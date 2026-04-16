@@ -1,0 +1,27 @@
+# rotostats
+
+Statistics for Rotisserie Baseball Auction Leagues.
+
+## Installation
+
+``` r
+# From GitHub (development version)
+pak::pak("JDenn0514/rotostats")
+
+# From r-universe (pre-built binaries, no GitHub PAT needed)
+install.packages("rotostats", repos = "https://jdenn0514.r-universe.dev")
+```
+
+## Usage
+
+``` r
+library(rotostats)
+```
+
+## Learn more
+
+See the [pkgdown site](https://jdenn0514.github.io/rotostats/) for full
+documentation.
+
+# 
+
