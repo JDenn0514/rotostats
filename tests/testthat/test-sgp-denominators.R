@@ -63,7 +63,7 @@ test_that("T-01: OLS 3-teams x 2-years exact computation", {
   ts <- data.frame(
     year    = c(2022, 2022, 2022, 2023, 2023, 2023),
     team_id = c("A", "B", "C", "A", "B", "C"),
-    HR      = c(150, 180, 210, 170, 200, 220)
+    HR      = c(150, 180, 210, 170, 195, 220)
   )
   h <- list(team_season = ts)
   result <- sgp_denominators(
@@ -81,10 +81,10 @@ test_that("T-01: OLS 3-teams x 2-years exact computation", {
   expect_true(inherits(result, "list"))
 
   # Primary denominator
-  expect_equal(result$denominators[["HR"]], 1 / mean(c(1/30, 50/1266.6667)),
+  expect_equal(result$denominators[["HR"]], 1 / mean(c(1/30, 1/25)),
                tolerance = 1e-4)
   # Exact value cross-check
-  expect_equal(result$denominators[["HR"]], 27.47, tolerance = 0.02)
+  expect_equal(result$denominators[["HR"]], 27.27, tolerance = 0.02)
 
   # year_diagnostics structure
   expect_equal(nrow(result$year_diagnostics), 2)
@@ -94,7 +94,7 @@ test_that("T-01: OLS 3-teams x 2-years exact computation", {
   expect_equal(result$year_diagnostics$slope[result$year_diagnostics$year == 2022],
                1/30, tolerance = 1e-5)
   expect_equal(result$year_diagnostics$slope[result$year_diagnostics$year == 2023],
-               50/1266.6667, tolerance = 1e-4)
+               1/25, tolerance = 1e-5)
   expect_true(all(abs(result$year_diagnostics$r_squared - 1.0) < 1e-10))
 
   # Flat weights: normalized and equal
@@ -449,38 +449,53 @@ test_that("T-23: NA in category emits warning and still returns finite denominat
 
 # T-24: Near-zero slope -> denominator is Inf
 test_that("T-24: Near-zero slope emits warning and returns Inf denominator", {
+  # Fixture: totals c(100, 110, 120, 130, 140) with denom_floor = 100.
+  # var(totals) = 250 >> 100, so zero-variance guard does NOT fire.
+  # OLS slope = 100/1000 = 0.10, which is < denom_floor = 100.
+  # Near-zero-slope guard fires instead.
   ts <- data.frame(
     year    = rep(2022L, 5),
-    team_id = paste0("T",1:5),
-    HR      = c(200, 200.0000001, 200.0000002, 200.0000003, 200.0000004)
+    team_id = paste0("T", 1:5),
+    HR      = c(100, 110, 120, 130, 140)   # var = 250 >> denom_floor = 100
   )
-  h <- list(team_season=ts)
+  h <- list(team_season = ts)
 
   expect_warning(
-    result <- sgp_denominators(h, "HR", n_teams=5L, exclude_years=integer(0),
-                                denom_floor=0.01),
+    result <- sgp_denominators(h, "HR", n_teams = 5L, exclude_years = integer(0),
+                                denom_floor = 100),
     class = "rotostats_warning_near_zero_slope"
   )
   expect_true(is.infinite(result$denominators[["HR"]]))
 })
 
-# T-25: Inverse category (ERA) — sign check, abs() applied correctly
-test_that("T-25: ERA inverse category has negative slope, positive denominator", {
+# T-25: Inverse category (ERA) — rank-flip produces negative slope, no spurious warning
+test_that("T-25: ERA inverse category: rank-flip gives slope -3.333, denom 0.300, no unexpected-sign warning", {
+  # ERA values c(3.3, 3.6, 3.9, 4.2, 4.5): increasing ERA = worsening.
+  # After rank-flip: standings_pos = 5 + 1 - rank(ERA) = c(5,4,3,2,1).
+  # Hand-calc slope = -3.0 / 0.90 = -3.333. Denom = 1/|slope| = 0.300.
   ts <- data.frame(
     year    = rep(2022L, 5),
     team_id = paste0("T", 1:5),
-    ERA     = c(4.5, 4.2, 3.9, 3.6, 3.3)
+    ERA     = c(3.3, 3.6, 3.9, 4.2, 4.5)  # increasing ERA -> worsening performance
   )
-  h <- list(team_season=ts)
+  h <- list(team_season = ts)
 
   expect_no_warning(
-    result <- sgp_denominators(h, "ERA", n_teams=5L, exclude_years=integer(0)),
+    result <- sgp_denominators(h, "ERA", n_teams = 5L, exclude_years = integer(0)),
     class = "rotostats_warning_unexpected_slope_sign"
   )
 
   diag <- result$year_diagnostics
   expect_true(diag$slope < 0)
+
+  # Slope must be approximately -3.333 (hand calculation)
+  expect_equal(diag$slope, -3.333, tolerance = 0.001)
+
+  # Denominator must be positive (abs() taken after sign check)
   expect_true(result$denominators[["ERA"]] > 0)
+
+  # Denominator = 1 / |slope| = 1 / 3.333 ~ 0.300
+  expect_equal(result$denominators[["ERA"]], 0.300, tolerance = 0.001)
 })
 
 # T-26: Fewer than 3 calibration seasons -> cli_warn()
@@ -620,7 +635,9 @@ test_that("T-36: Return object has correct class and all required slots", {
 
   expect_s3_class(result, c("sgp_denominators", "list"))
   expect_true(is.list(result))
-  expect_named(result, c("denominators", "year_diagnostics", "bootstrap_ci", "call", "meta"))
+  # names.sgp_denominators S3 override returns category names (T-56), so bypass it
+  expect_equal(names(unclass(result)),
+               c("denominators", "year_diagnostics", "bootstrap_ci", "call", "meta"))
 
   expect_true(is.numeric(result$denominators))
   expect_true(!is.null(names(result$denominators)))
