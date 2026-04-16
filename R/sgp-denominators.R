@@ -160,6 +160,13 @@ sgp_denominators <- function(
   }
   names(ts) <- upper_names
 
+  # Coerce YEAR to integer so downstream vapply(..., integer(1L)) calls never
+  # see a type mismatch when callers pass bare numeric literals (e.g. 2024).
+  # Guard against missing YEAR — column-presence validation follows below.
+  if ("YEAR" %in% names(ts)) {
+    ts$YEAR <- as.integer(ts$YEAR)
+  }
+
   # Normalize roto_pts_col to uppercase too.
   roto_pts_col_upper <- toupper(roto_pts_col)
 
