@@ -17,6 +17,14 @@ rotostats provides statistics and player valuations for rotisserie baseball auct
 
 ---
 
+## Branching Model
+
+- `develop` is the integration branch — all feature work merges here
+- `main` is release-only — updated via periodic `develop` → `main` merges, not from feature branches
+- Every feature branch must be cut from `develop` and target `develop` in its PR (`gh pr create --base develop`)
+- Never open a feature PR against `main`
+- The GitHub repo default branch is `develop`, so PRs default correctly when the feature branch is based on `develop`
+
 ## Key Implementation Rules
 
 - Every non-trivial change lives on a feature branch — never commit to `main` or
