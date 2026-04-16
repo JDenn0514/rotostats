@@ -1,0 +1,256 @@
+# rotostats Architecture
+
+> **Run:** sgp-denominators-2026-04-16 \| **Branch:**
+> feature/sgp-denominators
+
+------------------------------------------------------------------------
+
+## System Architecture
+
+### Module Structure
+
+``` mermaid
+%%{init: {'theme': 'neutral'}}%%
+graph TD
+  subgraph API["API Layer (Exported)"]
+    SGP["sgp_denominators()"]
+    CRS["convert_rate_stats() stub"]
+    FLAT["flat()"]
+    LINDEC["linear_decay()"]
+    EXPDEC["exp_decay()"]
+    AFTER["after()"]
+    BEFORE["before()"]
+    BETWEEN["between()"]
+    LAST["last()"]
+    CAL["cal()"]
+    CALSPEC["cal_spec()"]
+    ERN["expected_range_normal()"]
+    S3["S3 methods (print / [ / [[ / as.double / names / length)"]
+  end
+
+  subgraph CORE["Core Logic (sgp-denominators.R)"]
+    SGP
+    CRS
+    RW["resolve_weight()"]
+  end
+
+  subgraph HELPERS["Helpers (sgp-denominators-helpers.R)"]
+    FLAT
+    LINDEC
+    EXPDEC
+    AFTER
+    BEFORE
+    BETWEEN
+    LAST
+    CAL
+    CALSPEC
+    ERN
+    AYW["apply_year_window()"]
+    CW["compute_weight()"]
+    VYW["is_valid_year_window()"]
+    VW["is_valid_weight()"]
+    CONSTS["INVERSE_CATEGORIES\nMETADATA_COLS"]
+  end
+
+  subgraph S3LAYER["S3 Layer (sgp-denominators-s3.R)"]
+    CTOR["new_sgp_denominators()"]
+    S3
+  end
+
+  SGP --> RW
+  SGP --> AYW
+  SGP --> CW
+  SGP --> CTOR
+  SGP --> ERN
+  SGP --> CONSTS
+  RW --> FLAT
+  RW --> LINDEC
+  CAL --> VYW
+  CAL --> VW
+  CALSPEC --> CAL
+  CW --> LINDEC
+
+  style SGP fill:#1e90ff,stroke:#1565c0,color:#fff
+  style CRS fill:#1e90ff,stroke:#1565c0,color:#fff
+  style S3 fill:#1e90ff,stroke:#1565c0,color:#fff
+  style CTOR fill:#1e90ff,stroke:#1565c0,color:#fff
+```
+
+| Module                                                                                                                                                                                                                                                                                            | Purpose                                                    | Key Dependencies                                                                                                    | Changed in This Run |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|---------------------|
+| [`sgp_denominators()`](https://jdenn0514.github.io/rotostats/reference/sgp_denominators.md)                                                                                                                                                                                                       | Main entry point: validates input, calibrates denominators | helpers, S3 layer                                                                                                   | Yes — new           |
+| [`convert_rate_stats()`](https://jdenn0514.github.io/rotostats/reference/convert_rate_stats.md)                                                                                                                                                                                                   | Stub; always aborts                                        | —                                                                                                                   | Yes — new           |
+| `resolve_weight()`                                                                                                                                                                                                                                                                                | Resolves string/class weight specs to callables            | [`flat()`](https://jdenn0514.github.io/rotostats/reference/flat.md), `linear_decay_weight` class                    | Yes — new           |
+| [`flat()`](https://jdenn0514.github.io/rotostats/reference/flat.md)                                                                                                                                                                                                                               | Equal-weight constructor                                   | —                                                                                                                   | Yes — new           |
+| [`linear_decay()`](https://jdenn0514.github.io/rotostats/reference/linear_decay.md)                                                                                                                                                                                                               | Sentinel for linear-decay weighting                        | —                                                                                                                   | Yes — new           |
+| [`exp_decay()`](https://jdenn0514.github.io/rotostats/reference/exp_decay.md)                                                                                                                                                                                                                     | Exponential-decay weight constructor                       | —                                                                                                                   | Yes — new           |
+| [`after()`](https://jdenn0514.github.io/rotostats/reference/after.md) / [`before()`](https://jdenn0514.github.io/rotostats/reference/before.md) / [`between()`](https://jdenn0514.github.io/rotostats/reference/between.md) / [`last()`](https://jdenn0514.github.io/rotostats/reference/last.md) | Year-window S3 constructors                                | —                                                                                                                   | Yes — new           |
+| `apply_year_window()`                                                                                                                                                                                                                                                                             | Filters year vector by window spec                         | year-window classes                                                                                                 | Yes — new           |
+| `compute_weight()`                                                                                                                                                                                                                                                                                | Dispatches on weight class to compute a single weight      | `linear_decay_weight` class                                                                                         | Yes — new           |
+| [`cal()`](https://jdenn0514.github.io/rotostats/reference/cal.md)                                                                                                                                                                                                                                 | Single-category calibration override                       | `is_valid_year_window`, `is_valid_weight`                                                                           | Yes — new           |
+| [`cal_spec()`](https://jdenn0514.github.io/rotostats/reference/cal_spec.md)                                                                                                                                                                                                                       | Multi-category override collection                         | [`cal()`](https://jdenn0514.github.io/rotostats/reference/cal.md)                                                   | Yes — new           |
+| [`expected_range_normal()`](https://jdenn0514.github.io/rotostats/reference/expected_range_normal.md)                                                                                                                                                                                             | E\[range\] of n standard normals via integration           | [`stats::integrate`](https://rdrr.io/r/stats/integrate.html), [`stats::pnorm`](https://rdrr.io/r/stats/Normal.html) | Yes — new           |
+| `new_sgp_denominators()`                                                                                                                                                                                                                                                                          | S3 constructor                                             | —                                                                                                                   | Yes — new           |
+| S3 methods                                                                                                                                                                                                                                                                                        | print / \[ / \[\[ / as.double / names / length             | `new_sgp_denominators()`                                                                                            | Yes — new           |
+| `INVERSE_CATEGORIES`                                                                                                                                                                                                                                                                              | Constant: c(“ERA”, “WHIP”)                                 | —                                                                                                                   | Yes — new           |
+| `METADATA_COLS`                                                                                                                                                                                                                                                                                   | Constant: c(“YEAR”,“TEAM_ID”,“IP”,“AB”)                    | —                                                                                                                   | Yes — new           |
+
+------------------------------------------------------------------------
+
+### Function Call Graph
+
+``` mermaid
+%%{init: {'theme': 'neutral'}}%%
+graph TD
+  CALLER["Caller code"]
+  SGP["sgp_denominators()"]
+  VAL["Input validation\n(Steps 5.1–5.8)"]
+  RW["resolve_weight()"]
+  AYW["apply_year_window()"]
+  CW["compute_weight()"]
+  LOOPY["Per-category loop\n(vapply)"]
+  LOOPYR["Per-year loop\n(lapply)"]
+  OLS["OLS path\nlm(rank ~ total)"]
+  GAP["gap / trimmed_gap\nmean(diff(sort()))"]
+  SD["sd path\nsd() * (n-1) / E[Rn]"]
+  ERN["expected_range_normal()"]
+  BOOT["Bootstrap CI loop\n(n_bootstrap > 0)"]
+  CTOR["new_sgp_denominators()"]
+
+  CALLER --> SGP
+  SGP --> VAL
+  SGP --> RW
+  SGP --> AYW
+  SGP --> LOOPY
+  LOOPY --> LOOPYR
+  LOOPYR --> CW
+  LOOPYR --> OLS
+  LOOPYR --> GAP
+  LOOPYR --> SD
+  SD --> ERN
+  SGP --> BOOT
+  SGP --> CTOR
+
+  style SGP fill:#1e90ff,stroke:#1565c0,color:#fff
+  style CTOR fill:#1e90ff,stroke:#1565c0,color:#fff
+```
+
+| Function                                                                                    | Purpose                                                                                                                                          | Key Dependencies                                                                                                                      | Changed |
+|---------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|---------|
+| [`sgp_denominators()`](https://jdenn0514.github.io/rotostats/reference/sgp_denominators.md) | Orchestrates full pipeline                                                                                                                       | all helpers                                                                                                                           | Yes     |
+| Input validation (5.1–5.8)                                                                  | Type/range checks, inference                                                                                                                     | [`cli::cli_abort`](https://cli.r-lib.org/reference/cli_abort.html), [`cli::cli_warn`](https://cli.r-lib.org/reference/cli_abort.html) | Yes     |
+| `resolve_weight()`                                                                          | Converts string/sentinel to weight fn                                                                                                            | [`flat()`](https://jdenn0514.github.io/rotostats/reference/flat.md), `linear_decay_weight`                                            | Yes     |
+| `apply_year_window()`                                                                       | Year-set filtering                                                                                                                               | S3 window classes                                                                                                                     | Yes     |
+| `compute_weight()`                                                                          | Single-year weight computation                                                                                                                   | `linear_decay_weight` dispatch                                                                                                        | Yes     |
+| Per-category loop                                                                           | `vapply` over categories                                                                                                                         | per-year lapply                                                                                                                       | Yes     |
+| Per-year loop                                                                               | `lapply` over years                                                                                                                              | OLS / gap / sd branches                                                                                                               | Yes     |
+| OLS path                                                                                    | [`lm()`](https://rdrr.io/r/stats/lm.html), rank-flip for inverse cats                                                                            | [`stats::lm`](https://rdrr.io/r/stats/lm.html), `INVERSE_CATEGORIES`                                                                  | Yes     |
+| gap / trimmed_gap path                                                                      | `diff(sort())`                                                                                                                                   | —                                                                                                                                     | Yes     |
+| sd path                                                                                     | [`sd()`](https://rdrr.io/r/stats/sd.html), [`expected_range_normal()`](https://jdenn0514.github.io/rotostats/reference/expected_range_normal.md) | [`stats::sd`](https://rdrr.io/r/stats/sd.html), [`stats::integrate`](https://rdrr.io/r/stats/integrate.html)                          | Yes     |
+| Bootstrap CI loop                                                                           | Year-level resample                                                                                                                              | mirrors main pipeline                                                                                                                 | Yes     |
+| `new_sgp_denominators()`                                                                    | S3 construction                                                                                                                                  | —                                                                                                                                     | Yes     |
+
+------------------------------------------------------------------------
+
+### Data Flow
+
+``` mermaid
+%%{init: {'theme': 'neutral'}}%%
+graph TD
+  LH["league_history\n(list or S3)"]
+  TS["$team_season\ndata.frame"]
+  NORM["Normalize column names\nto uppercase"]
+  INFER{"scoring_categories\nNULL?"}
+  INFER_YES["Infer from numeric\nnon-metadata columns"]
+  INFER_NO["Validate supplied\ncategory names"]
+  YWIN["Build effective year sets\n(global + per-category)"]
+  WFNS["Build effective weight\nfunctions"]
+  FILTER["Apply NA exclusions\n+ outlier filter"]
+  LOOP["Per-category\ndenominator loop"]
+  RANKFLIP{"Inverse\ncategory?"}
+  RANKFLIP_YES["standings_pos =\nn+1 - rank(total)"]
+  RANKFLIP_NO["standings_pos =\nrank(total)"]
+  METHOD{"method?"}
+  OLS["OLS: lm(rank ~ total)\nβ̂ = slope"]
+  GAP["gap: mean(diff(sort()))"]
+  SD["sd: σ(n-1)/E[Rn]"]
+  WAVG["Weighted mean\nacross valid years"]
+  GUARD{"abs(slope)\n< denom_floor?"}
+  INF["denominator = Inf\n+ warn"]
+  DENOM["denominator =\n1 / |slope|"]
+  BOOT["Bootstrap CI\n(if n_bootstrap > 0)"]
+  OBJ["sgp_denominators S3 object\n($denominators, $year_diagnostics,\n$bootstrap_ci, $meta)"]
+
+  LH --> TS
+  TS --> NORM
+  NORM --> INFER
+  INFER -->|"NULL"| INFER_YES
+  INFER -->|"supplied"| INFER_NO
+  INFER_YES --> YWIN
+  INFER_NO --> YWIN
+  YWIN --> WFNS
+  WFNS --> FILTER
+  FILTER --> LOOP
+  LOOP --> RANKFLIP
+  RANKFLIP -->|"yes"| RANKFLIP_YES
+  RANKFLIP -->|"no"| RANKFLIP_NO
+  RANKFLIP_YES --> METHOD
+  RANKFLIP_NO --> METHOD
+  METHOD -->|"ols"| OLS
+  METHOD -->|"gap/trimmed_gap"| GAP
+  METHOD -->|"sd"| SD
+  OLS --> WAVG
+  GAP --> WAVG
+  SD --> WAVG
+  WAVG --> GUARD
+  GUARD -->|"yes"| INF
+  GUARD -->|"no"| DENOM
+  INF --> BOOT
+  DENOM --> BOOT
+  BOOT --> OBJ
+
+  style OBJ fill:#1e90ff,stroke:#1565c0,color:#fff
+  style OLS fill:#1e90ff,stroke:#1565c0,color:#fff
+  style RANKFLIP_YES fill:#1e90ff,stroke:#1565c0,color:#fff
+```
+
+------------------------------------------------------------------------
+
+## Key Design Decisions
+
+### 1. Direction-aware rank-flip for inverse categories
+
+For ERA and WHIP, `rank(total)` gives rank 1 to the best (lowest) value,
+which is the wrong convention. The implementation applies
+`n + 1 - rank(total)` so the best team gets rank *n* and the OLS slope
+is negative (rank decreases as total increases). Future S3 authors: add
+inverse categories to `INVERSE_CATEGORIES` in
+`R/sgp-denominators-helpers.R`.
+
+### 2. `as.double` vs `as.numeric` dispatch
+
+`as.numeric` is a base primitive that does not dispatch S3 methods on
+list objects. The method is registered as `as.double.sgp_denominators`;
+`as.numeric` works via R’s internal delegation from `as.numeric` to
+`as.double`. **Future list-based S3 classes in this package should
+register coercions under `as.double`, not `as.numeric`.**
+
+### 3. OLS vs SD estimand
+
+The `"ols"` denominator (`1/|β̂|`) and `"sd"` denominator
+(`σ × (n-1) / E[R_n]`) target different quantities. For a 12-team league
+with σ = 25 they differ by a factor of ≈ 12. Do not mix methods across
+categories in a single league valuation run.
+
+### 4. Bootstrap CI undercoverage (Jensen’s inequality)
+
+The OLS denominator has a small upward Jensen’s-inequality bias
+(`E[1/|β̂|] > 1/E[|β̂|]`). The percentile bootstrap CI is centred on the
+biased estimate, yielding ≈ 85% empirical coverage at nominal 95% when
+`n_years ≤ 6`. Documented in
+[`?sgp_denominators`](https://jdenn0514.github.io/rotostats/reference/sgp_denominators.md)
+Caveats section. BCa bootstrap is a planned enhancement.
+
+------------------------------------------------------------------------
+
+*Generated by Scriber — rotostats sgp-denominators-2026-04-16*

@@ -1,5 +1,6 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://jdenn0514.github.io/rotostats/404.html</loc></url>
+<url><loc>https://jdenn0514.github.io/rotostats/ARCHITECTURE.html</loc></url>
 <url><loc>https://jdenn0514.github.io/rotostats/CLAUDE.html</loc></url>
 <url><loc>https://jdenn0514.github.io/rotostats/HANDOFF.html</loc></url>
 <url><loc>https://jdenn0514.github.io/rotostats/LICENSE.html</loc></url>
@@ -7,7 +8,25 @@
 <url><loc>https://jdenn0514.github.io/rotostats/authors.html</loc></url>
 <url><loc>https://jdenn0514.github.io/rotostats/index.html</loc></url>
 <url><loc>https://jdenn0514.github.io/rotostats/news/index.html</loc></url>
+<url><loc>https://jdenn0514.github.io/rotostats/reference/after.html</loc></url>
+<url><loc>https://jdenn0514.github.io/rotostats/reference/as.double.sgp_denominators.html</loc></url>
+<url><loc>https://jdenn0514.github.io/rotostats/reference/before.html</loc></url>
+<url><loc>https://jdenn0514.github.io/rotostats/reference/between.html</loc></url>
+<url><loc>https://jdenn0514.github.io/rotostats/reference/cal.html</loc></url>
+<url><loc>https://jdenn0514.github.io/rotostats/reference/cal_spec.html</loc></url>
+<url><loc>https://jdenn0514.github.io/rotostats/reference/convert_rate_stats.html</loc></url>
+<url><loc>https://jdenn0514.github.io/rotostats/reference/exp_decay.html</loc></url>
+<url><loc>https://jdenn0514.github.io/rotostats/reference/expected_range_normal.html</loc></url>
+<url><loc>https://jdenn0514.github.io/rotostats/reference/flat.html</loc></url>
 <url><loc>https://jdenn0514.github.io/rotostats/reference/index.html</loc></url>
+<url><loc>https://jdenn0514.github.io/rotostats/reference/last.html</loc></url>
+<url><loc>https://jdenn0514.github.io/rotostats/reference/length.sgp_denominators.html</loc></url>
+<url><loc>https://jdenn0514.github.io/rotostats/reference/linear_decay.html</loc></url>
+<url><loc>https://jdenn0514.github.io/rotostats/reference/names.sgp_denominators.html</loc></url>
+<url><loc>https://jdenn0514.github.io/rotostats/reference/print.sgp_denominators.html</loc></url>
 <url><loc>https://jdenn0514.github.io/rotostats/reference/rotostats-package.html</loc></url>
+<url><loc>https://jdenn0514.github.io/rotostats/reference/sgp_denominators.html</loc></url>
+<url><loc>https://jdenn0514.github.io/rotostats/reference/sub-.sgp_denominators.html</loc></url>
+<url><loc>https://jdenn0514.github.io/rotostats/reference/sub-sub-.sgp_denominators.html</loc></url>
 </urlset>
 

@@ -23,5 +23,44 @@ library(rotostats)
 See the [pkgdown site](https://jdenn0514.github.io/rotostats/) for full
 documentation.
 
-# 
+# Package index
+
+## All functions
+
+- [`after()`](https://jdenn0514.github.io/rotostats/reference/after.md)
+  : Year-window helper: years strictly after a threshold
+- [`as.double(`*`<sgp_denominators>`*`)`](https://jdenn0514.github.io/rotostats/reference/as.double.sgp_denominators.md)
+  : Coerce sgp_denominators to a named numeric vector
+- [`before()`](https://jdenn0514.github.io/rotostats/reference/before.md)
+  : Year-window helper: years strictly before a threshold
+- [`between()`](https://jdenn0514.github.io/rotostats/reference/between.md)
+  : Year-window helper: years within an inclusive range
+- [`cal()`](https://jdenn0514.github.io/rotostats/reference/cal.md) :
+  Per-category calibration override constructor
+- [`cal_spec()`](https://jdenn0514.github.io/rotostats/reference/cal_spec.md)
+  : Per-category calibration spec constructor
+- [`convert_rate_stats()`](https://jdenn0514.github.io/rotostats/reference/convert_rate_stats.md)
+  : Convert rate statistics to counting-stat equivalents (stub)
+- [`exp_decay()`](https://jdenn0514.github.io/rotostats/reference/exp_decay.md)
+  : Exponential decay weight constructor for SGP denominator calibration
+- [`expected_range_normal()`](https://jdenn0514.github.io/rotostats/reference/expected_range_normal.md)
+  : Expected range of n standard normal variables
+- [`flat()`](https://jdenn0514.github.io/rotostats/reference/flat.md) :
+  Flat (equal) weight constructor for SGP denominator calibration
+- [`last()`](https://jdenn0514.github.io/rotostats/reference/last.md) :
+  Year-window helper: the n most recent years
+- [`length(`*`<sgp_denominators>`*`)`](https://jdenn0514.github.io/rotostats/reference/length.sgp_denominators.md)
+  : Length of an sgp_denominators object
+- [`linear_decay()`](https://jdenn0514.github.io/rotostats/reference/linear_decay.md)
+  : Linear decay weight constructor for SGP denominator calibration
+- [`names(`*`<sgp_denominators>`*`)`](https://jdenn0514.github.io/rotostats/reference/names.sgp_denominators.md)
+  : Names of an sgp_denominators object
+- [`print(`*`<sgp_denominators>`*`)`](https://jdenn0514.github.io/rotostats/reference/print.sgp_denominators.md)
+  : Print method for sgp_denominators objects
+- [`sgp_denominators()`](https://jdenn0514.github.io/rotostats/reference/sgp_denominators.md)
+  : Compute SGP denominators for rotisserie scoring categories
+- [`` `[`( ``*`<sgp_denominators>`*`)`](https://jdenn0514.github.io/rotostats/reference/sub-.sgp_denominators.md)
+  : Single-bracket subscript for sgp_denominators
+- [`` `[[`( ``*`<sgp_denominators>`*`)`](https://jdenn0514.github.io/rotostats/reference/sub-sub-.sgp_denominators.md)
+  : Double-bracket subscript for sgp_denominators
 

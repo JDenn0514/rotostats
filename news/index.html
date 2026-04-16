@@ -34,9 +34,25 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="rotostats-development-version">rotostats (development version)<a class="anchor" aria-label="anchor" href="#rotostats-development-version"></a></h2>
-<ul><li>Initial development version.</li>
+<div class="section level3">
+<h3 id="new-functions-development-version">New functions<a class="anchor" aria-label="anchor" href="#new-functions-development-version"></a></h3>
+<ul><li><p><code><a href="../reference/sgp_denominators.html">sgp_denominators()</a></code> — Calibrates the SGP (Standings Gain Points) denominator for each rotisserie scoring category from historical team-season standings. Supports four estimation methods (<code>"ols"</code>, <code>"gap"</code>, <code>"trimmed_gap"</code>, <code>"sd"</code>), per-category calibration overrides via <code><a href="../reference/cal_spec.html">cal_spec()</a></code>, and optional year-level bootstrap CIs. Returns an S3 object of class <code>"sgp_denominators"</code> that is fully backward-compatible with code that treated the return value as a named numeric vector.</p></li>
+<li><p><code><a href="../reference/convert_rate_stats.html">convert_rate_stats()</a></code> — Stub; always aborts. Use <code>rate_conversion = "blended_pool"</code> (the default) for now.</p></li>
+<li><p>Weight constructors: <code><a href="../reference/flat.html">flat()</a></code>, <code><a href="../reference/linear_decay.html">linear_decay()</a></code>, <code><a href="../reference/exp_decay.html">exp_decay()</a></code>.</p></li>
+<li><p>Year-window helpers: <code><a href="../reference/after.html">after()</a></code>, <code><a href="../reference/before.html">before()</a></code>, <code><a href="../reference/between.html">between()</a></code>, <code><a href="../reference/last.html">last()</a></code>.</p></li>
+<li><p>Calibration spec constructors: <code><a href="../reference/cal.html">cal()</a></code>, <code><a href="../reference/cal_spec.html">cal_spec()</a></code>.</p></li>
+<li><p><code><a href="../reference/expected_range_normal.html">expected_range_normal()</a></code> — Computes E[range] of <em>n</em> i.i.d. standard normals via numerical integration; used internally by <code>method = "sd"</code>.</p></li>
 </ul></div>
-  </main></div>
+<div class="section level3">
+<h3 id="implementation-notes-for-maintainers-development-version">Implementation notes for maintainers<a class="anchor" aria-label="anchor" href="#implementation-notes-for-maintainers-development-version"></a></h3>
+<p>See <code>plans/sgp-denominators-architecture.md</code> for a full discussion of the three non-obvious design decisions summarised below.</p>
+<p><strong>Direction-aware rank-flip for inverse categories.</strong> <code><a href="../reference/sgp_denominators.html">sgp_denominators()</a></code> uses a rank-1=worst / rank-n=best convention throughout. For normal categories (HR, R, RBI, …) <code>rank(total)</code> already gives this — higher totals get higher rank numbers and the OLS slope is positive. For inverse categories (ERA, WHIP) a lower value is better, so <code>rank(ERA)</code> would assign the best team rank 1 — the wrong end. The implementation applies <code>n + 1 - rank(total)</code> before OLS fitting, making the best ERA team rank <em>n</em> and producing a negative slope. The sign-check warning <code>rotostats_warning_unexpected_slope_sign</code> fires if observed slope sign disagrees with this convention, signalling corrupted or mislabelled data. The flip lives in <code>R/sgp-denominators.R</code> at the <code>standings_pos</code> computation block, and is mirrored in the bootstrap resampling path.</p>
+<p><strong><code>as.double</code> / <code>as.numeric</code> dispatch on list S3 objects.</strong> <code>as.numeric</code> is a base primitive that swallows S3 dispatch for list-based objects — <code>as.numeric(x)</code> on an S3 list falls back to base coercion silently. <code>as.double</code> dispatches correctly. The method is therefore registered as <code>as.double.sgp_denominators</code>; <code>as.numeric</code> works because R’s primitive fallback delegates to <code>as.double</code>. All future list-based S3 classes in this package should follow the same pattern: register coercions under <code>as.double</code>, not <code>as.numeric</code>. See <code>R/sgp-denominators-s3.R</code> and <code><a href="../reference/as.double.sgp_denominators.html">?as.double.sgp_denominators</a></code>.</p>
+<p><strong>OLS vs. SD estimand distinction.</strong> The <code>"ols"</code> and <code>"sd"</code> methods do not share an estimand. For a 12-team league with σ = 25, the OLS denominator converges to ≈ 6.7 while the SD denominator converges to ≈ 82 — a factor of 12. The SD formula <code>σ × (n-1) / E[R_n]</code> targets the within-year expected gap in <em>counting units</em>, whereas OLS targets <code>1 / |β̂|</code> which is determined by the covariance of rank with total. Do not mix OLS denominators for some categories with SD denominators for others in the same league valuation.</p>
+</div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
