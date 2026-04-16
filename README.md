@@ -1,0 +1,36 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# rotostats
+
+Statistics for Rotisserie Baseball Auction Leagues.
+
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/JDenn0514/rotostats/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/JDenn0514/rotostats/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/JDenn0514/rotostats/branch/main/graph/badge.svg)](https://app.codecov.io/gh/JDenn0514/rotostats?branch=main)
+[![rotostats status
+badge](https://jdenn0514.r-universe.dev/badges/rotostats)](https://jdenn0514.r-universe.dev/rotostats)
+<!-- badges: end -->
+
+## Installation
+
+``` r
+# From GitHub (development version)
+pak::pak("JDenn0514/rotostats")
+
+# From r-universe (pre-built binaries, no GitHub PAT needed)
+install.packages("rotostats", repos = "https://jdenn0514.r-universe.dev")
+```
+
+## Usage
+
+``` r
+library(rotostats)
+```
+
+## Learn more
+
+See the [pkgdown site](https://jdenn0514.github.io/rotostats/) for full
+documentation.
