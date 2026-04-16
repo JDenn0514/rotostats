@@ -475,8 +475,19 @@ sgp_denominators <- function(
         standings_pos        <- ts_y[[pts_col]]
         sp_source            <- "category_pts"
       } else {
-        standings_pos        <- rank(ts_y[[cat]], ties.method = "average")
-        sp_source            <- "rank"
+        # Direction-aware rank: rank 1 = worst, rank n_y = best.
+        # For normal categories, raw rank() already satisfies this (lowest value = rank 1).
+        # For inverse categories (ERA, WHIP), lower values are better (best team has lowest
+        # ERA), so we flip: standings_pos = n_y + 1 - rank(). This makes the best team
+        # (lowest ERA) receive rank n_y and produces a negative OLS slope (rank decreases
+        # as total increases), consistent with rank-1=worst / rank-n=best convention.
+        raw_rank <- rank(ts_y[[cat]], ties.method = "average")
+        standings_pos <- if (cat %in% INVERSE_CATEGORIES) {
+          n_y + 1L - raw_rank
+        } else {
+          raw_rank
+        }
+        sp_source <- "rank"
       }
       totals <- ts_y[[cat]]
 
@@ -574,10 +585,26 @@ sgp_denominators <- function(
       slopes_valid      <- vapply(valid_ys, `[[`, numeric(1L), "slope")
       beta_c            <- sum(norm_weights * slopes_valid)
 
-      # Sign check for inverse categories.
+      # Two-sided sign check (spec §5.11 Step 6).
+      # After the direction-aware rank-flip in Step 2:
+      #   Normal categories: higher totals -> higher rank -> positive slope expected.
+      #   Inverse categories: higher totals -> lower standings pos -> negative slope expected.
       if (cat %in% INVERSE_CATEGORIES && beta_c > 0) {
         cli::cli_warn(
-          "Unexpected positive OLS slope ({round(beta_c, 4)}) for inverse category {.val {cat}}.",
+          paste0(
+            "Unexpected positive OLS slope for inverse category {.val {cat}} ",
+            "(\u03b2\u0302 = {round(beta_c, 4)}). ",
+            "Expected negative slope after rank-flip (n+1 - rank). Check data quality."
+          ),
+          class = "rotostats_warning_unexpected_slope_sign"
+        )
+      } else if (!(cat %in% INVERSE_CATEGORIES) && beta_c < 0) {
+        cli::cli_warn(
+          paste0(
+            "Unexpected negative OLS slope for normal category {.val {cat}} ",
+            "(\u03b2\u0302 = {round(beta_c, 4)}). ",
+            "Check that data is not an inverse category mislabeled as normal."
+          ),
           class = "rotostats_warning_unexpected_slope_sign"
         )
       }
@@ -715,7 +742,14 @@ sgp_denominators <- function(
             if (pts_col %in% names(ts_y)) {
               sp <- ts_y[[pts_col]]
             } else {
-              sp <- rank(totals, ties.method = "average")
+              # Direction-aware rank (mirrors main computation path).
+              n_y_b <- length(totals)
+              raw_rank_b <- rank(totals, ties.method = "average")
+              sp <- if (cat %in% INVERSE_CATEGORIES) {
+                n_y_b + 1L - raw_rank_b
+              } else {
+                raw_rank_b
+              }
             }
             fit <- stats::lm(sp ~ totals)
             stats::coef(fit)[["totals"]]
