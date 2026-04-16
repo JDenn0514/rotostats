@@ -49,3 +49,9 @@ po/*~
 rsconnect/
 .DS_Store
 .quarto
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Playwright MCP artifacts
+.playwright-mcp/
