@@ -7,15 +7,34 @@
 linear_decay()
 }
 \value{
-An object of class \code{"linear_decay_weight"}. Do not call directly;
-it is consumed by \code{compute_weight()} inside \code{sgp_denominators()}.
+An object of class \code{"linear_decay_weight"}. Pass as the \code{weights}
+argument to \code{\link[=sgp_denominators]{sgp_denominators()}} or inside \code{\link[=cal]{cal()}}.
 }
 \description{
-Returns a special sentinel object that the SGP denominator weight computation
-loop handles explicitly. Weights are proportional to recency rank: the most
-recent year receives the highest weight.
+Returns a sentinel object signalling that \code{sgp_denominators()} should apply
+linearly declining weights proportional to recency rank. Within a window of
+\code{n} years the most recent year receives weight \code{n/n}, one year back receives
+\code{(n-1)/n}, etc. Because all weights are normalized by their sum, only the
+relative ordering matters, not the absolute values.
+}
+\details{
+\code{linear_decay()} does not return a callable function — it returns a sentinel
+of class \code{"linear_decay_weight"}. The internal \code{compute_weight()} helper
+detects this class and applies the rank-proportional formula using the window
+size available at call time. Do not call the return value directly.
 }
 \examples{
 w <- linear_decay()
 inherits(w, "linear_decay_weight")  # TRUE
+
+# Use as the weights argument:
+# sgp_denominators(history, weights = linear_decay())
 }
+\seealso{
+\code{\link[=flat]{flat()}}, \code{\link[=exp_decay]{exp_decay()}}, \code{\link[=sgp_denominators]{sgp_denominators()}}
+
+Other weight constructors: 
+\code{\link{exp_decay}()},
+\code{\link{flat}()}
+}
+\concept{weight constructors}

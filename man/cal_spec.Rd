@@ -7,19 +7,30 @@
 cal_spec(...)
 }
 \arguments{
-\item{...}{Named arguments where each name is a category name (uppercase)
-and each value is a \code{\link[=cal]{cal()}} object.}
+\item{...}{Named arguments. Each name is an uppercase scoring category
+(e.g., \code{SB}, \code{ERA}) and each value must be a \code{\link[=cal]{cal()}} object. Categories
+not listed here inherit the global \code{years} and \code{weights} defaults.}
 }
 \value{
-An S3 object of class \code{"cal_spec"}.
+An S3 object of class \code{"cal_spec"}. Pass as \code{category_spec} in
+\code{\link[=sgp_denominators]{sgp_denominators()}}.
 }
 \description{
-Creates a collection of per-category calibration overrides to pass as the
-\code{category_spec} argument of \code{\link[=sgp_denominators]{sgp_denominators()}}.
+Collects per-category calibration overrides into a single object to pass as
+the \code{category_spec} argument of \code{\link[=sgp_denominators]{sgp_denominators()}}. Each named argument
+must be a \code{\link[=cal]{cal()}} object; raw \code{list()} entries are rejected.
 }
 \examples{
+# Post-2022 window for SB (2023 rule changes); explicit flat decay for ERA:
 cal_spec(
-  SB = cal(years = after(2022)),
+  SB  = cal(years = after(2022)),
   ERA = cal(weights = flat())
 )
 }
+\seealso{
+\code{\link[=cal]{cal()}}, \code{\link[=sgp_denominators]{sgp_denominators()}}
+
+Other calibration spec constructors: 
+\code{\link{cal}()}
+}
+\concept{calibration spec constructors}

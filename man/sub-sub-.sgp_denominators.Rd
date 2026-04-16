@@ -9,12 +9,16 @@
 \arguments{
 \item{x}{An \code{sgp_denominators} object.}
 
-\item{i}{Index (name or position).}
+\item{i}{A character slot name or integer position.}
 }
 \value{
-The list element.
+The list element at position \code{i}.
 }
 \description{
-Uses default list semantics so that \code{x[["denominators"]]},
-\code{x[["year_diagnostics"]]}, etc. work as expected.
+Uses standard list semantics, giving direct access to named slots:
+\code{x[["denominators"]]}, \code{x[["year_diagnostics"]]}, \code{x[["bootstrap_ci"]]},
+\code{x[["call"]]}, and \code{x[["meta"]]}.
+}
+\seealso{
+\code{\link[=sgp_denominators]{sgp_denominators()}}
 }

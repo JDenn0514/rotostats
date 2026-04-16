@@ -22,98 +22,232 @@ sgp_denominators(
 )
 }
 \arguments{
-\item{league_history}{A \code{league_history} S3 object or duck-typed list with a
-\verb{$team_season} data.frame containing \code{year}, \code{team_id}, and category columns.}
+\item{league_history}{A \code{league_history} S3 object \strong{or} a plain list with a
+\verb{$team_season} data.frame. The data.frame must contain at minimum \code{year},
+\code{team_id}, and one column per scoring category. Column names are
+case-insensitive; they are normalized to uppercase internally.}
 
-\item{scoring_categories}{Character vector of category column names, or \code{NULL}
-to infer from \code{league_history$team_season}.}
+\item{scoring_categories}{Character vector of category column names, or
+\code{NULL} (default) to infer from \code{league_history$team_season}. Explicit
+specification suppresses the inference message and is recommended for
+production use.}
 
-\item{n_teams}{Positive integer or \code{NULL}. If \code{NULL}, team counts are inferred
-per year. If supplied, all years must have exactly \code{n_teams} rows.}
+\item{n_teams}{Positive integer or \code{NULL} (default). When \code{NULL}, the number
+of teams is inferred per year from row counts; years with different counts
+produce a \code{rotostats_warning_uneven_team_counts} warning. When an integer
+is supplied, every year must have exactly that many rows.}
 
-\item{years}{\code{"all"}, an integer vector of specific years, or a year-window
-helper: \code{\link[=after]{after()}}, \code{\link[=before]{before()}}, \code{\link[=between]{between()}}, \code{\link[=last]{last()}}. Global calibration window.}
-
-\item{weights}{Weight specification. One of:
+\item{years}{Global calibration window. One of:
 \itemize{
-\item A weight constructor result: \code{\link[=flat]{flat()}}, \code{\link[=linear_decay]{linear_decay()}}, \code{\link[=exp_decay]{exp_decay()}}.
-\item \code{"flat"} (character shorthand for \code{\link[=flat]{flat()}}).
-\item \code{"linear"} (character shorthand for \code{\link[=linear_decay]{linear_decay()}}).
+\item \code{"all"} (default) — all years present in \code{league_history}.
+\item An integer vector of specific years.
+\item A year-window helper: \code{\link[=after]{after()}}, \code{\link[=before]{before()}}, \code{\link[=between]{between()}}, \code{\link[=last]{last()}}.
+Per-category overrides via \code{category_spec} take precedence. Years in
+\code{exclude_years} are removed after the window is applied.
 }}
 
-\item{method}{Character. Denominator estimation method. One of \code{"ols"},
-\code{"gap"}, \code{"trimmed_gap"}, \code{"sd"}. Default: \code{"ols"}.}
+\item{weights}{Global year-weighting scheme. One of:
+\itemize{
+\item A weight constructor: \code{\link[=flat]{flat()}}, \code{\link[=linear_decay]{linear_decay()}}, or \code{\link[=exp_decay]{exp_decay()}}
+(default: \code{exp_decay(0.9)}).
+\item \code{"flat"} or \code{"linear"} as character shorthands.
+Per-category overrides via \code{category_spec} take precedence.
+}}
 
-\item{category_spec}{A \code{\link[=cal_spec]{cal_spec()}} object for per-category overrides of
-\code{years} and \code{weights}, or \code{NULL}.}
+\item{method}{Character. Denominator estimation method. One of:
+\itemize{
+\item \code{"ols"} (default) — OLS slope from \code{standings_position ~ category_total}.
+\item \code{"gap"} — mean adjacent gap between sorted team totals.
+\item \code{"trimmed_gap"} — 10\%-trimmed mean adjacent gap.
+\item \code{"sd"} — \code{sd(totals) * (n - 1) / E[R_n]}, where \code{E[R_n]} is the
+expected range of \code{n} standard normals (see \code{\link[=expected_range_normal]{expected_range_normal()}}).
+}}
 
-\item{outlier_filter}{Logical. If \code{TRUE}, exclude team-season rows where any
-category value is beyond 1.5 × IQR from the league median for that
-category-year combination. Default: \code{FALSE}.}
+\item{category_spec}{A \code{\link[=cal_spec]{cal_spec()}} object providing per-category overrides
+for \code{years} and/or \code{weights}, or \code{NULL} (default). Build with
+\code{cal_spec(CAT = cal(years = ..., weights = ...))}.}
 
-\item{exclude_years}{Integer vector of years to exclude from all calibration
+\item{outlier_filter}{Logical. When \code{TRUE}, team-season rows whose category
+value falls more than 1.5 × IQR outside the league median for that
+category-year are excluded before fitting. Default: \code{FALSE}.}
+
+\item{exclude_years}{Integer vector of years excluded from all calibration
 windows. Default: \code{2020L} (COVID-shortened season).}
 
 \item{rate_conversion}{Character. One of \code{"blended_pool"} (default) or
-\code{"fixed_baseline"}. \code{"fixed_baseline"} requires a pre-converted
-\code{league_history} of class \code{"sgp_history_transformed"} (or calls the not-yet-
-implemented \code{\link[=convert_rate_stats]{convert_rate_stats()}} stub and aborts).}
+\code{"fixed_baseline"}. The \code{"fixed_baseline"} path requires \code{league_history}
+to already be of class \code{"sgp_history_transformed"}; otherwise it calls the
+not-yet-implemented \code{\link[=convert_rate_stats]{convert_rate_stats()}} stub and aborts with
+\code{rotostats_error_not_implemented}.}
 
-\item{roto_pts_col}{Character. Column name for total roto points; used only
-for optional standings validation. Default: \code{"roto_pts"}.}
+\item{roto_pts_col}{Character. Column name for total roto points in
+\code{team_season}. Used only for optional standings validation; not part of
+denominator computation. Default: \code{"roto_pts"}.}
 
 \item{n_bootstrap}{Non-negative integer. Number of year-level bootstrap
-replicates for CI estimation. \code{0L} disables bootstrapping. Default: \code{0L}.}
+replicates for CI estimation. \code{0L} (default) disables bootstrapping. When
+positive, year-level percentile bootstrap CIs are returned in
+\verb{$bootstrap_ci}. See the Caveats section for coverage properties.}
 
-\item{denom_floor}{Positive numeric. Near-zero slope guard: if
-\code{abs(slope) < denom_floor}, denominator is set to \code{Inf}. Default: \code{1e-9}.}
+\item{denom_floor}{Positive numeric. Near-zero slope guard threshold. If
+\code{abs(weighted_slope) < denom_floor}, the denominator is set to \code{Inf} and a
+\code{rotostats_warning_near_zero_slope} warning is emitted. Default: \code{1e-9}.}
 
-\item{ci_level}{Numeric in (0, 1). Bootstrap CI nominal level (used only
-when \code{n_bootstrap > 0}). Default: \code{0.95}.}
+\item{ci_level}{Numeric in \verb{(0, 1)}. Bootstrap CI nominal coverage level.
+Used only when \code{n_bootstrap > 0}. Default: \code{0.95}.}
 }
 \value{
-An S3 object of class \code{c("sgp_denominators", "list")} with slots:
-\itemize{
-\item \verb{$denominators} — named numeric vector, one entry per category.
-\item \verb{$year_diagnostics} — data.frame with one row per (year × category).
-\item \verb{$bootstrap_ci} — data.frame or \code{NULL} (when \code{n_bootstrap = 0}).
-\item \verb{$call} — the matched call.
-\item \verb{$meta} — named list: \code{rate_conversion}, \code{method}, \code{years_used},
-\code{exclude_years}, \code{package_version}.
-\item \code{attr(result, "rate_conversion")} — character, for backward compatibility.
+An S3 object of class \code{c("sgp_denominators", "list")} with the
+following slots:
+\describe{
+\item{\verb{$denominators}}{Named numeric vector, one entry per scored
+category. Names are uppercase category names.}
+\item{\verb{$year_diagnostics}}{data.frame with one row per
+(year × category) combination. Columns: \code{year}, \code{category},
+\code{n_teams}, \code{slope} (OLS only; \code{NA} for other methods),
+\code{r_squared} (OLS only), \code{weight} (normalized, sums to 1 within
+category), \code{standings_pos_source} (factor: \code{"category_pts"} or
+\code{"rank"}).}
+\item{\verb{$bootstrap_ci}}{data.frame or \code{NULL}. When non-NULL: columns
+\code{category}, \code{ci_lower}, \code{ci_upper}, \code{ci_level}, \code{n_bootstrap}.}
+\item{\verb{$call}}{The matched call, captured at function entry.}
+\item{\verb{$meta}}{Named list: \code{rate_conversion}, \code{method}, \code{years_used}
+(integer vector of all years that entered any category's
+calibration), \code{exclude_years}, \code{package_version}.}
 }
+Additionally, \code{attr(result, "rate_conversion")} is set to the
+\code{rate_conversion} value for backward compatibility with downstream code.
 }
 \description{
 Estimates the SGP (Standings Gain Points) denominator for each scoring
 category by fitting OLS (or an alternative method) to historical team-season
 standings data. The denominator for category \emph{c} is the number of additional
-category units required to move up one place in the standings, on average.
+category units required to move up one place in the standings, on average,
+calibrated from your league's history.
 
 \code{league_history} may be a formal \code{league_history} S3 object (see
 \code{league_history()}) or any list with a \verb{$team_season} data.frame containing
-\code{year}, \code{team_id}, and category columns.
+\code{year}, \code{team_id}, and category columns (duck-typing).
 }
 \details{
+\subsection{Estimation methods}{
+
+\strong{\code{"ols"}}: Fits \code{standings_position ~ category_total} via OLS for each
+category-year. Standings position is the direction-aware rank (1 = last
+place, \code{n} = first place). For inverse categories (ERA, WHIP) the rank is
+flipped — \code{n + 1 - rank(total)} — so that lower totals receive higher
+rank numbers and the OLS slope is negative. The denominator is
+\verb{1 / |weighted_mean_slope|}.
+
+\strong{\code{"gap"}}: Mean of adjacent gaps between sorted totals,
+\code{mean(diff(sort(totals)))}, equivalent to \code{range / (n - 1)}. No rank
+fitting required; sign convention does not apply.
+
+\strong{\code{"trimmed_gap"}}: Same as \code{"gap"} but with 10\% trimming from each end
+of the gap vector to reduce sensitivity to outliers.
+
+\strong{\code{"sd"}}: \code{sd(totals) * (n - 1) / E[R_n]}, where \code{E[R_n]} is the
+expected range of \code{n} standard normal variables (see
+\code{\link[=expected_range_normal]{expected_range_normal()}}). This method targets a different estimand than
+OLS — its output is approximately 12x larger for typical 12-team leagues.
+Do not mix OLS and SD denominators across categories.
+}
+
 \subsection{Backward compatibility}{
 
-Code written against the old named-numeric-vector API continues to work:
+Code written against the old named-numeric-vector API continues to work
+without modification:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{denoms <- sgp_denominators(history, ...)
 attr(denoms, "rate_conversion")  # character
 as.numeric(denoms)               # named numeric vector
 denoms["HR"]                     # numeric scalar
-names(denoms)                    # character vector
+names(denoms)                    # character vector of category names
 length(denoms)                   # integer
 }\if{html}{\out{</div>}}
 }
 
-\subsection{Dependency note}{
+\subsection{Dependency notes}{
 
-The \code{league_history()} constructor is not yet implemented as of this run.
-\code{sgp_denominators()} accepts a plain list with a \verb{$team_season} component as
-a duck-type fallback.
+The \code{league_history()} constructor is not yet implemented. A plain list with
+a \verb{$team_season} data.frame is accepted as a duck-type fallback.
 
-\code{convert_rate_stats()} is a stub only. The \code{rate_conversion = "fixed_baseline"}
-path will abort with \code{rotostats_error_not_implemented}.
+\code{convert_rate_stats()} is a stub only. The
+\code{rate_conversion = "fixed_baseline"} path aborts with
+\code{rotostats_error_not_implemented}.
 }
+}
+\section{Caveats}{
+
+
+\strong{Jensen's-inequality undercoverage of bootstrap CIs at small \code{n_years}.}
+The OLS denominator is \verb{d = 1 / |beta|}. Because the inverse is a convex
+function, Jensen's inequality implies \verb{E[1/|beta|] > 1/E[|beta|]}, producing
+a small upward bias in the denominator estimate. At \code{n_years = 6} this bias
+is approximately 1\% of the true denominator (statistically confirmed by the
+sgp-denominators Monte Carlo study).
+
+The \strong{percentile bootstrap CI} is centered on the biased estimate rather
+than on the true denominator, so the lower CI bound systematically lies above
+the truth too often, yielding empirical coverage of approximately \strong{84-85\%}
+at nominal 95\% when \code{n_years <= 6}. At \code{n_years >= 10} coverage is
+materially better. This is not an implementation defect — it is a known
+property of the percentile bootstrap under upward-biased estimators.
+
+\strong{Practical guidance:}
+\itemize{
+\item For \code{n_years <= 6}, treat percentile bootstrap CIs as approximate
+(~10 percentage-point undercoverage). The point estimates remain unbiased
+in relative terms (bias < 2\% of denominator value).
+\item If tighter coverage is required, BCa (bias-corrected and accelerated)
+bootstrap corrects for this bias and is a planned enhancement.
+\item For \code{n_years >= 10}, percentile CIs are adequate for most applications.
+}
+}
+
+\examples{
+# Minimal example with a duck-typed league history:
+history <- list(
+  team_season = data.frame(
+    year    = c(2022L, 2022L, 2022L, 2023L, 2023L, 2023L),
+    team_id = rep(c("A", "B", "C"), 2),
+    HR      = c(150, 180, 210, 155, 185, 215),
+    stringsAsFactors = FALSE
+  )
+)
+denoms <- sgp_denominators(
+  history,
+  scoring_categories = "HR",
+  exclude_years      = integer(0)
+)
+denoms["HR"]     # numeric scalar denominator
+names(denoms)    # "HR"
+as.numeric(denoms)   # named numeric vector
+
+# Per-category override: restrict SB to post-2022, keep global window for HR:
+\dontrun{
+denoms2 <- sgp_denominators(
+  history,
+  scoring_categories = c("HR", "SB"),
+  category_spec = cal_spec(
+    SB = cal(years = after(2022))
+  )
+)
+}
+
+# Bootstrap CIs (year-level percentile, 500 replicates):
+\dontrun{
+denoms_ci <- sgp_denominators(
+  history,
+  scoring_categories = "HR",
+  exclude_years      = integer(0),
+  n_bootstrap        = 500L
+)
+denoms_ci$bootstrap_ci
+}
+}
+\seealso{
+\code{\link[=cal]{cal()}}, \code{\link[=cal_spec]{cal_spec()}}, \code{\link[=flat]{flat()}}, \code{\link[=exp_decay]{exp_decay()}}, \code{\link[=linear_decay]{linear_decay()}},
+\code{\link[=after]{after()}}, \code{\link[=before]{before()}}, \code{\link[=between]{between()}}, \code{\link[=last]{last()}}, \code{\link[=expected_range_normal]{expected_range_normal()}},
+\code{\link[=convert_rate_stats]{convert_rate_stats()}}
 }

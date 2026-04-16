@@ -32,9 +32,16 @@ new_sgp_denominators <- function(
 
 #' Print method for sgp_denominators objects
 #'
-#' @param x An `sgp_denominators` object.
+#' Displays the estimation method, rate-conversion mode, years used, and the
+#' denominator values for each scoring category. When bootstrap CIs are
+#' present, the replicate count and CI level are also shown.
+#'
+#' @param x An `sgp_denominators` object returned by [sgp_denominators()].
 #' @param ... Ignored.
+#'
 #' @return `x`, invisibly.
+#'
+#' @seealso [sgp_denominators()]
 #' @method print sgp_denominators
 #' @export
 print.sgp_denominators <- function(x, ...) {
@@ -56,62 +63,92 @@ print.sgp_denominators <- function(x, ...) {
 
 #' Single-bracket subscript for sgp_denominators
 #'
-#' Delegates to `$denominators` for backward compatibility with the old
-#' named-numeric-vector API.
+#' Delegates to `$denominators`, preserving backward compatibility with code
+#' that treats the return value of [sgp_denominators()] as a named numeric
+#' vector.
 #'
 #' @param x An `sgp_denominators` object.
-#' @param i Index (name or position).
-#' @return Named numeric scalar (or vector).
+#' @param i A character name (e.g., `"HR"`) or integer position.
+#'
+#' @return Named numeric scalar or vector from `x$denominators`.
+#'
+#' @seealso [sgp_denominators()]
 #' @method [ sgp_denominators
 #' @export
 `[.sgp_denominators` <- function(x, i) x$denominators[i]
 
 #' Double-bracket subscript for sgp_denominators
 #'
-#' Uses default list semantics so that `x[["denominators"]]`,
-#' `x[["year_diagnostics"]]`, etc. work as expected.
+#' Uses standard list semantics, giving direct access to named slots:
+#' `x[["denominators"]]`, `x[["year_diagnostics"]]`, `x[["bootstrap_ci"]]`,
+#' `x[["call"]]`, and `x[["meta"]]`.
 #'
 #' @param x An `sgp_denominators` object.
-#' @param i Index (name or position).
-#' @return The list element.
+#' @param i A character slot name or integer position.
+#'
+#' @return The list element at position `i`.
+#'
+#' @seealso [sgp_denominators()]
 #' @method [[ sgp_denominators
 #' @export
 `[[.sgp_denominators` <- function(x, i) .subset2(x, i)
 
 #' Coerce sgp_denominators to a named numeric vector
 #'
-#' Returns the underlying denominator vector. Enables backward-compatible
-#' usage such as `as.double(denoms)` or `as.numeric(denoms)`.
+#' Returns `x$denominators`, the named numeric vector of SGP denominators.
+#' Enables backward-compatible usage such as `as.double(denoms)` and
+#' `as.numeric(denoms)`.
 #'
-#' `as.numeric()` is a base primitive that does not dispatch S3 methods for
-#' list objects; `as.double()` does. Registering as `as.double` ensures
-#' correct dispatch for both `as.double()` and `as.numeric()` callers (since
-#' `as.numeric` internally calls `as.double`).
+#' @details
+#' **S3 dispatch subtlety.** In base R, `as.numeric` is a primitive that does
+#' not dispatch S3 methods for list-based objects — calling
+#' `as.numeric(x)` on an S3 list silently falls back to base coercion and
+#' returns an empty `numeric(0)`. `as.double` *does* dispatch correctly for
+#' list objects. This method is therefore registered as `as.double`, and
+#' `as.numeric` works because `as.numeric` internally delegates to `as.double`
+#' via R's primitive fallback chain. Future S3 authors building list-based
+#' classes in this package should register coercions under `as.double`, not
+#' `as.numeric`.
 #'
 #' @param x An `sgp_denominators` object.
 #' @param ... Ignored.
-#' @return Named numeric vector of denominators.
+#'
+#' @return Named numeric vector of length equal to the number of scored
+#'   categories.
+#'
+#' @seealso [sgp_denominators()]
 #' @method as.double sgp_denominators
 #' @export
 as.double.sgp_denominators <- function(x, ...) x$denominators
 
 #' Names of an sgp_denominators object
 #'
-#' Returns the category names from `$denominators` for backward compatibility
-#' with the old named-vector API.
+#' Returns the category names from `x$denominators`, preserving backward
+#' compatibility with code that calls `names()` on the return value of
+#' [sgp_denominators()]. To inspect the raw slot names of the underlying list,
+#' use `names(unclass(x))`.
 #'
 #' @param x An `sgp_denominators` object.
-#' @return Character vector of category names.
+#'
+#' @return Character vector of uppercase category names, e.g.,
+#'   `c("HR", "R", "RBI", "SB", "AVG", "ERA", "WHIP", "K", "W", "SV")`.
+#'
+#' @seealso [sgp_denominators()]
 #' @method names sgp_denominators
 #' @export
 names.sgp_denominators <- function(x) names(x$denominators)
 
 #' Length of an sgp_denominators object
 #'
-#' Returns the number of scored categories.
+#' Returns the number of scored categories — equivalent to
+#' `length(x$denominators)`. Preserves backward compatibility with code that
+#' calls `length()` on the return value of [sgp_denominators()].
 #'
 #' @param x An `sgp_denominators` object.
-#' @return Integer scalar.
+#'
+#' @return Integer scalar equal to the number of scored categories.
+#'
+#' @seealso [sgp_denominators()]
 #' @method length sgp_denominators
 #' @export
 length.sgp_denominators <- function(x) length(x$denominators)

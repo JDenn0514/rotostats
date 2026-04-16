@@ -12,11 +12,22 @@ between(y1, y2)
 \item{y2}{Integer. End of range (inclusive).}
 }
 \value{
-An S3 object of class \code{"sgp_year_window_between"}.
+An S3 object of class \code{"sgp_year_window_between"}. Pass as the
+\code{years} argument to \code{\link[=sgp_denominators]{sgp_denominators()}} or inside \code{\link[=cal]{cal()}}.
 }
 \description{
-Both endpoints are included: \verb{y1 <= y <= y2}.
+Restricts the calibration window to years satisfying \verb{y1 <= y <= y2}.
+Both endpoints are included.
 }
 \examples{
 between(2018, 2022)  # selects 2018, 2019, 2020, 2021, 2022
 }
+\seealso{
+\code{\link[=after]{after()}}, \code{\link[=before]{before()}}, \code{\link[=last]{last()}}, \code{\link[=cal]{cal()}}, \code{\link[=sgp_denominators]{sgp_denominators()}}
+
+Other year-window helpers: 
+\code{\link{after}()},
+\code{\link{before}()},
+\code{\link{last}()}
+}
+\concept{year-window helpers}

@@ -7,20 +7,36 @@
 cal(years = NULL, weights = NULL)
 }
 \arguments{
-\item{years}{A year-window specification: \code{"all"}, an integer vector, or
-the result of \code{\link[=after]{after()}}, \code{\link[=before]{before()}}, \code{\link[=between]{between()}}, or \code{\link[=last]{last()}}. \code{NULL}
-inherits the global \code{years} argument of \code{sgp_denominators()}.}
+\item{years}{A year-window specification for this category: \code{"all"}, an
+integer vector, or the result of \code{\link[=after]{after()}}, \code{\link[=before]{before()}}, \code{\link[=between]{between()}}, or
+\code{\link[=last]{last()}}. \code{NULL} (the default) inherits the global \code{years} argument of
+\code{\link[=sgp_denominators]{sgp_denominators()}}.}
 
-\item{weights}{A weight constructor result, \code{"flat"}, \code{"linear"}, or a
-plain function. \code{NULL} inherits the global \code{weights} argument.}
+\item{weights}{A weight specification for this category: a constructor result
+(\code{\link[=flat]{flat()}}, \code{\link[=linear_decay]{linear_decay()}}, \code{\link[=exp_decay]{exp_decay()}}), the shorthand \code{"flat"} or
+\code{"linear"}, or a plain function of signature \verb{function(years_ago)}. \code{NULL}
+(the default) inherits the global \code{weights} argument.}
 }
 \value{
-An S3 object of class \code{"cal"}.
+An S3 object of class \code{"cal"}. Use inside \code{\link[=cal_spec]{cal_spec()}}.
 }
 \description{
-Creates a calibration override for a single category, specifying a custom
-year window and/or custom weight function. Pass to \code{\link[=cal_spec]{cal_spec()}}.
+Creates a calibration override for a single scoring category, specifying a
+custom year window and/or custom weight function to use for that category
+instead of the global defaults. Pass one or more \code{cal()} objects to
+\code{\link[=cal_spec]{cal_spec()}}.
 }
 \examples{
+# Override SB to use only post-2022 data with flat weights:
 cal(years = after(2022), weights = flat())
+
+# Override ERA to use exponential decay only (inheriting global year window):
+cal(weights = exp_decay(0.8))
 }
+\seealso{
+\code{\link[=cal_spec]{cal_spec()}}, \code{\link[=sgp_denominators]{sgp_denominators()}}, \code{\link[=after]{after()}}, \code{\link[=flat]{flat()}}, \code{\link[=exp_decay]{exp_decay()}}
+
+Other calibration spec constructors: 
+\code{\link{cal_spec}()}
+}
+\concept{calibration spec constructors}

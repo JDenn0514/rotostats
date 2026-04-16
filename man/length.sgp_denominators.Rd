@@ -10,8 +10,13 @@
 \item{x}{An \code{sgp_denominators} object.}
 }
 \value{
-Integer scalar.
+Integer scalar equal to the number of scored categories.
 }
 \description{
-Returns the number of scored categories.
+Returns the number of scored categories — equivalent to
+\code{length(x$denominators)}. Preserves backward compatibility with code that
+calls \code{length()} on the return value of \code{\link[=sgp_denominators]{sgp_denominators()}}.
+}
+\seealso{
+\code{\link[=sgp_denominators]{sgp_denominators()}}
 }

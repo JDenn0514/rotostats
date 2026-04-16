@@ -10,11 +10,23 @@ last(n)
 \item{n}{Positive integer. Number of most recent years to include.}
 }
 \value{
-An S3 object of class \code{"sgp_year_window_last"}.
+An S3 object of class \code{"sgp_year_window_last"}. Pass as the \code{years}
+argument to \code{\link[=sgp_denominators]{sgp_denominators()}} or inside \code{\link[=cal]{cal()}}.
 }
 \description{
-Year-window helper: the n most recent years
+Restricts the calibration window to the \code{n} most recent years present in
+\code{league_history$team_season}. Useful when only a fixed rolling window is
+desired regardless of when the function is called.
 }
 \examples{
-last(5)  # selects the 5 most recent years
+last(5)  # selects the 5 most recent years in the data
 }
+\seealso{
+\code{\link[=after]{after()}}, \code{\link[=before]{before()}}, \code{\link[=between]{between()}}, \code{\link[=cal]{cal()}}, \code{\link[=sgp_denominators]{sgp_denominators()}}
+
+Other year-window helpers: 
+\code{\link{after}()},
+\code{\link{before}()},
+\code{\link{between}()}
+}
+\concept{year-window helpers}

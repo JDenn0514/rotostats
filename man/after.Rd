@@ -8,14 +8,29 @@ after(year)
 }
 \arguments{
 \item{year}{Numeric or integer threshold. Years \emph{strictly greater than}
-\code{year} are included. For example, \code{after(2022)} includes 2023 onward.}
+\code{year} are included (\code{y > year}).}
 }
 \value{
-An S3 object of class \code{"sgp_year_window_after"}.
+An S3 object of class \code{"sgp_year_window_after"}. Pass as the \code{years}
+argument to \code{\link[=sgp_denominators]{sgp_denominators()}} or inside \code{\link[=cal]{cal()}}.
 }
 \description{
-Year-window helper: years strictly after a threshold
+Restricts the calibration window to years strictly greater than \code{year}.
+Commonly used to exclude pre-rule-change seasons; e.g., \code{after(2022)} selects
+2023 onward (the post-shift-ban era).
 }
 \examples{
-after(2022)  # selects years >= 2023
+after(2022)  # selects 2023, 2024, ...
+
+# Use inside cal_spec() for a per-category override:
+cal_spec(SB = cal(years = after(2022)))
 }
+\seealso{
+\code{\link[=before]{before()}}, \code{\link[=between]{between()}}, \code{\link[=last]{last()}}, \code{\link[=cal]{cal()}}, \code{\link[=sgp_denominators]{sgp_denominators()}}
+
+Other year-window helpers: 
+\code{\link{before}()},
+\code{\link{between}()},
+\code{\link{last}()}
+}
+\concept{year-window helpers}

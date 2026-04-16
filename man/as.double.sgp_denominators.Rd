@@ -12,15 +12,25 @@
 \item{...}{Ignored.}
 }
 \value{
-Named numeric vector of denominators.
+Named numeric vector of length equal to the number of scored
+categories.
 }
 \description{
-Returns the underlying denominator vector. Enables backward-compatible
-usage such as \code{as.double(denoms)} or \code{as.numeric(denoms)}.
+Returns \code{x$denominators}, the named numeric vector of SGP denominators.
+Enables backward-compatible usage such as \code{as.double(denoms)} and
+\code{as.numeric(denoms)}.
 }
 \details{
-\code{as.numeric()} is a base primitive that does not dispatch S3 methods for
-list objects; \code{as.double()} does. Registering as \code{as.double} ensures
-correct dispatch for both \code{as.double()} and \code{as.numeric()} callers (since
-\code{as.numeric} internally calls \code{as.double}).
+\strong{S3 dispatch subtlety.} In base R, \code{as.numeric} is a primitive that does
+not dispatch S3 methods for list-based objects — calling
+\code{as.numeric(x)} on an S3 list silently falls back to base coercion and
+returns an empty \code{numeric(0)}. \code{as.double} \emph{does} dispatch correctly for
+list objects. This method is therefore registered as \code{as.double}, and
+\code{as.numeric} works because \code{as.numeric} internally delegates to \code{as.double}
+via R's primitive fallback chain. Future S3 authors building list-based
+classes in this package should register coercions under \code{as.double}, not
+\code{as.numeric}.
+}
+\seealso{
+\code{\link[=sgp_denominators]{sgp_denominators()}}
 }

@@ -8,14 +8,24 @@ before(year)
 }
 \arguments{
 \item{year}{Numeric or integer threshold. Years \emph{strictly less than} \code{year}
-are included.}
+are included (\code{y < year}).}
 }
 \value{
-An S3 object of class \code{"sgp_year_window_before"}.
+An S3 object of class \code{"sgp_year_window_before"}. Pass as the \code{years}
+argument to \code{\link[=sgp_denominators]{sgp_denominators()}} or inside \code{\link[=cal]{cal()}}.
 }
 \description{
-Year-window helper: years strictly before a threshold
+Restricts the calibration window to years strictly less than \code{year}.
 }
 \examples{
-before(2020)  # selects years up to 2019
+before(2020)  # selects 2019, 2018, ...
 }
+\seealso{
+\code{\link[=after]{after()}}, \code{\link[=between]{between()}}, \code{\link[=last]{last()}}, \code{\link[=cal]{cal()}}, \code{\link[=sgp_denominators]{sgp_denominators()}}
+
+Other year-window helpers: 
+\code{\link{after}()},
+\code{\link{between}()},
+\code{\link{last}()}
+}
+\concept{year-window helpers}

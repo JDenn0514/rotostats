@@ -7,7 +7,7 @@
 \method{print}{sgp_denominators}(x, ...)
 }
 \arguments{
-\item{x}{An \code{sgp_denominators} object.}
+\item{x}{An \code{sgp_denominators} object returned by \code{\link[=sgp_denominators]{sgp_denominators()}}.}
 
 \item{...}{Ignored.}
 }
@@ -15,5 +15,10 @@
 \code{x}, invisibly.
 }
 \description{
-Print method for sgp_denominators objects
+Displays the estimation method, rate-conversion mode, years used, and the
+denominator values for each scoring category. When bootstrap CIs are
+present, the replicate count and CI level are also shown.
+}
+\seealso{
+\code{\link[=sgp_denominators]{sgp_denominators()}}
 }

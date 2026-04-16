@@ -9,12 +9,16 @@
 \arguments{
 \item{x}{An \code{sgp_denominators} object.}
 
-\item{i}{Index (name or position).}
+\item{i}{A character name (e.g., \code{"HR"}) or integer position.}
 }
 \value{
-Named numeric scalar (or vector).
+Named numeric scalar or vector from \code{x$denominators}.
 }
 \description{
-Delegates to \verb{$denominators} for backward compatibility with the old
-named-numeric-vector API.
+Delegates to \verb{$denominators}, preserving backward compatibility with code
+that treats the return value of \code{\link[=sgp_denominators]{sgp_denominators()}} as a named numeric
+vector.
+}
+\seealso{
+\code{\link[=sgp_denominators]{sgp_denominators()}}
 }

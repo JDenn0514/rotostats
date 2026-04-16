@@ -7,20 +7,35 @@
 exp_decay(lambda)
 }
 \arguments{
-\item{lambda}{Numeric scalar in (0, 1]. Decay factor. Default in
-\code{sgp_denominators()} is 0.9.}
+\item{lambda}{Numeric scalar in \verb{(0, 1]}. Decay factor per year. The default
+in \code{\link[=sgp_denominators]{sgp_denominators()}} is \code{0.9}.}
 }
 \value{
-A function with signature \verb{function(years_ago)} returning \code{lambda^years_ago}.
+A function of class \code{c("exp_decay_weight", "function")} with
+signature \verb{function(years_ago)} returning \code{lambda^years_ago}.
 }
 \description{
 Returns a weight function where each additional year back in time reduces the
-weight by a factor of \code{lambda}. The most recent year (years_ago = 0) receives
-weight 1; one year back receives weight \code{lambda}; two years back \code{lambda^2}, etc.
+weight by a factor of \code{lambda}. The most recent year (\code{years_ago = 0})
+receives weight \code{1}; one year back receives \code{lambda}; \code{k} years back
+\code{lambda^k}. Use values close to \code{1} (e.g., \code{0.9}) for mild decay and lower
+values (e.g., \code{0.7}) when recent seasons should dominate strongly.
 }
 \examples{
 wfn <- exp_decay(0.9)
 wfn(0)  # 1
 wfn(1)  # 0.9
 wfn(2)  # 0.81
+
+# Stronger decay — recent years carry much more weight:
+wfn_strong <- exp_decay(0.7)
+wfn_strong(3)  # 0.343
 }
+\seealso{
+\code{\link[=flat]{flat()}}, \code{\link[=linear_decay]{linear_decay()}}, \code{\link[=sgp_denominators]{sgp_denominators()}}
+
+Other weight constructors: 
+\code{\link{flat}()},
+\code{\link{linear_decay}()}
+}
+\concept{weight constructors}

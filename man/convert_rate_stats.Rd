@@ -14,24 +14,34 @@ convert_rate_stats(
 )
 }
 \arguments{
-\item{league_history}{A \code{league_history} S3 object or duck-typed list.}
+\item{league_history}{A \code{league_history} S3 object or duck-typed list with
+a \verb{$team_season} data.frame. Not used (stub).}
 
-\item{baseline_era}{Numeric. Fixed baseline ERA (not yet used).}
+\item{baseline_era}{Numeric. Fixed baseline ERA. Not used (stub).}
 
-\item{baseline_whip}{Numeric. Fixed baseline WHIP (not yet used).}
+\item{baseline_whip}{Numeric. Fixed baseline WHIP. Not used (stub).}
 
-\item{baseline_avg}{Numeric. Fixed baseline AVG (not yet used).}
+\item{baseline_avg}{Numeric. Fixed baseline AVG. Not used (stub).}
 
-\item{projections}{Data frame of player projections (not yet used).}
+\item{projections}{Data frame of player projections. Not used (stub).}
 
-\item{league_config}{League configuration object (not yet used).}
+\item{league_config}{League configuration object. Not used (stub).}
 }
 \value{
-Does not return; always aborts.
+Does not return; always aborts with
+\code{rotostats_error_not_implemented}.
 }
 \description{
-This function is not yet implemented. It will convert rate statistics
-(ERA, WHIP, AVG, etc.) to counting-stat equivalents using a fixed baseline
-approach. For now, use \code{rate_conversion = "blended_pool"} (the default) in
+This function is not yet implemented. When complete it will convert rate
+statistics (ERA, WHIP, AVG) to counting-stat equivalents using a fixed
+baseline approach, enabling the \code{rate_conversion = "fixed_baseline"} path in
 \code{\link[=sgp_denominators]{sgp_denominators()}}.
+
+Until then, calling this function — directly or via
+\code{sgp_denominators(rate_conversion = "fixed_baseline")} — always aborts with
+class \code{rotostats_error_not_implemented}. Use the default
+\code{rate_conversion = "blended_pool"} instead.
+}
+\seealso{
+\code{\link[=sgp_denominators]{sgp_denominators()}}
 }

@@ -10,9 +10,15 @@
 \item{x}{An \code{sgp_denominators} object.}
 }
 \value{
-Character vector of category names.
+Character vector of uppercase category names, e.g.,
+\code{c("HR", "R", "RBI", "SB", "AVG", "ERA", "WHIP", "K", "W", "SV")}.
 }
 \description{
-Returns the category names from \verb{$denominators} for backward compatibility
-with the old named-vector API.
+Returns the category names from \code{x$denominators}, preserving backward
+compatibility with code that calls \code{names()} on the return value of
+\code{\link[=sgp_denominators]{sgp_denominators()}}. To inspect the raw slot names of the underlying list,
+use \code{names(unclass(x))}.
+}
+\seealso{
+\code{\link[=sgp_denominators]{sgp_denominators()}}
 }

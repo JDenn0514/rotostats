@@ -7,13 +7,28 @@
 flat()
 }
 \value{
-A function with signature \verb{function(years_ago)} that always returns 1.
+A function of class \code{"flat_weight"} with signature
+\verb{function(years_ago)} that always returns \code{1}. Weights are subsequently
+normalized by \code{sgp_denominators()} so the exact magnitude does not matter.
 }
 \description{
-Returns a weight function that assigns equal weight to all years.
+Returns a weight function that assigns equal weight to all years in the
+calibration window. Use this when you believe the denominator is stable over
+time and want to maximise effective sample size.
 }
 \examples{
 wfn <- flat()
 wfn(0)  # 1
 wfn(3)  # 1
+
+# Use as the weights argument in sgp_denominators():
+# sgp_denominators(history, weights = flat())
 }
+\seealso{
+\code{\link[=exp_decay]{exp_decay()}}, \code{\link[=linear_decay]{linear_decay()}}, \code{\link[=sgp_denominators]{sgp_denominators()}}
+
+Other weight constructors: 
+\code{\link{exp_decay}()},
+\code{\link{linear_decay}()}
+}
+\concept{weight constructors}
