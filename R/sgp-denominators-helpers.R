@@ -267,7 +267,7 @@ cal_spec <- function(...) {
 #' Expected values (numerical integration anchors):
 #' - n = 10: ≈ 3.0776
 #' - n = 12: ≈ 3.2587
-#' - n = 15: ≈ 3.5241
+#' - n = 15: ≈ 3.4718
 #'
 #' @param n Integer >= 2. Number of standard normal variables.
 #' @return Numeric scalar. The expected range.

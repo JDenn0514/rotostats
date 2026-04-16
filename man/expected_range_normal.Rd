@@ -21,7 +21,7 @@ Expected values (numerical integration anchors):
 \itemize{
 \item n = 10: ≈ 3.0776
 \item n = 12: ≈ 3.2587
-\item n = 15: ≈ 3.5241
+\item n = 15: ≈ 3.4718
 }
 }
 \examples{
