@@ -81,14 +81,19 @@ print.sgp_denominators <- function(x, ...) {
 #' Coerce sgp_denominators to a named numeric vector
 #'
 #' Returns the underlying denominator vector. Enables backward-compatible
-#' usage such as `as.numeric(denoms)`.
+#' usage such as `as.double(denoms)` or `as.numeric(denoms)`.
+#'
+#' `as.numeric()` is a base primitive that does not dispatch S3 methods for
+#' list objects; `as.double()` does. Registering as `as.double` ensures
+#' correct dispatch for both `as.double()` and `as.numeric()` callers (since
+#' `as.numeric` internally calls `as.double`).
 #'
 #' @param x An `sgp_denominators` object.
 #' @param ... Ignored.
 #' @return Named numeric vector of denominators.
-#' @method as.numeric sgp_denominators
+#' @method as.double sgp_denominators
 #' @export
-as.numeric.sgp_denominators <- function(x, ...) x$denominators
+as.double.sgp_denominators <- function(x, ...) x$denominators
 
 #' Names of an sgp_denominators object
 #'

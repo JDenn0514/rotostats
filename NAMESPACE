@@ -2,7 +2,7 @@
 
 S3method("[",sgp_denominators)
 S3method("[[",sgp_denominators)
-S3method(as.numeric,sgp_denominators)
+S3method(as.double,sgp_denominators)
 S3method(length,sgp_denominators)
 S3method(names,sgp_denominators)
 S3method(print,sgp_denominators)
