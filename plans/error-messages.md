@@ -15,7 +15,7 @@ All `cli_abort()` and `cli_warn()` calls must use a class from this table.
 | `rotostats_error_invalid_anchor` | `dollar_values()` | Valuation element has `attr(..., "anchor") != "replacement"` | Use `replacement_level()` to produce the anchor |
 | `rotostats_error_invalid_valuation_units` | `dollar_values()` | Valuation element has unrecognized `units` attribute value | Use a supported units value (see `?dollar_values`) |
 | `rotostats_error_missing_config_field` | `dollar_values()` | `config` missing `budget`, `n_teams`, or `budget_split` | Supply all required fields via `league_config()` |
-| `rotostats_error_invalid_budget_split` | `dollar_values()` | `config$budget_split` not in (0, 1) | Pass a value strictly between 0 and 1 |
+| `rotostats_error_invalid_budget_split` | `dollar_values()`, `league_config()` | `config$budget_split` not in (0, 1) | Pass a value strictly between 0 and 1 |
 | `rotostats_error_negative_allocatable_budget` | `dollar_values()` | $1 minimums exhaust hitter or pitcher budget after applying `budget_split` | Increase budget or adjust `budget_split` |
 | `rotostats_error_keeper_config_missing` | `dollar_values()` | `keepers` non-NULL but `config$keeper = FALSE` | Set `config$keeper = TRUE` when passing keepers |
 | `rotostats_error_missing_keeper_columns` | `dollar_values()`, `adjust_keeper_inflation()` | `keepers` data frame missing player identity or salary column | Include required columns in `keepers` |
@@ -35,6 +35,14 @@ All `cli_abort()` and `cli_warn()` calls must use a class from this table.
 | `rotostats_error_invalid_cal_weights` | `cal()` | `weights` field in `cal()` is not a valid weight specification | See `flat()`, `linear_decay()`, `exp_decay()` |
 | `rotostats_error_invalid_cal_field` | `cal()` | Unrecognized field name passed to `cal()` | Only `years` and `weights` are accepted |
 | `rotostats_error_invalid_parameter` | `sgp_denominators()` | `n_bootstrap` or another parameter fails type or range validation | Pass a non-negative integer scalar for `n_bootstrap`; see `?sgp_denominators` for constraints |
+| `rotostats_error_invalid_n_teams` | `league_config()` | `n_teams` not a single positive integer | Pass a positive integer (e.g., `12L`) |
+| `rotostats_error_invalid_roster_slots` | `league_config()` | `roster_slots` not a named non-negative integer vector | Pass a named integer vector, one entry per hitter position |
+| `rotostats_error_invalid_pitcher_slots` | `league_config()` | `pitcher_slots` not a scalar integer or a named integer vector with names from `{SP, RP}` | Pass `9L` (total), or `c(SP = X, RP = Y)` |
+| `rotostats_error_invalid_league_type` | `league_config()` | `league_type` not one of `"mixed"`, `"AL"`, `"NL"` | Choose one of the three supported values |
+| `rotostats_error_invalid_budget` | `league_config()` | `budget` not a single positive integer | Pass a positive integer (e.g., `260L`) |
+| `rotostats_error_invalid_categories` | `league_config()` | `categories` not a non-empty character vector | Pass at least one scored category name |
+| `rotostats_error_invalid_keeper_config` | `league_config()` | `keeper` not `TRUE`/`FALSE`/named list, missing required fields, or invalid method | Pass `FALSE`, `TRUE`, or a complete keeper list |
+| `rotostats_error_missing_keeper_salary_col` | `league_config()` | Keeper `method = "salary_adjust"` with `salary_col` unset | Supply `salary_col` naming the projections column holding keeper salaries |
 
 ## Warnings
 
@@ -58,3 +66,5 @@ All `cli_abort()` and `cli_warn()` calls must use a class from this table.
 | `rotostats_warning_unexpected_slope_sign` | `sgp_denominators()` | Positive OLS slope for an inverse category (ERA, WHIP), or negative slope for a normal category, after the direction-aware rank transformation | Verify that inverse categories are correctly declared and that `league_history` data is not corrupted |
 | `rotostats_warning_no_valid_years` | `sgp_denominators()` | No valid years remain for a category after exclusions; denominator set to NA | Widen `years` window or reduce `exclude_years` |
 | `rotostats_warning_high_denominator_cv` | `sgp_denominators()` | Year-over-year denominator CV > 20%; names category and CV value | Consider a shorter or more recent calibration window to reduce instability |
+| `rotostats_warning_dh_dropped_nl` | `league_config()` | `DH` present in `roster_slots` with `league_type = "NL"` | Use `"mixed"` or `"AL"` for DH-eligible rosters, or omit DH |
+| `rotostats_warning_unknown_category` | `league_config()` | Category name not in canonical list; accepted but unrecognized | Confirm the spelling; non-canonical categories are allowed but unvalidated |
