@@ -43,6 +43,12 @@ All `cli_abort()` and `cli_warn()` calls must use a class from this table.
 | `rotostats_error_invalid_categories` | `league_config()` | `categories` not a non-empty character vector | Pass at least one scored category name |
 | `rotostats_error_invalid_keeper_config` | `league_config()` | `keeper` not `TRUE`/`FALSE`/named list, missing required fields, or invalid method | Pass `FALSE`, `TRUE`, or a complete keeper list |
 | `rotostats_error_missing_keeper_salary_col` | `league_config()` | Keeper `method = "salary_adjust"` with `salary_col` unset | Supply `salary_col` naming the projections column holding keeper salaries |
+| `rotostats_error_invalid_team_season` | `league_history()` | `team_season` is not a data frame | Pass a data frame in wide format |
+| `rotostats_error_missing_team_season_column` | `league_history()` | `year` or `team_id` missing from `team_season` | Add the missing identifier column |
+| `rotostats_error_invalid_team_season_year` | `league_history()` | `team_season$year` not coercible to integer | Provide integer years (not character labels) |
+| `rotostats_error_invalid_team_season_team_id` | `league_history()` | `team_season$team_id` not character or factor | Coerce `team_id` to character before passing |
+| `rotostats_error_invalid_prices` | `league_history()` | `prices` supplied but not a data frame | Pass a data frame or `NULL` |
+| `rotostats_error_missing_prices_column` | `league_history()` | `prices` missing `year`, `player_name`, or `price` | Add the missing column(s) to `prices` |
 
 ## Warnings
 
@@ -68,3 +74,6 @@ All `cli_abort()` and `cli_warn()` calls must use a class from this table.
 | `rotostats_warning_high_denominator_cv` | `sgp_denominators()` | Year-over-year denominator CV > 20%; names category and CV value | Consider a shorter or more recent calibration window to reduce instability |
 | `rotostats_warning_dh_dropped_nl` | `league_config()` | `DH` present in `roster_slots` with `league_type = "NL"` | Use `"mixed"` or `"AL"` for DH-eligible rosters, or omit DH |
 | `rotostats_warning_unknown_category` | `league_config()` | Category name not in canonical list; accepted but unrecognized | Confirm the spelling; non-canonical categories are allowed but unvalidated |
+| `rotostats_warning_inconsistent_team_count` | `league_history()` | Team count varies across years in `team_season` | Investigate league expansion/contraction, or filter to consistent seasons |
+| `rotostats_warning_na_stat_value` | `league_history()` | NA in a non-identifier stat column; names affected team-year pairs | Impute, drop, or investigate the flagged rows before passing to `sgp_denominators()` |
+| `rotostats_warning_negative_price` | `league_history()` | `prices$price` contains negative values | Review and correct the flagged rows |
