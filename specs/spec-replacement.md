@@ -513,8 +513,7 @@ player assigned to P under current PAR estimates. Each player appears in exactly
 position's pool. This ensures replacement levels are self-consistent with valuations: a 2B/SS
 player assigned to SS counts toward SS pool depth, correctly reducing apparent SS scarcity.
 
-**Convergence criterion** (managed by `dollar_values()`, specified here for contract
-completeness):
+**Convergence criterion** (managed internally by `replacement_level()`):
 
 1. **Primary:** Zero players change their assigned position between passes N and N+1
    (`all(new_assignment == old_assignment)`)
@@ -569,17 +568,31 @@ stats. Self-contained — no upstream dependency on `sgp()`. This is the default
 `replacement_level()` to run without `sgp_denominators`.
 
 **`sort_by = "sgp"` (optional):** Players ranked by total SGP. Requires `sgp_denominators`
-(named numeric vector from `sgp()$denominators`). This creates a circular dependency:
-`sgp()` needs replacement stats → `replacement_level()` needs SGP denominators.
+(named numeric vector from `sgp_denominators()`). The ranking depends on per-player SGP,
+which depends in turn on the current replacement stat line — directly via `multi_pos`
+reassignment churn under `multi_pos = "highest_par"`, and via the marginal pool baseline
+when `boundary_rate_method = "sgp_pool"`. This is the circular dependency the loop resolves.
 
-**Circularity resolution:** Iteration is managed by `dollar_values()`:
-1. Call `replacement_level(sort_by = "zscore")` → initial replacement stats
-2. Call `sgp(replacement_stats = ...)` → SGP denominators
-3. Call `replacement_level(sort_by = "sgp", sgp_denominators = ...)` → updated replacement stats
-4. Repeat steps 2–3 until convergence (2–3 passes typical)
+**Circularity resolution:** Iteration is managed internally by `replacement_level()`. The
+caller computes `sgp_denominators` once from `league_history` and passes them in; the loop
+itself runs inside the function:
 
-`replacement_level()` itself is stateless and deterministic given fixed inputs — it does not
-manage iteration.
+1. **Pass 1:** Rank players by composite z-score, identify boundary, compute initial
+   replacement stats and position assignments.
+2. **Pass N (N ≥ 2):** Call `sgp(projections, denominators)` internally to derive per-player
+   `total_sgp`; re-rank by `total_sgp`; identify the new boundary; recompute replacement
+   stats; re-evaluate multi-position assignments (when `multi_pos = "highest_par"`).
+3. Repeat pass N until the convergence criteria above are met or `max_iter` is reached
+   (2–3 passes typical).
+
+`sgp_denominators` are calibrated once outside the loop and do not change between iterations
+— what updates each pass is per-player SGP totals (via re-ranking) and position assignments.
+Position assignment circularity and SGP-ranking circularity converge in the same loop; no
+separate loop is needed.
+
+`replacement_level()` is deterministic for fixed inputs and returns a converged result.
+Downstream callers (`par()`, `zar()`, `dollar_values()`) consume the converged output and do
+not orchestrate the loop.
 
 ---
 
@@ -686,8 +699,8 @@ per `calibration_min_n` when the genuine-$1 pool is too thin.
 
 **Downstream:**
 - `sgp()`: consumes `replacement_stats` to compute per-player SGP above replacement.
-- `dollar_values()`: consumes `replacement_stats` and `positional_adjustments`; manages
-  the iteration loop when `sort_by = "sgp"`.
+- `dollar_values()`: consumes `replacement_stats` and `positional_adjustments` from the
+  converged result; does not manage iteration.
 
 ---
 
@@ -701,8 +714,8 @@ per `calibration_min_n` when the genuine-$1 pool is too thin.
     position to produce above-replacement values.
   - `zaa()`: uses the replacement object to restrict the player pool to rostered players
     before computing within-position z-scores.
-  - `dollar_values()`: drives the iteration loop; calls `replacement_level()` on each
-    pass (when `sort_by = "sgp"`) until `position_assignments` converge.
+  - `dollar_values()`: consumes `position_assignments` and `replacement_stats` from the
+    converged `replacement_level()` result.
 - **How consumed:**
   - `replacement_stats`: one row per position, one column per category — subtracted
     directly in `par()` Step 3 and `zar()` Step 3.
