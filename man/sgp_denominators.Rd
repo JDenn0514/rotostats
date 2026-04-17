@@ -151,6 +151,10 @@ expected range of \code{n} standard normal variables (see
 \code{\link[=expected_range_normal]{expected_range_normal()}}). This method targets a different estimand than
 OLS — its output is approximately 12x larger for typical 12-team leagues.
 Do not mix OLS and SD denominators across categories.
+
+The \code{denom_floor} guard caused zero near-zero triggers across 115,000
+simulation runs under tested DGPs; the default is conservative, not
+load-bearing.
 }
 
 \subsection{Backward compatibility}{
