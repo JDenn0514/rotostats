@@ -47,6 +47,25 @@
 * `expected_range_normal()` — Computes E[range] of *n* i.i.d. standard
   normals via numerical integration; used internally by `method = "sd"`.
 
+## Breaking changes
+
+* `sgp()` now validates `pool_baseline` at the top of the function.
+  Passing `pool_baseline = "per_player"` or
+  `pool_baseline = "universal_constants"` now aborts immediately with
+  `rotostats_error_invalid_pool_baseline` rather than propagating to a
+  different downstream error. Only `pool_baseline = "projection_pool"`
+  (the default) is accepted.
+
+* `sgp()` now emits `rotostats_warning_zero_playing_time` (instead of
+  `rotostats_warning_missing_category_column`) when a player has 0 or `NA`
+  projected IP or AB for a scored rate stat. Callers using
+  `withCallingHandlers(rotostats_warning_missing_category_column = ...)` to
+  intercept zero-playing-time rows must update to
+  `withCallingHandlers(rotostats_warning_zero_playing_time = ...)`.
+  The condition triggering `rotostats_warning_missing_category_column` is
+  unchanged: it fires only when a scored category column is entirely absent
+  from `projections`.
+
 ## Implementation notes for maintainers
 
 See `plans/sgp-denominators-architecture.md` for a full discussion of the

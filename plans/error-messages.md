@@ -29,6 +29,7 @@ All `cli_abort()` and `cli_warn()` calls must use a class from this table.
 | `rotostats_error_n_teams_mismatch` | `sgp_denominators()` | Explicit `n_teams` does not match a year's row count in `team_season` | Either omit `n_teams` (infer per year) or ensure every year has exactly `n_teams` rows |
 | `rotostats_error_missing_category_column` | `sgp_denominators()` | A named element of `scoring_categories` is absent from `team_season` | Add the missing column to `league_history$team_season` or correct the category name |
 | `rotostats_error_not_implemented` | `convert_rate_stats()` | Function is called (stub only in this release) | Use `rate_conversion = "blended_pool"` (the default) |
+| `rotostats_error_invalid_pool_baseline` | `sgp()` | `pool_baseline` is not one of the implemented values; currently only `"projection_pool"` is supported | Pass `pool_baseline = "projection_pool"` (the default) |
 | `rotostats_error_invalid_year_window` | `apply_year_window()` (internal) | Unrecognized year-window specification passed as `years` | Use `"all"`, an integer vector, or a helper: `after()`, `before()`, `between()`, `last()` |
 | `rotostats_error_invalid_weights` | `sgp_denominators()` | `weights` argument is not a valid weight specification | Pass a constructor result (`flat()`, `linear_decay()`, `exp_decay()`), or the shorthand `"flat"` or `"linear"` |
 | `rotostats_error_invalid_cal_years` | `cal()` | `years` field in `cal()` is not a valid year window | See `after()`, `before()`, `between()`, `last()` |
@@ -65,7 +66,8 @@ All `cli_abort()` and `cli_warn()` calls must use a class from this table.
 | Class | Thrown by | Condition | Recovery guidance |
 |-------|-----------|-----------|-------------------|
 | `rotostats_warning_example` | TBD | Example warning condition | — |
-| `rotostats_warning_missing_category_column` | `sgp()` | A scored category in `names(denominators)` is absent from `projections`, OR a player has 0 or NA projected IP/AB for a scored rate stat; the affected `sgp_<cat>` values are set to `NA`. Both the "column entirely absent" and the "zero playing time" cases use this class — distinguish them by reading the message text | Add the missing column to `projections`, or remove the category from the scored list; for zero playing time, the player legitimately has no rate-stat contribution |
+| `rotostats_warning_missing_category_column` | `sgp()` | A scored category in `names(denominators)` is entirely absent from `projections`; the affected `sgp_<cat>` column is filled with `NA` for all players | Add the missing column to `projections`, or remove the category from the scored list |
+| `rotostats_warning_zero_playing_time` | `sgp()` | A player has 0 or `NA` projected IP (when ERA or WHIP is scored) or 0 or `NA` projected AB (when AVG is scored); that player's rate-stat SGP is set to `NA` | This is expected for pure hitters (zero IP) or pitchers with no AB; suppress with `withCallingHandlers(rotostats_warning_zero_playing_time = ...)` if intentional |
 | `rotostats_warning_pvm_concentration` | `pvm()` | Any `pvm[i, c] > 0.25` | Review category concentration; consider rebalancing |
 | `rotostats_warning_pvm_sum` | `pvm()` | `sum(pvm[j, c])` deviates from 1.0 by more than 1e-10 for any category | Check PVM inputs for floating-point accumulation errors |
 | `rotostats_warning_keeper_player_not_found` | `dollar_values()`, `adjust_keeper_inflation()` | Player in `keepers` not found in valuation output | Verify player IDs match between `keepers` and projections |

@@ -125,6 +125,7 @@ graph TD
     D --> D2["cli_abort\nrotostats_error_missing_required_column"]
 
     F --> F1["cli_warn\nrotostats_warning_missing_category_column"]
+    J --> J5a["cli_warn\nrotostats_warning_zero_playing_time"]
 
     G --> G1["rlang::inform .frequency=once"]
 
@@ -140,7 +141,7 @@ graph TD
     J --> J2["blended ERA formula vectorized"]
     J --> J3["blended WHIP formula vectorized"]
     J --> J4["blended AVG formula sign flip"]
-    J --> J5["cli_warn zero IP/AB"]
+    J --> J5["cli_warn\nrotostats_warning_zero_playing_time\nzero IP/AB"]
 
     K --> K1["as.data.frame sgp_cols"]
     K --> K2["rowSums na.rm=FALSE"]
@@ -445,7 +446,7 @@ Output attributes: `stat_units`, `config`, `projections`, `position_assignments`
 
 2. **`attr(denominators, "rate_conversion")` on outer S3 object**: The compatibility check reads from the outer `sgp_denominators` object, not from `$denominators`. Reading the wrong level silently returns `NULL`, which would always pass the check spuriously. Verified correct in tester's EC-2 and EC-11a.
 
-3. **`rotostats_warning_missing_category_column` dual use**: The same class covers "column absent from projections" (Step 8) and "player has 0 or NA playing time" (Steps 14a, 14d). Messages are distinguishable by content; one class makes it easy to suppress both with a single `withCallingHandlers` call.
+3. **Warning class split — `rotostats_warning_missing_category_column` vs `rotostats_warning_zero_playing_time`**: Two distinct warning classes replace the former dual-use design. `rotostats_warning_missing_category_column` fires at Step 8 when a scored category column is entirely absent from `projections`. `rotostats_warning_zero_playing_time` fires at Steps 14a, 14c, and 14d when a player has 0 or NA projected IP/AB for a scored rate stat. Callers may suppress either class independently via `withCallingHandlers`.
 
 4. **SVHD auto-derivation with `.frequency_id`**: `rlang::inform(.frequency = "once")` requires `.frequency_id` in rlang >= 1.1.0. The correct call uses `.frequency_id = "sgp_svhd_derivation"`. Omitting this caused a runtime crash (BLOCK-1 in tester round 1, fixed in builder round 2).
 
