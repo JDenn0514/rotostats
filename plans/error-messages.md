@@ -23,7 +23,7 @@ All `cli_abort()` and `cli_warn()` calls must use a class from this table.
 | `rotostats_error_missing_player_type` | `calibrate_budget_split()` | `prices` missing `player_type` column | Add a `player_type` column to the prices data frame |
 | `rotostats_error_missing_team_season` | `sgp_denominators()` | `league_history$team_season` is NULL or not a data.frame | Pass a list or `league_history` object whose `$team_season` slot is a non-NULL data.frame |
 | `rotostats_error_missing_required_column` | `sgp_denominators()` | `year` or `team_id` column absent from `team_season` | Add the missing column(s) to `league_history$team_season` |
-| `rotostats_error_invalid_rate_conversion` | `sgp_denominators()` | `rate_conversion` is not `"blended_pool"` or `"fixed_baseline"` | Pass one of the two supported values |
+| `rotostats_error_invalid_rate_conversion` | `sgp_denominators()`, `sgp()` | (1) `rate_conversion` is not one of the five recognized values (`"blended_pool"`, `"fixed_baseline"`, `"per_player"`, `"universal_constants"`, `"team_ip_normalized"`); (2) `rate_conversion = "blended_pool"` but `attr(denominators, "rate_conversion")` is not `"blended_pool"` — structurally incompatible units | Pass one of the supported values; ensure `rate_conversion` matches the method used in `sgp_denominators()` |
 | `rotostats_error_invalid_method` | `sgp_denominators()` | `method` is not one of `"ols"`, `"gap"`, `"trimmed_gap"`, `"sd"` | Pass one of the four supported method strings |
 | `rotostats_error_invalid_category_spec` | `sgp_denominators()`, `cal_spec()` | `category_spec` is not a `"cal_spec"` object; or a raw `list()` was used inside `cal_spec()` | Construct with `cal_spec(CAT = cal(...))` |
 | `rotostats_error_n_teams_mismatch` | `sgp_denominators()` | Explicit `n_teams` does not match a year's row count in `team_season` | Either omit `n_teams` (infer per year) or ensure every year has exactly `n_teams` rows |
@@ -55,6 +55,7 @@ All `cli_abort()` and `cli_warn()` calls must use a class from this table.
 | Class | Thrown by | Condition | Recovery guidance |
 |-------|-----------|-----------|-------------------|
 | `rotostats_warning_example` | TBD | Example warning condition | — |
+| `rotostats_warning_missing_category_column` | `sgp()` | A scored category in `names(denominators)` is absent from `projections`, OR a player has 0 or NA projected IP/AB for a scored rate stat; the affected `sgp_<cat>` values are set to `NA`. Both the "column entirely absent" and the "zero playing time" cases use this class — distinguish them by reading the message text | Add the missing column to `projections`, or remove the category from the scored list; for zero playing time, the player legitimately has no rate-stat contribution |
 | `rotostats_warning_pvm_concentration` | `pvm()` | Any `pvm[i, c] > 0.25` | Review category concentration; consider rebalancing |
 | `rotostats_warning_pvm_sum` | `pvm()` | `sum(pvm[j, c])` deviates from 1.0 by more than 1e-10 for any category | Check PVM inputs for floating-point accumulation errors |
 | `rotostats_warning_keeper_player_not_found` | `dollar_values()`, `adjust_keeper_inflation()` | Player in `keepers` not found in valuation output | Verify player IDs match between `keepers` and projections |
