@@ -10,7 +10,12 @@
 #   projections <- dgp_e(seed = 12345, n_teams = 10)
 #
 # Returns a data frame where the focal pitcher is always the first row.
-# Caller identifies focal pitcher by name == "FOCAL_F".
+# Caller identifies focal pitcher by player_name == "FOCAL_F".
+#
+# Column-schema notes (replacement_level() interface):
+#   - player_name  : required (NOT "name")
+#   - league       : required; mixed league = 50/50 AL/NL split
+#   - pos_eligibility: pipe-delimited ("|").
 
 # Fixed focal pitcher projections (per sim-spec.md §2.4)
 .FOCAL_PITCHER <- list(
@@ -52,9 +57,10 @@ dgp_e <- function(seed, n_teams) {
   # Focal pitcher row
   focal_df <- data.frame(
     player_id       = 1L,
-    name            = "FOCAL_F",
+    player_name     = "FOCAL_F",
     position        = "SP",
     pos_eligibility = "SP",
+    league          = "AL",
     role            = "SP",
     HR = NA_real_, R = NA_real_, RBI = NA_real_, SB = NA_real_,
     H  = NA_real_, AB = NA_real_, AVG = NA_real_,
@@ -69,9 +75,10 @@ dgp_e <- function(seed, n_teams) {
 
   comp_df <- data.frame(
     player_id       = seq.int(2L, n_complement_sp + 1L),
-    name            = paste0("SP_C_", seq_len(n_complement_sp)),
+    player_name     = paste0("SP_C_", seq_len(n_complement_sp)),
     position        = "SP",
     pos_eligibility = "SP",
+    league          = rep_len(c("AL", "NL"), n_complement_sp),
     role            = "SP",
     HR = NA_real_, R = NA_real_, RBI = NA_real_, SB = NA_real_,
     H  = NA_real_, AB = NA_real_, AVG = NA_real_,
@@ -85,7 +92,8 @@ dgp_e <- function(seed, n_teams) {
   )
 
   # ---- RP ---------------------------------------------------------------- #
-  n_rp <- n_teams * rp_slots
+  # Need at least n_teams * rp_slots + K_band_buffer (7 for K=3). Add 10 headroom.
+  n_rp <- n_teams * rp_slots + 10L
   IP_RP   <- pmin(pmax(round(stats::rnorm(n_rp, 62, 8)), 30L), 90L)
   ERA_RP  <- pmin(pmax(stats::rnorm(n_rp, 3.50, 0.65), 1.50), 7.00)
   WHIP_RP <- pmin(pmax(stats::rnorm(n_rp, 1.22, 0.15), 0.80), 2.00)
@@ -97,9 +105,10 @@ dgp_e <- function(seed, n_teams) {
 
   rp_df <- data.frame(
     player_id       = seq.int(n_complement_sp + 2L, n_complement_sp + 1L + n_rp),
-    name            = paste0("RP_", seq_len(n_rp)),
+    player_name     = paste0("RP_", seq_len(n_rp)),
     position        = "RP",
     pos_eligibility = "RP",
+    league          = rep_len(c("AL", "NL"), n_rp),
     role            = "RP",
     HR = NA_real_, R = NA_real_, RBI = NA_real_, SB = NA_real_,
     H  = NA_real_, AB = NA_real_, AVG = NA_real_,
@@ -124,8 +133,8 @@ dgp_e <- function(seed, n_teams) {
 
   for (i in seq_along(pos_names)) {
     pos <- pos_names[i]
-    # n_players = n_teams * slots[pos] + 5 buffer (enough for band)
-    n_p  <- n_teams * n_hitter_pos[i] + 5L
+    # n_players = n_teams * slots[pos] + 10 buffer (K=3 band needs +7 minimum)
+    n_p  <- n_teams * n_hitter_pos[i] + 10L
     hr_p <- sort(stats::rpois(n_p, mu_hr[pos]),  decreasing = TRUE)
     r_p  <- sort(stats::rpois(n_p, mu_r[pos]),   decreasing = TRUE)
     rbi_p<- sort(stats::rpois(n_p, mu_rbi[pos]), decreasing = TRUE)
@@ -135,9 +144,10 @@ dgp_e <- function(seed, n_teams) {
 
     hitter_rows[[i]] <- data.frame(
       player_id = seq.int(pid + 1L, pid + n_p),
-      name      = paste0(pos, "_", seq_len(n_p)),
+      player_name = paste0(pos, "_", seq_len(n_p)),
       position  = pos,
       pos_eligibility = pos,
+      league    = rep_len(c("AL", "NL"), n_p),
       role      = NA_character_,
       HR = hr_p, R = r_p, RBI = rbi_p, SB = sb_p,
       H  = h_p,  AB = ab_p, AVG = h_p / ab_p,
@@ -151,7 +161,7 @@ dgp_e <- function(seed, n_teams) {
   hitters <- do.call(rbind, hitter_rows)
 
   all_cols <- c(
-    "player_id", "name", "position", "pos_eligibility", "role",
+    "player_id", "player_name", "position", "pos_eligibility", "league", "role",
     "HR", "R", "RBI", "SB", "H", "AB", "AVG",
     "IP", "ERA", "WHIP", "W", "K", "SV"
   )

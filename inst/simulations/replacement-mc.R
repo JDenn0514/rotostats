@@ -565,7 +565,7 @@ run_study_e <- function(R = R_REPS) {
                         sum(sp_rows$IP)
       # Sort ascending (lower ERA/WHIP = better = higher rank)
       sp_ranked <- sp_rows[order(sp_rows$score), ]
-      focal_rank <- which(sp_ranked$name == "FOCAL_F")
+      focal_rank <- which(sp_ranked$player_name == "FOCAL_F")
       if (length(focal_rank) == 0L) focal_rank <- NA_integer_
 
       col_name <- if (li == 1L) "rank_10" else "rank_15"

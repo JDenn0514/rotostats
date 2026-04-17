@@ -13,6 +13,11 @@
 # Returns a full projection data frame (hitters + pitchers) that can be passed
 # to replacement_level(). The position under test (SS or C) is deliberately
 # thin so that K_eff < K_default is possible for the 5-team case.
+#
+# Column-schema notes (replacement_level() interface):
+#   - player_name  : required (NOT "name")
+#   - league       : required; AL-only pool = all rows "AL"
+#   - pos_eligibility: pipe-delimited ("|"), not slash-delimited ("/").
 
 #' Generate DGP-D projection data frame.
 #'
@@ -75,9 +80,10 @@ dgp_d <- function(seed, sub_dgp = c("D1", "D2", "D3")) {
 
   thin_df <- data.frame(
     player_id       = seq_len(n_thin),
-    name            = paste0(thin_pos, "_", seq_len(n_thin)),
+    player_name     = paste0(thin_pos, "_", seq_len(n_thin)),
     position        = thin_pos,
     pos_eligibility = thin_pos,
+    league          = "AL",
     role            = NA_character_,
     HR  = c(hr_above, hr_below),
     R   = c(r_above, r_below),
@@ -92,9 +98,14 @@ dgp_d <- function(seed, sub_dgp = c("D1", "D2", "D3")) {
   )
 
   # -- Other hitter positions ---------------------------------------------- #
+  # Pool sizing: 12-team needs 12*slots per position + K=3 band buffer (7).
+  # OF: 12*3 = 36 rostered; use 45. Single-slot positions: 12+7 = 19; use 20.
+  .dgp_d_n_players <- function(pos) {
+    if (pos == "OF") 45L else 20L
+  }
   other_params <- data.frame(
     position  = other_hitter_pos,
-    n_players = rep(15L, length(other_hitter_pos)),
+    n_players = vapply(other_hitter_pos, .dgp_d_n_players, integer(1L)),
     mu_HR     = c(14, 24, 16, 22, 20, 18, 18)[seq_along(other_hitter_pos)],
     mu_R      = c(55, 72, 72, 70, 75, 70, 65)[seq_along(other_hitter_pos)],
     mu_RBI    = c(55, 78, 62, 75, 70, 68, 65)[seq_along(other_hitter_pos)],
@@ -118,9 +129,10 @@ dgp_d <- function(seed, sub_dgp = c("D1", "D2", "D3")) {
 
     other_rows[[i]] <- data.frame(
       player_id       = seq.int(pid + 1L, pid + n),
-      name            = paste0(p$position, "_", seq_len(n)),
+      player_name     = paste0(p$position, "_", seq_len(n)),
       position        = p$position,
       pos_eligibility = p$position,
+      league          = "AL",
       role            = NA_character_,
       HR  = hr, R = r, RBI = rbi, SB = sb,
       H   = h,  AB = ab, AVG = h / ab,
@@ -133,8 +145,11 @@ dgp_d <- function(seed, sub_dgp = c("D1", "D2", "D3")) {
   other_hitters <- do.call(rbind, other_rows)
 
   # -- Pitchers ------------------------------------------------------------ #
-  n_sp <- 40L
-  n_rp <- 25L
+  # Pool sizing: 12-team × 6 SP = 72 rostered; 5-team × 6 SP = 30 rostered.
+  # Use 85 for all sub-DGPs (sufficient headroom for both 5- and 12-team cases).
+  # 12-team × 3 RP = 36 rostered; use 50.
+  n_sp <- 85L
+  n_rp <- 50L
 
   IP_SP   <- pmin(pmax(round(stats::rnorm(n_sp, 170, 15)), 120L), 230L)
   ERA_SP  <- pmin(pmax(stats::rnorm(n_sp, 3.80, 0.45), 2.50), 6.00)
@@ -145,8 +160,8 @@ dgp_d <- function(seed, sub_dgp = c("D1", "D2", "D3")) {
   sp_ord  <- order(IP_SP, decreasing = TRUE)
   sp_df <- data.frame(
     player_id = seq.int(pid + 1L, pid + n_sp),
-    name      = paste0("SP_", seq_len(n_sp)),
-    position  = "SP", pos_eligibility = "SP", role = "SP",
+    player_name = paste0("SP_", seq_len(n_sp)),
+    position  = "SP", pos_eligibility = "SP", league = "AL", role = "SP",
     HR = NA_real_, R = NA_real_, RBI = NA_real_, SB = NA_real_,
     H  = NA_real_, AB = NA_real_, AVG = NA_real_,
     IP   = IP_SP[sp_ord],   ERA  = ERA_SP[sp_ord],
@@ -166,8 +181,8 @@ dgp_d <- function(seed, sub_dgp = c("D1", "D2", "D3")) {
   rp_ord   <- order(IP_RP, decreasing = TRUE)
   rp_df <- data.frame(
     player_id = seq.int(pid + 1L, pid + n_rp),
-    name      = paste0("RP_", seq_len(n_rp)),
-    position  = "RP", pos_eligibility = "RP", role = "RP",
+    player_name = paste0("RP_", seq_len(n_rp)),
+    position  = "RP", pos_eligibility = "RP", league = "AL", role = "RP",
     HR = NA_real_, R = NA_real_, RBI = NA_real_, SB = NA_real_,
     H  = NA_real_, AB = NA_real_, AVG = NA_real_,
     IP   = IP_RP[rp_ord],   ERA  = ERA_RP[rp_ord],
@@ -177,7 +192,7 @@ dgp_d <- function(seed, sub_dgp = c("D1", "D2", "D3")) {
   )
 
   all_cols <- c(
-    "player_id", "name", "position", "pos_eligibility", "role",
+    "player_id", "player_name", "position", "pos_eligibility", "league", "role",
     "HR", "R", "RBI", "SB", "H", "AB", "AVG",
     "IP", "ERA", "WHIP", "W", "K", "SV"
   )

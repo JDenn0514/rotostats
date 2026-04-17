@@ -2,18 +2,25 @@
 # Used in Studies A and B.
 #
 # Generates a synthetic projection data frame with realistic talent distributions
-# for 150 hitters and 65 pitchers (40 SP + 25 RP), then applies multiplicative
+# for 150 hitters and 135 pitchers (85 SP + 50 RP), then applies multiplicative
 # noise (sigma_proj = 0.10) to simulate year-over-year projection variability.
+# Pool sizing: 12-team × 6 SP = 72 rostered; 85 provides 13-player headroom.
+#              12-team × 3 RP = 36 rostered; 50 provides 14-player headroom.
 #
 # Usage:
 #   projections <- dgp_a(seed = 12345, sigma_proj = 0.10)
 #
 # Returns a data frame with columns:
-#   player_id, name, position, pos_eligibility, role (pitchers only),
+#   player_id, player_name, position, pos_eligibility, league, role (pitchers),
 #   HR, R, RBI, SB, H, AB, AVG  (hitters)
 #   IP, ERA, WHIP, W, K, SV     (pitchers)
 #
 # Parameters are defined in sim-spec.md §2.1.
+#
+# Column-schema notes (replacement_level() interface):
+#   - player_name  : required (NOT "name")
+#   - league       : required; "AL" or "NL" only (mixed league = 50/50 split)
+#   - pos_eligibility: pipe-delimited ("|"), not slash-delimited ("/").
 
 # Position-level talent parameters for hitters
 .HITTER_PARAMS <- data.frame(
@@ -91,9 +98,9 @@ dgp_a <- function(seed, sigma_proj = 0.10, multi_eligible_fraction = 0.20) {
     ids <- seq.int(player_counter - n + 1L, player_counter)
 
     hitter_rows[[i]] <- data.frame(
-      player_id      = ids,
-      name           = paste0(p$position, "_", seq_len(n)),
-      position       = p$position,
+      player_id       = ids,
+      player_name     = paste0(p$position, "_", seq_len(n)),
+      position        = p$position,
       pos_eligibility = p$position,   # primary; secondary added below
       HR  = HR_proj,
       R   = R_proj,
@@ -127,14 +134,15 @@ dgp_a <- function(seed, sigma_proj = 0.10, multi_eligible_fraction = 0.20) {
       sec_pos <- setdiff(pair, player_pos)
       if (length(sec_pos) == 0L) sec_pos <- pair[2L]  # fallback
       hitters$pos_eligibility[multi_idx[k]] <-
-        paste(player_pos, sec_pos[1L], sep = "/")
+        paste(player_pos, sec_pos[1L], sep = "|")
     }
   }
 
   # ---- Pitchers ---------------------------------------------------------- #
-  # SP: n=40
-  n_sp    <- 40L
-  n_swing <- 4L   # swingmen (IP ~ N(95, 8^2), clamp 80-120)
+  # Pool sizing: 12-team × 6 SP slots = 72 rostered + K=3 band buffer (7 players)
+  # = 79 minimum. Use 85 for headroom.
+  n_sp    <- 85L
+  n_swing <- 4L   # swingmen (IP ~ N(95, 8^2), clamp 80-120); included in n_sp
   n_sp_reg <- n_sp - n_swing
 
   # Regular SP
@@ -169,7 +177,7 @@ dgp_a <- function(seed, sigma_proj = 0.10, multi_eligible_fraction = 0.20) {
 
   sp_df <- data.frame(
     player_id       = sp_ids,
-    name            = paste0("SP_", seq_len(n_sp)),
+    player_name     = paste0("SP_", seq_len(n_sp)),
     position        = "SP",
     pos_eligibility = "SP",
     role            = "SP",
@@ -182,9 +190,10 @@ dgp_a <- function(seed, sigma_proj = 0.10, multi_eligible_fraction = 0.20) {
     stringsAsFactors = FALSE
   )
 
-  # RP: n=25
-  n_rp  <- 25L
-  n_closers <- 3L  # top 3 RP per team (conceptually; we have 1 "team" for DGP purposes)
+  # RP: 12-team × 3 RP slots = 36 rostered + K=3 band buffer (7) = 43 minimum.
+  # Use 50 for headroom.
+  n_rp  <- 50L
+  n_closers <- 3L  # top 3 RP (closers) drawn with saves
   n_rp_reg  <- n_rp - n_closers
 
   IP_RP       <- pmin(pmax(round(stats::rnorm(n_rp, 62, 8)), 30L), 90L)
@@ -202,7 +211,7 @@ dgp_a <- function(seed, sigma_proj = 0.10, multi_eligible_fraction = 0.20) {
 
   rp_df <- data.frame(
     player_id       = rp_ids,
-    name            = paste0("RP_", seq_len(n_rp)),
+    player_name     = paste0("RP_", seq_len(n_rp)),
     position        = "RP",
     pos_eligibility = "RP",
     role            = "RP",
@@ -230,8 +239,17 @@ dgp_a <- function(seed, sigma_proj = 0.10, multi_eligible_fraction = 0.20) {
   # role for hitters
   hitters$role <- NA_character_
 
+  # league column: mixed league = alternate AL/NL by row so pool is 50/50.
+  # replacement_level() requires "AL" or "NL" (no "mixed" value accepted).
+  assign_league_mixed <- function(n) {
+    rep_len(c("AL", "NL"), n)
+  }
+  hitters$league <- assign_league_mixed(nrow(hitters))
+  sp_df$league   <- assign_league_mixed(nrow(sp_df))
+  rp_df$league   <- assign_league_mixed(nrow(rp_df))
+
   all_cols <- c(
-    "player_id", "name", "position", "pos_eligibility", "role",
+    "player_id", "player_name", "position", "pos_eligibility", "league", "role",
     "HR", "R", "RBI", "SB", "H", "AB", "AVG",
     "IP", "ERA", "WHIP", "W", "K", "SV"
   )

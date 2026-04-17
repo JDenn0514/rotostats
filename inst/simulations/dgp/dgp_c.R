@@ -10,6 +10,11 @@
 #
 # Returns a data frame in the same format as dgp_a() but with elevated
 # multi-eligibility among infielders.
+#
+# Column-schema notes (replacement_level() interface):
+#   - player_name  : required (NOT "name")
+#   - league       : required; "AL" or "NL" only (mixed league = 50/50 split)
+#   - pos_eligibility: pipe-delimited ("|"), not slash-delimited ("/").
 
 # DGP-C uses the DGP-A talent parameters but with elevated multi-eligibility.
 # Sourcing dgp_a.R provides .HITTER_PARAMS, .MULTI_ELIG_PAIRS, .MULTI_ELIG_PROBS.
@@ -34,9 +39,15 @@ dgp_c <- function(seed) {
   # ---- Hitters (n = 130) ------------------------------------------------- #
   # Use a subset of DGP-A position breakdown, scaled to 130 total
   # Position breakdown (scaled): C=15, 1B=15, 2B=20, 3B=20, SS=20, OF=30, UTIL=10
+  # Pool sizing per position for 12-team config:
+  #   C: 12*1=12 rostered → 15 (some buffer; C is not multi-eligible)
+  #   1B/2B/3B/SS: 12*1=12 rostered; with 60% multi-elig many reassign away.
+  #     Use 45 per infield position to ensure depth after reassignment churn.
+  #   OF: 12*3=36 rostered → 45
+  #   UTIL: 12*1=12 rostered → 15
   pos_params <- data.frame(
     position  = c("C",  "1B", "2B", "3B", "SS", "OF", "UTIL"),
-    n_players = c(15L,  15L,  20L,  20L,  20L,  30L,  10L),
+    n_players = c(15L,  45L,  45L,  45L,  45L,  45L,  15L),
     mu_HR     = c(14,   24,   16,   22,   15,   20,   18),
     mu_R      = c(55,   72,   72,   70,   70,   75,   65),
     mu_RBI    = c(55,   78,   62,   75,   62,   70,   65),
@@ -67,7 +78,7 @@ dgp_c <- function(seed) {
 
     hitter_rows[[i]] <- data.frame(
       player_id       = ids,
-      name            = paste0(p$position, "_", seq_len(n)),
+      player_name     = paste0(p$position, "_", seq_len(n)),
       position        = p$position,
       pos_eligibility = p$position,
       HR  = true_HR,
@@ -102,12 +113,13 @@ dgp_c <- function(seed) {
       sec_pos    <- setdiff(pair, player_pos)
       if (length(sec_pos) == 0L) sec_pos <- pair[2L]
       hitters$pos_eligibility[multi_idx[k]] <-
-        paste(player_pos, sec_pos[1L], sep = "/")
+        paste(player_pos, sec_pos[1L], sep = "|")
     }
   }
 
   # ---- Pitchers (same structure as DGP-A) -------------------------------- #
-  n_sp    <- 40L
+  # Pool sizing: 12-team × 6 SP = 72 rostered; use 85 for headroom.
+  n_sp    <- 85L
   n_swing <- 4L
   n_sp_reg <- n_sp - n_swing
 
@@ -139,7 +151,7 @@ dgp_c <- function(seed) {
 
   sp_df <- data.frame(
     player_id       = sp_ids,
-    name            = paste0("SP_", seq_len(n_sp)),
+    player_name     = paste0("SP_", seq_len(n_sp)),
     position        = "SP",
     pos_eligibility = "SP",
     role            = "SP",
@@ -152,7 +164,8 @@ dgp_c <- function(seed) {
     stringsAsFactors = FALSE
   )
 
-  n_rp     <- 25L
+  # 12-team × 3 RP = 36 rostered; use 50 for headroom.
+  n_rp     <- 50L
   n_closers <- 3L
   IP_RP   <- pmin(pmax(round(stats::rnorm(n_rp, 62, 8)), 30L), 90L)
   ERA_RP  <- pmin(pmax(stats::rnorm(n_rp, 3.50, 0.65), 1.50), 7.00)
@@ -167,7 +180,7 @@ dgp_c <- function(seed) {
 
   rp_df <- data.frame(
     player_id       = rp_ids,
-    name            = paste0("RP_", seq_len(n_rp)),
+    player_name     = paste0("RP_", seq_len(n_rp)),
     position        = "RP",
     pos_eligibility = "RP",
     role            = "RP",
@@ -193,8 +206,14 @@ dgp_c <- function(seed) {
   }
   hitters$role <- NA_character_
 
+  # league column: mixed league = alternate AL/NL so pool is 50/50.
+  # replacement_level() requires "AL" or "NL" (no "mixed" value accepted).
+  hitters$league <- rep_len(c("AL", "NL"), nrow(hitters))
+  sp_df$league   <- rep_len(c("AL", "NL"), nrow(sp_df))
+  rp_df$league   <- rep_len(c("AL", "NL"), nrow(rp_df))
+
   all_cols <- c(
-    "player_id", "name", "position", "pos_eligibility", "role",
+    "player_id", "player_name", "position", "pos_eligibility", "league", "role",
     "HR", "R", "RBI", "SB", "H", "AB", "AVG",
     "IP", "ERA", "WHIP", "W", "K", "SV"
   )
