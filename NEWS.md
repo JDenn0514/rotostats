@@ -2,6 +2,25 @@
 
 ## New functions
 
+* `replacement_level()` — Per-position replacement-level stat-line estimator
+  that serves as the zero-dollar PAR baseline for rotisserie auction valuation;
+  implements boundary-band averaging with dynamic K cap, cliff detection, SP/RP
+  role inference, and a multi-position iteration loop.
+
+* `replacement_from_prices()` — Derives replacement-level stat lines from
+  historical \$1 auction prices (trimmed mean method) rather than projections;
+  shares the same output schema as `replacement_level()`.
+
+* `default_replacement_params` — Exported named list of all nine numeric
+  constants used by `replacement_level()` (band half-width, cliff thresholds,
+  SP/RP IP cutoff, convergence tolerances, etc.); individual entries are
+  overridden via `replacement_params = list(band_width_K = 2L)`.
+
+* `rate_stat_denominators()` — Returns the built-in named character vector
+  mapping rate-stat category names to their denominator columns (e.g.,
+  `ERA -> "IP"`, `AVG -> "AB"`); used internally by `replacement_level()` for
+  weighted averaging and unknown-rate-stat validation.
+
 * `sgp()` — Converts projected per-player statistics into SGP units using
   pre-calibrated denominators from `sgp_denominators()`. Implements the
   blended-pool rate-stat method with a projection-pool baseline; pool sizes
