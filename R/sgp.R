@@ -4,54 +4,201 @@
 # sgp()
 # ---------------------------------------------------------------------------
 
-#' Convert player projections to SGP units
+#' Convert projected stats into SGP units per player
 #'
 #' @description
-#' Converts projected per-player statistics into SGP (Standings Gain Points)
-#' units using pre-calibrated denominators from [sgp_denominators()]. The
-#' primary method is `"blended_pool"` with `pool_baseline = "projection_pool"`,
-#' which derives blended-pool rate-stat baselines from the top-N projected
-#' starters by playing time.
+#' Converts per-player projected statistics into SGP (Standings Gain Points)
+#' units using pre-calibrated denominators from [sgp_denominators()].  Each
+#' category SGP measures how many standings places that player's projected
+#' contribution is worth in your league.
+#'
+#' @details
+#' ## Counting categories
+#'
+#' For every non-rate scored category `c`, the conversion is a simple vectorized
+#' division applied across all players at once:
+#'
+#' \deqn{SGP[i, c] = projected[i, c] \;/\; denominator[c]}
+#'
+#' No player-level loop is used; computation is fully vectorized.
+#'
+#' ## Rate categories (ERA, WHIP, AVG) — blended-pool method
+#'
+#' With `rate_conversion = "blended_pool"` and
+#' `pool_baseline = "projection_pool"` (the defaults), rate-stat SGP is
+#' computed via the *blended-pool* marginal contribution formula.  Pool
+#' constants (`pool_ER`, `pool_IP`, `pool_WH`, `pool_H`, `pool_AB`) are
+#' derived once from the top-`pool_size_p` / top-`pool_size_h` projected
+#' players by playing time (IP for pitchers, AB for hitters).  Pool sizes
+#' are taken from `pool_sizes(league_config)` and therefore automatically
+#' reflect your league's roster structure.
+#'
+#' The per-player formulas are:
+#'
+#' \deqn{ERA\_SGP[i]  = (avg\_ERA  - (pool\_ER  + player\_ER)  \times 9 \;/\; (pool\_IP + player\_IP)) \;/\; d_{ERA}}
+#' \deqn{WHIP\_SGP[i] = (avg\_WHIP - (pool\_WH  + player\_WH)  \;/\; (pool\_IP + player\_IP)) \;/\; d_{WHIP}}
+#' \deqn{AVG\_SGP[i]  = ((pool\_H  + player\_H)  \;/\; (pool\_AB + player\_AB) - avg\_AVG) \;/\; d_{AVG}}
+#'
+#' Note the sign flip for AVG: higher batting average helps the team, whereas
+#' higher ERA or WHIP hurts it, so the subtraction order is reversed.
+#'
+#' `avg_ERA`, `avg_WHIP`, and `avg_AVG` are derived from the most recent
+#' non-excluded year in `league_history$team_season` using IP-weighted (ERA,
+#' WHIP) or AB-weighted (AVG) means across all teams.  A `cli_inform()` message
+#' names the year used so callers can verify the baseline.
+#'
+#' ## `total_sgp`
+#'
+#' `total_sgp` is `rowSums()` across all `sgp_<CAT>` columns with
+#' `na.rm = FALSE`: any player with a missing per-category SGP also has a
+#' missing `total_sgp`.  This surfaces data quality issues rather than hiding
+#' them in a partial sum.
+#'
+#' ## Validation order
+#'
+#' Checks are applied in this order so that the most specific error wins:
+#' 1. `rate_conversion` must be one of the five recognized values (else
+#'    `rotostats_error_invalid_rate_conversion`).
+#' 2. When `rate_conversion = "blended_pool"`, `attr(denominators,
+#'    "rate_conversion")` must also be `"blended_pool"` — mismatched units
+#'    abort with `rotostats_error_invalid_rate_conversion`.
+#' 3. `"per_player"`, `"universal_constants"`, `"team_ip_normalized"` abort
+#'    with `rotostats_error_not_implemented`.
+#' 4. `"fixed_baseline"` delegates to [convert_rate_stats()] (stub; also aborts
+#'    with `rotostats_error_not_implemented`).
+#' 5. Required inputs (`league_history`, `league_config`) are validated only
+#'    after the method is confirmed.
+#'
+#' ## SVHD handling
+#'
+#' If `"SVHD"` is a scored category but the column is absent from `projections`,
+#' `sgp()` attempts to derive it as `SV + HLD` (also accepts `HD` as the holds
+#' column name).  A one-time informational message is emitted via
+#' `rlang::inform()` asking the caller to verify the definition matches their
+#' league's hold rules.
+#'
+#' ## Upstream helper
+#'
+#' `sgp()` consumes the output of [sgp_denominators()].  See that function for
+#' how denominators are calibrated from historical team-season standings data.
 #'
 #' @param projections A data frame with one row per player. Must include a
 #'   column for each scored category in `names(denominators)`, plus `IP` (for
 #'   ERA/WHIP pool construction) and `AB` (for AVG pool construction) when
 #'   those rate stats are scored. Column names are normalized to uppercase at
-#'   entry.
-#' @param denominators An `sgp_denominators` S3 object from
+#'   entry; no message is emitted for the normalization.
+#' @param denominators An `sgp_denominators` S3 object produced by
 #'   [sgp_denominators()]. The scored categories are `names(denominators)`.
-#'   The attribute `attr(denominators, "rate_conversion")` is read from the
-#'   outer S3 object (not from `denominators$denominators`).
-#' @param league_history A `league_history` S3 object or duck-typed list with
-#'   a `$team_season` data frame. Required when
-#'   `rate_conversion = "blended_pool"`. Must contain `IP` and `AB` columns
-#'   alongside rate-stat columns in `$team_season`.
-#' @param rate_conversion Character. One of `"blended_pool"` (default),
+#'   **Important:** `attr(denominators, "rate_conversion")` is read from the
+#'   outer S3 object — not from `denominators$denominators` — and must match
+#'   the `rate_conversion` argument when `rate_conversion = "blended_pool"`.
+#' @param league_history A `league_history` S3 object (see [league_history()])
+#'   or a duck-typed list with a `$team_season` data frame.  Required when
+#'   `rate_conversion = "blended_pool"`.  `$team_season` must contain `IP` and
+#'   `AB` columns alongside the rate-stat columns so that IP- and AB-weighted
+#'   baseline means can be computed.
+#' @param rate_conversion Character scalar.  One of `"blended_pool"` (default),
 #'   `"fixed_baseline"`, `"per_player"`, `"universal_constants"`, or
-#'   `"team_ip_normalized"`. The last three abort with
-#'   `rotostats_error_not_implemented`. `"fixed_baseline"` delegates to
-#'   [convert_rate_stats()]. Must match `attr(denominators, "rate_conversion")`
-#'   when `"blended_pool"`.
-#' @param pool_baseline Character. Currently only `"projection_pool"` is
-#'   implemented.
+#'   `"team_ip_normalized"`.  The last three abort with
+#'   `rotostats_error_not_implemented`.  `"fixed_baseline"` delegates to
+#'   [convert_rate_stats()] (stub; also aborts).  When `"blended_pool"`,
+#'   `attr(denominators, "rate_conversion")` must equal `"blended_pool"` or
+#'   `sgp()` aborts with `rotostats_error_invalid_rate_conversion`.
+#' @param pool_baseline Character scalar.  Determines how pool constants are
+#'   constructed for the blended-pool rate-stat formulas.  Currently only
+#'   `"projection_pool"` (the default) is implemented.
 #' @param league_config A `league_config` S3 object from [league_config()].
 #'   Required when `rate_conversion = "blended_pool"` and
-#'   `pool_baseline = "projection_pool"`. Passed to `pool_sizes()` to derive
-#'   `pool_size_p` and `pool_size_h`.
-#' @param baseline_era Numeric scalar. Explicit ERA baseline for
-#'   `rate_conversion = "fixed_baseline"`. Ignored for `"blended_pool"`.
-#' @param baseline_whip Numeric scalar. Explicit WHIP baseline. Ignored for
-#'   `"blended_pool"`.
-#' @param baseline_avg Numeric scalar. Explicit AVG baseline. Ignored for
-#'   `"blended_pool"`.
+#'   `pool_baseline = "projection_pool"`.  Passed to `pool_sizes()` (an
+#'   internal helper in `R/league-config.R`) to derive `pool_size_p` and
+#'   `pool_size_h` from the league's roster structure rather than hard-coding
+#'   roster depth.
+#' @param baseline_era Numeric scalar or `NULL`.  Explicit ERA baseline used
+#'   only when `rate_conversion = "fixed_baseline"`.  Passed through to
+#'   [convert_rate_stats()]; ignored for `"blended_pool"`.
+#' @param baseline_whip Numeric scalar or `NULL`.  Explicit WHIP baseline.
+#'   See `baseline_era`.
+#' @param baseline_avg Numeric scalar or `NULL`.  Explicit AVG baseline.
+#'   See `baseline_era`.
 #'
-#' @return A data frame with one row per player (same order as `projections`),
-#'   one column `sgp_<CAT>` per scored category (e.g., `sgp_HR`, `sgp_ERA`),
-#'   and a final column `total_sgp` equal to `rowSums()` across all
-#'   `sgp_<CAT>` columns. `total_sgp` is `NA` for any player whose
-#'   per-category SGP is `NA` (propagation via `na.rm = FALSE`).
+#' @return A plain `data.frame` (no attributes) with:
+#'   \describe{
+#'     \item{`sgp_<CAT>`}{One numeric column per scored category, named
+#'       `sgp_<CAT>` where `<CAT>` is the uppercase category name
+#'       (e.g., `sgp_HR`, `sgp_ERA`, `sgp_AVG`).  Column order matches
+#'       `names(denominators)`.  Players missing a scored category column, or
+#'       with 0 / NA projected playing time for a rate stat, receive `NA` in
+#'       that column.}
+#'     \item{`total_sgp`}{`rowSums()` across all `sgp_<CAT>` columns
+#'       (`na.rm = FALSE`).  `NA` when any per-category SGP is `NA`.}
+#'   }
+#'   Row order matches `projections`.
 #'
-#' @seealso [sgp_denominators()], [league_config()], [league_history()]
+#' @section Warnings:
+#'
+#' `sgp()` emits `rotostats_warning_missing_category_column` (via
+#' [cli::cli_warn()]) in two situations:
+#' \enumerate{
+#'   \item A scored category column is entirely absent from `projections` —
+#'         the affected `sgp_<CAT>` column is filled with `NA`.
+#'   \item A player has 0 or `NA` projected IP (when ERA or WHIP is scored) or
+#'         projected AB (when AVG is scored) — that player's rate-stat SGP is
+#'         set to `NA`.
+#' }
+#'
+#' @seealso
+#' \code{sgp_denominators()} for calibrating the denominators consumed by
+#' this function; [league_config()] for constructing the league configuration
+#' object; [league_history()] for the historical data object.
+#'
+#' @examples
+#' # Toy example: two counting categories, three players
+#' history <- list(
+#'   team_season = data.frame(
+#'     year    = c(2022L, 2022L, 2022L, 2023L, 2023L, 2023L),
+#'     team_id = rep(c("A", "B", "C"), 2),
+#'     HR      = c(150, 180, 210, 155, 185, 215),
+#'     R       = c(650, 700, 740, 660, 710, 750),
+#'     IP      = c(1350, 1380, 1410, 1360, 1390, 1420),
+#'     AB      = c(5400, 5500, 5600, 5420, 5520, 5620),
+#'     stringsAsFactors = FALSE
+#'   )
+#' )
+#'
+#' config <- league_config(
+#'   n_teams       = 12L,
+#'   roster_slots  = c(C = 1L, `1B` = 1L, `2B` = 1L, `3B` = 1L,
+#'                     SS = 1L, OF = 3L, DH = 1L),
+#'   pitcher_slots = 9L,
+#'   budget        = 260L,
+#'   budget_split  = 0.67,
+#'   categories    = c("HR", "R")
+#' )
+#'
+#' denoms <- sgp_denominators(
+#'   history,
+#'   scoring_categories = c("HR", "R"),
+#'   exclude_years      = integer(0)
+#' )
+#'
+#' projections <- data.frame(
+#'   HR = c(40L, 25L, 10L),
+#'   R  = c(90L, 80L, 70L),
+#'   IP = c(0L,  0L,  0L),    # pitching not scored — zeroes are fine
+#'   AB = c(500L, 450L, 400L)
+#' )
+#'
+#' \dontrun{
+#' # blended_pool requires league_history and league_config:
+#' result <- sgp(
+#'   projections   = projections,
+#'   denominators  = denoms,
+#'   league_history = history,
+#'   league_config  = config
+#' )
+#' result  # data frame: sgp_HR, sgp_R, total_sgp
+#' }
+#'
 #' @importFrom utils head
 #' @export
 sgp <- function(

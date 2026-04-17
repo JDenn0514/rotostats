@@ -2,6 +2,12 @@
 
 ## New functions
 
+* `sgp()` — Converts projected per-player statistics into SGP units using
+  pre-calibrated denominators from `sgp_denominators()`. Implements the
+  blended-pool rate-stat method with a projection-pool baseline; pool sizes
+  are derived automatically from `league_config`. Returns a data frame with
+  one `sgp_<CAT>` column per scored category plus `total_sgp`.
+
 * `sgp_denominators()` — Calibrates the SGP (Standings Gain Points) denominator
   for each rotisserie scoring category from historical team-season standings.
   Supports four estimation methods (`"ols"`, `"gap"`, `"trimmed_gap"`, `"sd"`),
