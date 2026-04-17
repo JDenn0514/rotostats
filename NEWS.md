@@ -47,6 +47,13 @@
 * `expected_range_normal()` — Computes E[range] of *n* i.i.d. standard
   normals via numerical integration; used internally by `method = "sd"`.
 
+## Improvements
+
+* `replacement_level()` and `replacement_from_prices()` now emit
+  `rotostats_warning_name_match_failure` (when `verbose = TRUE`) to
+  diagnose player-name mismatches between data sources. These warnings are
+  purely diagnostic — calibration output is unchanged.
+
 ## Breaking changes
 
 * `sgp()` now validates `pool_baseline` at the top of the function.

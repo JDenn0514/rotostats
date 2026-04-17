@@ -1042,6 +1042,33 @@ replacement_from_prices <- function(
   names(prices) <- toupper(names(prices))
   cats_upper    <- toupper(categories)
 
+  if (verbose && !("PLAYER_ID" %in% names(prices))) {
+    raw_names  <- prices$PLAYER_NAME
+    norm_names <- normalize_player_name(raw_names)
+
+    # For each normalized name, count distinct raw spellings
+    # Use split() to group raw spellings by normalized key (vectorized, no loop)
+    raw_by_norm    <- split(raw_names, norm_names)
+    n_distinct_raw <- vapply(raw_by_norm, function(raws) length(unique(raws)), integer(1L))
+    collision_keys <- names(n_distinct_raw[n_distinct_raw > 1L])
+
+    if (length(collision_keys) > 0L) {
+      n_collisions <- length(collision_keys)
+      sample_keys  <- head(collision_keys, 3L)
+
+      cli::cli_warn(
+        c(
+          "{n_collisions} normalized player name{?s} in {.arg prices} correspond to multiple raw spellings.",
+          "i" = "Sample normalized key{?s}: {.val {sample_keys}}.",
+          "i" = "These entries would be merged under name-based deduplication.",
+          "i" = "Supply a {.field player_id} column to use exact identity matching.",
+          "i" = "This is a diagnostic warning only \u2014 the stat-line computation is unchanged."
+        ),
+        class = "rotostats_warning_name_match_failure"
+      )
+    }
+  }
+
   # -------------------------------------------------------------------------
   # §8 Algorithm
   # -------------------------------------------------------------------------
@@ -1239,6 +1266,27 @@ replacement_from_prices <- function(
         class = "rotostats_error_missing_column",
         call  = call_env
       )
+    }
+
+    if (verbose) {
+      norm_prices_names <- normalize_player_name(prices_df$PLAYER_NAME)
+      norm_proj_names   <- normalize_player_name(projections$PLAYER_NAME)
+      unmatched_names   <- setdiff(norm_prices_names, norm_proj_names)
+
+      if (length(unmatched_names) > 0L) {
+        n_unmatched  <- length(unmatched_names)
+        sample_names <- head(unmatched_names, 3L)
+
+        cli::cli_warn(
+          c(
+            "{n_unmatched} player name{?s} in {.arg league_history$prices} could not be matched to {.arg projections} after name normalization.",
+            "i" = "Sample: {.val {sample_names}}.",
+            "i" = "Check for spelling differences between your prices history and projections source.",
+            "i" = "This is a diagnostic warning only \u2014 calibration output is unchanged."
+          ),
+          class = "rotostats_warning_name_match_failure"
+        )
+      }
     }
   }
 

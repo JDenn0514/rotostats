@@ -209,29 +209,160 @@ test_that("TS-48: multiple spaces collapsed", {
   expect_equal(fn("Mike  Trout"), "mike trout")
 })
 
-test_that("TS-49: replacement_from_prices runs with unmatched names (no crash)", {
-  # replacement_from_prices does not perform name matching against projections
-  # (it has no projections argument). The rotostats_warning_name_match_failure
-  # would fire in a future interface that cross-references prices to projections.
-  # For now verify no crash with unusual player names.
-  prices_unusual <- data.frame(
+# ---------------------------------------------------------------------------
+# § Name Match Failure Warning Tests
+# T-NMF-1 through T-NMF-4 — Site 2 (replacement_from_prices)
+# ---------------------------------------------------------------------------
+
+test_that("TS-49: replacement_from_prices emits rotostats_warning_name_match_failure on normalized-name collision", {
+  # Prior version (pre-audit) was a no-crash smoke test with no assertion about
+  # the warning class. That test conceded the warning was for "a future
+  # interface." This replacement test exercises the now-implemented warning path.
+  #
+  # Deterministic collision: "Jose Ramirez" and "José Ramírez" both normalize
+  # to "jose ramirez". Both are in the same year. player_id is absent.
+  # 20 rows required to satisfy calibration_min_n = 15 after filtering.
+  prices_collision <- data.frame(
     year            = rep(2023L, 20L),
-    player_name     = c(paste0("Name_", 1:19), "Z\u00e9 Sil\u00e4"),
+    player_name     = c(
+      paste0("Player_", 1:18),
+      "Jose Ramirez",
+      "Jos\u00e9 Ram\u00edrez"
+    ),
     price           = rep(1L, 20L),
     pos_eligibility = rep("OF", 20L),
-    HR              = rep(5, 20L),
-    R               = rep(25, 20L),
-    RBI             = rep(22, 20L),
-    SB              = rep(4, 20L),
+    HR              = rep(5L, 20L),
+    R               = rep(25L, 20L),
+    RBI             = rep(22L, 20L),
+    SB              = rep(4L, 20L),
     stringsAsFactors = FALSE
   )
-  result <- replacement_from_prices(
-    prices       = prices_unusual,
-    n_teams      = 12L,
-    roster_slots = c(OF = 3L),
-    categories   = c("HR", "R", "RBI", "SB"),
-    verbose      = FALSE
+  # Confirm: player_id column is absent
+  stopifnot(!"player_id" %in% names(prices_collision))
+
+  expect_warning(
+    replacement_from_prices(
+      prices        = prices_collision,
+      n_teams       = 12L,
+      roster_slots  = c(OF = 3L),
+      categories    = c("HR", "R", "RBI", "SB"),
+      verbose       = TRUE
+    ),
+    class = "rotostats_warning_name_match_failure"
   )
-  # Either valid result or NULL — should not crash
-  expect_true(is.null(result) || is.list(result))
+})
+
+test_that("T-NMF-1b: collision warning does not alter replacement_stats", {
+  # Collision fixture (same stat values, different names for rows 19-20)
+  prices_collision <- data.frame(
+    year            = rep(2023L, 20L),
+    player_name     = c(
+      paste0("Player_", 1:18),
+      "Jose Ramirez",
+      "Jos\u00e9 Ram\u00edrez"
+    ),
+    price           = rep(1L, 20L),
+    pos_eligibility = rep("OF", 20L),
+    HR              = rep(5L, 20L),
+    R               = rep(25L, 20L),
+    RBI             = rep(22L, 20L),
+    SB              = rep(4L, 20L),
+    stringsAsFactors = FALSE
+  )
+
+  # Clean fixture (same 20 rows, unique names, identical stat values)
+  prices_clean_equiv <- data.frame(
+    year            = rep(2023L, 20L),
+    player_name     = paste0("Player_", 1:20),  # unique names
+    price           = rep(1L, 20L),
+    pos_eligibility = rep("OF", 20L),
+    HR              = rep(5L, 20L),
+    R               = rep(25L, 20L),
+    RBI             = rep(22L, 20L),
+    SB              = rep(4L, 20L),
+    stringsAsFactors = FALSE
+  )
+
+  result_collision <- suppressWarnings(
+    replacement_from_prices(
+      prices        = prices_collision,
+      n_teams       = 12L,
+      roster_slots  = c(OF = 3L),
+      categories    = c("HR", "R", "RBI", "SB"),
+      verbose       = TRUE
+    )
+  )
+
+  result_clean <- replacement_from_prices(
+    prices        = prices_clean_equiv,
+    n_teams       = 12L,
+    roster_slots  = c(OF = 3L),
+    categories    = c("HR", "R", "RBI", "SB"),
+    verbose       = FALSE
+  )
+
+  # replacement_stats must be identical (same stat means, same positions)
+  # Tolerance from test-spec.md §6: 1e-9
+  expect_equal(
+    result_collision$replacement_stats[, c("position", "HR", "R", "RBI", "SB")],
+    result_clean$replacement_stats[,    c("position", "HR", "R", "RBI", "SB")],
+    tolerance = 1e-9
+  )
+})
+
+test_that("T-NMF-3: rotostats_warning_name_match_failure is suppressed when verbose = FALSE", {
+  # Same collision fixture as T-NMF-1 — but verbose = FALSE must suppress the warning.
+  prices_collision <- data.frame(
+    year            = rep(2023L, 20L),
+    player_name     = c(
+      paste0("Player_", 1:18),
+      "Jose Ramirez",
+      "Jos\u00e9 Ram\u00edrez"
+    ),
+    price           = rep(1L, 20L),
+    pos_eligibility = rep("OF", 20L),
+    HR              = rep(5L, 20L),
+    R               = rep(25L, 20L),
+    RBI             = rep(22L, 20L),
+    SB              = rep(4L, 20L),
+    stringsAsFactors = FALSE
+  )
+
+  # expect_no_warning with class argument is supported in testthat >= 3.1.2
+  expect_no_warning(
+    replacement_from_prices(
+      prices        = prices_collision,
+      n_teams       = 12L,
+      roster_slots  = c(OF = 3L),
+      categories    = c("HR", "R", "RBI", "SB"),
+      verbose       = FALSE
+    ),
+    class = "rotostats_warning_name_match_failure"
+  )
+})
+
+test_that("T-NMF-4: no rotostats_warning_name_match_failure when all names distinct after normalization", {
+  # All names are distinct ASCII strings — no normalization collisions possible.
+  prices_clean <- data.frame(
+    year            = rep(2023L, 20L),
+    player_name     = paste0("Player_", 1:20),  # all distinct, all ASCII
+    price           = rep(1L, 20L),
+    pos_eligibility = rep("OF", 20L),
+    HR              = rep(5L, 20L),
+    R               = rep(25L, 20L),
+    RBI             = rep(22L, 20L),
+    SB              = rep(4L, 20L),
+    stringsAsFactors = FALSE
+  )
+
+  expect_no_warning(
+    replacement_from_prices(
+      prices        = prices_clean,
+      n_teams       = 12L,
+      roster_slots  = c(OF = 3L),
+      categories    = c("HR", "R", "RBI", "SB"),
+      verbose       = TRUE
+    ),
+    class = "rotostats_warning_name_match_failure"
+  )
 })

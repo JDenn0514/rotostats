@@ -796,3 +796,45 @@ test_that("TS-58: stat_units attribute is always set", {
     attr(result, "stat_units") %in% c("raw_projected", "full_season_normalized")
   )
 })
+
+# ---------------------------------------------------------------------------
+# § Name Match Failure Warning Tests
+# T-NMF-2 — Site 1 (replacement_level + league_history$prices)
+# ---------------------------------------------------------------------------
+
+test_that("T-NMF-2: replacement_level emits rotostats_warning_name_match_failure when prices contain unmatched names", {
+  # projections fixture: make_projections_data(seed = 42L) produces players
+  # named "Player_1", "Player_2", etc. After normalization these become
+  # "player 1", "player 2", ... so "Ze Silao" will be unmatched.
+  proj <- make_projections_data(seed = 42L)
+
+  prices_with_unmatched <- data.frame(
+    year        = c(2022L, 2022L),
+    player_name = c("Player_1", "Z\u00e9 Sil\u00e4o"),
+    price       = c(1L, 1L),
+    stringsAsFactors = FALSE
+  )
+
+  # league_history() requires team_season (mandatory first argument).
+  # Supply a minimal valid team_season data frame.
+  minimal_ts <- data.frame(
+    year    = 2022L,
+    team_id = "NYY",
+    stringsAsFactors = FALSE
+  )
+
+  lh <- league_history(
+    team_season = minimal_ts,
+    prices      = prices_with_unmatched
+  )
+
+  expect_warning(
+    replacement_level(
+      projections    = proj,
+      config         = cfg_mixed_12,
+      league_history = lh,
+      verbose        = TRUE
+    ),
+    class = "rotostats_warning_name_match_failure"
+  )
+})
