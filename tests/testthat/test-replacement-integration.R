@@ -30,7 +30,10 @@ cfg_mixed_12 <- league_config(
 # ---------------------------------------------------------------------------
 
 # Build a minimal sgp_denominators object compatible with replacement_level().
-# We use sgp_denominators() with synthetic team-season history.
+# Uses sgp_denominators() with rate_conversion = "blended_pool" (the only
+# implemented option). The team_season data must include IP and AB columns so
+# that replacement_level() can forward league_history to sgp() for rate-stat
+# baseline computation.
 make_test_sgp_denominators <- function(seed = 42L) {
   set.seed(seed)
   n_teams <- 12L
@@ -49,15 +52,19 @@ make_test_sgp_denominators <- function(seed = 42L) {
       SV      = round(rnorm(n_teams, 43,   10)),
       ERA     = round(rnorm(n_teams, 3.90, 0.28), 3),
       WHIP    = round(rnorm(n_teams, 1.26, 0.07), 4),
+      IP      = round(rnorm(n_teams, 1430, 60)),   # required for blended_pool rate baseline
+      AB      = round(rnorm(n_teams, 5600, 150)),  # required for blended_pool rate baseline
       stringsAsFactors = FALSE
     )
   })
   ts <- do.call(rbind, rows)
-  history_obj <- list(team_season = ts)
-  sgp_denominators(
-    history_obj,
-    scoring_categories = c("HR", "R", "RBI", "SB", "AVG",
-                            "W", "K", "SV", "ERA", "WHIP")
+  list(
+    denominators = suppressWarnings(sgp_denominators(
+      list(team_season = ts),
+      scoring_categories = c("HR", "R", "RBI", "SB", "AVG",
+                              "W", "K", "SV", "ERA", "WHIP")
+    )),
+    history = list(team_season = ts)
   )
 }
 
@@ -66,16 +73,18 @@ make_test_sgp_denominators <- function(seed = 42L) {
 # ---------------------------------------------------------------------------
 
 test_that("TS-50: sort_by=sgp iteration converges with valid denominators", {
-  proj   <- make_projections_data(n_hitters = 80L, 
-                                   seed = 42L)
-  denoms <- suppressWarnings(make_test_sgp_denominators(seed = 42L))
-
+  proj       <- make_projections_data(n_hitters = 80L, seed = 42L)
+  sgp_bundle <- suppressWarnings(make_test_sgp_denominators(seed = 42L))
+  # sgp_bundle$denominators has rate_conversion = "blended_pool"; must supply
+  # sgp_bundle$history (with IP and AB) as league_history so sgp() can compute
+  # rate-stat baselines.
   result_sgp <- suppressWarnings(
     replacement_level(
       proj,
       config           = cfg_mixed_12,
       sort_by          = "sgp",
-      sgp_denominators = denoms
+      sgp_denominators = sgp_bundle$denominators,
+      league_history   = sgp_bundle$history
     )
   )
   expect_true(attr(result_sgp, "converged"))
@@ -87,16 +96,16 @@ test_that("TS-50: sort_by=sgp iteration converges with valid denominators", {
 # ---------------------------------------------------------------------------
 
 test_that("TS-51: sort_by=sgp produces different replacement stats than zscore", {
-  proj   <- make_projections_data(n_hitters = 80L, 
-                                   seed = 42L)
-  denoms <- suppressWarnings(make_test_sgp_denominators(seed = 42L))
+  proj       <- make_projections_data(n_hitters = 80L, seed = 42L)
+  sgp_bundle <- suppressWarnings(make_test_sgp_denominators(seed = 42L))
 
   result_z   <- replacement_level(proj, config = cfg_mixed_12,
                                     sort_by = "zscore")
   result_sgp <- suppressWarnings(
     replacement_level(proj, config = cfg_mixed_12,
-                      sort_by = "sgp",
-                      sgp_denominators = denoms)
+                      sort_by          = "sgp",
+                      sgp_denominators = sgp_bundle$denominators,
+                      league_history   = sgp_bundle$history)
   )
 
   z_sp_era   <- result_z$replacement_stats[
