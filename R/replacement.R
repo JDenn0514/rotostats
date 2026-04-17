@@ -1062,7 +1062,7 @@ replacement_from_prices <- function(
           "i" = "Sample normalized key{?s}: {.val {sample_keys}}.",
           "i" = "These entries would be merged under name-based deduplication.",
           "i" = "Supply a {.field player_id} column to use exact identity matching.",
-          "i" = "This is a diagnostic warning only — the stat-line computation is unchanged."
+          "i" = "This is a diagnostic warning only \u2014 the stat-line computation is unchanged."
         ),
         class = "rotostats_warning_name_match_failure"
       )
@@ -1282,7 +1282,7 @@ replacement_from_prices <- function(
             "{n_unmatched} player name{?s} in {.arg league_history$prices} could not be matched to {.arg projections} after name normalization.",
             "i" = "Sample: {.val {sample_names}}.",
             "i" = "Check for spelling differences between your prices history and projections source.",
-            "i" = "This is a diagnostic warning only — calibration output is unchanged."
+            "i" = "This is a diagnostic warning only \u2014 calibration output is unchanged."
           ),
           class = "rotostats_warning_name_match_failure"
         )
