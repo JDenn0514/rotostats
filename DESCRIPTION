@@ -13,9 +13,13 @@ Roxygen: list(markdown = TRUE)
 Depends:
     R (>= 4.3.0)
 Imports:
+    checkmate,
     cli (>= 3.6.0),
-    rlang (>= 1.0.0)
+    rlang (>= 1.0.0),
+    stringi
 Suggests:
+    classInt,
+    mixtools,
     testthat (>= 3.0.0),
     withr (>= 2.5.0),
     covr,
