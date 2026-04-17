@@ -720,11 +720,11 @@ test_that("TS-14: total_sgp equals rowSums of sgp_ columns for all players", {
 
 # ---------------------------------------------------------------------------
 # TS-15: SVHD derived from SV + HLD when SVHD column absent
-# NOTE: This test documents a code bug in sgp.R (rlang::inform with
-# .frequency = "once" but no .frequency_id). Test is marked to expect the error
-# so the bug is captured in audit.md. See BLOCK finding in audit.md.
+# Round-2 regression (BLOCK-1 fix): builder added .frequency_id = "sgp_svhd_derivation"
+# to rlang::inform(). Test asserts the correct behavioral contract from test-spec.md:
+# sgp_SVHD = (SV + HLD) / denominator, and inform fires with "SVHD" in the message.
 # ---------------------------------------------------------------------------
-test_that("TS-15: SVHD derived from SV + HLD — detects rlang::inform bug", {
+test_that("TS-15: SVHD derived from SV + HLD — returns correct SGP after BLOCK-1 fix", {
   projections <- data.frame(
     SV  = c(30L, 15L, 5L),
     HLD = c(10L, 20L, 30L),
@@ -739,25 +739,32 @@ test_that("TS-15: SVHD derived from SV + HLD — detects rlang::inform bug", {
   lh <- fake_league_history()
   lc <- fake_league_config()
 
-  # sgp() crashes when SVHD derivation path is triggered, because
-  # rlang::inform(.frequency = "once") requires .frequency_id (rlang >= 1.1.0).
-  # This is a CODE BUG in R/sgp.R line 211. Expected behavior per test-spec.md:
-  # result should succeed and sgp_SVHD = (SV + HLD) / denom. Instead it crashes.
-  expect_error(
-    suppressMessages(suppressWarnings(
+  # No crash — capture both the inform message and the return value.
+  msgs <- character(0L)
+  result <- withCallingHandlers(
+    suppressWarnings(
       sgp(projections, denominators,
           league_history = lh, league_config = lc, rate_conversion = "blended_pool")
-    )),
-    regexp = "\\.frequency_id"
+    ),
+    message = function(m) {
+      msgs <<- c(msgs, conditionMessage(m))
+      invokeRestart("muffleMessage")
+    }
   )
-  # The above assertion PASSES (the crash is confirmed) but the behavior is WRONG.
-  # test-spec.md TS-15 expects this to SUCCEED; the crash is a BUG → BLOCK.
+
+  # Inform fired at least once and contains "SVHD" (test-spec.md TS-15)
+  expect_true(any(grepl("SVHD", msgs, fixed = TRUE)))
+
+  # sgp_SVHD = (SV + HLD) / denominator (test-spec.md TS-15)
+  expected_svhd <- (c(30, 15, 5) + c(10, 20, 30)) / 4.0
+  expect_equal(result$sgp_SVHD, expected_svhd, tolerance = 1e-12)
+  expect_equal(nrow(result), 3L)
 })
 
 # ---------------------------------------------------------------------------
-# TS-16: SVHD with HD column alias — same bug as TS-15
+# TS-16: SVHD with HD column alias — same fix as TS-15
 # ---------------------------------------------------------------------------
-test_that("TS-16: SVHD derived using HD alias — detects rlang::inform bug", {
+test_that("TS-16: SVHD derived using HD alias — returns correct SGP after BLOCK-1 fix", {
   projections <- data.frame(
     SV = c(25L, 10L),
     HD = c(15L, 25L),
@@ -772,16 +779,28 @@ test_that("TS-16: SVHD derived using HD alias — detects rlang::inform bug", {
   lh <- fake_league_history()
   lc <- fake_league_config()
 
-  expect_error(
-    suppressMessages(suppressWarnings(
+  # No crash — capture both the inform message and the return value.
+  msgs <- character(0L)
+  result <- withCallingHandlers(
+    suppressWarnings(
       sgp(projections, denominators,
           league_history = lh, league_config = lc, rate_conversion = "blended_pool")
-    )),
-    regexp = "\\.frequency_id"
+    ),
+    message = function(m) {
+      msgs <<- c(msgs, conditionMessage(m))
+      invokeRestart("muffleMessage")
+    }
   )
-  # Same bug as TS-15. Expected result per test-spec.md: sgp_SVHD = (SV + HD) / denom.
-  # Actual result: crash in rlang::inform → BLOCK.
+
+  # Inform may or may not fire depending on session state (.frequency = "once" is per-session)
+  # The behavioral requirement is that the function succeeds and computes correctly.
+
+  # sgp_SVHD = (SV + HD) / denominator (test-spec.md TS-16)
+  expected_svhd <- (c(25, 10) + c(15, 25)) / 4.0
+  expect_equal(result$sgp_SVHD, expected_svhd, tolerance = 1e-12)
+  expect_equal(nrow(result), 2L)
 })
+
 
 # ---------------------------------------------------------------------------
 # EC-1: rate_conversion not in recognized five values
