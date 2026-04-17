@@ -141,8 +141,15 @@ compute_positional_adjustments <- function(
         idx <- match(pos, replacement_stats$position)
         pos_stats <- as.numeric(replacement_stats[idx, scored_cats, drop = TRUE])
         names(pos_stats) <- scored_cats
-        inverse_cats <- intersect(scored_cats, c("ERA", "WHIP"))
-        normal_cats  <- setdiff(scored_cats, inverse_cats)
+
+        # Restrict to categories that are non-NA for this position group.
+        # Hitter positions have NA for pitcher-only stats (ERA, WHIP) and vice
+        # versa.  colSums(na.rm=TRUE) in compute_global_repl() maps those to 0,
+        # so (NA - 0) = NA and mean(c(NA,...), na.rm=TRUE) returns NaN when
+        # all values in the vector are NA.  Filtering to valid cats prevents NaN.
+        valid_cats   <- scored_cats[!is.na(pos_stats[scored_cats])]
+        inverse_cats <- intersect(valid_cats, c("ERA", "WHIP"))
+        normal_cats  <- setdiff(valid_cats, inverse_cats)
 
         premium_normal  <- if (length(normal_cats) > 0L)
           mean(global_repl[normal_cats] - pos_stats[normal_cats], na.rm = TRUE)
@@ -152,18 +159,25 @@ compute_positional_adjustments <- function(
           mean(pos_stats[inverse_cats] - global_repl[inverse_cats], na.rm = TRUE)
         else 0.0
 
-        n_cats    <- length(scored_cats)
+        n_cats    <- length(valid_cats)
         n_normal  <- length(normal_cats)
         n_inverse <- length(inverse_cats)
-        scarcity_premium[[pos]] <<- (premium_normal * n_normal + premium_inverse * n_inverse) / max(n_cats, 1L)
+        scarcity_premium[[pos]] <<- if (n_cats > 0L)
+          (premium_normal * n_normal + premium_inverse * n_inverse) / n_cats
+        else 0.0
       }
     }
 
     compute_fvarz_premium(primary_hitter_pos, global_hitter)
     compute_fvarz_premium(pitcher_pos,        global_pitcher)
 
-    # Re-center so zero-sum holds for the zero_sum_positions
-    zero_sum_pos <- if (catcher_adjustment_method == "split_pool") {
+    # Re-center so zero-sum holds for the zero_sum_positions.
+    # "split_pool": catcher excluded from zero-sum positions (handled separately).
+    # "none":       catcher will be forced to 0 in step 3, so recenter the
+    #               remaining positions to sum to zero independently; the
+    #               assertion will then see C=0 plus a sum-zero remainder.
+    # "positional_default" / "partial_offset": C participates in zero-sum.
+    zero_sum_pos <- if (catcher_adjustment_method %in% c("split_pool", "none")) {
       setdiff(primary_hitter_pos, "C")
     } else {
       primary_hitter_pos
@@ -191,7 +205,14 @@ compute_positional_adjustments <- function(
         idx <- match(pos, replacement_stats$position)
         pos_stats <- as.numeric(replacement_stats[idx, scored_cats, drop = TRUE])
         names(pos_stats) <- scored_cats
-        diffs <- vapply(scored_cats, function(cat) {
+        # Restrict to categories non-NA for this position group (same reasoning
+        # as fvarz: hitter positions have NA for pitcher-only stats).
+        valid_cats <- scored_cats[!is.na(pos_stats[scored_cats])]
+        if (length(valid_cats) == 0L) {
+          scarcity_premium[[pos]] <<- 0.0
+          next
+        }
+        diffs <- vapply(valid_cats, function(cat) {
           d <- denom_vals[cat]
           if (is.na(d) || d == 0) return(0.0)
           if (cat %in% inverse_cats) {
@@ -207,7 +228,7 @@ compute_positional_adjustments <- function(
     compute_sgp_premium(primary_hitter_pos, global_hitter)
     compute_sgp_premium(pitcher_pos,        global_pitcher)
 
-    zero_sum_pos <- if (catcher_adjustment_method == "split_pool") {
+    zero_sum_pos <- if (catcher_adjustment_method %in% c("split_pool", "none")) {
       setdiff(primary_hitter_pos, "C")
     } else {
       primary_hitter_pos
@@ -239,19 +260,27 @@ compute_positional_adjustments <- function(
     for (pos in primary_hitter_pos) {
       idx          <- match(pos, replacement_stats$position)
       pos_stats    <- as.numeric(replacement_stats[idx, scored_cats, drop = TRUE])
-      global_stats <- as.numeric(global_hitter[scored_cats])
-      diffs        <- global_stats - pos_stats
-      scarcity_premium[[pos]] <- mean(diffs, na.rm = TRUE) * per_hitter_dollar
+      names(pos_stats) <- scored_cats
+      # Restrict to categories non-NA for this position group.
+      valid_cats   <- scored_cats[!is.na(pos_stats[scored_cats])]
+      global_stats <- as.numeric(global_hitter[valid_cats])
+      diffs        <- global_stats - pos_stats[valid_cats]
+      scarcity_premium[[pos]] <- if (length(diffs) > 0L)
+        mean(diffs, na.rm = TRUE) * per_hitter_dollar else 0.0
     }
     for (pos in pitcher_pos) {
       idx          <- match(pos, replacement_stats$position)
       pos_stats    <- as.numeric(replacement_stats[idx, scored_cats, drop = TRUE])
-      global_stats <- if (!is.null(global_pitcher)) as.numeric(global_pitcher[scored_cats]) else pos_stats
-      diffs        <- global_stats - pos_stats
-      scarcity_premium[[pos]] <- mean(diffs, na.rm = TRUE) * per_pitcher_dollar
+      names(pos_stats) <- scored_cats
+      # Restrict to categories non-NA for this position group.
+      valid_cats   <- scored_cats[!is.na(pos_stats[scored_cats])]
+      global_stats <- if (!is.null(global_pitcher)) as.numeric(global_pitcher[valid_cats]) else pos_stats[valid_cats]
+      diffs        <- global_stats - pos_stats[valid_cats]
+      scarcity_premium[[pos]] <- if (length(diffs) > 0L)
+        mean(diffs, na.rm = TRUE) * per_pitcher_dollar else 0.0
     }
 
-    zero_sum_pos <- if (catcher_adjustment_method == "split_pool") {
+    zero_sum_pos <- if (catcher_adjustment_method %in% c("split_pool", "none")) {
       setdiff(primary_hitter_pos, "C")
     } else {
       primary_hitter_pos
@@ -275,13 +304,20 @@ compute_positional_adjustments <- function(
         pos_stats <- as.numeric(replacement_stats[idx, scored_cats, drop = TRUE])
         names(pos_stats) <- scored_cats
 
+        # Restrict to categories non-NA for this position group.
+        valid_cats <- scored_cats[!is.na(pos_stats[scored_cats])]
+        if (length(valid_cats) == 0L) {
+          scarcity_premium[[pos]] <<- 0.0
+          next
+        }
+
         pos_avg <- colMeans(
-          as.matrix(replacement_stats[replacement_stats$position %in% pos_set, scored_cats, drop = FALSE]),
+          as.matrix(replacement_stats[replacement_stats$position %in% pos_set, valid_cats, drop = FALSE]),
           na.rm = TRUE
         )
 
-        within_pos    <- pos_stats - pos_avg
-        within_global <- pos_stats - global_repl
+        within_pos    <- pos_stats[valid_cats] - pos_avg[valid_cats]
+        within_global <- pos_stats[valid_cats] - global_repl[valid_cats]
 
         blended <- pos_weight * within_pos + (1 - pos_weight) * within_global
         scarcity_premium[[pos]] <<- mean(blended, na.rm = TRUE)
@@ -291,7 +327,7 @@ compute_positional_adjustments <- function(
     compute_posblend_premium(primary_hitter_pos, global_hitter)
     compute_posblend_premium(pitcher_pos,        global_pitcher)
 
-    zero_sum_pos <- if (catcher_adjustment_method == "split_pool") {
+    zero_sum_pos <- if (catcher_adjustment_method %in% c("split_pool", "none")) {
       setdiff(primary_hitter_pos, "C")
     } else {
       primary_hitter_pos

@@ -14,7 +14,8 @@ RATE_STAT_DENOMINATORS <- c(
   ERA   = "IP",  WHIP  = "IP",  "K/9" = "IP",  "BB/9" = "IP",  "HR/9" = "IP",
   SVHD  = "G",   QS    = "GS",
   "K%"  = "PA", "BB%" = "PA",
-  wOBA  = "PA",  xFIP  = "IP",  SIERA = "IP",   FIP   = "IP"
+  wOBA  = "PA",  xFIP  = "IP",  SIERA = "IP",   FIP   = "IP",
+  BABIP = "AB"
 )
 
 # ---------------------------------------------------------------------------

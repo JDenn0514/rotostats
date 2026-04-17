@@ -343,19 +343,18 @@ replacement_level <- function(
   checkmate::assert_subset(projections$LEAGUE, c("AL", "NL"))
 
   # Step 32: Rate stat denominator lookup
-  rate_cats <- intersect(cats_upper, names(rate_lookup))
-  # For any scored stat that is a rate stat, verify it's in the lookup
+  # Any scored category that is a known rate stat must resolve in rate_lookup.
+  # Use RATE_STAT_DENOMINATORS (the canonical set) as the membership test so
+  # new rate stats added to RATE_STAT_DENOMINATORS are automatically covered
+  # without requiring a parallel update to a hardcoded list here.
+  known_rate_stats_upper <- toupper(names(RATE_STAT_DENOMINATORS))
   for (cat in cats_upper) {
-    # Check if it's a rate stat (denominator-based) but not in lookup
-    # Heuristic: it's in RATE_STAT_DENOMINATORS or was supplied
-    if (cat %in% c("ERA", "WHIP", "AVG", "OBP", "SLG", "OPS",
-                   "K/9", "BB/9", "HR/9", "SVHD", "QS",
-                   "K%", "BB%", "WOBA", "XFIP", "SIERA", "FIP")) {
+    if (cat %in% known_rate_stats_upper) {
       if (!cat %in% names(rate_lookup)) {
         cli::cli_abort(
           c(
             "Rate stat {.val {cat}} is not in the rate-stat denominator lookup.",
-            "i" = "Supply the denominator via {.code rate_denominators = c({cat} = \"PA\")}.",
+            "i" = "Supply the denominator via {.code rate_denominators = c({cat} = \"AB\")}.",
             "i" = "See {.fn rate_stat_denominators} for the built-in lookup."
           ),
           class = "rotostats_error_unknown_rate_stat",
