@@ -45,7 +45,7 @@ implemented.}
 
 \item{league_config}{A \code{league_config} S3 object from \code{\link[=league_config]{league_config()}}.
 Required when \code{rate_conversion = "blended_pool"} and
-\code{pool_baseline = "projection_pool"}. Passed to \code{\link[=pool_sizes]{pool_sizes()}} to derive
+\code{pool_baseline = "projection_pool"}. Passed to \code{pool_sizes()} to derive
 \code{pool_size_p} and \code{pool_size_h}.}
 
 \item{baseline_era}{Numeric scalar. Explicit ERA baseline for

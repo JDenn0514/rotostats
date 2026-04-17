@@ -36,7 +36,7 @@
 #'   implemented.
 #' @param league_config A `league_config` S3 object from [league_config()].
 #'   Required when `rate_conversion = "blended_pool"` and
-#'   `pool_baseline = "projection_pool"`. Passed to [pool_sizes()] to derive
+#'   `pool_baseline = "projection_pool"`. Passed to `pool_sizes()` to derive
 #'   `pool_size_p` and `pool_size_h`.
 #' @param baseline_era Numeric scalar. Explicit ERA baseline for
 #'   `rate_conversion = "fixed_baseline"`. Ignored for `"blended_pool"`.
@@ -52,6 +52,7 @@
 #'   per-category SGP is `NA` (propagation via `na.rm = FALSE`).
 #'
 #' @seealso [sgp_denominators()], [league_config()], [league_history()]
+#' @importFrom utils head
 #' @export
 sgp <- function(
   projections,
@@ -213,7 +214,8 @@ sgp <- function(
           "SVHD derived as SV + ", hld_col, ". ",
           "Verify that this definition matches your league's hold rules."
         ),
-        .frequency = "once"
+        .frequency    = "once",
+        .frequency_id = "sgp_svhd_derivation"
       )
       # Remove SVHD from missing_cats since we just derived it
       missing_cats <- setdiff(missing_cats, "SVHD")
