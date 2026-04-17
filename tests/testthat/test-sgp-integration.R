@@ -569,7 +569,7 @@ test_that("TS-11: zero IP player gets NA for ERA and WHIP SGP, others computed n
                     league_history = lh, league_config = lc,
                     rate_conversion = "blended_pool")
     ),
-    class = "rotostats_warning_missing_category_column"
+    class = "rotostats_warning_zero_playing_time"    # changed from missing_category_column
   )
 
   expect_true(is.na(result$sgp_ERA[4L]),
@@ -622,7 +622,7 @@ test_that("TS-12: zero AB player gets NA for AVG SGP, others computed normally",
                     league_history = lh, league_config = lc,
                     rate_conversion = "blended_pool")
     ),
-    class = "rotostats_warning_missing_category_column"
+    class = "rotostats_warning_zero_playing_time"    # changed from missing_category_column
   )
 
   expect_true(is.na(result$sgp_AVG[4L]),

@@ -485,7 +485,7 @@ test_that("missing scored category column emits rotostats_warning_missing_catego
   )
 })
 
-test_that("zero IP player emits rotostats_warning_missing_category_column for ERA", {
+test_that("zero IP player emits rotostats_warning_zero_playing_time for ERA", {
   cats   <- c("ERA")
   denoms <- make_denominators(cats, values = c(ERA = 0.3))
   lh     <- make_league_history()
@@ -495,7 +495,7 @@ test_that("zero IP player emits rotostats_warning_missing_category_column for ER
 
   expect_warning(
     sgp(proj, denoms, league_history = lh, league_config = lc),
-    class = "rotostats_warning_missing_category_column"
+    class = "rotostats_warning_zero_playing_time"
   )
 })
 
@@ -514,7 +514,7 @@ test_that("zero IP player gets NA for sgp_ERA", {
   expect_true(is.na(result$sgp_ERA[2L]))
 })
 
-test_that("zero AB player emits warning and gets NA for sgp_AVG", {
+test_that("zero AB player emits rotostats_warning_zero_playing_time and gets NA for sgp_AVG", {
   cats   <- c("AVG")
   denoms <- make_denominators(cats, values = c(AVG = 0.003))
   lh     <- make_league_history()
@@ -523,7 +523,7 @@ test_that("zero AB player emits warning and gets NA for sgp_AVG", {
 
   expect_warning(
     sgp(proj, denoms, league_history = lh, league_config = lc),
-    class = "rotostats_warning_missing_category_column"
+    class = "rotostats_warning_zero_playing_time"
   )
 
   result <- suppressWarnings(
@@ -736,4 +736,131 @@ test_that("sgp() emits cli_inform naming the baseline year", {
   )
 
   expect_true(any(grepl("2024", msgs)), label = "Inform message should mention year 2024")
+})
+
+# ---------------------------------------------------------------------------
+# Section 12: pool_baseline validation — new tests (test-spec.md §3)
+# ---------------------------------------------------------------------------
+
+test_that("invalid pool_baseline aborts with rotostats_error_invalid_pool_baseline", {
+  cats   <- c("HR")
+  denoms <- make_denominators(cats, values = c(HR = 12.0))
+  lh     <- make_league_history()
+  lc     <- make_league_config()
+  proj   <- data.frame(HR = c(20, 30))
+
+  expect_error(
+    sgp(proj, denoms, league_history = lh, league_config = lc,
+        pool_baseline = "foo"),
+    class = "rotostats_error_invalid_pool_baseline"
+  )
+})
+
+test_that("pool_baseline = 'per_player' aborts with rotostats_error_invalid_pool_baseline", {
+  cats   <- c("HR")
+  denoms <- make_denominators(cats, values = c(HR = 12.0))
+  lh     <- make_league_history()
+  lc     <- make_league_config()
+  proj   <- data.frame(HR = c(20, 30))
+
+  expect_error(
+    sgp(proj, denoms, league_history = lh, league_config = lc,
+        pool_baseline = "per_player"),
+    class = "rotostats_error_invalid_pool_baseline"
+  )
+})
+
+test_that("pool_baseline = 'universal_constants' aborts with rotostats_error_invalid_pool_baseline", {
+  cats   <- c("HR")
+  denoms <- make_denominators(cats, values = c(HR = 12.0))
+  lh     <- make_league_history()
+  lc     <- make_league_config()
+  proj   <- data.frame(HR = c(20, 30))
+
+  expect_error(
+    sgp(proj, denoms, league_history = lh, league_config = lc,
+        pool_baseline = "universal_constants"),
+    class = "rotostats_error_invalid_pool_baseline"
+  )
+})
+
+test_that("missing category column fires rotostats_warning_missing_category_column not zero_playing_time", {
+  cats   <- c("HR", "R")
+  denoms <- make_denominators(cats, values = c(HR = 12.0, R = 15.0))
+  lh     <- make_league_history()
+  lc     <- make_league_config()
+  # Projections missing R — condition (a): column absent
+  proj   <- data.frame(HR = c(20, 30))
+
+  # Must fire missing_category_column
+  expect_warning(
+    sgp(proj, denoms, league_history = lh, league_config = lc),
+    class = "rotostats_warning_missing_category_column"
+  )
+
+  # Must NOT fire zero_playing_time
+  w <- tryCatch(
+    withCallingHandlers(
+      sgp(proj, denoms, league_history = lh, league_config = lc),
+      warning = function(cond) {
+        if (inherits(cond, "rotostats_warning_zero_playing_time")) {
+          stop("rotostats_warning_zero_playing_time should NOT fire for missing column")
+        }
+        invokeRestart("muffleWarning")
+      }
+    ),
+    error = function(e) fail(conditionMessage(e))
+  )
+  # If we reach here without failure, zero_playing_time did not fire — test passes
+  expect_true(TRUE)
+})
+
+test_that("zero IP fires rotostats_warning_zero_playing_time not missing_category_column", {
+  cats   <- c("ERA")
+  denoms <- make_denominators(cats, values = c(ERA = 0.3))
+  lh     <- make_league_history()
+  lc     <- make_league_config()
+  # ERA column IS present — condition (b): playing time missing
+  proj   <- data.frame(ERA = c(3.5, 0.0), WHIP = c(1.2, 0.0), IP = c(200, 0))
+
+  # Must fire zero_playing_time
+  expect_warning(
+    sgp(proj, denoms, league_history = lh, league_config = lc),
+    class = "rotostats_warning_zero_playing_time"
+  )
+
+  # Must NOT fire missing_category_column
+  w <- tryCatch(
+    withCallingHandlers(
+      sgp(proj, denoms, league_history = lh, league_config = lc),
+      warning = function(cond) {
+        if (inherits(cond, "rotostats_warning_missing_category_column")) {
+          stop("rotostats_warning_missing_category_column should NOT fire for zero IP")
+        }
+        invokeRestart("muffleWarning")
+      }
+    ),
+    error = function(e) fail(conditionMessage(e))
+  )
+  expect_true(TRUE)
+})
+
+# ---------------------------------------------------------------------------
+# Section 13: pool_baseline validation order (test-spec.md §6 invariant)
+# invalid pool_baseline fires BEFORE rate_conversion is checked
+# ---------------------------------------------------------------------------
+
+test_that("invalid pool_baseline fires before rate_conversion check", {
+  cats   <- c("HR")
+  denoms <- make_denominators(cats, values = c(HR = 12.0))
+  proj   <- data.frame(HR = c(20, 30))
+
+  err <- tryCatch(
+    sgp(proj, denoms, pool_baseline = "foo", rate_conversion = "invalid_value"),
+    error = function(e) e
+  )
+  expect_true(inherits(err, "rotostats_error_invalid_pool_baseline"),
+              label = "pool_baseline check should fire before rate_conversion check")
+  expect_false(inherits(err, "rotostats_error_invalid_rate_conversion"),
+               label = "Should NOT raise rotostats_error_invalid_rate_conversion here")
 })
