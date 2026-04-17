@@ -467,6 +467,7 @@ replacement_level <- function(
   converged           <- FALSE
   pass                <- 1L
   old_assignments     <- NULL
+  old_old_assignments <- NULL   # two passes ago — used for 2-cycle detection
   old_repl_stats_vec  <- NULL
   delta               <- NA_real_
   sgp_result          <- NULL
@@ -822,8 +823,24 @@ replacement_level <- function(
       break
     }
 
+    # 2-cycle detection: if new_assignments equals the assignments from two
+    # passes ago, the assignment loop is oscillating between two stable states
+    # and will never satisfy the consecutive-pass equality criterion.  Accept
+    # the current state as the limit-cycle fixed point and declare convergence.
+    cycle_detected <- multi_pos == "highest_par" &&
+      !is.null(old_old_assignments) &&
+      length(new_assignments) == length(old_old_assignments) &&
+      all(new_assignments[names(old_old_assignments)] == old_old_assignments,
+          na.rm = TRUE)
+
+    if (cycle_detected) {
+      converged <- TRUE
+      break
+    }
+
     if (pass >= max_iter) break
 
+    old_old_assignments <- old_assignments
     old_assignments    <- new_assignments
     old_repl_stats_vec <- new_repl_stats_vec
     current_assignments <- new_assignments

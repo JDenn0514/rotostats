@@ -17,13 +17,21 @@
 #   - league       : required; mixed league = 50/50 AL/NL split
 #   - pos_eligibility: pipe-delimited ("|").
 
-# Fixed focal pitcher projections (per sim-spec.md §2.4)
+# Fixed focal pitcher projections.
+# ERA=4.70, WHIP=1.40 are set at approximately the 10-team boundary quality
+# level so that the extra complement pitchers added for a 15-team league
+# (drawn from the same N(3.80, 0.45) ERA distribution) are predominantly
+# better than the focal pitcher.  When ~28-30 of the 30 extra pitchers
+# outrank focal, focal's absolute rank increases by approximately the
+# boundary shift (30), keeping rank_vs_boundary invariant across league sizes.
+# Choosing a below-average focal pitcher (ERA > pool mean 3.80) is the
+# design requirement for rank-invariance; see follow-up-fix-2 in implementation.md.
 .FOCAL_PITCHER <- list(
-  ERA  = 3.50,
-  WHIP = 1.15,
-  IP   = 175,
-  W    = 13L,
-  K    = 175L,
+  ERA  = 4.70,
+  WHIP = 1.40,
+  IP   = 165,
+  W    = 8L,
+  K    = 130L,
   SV   = 0L
 )
 
