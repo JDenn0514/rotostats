@@ -34,6 +34,7 @@ run directory under
 | R1 | `sgp-input-hardening` | Code | `pool_baseline` unguarded · warning class split | Planner → Builder → Tester → Scriber → Reviewer → Shipper |
 | R2 | `sgp-denom-dgpb-rerun` | Simulation-only | DGP-B mean-shift (Q4 + Q7 only) | Planner (DGP fix) → Simulator → Tester → Reviewer → Shipper |
 | R3 | `sgp-docs-cleanup` | Docs-only | sim-spec "8 per team" typo · `denom_floor` note | Scriber → Reviewer → Shipper |
+| R7 | `sgp-denom-weights-guidance-docs` | Docs-only | `@details` guidance on when to pick each `weights` scheme | Scriber → Reviewer → Shipper |
 
 ### Wave 2 — sequential after Wave 1
 
@@ -457,6 +458,115 @@ property). Planner → Builder → Tester → Scriber → Reviewer → Shipper.
 ## Branch
 
 - Feature branch: feature/sgp-denom-inverse-categories-param
+- Base branch: develop
+- PR base: develop
+
+## Workspace repo
+
+JDenn0514/workspace
+```
+
+---
+
+### R7 — `sgp-denom-weights-guidance-docs`
+
+**Objective.** Surface the Q4/Q7 findings from `sgp-denom-dgpb-rerun-2026-04-17`
+in `?sgp_denominators` so users know which `weights` preset fits which regime.
+Validated knowledge currently lives only in `simulation.md` / `review.md`.
+
+**Why file this now.** The rerun confirmed regime-dependent behavior:
+
+- Under stable history (DGP-A): `flat` wins (MSE 0.25 vs `exp_decay(0.7)` 0.48).
+- Under within-year σ shift (DGP-B, σ 10→25 at year 7): `exp_decay(0.7)` wins
+  by 71% MSE reduction (2.99 vs 10.41); `exp_decay(0.9)` sits in between.
+- SB override (Q7): combining `after` + `exp_decay(0.7)` reduces SB MSE by 93.5%
+  vs the no-override baseline with HR direction isolation confirmed.
+
+**Scope (docs only — no code, no tests, no spec change, no default change).**
+
+1. Expand `@details` in `R/sgp-denominators.R` with a short "Choosing weights"
+   subsection:
+   - `flat` — appropriate when seasons are i.i.d.; default remains `flat`.
+   - `exp_decay(0.9)` — compromise default if history spans a known regime
+     break (rule change, juiced-ball era, offense/defense shift).
+   - `exp_decay(0.7)` — use when a within-year σ break is known/expected.
+2. Add a one-sentence pointer to the SB override pattern: for SB, the
+   combination `after = "exp_decay_0.7"` (i.e., override SB weights to decay
+   hard from the break forward) reduced SB MSE materially in the validation
+   run, with HR isolation confirmed.
+3. Regenerate `man/sgp_denominators.Rd` via `devtools::document()`.
+
+**Explicitly out of scope.**
+
+- No change to the default `weights` argument. The `exp_decay(0.9)`-as-default
+  recommendation from the Simulator is a spec-level decision; if you want to
+  pursue it, file a separate request with Planner + Builder involvement.
+- No `NEWS.md` entry (docs-only, non-user-breaking).
+- No change to `@section Caveats` on Q3 bootstrap coverage — already documented.
+
+**Acceptance.**
+
+- `?sgp_denominators` `@details` contains a "Choosing weights" paragraph that
+  names each preset with its regime.
+- `devtools::document()` produces a clean diff to `man/sgp_denominators.Rd`.
+- `R CMD check`: 0 ERRORs, 0 WARNINGs, NOTEs unchanged from `develop`.
+
+**Effort.** ~10–15 min.
+
+#### Dispatch prompt (paste to Leader)
+
+```
+Request ID: sgp-denom-weights-guidance-docs-2026-04-17
+
+Docs-only. No code, no tests, no simulation, no default change.
+
+Read plans/sgp-cleanup.md §"R7 — sgp-denom-weights-guidance-docs" for the
+authoritative scope. Read the Q4 and Q7 results in the prior run:
+~/.claude/plugins/data/statsclaw-statsclaw/workspace/rotostats/runs/sgp-denom-dgpb-rerun-2026-04-17/simulation.md
+
+## Changes required
+
+1. In R/sgp-denominators.R @details, add a short "Choosing weights" block that
+   tells users which preset fits which regime:
+
+   - flat — use when seasons can be treated as i.i.d. This is the default.
+   - exp_decay(0.9) — mild decay; a reasonable compromise when a structural
+     break in the game environment is suspected but not confirmed.
+   - exp_decay(0.7) — strong decay; use when a within-year σ break is known
+     or expected (e.g., juiced-ball transitions, rule changes that alter
+     offense/defense dispersion).
+
+   Cite the validation run briefly: "Validated in the Q4 Monte Carlo study
+   (see NEWS and runs/sgp-denom-dgpb-rerun-2026-04-17)."
+
+2. Add one sentence noting the SB override pattern: for the SB category, the
+   combination after = "exp_decay_0.7" reduced SB MSE materially in the
+   validation run, with HR direction isolation confirmed.
+
+3. Regenerate man/sgp_denominators.Rd with devtools::document().
+
+## Acceptance criteria
+
+- ?sgp_denominators @details now contains a "Choosing weights" paragraph
+  naming flat / exp_decay(0.9) / exp_decay(0.7) with regime guidance.
+- The @details mentions the SB override pattern once.
+- devtools::document() produces a clean Rd diff.
+- R CMD check: 0 ERRORs, 0 WARNINGs, NOTEs unchanged.
+
+## Hard constraints
+
+- No change to the default weights argument.
+- No change to spec.md, test-spec.md, or the function's public interface.
+- No NEWS.md entry.
+
+## Workflow
+
+Docs-only. Scriber → Reviewer → Shipper. Skip Planner, Builder, Tester,
+Simulator.
+
+## Branch
+
+- Feature branch: feature/sgp-denom-weights-guidance-docs
 - Base branch: develop
 - PR base: develop
 
