@@ -43,9 +43,12 @@ baseline means can be computed.}
 \code{attr(denominators, "rate_conversion")} must equal \code{"blended_pool"} or
 \code{sgp()} aborts with \code{rotostats_error_invalid_rate_conversion}.}
 
-\item{pool_baseline}{Character scalar.  Determines how pool constants are
-constructed for the blended-pool rate-stat formulas.  Currently only
-\code{"projection_pool"} (the default) is implemented.}
+\item{pool_baseline}{Character scalar. Determines how pool constants are
+constructed for the blended-pool rate-stat formulas. Currently only
+\code{"projection_pool"} (the default) is implemented; any other value
+aborts with \code{rotostats_error_invalid_pool_baseline}. The other
+documented values (\code{"per_player"}, \code{"universal_constants"}) are
+not yet implemented.}
 
 \item{league_config}{A \code{league_config} S3 object from \code{\link[=league_config]{league_config()}}.
 Required when \code{rate_conversion = "blended_pool"} and
@@ -133,16 +136,21 @@ them in a partial sum.
 
 Checks are applied in this order so that the most specific error wins:
 \enumerate{
+\item \code{pool_baseline} must be \code{"projection_pool"} (else
+\code{rotostats_error_invalid_pool_baseline}). This check fires before
+any other validation, regardless of \code{rate_conversion}.
 \item \code{rate_conversion} must be one of the five recognized values (else
 \code{rotostats_error_invalid_rate_conversion}).
-\item When \code{rate_conversion = "blended_pool"}, \code{attr(denominators, "rate_conversion")} must also be \code{"blended_pool"} — mismatched units
+\item When \code{rate_conversion = "blended_pool"}, \code{attr(denominators,
+   "rate_conversion")} must also be \code{"blended_pool"} — mismatched units
 abort with \code{rotostats_error_invalid_rate_conversion}.
-\item \code{"per_player"}, \code{"universal_constants"}, \code{"team_ip_normalized"} abort
-with \code{rotostats_error_not_implemented}.
-\item \code{"fixed_baseline"} delegates to \code{\link[=convert_rate_stats]{convert_rate_stats()}} (stub; also aborts
-with \code{rotostats_error_not_implemented}).
-\item Required inputs (\code{league_history}, \code{league_config}) are validated only
-after the method is confirmed.
+\item \code{"per_player"}, \code{"universal_constants"},
+\code{"team_ip_normalized"} abort with
+\code{rotostats_error_not_implemented}.
+\item \code{"fixed_baseline"} delegates to \code{convert_rate_stats()} (stub;
+also aborts with \code{rotostats_error_not_implemented}).
+\item Required inputs (\code{league_history}, \code{league_config}) are
+validated only after the method is confirmed.
 }
 }
 
@@ -164,15 +172,26 @@ how denominators are calibrated from historical team-season standings data.
 \section{Warnings}{
 
 
-\code{sgp()} emits \code{rotostats_warning_missing_category_column} (via
-\code{\link[cli:cli_abort]{cli::cli_warn()}}) in two situations:
-\enumerate{
-\item A scored category column is entirely absent from \code{projections} —
-the affected \verb{sgp_<CAT>} column is filled with \code{NA}.
-\item A player has 0 or \code{NA} projected IP (when ERA or WHIP is scored) or
-projected AB (when AVG is scored) — that player's rate-stat SGP is
-set to \code{NA}.
+\code{sgp()} may emit one or both of the following warnings via
+\code{\link[cli]{cli_warn}}:
+
+\subsection{rotostats_warning_missing_category_column}{
+A scored category column is entirely absent from \code{projections} —
+the affected \code{sgp_<CAT>} column is filled with \code{NA} for all
+players. Emitted once per missing category (Step 8).
 }
+
+\subsection{rotostats_warning_zero_playing_time}{
+A player has 0 or \code{NA} projected IP (when ERA or WHIP is scored) or
+projected AB (when AVG is scored) — that player's rate-stat SGP is set to
+\code{NA}. Emitted at Steps 14a, 14c, and 14d respectively. The message
+names the affected player(s).
+}
+
+To suppress only one class, use
+\code{withCallingHandlers(rotostats_warning_missing_category_column = ...)}
+or \code{withCallingHandlers(rotostats_warning_zero_playing_time = ...)}
+independently.
 }
 
 \examples{

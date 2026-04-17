@@ -1,10 +1,10 @@
 # Architecture: rotostats
 
-**Run:** `replacement-2026-04-16`
-**Branch:** `feature/replacement-level` @ `21270fb`
+**Run:** `sgp-input-hardening-2026-04-17`
+**Branch:** `feature/sgp-input-hardening-docs` @ `3d2bd69`
 **Date:** 2026-04-17
 
-(Previous run: `sgp-2026-04-16` @ `22b7f4b` — see git log for prior state)
+(Previous run: `replacement-2026-04-16` @ `21270fb` — see git log for prior state)
 
 ---
 
@@ -92,13 +92,8 @@ graph TD
     YW --> SGPD_BODY
     CS --> SGPD_BODY
 
-    style RL fill:#1e90ff,stroke:#1565c0,color:#fff
-    style RFP fill:#1e90ff,stroke:#1565c0,color:#fff
-    style RL_BODY fill:#1e90ff,stroke:#1565c0,color:#fff
-    style RFP_BODY fill:#1e90ff,stroke:#1565c0,color:#fff
-    style RL_INT fill:#1e90ff,stroke:#1565c0,color:#fff
-    style RL_PARAMS fill:#1e90ff,stroke:#1565c0,color:#fff
     style SGP fill:#1e90ff,stroke:#1565c0,color:#fff
+    style SGP_BODY fill:#1e90ff,stroke:#1565c0,color:#fff
 ```
 
 ### Function Call Graph
@@ -147,7 +142,14 @@ graph TD
     K --> K2["rowSums na.rm=FALSE"]
 
     style A fill:#1e90ff,stroke:#1565c0,color:#fff
+    style B fill:#1e90ff,stroke:#1565c0,color:#fff
+    style C fill:#1e90ff,stroke:#1565c0,color:#fff
+    style C1 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style F fill:#1e90ff,stroke:#1565c0,color:#fff
+    style F1 fill:#1e90ff,stroke:#1565c0,color:#fff
     style J fill:#1e90ff,stroke:#1565c0,color:#fff
+    style J5 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style J5a fill:#1e90ff,stroke:#1565c0,color:#fff
 ```
 
 **replacement_level() call graph:**
@@ -175,10 +177,6 @@ graph TD
     RL --> FMT["format_replacement_output()"]
     RL --> CHK["assert_replacement_output_contract()"]
 
-    style RL fill:#1e90ff,stroke:#1565c0,color:#fff
-    style LOOP fill:#1e90ff,stroke:#1565c0,color:#fff
-    style ADJ fill:#1e90ff,stroke:#1565c0,color:#fff
-    style STATLINE fill:#1e90ff,stroke:#1565c0,color:#fff
 ```
 
 **sgp_denominators() call graph (for reference):**
@@ -248,10 +246,9 @@ graph TD
 
     ASSEMBLE --> OUT["data.frame\nsgp_HR sgp_R\nsgp_ERA sgp_WHIP sgp_AVG\ntotal_sgp"]
 
-    style RL fill:#1e90ff,stroke:#1565c0,color:#fff
-    style ROUT fill:#1e90ff,stroke:#1565c0,color:#fff
     style SGP fill:#1e90ff,stroke:#1565c0,color:#fff
     style OUT fill:#1e90ff,stroke:#1565c0,color:#fff
+    style POOL_CONST fill:#1e90ff,stroke:#1565c0,color:#fff
 ```
 
 ---
@@ -268,7 +265,7 @@ graph TD
 | `R/replacement_internal.R` — other internal helpers | `compute_band_indices()`, `detect_cliff()`, `compute_replacement_stat_line()`, `infer_pitcher_roles()`, `normalize_name()`, `compute_zscores()`, `assert_zero_sum()`, `compute_par_at_pos()`, `detect_kde_trough()` | `stats`, `stringi` | **YES** |
 | `R/replacement_params.R` — `default_replacement_params` | Exported list of 9 numeric constants; user overrides via `replacement_params = list(...)` | — | **YES** |
 | `R/replacement_params.R` — `rate_stat_denominators()` | Returns `RATE_STAT_DENOMINATORS` named character vector; 17 built-in entries including BABIP | — | **YES** |
-| `R/sgp.R` — `sgp()` | Per-player SGP converter; called internally by `replacement_level()` when `sort_by = "sgp"` | `sgp_denominators` S3, `pool_sizes()`, `cli`, `rlang`, `stats` | No |
+| `R/sgp.R` — `sgp()` | Per-player SGP converter; called internally by `replacement_level()` when `sort_by = "sgp"` | `sgp_denominators` S3, `pool_sizes()`, `cli`, `rlang`, `stats` | **YES** |
 | `R/sgp-denominators.R` — `sgp_denominators()` | Calibrates per-category SGP denominators from league history | `sgp-denominators-helpers.R`, `sgp-denominators-s3.R`, `cli`, `stats` | No |
 | `R/sgp-denominators.R` — `convert_rate_stats()` | Stub; always aborts with `rotostats_error_not_implemented` | `cli` | No |
 | `R/sgp-denominators-s3.R` — `new_sgp_denominators()` | Constructor for `sgp_denominators` S3 object; sets `attr(., "rate_conversion")` | Base R | No |
