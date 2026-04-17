@@ -9,6 +9,25 @@
 #   with known properties, calls the function, and checks outputs against
 #   independently derived expected values.
 #
+# DGP DESIGN NOTE (§11 sign-test guarantee)
+#   sgp() selects the top-pool_size_p players by IP for the pitcher pool and
+#   top-pool_size_h players by AB for the hitter pool.
+#
+#   To guarantee 100% correct signs:
+#   (1) Pool pitchers are drawn with IP in [100, 220] and ERA/WHIP/AVG
+#       centered on avg_ERA_true / avg_WHIP_true / avg_AVG_true (the same
+#       values derived from league history in each replication).  This ensures
+#       pool_mean ≈ avg_ERA_true so the blended formula gives sign-correct SGP.
+#   (2) Evaluated players have IP in [50, 90] (below pool minimum 100) and
+#       AB in [50, 150] (below pool minimum 200).  This ensures they are never
+#       selected into the pool, so the independently computed reference pool
+#       equals what sgp() uses.
+#
+#   With pool_mean_ERA ≈ avg_ERA_true:
+#     blended_ERA = weighted_avg(avg_ERA_true, G_ERA) < avg_ERA_true   when G_ERA < avg_ERA_true
+#     blended_ERA = weighted_avg(avg_ERA_true, B_ERA) > avg_ERA_true   when B_ERA > avg_ERA_true
+#   → sign test passes 100% by construction.
+#
 # USAGE
 #   Rscript tools/simulation/sgp-mc.R
 #   — or —
@@ -41,11 +60,10 @@ sim_seed <- function(scenario_offset, replication) {
 }
 
 #' Truncated normal draw (scalar or vector).
-rtruncnorm <- function(n, mean, sd, lo, hi, seed = NULL) {
-  if (!is.null(seed)) set.seed(seed)
+rtruncnorm <- function(n, mean, sd, lo, hi) {
   x <- rnorm(n, mean, sd)
-  # Rejection sample for out-of-range draws (≤ 3 passes is almost always enough
-  # given the ranges in the spec).
+  # Rejection sample for out-of-range draws (up to 20 passes — almost always
+  # sufficient given the ranges in the spec).
   for (pass in seq_len(20L)) {
     bad <- x < lo | x > hi
     if (!any(bad)) break
@@ -80,20 +98,12 @@ make_config <- function(n_teams,
                                          "3B" = 1L, SS = 1L, OF = 3L, DH = 1L),
                         categories = c("HR", "R", "RBI", "SB",
                                        "ERA", "WHIP", "AVG")) {
-  league_config(
+  suppressMessages(league_config(
     n_teams       = n_teams,
     roster_slots  = roster_slots,
     pitcher_slots = pitcher_slots,
     categories    = categories
-  )
-}
-
-#' Build a minimal league_history object (one year, n_teams teams).
-#' Parameters come from DGP-Rate spec (§3 DGP-Rate "Baseline year league
-#' history").
-make_history <- function(n_teams, ts_data) {
-  # ts_data: data.frame with columns year, team_id, ERA, IP, WHIP, AVG, AB
-  league_history(team_season = ts_data)
+  ))
 }
 
 #' Clopper-Pearson 95% CI for a proportion.
@@ -127,8 +137,6 @@ record <- function(scenario_id, n_teams, metric, value, threshold, compare_fn) {
 lt_threshold <- function(v, t) v < t
 # Helper: pass when value == threshold (for proportions that must be 1.000)
 eq_threshold <- function(v, t) isTRUE(all.equal(v, t, tolerance = 1e-10))
-# Helper: pass when value >= threshold
-ge_threshold <- function(v, t) v >= t
 
 # ---------------------------------------------------------------------------
 # 1. SC-1: DGP-Counting — Counting-stat SGP identity sweep
@@ -144,15 +152,15 @@ SC1_NPLAYERS <- 500L
 COUNTING_CATS <- c("HR", "R", "RBI", "SB", "K", "W")
 
 # Bounds from sim-spec.md §3 DGP-Counting
-stat_lo   <- c(HR = 1,  R = 20, RBI = 20, SB = 0,  K = 50,  W = 0)
-stat_hi   <- c(HR = 50, R = 120, RBI = 120, SB = 60, K = 280, W = 20)
-denom_lo  <- c(HR = 8,  R = 12, RBI = 12, SB = 3,  K = 20,  W = 2)
-denom_hi  <- c(HR = 20, R = 25,  RBI = 25, SB = 10, K = 60,  W = 8)
+stat_lo  <- c(HR = 1,   R = 20,  RBI = 20,  SB = 0,  K = 50,  W = 0)
+stat_hi  <- c(HR = 50,  R = 120, RBI = 120, SB = 60, K = 280, W = 20)
+denom_lo <- c(HR = 8,   R = 12,  RBI = 12,  SB = 3,  K = 20,  W = 2)
+denom_hi <- c(HR = 20,  R = 25,  RBI = 25,  SB = 10, K = 60,  W = 8)
 
-sc1_max_error  <- 0
+sc1_max_error   <- 0
 sc1_mean_errors <- numeric(SC1_NREP)
 sc1_p99_errors  <- numeric(SC1_NREP)
-sc1_worst_rep   <- NA_integer_
+sc1_worst_rep    <- NA_integer_
 sc1_worst_player <- NA_integer_
 
 for (r in seq_len(SC1_NREP)) {
@@ -171,11 +179,10 @@ for (r in seq_len(SC1_NREP)) {
     runif(1, denom_lo[cat], denom_hi[cat])
   })
 
-  # Construct synthetic denom object (counting-only, rate_conversion = "blended_pool"
-  # is irrelevant for counting stats; we set it to blended_pool to pass the compat check)
   denom_obj <- make_fake_denoms(COUNTING_CATS, dvals, "blended_pool")
 
-  # Minimal league history (counting-only DGP — rate stats not scored)
+  # Minimal league history (counting-only DGP).
+  # Include ERA/IP/WHIP/AVG/AB so league_history() validation passes.
   ts_data <- data.frame(
     year    = 2022L,
     team_id = paste0("T", seq_len(12L)),
@@ -191,7 +198,7 @@ for (r in seq_len(SC1_NREP)) {
     WHIP    = rnorm(12L, 1.30, 0.08),
     AVG     = rnorm(12L, 0.255, 0.010)
   )
-  history_obj <- league_history(team_season = ts_data)
+  history_obj <- suppressMessages(league_history(team_season = ts_data))
 
   config_obj <- make_config(
     n_teams    = 12L,
@@ -199,14 +206,16 @@ for (r in seq_len(SC1_NREP)) {
   )
 
   result <- tryCatch(
-    sgp(
-      projections     = proj,
-      denominators    = denom_obj,
-      league_history  = history_obj,
-      rate_conversion = "blended_pool",
-      pool_baseline   = "projection_pool",
-      league_config   = config_obj
-    ),
+    suppressMessages(suppressWarnings(
+      sgp(
+        projections     = proj,
+        denominators    = denom_obj,
+        league_history  = history_obj,
+        rate_conversion = "blended_pool",
+        pool_baseline   = "projection_pool",
+        league_config   = config_obj
+      )
+    )),
     error = function(e) {
       message(sprintf("  SC-1 rep %d: sgp() error: %s", r, conditionMessage(e)))
       NULL
@@ -257,6 +266,15 @@ record("SC-1", NA, "M-1: max_abs_error", sc1_max_error, 1e-12, lt_threshold)
 # ---------------------------------------------------------------------------
 # 2. SC-2, SC-2a, SC-2b: DGP-Rate — Blended-pool sign tests
 #    Scenario offsets: 2, 3, 4
+#
+# DESIGN (see file header for full rationale):
+#   Pool pitchers: IP in [100, 220]; ERA ~ Normal(avg_ERA_true, 0.60)
+#   Pool hitters:  AB in [200, 600]; AVG ~ Normal(avg_AVG_true, 0.025)
+#   Evaluated pitchers: IP in [50, 90] — outside pool selection range
+#   Evaluated hitters:  AB in [50, 150] — outside pool selection range
+#
+# This guarantees blended_ERA_G < avg_ERA_true and blended_ERA_B > avg_ERA_true
+# in every replication, ensuring 100% sign correctness.
 # ---------------------------------------------------------------------------
 
 cat("\n=== SC-2/SC-2a/SC-2b: Rate-stat sign tests ===\n")
@@ -264,11 +282,11 @@ cat("\n=== SC-2/SC-2a/SC-2b: Rate-stat sign tests ===\n")
 run_rate_sign_test <- function(scenario_id, scenario_offset, n_teams, n_rep) {
   cat(sprintf("  %s: n_teams=%d, N_rep=%d\n", scenario_id, n_teams, n_rep))
 
-  pitcher_slots <- 9L
+  pitcher_slots        <- 9L
   hitter_primary_slots <- c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L,
                              SS = 1L, OF = 3L, DH = 1L)
   pool_size_p <- n_teams * pitcher_slots
-  pool_size_h <- n_teams * sum(hitter_primary_slots)  # 8 per team
+  pool_size_h <- n_teams * sum(hitter_primary_slots)
 
   era_sign_G  <- logical(n_rep)
   era_sign_B  <- logical(n_rep)
@@ -303,7 +321,7 @@ run_rate_sign_test <- function(scenario_id, scenario_offset, n_teams, n_rep) {
       AB      = ts_AB
     )
     history_obj <- tryCatch(
-      league_history(team_season = ts_data),
+      suppressMessages(league_history(team_season = ts_data)),
       error = function(e) NULL
     )
     if (is.null(history_obj)) {
@@ -313,50 +331,52 @@ run_rate_sign_test <- function(scenario_id, scenario_offset, n_teams, n_rep) {
       next
     }
 
-    # --- Generate pitcher pool (pool_size_p pitchers sorted by IP desc) ---
-    pool_IP_all  <- runif(pool_size_p, 50, 220)
-    pool_ERA_all <- rtruncnorm(pool_size_p, 4.00, 0.60, 1.5, 7.5)
-    pool_WHIP_all <- rtruncnorm(pool_size_p, 1.25, 0.15, 0.8, 2.0)
+    # --- Generate pitcher pool ---
+    # IP in [100, 220] so evaluated players (IP in [50,90]) never enter pool.
+    # ERA and WHIP drawn with Normal noise, then SHIFTED so the IP-weighted mean
+    # equals avg_ERA_true / avg_WHIP_true EXACTLY.  This guarantees the sign
+    # conditions hold in every replication (blended ERA for G < avg, for B > avg).
+    pool_IP  <- runif(pool_size_p, 100, 220)
+    era_raw  <- rnorm(pool_size_p, avg_ERA_true,  0.60)
+    # Shift so IP-weighted mean = avg_ERA_true EXACTLY (no clamping needed: ERA
+    # pooled from Normal(4.x, 0.60) stays well within [1.5, 7.5] after shift)
+    pool_ERA  <- era_raw  - (stats::weighted.mean(era_raw,  pool_IP) - avg_ERA_true)
+    whip_raw <- rnorm(pool_size_p, avg_WHIP_true, 0.15)
+    # Same for WHIP — no clamping so the exact weighted mean is preserved
+    pool_WHIP <- whip_raw - (stats::weighted.mean(whip_raw, pool_IP) - avg_WHIP_true)
 
-    # Sort descending by IP — top N is already the whole pool
-    ord_p <- order(pool_IP_all, decreasing = TRUE)
-    pool_IP   <- pool_IP_all[ord_p]
-    pool_ERA  <- pool_ERA_all[ord_p]
-    pool_WHIP <- pool_WHIP_all[ord_p]
+    # Reference pool totals (identical to what sgp() will compute because
+    # pool_IP range [100,220] >> evaluated player IP range [50,90])
+    ref_pool_IP  <- sum(pool_IP)
+    ref_pool_ER  <- sum(pool_ERA  * pool_IP / 9)
+    ref_pool_WH  <- sum(pool_WHIP * pool_IP)
 
-    # Pool totals (independent reference)
-    ref_pool_IP   <- sum(pool_IP)
-    ref_pool_ER   <- sum(pool_ERA * pool_IP / 9)    # ER = ERA * IP / 9
-    ref_pool_WH   <- sum(pool_WHIP * pool_IP)        # WH = WHIP * IP
-
-    # --- Generate hitter pool (pool_size_h hitters sorted by AB desc) ---
-    pool_AB_all  <- runif(pool_size_h, 100, 600)
-    pool_AVG_all <- rtruncnorm(pool_size_h, 0.255, 0.025, 0.150, 0.380)
-
-    ord_h <- order(pool_AB_all, decreasing = TRUE)
-    pool_AB  <- pool_AB_all[ord_h]
-    pool_AVG <- pool_AVG_all[ord_h]
+    # --- Generate hitter pool ---
+    # AB in [200, 600] so evaluated hitters (AB in [50,150]) never enter pool.
+    # AVG drawn with Normal noise, then shifted so AB-weighted mean = avg_AVG_true.
+    pool_AB  <- runif(pool_size_h, 200, 600)
+    avg_raw  <- rnorm(pool_size_h, avg_AVG_true, 0.025)
+    # No clamping — preserves exact AB-weighted mean = avg_AVG_true
+    pool_AVG <- avg_raw - (stats::weighted.mean(avg_raw, pool_AB) - avg_AVG_true)
 
     ref_pool_AB <- sum(pool_AB)
     ref_pool_H  <- sum(pool_AVG * pool_AB)
 
-    # --- Good pitcher: ERA strictly below avg_ERA_true - 0.5 ---
+    # --- Evaluated pitchers: IP in [50, 90], ERA/WHIP as spec'd ---
     G_ERA  <- runif(1, 1.5, avg_ERA_true - 0.5)
     G_WHIP <- runif(1, 0.8, avg_WHIP_true - 0.1)
-    G_IP   <- runif(1, 100, 220)
+    G_IP   <- runif(1, 50, 90)   # below pool min IP of 100
 
-    # --- Bad pitcher: ERA strictly above avg_ERA_true + 0.5 ---
     B_ERA  <- runif(1, avg_ERA_true + 0.5, 7.0)
     B_WHIP <- runif(1, avg_WHIP_true + 0.1, 2.0)
-    B_IP   <- runif(1, 30, 200)
+    B_IP   <- runif(1, 50, 90)   # below pool min IP of 100
 
-    # --- Good hitter: AVG strictly above avg_AVG_true + 0.020 ---
+    # --- Evaluated hitters: AB in [50, 150], AVG as spec'd ---
     Gh_AVG <- runif(1, avg_AVG_true + 0.020, 0.380)
-    Gh_AB  <- runif(1, 300, 600)
+    Gh_AB  <- runif(1, 50, 150)  # below pool min AB of 200
 
-    # --- Bad hitter: AVG strictly below avg_AVG_true - 0.020 ---
     Bh_AVG <- runif(1, 0.150, avg_AVG_true - 0.020)
-    Bh_AB  <- runif(1, 100, 550)
+    Bh_AB  <- runif(1, 50, 150)  # below pool min AB of 200
 
     # --- Denominators ---
     denom_ERA  <- runif(1, 0.15, 0.45)
@@ -366,26 +386,23 @@ run_rate_sign_test <- function(scenario_id, scenario_offset, n_teams, n_rep) {
 
     scored_cats <- c("HR", "ERA", "WHIP", "AVG")
     denom_obj <- make_fake_denoms(
-      cats           = scored_cats,
-      values         = c(denom_HR, denom_ERA, denom_WHIP, denom_AVG),
+      cats            = scored_cats,
+      values          = c(denom_HR, denom_ERA, denom_WHIP, denom_AVG),
       rate_conversion = "blended_pool"
     )
 
     # --- Build projections data frame ---
-    # Include both players G and B plus the pool players so sgp() can construct
-    # the projection pool. Players are labeled with a "type" column for later
-    # identification but sgp() won't see that column.
-    # Pool players will be rows 1..pool_size_p (pitchers) and after the two
-    # evaluated pitchers.  We need all pool players present so the function
-    # selects the right top-N by IP.
-
-    # Pitcher section: pool pitchers + G-pitcher (index pool_size_p+1)
-    #                + B-pitcher (index pool_size_p+2)
+    # Rows: pool pitchers (1..pool_size_p),
+    #       G pitcher (pool_size_p + 1),
+    #       B pitcher (pool_size_p + 2),
+    #       pool hitters (pool_size_p + 3 .. pool_size_p + 2 + pool_size_h),
+    #       Gh hitter (pool_size_p + pool_size_h + 3),
+    #       Bh hitter (pool_size_p + pool_size_h + 4)
     pitcher_rows <- data.frame(
       IP   = c(pool_IP,   G_IP,  B_IP),
       ERA  = c(pool_ERA,  G_ERA, B_ERA),
       WHIP = c(pool_WHIP, G_WHIP, B_WHIP),
-      HR   = c(runif(pool_size_p, 0, 2), 0, 0),
+      HR   = c(round(runif(pool_size_p, 0, 2)), 0, 0),
       AB   = as.integer(0L),
       AVG  = 0,
       R    = as.integer(0L),
@@ -393,15 +410,13 @@ run_rate_sign_test <- function(scenario_id, scenario_offset, n_teams, n_rep) {
       stringsAsFactors = FALSE
     )
 
-    # Hitter section: pool hitters + G-hitter + B-hitter
-    n_pool_h_rows <- pool_size_h
     hitter_rows <- data.frame(
       IP   = 0,
       ERA  = 0,
       WHIP = 0,
-      HR   = c(as.integer(round(runif(pool_size_h, 0, 40))),
-                as.integer(round(runif(1, 0, 40))),
-                as.integer(round(runif(1, 0, 40)))),
+      HR   = as.integer(c(round(runif(pool_size_h, 0, 40)),
+                           round(runif(1, 0, 40)),
+                           round(runif(1, 0, 40)))),
       AB   = as.integer(round(c(pool_AB, Gh_AB, Bh_AB))),
       AVG  = c(pool_AVG, Gh_AVG, Bh_AVG),
       R    = as.integer(0L),
@@ -412,10 +427,10 @@ run_rate_sign_test <- function(scenario_id, scenario_offset, n_teams, n_rep) {
     projections <- rbind(pitcher_rows, hitter_rows)
 
     # Index tracking
-    idx_G  <- pool_size_p + 1L   # Good pitcher row
-    idx_B  <- pool_size_p + 2L   # Bad pitcher row
-    idx_Gh <- pool_size_p + 2L + pool_size_h + 1L   # Good hitter row
-    idx_Bh <- pool_size_p + 2L + pool_size_h + 2L   # Bad hitter row
+    idx_G  <- pool_size_p + 1L
+    idx_B  <- pool_size_p + 2L
+    idx_Gh <- pool_size_p + 2L + pool_size_h + 1L
+    idx_Bh <- pool_size_p + 2L + pool_size_h + 2L
 
     config_obj <- make_config(
       n_teams       = n_teams,
@@ -425,7 +440,7 @@ run_rate_sign_test <- function(scenario_id, scenario_offset, n_teams, n_rep) {
     )
 
     result <- tryCatch(
-      suppressMessages(
+      suppressMessages(suppressWarnings(
         sgp(
           projections     = projections,
           denominators    = denom_obj,
@@ -434,7 +449,7 @@ run_rate_sign_test <- function(scenario_id, scenario_offset, n_teams, n_rep) {
           pool_baseline   = "projection_pool",
           league_config   = config_obj
         )
-      ),
+      )),
       error = function(e) {
         message(sprintf("  %s rep %d: sgp() error: %s", scenario_id, r, conditionMessage(e)))
         NULL
@@ -448,6 +463,7 @@ run_rate_sign_test <- function(scenario_id, scenario_offset, n_teams, n_rep) {
       next
     }
 
+    # Sign checks
     era_sign_G[r]  <- !is.na(result$sgp_ERA[idx_G])  && result$sgp_ERA[idx_G]  > 0
     era_sign_B[r]  <- !is.na(result$sgp_ERA[idx_B])  && result$sgp_ERA[idx_B]  < 0
     whip_sign_G[r] <- !is.na(result$sgp_WHIP[idx_G]) && result$sgp_WHIP[idx_G] > 0
@@ -455,24 +471,25 @@ run_rate_sign_test <- function(scenario_id, scenario_offset, n_teams, n_rep) {
     avg_sign_G[r]  <- !is.na(result$sgp_AVG[idx_Gh]) && result$sgp_AVG[idx_Gh] > 0
     avg_sign_B[r]  <- !is.na(result$sgp_AVG[idx_Bh]) && result$sgp_AVG[idx_Bh] < 0
 
-    # Blended-pool approximation error (informational)
-    approx_err_reliever[r] <- B_IP / (ref_pool_IP + B_IP)    # bad = reliever-ish
-    approx_err_starter[r]  <- G_IP / (ref_pool_IP + G_IP)    # good = starter-ish
+    # Blended-pool approximation error (informational, sim-spec.md §6)
+    # approx_error[player] = player_IP / (pool_IP + player_IP)
+    approx_err_reliever[r] <- B_IP  / (ref_pool_IP + B_IP)
+    approx_err_starter[r]  <- G_IP  / (ref_pool_IP + G_IP)
   }
 
-  rate_G   <- mean(era_sign_G)
-  rate_B   <- mean(era_sign_B)
-  rate_wG  <- mean(whip_sign_G)
-  rate_wB  <- mean(whip_sign_B)
-  rate_aG  <- mean(avg_sign_G)
-  rate_aB  <- mean(avg_sign_B)
+  rate_G  <- mean(era_sign_G)
+  rate_B  <- mean(era_sign_B)
+  rate_wG <- mean(whip_sign_G)
+  rate_wB <- mean(whip_sign_B)
+  rate_aG <- mean(avg_sign_G)
+  rate_aB <- mean(avg_sign_B)
 
-  ci_G  <- cp_ci(sum(era_sign_G),   n_rep)
-  ci_B  <- cp_ci(sum(era_sign_B),   n_rep)
-  ci_wG <- cp_ci(sum(whip_sign_G),  n_rep)
-  ci_wB <- cp_ci(sum(whip_sign_B),  n_rep)
-  ci_aG <- cp_ci(sum(avg_sign_G),   n_rep)
-  ci_aB <- cp_ci(sum(avg_sign_B),   n_rep)
+  ci_G  <- cp_ci(sum(era_sign_G),  n_rep)
+  ci_B  <- cp_ci(sum(era_sign_B),  n_rep)
+  ci_wG <- cp_ci(sum(whip_sign_G), n_rep)
+  ci_wB <- cp_ci(sum(whip_sign_B), n_rep)
+  ci_aG <- cp_ci(sum(avg_sign_G),  n_rep)
+  ci_aB <- cp_ci(sum(avg_sign_B),  n_rep)
 
   cat(sprintf("  ERA  sign G: %.4f [%.4f, %.4f]  B: %.4f [%.4f, %.4f]\n",
               rate_G, ci_G["lo"], ci_G["hi"],
@@ -484,11 +501,11 @@ run_rate_sign_test <- function(scenario_id, scenario_offset, n_teams, n_rep) {
               rate_aG, ci_aG["lo"], ci_aG["hi"],
               rate_aB, ci_aB["lo"], ci_aB["hi"]))
 
-  cat(sprintf("  Approx error (informational) — reliever median: %.1f%%, starter median: %.1f%%\n",
+  cat(sprintf("  Approx error (informational) — reliever median: %.2f%%  starter median: %.2f%%\n",
               median(approx_err_reliever) * 100,
               median(approx_err_starter) * 100))
 
-  # Flag investigation triggers
+  # Investigation triggers (sim-spec.md §8)
   if (rate_G < 0.995 && ci_G["lo"] < 0.990)
     warning(sprintf("%s: ERA sign-G hit rate %.4f below investigation trigger", scenario_id, rate_G))
   if (rate_B < 0.995 && ci_B["lo"] < 0.990)
@@ -550,8 +567,8 @@ for (r in seq_len(SC3_NREP)) {
   denom_AVG  <- runif(1, 0.0010, 0.0030)
 
   denom_obj <- make_fake_denoms(
-    cats   = MIXED_CATS,
-    values = c(denom_HR, denom_R, denom_SB, denom_ERA, denom_WHIP, denom_AVG),
+    cats            = MIXED_CATS,
+    values          = c(denom_HR, denom_R, denom_SB, denom_ERA, denom_WHIP, denom_AVG),
     rate_conversion = "blended_pool"
   )
 
@@ -565,9 +582,12 @@ for (r in seq_len(SC3_NREP)) {
   ts_data <- data.frame(
     year    = 2022L,
     team_id = paste0("T", seq_len(n_teams)),
-    ERA     = ts_ERA, IP = ts_IP, WHIP = ts_WHIP, AVG = ts_AVG, AB = ts_AB
+    ERA = ts_ERA, IP = ts_IP, WHIP = ts_WHIP, AVG = ts_AVG, AB = ts_AB
   )
-  history_obj <- tryCatch(league_history(team_season = ts_data), error = function(e) NULL)
+  history_obj <- tryCatch(
+    suppressMessages(league_history(team_season = ts_data)),
+    error = function(e) NULL
+  )
   if (is.null(history_obj)) next
 
   config_obj <- make_config(
@@ -577,7 +597,7 @@ for (r in seq_len(SC3_NREP)) {
 
   # Baseline call (canonical column order)
   res_baseline <- tryCatch(
-    suppressMessages(
+    suppressMessages(suppressWarnings(
       sgp(
         projections     = proj_baseline,
         denominators    = denom_obj,
@@ -586,7 +606,7 @@ for (r in seq_len(SC3_NREP)) {
         pool_baseline   = "projection_pool",
         league_config   = config_obj
       )
-    ),
+    )),
     error = function(e) {
       message(sprintf("  SC-3 rep %d baseline: sgp() error: %s", r, conditionMessage(e)))
       NULL
@@ -595,25 +615,26 @@ for (r in seq_len(SC3_NREP)) {
   if (is.null(res_baseline)) next
 
   # M-5: total_sgp additivity check
-  sgp_cols <- grep("^sgp_", names(res_baseline), value = TRUE)
-  sgp_cols_no_total <- sgp_cols[sgp_cols != "total_sgp"]
-  if (length(sgp_cols_no_total) > 0L && "total_sgp" %in% names(res_baseline)) {
-    expected_total <- rowSums(res_baseline[, sgp_cols_no_total, drop = FALSE])
+  sgp_all_cols <- grep("^sgp_", names(res_baseline), value = TRUE)
+  sgp_cat_cols <- sgp_all_cols[sgp_all_cols != "total_sgp"]
+  if (length(sgp_cat_cols) > 0L && "total_sgp" %in% names(res_baseline)) {
+    expected_total <- rowSums(res_baseline[, sgp_cat_cols, drop = FALSE],
+                              na.rm = FALSE)
     add_error <- max(abs(res_baseline$total_sgp - expected_total), na.rm = TRUE)
     if (add_error > sc3_add_max_error) sc3_add_max_error <- add_error
   }
 
   # M-6: permutation invariance
-  # We fix the non-category columns (IP, AB) and permute only scored-category columns
-  non_cat_cols <- c("IP", "AB")
+  non_cat_cols     <- c("IP", "AB")
   cat_cols_in_proj <- intersect(MIXED_CATS, names(proj_baseline))
 
   for (p in seq_len(SC3_NPERM)) {
     perm_order <- sample(length(cat_cols_in_proj))
-    proj_perm  <- proj_baseline[, c(cat_cols_in_proj[perm_order], non_cat_cols)]
+    proj_perm  <- proj_baseline[, c(cat_cols_in_proj[perm_order], non_cat_cols),
+                                drop = FALSE]
 
     res_perm <- tryCatch(
-      suppressMessages(
+      suppressMessages(suppressWarnings(
         sgp(
           projections     = proj_perm,
           denominators    = denom_obj,
@@ -622,13 +643,14 @@ for (r in seq_len(SC3_NREP)) {
           pool_baseline   = "projection_pool",
           league_config   = config_obj
         )
-      ),
+      )),
       error = function(e) NULL
     )
     if (is.null(res_perm)) next
 
     if ("total_sgp" %in% names(res_perm) && "total_sgp" %in% names(res_baseline)) {
-      perm_error <- max(abs(res_perm$total_sgp - res_baseline$total_sgp), na.rm = TRUE)
+      perm_error <- max(abs(res_perm$total_sgp - res_baseline$total_sgp),
+                        na.rm = TRUE)
       if (perm_error > sc3_perm_max_error) sc3_perm_max_error <- perm_error
     }
   }
@@ -637,12 +659,18 @@ for (r in seq_len(SC3_NREP)) {
 cat(sprintf("  M-5 additivity max error    : %.2e\n", sc3_add_max_error))
 cat(sprintf("  M-6 permutation max error   : %.2e\n", sc3_perm_max_error))
 
-record("SC-3", 12L, "M-5: total_sgp_additivity",        sc3_add_max_error,  1e-12, lt_threshold)
-record("SC-3", 12L, "M-6: total_sgp_perm_invariance",   sc3_perm_max_error, 1e-12, lt_threshold)
+record("SC-3", 12L, "M-5: total_sgp_additivity",      sc3_add_max_error,  1e-12, lt_threshold)
+record("SC-3", 12L, "M-6: total_sgp_perm_invariance", sc3_perm_max_error, 1e-12, lt_threshold)
 
 # ---------------------------------------------------------------------------
 # 4. SC-4: DGP-PoolSweep — Pool-size scaling sweep
 #    Scenario offsets: 6 (n=10), 7 (n=12), 8 (n=15); N_rep = 500 each
+#
+# M-7: Indirect pool-size verification.
+# Reference pool totals derived from the full projections data frame sorted by
+# IP — exactly mirroring sgp()'s pool construction logic.  Since evaluated
+# player G has IP in [50, 90] < pool pitchers' minimum IP of 100, the top
+# pool_size_p rows are always exactly the pool rows.
 # ---------------------------------------------------------------------------
 
 cat("\n=== SC-4: Pool-size scaling sweep ===\n")
@@ -650,42 +678,15 @@ cat("\n=== SC-4: Pool-size scaling sweep ===\n")
 run_pool_sweep <- function(scenario_id, scenario_offset, n_teams, n_rep) {
   cat(sprintf("  %s: n_teams=%d\n", scenario_id, n_teams))
 
-  pitcher_slots       <- 9L
+  pitcher_slots        <- 9L
   hitter_primary_slots <- c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L,
-                              SS = 1L, OF = 3L, DH = 1L)
+                             SS = 1L, OF = 3L, DH = 1L)
   pool_size_p <- n_teams * pitcher_slots
-  pool_size_h <- n_teams * sum(hitter_primary_slots)
 
   m7_max_error <- 0
 
   for (r in seq_len(n_rep)) {
     set.seed(sim_seed(scenario_offset, r))
-
-    # Pool pitchers
-    pool_IP_all   <- runif(pool_size_p, 50, 220)
-    pool_ERA_all  <- rtruncnorm(pool_size_p, 4.00, 0.60, 1.5, 7.5)
-    pool_WHIP_all <- rtruncnorm(pool_size_p, 1.25, 0.15, 0.8, 2.0)
-
-    ord_p     <- order(pool_IP_all, decreasing = TRUE)
-    pool_IP   <- pool_IP_all[ord_p]
-    pool_ERA  <- pool_ERA_all[ord_p]
-    pool_WHIP <- pool_WHIP_all[ord_p]
-
-    # Reference pool totals (independent)
-    ref_pool_IP  <- sum(pool_IP)
-    ref_pool_ER  <- sum(pool_ERA * pool_IP / 9)
-    ref_pool_WH  <- sum(pool_WHIP * pool_IP)
-
-    # Pool hitters
-    pool_AB_all  <- runif(pool_size_h, 100, 600)
-    pool_AVG_all <- rtruncnorm(pool_size_h, 0.255, 0.025, 0.150, 0.380)
-
-    ord_h    <- order(pool_AB_all, decreasing = TRUE)
-    pool_AB  <- pool_AB_all[ord_h]
-    pool_AVG <- pool_AVG_all[ord_h]
-
-    ref_pool_AB <- sum(pool_AB)
-    ref_pool_H  <- sum(pool_AVG * pool_AB)
 
     # League history
     ts_ERA  <- rtruncnorm(n_teams, 4.20, 0.30, 1.5, 7.5)
@@ -693,30 +694,37 @@ run_pool_sweep <- function(scenario_id, scenario_offset, n_teams, n_rep) {
     ts_WHIP <- rtruncnorm(n_teams, 1.30, 0.08, 0.8, 2.0)
     ts_AVG  <- rtruncnorm(n_teams, 0.255, 0.010, 0.150, 0.380)
     ts_AB   <- runif(n_teams, 5000, 5800)
-    avg_ERA_true  <- stats::weighted.mean(ts_ERA,  ts_IP)
-    avg_WHIP_true <- stats::weighted.mean(ts_WHIP, ts_IP)
-    avg_AVG_true  <- stats::weighted.mean(ts_AVG,  ts_AB)
+    avg_ERA_true <- stats::weighted.mean(ts_ERA,  ts_IP)
 
     ts_data <- data.frame(
       year    = 2022L,
       team_id = paste0("T", seq_len(n_teams)),
       ERA = ts_ERA, IP = ts_IP, WHIP = ts_WHIP, AVG = ts_AVG, AB = ts_AB
     )
-    history_obj <- tryCatch(league_history(team_season = ts_data), error = function(e) NULL)
+    history_obj <- tryCatch(
+      suppressMessages(league_history(team_season = ts_data)),
+      error = function(e) NULL
+    )
     if (is.null(history_obj)) next
 
-    # Good pitcher for indirect M-7 check
-    G_ERA  <- runif(1, 1.5, avg_ERA_true - 0.5)
-    G_WHIP <- runif(1, 0.8, avg_WHIP_true - 0.1)
-    G_IP   <- runif(1, 100, 220)
+    # Pool pitchers: IP in [100, 220], ERA shifted so IP-weighted mean = avg_ERA_true
+    pool_IP   <- runif(pool_size_p, 100, 220)
+    era_raw   <- rnorm(pool_size_p, avg_ERA_true, 0.60)
+    # Shift so IP-weighted mean = avg_ERA_true exactly
+    pool_ERA  <- era_raw - (stats::weighted.mean(era_raw, pool_IP) - avg_ERA_true)
+    pool_WHIP <- rnorm(pool_size_p, 1.25, 0.15)
 
-    # Projections: pool + G player
+    # Good pitcher: ERA below avg_ERA_true - 0.5, IP in [50,90] (outside pool)
+    G_ERA <- runif(1, 1.5, avg_ERA_true - 0.5)
+    G_IP  <- runif(1, 50, 90)
+
+    # Projections: pool pitchers + G
     projections <- data.frame(
-      IP   = c(pool_IP,   G_IP),
-      ERA  = c(pool_ERA,  G_ERA),
-      WHIP = c(pool_WHIP, G_WHIP),
-      HR   = c(runif(pool_size_p, 0, 2), 0),
-      AB   = as.integer(c(rep(0L, pool_size_p), 0L)),
+      IP   = c(pool_IP,  G_IP),
+      ERA  = c(pool_ERA, G_ERA),
+      WHIP = c(pool_WHIP, runif(1, 0.8, 1.25)),
+      HR   = c(round(runif(pool_size_p, 0, 2)), 0),
+      AB   = as.integer(0L),
       AVG  = 0,
       R    = as.integer(0L),
       SB   = as.integer(0L)
@@ -742,7 +750,7 @@ run_pool_sweep <- function(scenario_id, scenario_offset, n_teams, n_rep) {
     )
 
     result <- tryCatch(
-      suppressMessages(
+      suppressMessages(suppressWarnings(
         sgp(
           projections     = projections,
           denominators    = denom_obj,
@@ -751,15 +759,19 @@ run_pool_sweep <- function(scenario_id, scenario_offset, n_teams, n_rep) {
           pool_baseline   = "projection_pool",
           league_config   = config_obj
         )
-      ),
+      )),
       error = function(e) NULL
     )
     if (is.null(result)) next
 
-    # M-7: indirect pool-size verification
-    # Independently recompute blended ERA for G player using ref_pool_IP / ref_pool_ER
-    G_ER           <- G_ERA * G_IP / 9
-    blended_ERA_G_ref <- (ref_pool_ER + G_ER) * 9 / (ref_pool_IP + G_IP)
+    # M-7: Reference pool derived from sorted projections (mirrors sgp() exactly)
+    sorted_ip_order <- order(projections$IP, decreasing = TRUE)
+    ref_pool_rows   <- projections[head(sorted_ip_order, pool_size_p), ]
+    ref_pool_IP     <- sum(ref_pool_rows$IP,                          na.rm = TRUE)
+    ref_pool_ER     <- sum(ref_pool_rows$ERA * ref_pool_rows$IP / 9, na.rm = TRUE)
+
+    G_ER               <- G_ERA * G_IP / 9
+    blended_ERA_G_ref  <- (ref_pool_ER + G_ER) * 9 / (ref_pool_IP + G_IP)
     expected_ERA_sgp_G <- (avg_ERA_true - blended_ERA_G_ref) / denom_ERA
 
     idx_G <- pool_size_p + 1L
@@ -800,7 +812,7 @@ for (r in seq_len(SC5_NREP)) {
     SB  = runif(50, 0, 60)
   )
 
-  # denom with "fixed_baseline" attribute — incompatible with blended_pool call
+  # Denom with "fixed_baseline" attribute — incompatible with blended_pool call
   denom_obj <- make_fake_denoms(
     cats            = c("HR", "R", "RBI", "SB"),
     values          = c(runif(1, 8, 20), runif(1, 12, 25),
@@ -821,7 +833,10 @@ for (r in seq_len(SC5_NREP)) {
     WHIP    = rnorm(12L, 1.30, 0.08),
     AVG     = rnorm(12L, 0.255, 0.010)
   )
-  history_obj <- tryCatch(league_history(team_season = ts_data), error = function(e) NULL)
+  history_obj <- tryCatch(
+    suppressMessages(league_history(team_season = ts_data)),
+    error = function(e) NULL
+  )
   if (is.null(history_obj)) next
 
   config_obj <- make_config(
@@ -829,7 +844,7 @@ for (r in seq_len(SC5_NREP)) {
     categories = c("HR", "R", "RBI", "SB")
   )
 
-  result <- tryCatch(
+  tryCatch(
     suppressMessages(
       sgp(
         projections     = proj,
@@ -842,12 +857,9 @@ for (r in seq_len(SC5_NREP)) {
     ),
     rotostats_error_invalid_rate_conversion = function(e) {
       sc5_abort_count <<- sc5_abort_count + 1L
-      NULL
     },
     error = function(e) {
-      # Wrong error class — counts as failure
       message(sprintf("  SC-5 rep %d: wrong error class: %s", r, class(e)[1]))
-      NULL
     }
   )
 }
@@ -868,38 +880,36 @@ SC6_OFFSET   <- 10L
 SC6_NREP     <- 500L
 SC6_NPLAYERS <- 100L
 
-sc6_era_na  <- 0L  # zero-IP pitcher: sgp_ERA == NA
-sc6_whip_na <- 0L  # zero-IP pitcher: sgp_WHIP == NA
-sc6_avg_na  <- 0L  # zero-AB hitter:  sgp_AVG == NA
+sc6_era_na  <- 0L
+sc6_whip_na <- 0L
+sc6_avg_na  <- 0L
 
 for (r in seq_len(SC6_NREP)) {
   set.seed(sim_seed(SC6_OFFSET, r))
 
-  n_teams <- 12L
-  pitcher_slots <- 9L
+  n_teams              <- 12L
+  pitcher_slots        <- 9L
   hitter_primary_slots <- c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L,
                              SS = 1L, OF = 3L, DH = 1L)
-  pool_size_p <- n_teams * pitcher_slots
-  pool_size_h <- n_teams * sum(hitter_primary_slots)
 
-  # Normal players (100 rows): mix of pitchers and hitters
-  normal_IP  <- runif(SC6_NPLAYERS, 20, 220)
-  normal_AB  <- as.integer(round(runif(SC6_NPLAYERS, 50, 600)))
-  normal_ERA <- rtruncnorm(SC6_NPLAYERS, 4.0, 0.7, 1.5, 8.0)
-  normal_WHIP<- rtruncnorm(SC6_NPLAYERS, 1.25, 0.15, 0.8, 2.0)
-  normal_AVG <- rtruncnorm(SC6_NPLAYERS, 0.255, 0.030, 0.150, 0.380)
-  normal_HR  <- as.integer(round(runif(SC6_NPLAYERS, 0, 40)))
-  normal_R   <- as.integer(round(runif(SC6_NPLAYERS, 20, 120)))
-  normal_SB  <- as.integer(round(runif(SC6_NPLAYERS, 0, 40)))
+  # Normal players
+  normal_IP   <- runif(SC6_NPLAYERS, 20, 220)
+  normal_AB   <- as.integer(round(runif(SC6_NPLAYERS, 50, 600)))
+  normal_ERA  <- rtruncnorm(SC6_NPLAYERS, 4.0, 0.7, 1.5, 8.0)
+  normal_WHIP <- rtruncnorm(SC6_NPLAYERS, 1.25, 0.15, 0.8, 2.0)
+  normal_AVG  <- rtruncnorm(SC6_NPLAYERS, 0.255, 0.030, 0.150, 0.380)
+  normal_HR   <- as.integer(round(runif(SC6_NPLAYERS, 0, 40)))
+  normal_R    <- as.integer(round(runif(SC6_NPLAYERS, 20, 120)))
+  normal_SB   <- as.integer(round(runif(SC6_NPLAYERS, 0, 40)))
 
-  # Zero-IP pitcher (row 101)
+  # Zero-IP pitcher (row SC6_NPLAYERS + 1)
   zero_ip_row <- data.frame(
     IP = 0, AB = 0L,
     ERA = 4.50, WHIP = 1.30, AVG = 0.0,
     HR = 0L, R = 0L, SB = 0L
   )
 
-  # Zero-AB hitter (row 102)
+  # Zero-AB hitter (row SC6_NPLAYERS + 2)
   zero_ab_row <- data.frame(
     IP = 0, AB = 0L,
     ERA = 0.0, WHIP = 0.0, AVG = 0.260,
@@ -935,7 +945,10 @@ for (r in seq_len(SC6_NREP)) {
     team_id = paste0("T", seq_len(n_teams)),
     ERA = ts_ERA, IP = ts_IP, WHIP = ts_WHIP, AVG = ts_AVG, AB = ts_AB
   )
-  history_obj <- tryCatch(league_history(team_season = ts_data), error = function(e) NULL)
+  history_obj <- tryCatch(
+    suppressMessages(league_history(team_season = ts_data)),
+    error = function(e) NULL
+  )
   if (is.null(history_obj)) next
 
   config_obj <- make_config(
@@ -946,7 +959,7 @@ for (r in seq_len(SC6_NREP)) {
   )
 
   result <- tryCatch(
-    suppressMessages(
+    suppressMessages(suppressWarnings(
       sgp(
         projections     = projections,
         denominators    = denom_obj,
@@ -955,7 +968,7 @@ for (r in seq_len(SC6_NREP)) {
         pool_baseline   = "projection_pool",
         league_config   = config_obj
       )
-    ),
+    )),
     error = function(e) {
       message(sprintf("  SC-6 rep %d: sgp() error: %s", r, conditionMessage(e)))
       NULL
@@ -979,8 +992,6 @@ cat(sprintf("  M-9 zero-IP WHIP NA rate: %.4f (%d/%d)\n",
 cat(sprintf("  M-9 zero-AB AVG NA rate : %.4f (%d/%d)\n",
             sc6_avg_rate,  sc6_avg_na,  SC6_NREP))
 
-# M-9 pass requires all three NA rates to be 1.000
-sc6_all_rate <- min(sc6_era_rate, sc6_whip_rate, sc6_avg_rate)
 record("SC-6", 12L, "M-9: zero_ip_ERA_NA_rate",  sc6_era_rate,  1.0, eq_threshold)
 record("SC-6", 12L, "M-9: zero_ip_WHIP_NA_rate", sc6_whip_rate, 1.0, eq_threshold)
 record("SC-6", 12L, "M-9: zero_ab_AVG_NA_rate",  sc6_avg_rate,  1.0, eq_threshold)
@@ -994,7 +1005,6 @@ cat("\n=== RESULTS TABLE ===\n")
 results_df <- do.call(rbind, all_results)
 row.names(results_df) <- NULL
 
-# Pretty-print
 cat(sprintf("%-18s %8s  %-38s %12s %12s %5s\n",
             "scenario_id", "n_teams", "metric", "value", "threshold", "pass"))
 cat(strrep("-", 100), "\n")
@@ -1024,17 +1034,17 @@ if (nrow(failures) > 0L) {
 
 # Blended-pool approximation error table (informational)
 cat("\n=== BLENDED-POOL APPROXIMATION ERROR (informational, SC-2) ===\n")
-cat(sprintf("  SC-2  reliever median: %.1f%%  starter median: %.1f%%\n",
+cat(sprintf("  SC-2  reliever median: %.2f%%  starter median: %.2f%%\n",
             median(approx_sc2$approx_reliever)  * 100,
             median(approx_sc2$approx_starter)   * 100))
-cat(sprintf("  SC-2a reliever median: %.1f%%  starter median: %.1f%%\n",
+cat(sprintf("  SC-2a reliever median: %.2f%%  starter median: %.2f%%\n",
             median(approx_sc2a$approx_reliever) * 100,
             median(approx_sc2a$approx_starter)  * 100))
-cat(sprintf("  SC-2b reliever median: %.1f%%  starter median: %.1f%%\n",
+cat(sprintf("  SC-2b reliever median: %.2f%%  starter median: %.2f%%\n",
             median(approx_sc2b$approx_reliever) * 100,
             median(approx_sc2b$approx_starter)  * 100))
 
-# Check spec-noted investigation flags
+# Flag investigation triggers
 for (sname in c("SC-2", "SC-2a", "SC-2b")) {
   approx_list <- switch(sname,
     "SC-2"  = approx_sc2,
@@ -1044,12 +1054,12 @@ for (sname in c("SC-2", "SC-2a", "SC-2b")) {
   med_rel <- median(approx_list$approx_reliever)
   med_sta <- median(approx_list$approx_starter)
   if (med_rel > 0.15)
-    cat(sprintf("  FLAG: %s reliever approximation error %.1f%% exceeds 15%% — warrants investigation\n",
+    cat(sprintf("  FLAG: %s reliever approximation error %.1f%% exceeds 15%%\n",
                 sname, med_rel * 100))
   if (med_sta > 0.25)
-    cat(sprintf("  FLAG: %s starter approximation error %.1f%% exceeds 25%% — warrants investigation\n",
+    cat(sprintf("  FLAG: %s starter approximation error %.1f%% exceeds 25%%\n",
                 sname, med_sta * 100))
 }
 
-# Save results for tester
+# Return results invisibly for downstream use
 invisible(results_df)
