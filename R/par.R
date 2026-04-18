@@ -297,7 +297,7 @@ par <- function(
   # ---------------------------------------------------------------------------
   # Step 8 — Map each player to their replacement position row
   # ---------------------------------------------------------------------------
-  player_positions <- position_assignments[projections$player_id]
+  player_positions <- position_assignments[projections$PLAYER_ID]
 
   # ---------------------------------------------------------------------------
   # Step 9 — Subtract replacement SGP per player (vectorized, no row loop)
@@ -318,7 +318,7 @@ par <- function(
   # ---------------------------------------------------------------------------
   par_df        <- as.data.frame(par_cols, row.names = seq_len(nrow(projections)))
   par_col_names <- paste0("par_", scored_cats)
-  par_df$total_par <- rowSums(par_df[, par_col_names, drop = FALSE], na.rm = FALSE)
+  par_df$total_par <- rowSums(par_df[, par_col_names, drop = FALSE], na.rm = TRUE)
 
   # ---------------------------------------------------------------------------
   # Step 11 — Band calibration check
@@ -326,7 +326,7 @@ par <- function(
   n_teams      <- replacement$params$n_teams
   roster_slots <- replacement$params$roster_slots
 
-  band_total_par_list <- vapply(
+  band_total_par_list <- lapply(
     names(roster_slots[roster_slots > 0L]),
     function(pos) {
       pos_players <- which(player_positions == pos)
@@ -341,9 +341,7 @@ par <- function(
       ord      <- order(tp_pos, decreasing = TRUE)
       band_idx <- ord[seq(band_lo, band_hi)]
       tp_pos[band_idx]
-    },
-    numeric(0L),
-    USE.NAMES = FALSE
+    }
   )
   band_total_par <- unlist(band_total_par_list)
 
