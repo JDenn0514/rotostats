@@ -3,6 +3,10 @@
 # Generates a synthetic projection data frame stress-testing the multi-position
 # reassignment loop. 60% of non-C, non-OF hitters are multi-eligible.
 #
+# Post-tightening (sim-spec.md §2.2 R6): 3 deterministic near-boundary
+# multi-eligible players are appended after the random assignment loop.
+# Row counts: 258 hitters, 85 SP, 50 RP → 393 total rows.
+#
 # Based on sim-spec.md §2.2.
 #
 # Usage:
@@ -26,6 +30,11 @@
   c("2B", "3B")   # 25%
 )
 .DGPC_PROBS <- c(0.40, 0.35, 0.25)
+
+# Module-level seed for the deterministic 3-cycle cluster (sim-spec.md §2.2 R6).
+# Differs from per-replication seeds; does NOT interact with set.seed(seed) in
+# the dgp_c() function body.
+.CYCLE_SEED <- 20260418L
 
 #' Generate one DGP-C projection data frame.
 #'
@@ -116,6 +125,50 @@ dgp_c <- function(seed) {
         paste(player_pos, sec_pos[1L], sep = "|")
     }
   }
+
+  # ---- Cycle-inducing cluster (appended after multi-elig assignment) ---- #
+  # Three deterministic near-boundary multi-eligible players designed so that
+  # greedy highest_par reassignment reliably cycles through a 3-cycle.
+  # Appended AFTER the random multi-elig loop so the random draw is not
+  # perturbed by these players (sim-spec.md §2.4 safer approach).
+  #
+  # Player IDs 9901-9903 (high integers; no collision with pool counter ~390).
+  # All three set to league = "AL" (consistent with alternating AL/NL pattern).
+  # Pitcher columns set to NA; role set to NA_character_.
+  #
+  # Structural design:
+  #   cycle_1 (ID 9901): 2B|SS — near 2B boundary; slightly stronger at 2B
+  #   cycle_2 (ID 9902): SS|3B — near SS/3B boundary; preference flips with pool
+  #   cycle_3 (ID 9903): 2B|3B — near 2B/3B boundary; completes the 3-cycle
+  #
+  # Stats calibrated at boundary quality (HR~15, AB=450, AVG~0.264).
+  # Verified in smoke run: converges under cycle_history_window=5 but not
+  # under cycle_history_window=1.
+  cycle_rows <- data.frame(
+    player_id       = c(9901L, 9902L, 9903L),
+    player_name     = c("CYCLE_1", "CYCLE_2", "CYCLE_3"),
+    position        = c("2B", "SS", "2B"),
+    pos_eligibility = c("2B|SS", "SS|3B", "2B|3B"),
+    league          = c("AL", "AL", "AL"),
+    role            = c(NA_character_, NA_character_, NA_character_),
+    HR              = c(15L, 14L, 15L),
+    R               = c(70L, 68L, 71L),
+    RBI             = c(62L, 60L, 63L),
+    SB              = c(12L, 16L, 11L),
+    H               = c(119L, 119L, 119L),   # AVG = 119/450 ≈ 0.2644
+    AB              = c(450L, 450L, 450L),
+    AVG             = c(119/450, 119/450, 119/450),
+    IP              = NA_real_,
+    ERA             = NA_real_,
+    WHIP            = NA_real_,
+    W               = NA_real_,
+    K               = NA_real_,
+    SV              = NA_real_,
+    stringsAsFactors = FALSE
+  )
+  # cycle_rows already has all hitter columns including league = "AL".
+  # It is appended to hitters in the merge section below, after hitters
+  # receives its pitcher placeholder columns and league assignment.
 
   # ---- Pitchers (same structure as DGP-A) -------------------------------- #
   # Pool sizing: 12-team × 6 SP = 72 rostered; use 85 for headroom.
@@ -211,6 +264,13 @@ dgp_c <- function(seed) {
   hitters$league <- rep_len(c("AL", "NL"), nrow(hitters))
   sp_df$league   <- rep_len(c("AL", "NL"), nrow(sp_df))
   rp_df$league   <- rep_len(c("AL", "NL"), nrow(rp_df))
+
+  # Append the deterministic 3-cycle cluster (cycle_rows already has all
+  # hitter columns: player_id, player_name, position, pos_eligibility,
+  # league, role, HR, R, RBI, SB, H, AB, AVG, IP, ERA, WHIP, W, K, SV).
+  # cycle_rows$league is already "AL" for all three players.
+  # Hitter total after append: 255 + 3 = 258.
+  hitters <- rbind(hitters, cycle_rows)
 
   all_cols <- c(
     "player_id", "player_name", "position", "pos_eligibility", "league", "role",
