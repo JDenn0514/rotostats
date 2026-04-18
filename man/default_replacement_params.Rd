@@ -5,7 +5,7 @@
 \alias{default_replacement_params}
 \title{Default parameters for replacement_level()}
 \format{
-A named list with nine elements: \code{band_width_K} (integer, default
+A named list with ten elements: \code{band_width_K} (integer, default
 3L, band half-width K), \code{cliff_threshold} (numeric, default 1.5, MAD
 threshold multiplier), \code{cliff_min_n} (integer, default 4L, minimum lower
 band players for cliff detection), \code{sp_ip_threshold} (numeric, default
@@ -14,7 +14,9 @@ numeric, default c(SP=0.60, RP=0.40)), \code{ip_ab_divergence_tol} (numeric,
 default 0.15, fractional IP/AB divergence tolerance),
 \code{calibration_min_n} (integer, default 15L, minimum dollar-one pool
 size), \code{convergence_eps} (numeric, default 0.01, SGP convergence
-tolerance), \code{convergence_max_iter} (integer, default 25L, max passes).
+tolerance), \code{convergence_max_iter} (integer, default 25L, max passes),
+\code{cycle_history_window} (integer, default 5L, rolling assignment-hash
+history window depth for higher-order cycle detection).
 }
 \usage{
 default_replacement_params

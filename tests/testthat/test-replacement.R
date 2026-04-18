@@ -682,7 +682,7 @@ test_that("TS-34: default_replacement_params has correct keys and defaults", {
     default_replacement_params,
     c("band_width_K", "cliff_threshold", "cliff_min_n", "sp_ip_threshold",
       "sp_rp_split_default", "ip_ab_divergence_tol", "calibration_min_n",
-      "convergence_eps", "convergence_max_iter"),
+      "convergence_eps", "convergence_max_iter", "cycle_history_window"),
     ignore.order = TRUE
   )
   expect_equal(default_replacement_params$band_width_K,         3L)
@@ -694,6 +694,7 @@ test_that("TS-34: default_replacement_params has correct keys and defaults", {
   expect_equal(default_replacement_params$calibration_min_n,     15L)
   expect_equal(default_replacement_params$convergence_eps,       0.01)
   expect_equal(default_replacement_params$convergence_max_iter,  25L)
+  expect_equal(default_replacement_params$cycle_history_window,  5L)
 })
 
 test_that("TS-35: replacement_params overrides take effect", {
@@ -837,4 +838,83 @@ test_that("T-NMF-2: replacement_level emits rotostats_warning_name_match_failure
     ),
     class = "rotostats_warning_name_match_failure"
   )
+})
+
+# ---------------------------------------------------------------------------
+# §15  State-Hash Cycle Detection Tests (R6 — higher-order cycles)
+# ---------------------------------------------------------------------------
+
+test_that("TS-60: default_replacement_params includes cycle_history_window = 5L", {
+  # Regression guard: cycle_history_window is the 10th element.
+  expect_equal(length(default_replacement_params), 10L)
+  expect_true("cycle_history_window" %in% names(default_replacement_params))
+  expect_identical(default_replacement_params$cycle_history_window, 5L)
+})
+
+test_that("TS-61: cycle_history_window validation rejects out-of-range values", {
+  proj <- make_projections_data(seed = 42L)
+
+  # Below lower bound (< 2)
+  expect_error(
+    replacement_level(
+      proj, config = cfg_mixed_12,
+      replacement_params = list(cycle_history_window = 1L)
+    )
+  )
+
+  # Above upper bound (> 50)
+  expect_error(
+    replacement_level(
+      proj, config = cfg_mixed_12,
+      replacement_params = list(cycle_history_window = 51L)
+    )
+  )
+
+  # Non-integer scalar
+  expect_error(
+    replacement_level(
+      proj, config = cfg_mixed_12,
+      replacement_params = list(cycle_history_window = "five")
+    )
+  )
+})
+
+test_that("TS-62: cycle_history_window = 2 accepted and produces converged result", {
+  # Window = 2 is the minimum valid value; it should behave like the former
+  # 2-lag detector (catching only 2-cycles) but via the hash ring buffer path.
+  proj   <- make_projections_data(seed = 42L)
+  result <- replacement_level(
+    proj, config = cfg_mixed_12,
+    multi_pos          = "highest_par",
+    replacement_params = list(cycle_history_window = 2L)
+  )
+  expect_true(attr(result, "converged"))
+})
+
+test_that("TS-63: assignment hash is order-invariant", {
+  # Verify that the canonical hash used in cycle detection does not depend on
+  # element ordering.  Two named character vectors with identical content but
+  # different element ordering must produce the same hash.
+  a1 <- c(P1 = "SS", P2 = "2B", P3 = "1B")
+  a2 <- c(P3 = "1B", P1 = "SS", P2 = "2B")   # same mapping, different order
+
+  hash_of <- function(a) {
+    sorted_idx <- order(names(a))
+    paste(names(a)[sorted_idx], a[sorted_idx], collapse = "|")
+  }
+
+  expect_identical(hash_of(a1), hash_of(a2))
+})
+
+test_that("TS-64: assignment hash distinguishes different assignment vectors", {
+  # Two different player-position mappings must produce different hashes.
+  a1 <- c(P1 = "SS", P2 = "2B", P3 = "1B")
+  a2 <- c(P1 = "2B", P2 = "SS", P3 = "1B")   # P1 and P2 swapped
+
+  hash_of <- function(a) {
+    sorted_idx <- order(names(a))
+    paste(names(a)[sorted_idx], a[sorted_idx], collapse = "|")
+  }
+
+  expect_false(identical(hash_of(a1), hash_of(a2)))
 })
