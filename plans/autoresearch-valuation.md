@@ -1,116 +1,316 @@
 # Autoresearch Plan: Rotisserie Valuation Optimization
 
-> **Goal:** Maximize the correlation between team-level pre-season auction dollar values and
-> final rotisserie standings points, using Moonlight Graham historical data as the benchmark.
-> The agent should iterate through the search space below, measure results against the
-> benchmark, commit winners, and discard losers.
+> **Goal:** Identify the valuation method and configuration that most accurately converts
+> a player's realized stats into dollars. **Primary metric:** per-player earned-$ MAE and
+> Spearman rank correlation across Tout Wars 2013–2025 and LABR 2020–2025 expert auction
+> records, reported per-format (AL-only / NL-only / mixed) in three views (aggregate /
+> consistency / deployment). **Secondary metric:** team-total-vs-standings Spearman ρ
+> (the Podhorzer & Bulay protocol) as a cross-check. **Deployment target:** Moonlight
+> Graham (AL-only, keeper), scored on earned $ only — keeper-agnostic. The agent iterates
+> through a curated grid of configurations, surfaces winners under each view, and commits
+> those that improve aggregate MAE without regressing per-format.
+
+---
+
+## Framework Decisions
+
+This plan reflects five structural decisions resolved in the 2026-04-17 design conversation.
+Each is elaborated further in the corresponding section below.
+
+1. **Primary metric is player-level** (earned-$ MAE + Spearman), not team-level correlation.
+   Team-level correlation is retained as a secondary cross-check. See §Primary Metric.
+2. **Evaluation pool is the full projected player pool** (preseason projection ≥ some
+   PA/IP threshold — sweep TBD), not rostered players only. Earned $ is scored on actual
+   realized stats with no full-season filter; partial-season treatment is covered in
+   §Primary Metric.
+3. **Data scope is Tout Wars + LABR primary, Moonlight Graham deployment.** NFBC's
+   average-only data cannot contribute to the MAE pipeline. See Layer 2 and Layer 3.
+4. **Format-aware evaluation** — three views reported every round: aggregate MAE,
+   max-format MAE (consistency), per-format MAE. Winner tagging surfaces aggregate,
+   consistency, and deployment candidates separately. See §Three-View Winner Tagging.
+5. **Search architecture is a curated grid on all axes** (not sequential-greedy). Claude
+   proposes curated variants per axis; user approves before the grid runs. See
+   §Experiment Protocol.
+
+Specifics marked **TBD** throughout this doc are placeholders for values to be resolved
+before the harness runs. They include: per-phase acceptance thresholds (dollars of
+improvement required / per-format regression tolerated), grid axis cardinalities, the
+library-default policy (consistency vs. deployment vs. aggregate winner), and the
+eligibility projection PA/IP sweep values.
 
 ---
 
 ## Research Design
 
 Validation proceeds in four layers. Layer 1 is a prerequisite gate — do not run real-data
-experiments until it passes. Layers 2 and 3 run the same search space on different datasets.
-Layer 4 runs once after the best configuration is found.
+experiments until it passes. Layer 2 drives method selection via the curated grid.
+Layer 3 is a post-selection deployment check, not an alternative optimization target.
+Layer 4 runs once after the best configuration is committed.
 
 | Layer | Name | Data | Purpose |
 |-------|------|------|---------|
 | 1 | Synthetic validation | Simulated | Confirm implementation faithfulness before real-data exposure |
-| 2 | Multi-league LOYO | Public leagues (aspirational) | Establish generally-valid defaults |
-| 3 | Moonlight Graham LOYO | Moonlight Graham 2019–2025 | Optimize for this league; compare to Layer 2 |
-| 4 | Sensitivity analysis | Moonlight Graham | Identify which parameters actually matter |
+| 2 | Multi-league LOYO (primary) | Tout Wars 2013–2025 + LABR 2020–2025 | Drive method selection; per-format MAE across AL-only / NL-only / mixed |
+| 3 | Deployment validation | Moonlight Graham 2017–2025 (AL-only, keeper) | Confirm Layer 2 winner performs on deployment target; earned-$ only |
+| 4 | Sensitivity analysis | Layer 2 dataset | Identify which parameters matter (OAT perturbation on winner) |
 
-Comparing Layer 2 and Layer 3 results tells you whether a winning parameter is a strong
-general default or a Moonlight Graham-specific choice:
+The Layer 2 winner is applied to MG data and scored against MG earned $ during Layer 3.
+Material Layer 2 → Layer 3 gaps flag either AL-only distributional quirks beyond the
+AL-only Tout Wars / LABR cross-section (worth investigating), or implementation bugs
+that surface only in the deployment pipeline (worth fixing). Layer 3 does not re-open
+method selection.
 
-- **Both layers agree** → document as a confident general default
-- **Layers diverge** → document as "tune this" with guidance on when to override
+### Three-View Winner Tagging (Layer 2)
 
----
+Every accepted candidate is tagged under three views:
 
-## Layer 1 — Synthetic Validation
+- **Aggregate winner** — lowest mean MAE across the three formats. Answers "best on
+  average."
+- **Consistency winner** — lowest max MAE (or lowest SD) across formats. Answers "most
+  format-invariant / most robust to unknown future distributional shifts."
+- **Deployment winner** — lowest MAE on AL-only specifically. Matches the deployment
+  target (Moonlight Graham is AL-only).
 
-**Purpose:** Confirm each function is faithful to its spec before any real data touches it.
-Run before Phases 1–5. Do not proceed if Layer 1 fails.
-
-**Method:** For each function under test, generate synthetic inputs from a known
-data-generating process, compute the expected output analytically, and verify recovery
-within tolerance.
-
-### SGP denominators
-
-1. Draw team category totals from a known distribution (e.g., HR ~ N(220, 30²) for a
-   12-team league over 5 seasons).
-2. Compute the analytic true denominator from the DGP parameters.
-3. Run `sgp_denominators()` and verify recovery within ±5%.
-4. Repeat across 1,000 simulated seasons to estimate bias and variance.
-
-Variants: OLS vs. gap (OLS should outperform under outlier teams); flat vs. exp_decay
-(exp_decay should outperform under a trend DGP); window length 3 vs. 5 vs. all.
-
-Edge cases: all teams tied, single-team outlier, zero-variance season, rounding in
-counting-equivalent rate stat conversions.
-
-### Replacement level
-
-1. Generate a synthetic projection pool with known position-group stat distributions.
-2. Verify that `replacement_level()` places the boundary at the correct rank for each
-   position.
-3. Test band averaging, cliff detection, and positional adjustment with known inputs.
-
-### Dollar allocation
-
-1. Generate synthetic PAR values with a known total positive-PAR pool.
-2. Verify that `dollar_values()` allocates the budget correctly and that per-player values
-   sum to the auction budget within rounding tolerance.
-
-**Gate:** All functions must pass synthetic recovery tests before proceeding to Layer 3.
+If one method wins all three, adopt it. If they differ, surface the tradeoff explicitly
+and commit a library-default policy (TBD). Likely default: consistency winner (robust,
+format-invariant, trustworthy across future seasons), with deployment winner available
+as a config-selectable override for AL-only leagues.
 
 ---
 
-## Layer 2 — Multi-League LOYO (Aspirational)
+## Primary Metric: Player-Level Earned-$ MAE
 
-**Purpose:** Determine which parameter choices are generally valid across leagues vs.
-specific to Moonlight Graham. Aspirational — requires public league data not yet assembled.
+### Metric definition
 
-**Design:** Same LOYO protocol as Layer 3, applied to a large multi-league public dataset.
-Target: 50+ leagues × 10+ years.
+For each player-season in the evaluation pool:
 
-**Data sources (aspirational):** NFBC, Fantrax public historical leagues.
+1. Compute **retrospective earned $** from realized stats, using that year's league
+   context (format, budget, roster slots, scored categories). This is the deterministic
+   auction-value conversion the method under test is trying to approximate.
+2. Compute **predicted $** from the valuation method under test, fed with realized
+   stats. (Realized stats, not projections — this isolates method quality from
+   projection error. See Critique 3 in `autoresearch-methodology-critiques.md`. A
+   projection-based validation stage is proposed as a deployment-gate check after the
+   grid completes.)
+3. Record per-player error: `err = predicted_$ − earned_$`.
 
-**Search space:** Same as Layer 3 below. For each candidate configuration, compute mean
-Spearman ρ across all held-out league-years.
+Aggregate error metrics per (method, format, year):
 
-**Output:** A per-parameter comparison table showing the Layer 2 winner vs. the Layer 3
-winner. Parameters where the two layers agree are strong general defaults. Parameters
-where they diverge are candidates for league-specific override guidance in the
-documentation.
+- **MAE** — mean absolute error across all eligible players. Primary.
+- **Spearman ρ** — rank correlation between predicted $ and earned $ across the pool.
+  Always reported alongside MAE; a method with high MAE but high rank ρ is
+  systematically biased (e.g., inflated) and can be fixed by post-hoc rescaling.
+- **RMSE** — optional secondary diagnostic.
+
+### Eligibility filter (draftability-based)
+
+A player is eligible for primary scoring if a preseason projection exists with:
+
+- PA ≥ **TBD** (proposed sweep: 100 / 150 / 200 / 250) for hitters
+- IP ≥ **TBD** (proposed sweep: 30 / 50 / 80) for pitchers
+
+This operationalizes "draftable on draft day." The filter is based on **projected**
+playing time, not realized. Jose Caballero (370 realized PA, 49 SB in 2025) is a valid
+evaluation target because he was projected above threshold preseason — regardless of
+his final PA count. An injured veteran who played 280 PA is similarly included.
+
+Within the eligible pool, every player is scored on actual earned $ — **no additional
+realized-playing-time filter is applied**.
+
+Players *excluded* by the eligibility filter (no preseason projection, or projection
+below threshold) are call-ups and deep reserves that no valuation system could have
+priced on draft day. These are aggregated into a separate **information-asymmetry
+diagnostic** rather than the primary MAE. Wyatt Langford–style surprise promotions fall
+here.
+
+**Dependency:** the eligibility filter requires preseason projection data (source TBD:
+Steamer / ZiPS / ATC / blend). This is an unresolved input to the harness.
+
+### Required reporting breakdowns
+
+Every experiment reports the following breakdowns alongside global MAE:
+
+**By sub-pool** — captures the $1-player problem (Critique 1). A method with good
+global MAE can still mis-calibrate the $1 pool.
+
+- Top-30 (stars): MAE + Spearman
+- Top-31 to top-100 (middle-elite)
+- Top-101 to roster capacity (mid-tier)
+- $1 pool (players whose realized earned $ is < $2)
+
+**By position** — catches position-specific failures, especially catcher mispricing
+from thin-pool distortion.
+
+- C, 1B, 2B, 3B, SS, OF, DH, SP, RP — each with MAE + Spearman
+
+**By era** — diagnostic for whether post-2023 MLB rule changes (shift ban, larger
+bases) affected method performance. Tests the assumption that correctly-implemented
+methods are era-invariant when internally calibrated within each year's data.
+
+- Pre-2023 (2013–2022)
+- Post-2023 (2023–2025)
+- **Time-based holdout test** (recommended diagnostic, TBD): fit on 2013–2022, predict
+  on 2023–2025; compare to full-LOYO MAE. Material divergence = era-shift signal at
+  the method level, triggering investigation rather than automatic weighting changes.
+
+**By format** — the three-view winner tagging from §Research Design.
+
+- AL-only, NL-only, mixed — each with MAE + Spearman
+
+### Secondary metric: team-level Spearman ρ (cross-check)
+
+The Podhorzer & Bulay team-total-vs-standings Spearman ρ protocol is retained as a
+secondary cross-check:
+
+1. For each held-out league-year, sum predicted $ per team across rostered players.
+2. Correlate `team_total_value` with that team's final standings points.
+3. Report Spearman ρ across all held-out league-years.
+
+Literature reference points from Podhorzer & Bulay (Fangraphs, 50-league study):
+
+| System | Correlation |
+|--------|-------------|
+| SGP (Winning Fantasy Baseball denoms) | 0.9697 |
+| Z-scores | 0.9670 |
+| Suggested ceiling | ~0.98–0.99 |
+
+**Cross-check divergence flag:** a candidate that wins player-level MAE but loses
+team-level Spearman is flagged for investigation — it may be aggressively mis-pricing
+stars in ways that cancel in per-player averages but accumulate when summed per team.
+The reverse flag also applies.
+
+### Multi-objective acceptance
+
+Candidates are evaluated in tiers:
+
+1. **Player-level MAE (primary gate):** candidate must improve aggregate MAE by ≥ **TBD**
+   AND not regress per-format MAE by more than **TBD** (per-phase; see §Experiment
+   Protocol for tighter thresholds in later phases).
+2. **Team-level Spearman ρ (cross-check gate):** candidate must not regress team-level ρ
+   by more than **TBD**.
+3. **Sub-pool and per-position diagnostics:** reported for every accepted candidate as
+   quality signals, not hard gates.
+
+Candidates that are **Pareto-better** on both player-level MAE and team-level Spearman
+are the preferred winner class. Candidates improving one metric at the cost of the
+other are surfaced explicitly for human review rather than auto-accepted.
 
 ---
 
-## Layer 3 — Moonlight Graham LOYO
+## Layer 1 — Synthetic Validation (handled by statsclaw)
 
-This is the primary Moonlight Graham–specific evaluation and the main driver of
-default-setting until Layer 2 data is available.
+Per-function synthetic validation is handled by statsclaw's `simulator` and `tester`
+pipelines on each function's feature branch. The `simulator` pipeline designs a DGP,
+runs Monte Carlo simulations, and verifies that the function recovers the known truth
+within tolerance. The `tester` pipeline independently validates behavior against the
+function's `test-spec.md`.
 
-### What we are measuring
+**Gate:** Do not proceed to Layer 2 until every function under test (`sgp_denominators`,
+`replacement_level`, `dollar_values`, plus any method-layer functions added after the
+spec walkthrough — `par`, `zar`, `zaa`, `pvm`) has a green statsclaw simulator + tester
+run merged to `develop`. statsclaw is the single source of truth for per-function
+correctness; this plan does not re-spec that validation.
 
-For each candidate valuation system:
+---
 
-1. Apply the system to each rostered player's **actual season stats** for year Y
-2. Sum each team's player values → `team_total_value`
-3. Correlate `team_total_value` with `total_pts` from final standings (Spearman ρ)
-4. Repeat for each held-out year; report mean ρ across all held-out years
+## Layer 2 — Multi-League LOYO (Primary)
 
-This follows the Fangraphs methodology (Podhorzer & Bulay) and isolates valuation method
-quality from projection accuracy — actual stats are used, not pre-season projections.
+**Purpose:** Drive method selection. This is the primary evaluation layer — all grid
+experiments run here and method rankings are determined by Layer 2 results.
+
+### Data sources
+
+| Dataset | Years | Formats | Role |
+|---------|-------|---------|------|
+| Tout Wars | 2013–2025 (13 seasons) | AL-only, NL-only, mixed | Primary — drives method selection |
+| LABR | 2020–2025 (6 seasons) | AL-only, NL-only, mixed | Secondary — cross-validates Tout Wars winners |
+
+Approximate sample size: **~57 league-years of expert-drafted auction records across
+three formats.** Roughly 10× the 6-season single-league footprint of the original plan.
+
+**Data scraping dependency:** Tout Wars and LABR full auction records — plus
+per-league-year configuration (teams, budget, roster slots, scored categories) — are
+not yet assembled in the repo. Scraping and normalization is a prerequisite task,
+tracked as a dependency for Layer 2 activation.
+
+NFBC average auction values are not used in this layer. Individual NFBC drafts are not
+available; NFBC can support neither player-level earned-$ scoring (requires per-player
+stats, which aren't affected by draft data) nor team-total correlation (requires
+per-league roster lists, which NFBC averages do not provide).
+
+### Protocol
+
+**Leave-one-year-out cross-validation** across Tout Wars + LABR seasons, stratified by
+format:
+
+- Calibrate any year-spanning parameters (e.g., SGP denominators if applicable) on the
+  remaining seasons within the same format.
+- Apply to the held-out year; compute per-format MAE against earned $.
+- Aggregate per-format MAE across all held-out years for each (format × method ×
+  configuration) triple.
+- Report three views per §Three-View Winner Tagging (aggregate / consistency /
+  deployment).
+- Secondary: compute team-total-vs-standings Spearman ρ per league-year; aggregate to a
+  league-level mean per the Podhorzer & Bulay protocol.
+
+**Year weighting:** Equal weight across all seasons for the loss function. Era-stratified
+MAE (pre-2023 vs. post-2023) is reported as a diagnostic. Time-based holdout test
+(fit 2013–2022, predict 2023–2025) recommended as an era-shift detection probe (TBD
+whether included in default reporting).
+
+**Format handling:** Per-format MAE is always reported. A winning method must satisfy
+per-phase acceptance rules across all three formats (see §Experiment Protocol). Library
+default-policy (which view's winner ships as the package default) is TBD — likely
+consistency winner with config-selectable deployment override.
+
+### Search space
+
+See §Search Space (below) for the curated-grid dimensions. The agent executes a full
+Cartesian over curated variants per axis, not sequential-greedy phase-by-phase tuning.
+Grid cardinality per axis is TBD but approximately: ~5 methods × ~20 replacement
+variants × ~10 denom configs × ~3 allocation × ~4 weighting ≈ 12K combinations.
+
+---
+
+## Layer 3 — Deployment Validation (Moonlight Graham)
+
+**Purpose:** Confirm the Layer 2 winner performs on the deployment target (Moonlight
+Graham, AL-only, keeper). This is a post-selection validation check, not an alternative
+method-selection driver.
+
+### What we measure
+
+For the Layer 2 winner only (not every candidate):
+
+1. Apply the winning valuation method and configuration to each Moonlight Graham
+   player-season.
+2. Compute player-level earned-$ MAE against MG earned $.
+3. Compute team-total-vs-standings Spearman ρ as secondary cross-check.
+4. Report MG-specific sub-pool (top-30 / top-100 / mid / $1) and per-position
+   breakdowns per §Primary Metric.
+
+### Keeper handling
+
+MG is a keeper league, but keepers are out of scope for this validation:
+
+- **Earned-$ MAE is keeper-agnostic** — a player's earned value from realized stats is
+  the same whether they were a keeper or an auction pick. MG is valid for earned-$
+  validation.
+- **MG auction prices are keeper-contaminated** (a $5 keeper with $25 value isn't a
+  market signal). Do *not* use MG auction prices as market ground truth at any point.
+- **Keeper-aware bid adjustments** belong in a separate function (provisionally
+  `bid_ceiling()`) that takes base valuations plus roster state and budget as inputs.
+  That function is not part of this evaluation and is deferred to a later spec.
 
 ### Evaluation protocol
 
-**Leave-one-year-out cross-validation** across the 6 usable seasons:
+**Leave-one-year-out cross-validation** across usable MG seasons (2017–2025 excluding
+2020 COVID season):
 
 | Year | Role | Notes |
 |------|------|-------|
+| 2017 | Calibration / held-out | |
+| 2018 | Calibration / held-out | |
 | 2019 | Calibration / held-out | Full 162-game season |
 | 2020 | **Excluded** | 60-game COVID season — unrepresentative |
 | 2021 | Calibration / held-out | Full season |
@@ -119,40 +319,32 @@ quality from projection accuracy — actual stats are used, not pre-season proje
 | 2024 | Calibration / held-out | Full season |
 | 2025 | Calibration / held-out | Full season |
 
-For each fold: calibrate SGP denominators on the remaining 5 years, apply to the held-out
-year. Replacement level is computed from the held-out year's projection pool (as it would be
-in practice). Dollar allocation uses the held-out year's empirical hitter/pitcher spend split.
+Any year-spanning calibration (e.g., SGP denominators) uses MG data only for this layer
+— the Layer 2 winner's *structure* is preserved, but calibration inputs come from MG.
 
 ### Data sources
 
 | File | Purpose |
 |------|---------|
-| `~/roto-models/data/player_valuations_{year}.csv` | Actual player stats, team assignments, existing SGP values |
+| `~/roto-models/data/player_valuations_{year}.csv` | Actual player stats and team assignments |
 | `~/roto-models/data/historical_standings.csv` | Final roto points by team and category |
 
-### Benchmark script
+### Gap investigation
 
-The benchmark outputs a single line to stdout:
+**Large Layer 2 → Layer 3 gaps are diagnostic signals, not re-optimization targets.**
+Investigate causes before any remediation:
 
-```
-METRIC correlation=0.971
-```
+- AL-only distributional quirks in MG beyond the AL-only Tout Wars / LABR cross-section
+  (team count, budget allocation, scored categories — note whether MG's format specifics
+  differ from Tout Wars AL-only).
+- Implementation bugs that surface only in the MG deployment data pipeline.
+- Pool construction differences (MG's keeper-adjusted active pool vs. open Tout Wars
+  pool).
 
-Higher is better. The baseline (existing SGP implementation) should be measured first and
-recorded as the floor — any candidate that beats it is a winner; any that falls below it
-is discarded.
-
-### Known reference points
-
-From Podhorzer & Bulay (Fangraphs, 50-league study):
-
-| System | Correlation |
-|--------|-------------|
-| SGP (Winning Fantasy Baseball denoms) | 0.9697 |
-| Z-scores | 0.9670 |
-| Suggested ceiling | ~0.98–0.99 |
-
-The goal is to exceed 0.97 on Moonlight Graham data and push toward 0.98+.
+Layer 3 does not re-open method selection. If a Layer 2 winner fails Layer 3, the
+response is to (a) debug the data/implementation gap, or (b) expose MG-style leagues
+as a config override using Layer 2's deployment-view winner — not to re-run the grid
+on MG data.
 
 ---
 
@@ -494,76 +686,93 @@ last and evaluate carefully against the held-out years.
 
 ## Experiment Protocol
 
-### Phase 0 — Layer 1: Synthetic Validation (prerequisite)
+The protocol runs in five phases: synthetic validation gate, variant curation, curated
+grid on Layer 2, deployment validation + sensitivity analysis, and optional autoresearch
+extension. The phase numbering reflects execution order; phases are not sequential
+tuning rounds in the old sense. Method selection and parameter tuning happen jointly
+inside the Phase 2 grid.
 
-Run before any real-data phases. Do not proceed until all synthetic tests pass.
+### Phase 0 — Per-function Validation (prerequisite, handled by statsclaw)
 
-1. Synthetic `sgp_denominators()` tests: recovery within ±5% across 1,000 simulated seasons
-2. Synthetic `replacement_level()` tests: boundary placement, band averaging, cliff detection
-3. Synthetic `dollar_values()` tests: budget allocation and sum-to-budget reconciliation
-4. **Gate: all pass → proceed to Phase 1**
+Run before any real-data phases. Per-function simulator + tester validation is owned by
+statsclaw on each function's feature branch (see §Layer 1). One additional harness-level
+check belongs to this plan, not to any single function:
 
-### Phase 1 — Establish baseline and method comparison (Layer 3)
+1. **Harness earned-$ recovery:** given a synthetic player pool with a known stat-to-dollar
+   mapping, verify that the autoresearch harness's earned-$ computation recovers the true
+   values within rounding tolerance.
+2. **Gate: statsclaw simulator + tester green on `develop` for every function under test,
+   AND harness earned-$ recovery passes → proceed to Phase 1.**
 
-1. Compute baseline correlation using existing SGP values from `player_valuations_*.csv`
-2. Implement z-score method; measure correlation
-3. Test hybrid blends at α ∈ {0.25, 0.5, 0.75}
-4. **Carry forward the winning top-level method**
+### Phase 1 — Variant Curation (prerequisite to grid)
 
-### Phase 2 — SGP denominator tuning (Layer 3, if SGP or hybrid wins)
+Claude proposes curated variants spanning the design space of the §Search Space
+subsections; user reviews and approves before the grid runs. Target cardinalities
+(TBD-approximate):
 
-1. Test estimator: pairwise_mean vs. OLS vs. trimmed pairwise mean
-2. Test calibration window: 3, 5, all years
-3. Test time decay: flat, linear, exponential (λ = 0.9, 0.7)
-4. Test rate stat SGP method: blended average-team pool vs. fixed baseline counting equivalent (§2e)
-5. For blended pool: test pool_baseline sub-options: projection_pool, per_player, universal_constants (§2e)
-6. Test 2023 structural break scope: full window vs. post-2023 SB only vs. post-2023 SB+R+RBI vs. post-2023 all (§2f)
-7. **Commit best denominator config**
+- **Replacement-level variants (~20):** proposals drawn from §3 — boundary × sort key ×
+  positional adjustment × SP/RP threshold × catcher handling × cliff detection × rate-stat
+  quality/volume. Informed by `specs/spec-replacement.md` and `replacement_solutions.md`.
+- **Denominator configurations (~10):** drawn from §2 — estimator × window × decay ×
+  rate-stat method × 2023-break scope.
+- **Allocation configurations (~3):** drawn from §4.
+- **Weighting configurations (~4):** drawn from §5.
+- **Methods (~5):** SGP, z-score, hybrid α ∈ {0.25, 0.5, 0.75}, plus any of PVM / ZAA /
+  ZAR / PAR that the spec walkthrough classifies as distinct top-level methods. Final
+  method axis TBD pending spec classification.
 
-### Phase 3 — Replacement level tuning (Layer 3)
+**Grid cardinality:** ~5 methods × ~20 replacement × ~10 denom × ~3 allocation × ~4
+weighting ≈ 12K combinations. Exact cardinality TBD.
 
-Run the pool SD diagnostic first (`position_sd_ratio` by position) to determine whether
-the catcher inflation is a pool-construction bug (fix before running any experiments) or
-a structural scarcity effect (testable via the catcher adjustment options).
+### Phase 2 — Curated Grid on Layer 2
 
-1. Test boundary definition: exact, band ±3, band ±5, band = 10% of pool (§3a)
-2. Test sort key: z-score, SGP 1-pass, SGP iterative warm-start, historical priors (§3b)
-3. Test positional adjustment method: slot-weighted z-score, SGP-unit weighted mean,
-   dollar-space, PosFact α ∈ {0.25, 0.5, 0.75, 1.0} (§3c — run SGP-unit first)
-4. Test SP/RP threshold: 80, 100, 120 IP (§3d)
-5. Test rate stat quality/volume separation: IP-weighted vs. team-IP-normalized (§3g)
-6. Test catcher adjustment: none, split pool, 0.75×, historical calibration (§3e)
-7. Test cliff detection: disabled; if enabled, test MAD vs. gap-to-range vs. Fisher-Jenks
-   scale method, and threshold ∈ {1.0, 1.5, 2.0} (§3f — sweep threshold jointly with method)
-8. Constant sweep (§3h): K ∈ {1–5}, calibration min-N, SP/RP split default
-9. **Commit best replacement config**
+Execute full Cartesian over curated variants per axis against the Layer 2 dataset
+(Tout Wars + LABR), per the Layer 2 Protocol.
 
-### Phase 4 — Dollar allocation (Layer 3)
+Per combination, the harness computes and logs:
 
-1. Test hitter/pitcher split: empirical vs. fixed 67/33, 70/30
-2. Test minimum pre-allocation: $1 vs. $0.50
-3. **Commit if any improvement**
+- Player-level MAE per format (AL-only / NL-only / mixed); aggregate mean and max across formats.
+- Spearman rank ρ per format; aggregate mean and max.
+- Sub-pool MAE (top-30 / top-100 / mid / $1).
+- Per-position MAE.
+- Era-stratified MAE (pre-2023 vs. post-2023).
+- Secondary: team-total-vs-standings Spearman ρ per league-year.
 
-### Phase 5 — Category weighting (Layer 3, optional, run last)
+Results logged to `autoresearch.jsonl` or equivalent harness output.
 
-1. Equal vs. stability weights vs. spread weights
-2. Learned weights (check for overfit — requires held-out correlation to stay above baseline)
+**Tiered acceptance rule (thresholds TBD, phase-depth dependent):**
 
-### Phase 6 — Layer 4: Sensitivity Analysis
+| Gate | Condition |
+|------|-----------|
+| Primary | Aggregate player-level MAE improves by ≥ **$TBD** vs. incumbent |
+| Per-format guardrail | No single-format MAE regresses by more than **$TBD** (looser for initial method exploration, tighter for within-method parameter tuning) |
+| Cross-check | Team-level Spearman ρ does not regress by more than **TBD** |
+| Pareto flag | Candidates improving one view but regressing another are surfaced for human review rather than auto-accepted |
 
-Run once, after Phase 5 completes and the best configuration is committed.
+Winners tagged per §Three-View Winner Tagging (aggregate, consistency, deployment).
 
-1. Perturb each parameter by ±1 step in its sweep range (OAT)
-2. Recompute SGP and rank all players under each perturbation
-3. Record percentage of player rankings that shift by > 5 positions
-4. **Classify parameters as high-sensitivity ("tune this") or flat ("default is fine")**
-5. Feed results directly into user-facing documentation guidance
+### Phase 3 — Deployment Validation (Layer 3)
 
-### Layer 2 (Aspirational) — Run Phases 1–5 on multi-league data
+Apply the Layer 2 winner(s) to Moonlight Graham data per §Layer 3. Report gap metrics
+and investigate any material divergence. Layer 3 does not re-open method selection.
 
-When public league data is available, re-run Phases 1–5 using the Layer 2 dataset. Compare
-winners against Layer 3 results. Update documentation to reflect which parameters are
-consistent across leagues vs. which are Moonlight Graham-specific.
+### Phase 4 — Layer 4 Sensitivity Analysis
+
+Run once, after the winner commits:
+
+1. Perturb each parameter by ±1 step in its sweep range (OAT).
+2. Recompute valuations and rank all players under each perturbation.
+3. Record percentage of player rankings that shift by > 5 positions.
+4. Classify parameters as high-sensitivity ("tune this") or flat ("default is fine").
+5. Feed results into user-facing documentation guidance.
+
+### Phase 5 — Autoresearch Extension (optional)
+
+Once the curated grid establishes a Pareto frontier, an autoresearch agent may extend
+beyond it. Agent proposals include new methods, refinements to existing methods'
+internals, or replacement-level variants outside the curated set. Accepted proposals
+follow the same tiered acceptance rule as Phase 2. Not gated to the same timeline as
+Phases 0–4.
 
 ---
 
@@ -573,9 +782,17 @@ consistent across leagues vs. which are Moonlight Graham-specific.
 |------|---------------|
 | `R/sgp.R` | SGP denominator estimator, calibration window, time decay |
 | `R/replacement.R` | Boundary definition, sort key, band width, catcher adjustment |
-| `R/dollar_values.R` | Hitter/pitcher split, minimum allocation, iteration logic |
+| `R/par.R` | PAR arithmetic (once specced); hitter/pitcher split hooks |
+| `R/zar.R` | Z-score above replacement (once specced); pooling, standardization window |
+| `R/zaa.R` | Z-above-average (once specced); baseline choice |
+| `R/pvm.R` | Percent-value method (once specced); tier anchors |
+| `R/dollar_values.R` | Budget allocation, minimum allocation, iteration logic, hybrid-α blend |
 | `autoresearch.sh` | Benchmark runner — should not need modification |
 | `autoresearch.jsonl` | Experiment log — written by the agent automatically |
+
+The exact set of method-layer files (`par.R`, `zar.R`, `zaa.R`, `pvm.R`) is **pending
+the spec walkthrough** (see Open Questions). Some of these may be collapsed into
+`dollar_values.R` or a single `methods.R` depending on spec outcomes.
 
 **Do not modify:**
 - `plans/autoresearch-valuation.md` (this file)
@@ -586,48 +803,171 @@ consistent across leagues vs. which are Moonlight Graham-specific.
 
 ## Stopping Rules
 
-- **Accept** any candidate that beats the current best by ≥ 0.002 correlation points
-- **Reject** any candidate that falls below the current best (revert to last committed winner)
-- **Stop Phase** when 3 consecutive experiments produce no improvement ≥ 0.002
-- **Stop overall** when correlation reaches 0.980 or when the full search space is exhausted
+The primary optimization target is **player-level earned-$ MAE** (lower is better); the
+secondary cross-check is **team-total vs. standings Spearman ρ** (higher is better). The
+curated grid in Phase 2 evaluates all ~12K configurations exhaustively — there is no
+early-stop during Phase 2 enumeration. Stopping rules apply to the *winner selection*
+and to any post-grid autoresearch extension (Phase 5).
+
+**Multi-objective acceptance (Phase 2 winner selection):**
+
+- **Accept** a candidate as a new best only if it improves primary MAE by **≥ TBD-ε_mae**
+  without regressing secondary Spearman ρ by more than **TBD-δ_rho**
+- **Tie-break** equal-MAE candidates by (a) higher Spearman ρ, then (b) lower worst-format
+  MAE (deployment robustness), then (c) simpler configuration (fewer non-default axis
+  settings)
+- **Three-view winners** are selected separately using:
+  - Aggregate: lowest mean MAE across leagues × years
+  - Consistency: lowest worst-case (max) MAE across any single league-year
+  - Deployment: lowest MAE on Moonlight Graham (Layer 3) specifically
+
+**Phase-level stops:**
+
+- **Phase 2 (grid)** — runs to completion; no early-stop. Report all three view winners.
+- **Phase 3 (MG deployment)** — runs only the top-K candidates from Phase 2 (K TBD,
+  candidate values 5 / 10 / 20); no early-stop within that set.
+- **Phase 4 (sensitivity)** — one-at-a-time perturbation on the selected consistency
+  winner; runs to completion across the perturbation list.
+- **Phase 5 (autoresearch, optional)** — stops when 10 consecutive agent-proposed
+  variants fail the multi-objective acceptance rule, OR when TBD-max-experiments is
+  reached, whichever comes first.
+
+**Numerical thresholds** (TBD-ε_mae, TBD-δ_rho, TBD-K, TBD-max-experiments) will be
+resolved empirically after a pilot run on a single LOYO fold — the scale of natural
+MAE variance across the grid determines a meaningful improvement threshold. Until then,
+they are recorded as TBDs rather than guessed.
 
 ---
 
 ## Open Questions Deferred to Validation (not part of this search)
 
-These questions cannot be resolved by correlation optimization alone — they require
-separate validation:
+These questions cannot be resolved by MAE optimization alone — they require separate
+validation, upstream data work, or explicit scope decisions.
 
-- Positional adjustment sign direction (C/SS positive, OF/1B negative) — verify after
-  implementation, not during autoresearch. Unit test: `scarcity_premium["C"] > 0` and
-  `scarcity_premium["OF"] <= 0` for a standard AL-only league fixture.
-- Budget reconciliation: total positive-PAR pool should be within ~$5 of actual auction
-  budget — check as a diagnostic at the end of each phase
-- $1 player trimmed-mean calibration window — deferred until implementation is live
-- Two-way player value formula: `hitter_PAR + pitcher_PAR − 1` (Pitcher List formulation)
-  is not testable via correlation alone since Moonlight Graham has no two-way players;
-  validate against Ottoneu leagues if extending beyond the current format
-- Pool SD diagnostic (`position_sd_ratio` by position/category) — run once on historical
-  data to determine catcher inflation root cause before choosing a catcher adjustment
-  method; this is a prerequisite diagnostic, not an autoresearch experiment
-- 100 IP SP/RP threshold empirical validation — fit a bimodal mixture model
-  (`mixtools::normalmixEM`) to actual pitcher IP distributions from 5 years of Steamer/ZiPS
-  projections; use the empirical trough as the default rather than the round-number 100
+### Scope & methodology
+
+- **Keeper handling is out of scope.** The valuation functions under test produce
+  keeper-agnostic earned-$ and bid-ceiling baselines. Keeper discounts (strategic bid
+  adjustments based on league keeper rules, inflation, and roster construction) are
+  deferred to a separate future `bid_ceiling()` or `keeper_adjustment()` function.
+  Moonlight Graham Layer 3 evaluation uses MG's **keeper-agnostic earned-$** only; MG's
+  auction prices are contaminated by keeper economics and are not used as ground truth.
+- **Projection source (for eligibility filter) is TBD.** The draftability filter
+  requires a preseason projection (PA ≥ 100/150/200/250, IP ≥ 30/50/80). The specific
+  projection source (Steamer, ZiPS, THE BAT, composite) is unresolved; sweep is
+  expected across the candidate thresholds but projection-source choice itself is a
+  separate data-sourcing question.
+- **Method axis membership pending spec walkthrough.** Which of SGP / Z-score / PVM /
+  PAR / ZAR / ZAA / hybrid-α are *methods* (top-level search axis values) vs.
+  *components* (parameterizations within another method) vs. *variants* (same method
+  under a different name) is pending the walkthrough of `specs/spec-sgp.md`,
+  `specs/spec-replacement.md`, `specs/spec-par.md`, `specs/spec-zar.md`,
+  `specs/spec-zaa.md`, `specs/spec-pvm.md`, `specs/spec-dollar-values.md`. The method
+  axis listed in §Search Space is a working assumption until that walkthrough
+  completes.
+- **Library-default policy is TBD.** The three-view winner tagging produces an
+  aggregate winner, a consistency winner, and a deployment winner. Which of these (or
+  which combination) becomes the shipped library default, and whether non-winner
+  configurations are exposed as named presets, is a post-experiment decision.
+
+### Data dependencies
+
+- **Tout Wars and LABR data scraping not yet done.** Layer 2 (primary evaluation)
+  depends on scraping Tout Wars 2013–2025 and LABR 2020–2025 auction and final-stat
+  tables. No experiments can run until that data is ingested and validated. Roster
+  snapshot date must be verified (opening-day rosters preferred; see
+  `plans/autoresearch-methodology-critiques.md` Critique 4).
+- **Moonlight Graham 2017–2025 is AL-only.** Layer 3 deployment validation is AL-only
+  until NL-only MG data or a second keeper league is added. Any NL-only behavior is
+  untested in Layer 3.
+
+### Numerical thresholds (TBD until pilot run)
+
+- **TBD-ε_mae** — minimum MAE improvement to accept a new winner (Phase 2)
+- **TBD-δ_rho** — maximum allowed Spearman ρ regression when accepting an MAE-better
+  candidate
+- **TBD-K** — number of Phase 2 candidates promoted to Phase 3 deployment validation
+- **TBD-max-experiments** — cap on Phase 5 autoresearch extension
+- **$1 pool calibration window** — trimmed-mean band for $1-player diagnostic
+  (addresses Critique 1); set after the first pilot grid reports actual $1-pool MAE
+  distribution
+
+All TBDs are resolved empirically after a single LOYO-fold pilot run; rather than
+guess thresholds now, the plan is to observe the natural scale of MAE and ρ variance
+across the grid and pick thresholds that separate meaningful differences from noise.
+
+### Post-implementation validation checks (not autoresearch experiments)
+
+- Positional adjustment sign direction (C/SS positive, OF/1B negative) — unit-tested
+  after implementation. `scarcity_premium["C"] > 0` and `scarcity_premium["OF"] <= 0`
+  for a standard AL-only league fixture.
+- Budget reconciliation: total positive-PAR pool within ~$5 of actual auction budget —
+  diagnostic at end of each phase.
+- Two-way player value formula: `hitter_PAR + pitcher_PAR − 1` (Pitcher List
+  formulation) is not testable via Layer 2/3 since neither data source has two-way
+  players; validate against Ottoneu leagues if extending scope.
+- Pool SD diagnostic (`position_sd_ratio` by position/category) — run once on
+  historical data to identify catcher inflation drivers before committing to a catcher
+  adjustment method; prerequisite diagnostic, not an experiment.
+- SP/RP threshold empirical validation — fit a bimodal mixture model
+  (`mixtools::normalmixEM`) to actual pitcher IP distributions from 5 years of
+  Steamer/ZiPS projections; use the empirical trough as the default rather than the
+  round-number 100.
 
 ---
 
 ## Interpreting Results
 
-A high correlation means the system correctly **orders teams by quality**. It does not mean
-individual player dollar values are accurate. After finding the best-correlating system,
-a separate calibration step will check:
+The primary metric is **player-level earned-$ MAE** — how close the system's value gets
+to each player's realized end-of-season auction value, averaged across the eligible
+pool. The secondary metric is **team-total vs. standings Spearman ρ** — a coarser
+signal that a system's total-value sums order teams correctly, which is necessary but
+not sufficient for individual-player accuracy.
 
-- Do total team dollar values match the actual auction budget within ~$5?
-- Are catcher prices within observed market range?
-- Does the system correctly identify the top-3 teams in held-out years?
+**Low MAE** means individual player dollar values are accurate. **High ρ** means the
+system correctly orders teams by quality. A system can achieve high ρ while producing
+poor individual values (e.g., systematically misprices $1 players but gets totals
+right) — this is precisely the Critique 1 failure mode. Reporting both, with MAE as
+primary, guards against that.
 
-**Comparing Layer 2 and Layer 3 results:** Parameters where the two layers agree are
-documented as confident general defaults. Parameters where they diverge indicate
-Moonlight Graham-specific behavior — these should be documented as configurable with
-guidance explaining the league characteristics that drive the difference (e.g., shallow
-catcher pool, unusual SB environment, heavy auction spend on pitching).
+### Diagnostic breakdowns for every Phase 2/3 winner
+
+- **Sub-pool MAE**: top-30, top-100, mid-tier, $1-pool separately. The $1-pool
+  diagnostic explicitly addresses Critique 1 — a well-calibrated system projects ~$1
+  for players who actually earned $1.
+- **Per-position MAE**: C, 1B, 2B, 3B, SS, OF, DH, SP, RP.
+- **Per-format MAE**: AL-only, NL-only, mixed — always reported regardless of which
+  view tagged the winner.
+- **Era-stratified MAE**: pre-2023 vs. post-2023. MLB rule changes (shift ban, larger
+  bases) may shift category volatility; stratification detects over-fit to one regime.
+- **Budget reconciliation**: total positive-PAR pool vs. actual auction budget.
+
+### Three-view winner comparison
+
+Three winners are tagged independently per Phase 2:
+
+- **Aggregate winner** — lowest mean MAE across leagues × years.
+- **Consistency winner** — lowest worst-case MAE across any single league-year.
+- **Deployment winner** — lowest MAE on Moonlight Graham (Layer 3).
+
+**When they agree**, the shared configuration is a confident general default. **When
+they diverge**, the divergence is itself the finding: the aggregate winner may be
+over-fit to the dominant data source (Tout Wars), the consistency winner may be
+robust-but-average, and the deployment winner may encode MG-specific behavior
+(AL-only, shallow catcher pool, keeper-league roster construction). Divergences are
+documented as configurable variants with guidance on when to select each, not
+collapsed into a single "best" choice. Library-default policy (which view ships as the
+default) is TBD.
+
+### Scope caveats
+
+- Results measure **inherent methodology quality given actual-stats inputs**
+  (Critique 3). Pre-season projection error is not part of this benchmark — a separate
+  validation using pre-season projections correlated with the same ground truth is
+  required to estimate real-world auction performance.
+- Raw system outputs are compared; strategic overlays (reliever discount,
+  category-volatility-adjusted bids, keeper discounts) are out of scope and deferred
+  to downstream `bid_ceiling()` / strategy functions (Critique 2).
+- Moonlight Graham roster snapshot date must be verified (opening-day preferred;
+  Critique 4). Season-end snapshots degrade ρ signal uniformly across candidates but
+  do not bias relative rankings — they do cap the achievable ρ ceiling.
