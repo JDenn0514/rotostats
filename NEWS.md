@@ -6,7 +6,12 @@
   `c("ERA", "WHIP")`) to declare which scoring categories use a
   direction-flipped rank before OLS fitting. Leagues scoring OAVG, BB9, or
   other lower-is-better categories can now pass these names directly instead
-  of modifying package source. Existing callers are unaffected.
+  of modifying package source. When omitted, the default set is silently
+  intersected with the league's actual scored categories, so batting-only
+  leagues and partial-rate-stat leagues work without modification. When
+  supplied explicitly, every element must appear in the effective scored-category
+  set (otherwise aborts with `rotostats_error_invalid_inverse_categories`).
+  Existing callers are unaffected.
 
 ## New functions
 

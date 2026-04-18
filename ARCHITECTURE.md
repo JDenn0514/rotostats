@@ -1,10 +1,10 @@
 # Architecture: rotostats
 
-**Run:** `sgp-input-hardening-2026-04-17`
-**Branch:** `feature/sgp-input-hardening-docs` @ `3d2bd69`
-**Date:** 2026-04-17
+**Run:** `sgp-denom-inverse-categories-param-2026-04-17`
+**Branch:** `feature/sgp-denom-inverse-categories-param` @ `ce8a37d`
+**Date:** 2026-04-18
 
-(Previous run: `replacement-2026-04-16` @ `21270fb` — see git log for prior state)
+(Previous run: `sgp-input-hardening-2026-04-17` @ `3d2bd69` — see git log for prior state)
 
 ---
 
@@ -49,7 +49,7 @@ graph TD
     end
 
     subgraph HELPERS["Internal Helpers"]
-        SGPDH["sgp-denominators-helpers.R\nINVERSE_CATEGORIES\nMETADATA_COLS\napply_year_window\ncompute_weight\nexpected_range_normal\nresolve_weight"]
+        SGPDH["sgp-denominators-helpers.R\nMETADATA_COLS\napply_year_window\ncompute_weight\nexpected_range_normal\nresolve_weight"]
         POOL["pool_sizes()\nin league-config.R"]
         NEWDENOM["new_sgp_denominators()\nin sgp-denominators-s3.R"]
     end
@@ -184,8 +184,10 @@ graph TD
 ```mermaid
 %%{init: {'theme': 'neutral'}}%%
 graph TD
-    SD["sgp_denominators()"] --> SD1["validate inputs"]
+    SD["sgp_denominators()"] --> SD0["capture missing() flag\ninverse_categories_is_default"]
+    SD --> SD1["validate inputs"]
     SD --> SD2["infer / validate scoring_categories"]
+    SD --> SDV["validate + normalize\ninverse_categories\ndefault: silent intersect\nexplicit: abort if bad"]
     SD --> SD3["build year sets + weight fns"]
     SD --> SD4["denominator loop per category"]
     SD --> SD5["bootstrap CIs (optional)"]
@@ -193,11 +195,18 @@ graph TD
 
     SD4 --> SD4a["apply_year_window()"]
     SD4 --> SD4b["compute_weight()"]
-    SD4 --> SD4c["OLS: stats::lm()"]
+    SD4 --> SD4c["OLS: stats::lm()\nrank-flip if cat %in%\ninverse_categories"]
     SD4 --> SD4d["gap / trimmed_gap"]
     SD4 --> SD4e["sd: expected_range_normal()"]
+    SD4 --> SD4f["sign check: beta_c vs\ninverse_categories"]
 
     SD6 --> S3["sgp_denominators S3 object\nattr dot rate_conversion"]
+
+    style SD fill:#1e90ff,stroke:#1565c0,color:#fff
+    style SD0 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style SDV fill:#1e90ff,stroke:#1565c0,color:#fff
+    style SD4c fill:#1e90ff,stroke:#1565c0,color:#fff
+    style SD4f fill:#1e90ff,stroke:#1565c0,color:#fff
 ```
 
 ### Data Flow
@@ -266,11 +275,11 @@ graph TD
 | `R/replacement_params.R` — `default_replacement_params` | Exported list of 9 numeric constants; user overrides via `replacement_params = list(...)` | — | **YES** |
 | `R/replacement_params.R` — `rate_stat_denominators()` | Returns `RATE_STAT_DENOMINATORS` named character vector; 17 built-in entries including BABIP | — | **YES** |
 | `R/sgp.R` — `sgp()` | Per-player SGP converter; called internally by `replacement_level()` when `sort_by = "sgp"` | `sgp_denominators` S3, `pool_sizes()`, `cli`, `rlang`, `stats` | **YES** |
-| `R/sgp-denominators.R` — `sgp_denominators()` | Calibrates per-category SGP denominators from league history | `sgp-denominators-helpers.R`, `sgp-denominators-s3.R`, `cli`, `stats` | No |
+| `R/sgp-denominators.R` — `sgp_denominators()` | Calibrates per-category SGP denominators from league history; now accepts `inverse_categories` argument (default `c("ERA", "WHIP")`) replacing the former hard-coded constant | `sgp-denominators-helpers.R`, `sgp-denominators-s3.R`, `cli`, `stats` | **YES** |
 | `R/sgp-denominators.R` — `convert_rate_stats()` | Stub; always aborts with `rotostats_error_not_implemented` | `cli` | No |
 | `R/sgp-denominators-s3.R` — `new_sgp_denominators()` | Constructor for `sgp_denominators` S3 object; sets `attr(., "rate_conversion")` | Base R | No |
 | `R/sgp-denominators-s3.R` — S3 methods | `print`, `names`, `length`, `as.double`, `[`, `[[` for `sgp_denominators` | Base R | No |
-| `R/sgp-denominators-helpers.R` | `INVERSE_CATEGORIES`, `METADATA_COLS`, weight helpers, year-window helpers, `expected_range_normal()` | `stats` | No |
+| `R/sgp-denominators-helpers.R` | `METADATA_COLS`, weight helpers, year-window helpers, `expected_range_normal()`. `INVERSE_CATEGORIES` constant deleted — direction-flip set is now the `inverse_categories` argument on `sgp_denominators()`. | `stats` | **YES** |
 | `R/league-config.R` — `league_config()` | Constructor for `league_config` S3 object; validates roster / budget config | `cli` | No |
 | `R/league-config.R` — `pool_sizes()` | Returns `list(pitchers, hitters)` from config; shared by `sgp()` and `replacement_level()` | `league_config` S3 | No |
 | `R/league-history.R` — `league_history()` | Constructor for `league_history` S3 object; validates `team_season` schema | `cli` | No |
@@ -457,3 +466,17 @@ Both sites use `normalize_player_name()` from `replacement_internal.R`. See `pla
 4. **SVHD auto-derivation with `.frequency_id`**: `rlang::inform(.frequency = "once")` requires `.frequency_id` in rlang >= 1.1.0. The correct call uses `.frequency_id = "sgp_svhd_derivation"`. Omitting this caused a runtime crash (BLOCK-1 in tester round 1, fixed in builder round 2).
 
 5. **`total_sgp` uses `na.rm = FALSE`**: Any per-category NA propagates to `total_sgp` to surface data quality issues downstream. Callers who want partial sums can compute `rowSums(result[, grep("^sgp_", names(result))], na.rm = TRUE)` themselves.
+
+---
+
+## Key Design Decisions (sgp-denom-inverse-categories-param-2026-04-17)
+
+1. **`INVERSE_CATEGORIES` constant replaced by `inverse_categories` argument**: The package-level constant `INVERSE_CATEGORIES <- c("ERA", "WHIP")` in `sgp-denominators-helpers.R` was deleted. The direction-flip set is now a user-facing argument on `sgp_denominators()` with the same default value. Users can now declare additional lower-is-better categories (OAVG, BB9, etc.) without modifying package source. The constant was deleted to prevent drift (a live constant and a parameter with the same value would diverge if either were updated independently).
+
+2. **`missing()` flag for default-vs-explicit path distinction**: The default value `c("ERA", "WHIP")` must behave like the old constant — implicitly filtered by the `%in%` operator at runtime, so batting-only leagues produce no rank flip. A strict membership validation at argument-validation time is correct for user-supplied values but incorrect for the default (it would abort a batting-only league). The `missing(inverse_categories)` primitive, captured as the very first statement of the function body, distinguishes these paths without changing the published default in the function signature. Using `NULL` as a sentinel would have altered the `man/` documentation and the callable interface. The `missing()` approach is a standard R idiom with no `R CMD check` implications.
+
+3. **Content-addressed `.frequency_id` for one-shot inform**: The `cli_inform(.frequency = "once")` message uses `.frequency_id = paste0("rotostats_sgp_denom_inverse_", paste(sort(inverse_categories), collapse = ","))`. This key is content-addressed: identical configurations share a key (suppressed after the first call in a session); distinct configurations announce themselves independently. No external `digest` dependency is needed. The rlang requirement for an explicit `.frequency_id` (rlang >= 1.1.0) is satisfied throughout.
+
+4. **Three threading sites plus helpers deletion**: Four changes were needed atomically — the main year-loop rank-flip (line ~623), the slope-sign check's inverse branch (line ~730), the slope-sign check's normal branch (line ~739), and the bootstrap resampling rank-flip (line ~886). Missing any one of these would cause behavioral divergence: missing the sign-check sites would fire `rotostats_warning_unexpected_slope_sign` for correctly-inverted user-declared categories (acceptance criterion #2 failure). The constant deletion from the helpers file was also required to prevent dead-code accumulation.
+
+5. **Default path produces silent intersection, not a no-op**: When the default `c("ERA", "WHIP")` is intersected with a batting-only league's `scoring_categories`, the result is `character(0)`. The `cli_inform()` then fires with "No categories will be direction-flipped" — not with the ERA/WHIP names. This is the correct and intended behavior: it precisely matches what the old constant did at runtime (`no cat %in% INVERSE_CATEGORIES` in a batting-only loop), and the inform gives the user accurate visibility into the effective configuration.
