@@ -282,6 +282,7 @@ sgp_denominators <- function(
   denom_floor         = 1e-9,
   ci_level            = 0.95
 ) {
+  inverse_categories_is_default <- missing(inverse_categories)
   the_call <- match.call()
 
   # ----- 5.1 Input Acquisition and Validation --------------------------------
@@ -430,17 +431,25 @@ sgp_denominators <- function(
   # Silently deduplicate.
   inverse_categories <- unique(inverse_categories)
 
-  # Every element must appear in the effective scored-category set.
+  # Membership check — behavior differs by source:
+  # - Default path: silently intersect with scored categories (no abort, no warning).
+  #   A batting-only league produces character(0) here; rank-flip becomes a no-op.
+  # - Explicit path: abort on any element not in the scored-category set.
   bad_cats <- setdiff(inverse_categories, scoring_categories)
   if (length(bad_cats) > 0L) {
-    cli::cli_abort(
-      c(
-        "{.arg inverse_categories} contains element(s) not in the effective scored-category set.",
-        "x" = "Invalid: {.val {bad_cats}}",
-        "i" = "Valid scored categories: {.val {scoring_categories}}"
-      ),
-      class = "rotostats_error_invalid_inverse_categories"
-    )
+    if (inverse_categories_is_default) {
+      # Silent intersection: keep only the default elements that are actually scored.
+      inverse_categories <- intersect(inverse_categories, scoring_categories)
+    } else {
+      cli::cli_abort(
+        c(
+          "{.arg inverse_categories} contains element(s) not in the effective scored-category set.",
+          "x" = "Invalid: {.val {bad_cats}}",
+          "i" = "Valid scored categories: {.val {scoring_categories}}"
+        ),
+        class = "rotostats_error_invalid_inverse_categories"
+      )
+    }
   }
 
   # One-shot inform: report effective inverse_categories once per configuration.
