@@ -14,6 +14,7 @@ sgp_denominators(
   category_spec = NULL,
   outlier_filter = FALSE,
   exclude_years = 2020L,
+  inverse_categories = c("ERA", "WHIP"),
   rate_conversion = "blended_pool",
   roto_pts_col = "roto_pts",
   n_bootstrap = 0L,
@@ -73,6 +74,15 @@ category-year are excluded before fitting. Default: \code{FALSE}.}
 
 \item{exclude_years}{Integer vector of years excluded from all calibration
 windows. Default: \code{2020L} (COVID-shortened season).}
+
+\item{inverse_categories}{Character vector of scoring category names whose
+OLS rank should be direction-flipped before fitting (\code{n + 1 - rank(total)}
+replaces \code{rank(total)}), so that lower totals receive higher standings
+positions. Default: \code{c("ERA", "WHIP")}. An empty vector (\code{character(0)})
+disables all direction flips. Values are normalized to uppercase
+internally; every element must appear in the effective scored-category set
+after normalization (otherwise aborts with
+\code{rotostats_error_invalid_inverse_categories}).}
 
 \item{rate_conversion}{Character. One of \code{"blended_pool"} (default) or
 \code{"fixed_baseline"}. The \code{"fixed_baseline"} path requires \code{league_history}

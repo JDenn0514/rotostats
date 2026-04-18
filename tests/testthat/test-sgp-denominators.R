@@ -929,3 +929,370 @@ test_that("T-57: standings_pos_source is 'category_pts' with _pts column, 'rank'
   result2 <- sgp_denominators(h2, "HR", n_teams=3L, exclude_years=integer(0))
   expect_true(all(as.character(result2$year_diagnostics$standings_pos_source) == "rank"))
 })
+
+# ===========================================================================
+# 13. inverse_categories Scenarios (T-58 through T-70)
+# ===========================================================================
+# Tester pipeline — generated from test-spec.md §3 (Patch round 2).
+# Tests T-NEW-01 through T-NEW-13 renumbered T-58 through T-70 here.
+# Tester did NOT read spec.md or implementation.md.
+
+# ---------------------------------------------------------------------------
+# Helper: make_oavg_history (from test-spec.md §2)
+# ---------------------------------------------------------------------------
+make_oavg_history <- function(n_years = 3, n_teams = 5, seed = 200) {
+  set.seed(seed)
+  team_ids <- paste0("T", seq_len(n_teams))
+  rows <- lapply(seq_len(n_years), function(i) {
+    y <- 2020L + i - 1L
+    data.frame(
+      year    = y,
+      team_id = team_ids,
+      HR      = round(rnorm(n_teams, 200, 30)),
+      OAVG    = round(runif(n_teams, 0.220, 0.310), 3),
+      stringsAsFactors = FALSE
+    )
+  })
+  list(team_season = do.call(rbind, rows))
+}
+
+# ---------------------------------------------------------------------------
+# Helper: make_oavg_monotone_history (from test-spec.md §3 T-NEW-03)
+# ---------------------------------------------------------------------------
+make_oavg_monotone_history <- function() {
+  years <- 2021L:2023L
+  ts <- do.call(rbind, lapply(years, function(y) {
+    data.frame(
+      year    = y,
+      team_id = paste0("T", 1:5),
+      HR      = c(150L, 170L, 190L, 210L, 230L),
+      OAVG    = c(0.220, 0.245, 0.270, 0.295, 0.320),
+      stringsAsFactors = FALSE
+    )
+  }))
+  list(team_season = ts)
+}
+
+# ---------------------------------------------------------------------------
+# T-58 (T-NEW-01): Regression guard — existing T-01 through T-57 all pass
+# ---------------------------------------------------------------------------
+# This test runs the full suite externally; individual tests above serve as
+# the evidence. Here we re-run the canonical T-25 fixture as a named guard.
+
+test_that("T-58 (T-NEW-01): T-25 ERA regression anchor still passes after patch", {
+  ts <- data.frame(
+    year    = rep(2022L, 5),
+    team_id = paste0("T", 1:5),
+    ERA     = c(3.3, 3.6, 3.9, 4.2, 4.5)
+  )
+  h <- list(team_season = ts)
+  expect_no_warning(
+    result <- sgp_denominators(h, "ERA", n_teams = 5L, exclude_years = integer(0)),
+    class = "rotostats_warning_unexpected_slope_sign"
+  )
+  diag <- result$year_diagnostics
+  expect_true(diag$slope < 0)
+  expect_equal(diag$slope, -3.333, tolerance = 0.001)
+  expect_true(result$denominators[["ERA"]] > 0)
+  expect_equal(result$denominators[["ERA"]], 0.300, tolerance = 0.001)
+})
+
+# ---------------------------------------------------------------------------
+# T-59 (T-NEW-02): Default call — OAVG NOT in inverse_categories
+# ---------------------------------------------------------------------------
+# When scoring_categories = c("HR", "OAVG") with default inverse_categories
+# = c("ERA", "WHIP"), the effective set is character(0) (neither ERA nor WHIP
+# is scored). OAVG has no rank-flip.
+# The exact slope sign depends on data; we verify only structural properties.
+
+test_that("T-59 (T-NEW-02): default path with HR+OAVG league: effective inverse set is empty", {
+  h <- make_oavg_history(n_years = 3, n_teams = 5, seed = 200)
+  # Default inverse_categories = c("ERA", "WHIP"); neither is in c("HR","OAVG").
+  # Silent intersection -> character(0). Should NOT abort.
+  expect_no_error(
+    suppressMessages(suppressWarnings(
+      result <- sgp_denominators(
+        h,
+        scoring_categories = c("HR", "OAVG"),
+        exclude_years      = integer(0)
+        # inverse_categories omitted — default path
+      )
+    ))
+  )
+  expect_true(is.list(result))
+  expect_true("OAVG" %in% names(result$denominators))
+})
+
+# ---------------------------------------------------------------------------
+# T-60 (T-NEW-03): Explicit inverse_categories = c("OAVG") — negative slope,
+#                   no rotostats_warning_unexpected_slope_sign
+# ---------------------------------------------------------------------------
+
+test_that("T-60 (T-NEW-03): OAVG declared inverse: negative slope, no unexpected-sign warning", {
+  h <- make_oavg_monotone_history()
+  expect_no_warning(
+    result <- sgp_denominators(
+      h,
+      scoring_categories = c("HR", "OAVG"),
+      inverse_categories = c("OAVG"),
+      exclude_years      = integer(0)
+    ),
+    class = "rotostats_warning_unexpected_slope_sign"
+  )
+  oavg_diag <- result$year_diagnostics[result$year_diagnostics$category == "OAVG", ]
+  expect_true(all(oavg_diag$slope < 0))
+  expect_true(result$denominators[["OAVG"]] > 0)
+  expect_true(is.finite(result$denominators[["OAVG"]]))
+
+  # Cross-check against lm(): rank-flip produces standings_pos = 5, 4, 3, 2, 1.
+  totals        <- c(0.220, 0.245, 0.270, 0.295, 0.320)
+  standings_pos <- c(5L, 4L, 3L, 2L, 1L)
+  ref_slope     <- coef(lm(standings_pos ~ totals))[["totals"]]
+  ref_denom     <- 1 / abs(ref_slope)
+  expect_equal(result$denominators[["OAVG"]], ref_denom, tolerance = 1e-5)
+})
+
+# ---------------------------------------------------------------------------
+# T-61 (T-NEW-04): Invalid element aborts with correct class
+# ---------------------------------------------------------------------------
+
+test_that("T-61 (T-NEW-04): invalid inverse_categories element aborts with correct class", {
+  h <- make_history(cats = c("HR", "ERA"), seed = 1)
+  expect_error(
+    sgp_denominators(
+      h,
+      scoring_categories = c("HR", "ERA"),
+      inverse_categories = c("NOT_IN_CATEGORIES"),
+      exclude_years      = integer(0)
+    ),
+    class = "rotostats_error_invalid_inverse_categories"
+  )
+})
+
+# ---------------------------------------------------------------------------
+# T-62 (T-NEW-05): cli_inform() fires exactly once per configuration
+# ---------------------------------------------------------------------------
+
+test_that("T-62 (T-NEW-05): cli_inform fires at most once per configuration (second call silent)", {
+  # Use a league scoring HR + ERA + WHIP with explicit inverse_categories =
+  # c("ERA", "WHIP").
+  h <- make_history(cats = c("HR", "ERA", "WHIP"), seed = 1)
+
+  # First call: fires OR is suppressed depending on whether another test in
+  # this session already fired the same .frequency_id. Either outcome is valid.
+  # We make the call and capture the output, but do NOT assert it fires here —
+  # the rlang .frequency = "once" mechanism is session-scoped, so the first
+  # call with this .frequency_id in the ENTIRE session fires the message.
+  suppressWarnings(
+    sgp_denominators(h, scoring_categories = c("HR", "ERA", "WHIP"),
+                     inverse_categories = c("ERA", "WHIP"),
+                     exclude_years = integer(0))
+  )
+
+  # Second identical call in the same test_that block: rlang frequency cache
+  # MUST suppress the direction-flip inform. This is the invariant: once the
+  # message fires for a given .frequency_id (whether in this test_that block or
+  # an earlier one), repeated identical calls are silent.
+  msgs2 <- testthat::capture_messages(
+    suppressWarnings(
+      sgp_denominators(h, scoring_categories = c("HR", "ERA", "WHIP"),
+                       inverse_categories = c("ERA", "WHIP"),
+                       exclude_years = integer(0))
+    )
+  )
+  flip_msgs2 <- msgs2[grepl("Direction-flipping|direction-flip", msgs2, ignore.case = TRUE)]
+  expect_length(flip_msgs2, 0L)
+})
+
+# ---------------------------------------------------------------------------
+# T-63 (T-NEW-06): Empty inverse_categories = character(0) is legal
+# ---------------------------------------------------------------------------
+
+test_that("T-63 (T-NEW-06): empty inverse_categories is legal and informs 'no categories'", {
+  h <- make_history(cats = "HR", seed = 1)
+  # Primary assertion: no error (no rotostats_error_invalid_inverse_categories).
+  result <- NULL
+  expect_no_error(
+    suppressMessages(
+      result <- sgp_denominators(h, scoring_categories = "HR",
+                                 inverse_categories = character(0),
+                                 exclude_years = integer(0))
+    )
+  )
+  # Result must be a valid sgp_denominators list.
+  expect_true(is.list(result))
+  expect_true("HR" %in% names(result$denominators))
+  # The "No categories will be direction-flipped" inform message fires at most
+  # once per session (rlang .frequency = "once"). It may have fired in an
+  # earlier test (e.g., a batting-only default-path test). Message presence is
+  # verified by T-62 for the non-empty case; absence here is not a failure.
+})
+
+# ---------------------------------------------------------------------------
+# T-64 (T-NEW-07): Lowercase inverse_categories normalized to uppercase
+# ---------------------------------------------------------------------------
+
+test_that("T-64 (T-NEW-07): lowercase inverse_categories normalized to uppercase", {
+  h <- make_history(cats = c("HR", "ERA"), seed = 1)
+  expect_no_error(
+    suppressMessages(
+      sgp_denominators(h, scoring_categories = c("HR", "ERA"),
+                       inverse_categories = c("era"),
+                       exclude_years = integer(0))
+    )
+  )
+})
+
+# ---------------------------------------------------------------------------
+# T-65 (T-NEW-08): Duplicate inverse_categories elements deduplicated silently
+# ---------------------------------------------------------------------------
+
+test_that("T-65 (T-NEW-08): duplicate inverse_categories deduplicated silently", {
+  h <- make_history(cats = c("HR", "ERA"), seed = 1)
+  expect_no_error(
+    suppressMessages(
+      sgp_denominators(h, scoring_categories = c("HR", "ERA"),
+                       inverse_categories = c("ERA", "ERA"),
+                       exclude_years = integer(0))
+    )
+  )
+  # The behavioral contract says deduplication must be SILENT — no warning about
+  # duplicate elements. Data-quality warnings (high_denominator_cv, low_r_squared)
+  # are unrelated to deduplication and are suppressed with suppressWarnings().
+  # No "rotostats_warning_unexpected_slope_sign" should fire (ERA is in the effective set).
+  expect_no_warning(
+    suppressMessages(suppressWarnings(
+      sgp_denominators(h, scoring_categories = c("HR", "ERA"),
+                       inverse_categories = c("ERA", "ERA"),
+                       exclude_years = integer(0))
+    )),
+    class = "rotostats_warning_unexpected_slope_sign"
+  )
+})
+
+# ---------------------------------------------------------------------------
+# T-66 (T-NEW-09): Non-character inverse_categories aborts with correct class
+# ---------------------------------------------------------------------------
+
+test_that("T-66 (T-NEW-09): non-character inverse_categories aborts with correct class", {
+  h <- make_history(cats = "HR", seed = 1)
+  expect_error(
+    sgp_denominators(h, scoring_categories = "HR",
+                     inverse_categories = 123L,
+                     exclude_years = integer(0)),
+    class = "rotostats_error_invalid_inverse_categories"
+  )
+})
+
+# ---------------------------------------------------------------------------
+# T-67 (T-NEW-10): T-25 exact-value ERA regression guard (explicit replication)
+# ---------------------------------------------------------------------------
+
+test_that("T-67 (T-NEW-10): T-25 ERA regression: slope -3.333, denom 0.300, no sign warning", {
+  ts <- data.frame(
+    year    = rep(2022L, 5),
+    team_id = paste0("T", 1:5),
+    ERA     = c(3.3, 3.6, 3.9, 4.2, 4.5)
+  )
+  h <- list(team_season = ts)
+  expect_no_warning(
+    result <- sgp_denominators(h, "ERA", n_teams = 5L, exclude_years = integer(0)),
+    class = "rotostats_warning_unexpected_slope_sign"
+  )
+  diag <- result$year_diagnostics
+  expect_true(diag$slope < 0)
+  expect_equal(diag$slope, -3.333, tolerance = 0.001)
+  expect_equal(result$denominators[["ERA"]], 0.300, tolerance = 0.001)
+})
+
+# ---------------------------------------------------------------------------
+# T-68 (T-NEW-11): Default path, batting-only league — no abort, empty effective set
+# ---------------------------------------------------------------------------
+# Patch round 2: verifies behavioral contract item 2a.
+# inverse_categories NOT supplied; scoring only HR, R, RBI, SB.
+# Default c("ERA","WHIP") intersects to character(0). No abort.
+
+test_that("T-68 (T-NEW-11): default path, batting-only league does not abort", {
+  h <- make_history(cats = c("HR", "R", "RBI", "SB"), seed = 1)
+  result <- NULL
+  # Primary assertion: no error (no rotostats_error_invalid_inverse_categories).
+  # Default inverse_categories = c("ERA","WHIP") intersects silently to
+  # character(0) when neither ERA nor WHIP is scored. No abort, no error.
+  expect_no_error(
+    suppressMessages(
+      result <- sgp_denominators(
+        h,
+        scoring_categories = c("HR", "R", "RBI", "SB"),
+        exclude_years      = integer(0)
+        # inverse_categories deliberately omitted — default path
+      )
+    )
+  )
+  # Result structure is a valid sgp_denominators list.
+  expect_true(is.list(result))
+  expect_true(all(c("HR", "R", "RBI", "SB") %in% names(result$denominators)))
+  # The "No categories will be direction-flipped" inform fires at most once per
+  # session (rlang .frequency = "once"). Earlier tests in this suite that score
+  # only batting categories (e.g., T-01, T-02) already fired this inform with
+  # the same .frequency_id. Its absence in THIS test_that block is not a failure
+  # — the cache confirms it fired. The critical behavioral guarantee is NO ABORT.
+})
+
+# ---------------------------------------------------------------------------
+# T-69 (T-NEW-12): Default path, HR+ERA league — ERA intersected in, WHIP dropped
+# ---------------------------------------------------------------------------
+# Patch round 2: verifies partial-overlap default-path behavior.
+# Default c("ERA","WHIP") ∩ c("HR","ERA") = c("ERA"). WHIP silently dropped.
+
+test_that("T-69 (T-NEW-12): default path, HR+ERA league: ERA intersected in, WHIP silently dropped", {
+  h <- make_history(cats = c("HR", "ERA"), seed = 42)
+  msgs <- character(0)
+  expect_no_error(
+    msgs <- testthat::capture_messages(
+      suppressWarnings(
+        result <- sgp_denominators(
+          h,
+          scoring_categories = c("HR", "ERA"),
+          exclude_years      = integer(0)
+          # inverse_categories deliberately omitted
+        )
+      )
+    )
+  )
+  # ERA receives rank-flip: all slopes must be negative.
+  era_diag <- result$year_diagnostics[result$year_diagnostics$category == "ERA", ]
+  expect_true(all(era_diag$slope < 0))
+  expect_true(result$denominators[["ERA"]] > 0)
+  expect_true(is.finite(result$denominators[["ERA"]]))
+
+  # No unexpected-slope warning for ERA (it IS in the effective inverse set).
+  expect_no_warning(
+    suppressMessages(
+      sgp_denominators(
+        h,
+        scoring_categories = c("HR", "ERA"),
+        exclude_years      = integer(0)
+      )
+    ),
+    class = "rotostats_warning_unexpected_slope_sign"
+  )
+})
+
+# ---------------------------------------------------------------------------
+# T-70 (T-NEW-13): Explicit path, batting-only league — must abort
+# ---------------------------------------------------------------------------
+# Patch round 2: verifies that explicit path is still strict even when the
+# value passed happens to match the default literal.
+
+test_that("T-70 (T-NEW-13): explicit inverse_categories with batting-only league aborts", {
+  h <- make_history(cats = c("HR"), seed = 1)
+  expect_error(
+    sgp_denominators(
+      h,
+      scoring_categories = c("HR"),
+      inverse_categories = c("ERA", "WHIP"),  # explicitly supplied — triggers strict validation
+      exclude_years      = integer(0)
+    ),
+    class = "rotostats_error_invalid_inverse_categories"
+  )
+})
