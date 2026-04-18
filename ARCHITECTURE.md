@@ -1,10 +1,10 @@
 # Architecture: rotostats
 
-**Run:** `sgp-denom-inverse-categories-param-2026-04-17`
-**Branch:** `feature/sgp-denom-inverse-categories-param` @ `ce8a37d`
+**Run:** `sgp-denom-weights-guidance-docs-2026-04-17`
+**Branch:** `feature/sgp-denom-weights-guidance-docs` @ (see git log)
 **Date:** 2026-04-18
 
-(Previous run: `sgp-input-hardening-2026-04-17` @ `3d2bd69` — see git log for prior state)
+(Previous run: `sgp-denom-inverse-categories-param-2026-04-17` — see git log for prior state)
 
 ---
 
@@ -266,20 +266,20 @@ graph TD
 
 | Module / Function | Purpose | Key Dependencies | Changed in This Run |
 |---|---|---|---|
-| `R/replacement.R` — `replacement_level()` | Per-position replacement-level estimator; boundary-band + iteration loop | `replacement_internal.R`, `replacement_params.R`, `league-config.R` (`pool_sizes()`), `sgp.R` (when `sort_by="sgp"`), `cli`, `checkmate`, `rlang`, `stats`, `stringi` | **YES** |
-| `R/replacement.R` — `replacement_from_prices()` | Price-based replacement estimator; no projections or band computation | `replacement_internal.R`, `cli`, `checkmate`, `rlang`, `stringi` | **YES** |
-| `R/replacement_internal.R` — `format_replacement_output()` | Constructs the 7-element output list; called by both exported functions | Base R | **YES** |
-| `R/replacement_internal.R` — `compute_positional_adjustments()` | Computes scarcity premiums via fvarz/sgp/dollar/posblend; enforces zero-sum | `cli`, `rlang` | **YES** |
-| `R/replacement_internal.R` — `assert_replacement_output_contract()` | Final validation of the complete output object before return | `cli` | **YES** |
-| `R/replacement_internal.R` — other internal helpers | `compute_band_indices()`, `detect_cliff()`, `compute_replacement_stat_line()`, `infer_pitcher_roles()`, `normalize_name()`, `compute_zscores()`, `assert_zero_sum()`, `compute_par_at_pos()`, `detect_kde_trough()` | `stats`, `stringi` | **YES** |
-| `R/replacement_params.R` — `default_replacement_params` | Exported list of 9 numeric constants; user overrides via `replacement_params = list(...)` | — | **YES** |
-| `R/replacement_params.R` — `rate_stat_denominators()` | Returns `RATE_STAT_DENOMINATORS` named character vector; 17 built-in entries including BABIP | — | **YES** |
-| `R/sgp.R` — `sgp()` | Per-player SGP converter; called internally by `replacement_level()` when `sort_by = "sgp"` | `sgp_denominators` S3, `pool_sizes()`, `cli`, `rlang`, `stats` | **YES** |
-| `R/sgp-denominators.R` — `sgp_denominators()` | Calibrates per-category SGP denominators from league history; now accepts `inverse_categories` argument (default `c("ERA", "WHIP")`) replacing the former hard-coded constant | `sgp-denominators-helpers.R`, `sgp-denominators-s3.R`, `cli`, `stats` | **YES** |
+| `R/replacement.R` — `replacement_level()` | Per-position replacement-level estimator; boundary-band + iteration loop | `replacement_internal.R`, `replacement_params.R`, `league-config.R` (`pool_sizes()`), `sgp.R` (when `sort_by="sgp"`), `cli`, `checkmate`, `rlang`, `stats`, `stringi` | No |
+| `R/replacement.R` — `replacement_from_prices()` | Price-based replacement estimator; no projections or band computation | `replacement_internal.R`, `cli`, `checkmate`, `rlang`, `stringi` | No |
+| `R/replacement_internal.R` — `format_replacement_output()` | Constructs the 7-element output list; called by both exported functions | Base R | No |
+| `R/replacement_internal.R` — `compute_positional_adjustments()` | Computes scarcity premiums via fvarz/sgp/dollar/posblend; enforces zero-sum | `cli`, `rlang` | No |
+| `R/replacement_internal.R` — `assert_replacement_output_contract()` | Final validation of the complete output object before return | `cli` | No |
+| `R/replacement_internal.R` — other internal helpers | `compute_band_indices()`, `detect_cliff()`, `compute_replacement_stat_line()`, `infer_pitcher_roles()`, `normalize_name()`, `compute_zscores()`, `assert_zero_sum()`, `compute_par_at_pos()`, `detect_kde_trough()` | `stats`, `stringi` | No |
+| `R/replacement_params.R` — `default_replacement_params` | Exported list of 9 numeric constants; user overrides via `replacement_params = list(...)` | — | No |
+| `R/replacement_params.R` — `rate_stat_denominators()` | Returns `RATE_STAT_DENOMINATORS` named character vector; 17 built-in entries including BABIP | — | No |
+| `R/sgp.R` — `sgp()` | Per-player SGP converter; called internally by `replacement_level()` when `sort_by = "sgp"` | `sgp_denominators` S3, `pool_sizes()`, `cli`, `rlang`, `stats` | No |
+| `R/sgp-denominators.R` — `sgp_denominators()` | Calibrates per-category SGP denominators from league history; accepts `inverse_categories` argument; `@details` now includes "Choosing weights" subsection with Q4/Q7 regime guidance | `sgp-denominators-helpers.R`, `sgp-denominators-s3.R`, `cli`, `stats` | **YES (docs only)** |
 | `R/sgp-denominators.R` — `convert_rate_stats()` | Stub; always aborts with `rotostats_error_not_implemented` | `cli` | No |
 | `R/sgp-denominators-s3.R` — `new_sgp_denominators()` | Constructor for `sgp_denominators` S3 object; sets `attr(., "rate_conversion")` | Base R | No |
 | `R/sgp-denominators-s3.R` — S3 methods | `print`, `names`, `length`, `as.double`, `[`, `[[` for `sgp_denominators` | Base R | No |
-| `R/sgp-denominators-helpers.R` | `METADATA_COLS`, weight helpers, year-window helpers, `expected_range_normal()`. `INVERSE_CATEGORIES` constant deleted — direction-flip set is now the `inverse_categories` argument on `sgp_denominators()`. | `stats` | **YES** |
+| `R/sgp-denominators-helpers.R` | `METADATA_COLS`, weight helpers, year-window helpers, `expected_range_normal()`. `INVERSE_CATEGORIES` constant deleted in prior run. | `stats` | No |
 | `R/league-config.R` — `league_config()` | Constructor for `league_config` S3 object; validates roster / budget config | `cli` | No |
 | `R/league-config.R` — `pool_sizes()` | Returns `list(pitchers, hitters)` from config; shared by `sgp()` and `replacement_level()` | `league_config` S3 | No |
 | `R/league-history.R` — `league_history()` | Constructor for `league_history` S3 object; validates `team_season` schema | `cli` | No |

@@ -190,6 +190,31 @@ a \verb{$team_season} data.frame is accepted as a duck-type fallback.
 \code{rate_conversion = "fixed_baseline"} path aborts with
 \code{rotostats_error_not_implemented}.
 }
+
+\subsection{Choosing weights}{
+
+Three presets cover the most common calibration regimes:
+\itemize{
+\item \strong{\code{flat()}} — treat all seasons as exchangeable (i.i.d.). Lowest MSE when
+the scoring environment is genuinely stable across years.
+\item \strong{\code{exp_decay(0.9)}} — mild decay; the default. A reasonable compromise
+when a structural break in the game environment is suspected but not
+confirmed. Intermediate MSE under both stable and break DGPs.
+\item \strong{\code{exp_decay(0.7)}} — strong decay. Use when a within-year dispersion
+break is known or expected (e.g., rule changes that materially alter
+category spread). Validated in the Q4 Monte Carlo study
+(see \code{runs/sgp-denom-dgpb-rerun-2026-04-17}): under a 2.5x sigma-shift
+DGP, \code{exp_decay(0.7)} achieved a 71\% MSE reduction versus flat weighting.
+}
+
+For categories where a break year is known, the per-category override
+combines a year cutoff with strong decay; for example, the Q7 validation
+showed that
+\code{category_spec = cal_spec(SB = cal(years = after(2005), weights = exp_decay(0.7)))}
+reduced SB MSE by 93.5\% relative to the flat baseline while HR MSE changed
+by less than 1\%, confirming that overrides are isolated to the target
+category.
+}
 }
 \section{Caveats}{
 
