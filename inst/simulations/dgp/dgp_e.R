@@ -1,10 +1,17 @@
 # DGP-E: Rank Invariance (Study E)
 #
-# Generates a pitcher pool with a fixed focal pitcher F and a random complement
-# pool. The focal pitcher has fixed projections; complement is drawn from DGP-A
-# pitcher model. Two league configurations: 10-team and 15-team.
+# Generates a pitcher pool with a fixed focal pitcher F and a complement
+# pool that is FIXED across replications (via FIXED_POOL_SEED). The focal
+# pitcher has fixed projections; the complement SP are drawn once at source
+# time using the dedicated FIXED_POOL_SEED. Both the 10-team and 15-team
+# calls to dgp_e() use the same pre-generated pool (first 62 pitchers for
+# 10-team, first 92 for 15-team), eliminating all between-replication
+# variance from the rank_diff metric.
 #
-# Based on sim-spec.md §2.4.
+# Patched per sim-spec.md §2.E (request replacement-dgp-e-calibration-2026-04-17).
+# See changelog in sim-spec.md §7 for root-cause analysis and fix rationale.
+#
+# Based on sim-spec.md §2.4 (parent) and §2.E (this patch).
 #
 # Usage:
 #   projections <- dgp_e(seed = 12345, n_teams = 10)
@@ -17,15 +24,12 @@
 #   - league       : required; mixed league = 50/50 AL/NL split
 #   - pos_eligibility: pipe-delimited ("|").
 
-# Fixed focal pitcher projections.
-# ERA=4.70, WHIP=1.40 are set at approximately the 10-team boundary quality
-# level so that the extra complement pitchers added for a 15-team league
-# (drawn from the same N(3.80, 0.45) ERA distribution) are predominantly
-# better than the focal pitcher.  When ~28-30 of the 30 extra pitchers
-# outrank focal, focal's absolute rank increases by approximately the
-# boundary shift (30), keeping rank_vs_boundary invariant across league sizes.
-# Choosing a below-average focal pitcher (ERA > pool mean 3.80) is the
-# design requirement for rank-invariance; see follow-up-fix-2 in implementation.md.
+# ---------------------------------------------------------------------------
+# Fixed focal pitcher projections (unchanged from commit 21270fb).
+# ERA=4.70, WHIP=1.40 are well below pool mean (3.80/1.22); ~97.7% of pool
+# pitchers have lower ERA. The focal pitcher is designed to be near but just
+# below the replacement boundary.
+# ---------------------------------------------------------------------------
 .FOCAL_PITCHER <- list(
   ERA  = 4.70,
   WHIP = 1.40,
@@ -35,32 +39,69 @@
   SV   = 0L
 )
 
+# ---------------------------------------------------------------------------
+# Module-level fixed complement SP pool (generated once at source time).
+#
+# FIXED_POOL_SEED = 25260416L = 20260416L + 5000000L. This seed is a
+# module-level constant and must never change between runs. Re-sourcing this
+# file regenerates the SAME fixed pool.
+#
+# N_FIXED_POOL = 95L is sufficient for the 15-team case (n_complement_sp=92)
+# plus a 3-pitcher buffer.
+# ---------------------------------------------------------------------------
+.FIXED_POOL_SEED <- 25260416L   # = 20260416L + 5000000L; constant; never changes
+.N_FIXED_POOL    <- 95L
+
+set.seed(.FIXED_POOL_SEED)
+.FIXED_IP_SP    <- pmin(pmax(round(stats::rnorm(.N_FIXED_POOL, 170, 15)), 120L), 230L)
+.FIXED_ERA_SP   <- pmin(pmax(stats::rnorm(.N_FIXED_POOL, 3.80, 0.45), 2.50), 6.00)
+.FIXED_WHIP_SP  <- pmin(pmax(stats::rnorm(.N_FIXED_POOL, 1.22, 0.10), 0.90), 1.80)
+.FIXED_K9_SP    <- pmin(pmax(stats::rnorm(.N_FIXED_POOL, 8.5, 1.2), 4.0), 14.0)
+.FIXED_W_SP     <- stats::rpois(.N_FIXED_POOL, lambda = .FIXED_IP_SP / 9 * 0.44)
+.FIXED_K_SP     <- round(.FIXED_IP_SP * .FIXED_K9_SP / 9)
+
+# Verify fixed pool integrity
+stopifnot(
+  length(.FIXED_IP_SP)   >= 92L,
+  length(.FIXED_ERA_SP)  >= 92L,
+  length(.FIXED_WHIP_SP) >= 92L,
+  all(!is.na(.FIXED_ERA_SP[seq_len(92L)])),
+  all(!is.na(.FIXED_WHIP_SP[seq_len(92L)])),
+  all(!is.na(.FIXED_IP_SP[seq_len(92L)]))
+)
+
 #' Generate DGP-E projection data frame.
 #'
-#' @param seed Integer seed.
+#' The complement SP pool is drawn from a fixed pre-generated pool
+#' (.FIXED_IP_SP, .FIXED_ERA_SP, etc.) at module scope. This eliminates
+#' between-replication variance in complement SP composition. The per-
+#' replication seed drives ONLY the RP and hitter draws.
+#'
+#' @param seed Integer per-replication seed. Drives RP and hitter draws only.
 #' @param n_teams Number of teams (10 or 15).
-#' @return A data frame with focal pitcher F as the first row and a random
-#'   complement pitcher pool. All players have \code{position = "SP"} or
-#'   \code{"RP"}; hitter columns are \code{NA}.
+#' @return A data frame with focal pitcher F as the first row and complement
+#'   pitcher/hitter pool. All pitchers have \code{position = "SP"} or
+#'   \code{"RP"}; hitter columns are \code{NA} for pitchers.
 #' @noRd
 dgp_e <- function(seed, n_teams) {
-  set.seed(seed)
-
   sp_slots   <- 6L
   rp_slots   <- 3L
-  # Total SP needed = n_teams * sp_slots + K (K=3 buffer per sim-spec.md §2.4)
-  n_sp_total <- n_teams * sp_slots + 3L  # +3 buffer
-  n_complement_sp <- n_sp_total - 1L     # focal pitcher takes 1 slot
 
-  # ---- Complement SP ----------------------------------------------------- #
-  # Draw from DGP-A SP distribution (no swingmen for simplicity; rank study
-  # doesn't depend on swingman flagging)
-  IP_SP   <- pmin(pmax(round(stats::rnorm(n_complement_sp, 170, 15)), 120L), 230L)
-  ERA_SP  <- pmin(pmax(stats::rnorm(n_complement_sp, 3.80, 0.45), 2.50), 6.00)
-  WHIP_SP <- pmin(pmax(stats::rnorm(n_complement_sp, 1.22, 0.10), 0.90), 1.80)
-  K9_SP   <- pmin(pmax(stats::rnorm(n_complement_sp, 8.5, 1.2), 4.0), 14.0)
-  W_SP    <- stats::rpois(n_complement_sp, lambda = IP_SP / 9 * 0.44)
-  K_SP    <- round(IP_SP * K9_SP / 9)
+  # n_complement_sp = n_teams * sp_slots + 2L (buffer); total pool = n_teams*6+3
+  # (focal pitcher takes 1 slot, making total = n_complement_sp + 1 = n_teams*6+3)
+  n_complement_sp <- n_teams * sp_slots + 2L
+
+  # ---- Complement SP: subset from FIXED pool (NO set.seed here) ----------- #
+  # Both 10-team (first 62) and 15-team (first 92) calls use the same fixed
+  # pool. The extra 30 pitchers for the 15-team call are FIXED, not random.
+  IP_SP   <- .FIXED_IP_SP[seq_len(n_complement_sp)]
+  ERA_SP  <- .FIXED_ERA_SP[seq_len(n_complement_sp)]
+  WHIP_SP <- .FIXED_WHIP_SP[seq_len(n_complement_sp)]
+  W_SP    <- .FIXED_W_SP[seq_len(n_complement_sp)]
+  K_SP    <- .FIXED_K_SP[seq_len(n_complement_sp)]
+
+  # ---- Per-replication seed: drives RP and hitter draws ONLY -------------- #
+  set.seed(seed)
 
   # Focal pitcher row
   focal_df <- data.frame(
@@ -127,7 +168,6 @@ dgp_e <- function(seed, n_teams) {
 
   # ---- Hitters (minimal, required so replacement_level() doesn't error) -- #
   # Use scaled hitter pool based on n_teams. Minimal for Study E purposes.
-  # 6 positions * n_teams players + some buffer
   n_hitter_pos <- c(C=1L, `1B`=1L, `2B`=1L, `3B`=1L, SS=1L, OF=3L, UTIL=1L)
   hitter_rows <- vector("list", length(n_hitter_pos))
   pid <- n_complement_sp + 1L + n_rp
