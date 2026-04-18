@@ -103,6 +103,14 @@ convert_rate_stats <- function(
 #'   category-year are excluded before fitting. Default: `FALSE`.
 #' @param exclude_years Integer vector of years excluded from all calibration
 #'   windows. Default: `2020L` (COVID-shortened season).
+#' @param inverse_categories Character vector of scoring category names whose
+#'   OLS rank should be direction-flipped before fitting (`n + 1 - rank(total)`
+#'   replaces `rank(total)`), so that lower totals receive higher standings
+#'   positions. Default: `c("ERA", "WHIP")`. An empty vector (`character(0)`)
+#'   disables all direction flips. Values are normalized to uppercase
+#'   internally; every element must appear in the effective scored-category set
+#'   after normalization (otherwise aborts with
+#'   `rotostats_error_invalid_inverse_categories`).
 #' @param rate_conversion Character. One of `"blended_pool"` (default) or
 #'   `"fixed_baseline"`. The `"fixed_baseline"` path requires `league_history`
 #'   to already be of class `"sgp_history_transformed"`; otherwise it calls the
@@ -259,19 +267,20 @@ convert_rate_stats <- function(
 #' }
 sgp_denominators <- function(
   league_history,
-  scoring_categories = NULL,
-  n_teams            = NULL,
-  years              = "all",
-  weights            = exp_decay(0.9),
-  method             = "ols",
-  category_spec      = NULL,
-  outlier_filter     = FALSE,
-  exclude_years      = 2020L,
-  rate_conversion    = "blended_pool",
-  roto_pts_col       = "roto_pts",
-  n_bootstrap        = 0L,
-  denom_floor        = 1e-9,
-  ci_level           = 0.95
+  scoring_categories  = NULL,
+  n_teams             = NULL,
+  years               = "all",
+  weights             = exp_decay(0.9),
+  method              = "ols",
+  category_spec       = NULL,
+  outlier_filter      = FALSE,
+  exclude_years       = 2020L,
+  inverse_categories  = c("ERA", "WHIP"),
+  rate_conversion     = "blended_pool",
+  roto_pts_col        = "roto_pts",
+  n_bootstrap         = 0L,
+  denom_floor         = 1e-9,
+  ci_level            = 0.95
 ) {
   the_call <- match.call()
 
@@ -403,6 +412,54 @@ sgp_denominators <- function(
         class = "rotostats_error_missing_category_column"
       )
     }
+  }
+
+  # ----- Validate and normalize inverse_categories ----------------------------
+
+  # Must be a character vector.
+  if (!is.character(inverse_categories)) {
+    cli::cli_abort(
+      "{.arg inverse_categories} must be a character vector, not {.cls {class(inverse_categories)}}.",
+      class = "rotostats_error_invalid_inverse_categories"
+    )
+  }
+
+  # Normalize to uppercase (matches scoring_categories convention).
+  inverse_categories <- toupper(inverse_categories)
+
+  # Silently deduplicate.
+  inverse_categories <- unique(inverse_categories)
+
+  # Every element must appear in the effective scored-category set.
+  bad_cats <- setdiff(inverse_categories, scoring_categories)
+  if (length(bad_cats) > 0L) {
+    cli::cli_abort(
+      c(
+        "{.arg inverse_categories} contains element(s) not in the effective scored-category set.",
+        "x" = "Invalid: {.val {bad_cats}}",
+        "i" = "Valid scored categories: {.val {scoring_categories}}"
+      ),
+      class = "rotostats_error_invalid_inverse_categories"
+    )
+  }
+
+  # One-shot inform: report effective inverse_categories once per configuration.
+  .freq_id <- paste0(
+    "rotostats_sgp_denom_inverse_",
+    paste(sort(inverse_categories), collapse = ",")
+  )
+  if (length(inverse_categories) == 0L) {
+    cli::cli_inform(
+      "No categories will be direction-flipped ({.arg inverse_categories} is empty).",
+      .frequency    = "once",
+      .frequency_id = .freq_id
+    )
+  } else {
+    cli::cli_inform(
+      "Direction-flipping categories (rank-flip before OLS): {.val {inverse_categories}}.",
+      .frequency    = "once",
+      .frequency_id = .freq_id
+    )
   }
 
   # Now emit the unrecognized-column warning with full knowledge of categories.
@@ -620,7 +677,7 @@ sgp_denominators <- function(
         # (lowest ERA) receive rank n_y and produces a negative OLS slope (rank decreases
         # as total increases), consistent with rank-1=worst / rank-n=best convention.
         raw_rank <- rank(ts_y[[cat]], ties.method = "average")
-        standings_pos <- if (cat %in% INVERSE_CATEGORIES) {
+        standings_pos <- if (cat %in% inverse_categories) {
           n_y + 1L - raw_rank
         } else {
           raw_rank
@@ -727,7 +784,7 @@ sgp_denominators <- function(
       # After the direction-aware rank-flip in Step 2:
       #   Normal categories: higher totals -> higher rank -> positive slope expected.
       #   Inverse categories: higher totals -> lower standings pos -> negative slope expected.
-      if (cat %in% INVERSE_CATEGORIES && beta_c > 0) {
+      if (cat %in% inverse_categories && beta_c > 0) {
         cli::cli_warn(
           paste0(
             "Unexpected positive OLS slope for inverse category {.val {cat}} ",
@@ -736,7 +793,7 @@ sgp_denominators <- function(
           ),
           class = "rotostats_warning_unexpected_slope_sign"
         )
-      } else if (!(cat %in% INVERSE_CATEGORIES) && beta_c < 0) {
+      } else if (!(cat %in% inverse_categories) && beta_c < 0) {
         cli::cli_warn(
           paste0(
             "Unexpected negative OLS slope for normal category {.val {cat}} ",
@@ -883,7 +940,7 @@ sgp_denominators <- function(
               # Direction-aware rank (mirrors main computation path).
               n_y_b <- length(totals)
               raw_rank_b <- rank(totals, ties.method = "average")
-              sp <- if (cat %in% INVERSE_CATEGORIES) {
+              sp <- if (cat %in% inverse_categories) {
                 n_y_b + 1L - raw_rank_b
               } else {
                 raw_rank_b

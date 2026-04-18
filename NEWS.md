@@ -1,5 +1,13 @@
 # rotostats (development version)
 
+## New arguments
+
+* `sgp_denominators()` gains an `inverse_categories` argument (default
+  `c("ERA", "WHIP")`) to declare which scoring categories use a
+  direction-flipped rank before OLS fitting. Leagues scoring OAVG, BB9, or
+  other lower-is-better categories can now pass these names directly instead
+  of modifying package source. Existing callers are unaffected.
+
 ## New functions
 
 * `replacement_level()` — Per-position replacement-level stat-line estimator

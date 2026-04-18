@@ -334,6 +334,7 @@ sgp_denominators(
 | `category_spec` | `cal_spec` object | No | `NULL` | Per-category overrides for `years` and `weights`. Must be constructed with `cal_spec(SB = cal(...))`. Raw `list()` rejected at construction time |
 | `outlier_filter` | logical | No | `FALSE` | When `TRUE`, excludes team-season rows where a category total is > 1.5 IQR from the league median for that category-year |
 | `exclude_years` | integer or integer vector | No | `2020` | Years excluded from all calibration windows regardless of `years` setting |
+| `inverse_categories` | character vector | No | `c("ERA", "WHIP")` | Categories whose OLS rank is direction-flipped (`n + 1 - rank(total)`) before fitting. Lower totals in these categories receive higher standings positions. Normalized to uppercase internally. Must be a subset of the effective scored-category set; otherwise aborts with `rotostats_error_invalid_inverse_categories`. An empty vector (`character(0)`) disables all direction flips. |
 | `rate_conversion` | character | No | `"blended_pool"` | One of `"blended_pool"`, `"fixed_baseline"`. When `"fixed_baseline"`, calls `convert_rate_stats()` internally before calibration unless `league_history` already carries class `sgp_history_transformed`. Stored as `attr(result, "rate_conversion")` on the returned vector |
 | `roto_pts_col` | character | No | `"roto_pts"` | Column name in `league_history$team_season` holding total roto points. Used only for the optional standings correlation validation check |
 
@@ -453,6 +454,7 @@ No output attributes. `attr(denominators, "rate_conversion")` on the input denom
 |-----------|----------|---------|-------------|
 | `league_history` missing `year` or `team_id` column | `sgp_denominators()` | `cli_abort()` | TBD |
 | Scored category column absent from `league_history` | `sgp_denominators()` | `cli_abort()`, names the missing category | TBD |
+| Any element of `inverse_categories` (after uppercase normalization) not present in effective scored-category set | `sgp_denominators()` | `cli_abort()`, names offending elements and valid set | `rotostats_error_invalid_inverse_categories` |
 | `category_spec` constructed with raw `list()` instead of `cal_spec()` | `sgp_denominators()` / `cal_spec()` | `cli_abort()` at construction time | TBD |
 | `roto_pts` column absent from `league_history` | `sgp_denominators()` | `cli_inform()` — standings validation check skipped | — |
 | Column names normalized to uppercase | `sgp_denominators()` | `cli_inform()` (once), names changed columns | — |
