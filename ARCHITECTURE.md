@@ -1,10 +1,10 @@
 # Architecture: rotostats
 
-**Run:** `sgp-denom-weights-guidance-docs-2026-04-17`
-**Branch:** `feature/sgp-denom-weights-guidance-docs` @ (see git log)
+**Run:** `replacement-multi-pos-all-spec-2026-04-18`
+**Branch:** `feature/replacement-multi-pos-all-spec` @ (see git log)
 **Date:** 2026-04-18
 
-(Previous run: `sgp-denom-inverse-categories-param-2026-04-17` — see git log for prior state)
+(Previous run: `sgp-denom-weights-guidance-docs-2026-04-17` — see git log for prior state)
 
 ---
 
@@ -419,7 +419,7 @@ Both sites use `normalize_player_name()` from `replacement_internal.R`. See `pla
 
 4. **`boundary_rate_method = "sgp_pool"` deferred**: Validation guard (including `fixed_baseline` incompatibility) is in place; full pool-marginal boundary ranking deferred.
 
-5. **`multi_pos = "all"` deferred**: Falls back to primary-position assignment; 3D output structure not yet implemented.
+5. **`multi_pos = "all"` designed**: Full design specified in `specs/spec-replacement-multi-pos-all.md` (this run). Output shape: long-form tidy data frame (not 3D array) with columns `player_id`, `position`, `[stat]`, `n_band_players`, `cliff_detected`. `position_assignments` attribute becomes a named list of character vectors. Generalized zero-sum invariant uses fractional allocation (`1/n_eligible` per eligible position), asserted at `1e-5` tolerance. `par()`, `zar()`, `dollar_values()` reject `"all"` input with `rotostats_error_multi_pos_all_unsupported`. Implementation deferred to a future run.
 
 ### Cross-References
 
@@ -480,3 +480,15 @@ Both sites use `normalize_player_name()` from `replacement_internal.R`. See `pla
 4. **Three threading sites plus helpers deletion**: Four changes were needed atomically — the main year-loop rank-flip (line ~623), the slope-sign check's inverse branch (line ~730), the slope-sign check's normal branch (line ~739), and the bootstrap resampling rank-flip (line ~886). Missing any one of these would cause behavioral divergence: missing the sign-check sites would fire `rotostats_warning_unexpected_slope_sign` for correctly-inverted user-declared categories (acceptance criterion #2 failure). The constant deletion from the helpers file was also required to prevent dead-code accumulation.
 
 5. **Default path produces silent intersection, not a no-op**: When the default `c("ERA", "WHIP")` is intersected with a batting-only league's `scoring_categories`, the result is `character(0)`. The `cli_inform()` then fires with "No categories will be direction-flipped" — not with the ERA/WHIP names. This is the correct and intended behavior: it precisely matches what the old constant did at runtime (`no cat %in% INVERSE_CATEGORIES` in a batting-only loop), and the inform gives the user accurate visibility into the effective configuration.
+
+---
+
+## Key Design Decisions (replacement-multi-pos-all-spec-2026-04-18)
+
+1. **Long-form tidy data frame over 3D array**: Ineligible `(player, position)` pairs produce no row (no NAs), memory is proportional to the number of eligible pairs (~3-4x smaller than a dense array for typical 15-team leagues), and downstream operations use standard dplyr idioms consistent with the rest of the package. A 3D array was rejected because its sparse ineligibility structure requires either NA fill or a separate eligibility mask — both absent from the existing codebase. See `specs/spec-replacement-multi-pos-all.md` §1.
+
+2. **Fractional allocation for zero-sum invariant**: Each multi-eligible player contributes `1/n_eligible` to each position's effective slot count (`f_slots[p]`). This is the unique allocation that sums to 1.0 per player, is distribution-free, and reduces to the `"best"` scalar invariant when `n_eligible = 1`. Tolerance loosened from `1e-6` to `1e-5` to accommodate floating-point accumulation in fractional arithmetic; `1e-5` provides a 100x margin above worst-case accumulation for 500 players with up to 3 eligible positions. See `specs/spec-replacement-multi-pos-all.md` §2.
+
+3. **Downstream reject-not-aggregate for par/zar/dollar_values**: `par()`, `zar()`, and `dollar_values()` reject `"all"` replacement objects with `rotostats_error_multi_pos_all_unsupported`. Silent aggregation (e.g., pick max-premium position inside `par()`) was rejected because it changes semantics without user awareness. Per-position PAR was rejected because `par()` must produce one PAR per player for auction pricing. `"all"` mode is diagnostic, not a primary valuation input. See `specs/spec-replacement-multi-pos-all.md` §3.
+
+4. **`multi_pos` recorded in `params` for all modes**: All `multi_pos` values (not just `"all"`) must be recorded in the `params` element of the return list so downstream guards can check mode without inspecting data frame column structure. This is a backward-compatible addition to `params` (no existing code reads `params$multi_pos`). See `specs/spec-replacement-multi-pos-all.md` §7.

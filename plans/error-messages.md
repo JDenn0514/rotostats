@@ -66,6 +66,7 @@ All `cli_abort()` and `cli_warn()` calls must use a class from this table.
 | `rotostats_error_missing_rate_conversion_attr` | `replacement_level()` | `boundary_rate_method = "sgp_pool"` and `attr(sgp_denominators, "rate_conversion")` is `NULL` (attribute absent) | Use an `sgp_denominators` object produced by `sgp_denominators()`, which attaches `rate_conversion` automatically; or set `attr(sgp_denominators, "rate_conversion") <- "blended_pool"` manually |
 | `rotostats_error_sgp_pool_degenerate` | `replacement_level()` | A position's rostered pool (from `position_assignments`) has fewer than 2 players; the N−1 marginal-pool formula is undefined | Check `n_teams` and `roster_slots`; use `boundary_rate_method = "raw_ip"` for positions with only 1 roster slot |
 | `rotostats_error_sgp_pool_sort_mismatch` | `replacement_level()` | `boundary_rate_method = "sgp_pool"` paired with `sort_by = "zscore"` | Set `sort_by = "sgp"` when using `boundary_rate_method = "sgp_pool"` |
+| `rotostats_error_multi_pos_all_unsupported` | `par()`, `zar()`, `dollar_values()` | Function receives a replacement object where `params$multi_pos == "all"`; these functions require a single-assignment replacement object | Re-run `replacement_level()` with `multi_pos = "best"` (or `"highest_par"`, `"primary"`, or `"custom"`) before calling this function; use `multi_pos = "all"` only for diagnostic inspection |
 
 ## Warnings
 
