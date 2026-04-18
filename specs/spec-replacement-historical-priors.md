@@ -258,8 +258,9 @@ When `seed_method = "historical_priors"`:
   the source of the pass-1 seed. It does not merely confirm the seed; there is no blending.
 - After convergence, the $1 calibration diagnostic runs as normal. A large divergence
   between the converged replacement level and the current-season $1 trimmed mean is
-  reported as `rotostats_warning_calibration_suppressed` (if too few $1 players survive) or
-  is available for inspection; it does not retroactively alter the converged result.
+  available for manual inspection; it does not retroactively alter the converged result.
+  `rotostats_warning_calibration_suppressed` fires only when the post-trim $1 pool count
+  falls below `calibration_min_n`, as defined in the parent spec — not on divergence itself.
 
 ---
 
@@ -291,7 +292,7 @@ absent).
 | Seasons with matching `n_teams` are the correct pool to aggregate | Theoretical | Boundary depth is `n_teams * roster_slots[pos]`; a 12-team season and a 15-team season produce boundary players of materially different quality. Explicit restriction is transparent and matches the caller-filters-the-window convention established in the parent spec for `$prices` |
 | 3-season default (`historical_priors_min_seasons = 3L`) is sufficient for per-position stability | Partially testable | Leave-one-out CV (hold out each year, re-derive prior from remaining years, compare to single-season hierarchy seed on the held-out year); validate once multi-season history is available |
 | Standardizing historical stat lines in the current-year projection distribution (not the historical distribution) produces a seed that is correctly scaled relative to current players | Partially testable | Compare replacement z-scores derived from historical mean stats (standardized in current-year pool) to the boundary player's current-year z-score; they should be in the same neighborhood at the same position |
-| Reusing `compute_positional_adjustments()` and the trim-logic path from `replacement_from_prices()` ensures per-position historical prior is constructed consistently with the single-season path | Yes | Test that on identical single-season data, `seed_method = "historical_priors"` with a one-year `$prices` produces pass-1 z-scores that match a `replacement_from_prices()`-style computation within floating-point tolerance (see Follow-up Work Items §test-spec, item g) |
+| Reusing `compute_positional_adjustments()` and the trim-logic path from `replacement_from_prices()` ensures per-position historical prior is constructed consistently with the single-season path | Yes | Test that on identical single-season data, `seed_method = "historical_priors"` with a one-year `$prices` produces pass-1 z-scores that match a `replacement_from_prices()`-style computation within floating-point tolerance (see Follow-up Work Items §test-spec, TS-HP-7) |
 
 ---
 
@@ -309,7 +310,7 @@ position. This is the correct behavior but users should monitor it via
 and the note on calibration suppression.
 
 **2. Stat-definition drift across seasons is not smoothed over — it aborts.**
-A league that switched from AVG to OBP mid-history, or that changed its categoriy set
+A league that switched from AVG to OBP mid-history, or that changed its category set
 between eras, will trigger `rotostats_error_stat_definition_drift` for any category absent
 from the filtered `$prices`. Silent stat substitution (using historical AVG as a proxy for
 OBP) would produce meaningless priors with no warning. Aborting forces the user to either
