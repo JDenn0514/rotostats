@@ -15,6 +15,21 @@
 
 ## New functions
 
+* `par()` — Computes per-player Points Above Replacement (PAR) in SGP units.
+  Takes a `replacement_level()` output and `sgp_denominators()` output, calls
+  `sgp()` internally to convert projected statistics, and subtracts the
+  position-specific replacement-level SGP from each player's individual SGP.
+  SP and RP use separate replacement baselines derived from their respective rows
+  in `replacement$replacement_stats`. Returns a data frame with one `par_<CAT>`
+  column per scored category plus `total_par`; when `include_raw = TRUE`,
+  prepends the raw `sgp_<CAT>` and `total_sgp` columns before subtraction.
+  Emits `rotostats_warning_band_check` when the median `total_par` of the +/-K
+  replacement band around the roster boundary exceeds `boundary_threshold`
+  (default 1.0 SGP unit), indicating a mis-calibrated replacement level.
+  Note: the band check cannot detect `n_teams` miscalibration because the PAR
+  anchor and the boundary identification both use the same `n_teams` value from
+  the `replacement_level()` call.
+
 * `replacement_level()` — Per-position replacement-level stat-line estimator
   that serves as the zero-dollar PAR baseline for rotisserie auction valuation;
   implements boundary-band averaging with dynamic K cap, cliff detection, SP/RP
@@ -59,6 +74,19 @@
 
 * `expected_range_normal()` — Computes E[range] of *n* i.i.d. standard
   normals via numerical integration; used internally by `method = "sd"`.
+
+## New arguments
+
+* `sgp_denominators()` gains an `inverse_categories` argument (default
+  `c("ERA", "WHIP")`) to declare which scoring categories use a
+  direction-flipped rank before OLS fitting. Leagues scoring OAVG, BB9, or
+  other lower-is-better categories can now pass these names directly instead
+  of modifying package source. When omitted, the default set is silently
+  intersected with the league's actual scored categories, so batting-only
+  leagues and partial-rate-stat leagues work without modification. When
+  supplied explicitly, every element must appear in the effective scored-category
+  set (otherwise aborts with `rotostats_error_invalid_inverse_categories`).
+  Existing callers are unaffected.
 
 ## Improvements
 
