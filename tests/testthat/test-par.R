@@ -5,15 +5,6 @@
 # Tester did NOT read spec.md, implementation.md, or sim-spec.md.
 #
 # Fixtures are defined in helper-par-fixtures.R (auto-loaded by testthat).
-#
-# TESTER NOTE — AC-9 BLOCK:
-# test-spec.md §5 requires that removing a stat column from
-# replacement$replacement_stats triggers rotostats_error_category_mismatch.
-# The current par() implementation does NOT produce this error: the combined-frame
-# approach (Step 5) means that replacement rows inherit NA for missing columns
-# from the projections frame, so both the player SGP output and replacement SGP
-# output have identical sgp_* column sets. The category-mismatch guard (Step 6)
-# never fires. This is reported as a BLOCK → route to builder.
 
 library(testthat)
 
@@ -278,24 +269,16 @@ test_that("Attribute check fires BEFORE other validation", {
   )
 })
 
-test_that("AC-9: Category mismatch — BLOCK: error not triggered by current implementation", {
-  # TESTER BLOCK: test-spec.md §5 specifies that removing a stat column from
-  # replacement$replacement_stats should trigger rotostats_error_category_mismatch.
-  #
-  # In the current par() implementation the check never fires because:
-  # Step 5 builds a combined frame (projections + replacement_stats) and calls
-  # sgp() on it.  When a stat column is absent from replacement_stats, the
-  # rbind() fills the missing column with NA for replacement rows.  The combined
-  # sgp() call produces identical sgp_* column sets for both player and
-  # replacement rows (with NA values for replacement rows that were missing the
-  # stat).  Step 6 therefore sees equal sgp column sets and does not error.
-  #
-  # This is routed to BUILDER: AC-9 requires par() to detect when
-  # replacement_stats is missing columns that denominators cover, and abort
-  # with rotostats_error_category_mismatch BEFORE calling sgp() on the combined
-  # frame (or to check that the replacement SGP values are non-NA for required
-  # categories).
-  skip("AC-9 BLOCK: rotostats_error_category_mismatch not triggered — see test file header")
+test_that("AC-9: Category mismatch → rotostats_error_category_mismatch", {
+  fx       <- make_par_counting_fixture()
+  bad_repl <- fx$replacement
+  # Remove HR from replacement_stats so it no longer covers all denominators categories
+  bad_repl$replacement_stats[["HR"]] <- NULL
+
+  expect_error(
+    par(bad_repl, fx$denominators, league_history = fx$league_history),
+    class = "rotostats_error_category_mismatch"
+  )
 })
 
 test_that("sgp() warnings propagate from par() (denominators name mismatch)", {
