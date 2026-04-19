@@ -2,6 +2,46 @@
 
 ## New functions
 
+* `par()` — Computes per-player Points Above Replacement (PAR) in SGP units.
+  Takes a `replacement_level()` output and `sgp_denominators()` output, calls
+  `sgp()` internally to convert projected statistics, and subtracts the
+  position-specific replacement-level SGP from each player's individual SGP.
+  SP and RP use separate replacement baselines derived from their respective rows
+  in `replacement$replacement_stats`. Returns a data frame with one `par_<CAT>`
+  column per scored category plus `total_par`; when `include_raw = TRUE`,
+  prepends the raw `sgp_<CAT>` and `total_sgp` columns before subtraction.
+  Emits `rotostats_warning_band_check` when the median `total_par` of the +/-K
+  replacement band around the roster boundary exceeds `boundary_threshold`
+  (default 1.0 SGP unit), indicating a mis-calibrated replacement level.
+  Note: the band check cannot detect `n_teams` miscalibration because the PAR
+  anchor and the boundary identification both use the same `n_teams` value from
+  the `replacement_level()` call.
+
+* `replacement_level()` — Per-position replacement-level stat-line estimator
+  that serves as the zero-dollar PAR baseline for rotisserie auction valuation;
+  implements boundary-band averaging with dynamic K cap, cliff detection, SP/RP
+  role inference, and a multi-position iteration loop.
+
+* `replacement_from_prices()` — Derives replacement-level stat lines from
+  historical \$1 auction prices (trimmed mean method) rather than projections;
+  shares the same output schema as `replacement_level()`.
+
+* `default_replacement_params` — Exported named list of all nine numeric
+  constants used by `replacement_level()` (band half-width, cliff thresholds,
+  SP/RP IP cutoff, convergence tolerances, etc.); individual entries are
+  overridden via `replacement_params = list(band_width_K = 2L)`.
+
+* `rate_stat_denominators()` — Returns the built-in named character vector
+  mapping rate-stat category names to their denominator columns (e.g.,
+  `ERA -> "IP"`, `AVG -> "AB"`); used internally by `replacement_level()` for
+  weighted averaging and unknown-rate-stat validation.
+
+* `sgp()` — Converts projected per-player statistics into SGP units using
+  pre-calibrated denominators from `sgp_denominators()`. Implements the
+  blended-pool rate-stat method with a projection-pool baseline; pool sizes
+  are derived automatically from `league_config`. Returns a data frame with
+  one `sgp_<CAT>` column per scored category plus `total_sgp`.
+
 * `sgp_denominators()` — Calibrates the SGP (Standings Gain Points) denominator
   for each rotisserie scoring category from historical team-season standings.
   Supports four estimation methods (`"ols"`, `"gap"`, `"trimmed_gap"`, `"sd"`),
@@ -21,6 +61,45 @@
 
 * `expected_range_normal()` — Computes E[range] of *n* i.i.d. standard
   normals via numerical integration; used internally by `method = "sd"`.
+
+## New arguments
+
+* `sgp_denominators()` gains an `inverse_categories` argument (default
+  `c("ERA", "WHIP")`) to declare which scoring categories use a
+  direction-flipped rank before OLS fitting. Leagues scoring OAVG, BB9, or
+  other lower-is-better categories can now pass these names directly instead
+  of modifying package source. When omitted, the default set is silently
+  intersected with the league's actual scored categories, so batting-only
+  leagues and partial-rate-stat leagues work without modification. When
+  supplied explicitly, every element must appear in the effective scored-category
+  set (otherwise aborts with `rotostats_error_invalid_inverse_categories`).
+  Existing callers are unaffected.
+
+## Improvements
+
+* `replacement_level()` and `replacement_from_prices()` now emit
+  `rotostats_warning_name_match_failure` (when `verbose = TRUE`) to
+  diagnose player-name mismatches between data sources. These warnings are
+  purely diagnostic — calibration output is unchanged.
+
+## Breaking changes
+
+* `sgp()` now validates `pool_baseline` at the top of the function.
+  Passing `pool_baseline = "per_player"` or
+  `pool_baseline = "universal_constants"` now aborts immediately with
+  `rotostats_error_invalid_pool_baseline` rather than propagating to a
+  different downstream error. Only `pool_baseline = "projection_pool"`
+  (the default) is accepted.
+
+* `sgp()` now emits `rotostats_warning_zero_playing_time` (instead of
+  `rotostats_warning_missing_category_column`) when a player has 0 or `NA`
+  projected IP or AB for a scored rate stat. Callers using
+  `withCallingHandlers(rotostats_warning_missing_category_column = ...)` to
+  intercept zero-playing-time rows must update to
+  `withCallingHandlers(rotostats_warning_zero_playing_time = ...)`.
+  The condition triggering `rotostats_warning_missing_category_column` is
+  unchanged: it fires only when a scored category column is entirely absent
+  from `projections`.
 
 ## Implementation notes for maintainers
 
