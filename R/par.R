@@ -201,6 +201,31 @@ par <- function(
   K                    <- replacement$params$band_width
 
   # ---------------------------------------------------------------------------
+  # Step 1b — Validate replacement_stats covers all scored categories
+  # (must be before Step 5 so NA-fill does not silently mask missing columns)
+  # ---------------------------------------------------------------------------
+  scored_cat_names <- names(denominators)
+  repl_stat_cols   <- names(repl_stats)
+  missing_in_repl  <- setdiff(toupper(scored_cat_names), toupper(repl_stat_cols))
+
+  if (length(missing_in_repl) > 0L) {
+    n_missing <- length(missing_in_repl)
+    cli::cli_abort(
+      c(
+        "{n_missing} scored categor{?y/ies} {?is/are} missing from \\
+        {.code replacement$replacement_stats}.",
+        "i" = "Missing from {.code replacement$replacement_stats}: \\
+               {.val {missing_in_repl}}",
+        "i" = "Scored categories in {.arg denominators}: \\
+               {.val {scored_cat_names}}",
+        "i" = "Ensure {.arg replacement} was produced with the same scored \\
+               categories as {.arg denominators}."
+      ),
+      class = "rotostats_error_category_mismatch"
+    )
+  }
+
+  # ---------------------------------------------------------------------------
   # Step 3 — Unpack baseline
   # ---------------------------------------------------------------------------
   baseline_era  <- baseline[["era"]]
