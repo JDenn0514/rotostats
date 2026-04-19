@@ -281,14 +281,17 @@ test_that("AC-9: Category mismatch → rotostats_error_category_mismatch", {
   )
 })
 
-test_that("sgp() warnings propagate from par() (denominators name mismatch)", {
-  fx          <- make_par_counting_fixture()
-  bad_denoms  <- fx$denominators
-  names(bad_denoms)[1] <- "BADCAT"  # rename HR to unknown category
-  attr(bad_denoms, "rate_conversion") <- "blended_pool"
+test_that("sgp() warnings propagate from par() (missing category column in projections)", {
+  fx              <- make_par_counting_fixture()
+  bad_replacement <- fx$replacement
+  proj_attr       <- attr(bad_replacement, "projections")
+  proj_attr[["HR"]] <- NULL  # remove HR from projections only; replacement_stats and denominators unchanged
+  attr(bad_replacement, "projections") <- proj_attr
+  # Step 1b passes: HR is still in names(replacement$replacement_stats)
+  # sgp() Step 8 sees missing HR column in projections -> emits rotostats_warning_missing_category_column
 
   expect_warning(
-    par(fx$replacement, bad_denoms, league_history = fx$league_history),
+    par(bad_replacement, fx$denominators, league_history = fx$league_history),
     class = "rotostats_warning_missing_category_column"
   )
 })
