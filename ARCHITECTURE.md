@@ -4,7 +4,7 @@
 **Branch:** `feature/replacement-higher-order-cycle`
 **Date:** 2026-04-20
 
-(Previous run: `replacement-multi-pos-all-spec-2026-04-18` — see git log for prior state)
+(Previous run: `par-2026-04-18` — see git log for prior state)
 
 ---
 
@@ -25,6 +25,7 @@ graph TD
         CRS["convert_rate_stats()"]
         LC["league_config()"]
         LH["league_history()"]
+        PAR["par()"]
         W["Weight constructors\nflat / linear_decay / exp_decay"]
         YW["Year-window helpers\nafter / before / between / last"]
         CS["cal / cal_spec"]
@@ -46,6 +47,10 @@ graph TD
     subgraph CORE["SGP Core Logic"]
         SGP_BODY["sgp() body\nSteps 1-15\ncounting + rate SGP\npool construction\nbaseline derivation"]
         SGPD_BODY["sgp_denominators() body\ncalibration loop\nOLS / gap / SD\nbootstrap CIs"]
+    end
+
+    subgraph PAR_LAYER["PAR Layer"]
+        PAR_BODY["par() body\nSteps 1–13\nattribute validation\nsgp() delegation\nreplacement subtraction\nband check"]
     end
 
     subgraph HELPERS["Internal Helpers"]
@@ -92,8 +97,14 @@ graph TD
     YW --> SGPD_BODY
     CS --> SGPD_BODY
 
+    PAR --> PAR_BODY
+    PAR_BODY --> SGP_BODY
+    PAR_BODY --> RL_BODY
+
     style RL_BODY fill:#1e90ff,stroke:#1565c0,color:#fff
     style RL_PARAMS fill:#1e90ff,stroke:#1565c0,color:#fff
+    style PAR fill:#1e90ff,stroke:#1565c0,color:#fff
+    style PAR_BODY fill:#1e90ff,stroke:#1565c0,color:#fff
 ```
 
 | Module | Purpose | Key Dependencies | Changed in This Run |
@@ -102,6 +113,7 @@ graph TD
 | `default_replacement_params` | Exported list of 10 numeric constants (was 9); 10th is `cycle_history_window = 5L` | — | Yes — 9 to 10 entries |
 | `dgp_c.R` | DGP-C simulation: 393-row pool with 3 deterministic cycle players + rejection-sampling guard | — | Yes — rejection sampling added |
 | `test-replacement.R` | Unit tests: TS-R6-1/2/3 + TS-60 to TS-64 added | `testthat` | Yes — 311 lines added |
+| `par()` | PAR computation layer | `sgp.R`, `replacement.R` | No |
 | `sgp()`, `sgp_denominators()` | SGP computation and denominator calibration | `sgp-denominators-helpers.R` | No |
 | All other modules | Unchanged | — | No |
 
@@ -158,6 +170,96 @@ graph TD
 | H4: max_iter guard | `if (pass >= max_iter) break` — unchanged | — | No |
 | `default_replacement_params` | 10th entry `cycle_history_window = 5L` added | — | Yes |
 
+**sgp() call graph:**
+
+```mermaid
+%%{init: {'theme': 'neutral'}}%%
+graph TD
+    A["sgp()"] --> B["Step 1: normalize column names"]
+    A --> C["Step 2–5: validate rate_conversion"]
+    A --> D["Step 6: validate league_history / config"]
+    A --> E["Step 7: derive scored_cats"]
+    A --> F["Step 8: warn missing columns"]
+    A --> G["Step 9: handle SVHD"]
+    A --> H["Step 10: baseline year + avg_ERA/WHIP/AVG"]
+    A --> I["Step 11: pool constants"]
+    A --> J["Steps 13–14: compute SGP columns"]
+    A --> K["Step 15: assemble data frame"]
+
+    C --> C1["cli_abort\nrotostats_error_invalid_rate_conversion"]
+    C --> C2["cli_abort\nrotostats_error_not_implemented"]
+    C --> C3["convert_rate_stats() — delegate"]
+
+    D --> D1["cli_abort\nrotostats_error_missing_config_field"]
+    D --> D2["cli_abort\nrotostats_error_missing_required_column"]
+
+    F --> F1["cli_warn\nrotostats_warning_missing_category_column"]
+    J --> J5a["cli_warn\nrotostats_warning_zero_playing_time"]
+
+    G --> G1["rlang::inform .frequency=once"]
+
+    H --> H1["stats::weighted.mean ERA/WHIP"]
+    H --> H2["stats::weighted.mean AVG"]
+    H --> H3["cli_inform baseline year used"]
+
+    I --> I1["pool_sizes(league_config)"]
+    I --> I2["order + head — pitcher pool"]
+    I --> I3["order + head — hitter pool"]
+
+    J --> J1["vectorized division counting cats"]
+    J --> J2["blended ERA formula vectorized"]
+    J --> J3["blended WHIP formula vectorized"]
+    J --> J4["blended AVG formula sign flip"]
+    J --> J5["cli_warn\nrotostats_warning_zero_playing_time\nzero IP/AB"]
+
+    K --> K1["as.data.frame sgp_cols"]
+    K --> K2["rowSums na.rm=FALSE"]
+
+    style A fill:#1e90ff,stroke:#1565c0,color:#fff
+    style B fill:#1e90ff,stroke:#1565c0,color:#fff
+    style C fill:#1e90ff,stroke:#1565c0,color:#fff
+    style C1 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style F fill:#1e90ff,stroke:#1565c0,color:#fff
+    style F1 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style J fill:#1e90ff,stroke:#1565c0,color:#fff
+    style J5 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style J5a fill:#1e90ff,stroke:#1565c0,color:#fff
+```
+
+**par() call graph:**
+
+```mermaid
+%%{init: {'theme': 'neutral'}}%%
+graph TD
+    PAR["par()"] --> S1["Step 1: validate replacement attrs\nprojections + config non-NULL\ncli_abort rotostats_error_missing_replacement_attrs"]
+    PAR --> S1B["Step 1b: validate replacement_stats\ncategory coverage check\ncli_abort rotostats_error_category_mismatch"]
+    PAR --> S2["Step 2: extract position_assignments\nreplacement_stats, band_width"]
+    PAR --> S3["Step 3: unpack baseline list\nbaseline_era / whip / avg"]
+    PAR --> S4["Step 4: sgp() on full projections"]
+    PAR --> S5["Step 5: sgp() on combined frame\n(players + replacement rows)"]
+    PAR --> S6["Step 6: validate category name\nconsistency (setequal)\ncli_abort rotostats_error_category_mismatch"]
+    PAR --> S7["Step 7: build position x category\nreplacement SGP lookup"]
+    PAR --> S8["Step 8: match() player positions\nO(n) lookup"]
+    PAR --> S9["Step 9: vectorized PAR subtraction\nlapply over categories"]
+    PAR --> S10["Step 10: total_par = rowSums\nna.rm = TRUE"]
+    PAR --> S11["Step 11: band calibration check\ncli_warn rotostats_warning_band_check"]
+    PAR --> S12["Step 12: assemble output\n(optionally prepend raw SGP)"]
+    PAR --> S13["Step 13: attach attributes\nreplacement_sgp / units / anchor"]
+
+    S4 --> SGP1["sgp() call #1\nfull player pool"]
+    S5 --> SGP2["sgp() call #2\ncombined players + replacement"]
+
+    S11 --> MEDIAN["stats::median(band_total_par)"]
+
+    style PAR fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S1 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S1B fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S4 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S5 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S9 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S11 fill:#1e90ff,stroke:#1565c0,color:#fff
+```
+
 **sgp_denominators() call graph (unchanged — for reference):**
 
 ```mermaid
@@ -188,9 +290,14 @@ graph TD
 ```mermaid
 %%{init: {'theme': 'neutral'}}%%
 graph TD
+    IN1["league_history\nteam_season data"]
     IN2["league_config\nn_teams roster_slots"]
     IN3["projections\nper-player data frame"]
     PARAMS["replacement_params\nincl. cycle_history_window"]
+
+    IN1 --> SD["sgp_denominators()"]
+    IN2 --> SD
+    SD --> DENOM["sgp_denominators S3 object\nnamed denominator vector\nrate_conversion attr"]
 
     IN2 --> RL["replacement_level()"]
     IN3 --> RL
@@ -215,14 +322,37 @@ graph TD
     MCHECK -->|"no"| ITER
 
     NOTCONV --> CWARN["cli_warn\nrotostats_warning_convergence_not_reached"]
-    CONV --> OUT["7-element named list\n+ converged/iterations attrs"]
-    CWARN --> OUT
+    CONV --> ROUT["replacement_level S3 output\nreplacement_stats\npositional_adjustments\ncliff_metric\nparams + attributes\n(projections, config,\nposition_assignments)"]
+    CWARN --> ROUT
+
+    ROUT --> PAR["par()"]
+    DENOM --> PAR
+    IN1 --> PAR
+
+    PAR --> SGP2A["sgp() call #1\nfull player projections"]
+    PAR --> COMBINED["combined frame\n(players + replacement rows)"]
+    COMBINED --> SGP2B["sgp() call #2\ncombined frame"]
+    SGP2B --> REPL_SGP["replacement SGP\nper position per category"]
+
+    SGP2A --> PARSUB["vectorized subtraction\npar_[cat] = sgp_[cat] - repl_sgp[pos, cat]"]
+    REPL_SGP --> PARSUB
+
+    PARSUB --> TOTAL_PAR["total_par = rowSums(par_[cat])"]
+    TOTAL_PAR --> BANDCHECK{"band check:\nmedian(band_total_par)\nexceeds boundary_threshold?"}
+    BANDCHECK -- yes --> WARN["cli_warn\nrotostats_warning_band_check"]
+    BANDCHECK -- no --> PAROUT["data.frame\npar_[CAT] + total_par\nattr: replacement_sgp\nunits = 'sgp'\nanchor = 'replacement'"]
+    WARN --> PAROUT
 
     style HASH fill:#1e90ff,stroke:#1565c0,color:#fff
     style HCHECK fill:#1e90ff,stroke:#1565c0,color:#fff
     style PUSHBUF fill:#1e90ff,stroke:#1565c0,color:#fff
     style CONV fill:#1e90ff,stroke:#1565c0,color:#fff
-    style OUT fill:#1e90ff,stroke:#1565c0,color:#fff
+    style PAR fill:#1e90ff,stroke:#1565c0,color:#fff
+    style PARSUB fill:#1e90ff,stroke:#1565c0,color:#fff
+    style TOTAL_PAR fill:#1e90ff,stroke:#1565c0,color:#fff
+    style BANDCHECK fill:#1e90ff,stroke:#1565c0,color:#fff
+    style PAROUT fill:#1e90ff,stroke:#1565c0,color:#fff
+    style REPL_SGP fill:#1e90ff,stroke:#1565c0,color:#fff
 ```
 
 ---
@@ -231,24 +361,162 @@ graph TD
 
 | Module / Function | Purpose | Key Dependencies | Changed in This Run |
 |---|---|---|---|
+| `R/par.R` — `par()` | Per-player PAR (Points Above Replacement) in SGP units; delegates all SGP computation to `sgp()`, subtracts position-specific replacement SGP, applies band calibration check | `sgp.R`, `replacement.R` (produces `replacement` arg), `cli`, `stats` | No |
 | `R/replacement.R` — `replacement_level()` | Per-position replacement-level estimator; boundary-band + state-hash cycle detection loop | `replacement_internal.R`, `replacement_params.R`, `league-config.R`, `sgp.R`, `cli`, `checkmate`, `rlang`, `stats`, `stringi` | **YES** — state-hash detector replaces 2-lag; `cycle_history_window` validation added |
-| `R/replacement.R` — `replacement_from_prices()` | Price-based replacement estimator | `replacement_internal.R`, `cli`, `checkmate`, `rlang`, `stringi` | No |
-| `R/replacement_internal.R` — `format_replacement_output()` | Constructs the 7-element output list | Base R | No |
-| `R/replacement_internal.R` — `compute_positional_adjustments()` | Scarcity premiums; zero-sum enforcement | `cli`, `rlang` | No |
-| `R/replacement_internal.R` — `assert_replacement_output_contract()` | Final output validation | `cli` | No |
-| `R/replacement_internal.R` — other helpers | `compute_band_indices()`, `detect_cliff()`, `compute_replacement_stat_line()`, `infer_pitcher_roles()`, `normalize_name()`, `compute_zscores()`, `assert_zero_sum()`, `compute_par_at_pos()`, `detect_kde_trough()` | `stats`, `stringi` | No |
+| `R/replacement.R` — `replacement_from_prices()` | Price-based replacement estimator; no projections or band computation | `replacement_internal.R`, `cli`, `checkmate`, `rlang`, `stringi` | No |
+| `R/replacement_internal.R` — `format_replacement_output()` | Constructs the 7-element output list; called by both exported functions | Base R | No |
+| `R/replacement_internal.R` — `compute_positional_adjustments()` | Computes scarcity premiums via fvarz/sgp/dollar/posblend; enforces zero-sum | `cli`, `rlang` | No |
+| `R/replacement_internal.R` — `assert_replacement_output_contract()` | Final validation of the complete output object before return | `cli` | No |
+| `R/replacement_internal.R` — other internal helpers | `compute_band_indices()`, `detect_cliff()`, `compute_replacement_stat_line()`, `infer_pitcher_roles()`, `normalize_name()`, `compute_zscores()`, `assert_zero_sum()`, `compute_par_at_pos()`, `detect_kde_trough()` | `stats`, `stringi` | No |
 | `R/replacement_params.R` — `default_replacement_params` | Exported list of **10** numeric constants (was 9); 10th is `cycle_history_window = 5L` | — | **YES** |
-| `R/replacement_params.R` — `rate_stat_denominators()` | Returns `RATE_STAT_DENOMINATORS` named character vector; 17 entries | — | No |
-| `R/sgp.R` — `sgp()` | Per-player SGP converter | `sgp_denominators` S3, `pool_sizes()`, `cli`, `rlang`, `stats` | No |
-| `R/sgp-denominators.R` — `sgp_denominators()` | Calibrates per-category SGP denominators | `sgp-denominators-helpers.R`, `sgp-denominators-s3.R`, `cli`, `stats` | No |
-| `R/sgp-denominators.R` — `convert_rate_stats()` | Stub; always aborts | `cli` | No |
-| `R/sgp-denominators-s3.R` | S3 methods for `sgp_denominators` | Base R | No |
-| `R/sgp-denominators-helpers.R` | `METADATA_COLS`, weight/year-window helpers, `expected_range_normal()` | `stats` | No |
-| `R/league-config.R` — `league_config()` + `pool_sizes()` | Config constructor + pool-size helper | `cli` | No |
-| `R/league-history.R` — `league_history()` | League history S3 constructor | `cli` | No |
-| `R/rotostats-package.R` | Package-level Rd stub | — | No |
+| `R/replacement_params.R` — `rate_stat_denominators()` | Returns `RATE_STAT_DENOMINATORS` named character vector; 17 built-in entries including BABIP | — | No |
+| `R/sgp.R` — `sgp()` | Per-player SGP converter; called internally by `replacement_level()` when `sort_by = "sgp"` and twice inside `par()` | `sgp_denominators` S3, `pool_sizes()`, `cli`, `rlang`, `stats` | No |
+| `R/sgp-denominators.R` — `sgp_denominators()` | Calibrates per-category SGP denominators from league history | `sgp-denominators-helpers.R`, `sgp-denominators-s3.R`, `cli`, `stats` | No |
+| `R/sgp-denominators.R` — `convert_rate_stats()` | Stub; always aborts with `rotostats_error_not_implemented` | `cli` | No |
+| `R/sgp-denominators-s3.R` — `new_sgp_denominators()` | Constructor for `sgp_denominators` S3 object; sets `attr(., "rate_conversion")` | Base R | No |
+| `R/sgp-denominators-s3.R` — S3 methods | `print`, `names`, `length`, `as.double`, `[`, `[[` for `sgp_denominators` | Base R | No |
+| `R/sgp-denominators-helpers.R` | `METADATA_COLS`, weight helpers, year-window helpers, `expected_range_normal()` | `stats` | No |
+| `R/league-config.R` — `league_config()` | Constructor for `league_config` S3 object; validates roster / budget config | `cli` | No |
+| `R/league-config.R` — `pool_sizes()` | Returns `list(pitchers, hitters)` from config; shared by `sgp()` and `replacement_level()` | `league_config` S3 | No |
+| `R/league-history.R` — `league_history()` | Constructor for `league_history` S3 object; validates `team_season` schema | `cli` | No |
+| `R/rotostats-package.R` | Package-level Rd stub and `@keywords internal` | — | No |
 | `inst/simulations/dgp/dgp_c.R` | DGP-C: 393-row pool (258 hitters incl. 3 deterministic cycle players 9901-9903); rejection-sampling guard ensures mono_count >= 12 at all infield positions | — | **YES** |
 | `tests/testthat/test-replacement.R` | TS-R6-1/2/3 (cycle fixtures); TS-34 updated; TS-60 to TS-64 (hash invariants + param validation) | `testthat` | **YES** — 311 lines added |
+| `plans/error-messages.md` | Error/warning class registry; `rotostats_warning_band_check` added in par-2026-04-18 run | — | No |
+
+---
+
+## PAR Section
+
+### Purpose
+
+`par()` computes per-player Points Above Replacement (PAR) in SGP units. It is
+the direct consumer of `replacement_level()` output: it takes the per-position
+replacement stat lines, converts them to SGP via a second `sgp()` call, and
+subtracts the resulting position-specific replacement SGP from each player's
+individual SGP.
+
+PAR is the primary intermediate metric for rotisserie auction valuation. A player
+at exactly the replacement level for their position has `total_par` equal to
+approximately 0 by construction. Players above replacement have positive PAR;
+players below have negative PAR. Dollar values are derived from PAR by allocating
+the league's total surplus budget in proportion to each player's total PAR.
+
+`par()` is a pure anchoring layer: it does not implement any SGP conversion logic.
+All rate-stat handling (ERA/WHIP blended-pool formulas, AVG sign flip, IP/AB
+weighting) lives inside `sgp()`. The two internal `sgp()` calls use a shared pool
+context — the second call operates on a combined frame of player projections plus
+replacement rows so that replacement SGP is computed against the same pool
+constants as player SGP.
+
+SP and RP always use separate replacement baselines because `replacement_level()`
+produces distinct rows for SP and RP in `replacement_stats`. The `par()` function
+inherits this separation without any special-casing: position lookup is done via
+`match(player_positions, repl_sgp_mat$position)`, and the `position_assignments`
+attribute on the `replacement_level()` output maps each player to their role.
+
+### Input Contract
+
+| Argument | Type | Required? | Notes |
+|---|---|---|---|
+| `replacement` | `replacement_level` output | Yes | Must carry `projections` and `config` attributes; `replacement_from_prices()` output is incompatible (NULL projections) |
+| `denominators` | `sgp_denominators` S3 | Yes | Names must match scored categories; carries `attr(., "rate_conversion")` |
+| `include_raw` | logical scalar | No | Default `FALSE`; when `TRUE`, prepends `sgp_[CAT]` and `total_sgp` columns |
+| `boundary_threshold` | numeric scalar | No | Default `1.0`; band-check trigger (SGP units) |
+| `rate_conversion` | character scalar | No | Default `"blended_pool"`; passed through to `sgp()` |
+| `pool_baseline` | character scalar | No | Default `"projection_pool"`; passed through to `sgp()` |
+| `baseline` | named numeric or NULL | No | Per-category overrides for ERA/WHIP/AVG; unpacked by name and forwarded to `sgp()` |
+| `league_history` | `league_history` S3 or NULL | Conditional | Required when `rate_conversion = "blended_pool"` (the default); `sgp()` aborts with `rotostats_error_missing_config_field` when NULL |
+
+### Algorithm Sketch
+
+#### Dual sgp() calls with shared pool context
+
+`par()` calls `sgp()` twice. The first call (Step 4) processes only the player
+projection pool and produces `sgp_[CAT]` for every player. The second call
+(Step 5) processes a combined frame of player projections plus the replacement
+stat rows from `replacement$replacement_stats`. The combined-frame approach
+ensures that pool constants (pool_IP, pool_ER, pool_WH, pool_H, pool_AB) are
+identical for both players and replacement rows. Replacement rows are identified
+by a `.is_replacement` sentinel column added before the `rbind()`; this column is
+stripped before the `sgp()` call but retained in the combined frame to extract
+replacement row indices after the call.
+
+#### Vectorized PAR subtraction
+
+After extracting replacement SGP per position per category, `par()` uses
+`match(player_positions, repl_sgp_mat$position)` (O(n)) to build a position index
+for each player, then subtracts in a single vectorized `lapply()` over categories:
+`sgp_out[[col]] - repl_sgp_mat[[col]][pos_idx]`. No row-wise loops over players.
+
+#### Band calibration check
+
+After computing `total_par`, `par()` identifies the ±K players around each
+position's roster boundary (K = `replacement$params$band_width`) and computes
+`stats::median(band_total_par)`. If this median exceeds `boundary_threshold` in
+absolute value, `rotostats_warning_band_check` is emitted. The warning direction
+("too conservative" / "too aggressive") is derived from the sign of the median.
+The check uses `replacement$params$n_teams` and `roster_slots` for boundary
+identification; when `n_teams` is miscalibrated, both the PAR anchor and the band
+boundary shift identically, so the band check cannot detect miscalibration of
+`n_teams` directly — this is a known limitation documented in
+`tests/simulations/sim-spec.md §Known Limitations`.
+
+### Output Contract
+
+| Column | Type | Condition | Description |
+|---|---|---|---|
+| `par_[CAT]` | numeric | Always | SGP above replacement for each scored category; one column per `names(denominators)` |
+| `total_par` | numeric | Always | `rowSums(par_[CAT], na.rm = FALSE)` |
+| `sgp_[CAT]` | numeric | `include_raw = TRUE` only | Raw SGP per category before replacement subtraction |
+| `total_sgp` | numeric | `include_raw = TRUE` only | `rowSums(sgp_[CAT], na.rm = FALSE)` |
+
+Output attributes: `replacement_sgp` (named list, keys = position names, values = named numeric vectors of replacement-level SGP per category), `units = "sgp"`, `anchor = "replacement"`.
+
+Row order matches `attr(replacement, "projections")` exactly.
+
+### Error and Warning Classes
+
+| Class | Type | Step | Condition |
+|---|---|---|---|
+| `rotostats_error_missing_replacement_attrs` | error | Step 1 | `projections` or `config` attribute absent from `replacement` |
+| `rotostats_error_category_mismatch` | error | Step 1b / Step 6 | Scored category in `denominators` absent from `replacement$replacement_stats`, or `sgp_[cat]` column sets mismatch |
+| `rotostats_warning_band_check` | warning | Step 11 | Median `total_par` of ±K replacement band exceeds `boundary_threshold` |
+
+`par()` also propagates without modification any warnings from the two internal
+`sgp()` calls (`rotostats_warning_missing_category_column`,
+`rotostats_warning_zero_playing_time`).
+
+### Known Limitations
+
+1. **Band check cannot detect `n_teams` miscalibration**: When `n_teams` is wrong,
+   both the PAR anchor (replacement player total_par ≈ 0 by construction) and the
+   band-boundary identification use the same miscalibrated `n_teams`. The median
+   band total_par remains near 0 regardless. A reference-configuration parameter
+   would be needed for external calibration checking — deferred.
+
+2. **`replacement_from_prices()` output is incompatible**: `par()` requires the
+   `projections` and `config` attributes that only `replacement_level()` attaches.
+   Users who calibrate replacement level from prices must call `replacement_level()`
+   for valuation purposes.
+
+3. **`multi_pos = "all"` rejected**: `par()` aborts with
+   `rotostats_error_multi_pos_all_unsupported` when passed a `replacement_level()`
+   output produced with `multi_pos = "all"`. Per-position PAR would produce one
+   value per eligible position per player, which is incompatible with the one-row-
+   per-player contract needed for auction dollar values.
+
+### Cross-References
+
+| Surface | Location |
+|---|---|
+| Implementation | `R/par.R` |
+| SGP conversion (delegated) | `R/sgp.R` |
+| Replacement level (produces `replacement` arg) | `R/replacement.R` |
+| Error/warning class registry | `plans/error-messages.md` |
+| MC simulation harness | `tests/simulations/sim-par.R` |
+| Simulation results | `tests/simulations/sim-par-results.rds`, `tests/simulations/sim-par-summary.csv` |
+| Unit tests | `tests/testthat/test-par.R`, `tests/testthat/test-par-sim.R` |
 
 ---
 
@@ -323,6 +591,27 @@ Attributes: `stat_units`, `config`, `projections`, `position_assignments`, `conv
 5. **`max_iter` hard upper bound**: verified by TS-R6-3.
 6. **`rotostats_error_pool_too_small` load-bearing**: abort fires before loop; DGP defects are fixed in DGP, not estimator.
 
+### Name-Match Warning Wiring (replacement-name-match-audit-2026-04-17)
+
+`rotostats_warning_name_match_failure` has two emit sites, both gated by `verbose = TRUE`:
+
+- **Site 1** — `replacement_level()` inside `.validate_league_history_inputs()`: fires when one or more names in `league_history$prices` cannot be cross-matched to `projections` after Unicode NFD normalization and punctuation stripping.
+- **Site 2** — `replacement_from_prices()` after column-upcasing: fires when multiple raw spellings in `prices` collapse to the same normalized key (self-deduplication detection; only when `PLAYER_ID` is absent from `prices`).
+
+Both sites use `normalize_player_name()` from `replacement_internal.R`. See `plans/error-messages.md` for the full warning class registry entry.
+
+### Known Limitations and Follow-up Tickets
+
+1. **Study C near-miss resolved**: The 2-lag cycle detection (convergence_rate = 96.6%) has been superseded by the state-hash ring buffer in this run (convergence_rate = 1.0). Higher-order cycles of period 2 through N are now caught.
+
+2. **Study E near-miss (median rank diff = 3, pct_within_2 = 0.46; targets 2.0 and 0.90)**: The remaining gap reflects residual DGP-E sensitivity after the focal-pitcher quality fix; the algorithm correctly uses `n_teams × roster_slots[pos]` for boundary indexing (Study D confirms 100% K_eff correctness). Follow-up: tighten DGP-E focal pitcher or review thresholds (median ≤ 5, pct_within_2 ≥ 0.80 may be more appropriate for a static focal pitcher).
+
+3. **`seed_method = "historical_priors"` deferred**: Validation in place; seeding falls through to primary-position seed. Full historical z-score seeding deferred to a sub-spec.
+
+4. **`boundary_rate_method = "sgp_pool"` deferred**: Validation guard (including `fixed_baseline` incompatibility) is in place; full pool-marginal boundary ranking deferred.
+
+5. **`multi_pos = "all"` designed**: Full design specified in `specs/spec-replacement-multi-pos-all.md`. Output shape: long-form tidy data frame. `par()`, `zar()`, `dollar_values()` reject `"all"` input with `rotostats_error_multi_pos_all_unsupported`. Implementation deferred to a future run.
+
 ### Cross-References
 
 | Surface | Location |
@@ -354,6 +643,22 @@ Attributes: `stat_units`, `config`, `projections`, `position_assignments`, `conv
 
 ---
 
+## Key Design Decisions (par-2026-04-18)
+
+1. **Dual sgp() calls with shared pool context**: `par()` calls `sgp()` twice — once on the full player pool and once on a combined frame (players + replacement rows). The combined-frame approach ensures that pool constants (pool_IP, pool_ER, pool_WH, pool_H, pool_AB) used for rate-stat SGP are identical for both players and replacement rows. Using separate `sgp()` calls with separate pools would cause systematic bias in rate-stat PAR because the reference pool would differ. The combined frame is assembled by `rbind()` with aligned columns; extra metadata columns in `replacement_stats` (e.g., `position`, `n_band_players`, `cliff_detected`) are dropped before `rbind()` and re-attached after.
+
+2. **`projections$PLAYER_ID` (uppercase) for position lookup**: `replacement_level()` normalizes all column names to uppercase (Step 27). The stored `attr(result, "projections")` therefore has `PLAYER_ID`, not `player_id`. The position lookup in Step 8 uses `position_assignments[projections$PLAYER_ID]` explicitly. Using lowercase silently returns NULL (R's `$` on a missing column returns NULL, not an error), causing `par_cols` to be zero-length and `as.data.frame()` to fail with a row-names length mismatch. This was one of the three bugs found and fixed by the simulator respawn.
+
+3. **`lapply()` instead of `vapply()` for band collection**: The band collection function in Step 11 returns a variable-length vector for each position (size = `band_hi - band_lo + 1`, which varies across positions). `vapply` with `FUN.VALUE = numeric(0L)` requires every call to return exactly length 0, causing a runtime error when bands are non-empty. `lapply()` followed by `unlist()` handles variable-length outputs correctly. This was the second bug fixed by the simulator respawn.
+
+4. **`na.rm = TRUE` in `total_par = rowSums(...)`**: In a mixed hitter/pitcher pool, hitters have NA for pitcher categories (K, SV) and pitchers have NA for hitter categories (HR, R, SB). With `na.rm = FALSE`, every player in a mixed pool gets `total_par = NA`. The correct semantics: a hitter's contribution to pitcher categories is 0, not undefined. Note: this deviates from spec.md §5 which originally specified `na.rm = FALSE` — the spec was superseded by the simulator's finding that `na.rm = FALSE` produces all-NA output in production usage. The spec's `na.rm = FALSE` rationale ("NA propagation to surface data quality issues") applies to `sgp()` output (where NAs indicate genuinely missing data) but not to cross-category PAR summation (where NAs indicate expected absence of category relevance for that player type).
+
+5. **Step 1b category mismatch check before combined-frame rbind**: Without Step 1b, a scored category absent from `replacement$replacement_stats` would be silently added back as NA by the column-alignment loop in Step 5c. The subsequent `setequal()` check in Step 6 would then pass (both player and replacement SGP frames would have the same `sgp_[CAT]` columns, all NA for the missing category). Adding Step 1b ensures that a mismatch is caught early with a clear error message naming the missing categories, before the NA-fill loop masks the problem. This was added in the builder respawn (commit `718da01`) following the tester's BLOCK on AC-9.
+
+6. **SS/2B wider boundary tolerance in simulation**: The Monte Carlo simulation uses `positional_adjustment_method = "fvarz"` (the `replacement_level()` default). `fvarz` applies a scarcity premium to SS (and 2B, to a lesser extent) that shifts their effective replacement baseline above the raw head_count boundary. This is genuine production behavior — it reflects real positional scarcity. The simulation acceptance criterion AC-SIM-2 was revised to apply a 0.10 tolerance for SS and 2B versus 0.05 for other positions. Using `positional_adjustment_method = "none"` in the harness would validate a non-production code path and was rejected.
+
+---
+
 ## Key Design Decisions (replacement-multi-pos-all-spec-2026-04-18)
 
 1. **Long-form tidy data frame for `multi_pos = "all"`**: Ineligible `(player, position)` pairs produce no row; memory is proportional to eligible pairs. A 3D array was rejected due to sparse ineligibility structure.
@@ -361,6 +666,8 @@ Attributes: `stat_units`, `config`, `projections`, `position_assignments`, `conv
 2. **Fractional allocation for zero-sum invariant**: Each multi-eligible player contributes `1/n_eligible` to each position's effective slot count. Tolerance loosened from `1e-6` to `1e-5` for floating-point accumulation in fractional arithmetic.
 
 3. **Downstream reject-not-aggregate**: `par()`, `zar()`, `dollar_values()` reject `"all"` replacement objects with `rotostats_error_multi_pos_all_unsupported`.
+
+4. **`multi_pos` recorded in `params` for all modes**: All `multi_pos` values must be recorded in the `params` element so downstream guards can check mode without inspecting data frame column structure.
 
 ---
 
@@ -370,7 +677,7 @@ Attributes: `stat_units`, `config`, `projections`, `position_assignments`, `conv
 
 2. **NaN guard in `compute_positional_adjustments()`**: All four premium methods filter to `valid_cats` before computing differences to prevent `NaN` from bypassing the zero-sum assertion.
 
-3. **2-cycle detection via `old_old_assignments`** (superseded): The 2-lag detector raised Study C convergence_rate from 0.002 to 0.966; the state-hash ring buffer in this run raises it from 0.966 to 1.0.
+3. **2-cycle detection via `old_old_assignments`** (superseded): The 2-lag detector raised Study C convergence_rate from 0.002 to 0.966; the state-hash ring buffer in the replacement-higher-order-cycle-2026-04-17 run raises it from 0.966 to 1.0.
 
 4. **`projections` attribute stripped before iteration loop**: `stored_projections <- projections` saved before the `repeat {}` block prevents copying the large projections data frame on every pass.
 
@@ -380,6 +687,14 @@ Attributes: `stat_units`, `config`, `projections`, `position_assignments`, `conv
 
 1. **Blended-pool fixed-constant approximation**: Pool constants computed once from projected top-N players. Approximation error bounded at 5-15% per player; cancels in aggregate standings comparisons.
 
-2. **`attr(denominators, "rate_conversion")` on outer S3 object**: Compatibility check reads from outer `sgp_denominators` object, not `$denominators`.
+2. **`attr(denominators, "rate_conversion")` on outer S3 object**: Compatibility check reads from outer `sgp_denominators` object, not `$denominators`. Reading the wrong level silently returns `NULL`, which would always pass the check spuriously.
 
-3. **`INVERSE_CATEGORIES` constant replaced by `inverse_categories` argument**: The `missing()` primitive distinguishes the default-path behavior (silent intersection) from the explicit-path behavior (strict validation).
+3. **Warning class split — `rotostats_warning_missing_category_column` vs `rotostats_warning_zero_playing_time`**: Two distinct warning classes replace the former dual-use design. Callers may suppress either class independently via `withCallingHandlers`.
+
+4. **SVHD auto-derivation with `.frequency_id`**: The correct call uses `.frequency_id = "sgp_svhd_derivation"`. Omitting this caused a runtime crash (BLOCK-1 in tester round 1, fixed in builder round 2).
+
+5. **`total_sgp` uses `na.rm = FALSE`**: Any per-category NA propagates to `total_sgp` to surface data quality issues downstream.
+
+6. **`INVERSE_CATEGORIES` constant replaced by `inverse_categories` argument**: The `missing()` primitive distinguishes the default-path behavior (silent intersection) from the explicit-path behavior (strict validation).
+
+7. **BABIP added to `RATE_STAT_DENOMINATORS`**: BABIP is AB-denominated (like SLG). Adding it to the built-in lookup means users can include BABIP as a scored category without supplying `rate_denominators`.
