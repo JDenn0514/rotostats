@@ -117,7 +117,12 @@ or \code{NULL}.  Supplied by \code{dollar_values()} on pass 2+; \code{NULL} on f
 call.}
 
 \item{replacement_params}{Named list.  Override specific entries of
-\code{default_replacement_params} (e.g., \code{list(band_width_K = 2L)}).}
+\code{default_replacement_params} (e.g., \code{list(band_width_K = 2L)}).
+\code{cycle_history_window} (integer, default 5L): depth of the rolling
+assignment-hash history window used to detect higher-order convergence
+cycles (periods 2 through N) in the \code{multi_pos = "highest_par"} loop.
+Increase if you observe non-convergence in pools with many near-boundary
+multi-eligible players.}
 
 \item{max_iter}{Positive integer.  Maximum convergence passes (default \code{25L}).}
 

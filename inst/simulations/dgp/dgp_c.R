@@ -3,6 +3,22 @@
 # Generates a synthetic projection data frame stress-testing the multi-position
 # reassignment loop. 60% of non-C, non-OF hitters are multi-eligible.
 #
+# Post-tightening (sim-spec.md §2.2 R6): 3 deterministic near-boundary
+# multi-eligible players are appended after the random assignment loop.
+# Row counts: 258 hitters, 85 SP, 50 RP → 393 total rows.
+#
+# Post-tightening R6 follow-up (mailbox.md Leader Routing 2026-04-20):
+#   The random multi-eligibility assignment occasionally left a position with
+#   fewer than n_teams = 12 mono-eligible players, causing replacement_level()
+#   to throw rotostats_error_pool_too_small when all multi-eligible players
+#   fled to their secondary position in the highest_par convergence loop.
+#   Fix: rejection sampling on the multi-eligibility assignment, using a
+#   separate seed stream (seed + 314159L + retry_k) so hitter stat generation
+#   is unaffected. Re-samples until all positions in multi_elig_pos have at
+#   least n_teams_dgpc = 12 mono-eligible players.  Max retries = 20; aborts
+#   with a diagnostic message if structurally infeasible (should never occur
+#   given 45 base players per infield position and 60% multi-elig rate).
+#
 # Based on sim-spec.md §2.2.
 #
 # Usage:
@@ -26,6 +42,11 @@
   c("2B", "3B")   # 25%
 )
 .DGPC_PROBS <- c(0.40, 0.35, 0.25)
+
+# Module-level seed for the deterministic 3-cycle cluster (sim-spec.md §2.2 R6).
+# Differs from per-replication seeds; does NOT interact with set.seed(seed) in
+# the dgp_c() function body.
+.CYCLE_SEED <- 20260418L
 
 #' Generate one DGP-C projection data frame.
 #'
@@ -96,26 +117,115 @@ dgp_c <- function(seed) {
 
   # Assign secondary eligibility to 60% of 2B, 3B, SS, 1B players
   # (per sim-spec.md §2.2: "applies to 2B, 3B, SS, 1B players")
+  #
+  # Uses rejection sampling to guarantee that every position in multi_elig_pos
+  # retains at least n_teams_dgpc mono-eligible players after assignment.
+  # A position goes below n_teams_dgpc when the random draw makes too many
+  # players from that position multi-eligible; in the highest_par convergence
+  # loop those players can all flee to their secondary position, leaving the
+  # original position depleted below the 12-player minimum required by
+  # replacement_level().  Observed failure rate without this guard: ~2% of
+  # DGP-C draws at R=500.
+  #
+  # Separate seed stream (seed + 314159L + retry_k) so hitter stat generation
+  # above is unaffected by retries.
+  n_teams_dgpc   <- 12L    # matches Study C league config (n_teams = 12)
+  MAX_RETRIES    <- 20L    # structurally infeasible to hit given 45/pos base
+  ELIG_SEED_BASE <- seed + 314159L
+
   multi_elig_pos <- c("2B", "3B", "SS", "1B")
-  eligible_idx <- which(hitters$position %in% multi_elig_pos)
-  n_multi <- round(length(eligible_idx) * 0.60)
-  if (n_multi > 0) {
-    multi_idx <- sample(eligible_idx, n_multi, replace = FALSE)
-    pair_draw <- sample(
-      seq_along(.DGPC_PAIRS),
-      n_multi,
-      replace = TRUE,
-      prob = .DGPC_PROBS
-    )
-    for (k in seq_len(n_multi)) {
-      player_pos <- hitters$position[multi_idx[k]]
-      pair       <- .DGPC_PAIRS[[pair_draw[k]]]
-      sec_pos    <- setdiff(pair, player_pos)
-      if (length(sec_pos) == 0L) sec_pos <- pair[2L]
-      hitters$pos_eligibility[multi_idx[k]] <-
-        paste(player_pos, sec_pos[1L], sep = "|")
+  eligible_idx   <- which(hitters$position %in% multi_elig_pos)
+  n_multi        <- round(length(eligible_idx) * 0.60)
+
+  hitters_base   <- hitters   # snapshot before any eligibility modification
+  elig_ok        <- FALSE
+  mono_counts    <- setNames(integer(length(multi_elig_pos)), multi_elig_pos)
+
+  for (retry_k in 0L:MAX_RETRIES) {
+    hitters <- hitters_base
+    set.seed(ELIG_SEED_BASE + retry_k)
+
+    if (n_multi > 0L) {
+      multi_idx <- sample(eligible_idx, n_multi, replace = FALSE)
+      pair_draw <- sample(
+        seq_along(.DGPC_PAIRS),
+        n_multi,
+        replace = TRUE,
+        prob = .DGPC_PROBS
+      )
+      for (k in seq_len(n_multi)) {
+        player_pos <- hitters$position[multi_idx[k]]
+        pair       <- .DGPC_PAIRS[[pair_draw[k]]]
+        sec_pos    <- setdiff(pair, player_pos)
+        if (length(sec_pos) == 0L) sec_pos <- pair[2L]
+        hitters$pos_eligibility[multi_idx[k]] <-
+          paste(player_pos, sec_pos[1L], sep = "|")
+      }
+    }
+
+    # Check: every position must have >= n_teams_dgpc mono-eligible players
+    # (pos_eligibility exactly equals position, no secondary).
+    mono_counts[] <- vapply(multi_elig_pos, function(pos) {
+      sum(hitters$pos_eligibility == pos)
+    }, integer(1L))
+
+    if (all(mono_counts >= n_teams_dgpc)) {
+      elig_ok <- TRUE
+      break
     }
   }
+
+  if (!elig_ok) {
+    stop(sprintf(
+      "dgp_c: pool not feasible after %d retries (seed=%d). mono per pos: %s",
+      MAX_RETRIES, seed,
+      paste(names(mono_counts), mono_counts, sep = "=", collapse = ", ")
+    ))
+  }
+
+  # ---- Cycle-inducing cluster (appended after multi-elig assignment) ---- #
+  # Three deterministic near-boundary multi-eligible players designed so that
+  # greedy highest_par reassignment reliably cycles through a 3-cycle.
+  # Appended AFTER the random multi-elig loop so the random draw is not
+  # perturbed by these players (sim-spec.md §2.4 safer approach).
+  #
+  # Player IDs 9901-9903 (high integers; no collision with pool counter ~390).
+  # All three set to league = "AL" (consistent with alternating AL/NL pattern).
+  # Pitcher columns set to NA; role set to NA_character_.
+  #
+  # Structural design:
+  #   cycle_1 (ID 9901): 2B|SS — near 2B boundary; slightly stronger at 2B
+  #   cycle_2 (ID 9902): SS|3B — near SS/3B boundary; preference flips with pool
+  #   cycle_3 (ID 9903): 2B|3B — near 2B/3B boundary; completes the 3-cycle
+  #
+  # Stats calibrated at boundary quality (HR~15, AB=450, AVG~0.264).
+  # Verified in smoke run: converges under cycle_history_window=5 but not
+  # under cycle_history_window=1.
+  cycle_rows <- data.frame(
+    player_id       = c(9901L, 9902L, 9903L),
+    player_name     = c("CYCLE_1", "CYCLE_2", "CYCLE_3"),
+    position        = c("2B", "SS", "2B"),
+    pos_eligibility = c("2B|SS", "SS|3B", "2B|3B"),
+    league          = c("AL", "AL", "AL"),
+    role            = c(NA_character_, NA_character_, NA_character_),
+    HR              = c(15L, 14L, 15L),
+    R               = c(70L, 68L, 71L),
+    RBI             = c(62L, 60L, 63L),
+    SB              = c(12L, 16L, 11L),
+    H               = c(119L, 119L, 119L),   # AVG = 119/450 ≈ 0.2644
+    AB              = c(450L, 450L, 450L),
+    AVG             = c(119/450, 119/450, 119/450),
+    IP              = NA_real_,
+    ERA             = NA_real_,
+    WHIP            = NA_real_,
+    W               = NA_real_,
+    K               = NA_real_,
+    SV              = NA_real_,
+    stringsAsFactors = FALSE
+  )
+  # cycle_rows already has all hitter columns including league = "AL".
+  # It is appended to hitters in the merge section below, after hitters
+  # receives its pitcher placeholder columns and league assignment.
 
   # ---- Pitchers (same structure as DGP-A) -------------------------------- #
   # Pool sizing: 12-team × 6 SP = 72 rostered; use 85 for headroom.
@@ -211,6 +321,13 @@ dgp_c <- function(seed) {
   hitters$league <- rep_len(c("AL", "NL"), nrow(hitters))
   sp_df$league   <- rep_len(c("AL", "NL"), nrow(sp_df))
   rp_df$league   <- rep_len(c("AL", "NL"), nrow(rp_df))
+
+  # Append the deterministic 3-cycle cluster (cycle_rows already has all
+  # hitter columns: player_id, player_name, position, pos_eligibility,
+  # league, role, HR, R, RBI, SB, H, AB, AVG, IP, ERA, WHIP, W, K, SV).
+  # cycle_rows$league is already "AL" for all three players.
+  # Hitter total after append: 255 + 3 = 258.
+  hitters <- rbind(hitters, cycle_rows)
 
   all_cols <- c(
     "player_id", "player_name", "position", "pos_eligibility", "league", "role",

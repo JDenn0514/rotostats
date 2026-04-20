@@ -90,6 +90,13 @@
 
 ## Improvements
 
+* `replacement_level()`: The multi-position convergence loop now detects
+  higher-order assignment cycles (periods 3–5) using a rolling state-hash
+  buffer of depth `replacement_params$cycle_history_window` (default 5).
+  Previously only 2-cycles were detected. This eliminates the
+  `rotostats_warning_convergence_not_reached` false-alarm that occurred in
+  ~3% of highly multi-eligible pools.
+
 * `replacement_level()` and `replacement_from_prices()` now emit
   `rotostats_warning_name_match_failure` (when `verbose = TRUE`) to
   diagnose player-name mismatches between data sources. These warnings are

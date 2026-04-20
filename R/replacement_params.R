@@ -28,7 +28,7 @@ RATE_STAT_DENOMINATORS <- c(
 #' Named list of all numeric constants used by `replacement_level()`.
 #' Override specific entries via `replacement_params = list(band_width_K = 2L)`.
 #'
-#' @format A named list with nine elements: `band_width_K` (integer, default
+#' @format A named list with ten elements: `band_width_K` (integer, default
 #'   3L, band half-width K), `cliff_threshold` (numeric, default 1.5, MAD
 #'   threshold multiplier), `cliff_min_n` (integer, default 4L, minimum lower
 #'   band players for cliff detection), `sp_ip_threshold` (numeric, default
@@ -37,7 +37,9 @@ RATE_STAT_DENOMINATORS <- c(
 #'   default 0.15, fractional IP/AB divergence tolerance),
 #'   `calibration_min_n` (integer, default 15L, minimum dollar-one pool
 #'   size), `convergence_eps` (numeric, default 0.01, SGP convergence
-#'   tolerance), `convergence_max_iter` (integer, default 25L, max passes).
+#'   tolerance), `convergence_max_iter` (integer, default 25L, max passes),
+#'   `cycle_history_window` (integer, default 5L, rolling assignment-hash
+#'   history window depth for higher-order cycle detection).
 #'
 #' @seealso `replacement_level()`, `rate_stat_denominators()`
 #'
@@ -51,7 +53,8 @@ default_replacement_params <- list(
   ip_ab_divergence_tol  = 0.15,
   calibration_min_n     = 15L,
   convergence_eps       = 0.01,
-  convergence_max_iter  = 25L
+  convergence_max_iter  = 25L,
+  cycle_history_window  = 5L
 )
 
 # ---------------------------------------------------------------------------

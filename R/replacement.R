@@ -93,6 +93,11 @@ utils::globalVariables(c("PRIMARY_HITTER_SLOTS", "pool_sizes", "sgp"))
 #'   call.
 #' @param replacement_params Named list.  Override specific entries of
 #'   `default_replacement_params` (e.g., `list(band_width_K = 2L)`).
+#'   `cycle_history_window` (integer, default 5L): depth of the rolling
+#'   assignment-hash history window used to detect higher-order convergence
+#'   cycles (periods 2 through N) in the `multi_pos = "highest_par"` loop.
+#'   Increase if you observe non-convergence in pools with many near-boundary
+#'   multi-eligible players.
 #' @param max_iter Positive integer.  Maximum convergence passes (default `25L`).
 #' @param tol Numeric.  Convergence tolerance in SGP units (default `0.01`).
 #' @param verbose Logical.  If `TRUE`, emit diagnostic messages and
@@ -369,6 +374,9 @@ replacement_level <- function(
   # -------------------------------------------------------------------------
   params <- utils::modifyList(default_replacement_params, replacement_params)
 
+  checkmate::assert_int(params$cycle_history_window, lower = 2L, upper = 50L,
+                        .var.name = "replacement_params$cycle_history_window")
+
   K <- if (!is.null(band_width)) as.integer(band_width) else as.integer(params$band_width_K)
   cliff_thr <- cliff_threshold   # top-level arg always wins
 
@@ -464,13 +472,14 @@ replacement_level <- function(
   # -------------------------------------------------------------------------
   # §5.5  Iteration loop
   # -------------------------------------------------------------------------
-  converged           <- FALSE
-  pass                <- 1L
-  old_assignments     <- NULL
-  old_old_assignments <- NULL   # two passes ago — used for 2-cycle detection
-  old_repl_stats_vec  <- NULL
-  delta               <- NA_real_
-  sgp_result          <- NULL
+  converged                <- FALSE
+  pass                     <- 1L
+  old_assignments          <- NULL
+  assignment_hash_history  <- character(0L)  # rolling window of assignment hashes
+  cycle_window             <- params$cycle_history_window
+  old_repl_stats_vec       <- NULL
+  delta                    <- NA_real_
+  sgp_result               <- NULL
 
   # Determine which stats are counted (non-rate) vs rate
   rate_cats_scored <- intersect(cats_upper, names(rate_lookup))
@@ -823,26 +832,35 @@ replacement_level <- function(
       break
     }
 
-    # 2-cycle detection: if new_assignments equals the assignments from two
-    # passes ago, the assignment loop is oscillating between two stable states
-    # and will never satisfy the consecutive-pass equality criterion.  Accept
-    # the current state as the limit-cycle fixed point and declare convergence.
-    cycle_detected <- multi_pos == "highest_par" &&
-      !is.null(old_old_assignments) &&
-      length(new_assignments) == length(old_old_assignments) &&
-      all(new_assignments[names(old_old_assignments)] == old_old_assignments,
-          na.rm = TRUE)
+    # State-hash cycle detection: compute a canonical hash of new_assignments
+    # (sorted by player ID for order-invariance) and check against the rolling
+    # history buffer.  Catches 2-cycles, 3-cycles, and higher-order cycles up
+    # to period cycle_window.  Replaces the former 2-lag old_old_assignments
+    # comparison.
+    if (multi_pos == "highest_par") {
+      sorted_idx <- order(names(new_assignments))
+      new_hash   <- paste(
+        names(new_assignments)[sorted_idx],
+        new_assignments[sorted_idx],
+        collapse = "|"
+      )
 
-    if (cycle_detected) {
-      converged <- TRUE
-      break
+      if (new_hash %in% assignment_hash_history) {
+        converged <- TRUE
+        break
+      }
+
+      # Push new_hash onto ring buffer; evict oldest entry if window exceeded
+      assignment_hash_history <- c(assignment_hash_history, new_hash)
+      if (length(assignment_hash_history) > cycle_window) {
+        assignment_hash_history <- tail(assignment_hash_history, cycle_window)
+      }
     }
 
     if (pass >= max_iter) break
 
-    old_old_assignments <- old_assignments
-    old_assignments    <- new_assignments
-    old_repl_stats_vec <- new_repl_stats_vec
+    old_assignments     <- new_assignments
+    old_repl_stats_vec  <- new_repl_stats_vec
     current_assignments <- new_assignments
     pass <- pass + 1L
   }  # end repeat

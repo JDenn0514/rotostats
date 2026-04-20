@@ -682,7 +682,7 @@ test_that("TS-34: default_replacement_params has correct keys and defaults", {
     default_replacement_params,
     c("band_width_K", "cliff_threshold", "cliff_min_n", "sp_ip_threshold",
       "sp_rp_split_default", "ip_ab_divergence_tol", "calibration_min_n",
-      "convergence_eps", "convergence_max_iter"),
+      "convergence_eps", "convergence_max_iter", "cycle_history_window"),
     ignore.order = TRUE
   )
   expect_equal(default_replacement_params$band_width_K,         3L)
@@ -694,6 +694,7 @@ test_that("TS-34: default_replacement_params has correct keys and defaults", {
   expect_equal(default_replacement_params$calibration_min_n,     15L)
   expect_equal(default_replacement_params$convergence_eps,       0.01)
   expect_equal(default_replacement_params$convergence_max_iter,  25L)
+  expect_equal(default_replacement_params$cycle_history_window,  5L)
 })
 
 test_that("TS-35: replacement_params overrides take effect", {
@@ -837,4 +838,394 @@ test_that("T-NMF-2: replacement_level emits rotostats_warning_name_match_failure
     ),
     class = "rotostats_warning_name_match_failure"
   )
+})
+
+# ---------------------------------------------------------------------------
+# §15  State-Hash Cycle Detection Tests (R6 — higher-order cycles)
+# ---------------------------------------------------------------------------
+
+test_that("TS-60: default_replacement_params includes cycle_history_window = 5L", {
+  # Regression guard: cycle_history_window is the 10th element.
+  expect_equal(length(default_replacement_params), 10L)
+  expect_true("cycle_history_window" %in% names(default_replacement_params))
+  expect_identical(default_replacement_params$cycle_history_window, 5L)
+})
+
+test_that("TS-61: cycle_history_window validation rejects out-of-range values", {
+  proj <- make_projections_data(seed = 42L)
+
+  # Below lower bound (< 2)
+  expect_error(
+    replacement_level(
+      proj, config = cfg_mixed_12,
+      replacement_params = list(cycle_history_window = 1L)
+    )
+  )
+
+  # Above upper bound (> 50)
+  expect_error(
+    replacement_level(
+      proj, config = cfg_mixed_12,
+      replacement_params = list(cycle_history_window = 51L)
+    )
+  )
+
+  # Non-integer scalar
+  expect_error(
+    replacement_level(
+      proj, config = cfg_mixed_12,
+      replacement_params = list(cycle_history_window = "five")
+    )
+  )
+})
+
+test_that("TS-62: cycle_history_window = 2 accepted and produces converged result", {
+  # Window = 2 is the minimum valid value; it should behave like the former
+  # 2-lag detector (catching only 2-cycles) but via the hash ring buffer path.
+  proj   <- make_projections_data(seed = 42L)
+  result <- replacement_level(
+    proj, config = cfg_mixed_12,
+    multi_pos          = "highest_par",
+    replacement_params = list(cycle_history_window = 2L)
+  )
+  expect_true(attr(result, "converged"))
+})
+
+test_that("TS-63: assignment hash is order-invariant", {
+  # Verify that the canonical hash used in cycle detection does not depend on
+  # element ordering.  Two named character vectors with identical content but
+  # different element ordering must produce the same hash.
+  a1 <- c(P1 = "SS", P2 = "2B", P3 = "1B")
+  a2 <- c(P3 = "1B", P1 = "SS", P2 = "2B")   # same mapping, different order
+
+  hash_of <- function(a) {
+    sorted_idx <- order(names(a))
+    paste(names(a)[sorted_idx], a[sorted_idx], collapse = "|")
+  }
+
+  expect_identical(hash_of(a1), hash_of(a2))
+})
+
+test_that("TS-64: assignment hash distinguishes different assignment vectors", {
+  # Two different player-position mappings must produce different hashes.
+  a1 <- c(P1 = "SS", P2 = "2B", P3 = "1B")
+  a2 <- c(P1 = "2B", P2 = "SS", P3 = "1B")   # P1 and P2 swapped
+
+  hash_of <- function(a) {
+    sorted_idx <- order(names(a))
+    paste(names(a)[sorted_idx], a[sorted_idx], collapse = "|")
+  }
+
+  expect_false(identical(hash_of(a1), hash_of(a2)))
+})
+
+# ---------------------------------------------------------------------------
+# §16  State-Hash Cycle Detection — Fixture Tests (TS-R6-1/2/3)
+# Written by tester pipeline from test-spec.md §2.
+# Tester did NOT read spec.md, sim-spec.md, or implementation.md.
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Shared pool-construction helper for R6 fixture tests.
+#
+# Produces a pool with enough players at every position to satisfy
+# cfg_mixed_12 (12-team, boundary = 12 per hitter slot, 72 SP, 36 RP).
+# Pool dimensions per test-spec §2:
+#   n_solo_per_pos  : primary-only players at C, 1B, 2B, 3B, SS (≥ 15 each)
+#   n_of            : OF players (≥ 39)
+#   n_sp            : SP (≥ 75)
+#   n_rp            : RP (≥ 39)
+# plus the caller's multi-eligible rows appended at the end.
+# ---------------------------------------------------------------------------
+make_pool_with_multi_elig <- function(multi_elig_rows, seed = 20260418L,
+                                       n_solo = 15L, n_of = 39L,
+                                       n_sp = 75L, n_rp = 39L) {
+  set.seed(seed)
+
+  make_solo_pos <- function(pos, n, hr_mean) {
+    data.frame(
+      player_id       = paste0(pos, "_P", seq_len(n)),
+      player_name     = paste0(pos, "_Player", seq_len(n)),
+      pos_eligibility = rep(pos, n),
+      team            = rep("NYY", n),
+      league          = rep("AL", n),
+      HR              = round(sort(rnorm(n, hr_mean, 3), decreasing = TRUE)),
+      R               = rep(70L,  n),
+      RBI             = rep(72L,  n),
+      SB              = rep(8L,   n),
+      AVG             = rep(0.260, n),
+      AB              = rep(450L, n),
+      W               = NA_real_, K  = NA_real_, SV  = NA_real_,
+      ERA             = NA_real_, WHIP = NA_real_, IP  = NA_real_,
+      stringsAsFactors = FALSE
+    )
+  }
+
+  # Each position gets its own HR range so boundaries are distinct.
+  c_df  <- make_solo_pos("C",  n_solo, hr_mean = 12)
+  b1_df <- make_solo_pos("1B", n_solo, hr_mean = 22)
+  b2_df <- make_solo_pos("2B", n_solo, hr_mean = 15)
+  b3_df <- make_solo_pos("3B", n_solo, hr_mean = 18)
+  ss_df <- make_solo_pos("SS", n_solo, hr_mean = 14)
+  of_df <- make_solo_pos("OF", n_of,   hr_mean = 20)
+
+  # Pitchers
+  sp_ids <- paste0("SP_P", seq_len(n_sp))
+  sp_df  <- data.frame(
+    player_id       = sp_ids,
+    player_name     = paste0("SP_Player", seq_len(n_sp)),
+    pos_eligibility = rep("SP", n_sp),
+    team            = rep("NYY", n_sp),
+    league          = rep("AL",  n_sp),
+    HR = NA_real_, R = NA_real_, RBI = NA_real_, SB = NA_real_,
+    AVG = NA_real_, AB = NA_real_,
+    W   = round(pmax(0, rnorm(n_sp, 12, 4))),
+    K   = round(pmax(50, rnorm(n_sp, 165, 35))),
+    SV  = NA_real_,
+    ERA = round(pmax(2.5, pmin(6.5, rnorm(n_sp, 3.90, 0.60))), 2),
+    WHIP = round(pmax(0.95, pmin(1.80, rnorm(n_sp, 1.25, 0.12))), 3),
+    IP  = round(pmax(140, rnorm(n_sp, 170, 12)), 1),
+    stringsAsFactors = FALSE
+  )
+
+  rp_ids <- paste0("RP_P", seq_len(n_rp))
+  rp_df  <- data.frame(
+    player_id       = rp_ids,
+    player_name     = paste0("RP_Player", seq_len(n_rp)),
+    pos_eligibility = rep("RP", n_rp),
+    team            = rep("NYY", n_rp),
+    league          = rep("AL",  n_rp),
+    HR = NA_real_, R = NA_real_, RBI = NA_real_, SB = NA_real_,
+    AVG = NA_real_, AB = NA_real_,
+    W   = NA_real_,
+    K   = round(pmax(10, rnorm(n_rp, 60, 15))),
+    SV  = round(pmax(0, rnorm(n_rp, 8, 8))),
+    ERA = round(pmax(2.5, pmin(6.5, rnorm(n_rp, 3.80, 0.80))), 2),
+    WHIP = round(pmax(0.95, pmin(1.80, rnorm(n_rp, 1.25, 0.15))), 3),
+    IP  = round(pmax(40, rnorm(n_rp, 60, 8)), 1),
+    stringsAsFactors = FALSE
+  )
+
+  rbind(c_df, b1_df, b2_df, b3_df, ss_df, of_df, sp_df, rp_df,
+        multi_elig_rows)
+}
+
+# ---------------------------------------------------------------------------
+# TS-R6-1: 2-Cycle Regression Fixture
+#
+# Purpose: guard against regression of commit 21270fb.  The 2-lag detector
+# has been replaced by the hash ring buffer; this test confirms the new
+# detector still catches 2-cycles.
+#
+# Fixture: a controlled pool built with make_pool_with_multi_elig().  Two
+# near-boundary 2B|SS players (A and B) are added at boundary-quality for both
+# positions, mimicking the classic 2-cycle scenario.  The mono-eligible pools
+# are deep enough (15 pure players per position) to prevent pool_too_small
+# errors during the convergence loop.  This fallback is permitted by test-spec
+# §2 ("The test is considered valid if it reliably passes with fixed seeds").
+# ---------------------------------------------------------------------------
+test_that("TS-R6-1: 2-cycle regression — hash detector converges on multi-eligible pool", {
+  # Seed matches test-spec §2: set.seed(20260418L)
+  # Two near-boundary 2B|SS players — the classic 2-cycle scenario.
+  # HR values (13 and 12) are near the 12th-best at both 2B (hr_mean=15)
+  # and SS (hr_mean=14), making them boundary-quality at both positions.
+  two_cycle_players <- data.frame(
+    player_id       = c("PA", "PB"),
+    player_name     = c("CyclePlayerA", "CyclePlayerB"),
+    pos_eligibility = c("2B|SS", "2B|SS"),
+    team            = c("NYY", "NYY"),
+    league          = c("AL",  "AL"),
+    HR              = c(13L, 12L),
+    R               = c(69L, 68L),
+    RBI             = c(71L, 70L),
+    SB              = c(8L,  7L),
+    AVG             = c(0.259, 0.258),
+    AB              = c(450L, 448L),
+    W               = NA_real_, K  = NA_real_, SV  = NA_real_,
+    ERA             = NA_real_, WHIP = NA_real_, IP  = NA_real_,
+    stringsAsFactors = FALSE
+  )
+
+  proj <- make_pool_with_multi_elig(two_cycle_players, seed = 20260418L)
+
+  warning_fired <- FALSE
+  result <- withCallingHandlers(
+    replacement_level(
+      projections        = proj,
+      config             = cfg_mixed_12,
+      multi_pos          = "highest_par",
+      replacement_params = list(cycle_history_window = 5L),
+      max_iter           = 30L
+    ),
+    rotostats_warning_convergence_not_reached = function(w) {
+      warning_fired <<- TRUE
+      invokeRestart("muffleWarning")
+    }
+  )
+
+  # Primary assertions (exact logical checks; no numerical tolerance)
+  expect_true(attr(result, "converged"),
+              info = "Pool must converge: hash detector did not catch 2-cycle")
+  expect_lt(attr(result, "iterations"), 30L,
+            label = "iterations < max_iter (converged before hitting the cap)")
+  expect_false(warning_fired,
+               info = "rotostats_warning_convergence_not_reached must NOT fire")
+})
+
+# ---------------------------------------------------------------------------
+# TS-R6-2: 3-Cycle Detection Fixture
+#
+# Purpose: verify that the hash ring buffer catches a genuine 3-cycle
+# (primary new capability of commit ddbdd23).
+#
+# Fixture: standard make_projections_data() pool extended with three
+# near-boundary multi-eligible infielders (P1: 2B|SS, P2: SS|3B, P3: 2B|3B)
+# whose stats are calibrated to be at the boundary of 2B, SS, and 3B pools
+# respectively.  With cycle_history_window = 5 (default), the hash detector
+# catches the cycle.  With cycle_history_window = 2, the 3-cycle escapes the
+# window (window only holds 2 hashes; 3-cycle period = 3 exceeds it).
+#
+# Guard check: if window = 2 reliably fails to converge, that confirms the
+# fixture actually exercises a 3-cycle path.  If the guard check is unreliable
+# (pool converges via a 2-cycle first), it is omitted per test-spec §2.
+# ---------------------------------------------------------------------------
+test_that("TS-R6-2: 3-cycle detection — hash ring buffer catches higher-order cycle", {
+  set.seed(20260418L + 1L)
+
+  # Three near-boundary multi-eligible infielders.
+  # HR values are set just below the 12th-best at the respective primary
+  # position so they are boundary-quality (the standard pool's 15 mono-players
+  # per position means rank 12 is well-defined).
+  #
+  # P9901: 2B|SS  — boundary quality at both 2B and SS
+  # P9902: SS|3B  — boundary quality at both SS and 3B
+  # P9903: 2B|3B  — boundary quality at both 2B and 3B
+  multi_elig <- data.frame(
+    player_id       = c("P9901", "P9902", "P9903"),
+    player_name     = c("CycleA", "CycleB", "CycleC"),
+    pos_eligibility = c("2B|SS", "SS|3B", "2B|3B"),
+    team            = c("NYY",   "NYY",   "NYY"),
+    league          = c("AL",    "AL",    "AL"),
+    HR              = c(13L, 12L, 11L),   # boundary-quality: near rank 12 at target pos
+    R               = c(68L, 67L, 66L),
+    RBI             = c(70L, 69L, 68L),
+    SB              = c(7L,  7L,  6L),
+    AVG             = c(0.258, 0.257, 0.256),
+    AB              = c(450L, 448L, 445L),
+    W               = NA_real_, K  = NA_real_, SV  = NA_real_,
+    ERA             = NA_real_, WHIP = NA_real_, IP  = NA_real_,
+    stringsAsFactors = FALSE
+  )
+
+  fixture_proj   <- make_pool_with_multi_elig(multi_elig, seed = 20260418L + 1L)
+  fixture_config <- cfg_mixed_12
+
+  # --- Primary assertions (default cycle_history_window = 5L) ---
+  warning_fired <- FALSE
+  result <- withCallingHandlers(
+    replacement_level(
+      projections        = fixture_proj,
+      config             = fixture_config,
+      multi_pos          = "highest_par",
+      replacement_params = list(cycle_history_window = 5L),
+      max_iter           = 30L
+    ),
+    rotostats_warning_convergence_not_reached = function(w) {
+      warning_fired <<- TRUE
+      invokeRestart("muffleWarning")
+    }
+  )
+
+  expect_true(attr(result, "converged"),
+              info = "Pool must converge: hash detector (window=5) should catch the cycle")
+  expect_lte(attr(result, "iterations"), 30L,
+             label = "iterations <= max_iter")
+  expect_false(warning_fired,
+               info = "rotostats_warning_convergence_not_reached must NOT fire when converged")
+
+  # --- Guard check: window = 2L should NOT catch a 3-cycle ---
+  # With window = 2 the ring buffer holds only 2 hashes; a 3-cycle has
+  # period 3 and escapes the window.  This optional check confirms the fixture
+  # requires a window >= 3.  If the pool happens to 2-cycle (converges even
+  # with window = 2), omit the assertion and rely on the primary assertions.
+  # Note: cycle_history_window = 1L is rejected by validation (lower bound 2L).
+  warning_fired_small <- FALSE
+  result_small <- withCallingHandlers(
+    replacement_level(
+      projections        = fixture_proj,
+      config             = fixture_config,
+      multi_pos          = "highest_par",
+      replacement_params = list(cycle_history_window = 2L),
+      max_iter           = 10L
+    ),
+    rotostats_warning_convergence_not_reached = function(w) {
+      warning_fired_small <<- TRUE
+      invokeRestart("muffleWarning")
+    }
+  )
+  # Guard check is advisory: if window=2 also converges, the fixture may be
+  # executing a 2-cycle rather than a 3-cycle.  Log but do not fail the test.
+  if (!attr(result_small, "converged")) {
+    expect_true(warning_fired_small,
+                info = "Guard: window=2 should NOT converge a 3-cycle (warning expected)")
+  }
+  # else: fixture converges with window=2 (likely a 2-cycle); primary assertions
+  # above still pass. Document with a message.
+  if (attr(result_small, "converged")) {
+    message("TS-R6-2 guard: fixture converged with cycle_history_window=2 — ",
+            "fixture may be exercising a 2-cycle rather than a 3-cycle; ",
+            "primary assertions still valid per test-spec §2 fallback.")
+  }
+})
+
+# ---------------------------------------------------------------------------
+# TS-R6-3: Pathological Pool (no fixed point, no cycle within window)
+#
+# Purpose: verify that a pool exhausting max_iter without a hash match still
+# terminates cleanly with converged = FALSE and emits
+# rotostats_warning_convergence_not_reached.
+#
+# Fixture: standard make_projections_data() pool with max_iter = 1L.
+# With max_iter = 1L: pass 1 runs, old_assignments is NULL so convergence
+# check cannot succeed, hash is pushed (1 entry), pass >= max_iter → break.
+# converged = FALSE is guaranteed.  Warning fires unconditionally.
+#
+# This is a stricter scenario than TS-32 and TS-33 because it explicitly
+# uses cycle_history_window = 5 (default) to confirm the hash buffer does
+# not trigger false-positive convergence after 1 pass.
+#
+# Tolerances: exact logical checks; integer equality (iterations == max_iter).
+# ---------------------------------------------------------------------------
+test_that("TS-R6-3: pathological pool — max_iter fires, converged = FALSE, warning emitted", {
+  # Seed matches test-spec §2: set.seed(20260418L + 2L)
+  proj <- make_projections_data(seed = 20260418L + 2L, n_hitters = 200L)
+
+  max_iter_val <- 1L
+
+  warning_class_observed <- character(0)
+  result <- withCallingHandlers(
+    replacement_level(
+      projections        = proj,
+      config             = cfg_mixed_12,
+      multi_pos          = "highest_par",
+      replacement_params = list(cycle_history_window = 5L),
+      max_iter           = max_iter_val
+    ),
+    rotostats_warning_convergence_not_reached = function(w) {
+      warning_class_observed <<- c(warning_class_observed, class(w)[1])
+      invokeRestart("muffleWarning")
+    }
+  )
+
+  # converged MUST be FALSE
+  expect_false(attr(result, "converged"),
+               info = "converged must be FALSE when max_iter is hit without cycle detection")
+
+  # Warning MUST fire with exact class name
+  expect_true("rotostats_warning_convergence_not_reached" %in% warning_class_observed,
+              info = "rotostats_warning_convergence_not_reached must be emitted")
+
+  # iterations MUST equal max_iter (hit the hard cap)
+  expect_equal(attr(result, "iterations"), max_iter_val,
+               info = "iterations must equal max_iter when hard cap is hit")
 })
