@@ -16,10 +16,8 @@ Compute per-player, per-category proportional shares of above-replacement produc
 ## Surfaces
 
 **Reads (builder, simulator, tester may read):**
-- R/replacement.R (pvm takes replacement_level() output)
-- R/dollar_values.R (downstream consumer; read-only for context)
-- TODO(user): confirm R/replacement.R
-- TODO(user): confirm R/dollar_values.R
+- R/replacement.R (pvm takes replacement_level() output; direct read surface — `pvm()` consumes the `projections` / `config` / `stat_units` attributes attached by `replacement_level()`)
+- R/dollar_values.R (downstream consumer; context-only read, never sourced directly — `pvm()` emits attributes that `dollar_values()` reads, not the reverse)
 
 **Writes — builder:**
 - R/pvm.R
@@ -42,7 +40,8 @@ Compute per-player, per-category proportional shares of above-replacement produc
 - R/zaa.R
 - R/zar.R
 - R/dollar_values.R (downstream consumer)
-- TODO(user): confirm frozen-surface list is complete
+- R/league-config.R (upstream — `config` is consumed via `attr(replacement, "config")`; `pvm()` does not modify it)
+- R/league-history.R (not consumed by `pvm()` directly, but listed here to make it explicit that the `pvm()` run must not modify this file)
 
 ---
 
@@ -74,31 +73,31 @@ pvm(
 
 **Default-path behavior (`missing(x)`):** `include_raw = FALSE`; no `contrib_[cat]` columns are added to the output.
 
-**Explicit-path behavior (user supplied):** Must be a logical scalar (`TRUE` or `FALSE`). TODO(user): decide error class for non-logical / non-scalar `include_raw` (not currently listed in Error Handling table). When `TRUE`, include `contrib_[cat]` columns in the output; when `FALSE`, omit them.
+**Explicit-path behavior (user supplied):** Must be a logical scalar (`TRUE` or `FALSE`). Non-logical input, `NA`, or length > 1 aborts with `rotostats_error_invalid_parameter` (reused from the existing registry — no new class). No silent coercion. When `TRUE`, include `contrib_[cat]` columns in the output; when `FALSE`, omit them. TODO(planner): add this case to the Error Handling table at implementation time.
 
 ### Parameter: `cat_pct`
 
 **Default-path behavior (`missing(x)`):** `cat_pct = "auto"`; CAT% is derived from `league_config` using `hitter_split / n_hitter_cats` and `(1 - hitter_split) / n_pitcher_cats`. Uses the conventional 67/33 hitter/pitcher split unless overridden in `league_config`.
 
-**Explicit-path behavior (user supplied):** Must be either the string `"auto"`, the string `"equal"`, or a named numeric vector. If a named numeric vector: names must cover all scored categories (else abort with `rotostats_error_category_mismatch`) and values must satisfy `|sum(cat_pct) - 1.0| < 1e-10` (else abort with `rotostats_error_cat_pct_sum`). TODO(user): decide error class for `cat_pct` values that are neither `"auto"`, `"equal"`, nor a named numeric vector (e.g., unnamed numeric, other strings).
+**Explicit-path behavior (user supplied):** Must be either the string `"auto"`, the string `"equal"`, or a named numeric vector. If a named numeric vector: names must cover all scored categories (else abort with `rotostats_error_category_mismatch`) and values must satisfy `|sum(cat_pct) - 1.0| < 1e-10` (else abort with `rotostats_error_cat_pct_sum`). Values that are neither `"auto"`, `"equal"`, nor a named numeric vector (e.g., unnamed numeric, other strings, logical, list) abort with `rotostats_error_invalid_parameter` — reuse the existing class rather than introducing a `cat_pct`-specific variant. TODO(planner): add this case to the Error Handling table at implementation time.
 
 ### Parameter: `rate_pool`
 
 **Default-path behavior (`missing(x)`):** `rate_pool = "ip_weighted"`; rate stat contributions are volume-weighted in raw stat space using `PS[j, IP] / mean_rostered_IP` or `PS[j, AB] / mean_rostered_AB`.
 
-**Explicit-path behavior (user supplied):** Must be one of `"ip_weighted"`, `"pool_average"`, or `"fixed_baseline"`. TODO(user): decide error class for unrecognized `rate_pool` values (not currently listed in Error Handling table). When `"fixed_baseline"` is supplied and a scored rate stat category has no baseline in `config` and no override in `baseline`, abort with the class marked TBD in the Error Handling table.
+**Explicit-path behavior (user supplied):** Must be one of `"ip_weighted"`, `"pool_average"`, or `"fixed_baseline"`. Any other value aborts with `rotostats_error_invalid_parameter` — same reuse rationale as `include_raw` and `cat_pct`. When `"fixed_baseline"` is supplied and a scored rate stat category has no baseline in `config` and no override in `baseline`, abort with the class marked TBD in the Error Handling table. TODO(planner): add the invalid-value case to the Error Handling table at implementation time.
 
 ### Parameter: `sub_replacement`
 
 **Default-path behavior (`missing(x)`):** `sub_replacement = "clip"`; sub-replacement contributions are clipped to 0, and the sum-to-1 invariant holds across all rostered players.
 
-**Explicit-path behavior (user supplied):** Must be one of `"clip"` or `"negative"`. TODO(user): decide error class for unrecognized `sub_replacement` values (not currently listed in Error Handling table). When `"negative"`, sub-replacement players retain negative contributions; only positive contributors enter the pool denominator.
+**Explicit-path behavior (user supplied):** Must be one of `"clip"` or `"negative"`. Any other value aborts with `rotostats_error_invalid_parameter` — same reuse rationale as the other pvm membership checks. When `"negative"`, sub-replacement players retain negative contributions; only positive contributors enter the pool denominator. TODO(planner): add the invalid-value case to the Error Handling table at implementation time.
 
 ### Parameter: `baseline`
 
 **Default-path behavior (`missing(x)`):** `baseline = NULL`; baseline constants are read automatically from `config` when `rate_pool = "fixed_baseline"`. When `rate_pool != "fixed_baseline"`, `baseline` is ignored.
 
-**Explicit-path behavior (user supplied):** Must be a named numeric vector whose names match scored rate stat categories present in the league configuration. TODO(user): decide error class for non-numeric / non-named `baseline` inputs, and for `baseline` names that do not correspond to scored rate stat categories. Only consulted when `rate_pool = "fixed_baseline"`; TODO(user): decide whether supplying `baseline` under a non-fixed_baseline `rate_pool` is a silent no-op or an error.
+**Explicit-path behavior (user supplied):** Must be a named numeric vector whose names match scored rate stat categories present in the league configuration. Non-numeric, unnamed, or partially named `baseline` (including `NA` / `NaN` / non-finite values) aborts with `rotostats_error_invalid_parameter` — same reuse rationale as the other pvm explicit-path checks. TODO(user): decide error class for `baseline` names that do not correspond to scored rate stat categories (candidates: `rotostats_error_invalid_parameter` or `rotostats_error_category_mismatch` — the latter is more specific but requires broadening its condition in `plans/error-messages.md`). Only consulted when `rate_pool = "fixed_baseline"`; TODO(user): decide whether supplying `baseline` under a non-fixed_baseline `rate_pool` is a silent no-op or an error (current spec body says silent; strict-validation consistency with `include_cat` / `pivot` in `spec-dollar-values.md` would argue for error).
 
 **Outputs:**
 
