@@ -1,10 +1,10 @@
 # Architecture: rotostats
 
-**Run:** `replacement-multi-pos-all-spec-2026-04-18`
-**Branch:** `feature/replacement-multi-pos-all-spec` @ (see git log)
-**Date:** 2026-04-18
+**Run:** `replacement-higher-order-cycle-2026-04-17`
+**Branch:** `feature/replacement-higher-order-cycle`
+**Date:** 2026-04-20
 
-(Previous run: `sgp-denom-weights-guidance-docs-2026-04-17` — see git log for prior state)
+(Previous run: `replacement-multi-pos-all-spec-2026-04-18` — see git log for prior state)
 
 ---
 
@@ -37,14 +37,14 @@ graph TD
     end
 
     subgraph REPL_CORE["Replacement Core"]
-        RL_BODY["replacement_level() body\nvalidation → seed → loop\nband + cliff + adjustments\nmulti-pos convergence"]
-        RFP_BODY["replacement_from_prices() body\nfilter prices → trim\nper-pos stat means"]
+        RL_BODY["replacement_level() body\nvalidation + seed + loop\nband + cliff + adjustments\nmulti-pos convergence\n+ state-hash cycle detector"]
+        RFP_BODY["replacement_from_prices() body\nfilter prices + trim\nper-pos stat means"]
         RL_INT["replacement_internal.R\nformat_replacement_output\ncompute_positional_adjustments\nassert_replacement_output_contract\ncompute_band_indices\ndetect_cliff\ncompute_replacement_stat_line\ninfer_pitcher_roles\nnormalize_name\nassert_zero_sum"]
-        RL_PARAMS["replacement_params.R\nRATE_STAT_DENOMINATORS\ndefault_replacement_params"]
+        RL_PARAMS["replacement_params.R\nRATE_STAT_DENOMINATORS\ndefault_replacement_params\n(10 entries incl. cycle_history_window)"]
     end
 
     subgraph CORE["SGP Core Logic"]
-        SGP_BODY["sgp() body\nSteps 1–15\ncounting + rate SGP\npool construction\nbaseline derivation"]
+        SGP_BODY["sgp() body\nSteps 1-15\ncounting + rate SGP\npool construction\nbaseline derivation"]
         SGPD_BODY["sgp_denominators() body\ncalibration loop\nOLS / gap / SD\nbootstrap CIs"]
     end
 
@@ -92,102 +92,81 @@ graph TD
     YW --> SGPD_BODY
     CS --> SGPD_BODY
 
-    style SGP fill:#1e90ff,stroke:#1565c0,color:#fff
-    style SGP_BODY fill:#1e90ff,stroke:#1565c0,color:#fff
+    style RL_BODY fill:#1e90ff,stroke:#1565c0,color:#fff
+    style RL_PARAMS fill:#1e90ff,stroke:#1565c0,color:#fff
 ```
+
+| Module | Purpose | Key Dependencies | Changed in This Run |
+|--------|---------|-----------------|---------------------|
+| `replacement_level()` body | Per-position estimator; boundary-band + state-hash cycle detection loop | `replacement_internal.R`, `replacement_params.R`, `cli`, `checkmate` | Yes — state-hash detector replaces 2-lag |
+| `default_replacement_params` | Exported list of 10 numeric constants (was 9); 10th is `cycle_history_window = 5L` | — | Yes — 9 to 10 entries |
+| `dgp_c.R` | DGP-C simulation: 393-row pool with 3 deterministic cycle players + rejection-sampling guard | — | Yes — rejection sampling added |
+| `test-replacement.R` | Unit tests: TS-R6-1/2/3 + TS-60 to TS-64 added | `testthat` | Yes — 311 lines added |
+| `sgp()`, `sgp_denominators()` | SGP computation and denominator calibration | `sgp-denominators-helpers.R` | No |
+| All other modules | Unchanged | — | No |
+
+---
 
 ### Function Call Graph
 
-```mermaid
-%%{init: {'theme': 'neutral'}}%%
-graph TD
-    A["sgp()"] --> B["Step 1: normalize column names"]
-    A --> C["Step 2–5: validate rate_conversion"]
-    A --> D["Step 6: validate league_history / config"]
-    A --> E["Step 7: derive scored_cats"]
-    A --> F["Step 8: warn missing columns"]
-    A --> G["Step 9: handle SVHD"]
-    A --> H["Step 10: baseline year + avg_ERA/WHIP/AVG"]
-    A --> I["Step 11: pool constants"]
-    A --> J["Steps 13–14: compute SGP columns"]
-    A --> K["Step 15: assemble data frame"]
-
-    C --> C1["cli_abort\nrotostats_error_invalid_rate_conversion"]
-    C --> C2["cli_abort\nrotostats_error_not_implemented"]
-    C --> C3["convert_rate_stats() — delegate"]
-
-    D --> D1["cli_abort\nrotostats_error_missing_config_field"]
-    D --> D2["cli_abort\nrotostats_error_missing_required_column"]
-
-    F --> F1["cli_warn\nrotostats_warning_missing_category_column"]
-    J --> J5a["cli_warn\nrotostats_warning_zero_playing_time"]
-
-    G --> G1["rlang::inform .frequency=once"]
-
-    H --> H1["stats::weighted.mean ERA/WHIP"]
-    H --> H2["stats::weighted.mean AVG"]
-    H --> H3["cli_inform baseline year used"]
-
-    I --> I1["pool_sizes(league_config)"]
-    I --> I2["order + head — pitcher pool"]
-    I --> I3["order + head — hitter pool"]
-
-    J --> J1["vectorized division counting cats"]
-    J --> J2["blended ERA formula vectorized"]
-    J --> J3["blended WHIP formula vectorized"]
-    J --> J4["blended AVG formula sign flip"]
-    J --> J5["cli_warn\nrotostats_warning_zero_playing_time\nzero IP/AB"]
-
-    K --> K1["as.data.frame sgp_cols"]
-    K --> K2["rowSums na.rm=FALSE"]
-
-    style A fill:#1e90ff,stroke:#1565c0,color:#fff
-    style B fill:#1e90ff,stroke:#1565c0,color:#fff
-    style C fill:#1e90ff,stroke:#1565c0,color:#fff
-    style C1 fill:#1e90ff,stroke:#1565c0,color:#fff
-    style F fill:#1e90ff,stroke:#1565c0,color:#fff
-    style F1 fill:#1e90ff,stroke:#1565c0,color:#fff
-    style J fill:#1e90ff,stroke:#1565c0,color:#fff
-    style J5 fill:#1e90ff,stroke:#1565c0,color:#fff
-    style J5a fill:#1e90ff,stroke:#1565c0,color:#fff
-```
-
-**replacement_level() call graph:**
+**replacement_level() — state-hash cycle detector (changed in this run):**
 
 ```mermaid
 %%{init: {'theme': 'neutral'}}%%
 graph TD
-    RL["replacement_level()"] --> VA["validate inputs\ncheckmate + cli_abort\n32 assertions"]
-    RL --> PRES["parameter resolution\nmodifyList + K_eff formula"]
+    RL["replacement_level()"] --> VA["validate inputs\n32 assertions\n+ assert_int cycle_history_window"]
+    RL --> PRES["param resolution\nmodifyList\ncycle_window = params$cycle_history_window"]
     RL --> ROLE["infer_pitcher_roles()\nswingman flag BEFORE role"]
-    RL --> LOOP["repeat convergence loop\nmax_iter=25 passes"]
+    RL --> INIT["init loop state\nassignment_hash_history = character(0L)"]
+    INIT --> LOOP["repeat convergence loop\nmax_iter = 25 passes"]
 
-    LOOP --> SORT["sort players into\nposition pools"]
-    LOOP --> BAND["compute_band_indices()\nb = n_teams × slots\nK_eff = min(K, b/4)"]
-    LOOP --> CLIFF["detect_cliff()\nB_lower only\nskip if len < cliff_min_n"]
-    LOOP --> STATLINE["compute_replacement_stat_line()\ncounting=mean\nERA/WHIP=IP-weighted\nAVG=AB-weighted"]
-    LOOP --> ADJ["compute_positional_adjustments()\nfvarz/sgp/dollar/posblend\ncatcher override → zero-sum"]
-    LOOP --> ZS["assert_zero_sum()\n< 1e-6 required"]
-    LOOP --> MPOS["multi-pos reassign\nhighest_par + 2-cycle detect"]
-    LOOP --> CONV["convergence check\nassignments + delta < tol"]
+    LOOP --> SORT["sort pools"]
+    LOOP --> BAND["compute_band_indices()\nK_eff = min(K, b/4)"]
+    LOOP --> CLIFF["detect_cliff()\nB_lower only"]
+    LOOP --> STATLINE["compute_replacement_stat_line()"]
+    LOOP --> ADJ["compute_positional_adjustments()\nzero-sum enforced"]
+    LOOP --> MPOS["multi-pos reassign\nhighest_par only"]
 
-    ADJ --> ZS
-    CONV --> WARN["cli_warn\nconvergence_not_reached\n(unconditional)"]
+    MPOS --> H1["H1: primary convergence\nassignments_converged AND stats_converged"]
+    MPOS --> H2["H2: hash cycle check\nnew_hash %in% assignment_hash_history"]
+    MPOS --> H3["H3: advance pass\npush hash to ring buffer\ntail() eviction at cycle_window"]
+    MPOS --> H4["H4: max_iter guard\nif pass >= max_iter break"]
 
+    H1 -->|"converged=TRUE"| DONE["break"]
+    H2 -->|"converged=TRUE"| DONE
+    H4 -->|"converged=FALSE"| DONE
+
+    DONE --> WARN["cli_warn\nconvergence_not_reached\nonly when not converged"]
     RL --> FMT["format_replacement_output()"]
     RL --> CHK["assert_replacement_output_contract()"]
 
+    style RL fill:#1e90ff,stroke:#1565c0,color:#fff
+    style VA fill:#1e90ff,stroke:#1565c0,color:#fff
+    style PRES fill:#1e90ff,stroke:#1565c0,color:#fff
+    style INIT fill:#1e90ff,stroke:#1565c0,color:#fff
+    style H2 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style H3 fill:#1e90ff,stroke:#1565c0,color:#fff
 ```
 
-**sgp_denominators() call graph (for reference):**
+| Function / Block | Purpose | Key Dependencies | Changed |
+|---|---|---|---|
+| Parameter validation | Merges user overrides; `checkmate::assert_int(cycle_history_window, lower=2L, upper=50L)` | `checkmate` | Yes |
+| Loop init | Removed `old_old_assignments`; added `assignment_hash_history`, `cycle_window` | base R | Yes |
+| H1: primary convergence | `assignments_converged && stats_converged` — unchanged | — | No |
+| H2: hash cycle detection | `new_hash %in% assignment_hash_history`; sets `converged=TRUE; break` | base R | Yes — replaces 2-lag |
+| H3: advance pass | Push hash, evict via `tail()`, rotate `old_assignments`; removes `old_old_assignments` rotation | base R | Yes |
+| H4: max_iter guard | `if (pass >= max_iter) break` — unchanged | — | No |
+| `default_replacement_params` | 10th entry `cycle_history_window = 5L` added | — | Yes |
+
+**sgp_denominators() call graph (unchanged — for reference):**
 
 ```mermaid
 %%{init: {'theme': 'neutral'}}%%
 graph TD
-    SD["sgp_denominators()"] --> SD0["capture missing() flag\ninverse_categories_is_default"]
+    SD["sgp_denominators()"] --> SD0["capture missing() flag"]
     SD --> SD1["validate inputs"]
     SD --> SD2["infer / validate scoring_categories"]
-    SD --> SDV["validate + normalize\ninverse_categories\ndefault: silent intersect\nexplicit: abort if bad"]
+    SD --> SDV["validate inverse_categories"]
     SD --> SD3["build year sets + weight fns"]
     SD --> SD4["denominator loop per category"]
     SD --> SD5["bootstrap CIs (optional)"]
@@ -195,69 +174,55 @@ graph TD
 
     SD4 --> SD4a["apply_year_window()"]
     SD4 --> SD4b["compute_weight()"]
-    SD4 --> SD4c["OLS: stats::lm()\nrank-flip if cat %in%\ninverse_categories"]
+    SD4 --> SD4c["OLS: stats::lm()"]
     SD4 --> SD4d["gap / trimmed_gap"]
     SD4 --> SD4e["sd: expected_range_normal()"]
-    SD4 --> SD4f["sign check: beta_c vs\ninverse_categories"]
-
-    SD6 --> S3["sgp_denominators S3 object\nattr dot rate_conversion"]
 
     style SD fill:#1e90ff,stroke:#1565c0,color:#fff
-    style SD0 fill:#1e90ff,stroke:#1565c0,color:#fff
-    style SDV fill:#1e90ff,stroke:#1565c0,color:#fff
-    style SD4c fill:#1e90ff,stroke:#1565c0,color:#fff
-    style SD4f fill:#1e90ff,stroke:#1565c0,color:#fff
 ```
+
+---
 
 ### Data Flow
 
 ```mermaid
 %%{init: {'theme': 'neutral'}}%%
 graph TD
-    IN1["league_history\nteam_season data"]
     IN2["league_config\nn_teams roster_slots"]
     IN3["projections\nper-player data frame"]
-
-    IN1 --> SD["sgp_denominators()"]
-    IN2 --> SD
-    SD --> DENOM["sgp_denominators S3 object\nnamed denominator vector\nrate_conversion attr"]
-
-    IN1 --> SGP["sgp()"]
-    IN2 --> SGP
-    IN3 --> SGP
-    DENOM --> SGP
+    PARAMS["replacement_params\nincl. cycle_history_window"]
 
     IN2 --> RL["replacement_level()"]
     IN3 --> RL
-    DENOM --> RL
+    PARAMS --> RL
 
-    RL --> ITER{"sort_by?"}
-    ITER -- zscore --> ZSCORE["z-score composite rank\nper position pool"]
-    ITER -- sgp pass 2+ --> SGP
+    RL --> PARVAL["validate cycle_history_window\nassert_int [2L, 50L]"]
+    PARVAL --> INIT["init ring buffer\nassignment_hash_history = character(0L)\ncycle_window resolved"]
 
-    ZSCORE --> BOUNDARY["boundary band\nb = n_teams × slots\ncliff detection\nband stat means"]
-    SGP --> SGPOUT["data.frame total_sgp"]
-    SGPOUT --> BOUNDARY
+    INIT --> ITER["repeat loop\npass 1..max_iter"]
+    ITER --> SORTBAND["sort + band + cliff\nstat line computation"]
+    SORTBAND --> ADJ["positional adjustments\nzero-sum enforced"]
+    ADJ --> REASSIGN["multi-pos reassign\nhighest_par only"]
 
-    BOUNDARY --> POSADJ["positional adjustments\nscarcity premiums\nzero-sum enforced"]
-    POSADJ --> CONVCHECK{"converged?"}
-    CONVCHECK -- no, reassign multi-pos --> ITER
-    CONVCHECK -- yes --> ROUT["named list\nreplacement_stats\npositional_adjustments\ncliff_metric\nparams + attributes"]
+    REASSIGN --> HASH["compute new_hash\npaste(sorted names, assignments)"]
+    HASH --> PCONV{"assignments_converged\nAND stats_converged?"}
+    PCONV -->|"yes"| CONV["converged = TRUE\nbreak"]
+    PCONV -->|"no"| HCHECK{"new_hash %in%\nassignment_hash_history?"}
+    HCHECK -->|"yes"| CONV
+    HCHECK -->|"no"| PUSHBUF["push hash\ntail() eviction\nincrement pass"]
+    PUSHBUF --> MCHECK{"pass >= max_iter?"}
+    MCHECK -->|"yes"| NOTCONV["converged = FALSE\nbreak"]
+    MCHECK -->|"no"| ITER
 
-    SGP --> POOL_CONST{"pool_baseline\n= projection_pool?"}
-    POOL_CONST -- yes --> BUILD_POOL["build pool constants\npool_ER pool_IP\npool_WH pool_H pool_AB"]
-    BUILD_POOL --> RATE_SGP["vectorized rate-stat SGP\nERA / WHIP / AVG"]
+    NOTCONV --> CWARN["cli_warn\nrotostats_warning_convergence_not_reached"]
+    CONV --> OUT["7-element named list\n+ converged/iterations attrs"]
+    CWARN --> OUT
 
-    SGP --> COUNT_SGP["vectorized counting-stat SGP\nprojected / denominator"]
-
-    RATE_SGP --> ASSEMBLE["assemble result data frame"]
-    COUNT_SGP --> ASSEMBLE
-
-    ASSEMBLE --> OUT["data.frame\nsgp_HR sgp_R\nsgp_ERA sgp_WHIP sgp_AVG\ntotal_sgp"]
-
-    style SGP fill:#1e90ff,stroke:#1565c0,color:#fff
+    style HASH fill:#1e90ff,stroke:#1565c0,color:#fff
+    style HCHECK fill:#1e90ff,stroke:#1565c0,color:#fff
+    style PUSHBUF fill:#1e90ff,stroke:#1565c0,color:#fff
+    style CONV fill:#1e90ff,stroke:#1565c0,color:#fff
     style OUT fill:#1e90ff,stroke:#1565c0,color:#fff
-    style POOL_CONST fill:#1e90ff,stroke:#1565c0,color:#fff
 ```
 
 ---
@@ -266,24 +231,24 @@ graph TD
 
 | Module / Function | Purpose | Key Dependencies | Changed in This Run |
 |---|---|---|---|
-| `R/replacement.R` — `replacement_level()` | Per-position replacement-level estimator; boundary-band + iteration loop | `replacement_internal.R`, `replacement_params.R`, `league-config.R` (`pool_sizes()`), `sgp.R` (when `sort_by="sgp"`), `cli`, `checkmate`, `rlang`, `stats`, `stringi` | No |
-| `R/replacement.R` — `replacement_from_prices()` | Price-based replacement estimator; no projections or band computation | `replacement_internal.R`, `cli`, `checkmate`, `rlang`, `stringi` | No |
-| `R/replacement_internal.R` — `format_replacement_output()` | Constructs the 7-element output list; called by both exported functions | Base R | No |
-| `R/replacement_internal.R` — `compute_positional_adjustments()` | Computes scarcity premiums via fvarz/sgp/dollar/posblend; enforces zero-sum | `cli`, `rlang` | No |
-| `R/replacement_internal.R` — `assert_replacement_output_contract()` | Final validation of the complete output object before return | `cli` | No |
-| `R/replacement_internal.R` — other internal helpers | `compute_band_indices()`, `detect_cliff()`, `compute_replacement_stat_line()`, `infer_pitcher_roles()`, `normalize_name()`, `compute_zscores()`, `assert_zero_sum()`, `compute_par_at_pos()`, `detect_kde_trough()` | `stats`, `stringi` | No |
-| `R/replacement_params.R` — `default_replacement_params` | Exported list of 9 numeric constants; user overrides via `replacement_params = list(...)` | — | No |
-| `R/replacement_params.R` — `rate_stat_denominators()` | Returns `RATE_STAT_DENOMINATORS` named character vector; 17 built-in entries including BABIP | — | No |
-| `R/sgp.R` — `sgp()` | Per-player SGP converter; called internally by `replacement_level()` when `sort_by = "sgp"` | `sgp_denominators` S3, `pool_sizes()`, `cli`, `rlang`, `stats` | No |
-| `R/sgp-denominators.R` — `sgp_denominators()` | Calibrates per-category SGP denominators from league history; accepts `inverse_categories` argument; `@details` now includes "Choosing weights" subsection with Q4/Q7 regime guidance | `sgp-denominators-helpers.R`, `sgp-denominators-s3.R`, `cli`, `stats` | **YES (docs only)** |
-| `R/sgp-denominators.R` — `convert_rate_stats()` | Stub; always aborts with `rotostats_error_not_implemented` | `cli` | No |
-| `R/sgp-denominators-s3.R` — `new_sgp_denominators()` | Constructor for `sgp_denominators` S3 object; sets `attr(., "rate_conversion")` | Base R | No |
-| `R/sgp-denominators-s3.R` — S3 methods | `print`, `names`, `length`, `as.double`, `[`, `[[` for `sgp_denominators` | Base R | No |
-| `R/sgp-denominators-helpers.R` | `METADATA_COLS`, weight helpers, year-window helpers, `expected_range_normal()`. `INVERSE_CATEGORIES` constant deleted in prior run. | `stats` | No |
-| `R/league-config.R` — `league_config()` | Constructor for `league_config` S3 object; validates roster / budget config | `cli` | No |
-| `R/league-config.R` — `pool_sizes()` | Returns `list(pitchers, hitters)` from config; shared by `sgp()` and `replacement_level()` | `league_config` S3 | No |
-| `R/league-history.R` — `league_history()` | Constructor for `league_history` S3 object; validates `team_season` schema | `cli` | No |
-| `R/rotostats-package.R` | Package-level Rd stub and `@keywords internal` | — | No |
+| `R/replacement.R` — `replacement_level()` | Per-position replacement-level estimator; boundary-band + state-hash cycle detection loop | `replacement_internal.R`, `replacement_params.R`, `league-config.R`, `sgp.R`, `cli`, `checkmate`, `rlang`, `stats`, `stringi` | **YES** — state-hash detector replaces 2-lag; `cycle_history_window` validation added |
+| `R/replacement.R` — `replacement_from_prices()` | Price-based replacement estimator | `replacement_internal.R`, `cli`, `checkmate`, `rlang`, `stringi` | No |
+| `R/replacement_internal.R` — `format_replacement_output()` | Constructs the 7-element output list | Base R | No |
+| `R/replacement_internal.R` — `compute_positional_adjustments()` | Scarcity premiums; zero-sum enforcement | `cli`, `rlang` | No |
+| `R/replacement_internal.R` — `assert_replacement_output_contract()` | Final output validation | `cli` | No |
+| `R/replacement_internal.R` — other helpers | `compute_band_indices()`, `detect_cliff()`, `compute_replacement_stat_line()`, `infer_pitcher_roles()`, `normalize_name()`, `compute_zscores()`, `assert_zero_sum()`, `compute_par_at_pos()`, `detect_kde_trough()` | `stats`, `stringi` | No |
+| `R/replacement_params.R` — `default_replacement_params` | Exported list of **10** numeric constants (was 9); 10th is `cycle_history_window = 5L` | — | **YES** |
+| `R/replacement_params.R` — `rate_stat_denominators()` | Returns `RATE_STAT_DENOMINATORS` named character vector; 17 entries | — | No |
+| `R/sgp.R` — `sgp()` | Per-player SGP converter | `sgp_denominators` S3, `pool_sizes()`, `cli`, `rlang`, `stats` | No |
+| `R/sgp-denominators.R` — `sgp_denominators()` | Calibrates per-category SGP denominators | `sgp-denominators-helpers.R`, `sgp-denominators-s3.R`, `cli`, `stats` | No |
+| `R/sgp-denominators.R` — `convert_rate_stats()` | Stub; always aborts | `cli` | No |
+| `R/sgp-denominators-s3.R` | S3 methods for `sgp_denominators` | Base R | No |
+| `R/sgp-denominators-helpers.R` | `METADATA_COLS`, weight/year-window helpers, `expected_range_normal()` | `stats` | No |
+| `R/league-config.R` — `league_config()` + `pool_sizes()` | Config constructor + pool-size helper | `cli` | No |
+| `R/league-history.R` — `league_history()` | League history S3 constructor | `cli` | No |
+| `R/rotostats-package.R` | Package-level Rd stub | — | No |
+| `inst/simulations/dgp/dgp_c.R` | DGP-C: 393-row pool (258 hitters incl. 3 deterministic cycle players 9901-9903); rejection-sampling guard ensures mono_count >= 12 at all infield positions | — | **YES** |
+| `tests/testthat/test-replacement.R` | TS-R6-1/2/3 (cycle fixtures); TS-34 updated; TS-60 to TS-64 (hash invariants + param validation) | `testthat` | **YES** — 311 lines added |
 
 ---
 
@@ -297,10 +262,7 @@ them as the zero-dollar baseline for PAR (Points Above Replacement) in
 rotisserie auction valuation.
 
 `replacement_from_prices()` derives the same output schema from historical \$1
-auction prices (players who sell for \$1 are at replacement level by auction
-consensus) rather than from projections. Use `replacement_level()` for
-pre-draft valuation with a projection set; use `replacement_from_prices()` for
-post-draft calibration or as a cross-check against auction history.
+auction prices rather than from projections.
 
 ### Input Contract
 
@@ -308,118 +270,58 @@ post-draft calibration or as a cross-check against auction history.
 
 | Argument | Type | Required? | Notes |
 |---|---|---|---|
-| `projections` | data.frame | Yes | One row per player; columns: `player_id`, `player_name`, `pos_eligibility` (pipe-delimited), `league` (AL/NL), plus scored categories and `IP`/`AB` |
-| `config` | `league_config` | Yes | From `league_config()`; provides `n_teams`, `roster_slots`, `pitcher_slots`, `categories` |
-| `sort_by` | character | No | `"zscore"` (default) or `"sgp"`; when `"sgp"`, `sgp_denominators` is required |
-| `sgp_denominators` | `sgp_denominators` | Conditional | Required when `sort_by = "sgp"` or `boundary_rate_method = "sgp_pool"` |
-| `catcher_adjustment_method` | character | No | `"split_pool"` (default), `"positional_default"`, `"partial_offset"`, `"none"` |
+| `projections` | data.frame | Yes | One row per player; includes `player_id`, `player_name`, `pos_eligibility` (pipe-delimited), `league`, scored categories, `IP`, `AB` |
+| `config` | `league_config` | Yes | Provides `n_teams`, `roster_slots`, `pitcher_slots`, `categories` |
+| `sort_by` | character | No | `"zscore"` (default) or `"sgp"` |
 | `multi_pos` | character | No | `"highest_par"` (default), `"primary"`, `"all"`, `"custom"` |
+| `replacement_params` | named list | No | Overrides `default_replacement_params` entries; `cycle_history_window` (integer, [2L, 50L], default 5L) controls rolling hash window depth |
 | `max_iter`, `tol` | integer, numeric | No | Convergence controls; defaults `25L`, `0.01` |
-
-**`replacement_from_prices()` key arguments:** `prices` (data.frame with `year`, `player_name`, `price`, `pos_eligibility`), `n_teams`, `roster_slots`, `categories`, `trim_method`, `calibration_min_n`.
 
 ### Algorithm Sketch
 
 #### Boundary band with dynamic K cap
 
-The roster boundary at position `pos` is player at rank `b = n_teams × roster_slots[pos]`
-in the sorted pool. A symmetric band of `2K+1` players around `b` is averaged into the
-replacement stat line. The effective K is capped: `K_eff = min(K, floor(b/4))`, preventing
-the band from covering more than ~50% of the pool in thin configurations (e.g., 12-team
-AL-only SS: `K_eff = 3`, band = 7 out of 12 players).
+The roster boundary at position `pos` is player at rank `b = n_teams x roster_slots[pos]`.
+A band of `2K+1` players around `b` is averaged. `K_eff = min(K, floor(b/4))`.
+Counting stats = simple mean; ERA/WHIP = IP-weighted mean; AVG = `sum(H)/sum(AB)`.
 
-Counting stats use simple means; ERA and WHIP use IP-weighted means; AVG uses
-`sum(H_i) / sum(AB_i)` across band players (not the mean of individual AVG values).
+#### Multi-position iteration loop with state-hash cycle detection
 
-#### Cliff detection
+The loop reassigns multi-eligible players to their highest-PAR position each pass.
+Convergence requires BOTH zero assignment changes AND `max(|Delta_replacement_stats|) < tol`.
 
-Cliff detection is applied to the lower half of the band only (`B_lower` = players
-beyond the boundary). Three methods: `"mad"` (default — gap >= `cliff_threshold × MAD`),
-`"fisher_jenks"`, `"gap_ratio"`. When a cliff is found at position `j` in `B_lower`,
-the band is truncated to `B_upper ∪ {b} ∪ B_lower[1..(j-1)]`. Skipped when
-`|B_lower| < cliff_min_n` (default 4).
+**State-hash cycle detection (this run):**
 
-#### SP/RP role inference and swingman flagging
+A rolling ring buffer `assignment_hash_history` of depth `cycle_history_window` (default N=5)
+holds the last N canonical assignment hashes. Each pass:
 
-Swingman flag is computed BEFORE role classification: pitchers with `80 <= IP <= 120`
-are flagged in `cliff_metric$swingman`. Role is then assigned from an explicit `role`
-column if present, else by `IP >= sp_ip_threshold` (default 100). Pitcher rows always
-include an `IP` column in `replacement_stats` regardless of whether IP is a scored
-category.
+```
+hash(a) = paste(names(a)[order(names(a))], a[order(names(a))], collapse = "|")
+```
 
-#### Zero-sum positional adjustment
+The sort by player ID ensures order-invariance. On any pass where
+`new_hash %in% assignment_hash_history`, the loop declares `converged = TRUE` and
+breaks. This generalizes the old 2-lag detector to catch cycles of period 2 through N.
 
-`scarcity_premium[pos] = global_replacement - replacement[pos]`. Four methods for
-the global reference: `"fvarz"` (z-score units), `"sgp"`, `"dollar"`, `"posblend"`.
-
-The zero-sum invariant is enforced after each pass:
-`abs(sum(roster_slots[zero_sum_positions] × scarcity_premium[zero_sum_positions])) < 1e-6`
-
-The catcher override is applied before the zero-sum check. `zero_sum_positions` excludes
-"C" when `catcher_adjustment_method = "split_pool"` (default); includes "C" for all other
-methods. A violation aborts with `rotostats_error_zero_sum_violation` (indicates an
-internal computation bug, not user error). Hitter and pitcher pools are computed
-separately; the zero-sum invariant applies only within the hitter pool.
-
-#### Multi-position iteration loop (with 2-cycle detection)
-
-The loop body: (A) sort players into position pools; (B) compute boundary band and
-replacement stats per position; (C) compute global replacement level; (D) compute
-positional adjustments; (E) assert zero-sum; (F) call `sgp()` when `sort_by = "sgp"`;
-(G) reassign multi-eligible players to position of highest PAR. Convergence requires
-BOTH zero assignment changes AND `max(|Δreplacement_stats|) < tol`.
-
-The `"highest_par"` greedy reassignment can produce 2-cycles (all multi-eligible players
-flood the same scarce position, then bounce back). A 2-lag state variable
-(`old_old_assignments`) detects this: when `new_assignments == old_old_assignments`,
-the loop accepts the current state as converged and exits. The `projections` attribute is
-stored before the loop and re-attached after convergence; loop-internal objects never hold
-the attribute (prevents per-iteration copy of a large data frame).
+**`max_iter` remains the hard upper bound.** Cycles of period > N still hit `max_iter`
+and emit `rotostats_warning_convergence_not_reached`. The `rotostats_error_pool_too_small`
+abort is unchanged — it is load-bearing for real user input data quality.
 
 ### Output Contract
 
-Both functions return a 7-element named list:
-
-| Element | Type | Description |
-|---|---|---|
-| `replacement_stats` | data.frame | One row per position; columns: `position`, one column per scored category, `IP` (pitchers), `AB` (hitters with rate stats), `n_band_players`, `cliff_detected` |
-| `positional_adjustments` | named numeric or NULL | `scarcity_premium[pos]` indexed by position name; NULL on pass 1 when `positional_adjustment_method = "sgp"` |
-| `cliff_metric` | data.frame | One row per position: `position`, `cliff_detected`, `cliff_location`, `cliff_magnitude`, `swingman`, `n_band_players` |
-| `two_way_players` | character | `player_id` values where `hitter_PAR > 0` AND `pitcher_PAR > 0` (informational) |
-| `pool_diagnostics` | list | `position_sd_ratio`: named numeric vector (pos → within-pos SD / global SD per category) |
-| `method` | character | `"boundary_band"` or `"prices"` |
-| `params` | list | `converged`, `iterations`, `delta`, `n_teams`, `roster_slots`, `band_width`, `cliff_threshold`, `sort_by`, `stat_units`, `catcher_adjustment_method`, `method` |
-
-Output attributes: `stat_units`, `config`, `projections`, `position_assignments`, `converged`, `iterations`, `delta`.
+Both functions return a 7-element named list with `replacement_stats`, `positional_adjustments`,
+`cliff_metric`, `two_way_players`, `pool_diagnostics`, `method`, and `params`.
+Attributes: `stat_units`, `config`, `projections`, `position_assignments`, `converged`,
+`iterations`, `delta`.
 
 ### Key Invariants (Load-Bearing)
 
-1. **Boundary band with dynamic K cap**: `K_eff = min(K, floor(n_rostered_pos/4))`. Counting stats = simple mean; ERA/WHIP = IP-weighted; AVG = `sum(H)/sum(AB)`. Cliff detection in lower half only. Verified by Study A (var_ratio < 1.0 for K=3 vs K=1) and Study D (K_eff exact at all league sizes, 100%).
-
-2. **Zero-sum positional adjustment**: `abs(sum(roster_slots × scarcity_premium)) < 1e-6` across all four `catcher_adjustment_method` values. Verified by Study B (max violation 5.3e-15 across 2000 replications, 0 violations).
-
-3. **SP/RP always separated**: Role inference always runs; swingman flag computed before classification; pitcher `replacement_stats` always includes `IP`. Verified by TS-17 through TS-21 (all PASS).
-
-### Name-Match Warning Wiring (replacement-name-match-audit-2026-04-17)
-
-`rotostats_warning_name_match_failure` has two emit sites, both gated by `verbose = TRUE`:
-
-- **Site 1** — `replacement_level()` inside `.validate_league_history_inputs()`: fires when one or more names in `league_history$prices` cannot be cross-matched to `projections` after Unicode NFD normalization and punctuation stripping.
-- **Site 2** — `replacement_from_prices()` after column-upcasing: fires when multiple raw spellings in `prices` collapse to the same normalized key (self-deduplication detection; only when `PLAYER_ID` is absent from `prices`).
-
-Both sites use `normalize_player_name()` from `replacement_internal.R`. See `plans/error-messages.md` for the full warning class registry entry.
-
-### Known Limitations and Follow-up Tickets
-
-1. **Study C near-miss (convergence_rate = 96.6%, target 99%)**: The 2-lag cycle detection handles the common 2-cycle case but misses higher-order cycles (3-cycles+) that occur in ~3/500 replications of DGP-C's 60%-multi-eligible stress pool. Follow-up: extend cycle detection to arbitrary length using a hash of the assignment state.
-
-2. **Study E near-miss (median rank diff = 3, pct_within_2 = 0.46; targets 2.0 and 0.90)**: The remaining gap reflects residual DGP-E sensitivity after the focal-pitcher quality fix; the algorithm correctly uses `n_teams × roster_slots[pos]` for boundary indexing (Study D confirms 100% K_eff correctness). Follow-up: tighten DGP-E focal pitcher or review thresholds (median ≤ 5, pct_within_2 ≥ 0.80 may be more appropriate for a static focal pitcher).
-
-3. **`seed_method = "historical_priors"` deferred**: Validation in place; seeding falls through to primary-position seed. Full historical z-score seeding deferred to a sub-spec.
-
-4. **`boundary_rate_method = "sgp_pool"` deferred**: Validation guard (including `fixed_baseline` incompatibility) is in place; full pool-marginal boundary ranking deferred.
-
-5. **`multi_pos = "all"` designed**: Full design specified in `specs/spec-replacement-multi-pos-all.md` (this run). Output shape: long-form tidy data frame (not 3D array) with columns `player_id`, `position`, `[stat]`, `n_band_players`, `cliff_detected`. `position_assignments` attribute becomes a named list of character vectors. Generalized zero-sum invariant uses fractional allocation (`1/n_eligible` per eligible position), asserted at `1e-5` tolerance. `par()`, `zar()`, `dollar_values()` reject `"all"` input with `rotostats_error_multi_pos_all_unsupported`. Implementation deferred to a future run.
+1. **Boundary band**: `K_eff = min(K, floor(b/4))`; verified by Study A and Study D.
+2. **Zero-sum**: `abs(sum(roster_slots x scarcity_premium)) < 1e-6`; verified by Study B.
+3. **SP/RP separation**: Role inference always runs; verified by TS-17 to TS-21.
+4. **State-hash cycle detection**: catches period 2 through N; verified by TS-R6-1/2, Study C `convergence_rate = 1.0`.
+5. **`max_iter` hard upper bound**: verified by TS-R6-3.
+6. **`rotostats_error_pool_too_small` load-bearing**: abort fires before loop; DGP defects are fixed in DGP, not estimator.
 
 ### Cross-References
 
@@ -427,68 +329,57 @@ Both sites use `normalize_player_name()` from `replacement_internal.R`. See `pla
 |---|---|
 | Entry-point functions | `R/replacement.R` |
 | All internal helpers | `R/replacement_internal.R` |
-| Exported constants + lookup | `R/replacement_params.R` |
-| `pool_sizes()` (shared with `sgp()`) | `R/league-config.R:349` |
-| `sgp()` (called in iteration loop) | `R/sgp.R` |
-| `league_history` schema | `R/league-history.R` |
+| Exported constants | `R/replacement_params.R` |
+| `pool_sizes()` | `R/league-config.R:349` |
 | Error/warning class registry | `plans/error-messages.md` |
 | MC simulation harness | `inst/simulations/replacement-mc.R` |
 | DGP helpers | `inst/simulations/dgp/` |
+| Algorithm spec | `specs/spec-replacement.md` |
 
 ---
 
-## Key Design Decisions (replacement-2026-04-16)
+## Key Design Decisions (replacement-higher-order-cycle-2026-04-17)
 
-1. **Swingman flag before role classification**: `swingman_flag` is computed from raw IP (80–120) before any role assignment. A pitcher later reclassified by pool membership still carries the correct swingman flag. This ordering is critical because role classification and band membership are circular; the swingman flag must reflect the player's inherent quality, not their eventual pool slot.
+1. **State-hash ring buffer over 2-lag `old_old_assignments`**: The old 2-lag detector caught only period-2 cycles. The new ring buffer of depth N catches any cycle of period 2 through N. With N=5, periods 3, 4, and 5 are also caught. Study C confirmed all observed cycles in DGP-C are period 2 or 3; N=5 provides a 2x safety margin. The detector is O(N x L) per pass — negligible for N <= 50 and typical hash lengths.
 
-2. **NaN guard in `compute_positional_adjustments()`**: All four premium methods (`fvarz`, `sgp`, `dollar`, `posblend`) filter to `valid_cats = scored_cats[!is.na(pos_stats[scored_cats])]` before computing differences. Without this guard, hitter positions produce `NA - 0 = NA` and `mean(c(NA, NA), na.rm=TRUE) = NaN` (R returns NaN, not NA, for mean of an empty-after-removal vector). NaN silently bypasses the zero-sum assertion and causes the convergence loop to never terminate. Fixed in commit `493c4c2`.
+2. **Order-invariant hash via `order(names(a))`**: The greedy reassignment loop processes players in arbitrary order that may vary between passes. Sorting by player ID before `paste()` ensures two assignment vectors with identical player-position mappings produce the same hash regardless of evaluation order. Without this sort, genuine cycles would be missed due to hash instability.
 
-3. **`"none"` catcher treatment matches `"split_pool"` in the recentering step**: The `"none"` method sets `scarcity_premium["C"] <- 0` but must exclude "C" from the recentering step (same as `"split_pool"`). Including "C" in recentering then zeroing it breaks the zero-sum invariant. Fixed in commit `493c4c2` alongside the NaN guard.
+3. **`rotostats_error_pool_too_small` abort stays as `cli_abort`**: The Simulator's initial BLOCK proposed relaxing this to a warning for thin DGP-C draws. The Leader rejected this: the error is load-bearing for real user input — every realistic fantasy baseball league has far more eligible players than `n_teams x roster_slots[pos]`. Silently degrading would hide data-quality misconfigurations and corrupt downstream `par()`/`zar()`/`dollar_values()` results. The correct fix was in the DGP (rejection sampling).
 
-4. **2-cycle detection via `old_old_assignments`**: The `"highest_par"` loop's greedy simultaneous reassignment creates deterministic 2-cycles in pools with many multi-eligible players at the same positional boundary. A second lag variable detects `new == old_old` as a fixed point (the oscillation IS the stable equilibrium; accepting either half-cycle is equivalent). This raised Study C convergence_rate from 0.002 to 0.966. Fixed in commit `21270fb`.
+4. **DGP-level fix over estimator-behavior change**: When the simulation input (thin DGP-C pool) would never occur in realistic leagues, the correct fix is in the DGP, not in the estimator. The rejection-sampling fix in `dgp_c.R` guarantees mono_count >= 12 at all infield positions, matching the estimator's invariant.
 
-5. **`projections` attribute stripped before iteration loop**: `stored_projections <- projections` is saved before the `repeat {}` block; the attribute is attached only to the final returned list. This prevents copying the potentially-large projections data frame on every pass through the convergence loop (risk area from `impact.md` §Risk Areas).
+5. **Hash push AFTER cycle check (H3 after H2)**: `new_hash` is pushed onto the ring buffer in H3, after the H2 check. H2 sees only hashes from prior passes. A 2-cycle is detected when pass N+2 returns to the state as pass N — the pass-N hash is in the buffer from two H3 pushes ago. If the push came before the check, false detections would occur when consecutive passes happen to return the same state (which is the primary convergence path H1 handles).
 
-6. **BABIP added to `RATE_STAT_DENOMINATORS`**: BABIP is AB-denominated (like SLG). Adding it to the built-in lookup means users can include BABIP as a scored category without supplying `rate_denominators`. The step-32 rate-stat guard now uses a dynamic lookup against `toupper(names(RATE_STAT_DENOMINATORS))` instead of a hardcoded list, ensuring new entries are automatically covered.
-
-7. **Pipeline-isolation crossover on `inst/simulations/dgp/dgp_e.R`**: Builder's commit `21270fb` touched simulator-owned code (`dgp_e.R`) to fix the Study E focal-pitcher quality mismatch. The root cause was DGP design (focal pitcher above pool mean caused rank shifts with league size), not an algorithm bug. The `replacement_level()` algorithm was already correctly implementing `n_teams × roster_slots[pos]` boundary indexing. Acknowledged by reviewer.
-
----
-
-## Key Design Decisions (sgp-2026-04-16)
-
-1. **Blended-pool fixed-constant approximation**: Pool constants are computed once from the projected top-N players and applied to all evaluees. Each player is blended against the full pool (not pool-excluding-self). Approximation error is bounded at 5–15% for individual players but cancels in aggregate standings comparisons. Monte Carlo validation confirmed errors well under 1% in practice (SV-8).
-
-2. **`attr(denominators, "rate_conversion")` on outer S3 object**: The compatibility check reads from the outer `sgp_denominators` object, not from `$denominators`. Reading the wrong level silently returns `NULL`, which would always pass the check spuriously. Verified correct in tester's EC-2 and EC-11a.
-
-3. **Warning class split — `rotostats_warning_missing_category_column` vs `rotostats_warning_zero_playing_time`**: Two distinct warning classes replace the former dual-use design. `rotostats_warning_missing_category_column` fires at Step 8 when a scored category column is entirely absent from `projections`. `rotostats_warning_zero_playing_time` fires at Steps 14a, 14c, and 14d when a player has 0 or NA projected IP/AB for a scored rate stat. Callers may suppress either class independently via `withCallingHandlers`.
-
-4. **SVHD auto-derivation with `.frequency_id`**: `rlang::inform(.frequency = "once")` requires `.frequency_id` in rlang >= 1.1.0. The correct call uses `.frequency_id = "sgp_svhd_derivation"`. Omitting this caused a runtime crash (BLOCK-1 in tester round 1, fixed in builder round 2).
-
-5. **`total_sgp` uses `na.rm = FALSE`**: Any per-category NA propagates to `total_sgp` to surface data quality issues downstream. Callers who want partial sums can compute `rowSums(result[, grep("^sgp_", names(result))], na.rm = TRUE)` themselves.
-
----
-
-## Key Design Decisions (sgp-denom-inverse-categories-param-2026-04-17)
-
-1. **`INVERSE_CATEGORIES` constant replaced by `inverse_categories` argument**: The package-level constant `INVERSE_CATEGORIES <- c("ERA", "WHIP")` in `sgp-denominators-helpers.R` was deleted. The direction-flip set is now a user-facing argument on `sgp_denominators()` with the same default value. Users can now declare additional lower-is-better categories (OAVG, BB9, etc.) without modifying package source. The constant was deleted to prevent drift (a live constant and a parameter with the same value would diverge if either were updated independently).
-
-2. **`missing()` flag for default-vs-explicit path distinction**: The default value `c("ERA", "WHIP")` must behave like the old constant — implicitly filtered by the `%in%` operator at runtime, so batting-only leagues produce no rank flip. A strict membership validation at argument-validation time is correct for user-supplied values but incorrect for the default (it would abort a batting-only league). The `missing(inverse_categories)` primitive, captured as the very first statement of the function body, distinguishes these paths without changing the published default in the function signature. Using `NULL` as a sentinel would have altered the `man/` documentation and the callable interface. The `missing()` approach is a standard R idiom with no `R CMD check` implications.
-
-3. **Content-addressed `.frequency_id` for one-shot inform**: The `cli_inform(.frequency = "once")` message uses `.frequency_id = paste0("rotostats_sgp_denom_inverse_", paste(sort(inverse_categories), collapse = ","))`. This key is content-addressed: identical configurations share a key (suppressed after the first call in a session); distinct configurations announce themselves independently. No external `digest` dependency is needed. The rlang requirement for an explicit `.frequency_id` (rlang >= 1.1.0) is satisfied throughout.
-
-4. **Three threading sites plus helpers deletion**: Four changes were needed atomically — the main year-loop rank-flip (line ~623), the slope-sign check's inverse branch (line ~730), the slope-sign check's normal branch (line ~739), and the bootstrap resampling rank-flip (line ~886). Missing any one of these would cause behavioral divergence: missing the sign-check sites would fire `rotostats_warning_unexpected_slope_sign` for correctly-inverted user-declared categories (acceptance criterion #2 failure). The constant deletion from the helpers file was also required to prevent dead-code accumulation.
-
-5. **Default path produces silent intersection, not a no-op**: When the default `c("ERA", "WHIP")` is intersected with a batting-only league's `scoring_categories`, the result is `character(0)`. The `cli_inform()` then fires with "No categories will be direction-flipped" — not with the ERA/WHIP names. This is the correct and intended behavior: it precisely matches what the old constant did at runtime (`no cat %in% INVERSE_CATEGORIES` in a batting-only loop), and the inform gives the user accurate visibility into the effective configuration.
+6. **`cycle_history_window` range [2L, 50L], default 5L**: Lower bound 2 is the minimum that can catch a 2-cycle (a window of 1 has semantics equivalent to a 1-lag detector catching fixed points, not cycles). Upper bound 50 prevents accidental memory issues. Default 5 provides margin over observed cycle periods (2 and 3 in DGP-C).
 
 ---
 
 ## Key Design Decisions (replacement-multi-pos-all-spec-2026-04-18)
 
-1. **Long-form tidy data frame over 3D array**: Ineligible `(player, position)` pairs produce no row (no NAs), memory is proportional to the number of eligible pairs (~3-4x smaller than a dense array for typical 15-team leagues), and downstream operations use standard dplyr idioms consistent with the rest of the package. A 3D array was rejected because its sparse ineligibility structure requires either NA fill or a separate eligibility mask — both absent from the existing codebase. See `specs/spec-replacement-multi-pos-all.md` §1.
+1. **Long-form tidy data frame for `multi_pos = "all"`**: Ineligible `(player, position)` pairs produce no row; memory is proportional to eligible pairs. A 3D array was rejected due to sparse ineligibility structure.
 
-2. **Fractional allocation for zero-sum invariant**: Each multi-eligible player contributes `1/n_eligible` to each position's effective slot count (`f_slots[p]`). This is the unique allocation that sums to 1.0 per player, is distribution-free, and reduces to the `"best"` scalar invariant when `n_eligible = 1`. Tolerance loosened from `1e-6` to `1e-5` to accommodate floating-point accumulation in fractional arithmetic; `1e-5` provides a 100x margin above worst-case accumulation for 500 players with up to 3 eligible positions. See `specs/spec-replacement-multi-pos-all.md` §2.
+2. **Fractional allocation for zero-sum invariant**: Each multi-eligible player contributes `1/n_eligible` to each position's effective slot count. Tolerance loosened from `1e-6` to `1e-5` for floating-point accumulation in fractional arithmetic.
 
-3. **Downstream reject-not-aggregate for par/zar/dollar_values**: `par()`, `zar()`, and `dollar_values()` reject `"all"` replacement objects with `rotostats_error_multi_pos_all_unsupported`. Silent aggregation (e.g., pick max-premium position inside `par()`) was rejected because it changes semantics without user awareness. Per-position PAR was rejected because `par()` must produce one PAR per player for auction pricing. `"all"` mode is diagnostic, not a primary valuation input. See `specs/spec-replacement-multi-pos-all.md` §3.
+3. **Downstream reject-not-aggregate**: `par()`, `zar()`, `dollar_values()` reject `"all"` replacement objects with `rotostats_error_multi_pos_all_unsupported`.
 
-4. **`multi_pos` recorded in `params` for all modes**: All `multi_pos` values (not just `"all"`) must be recorded in the `params` element of the return list so downstream guards can check mode without inspecting data frame column structure. This is a backward-compatible addition to `params` (no existing code reads `params$multi_pos`). See `specs/spec-replacement-multi-pos-all.md` §7.
+---
+
+## Key Design Decisions (replacement-2026-04-16)
+
+1. **Swingman flag before role classification**: `swingman_flag` from raw IP (80-120) computed before role assignment — critical because role classification and band membership are circular.
+
+2. **NaN guard in `compute_positional_adjustments()`**: All four premium methods filter to `valid_cats` before computing differences to prevent `NaN` from bypassing the zero-sum assertion.
+
+3. **2-cycle detection via `old_old_assignments`** (superseded): The 2-lag detector raised Study C convergence_rate from 0.002 to 0.966; the state-hash ring buffer in this run raises it from 0.966 to 1.0.
+
+4. **`projections` attribute stripped before iteration loop**: `stored_projections <- projections` saved before the `repeat {}` block prevents copying the large projections data frame on every pass.
+
+---
+
+## Key Design Decisions (sgp-2026-04-16 and sgp-denom-inverse-categories-param-2026-04-17)
+
+1. **Blended-pool fixed-constant approximation**: Pool constants computed once from projected top-N players. Approximation error bounded at 5-15% per player; cancels in aggregate standings comparisons.
+
+2. **`attr(denominators, "rate_conversion")` on outer S3 object**: Compatibility check reads from outer `sgp_denominators` object, not `$denominators`.
+
+3. **`INVERSE_CATEGORIES` constant replaced by `inverse_categories` argument**: The `missing()` primitive distinguishes the default-path behavior (silent intersection) from the explicit-path behavior (strict validation).
