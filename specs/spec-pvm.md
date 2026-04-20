@@ -65,7 +65,7 @@ pvm(
 | `cat_pct` | character or named numeric | No | `"auto"` (default) — derive from config. `"equal"` — flat across all categories. Named numeric vector — explicit weights, must sum to 1.0. |
 | `rate_pool` | character | No | `"ip_weighted"` (default) — volume-weight rate stat contributions in raw stat space. `"pool_average"` — Zola canonical extras method with pool-average baseline. `"fixed_baseline"` — counting equivalents using fixed baseline constants from `config`, consistent with `sgp(rate_conversion = "fixed_baseline")`. |
 | `sub_replacement` | character | No | `"clip"` (default) — clip sub-replacement contributions to 0; sum-to-1 invariant holds across all rostered players. `"negative"` — allow negative values for sub-replacement players; only positive contributors included in pool denominator (Zola canonical). |
-| `baseline` | named numeric | No | Per-category baseline overrides. Names must match scored rate stat categories. Only used when `rate_pool = "fixed_baseline"`. When `NULL` (default), baseline constants are read from `config` automatically. Supports any rate stats present in the league configuration, not just ERA, WHIP, and AVG. |
+| `baseline` | named numeric | No | Per-category baseline overrides. Names must match scored rate stat categories. **Only consulted when `rate_pool = "fixed_baseline"`** — under `"ip_weighted"` or `"pool_average"`, `baseline` is silently ignored (no warning, no error). When `NULL` (default), baseline constants are read from `config` automatically. Supports any rate stats present in the league configuration, not just ERA, WHIP, and AVG. |
 
 ### Parameter semantics (default vs explicit)
 
@@ -95,9 +95,18 @@ pvm(
 
 ### Parameter: `baseline`
 
-**Default-path behavior (`missing(x)`):** `baseline = NULL`; baseline constants are read automatically from `config` when `rate_pool = "fixed_baseline"`. When `rate_pool != "fixed_baseline"`, `baseline` is ignored.
+**Default-path behavior (`missing(x)`):** `baseline = NULL`; baseline constants are read automatically from `config` when `rate_pool = "fixed_baseline"`. When `rate_pool != "fixed_baseline"`, `baseline` is ignored. No validation runs on the default path.
 
-**Explicit-path behavior (user supplied):** Must be a named numeric vector whose names match scored rate stat categories present in the league configuration. Non-numeric, unnamed, or partially named `baseline` (including `NA` / `NaN` / non-finite values) aborts with `rotostats_error_invalid_parameter` — same reuse rationale as the other pvm explicit-path checks. TODO(user): decide error class for `baseline` names that do not correspond to scored rate stat categories (candidates: `rotostats_error_invalid_parameter` or `rotostats_error_category_mismatch` — the latter is more specific but requires broadening its condition in `plans/error-messages.md`). Only consulted when `rate_pool = "fixed_baseline"`; TODO(user): decide whether supplying `baseline` under a non-fixed_baseline `rate_pool` is a silent no-op or an error (current spec body says silent; strict-validation consistency with `include_cat` / `pivot` in `spec-dollar-values.md` would argue for error).
+**Explicit-path behavior (user supplied):** Must be a named numeric vector whose names match scored rate stat categories present in the league configuration.
+
+Validation runs **only when `rate_pool = "fixed_baseline"`**. Under `rate_pool = "ip_weighted"` or `rate_pool = "pool_average"`, any user-supplied `baseline` is silently ignored — no warning, no error, no validation. This is the one exception to the "no silent coercion" rule applied elsewhere in `rotostats`: `baseline` is inherently conditional on `rate_pool`, and firing on the unused path would surface noise rather than bugs.
+
+When `rate_pool = "fixed_baseline"` and `baseline` is supplied, two guards fire:
+
+1. `rotostats_error_invalid_parameter` — `baseline` is not a named numeric vector (non-numeric, unnamed, partially named, or contains `NA` / `NaN` / non-finite values).
+2. `rotostats_error_category_mismatch` — one or more names in `baseline` do not correspond to scored rate stat categories in the league configuration. Reuses the existing class registered in `plans/error-messages.md`; the class's condition must be broadened at implementation time to cover `pvm()` in addition to `par()`.
+
+TODO(planner): add both cases to the Error Handling table; update the `rotostats_error_category_mismatch` entry in `plans/error-messages.md` to include `pvm()` in the "Thrown by" column and to extend the "Condition" text accordingly.
 
 **Outputs:**
 
