@@ -13,6 +13,39 @@ Compute per-player, per-category proportional shares of above-replacement produc
 
 ---
 
+## Surfaces
+
+**Reads (builder, simulator, tester may read):**
+- R/replacement.R (pvm takes replacement_level() output)
+- R/dollar_values.R (downstream consumer; read-only for context)
+- TODO(user): confirm R/replacement.R
+- TODO(user): confirm R/dollar_values.R
+
+**Writes — builder:**
+- R/pvm.R
+
+**Writes — simulator:**
+- inst/simulations/sim-pvm.R (if a sim harness is added; else "none")
+- tests/simulations/sim-pvm-results.rds (if simulation run occurs)
+- tests/simulations/sim-pvm-summary.csv (ditto)
+
+**Writes — tester:**
+- tests/testthat/test-pvm.R
+
+**Writes — scriber:**
+- R/pvm.R roxygen, man/pvm.Rd, NEWS.md, ARCHITECTURE.md
+
+**Frozen surfaces (NO teammate may modify):**
+- R/replacement.R
+- R/sgp.R
+- R/par.R
+- R/zaa.R
+- R/zar.R
+- R/dollar_values.R (downstream consumer)
+- TODO(user): confirm frozen-surface list is complete
+
+---
+
 ## Interface
 
 ```r
@@ -34,6 +67,38 @@ pvm(
 | `rate_pool` | character | No | `"ip_weighted"` (default) — volume-weight rate stat contributions in raw stat space. `"pool_average"` — Zola canonical extras method with pool-average baseline. `"fixed_baseline"` — counting equivalents using fixed baseline constants from `config`, consistent with `sgp(rate_conversion = "fixed_baseline")`. |
 | `sub_replacement` | character | No | `"clip"` (default) — clip sub-replacement contributions to 0; sum-to-1 invariant holds across all rostered players. `"negative"` — allow negative values for sub-replacement players; only positive contributors included in pool denominator (Zola canonical). |
 | `baseline` | named numeric | No | Per-category baseline overrides. Names must match scored rate stat categories. Only used when `rate_pool = "fixed_baseline"`. When `NULL` (default), baseline constants are read from `config` automatically. Supports any rate stats present in the league configuration, not just ERA, WHIP, and AVG. |
+
+### Parameter semantics (default vs explicit)
+
+### Parameter: `include_raw`
+
+**Default-path behavior (`missing(x)`):** `include_raw = FALSE`; no `contrib_[cat]` columns are added to the output.
+
+**Explicit-path behavior (user supplied):** Must be a logical scalar (`TRUE` or `FALSE`). TODO(user): decide error class for non-logical / non-scalar `include_raw` (not currently listed in Error Handling table). When `TRUE`, include `contrib_[cat]` columns in the output; when `FALSE`, omit them.
+
+### Parameter: `cat_pct`
+
+**Default-path behavior (`missing(x)`):** `cat_pct = "auto"`; CAT% is derived from `league_config` using `hitter_split / n_hitter_cats` and `(1 - hitter_split) / n_pitcher_cats`. Uses the conventional 67/33 hitter/pitcher split unless overridden in `league_config`.
+
+**Explicit-path behavior (user supplied):** Must be either the string `"auto"`, the string `"equal"`, or a named numeric vector. If a named numeric vector: names must cover all scored categories (else abort with `rotostats_error_category_mismatch`) and values must satisfy `|sum(cat_pct) - 1.0| < 1e-10` (else abort with `rotostats_error_cat_pct_sum`). TODO(user): decide error class for `cat_pct` values that are neither `"auto"`, `"equal"`, nor a named numeric vector (e.g., unnamed numeric, other strings).
+
+### Parameter: `rate_pool`
+
+**Default-path behavior (`missing(x)`):** `rate_pool = "ip_weighted"`; rate stat contributions are volume-weighted in raw stat space using `PS[j, IP] / mean_rostered_IP` or `PS[j, AB] / mean_rostered_AB`.
+
+**Explicit-path behavior (user supplied):** Must be one of `"ip_weighted"`, `"pool_average"`, or `"fixed_baseline"`. TODO(user): decide error class for unrecognized `rate_pool` values (not currently listed in Error Handling table). When `"fixed_baseline"` is supplied and a scored rate stat category has no baseline in `config` and no override in `baseline`, abort with the class marked TBD in the Error Handling table.
+
+### Parameter: `sub_replacement`
+
+**Default-path behavior (`missing(x)`):** `sub_replacement = "clip"`; sub-replacement contributions are clipped to 0, and the sum-to-1 invariant holds across all rostered players.
+
+**Explicit-path behavior (user supplied):** Must be one of `"clip"` or `"negative"`. TODO(user): decide error class for unrecognized `sub_replacement` values (not currently listed in Error Handling table). When `"negative"`, sub-replacement players retain negative contributions; only positive contributors enter the pool denominator.
+
+### Parameter: `baseline`
+
+**Default-path behavior (`missing(x)`):** `baseline = NULL`; baseline constants are read automatically from `config` when `rate_pool = "fixed_baseline"`. When `rate_pool != "fixed_baseline"`, `baseline` is ignored.
+
+**Explicit-path behavior (user supplied):** Must be a named numeric vector whose names match scored rate stat categories present in the league configuration. TODO(user): decide error class for non-numeric / non-named `baseline` inputs, and for `baseline` names that do not correspond to scored rate stat categories. Only consulted when `rate_pool = "fixed_baseline"`; TODO(user): decide whether supplying `baseline` under a non-fixed_baseline `rate_pool` is a silent no-op or an error.
 
 **Outputs:**
 
@@ -270,16 +335,16 @@ if violated.
 
 ## Error Handling
 
-| Condition | Handler | Class |
-|-----------|---------|-------|
-| `replacement` missing `projections` or `config` attributes | `cli_abort()` | `rotostats_error_missing_replacement_attrs` |
-| `attr(replacement, "stat_units") != "raw_projected"` | `cli_abort()` | `rotostats_error_stat_units_mismatch` |
-| `Pool[c] = 0` for any category (all rostered players sub-replacement) | `cli_abort()` | `rotostats_error_zero_pool` |
-| `cat_pct` named vector does not sum to 1.0 within tolerance | `cli_abort()` | `rotostats_error_cat_pct_sum` |
-| `cat_pct` names do not cover all scored categories | `cli_abort()` | `rotostats_error_category_mismatch` |
-| Any `pvm[i, c]` exceeds 0.25 | `cli_warn()` (always) | `rotostats_warning_pvm_concentration` |
-| `sum(pvm[j, c])` deviates from 1.0 by more than 1e-10 for any category | `cli_warn()` (always) | `rotostats_warning_pvm_sum` |
-| `rate_pool = "fixed_baseline"` and a rate stat category has no baseline in `config` and no override in `baseline` | `cli_abort()` | TBD |
+| Condition | Handler | Class | Trigger fixture |
+|-----------|---------|-------|-----------------|
+| `replacement` missing `projections` or `config` attributes | `cli_abort()` | `rotostats_error_missing_replacement_attrs` | TS-PVM-1 |
+| `attr(replacement, "stat_units") != "raw_projected"` | `cli_abort()` | `rotostats_error_stat_units_mismatch` | TS-PVM-2 |
+| `Pool[c] = 0` for any category (all rostered players sub-replacement) | `cli_abort()` | `rotostats_error_zero_pool` | TS-PVM-6 |
+| `cat_pct` named vector does not sum to 1.0 within tolerance | `cli_abort()` | `rotostats_error_cat_pct_sum` | TS-PVM-8 |
+| `cat_pct` names do not cover all scored categories | `cli_abort()` | `rotostats_error_category_mismatch` | TS-PVM-8 |
+| Any `pvm[i, c]` exceeds 0.25 | `cli_warn()` (always) | `rotostats_warning_pvm_concentration` | TS-PVM-7 |
+| `sum(pvm[j, c])` deviates from 1.0 by more than 1e-10 for any category | `cli_warn()` (always) | `rotostats_warning_pvm_sum` | TODO(planner): bind to fixture |
+| `rate_pool = "fixed_baseline"` and a rate stat category has no baseline in `config` and no override in `baseline` | `cli_abort()` | TBD | TODO(planner): bind to fixture |
 
 _All classes must be registered in `plans/error-messages.md` before implementation._
 
@@ -364,6 +429,22 @@ rotisserie. The `"equal"` and explicit-vector options cover non-standard formats
 
 ### Statistical (Q2)
 
+### Simulation studies — Signal pre-check (mandatory before R ≥ 100)
+
+PVM is a deterministic pool-share transform; sim studies apply when evaluating finite-sample behavior of pool sums vs. the sum-to-1 invariant under floating-point accumulation, or when probing sensitivity to pool composition (adding/removing one player).
+
+For each sim study (when added):
+
+**Estimator used:** <name — e.g., "ip-weighted pool denominator", "pool-average extras">
+
+**Analytical signal prediction:** <closed-form or approximate expression for the estimand under this DGP>. `TODO(planner): derive analytical prediction`
+
+**Small-R pre-check (R ≤ 50):**
+- Gate: <quantitative PASS condition that must hold at R=50 before proceeding to R=500>
+- If gate fails: BLOCK. Route to planner — DGP or estimator assumption is wrong.
+
+**Estimator-threshold compatibility:** Thresholds calibrated for the three `rate_pool` options must be verified per-option. A threshold derived for `rate_pool = "ip_weighted"` is NOT valid for `rate_pool = "pool_average"` (endogenous baseline) or `rate_pool = "fixed_baseline"` (external constants). `TODO(planner): calibrate per rate_pool option`.
+
 _Pending — fill in after code audit of relevant source files. Key areas to audit: pool boundary implementation (does the player set passed to `pvm()` match the `n_teams × roster_slots` boundary from `replacement_level()`?), clipping behavior for sub-replacement players, and floating-point precision of the sum-to-1 invariant._
 
 ---
@@ -380,25 +461,215 @@ _Pending — fill in after validation harness results. Primary question: do PVM-
 
 These fire on every call and are automatable as unit tests.
 
-- **Attribute extraction guard:** `pvm()` must abort with `rotostats_error_missing_replacement_attrs`
-  when `projections` or `config` attributes are absent from `replacement`.
-- **Sum-to-1 invariant:** Behavior depends on `sub_replacement`:
-  - `"clip"`: `sum(pvm[j, c])` across all rostered players must equal 1.0 within 1e-10.
-    Emit `rotostats_warning_pvm_sum` naming the category and reporting the observed sum if
-    violated.
-  - `"negative"`: `sum(pvm[j, c])` for positive-contributing players only must equal 1.0
-    within 1e-10. Assert the positive-only sum; do not assert the total (which will be less
-    than 1.0 by construction).
-- **Replacement player at zero:** The replacement boundary player at each position must have
-  `pvm_[cat] ≈ 0` for all categories. Assert deviation < 1e-10 before pool normalization
-  (numerator is exactly 0 by construction); after normalization, deviation reflects only
-  floating-point accumulation.
-- **Concentration diagnostic:** Any `pvm[i, c] > 0.25` triggers `rotostats_warning_pvm_concentration`
-  naming the player and category. Diagnostic only — no correction applied.
-- **cat_pct sum guard:** If `cat_pct` is a named vector, assert `|sum(cat_pct) - 1.0| < 1e-10`
-  and that names cover all scored categories. Abort on violation.
-- **Pipe-compatibility check:** `replacement_level(projections, config) |> pvm()` must produce
-  output structurally identical to `pvm(replacement_level(projections, config))`.
+### TS-PVM-1 — Attribute extraction guard fires when replacement lacks attributes
+
+**Preconditions (inputs must satisfy):**
+- `replacement` argument is an object whose `projections` attribute OR `config` attribute is `NULL` / absent.
+- All other parameters are omitted so defaults apply.
+
+**Target guard / behavior under test:**
+- `pvm()` aborts with `rotostats_error_missing_replacement_attrs` during Step 1 attribute extraction.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_stat_units_mismatch` — cannot fire before the attribute-presence check, which runs first.
+- `rotostats_error_zero_pool` — unreachable because execution aborts before Step 4.
+- `rotostats_error_cat_pct_sum` — `cat_pct` defaults to `"auto"`; no named numeric supplied.
+- `rotostats_error_category_mismatch` — unreachable; execution aborts before cat_pct is consulted.
+- `rotostats_error_multi_pos_all_unsupported` — TODO(planner): enumerate upstream guards (spec does not currently state where/if `pvm()` checks `params$multi_pos`).
+- `rotostats_warning_pvm_concentration` — unreachable; execution aborts before pvm values exist.
+- `rotostats_warning_pvm_sum` — unreachable; execution aborts before pvm values exist.
+
+**Expected outcome:**
+- Abort with class string `"rotostats_error_missing_replacement_attrs"`.
+
+### TS-PVM-2 — Stat-units mismatch guard fires when stat_units attribute is wrong
+
+**Preconditions (inputs must satisfy):**
+- `replacement` has valid `projections` and `config` attributes.
+- `attr(replacement, "stat_units")` is present but not equal to `"raw_projected"`.
+- All other parameters omitted so defaults apply.
+
+**Target guard / behavior under test:**
+- `pvm()` aborts with `rotostats_error_stat_units_mismatch` during Step 1.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_missing_replacement_attrs` — fixture supplies both required attributes.
+- `rotostats_error_zero_pool` — unreachable; execution aborts before Step 4.
+- `rotostats_error_cat_pct_sum` — `cat_pct` defaults to `"auto"`.
+- `rotostats_error_category_mismatch` — unreachable; execution aborts before cat_pct resolution.
+- `rotostats_error_multi_pos_all_unsupported` — TODO(planner): enumerate upstream guards.
+- `rotostats_warning_pvm_concentration` — unreachable; aborts before pvm values computed.
+- `rotostats_warning_pvm_sum` — unreachable; aborts before pvm values computed.
+
+**Expected outcome:**
+- Abort with class string `"rotostats_error_stat_units_mismatch"`.
+
+### TS-PVM-3 — Sum-to-1 invariant under `sub_replacement = "clip"`
+
+**Preconditions (inputs must satisfy):**
+- Valid `replacement` object (projections, config, `stat_units = "raw_projected"` all present).
+- Projection set contains a mix of above- and below-replacement players in every scored category; at least one strictly positive contributor per category.
+- `sub_replacement = "clip"` (either by default or explicit).
+- `cat_pct` defaults to `"auto"`; `rate_pool` defaults to `"ip_weighted"`; `baseline = NULL`.
+- No single player's `pvm[i, c]` exceeds 0.25 (otherwise the concentration warning would also fire — not this fixture's target).
+
+**Target guard / behavior under test:**
+- `sum(pvm[j, c]) == 1.0` within 1e-10 for every scored category `c`; no `rotostats_warning_pvm_sum` fires.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_missing_replacement_attrs` — attributes are present.
+- `rotostats_error_stat_units_mismatch` — stat_units is `"raw_projected"`.
+- `rotostats_error_zero_pool` — each category has positive contributors.
+- `rotostats_error_cat_pct_sum` — cat_pct is `"auto"`, not a named vector.
+- `rotostats_error_category_mismatch` — cat_pct is `"auto"`; no user names to mismatch.
+- `rotostats_error_multi_pos_all_unsupported` — TODO(planner): enumerate upstream guards.
+- `rotostats_warning_pvm_concentration` — fixture explicitly bounds `pvm[i, c] <= 0.25`.
+- `rotostats_warning_pvm_sum` — asserted NOT to fire; this fixture exists to verify invariant holds.
+
+**Expected outcome:**
+- For every category `c`: `abs(sum(pvm[, c]) - 1.0) < 1e-10`; no warning emitted.
+
+### TS-PVM-4 — Positive-only sum-to-1 under `sub_replacement = "negative"`
+
+**Preconditions (inputs must satisfy):**
+- Valid `replacement` object.
+- Projection set contains both above- and below-replacement players in each scored category.
+- `sub_replacement = "negative"` supplied explicitly.
+- Remaining parameters at defaults; no single positive player's `pvm[i, c]` exceeds 0.25.
+
+**Target guard / behavior under test:**
+- Sum of `pvm[j, c]` restricted to positive-contributing players equals 1.0 within 1e-10 for each category; sub-replacement players have `pvm[i, c] < 0`; total sum across all rostered players is less than 1.0 by the magnitude of negative shares.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_missing_replacement_attrs` — attributes present.
+- `rotostats_error_stat_units_mismatch` — stat_units is `"raw_projected"`.
+- `rotostats_error_zero_pool` — at least one positive contributor per category.
+- `rotostats_error_cat_pct_sum` — cat_pct at default.
+- `rotostats_error_category_mismatch` — cat_pct at default.
+- `rotostats_error_multi_pos_all_unsupported` — TODO(planner): enumerate upstream guards.
+- `rotostats_warning_pvm_concentration` — fixture bounds positive pvm values ≤ 0.25.
+- `rotostats_warning_pvm_sum` — asserted NOT to fire on the positive-only sum.
+
+**Expected outcome:**
+- `abs(sum(pvm[pvm[, c] > 0, c]) - 1.0) < 1e-10` for every category; no warning emitted.
+
+### TS-PVM-5 — Replacement boundary player has pvm ≈ 0
+
+**Preconditions (inputs must satisfy):**
+- Valid `replacement` object.
+- Projection set where the replacement boundary player (lowest-ranked rostered at each position) has `PS[boundary, c] == RS[c]` exactly for every scored category.
+- Parameters at defaults.
+
+**Target guard / behavior under test:**
+- The boundary player's `contrib[boundary, c]` is exactly 0 before pool normalization; after normalization, `abs(pvm[boundary, c]) < 1e-10`.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_missing_replacement_attrs` — attributes present.
+- `rotostats_error_stat_units_mismatch` — stat_units is `"raw_projected"`.
+- `rotostats_error_zero_pool` — pool still has strictly positive contributors (boundary player contributes 0, not all players).
+- `rotostats_error_cat_pct_sum` — cat_pct default.
+- `rotostats_error_category_mismatch` — cat_pct default.
+- `rotostats_error_multi_pos_all_unsupported` — TODO(planner): enumerate upstream guards.
+- `rotostats_warning_pvm_concentration` — boundary pvm ≈ 0; irrelevant.
+- `rotostats_warning_pvm_sum` — fixture sized so invariant holds.
+
+**Expected outcome:**
+- `abs(pvm[boundary_player, c]) < 1e-10` for every scored category `c`.
+
+### TS-PVM-6 — Zero-pool abort when all rostered players are sub-replacement
+
+**Preconditions (inputs must satisfy):**
+- Valid `replacement` object.
+- Projection set constructed so that in at least one scored category `c*`, every rostered player has `PS[i, c*] <= RS[c*]` (after sign flip for ERA/WHIP).
+- `sub_replacement = "clip"` (default) so `Pool[c*] = 0`.
+- Other parameters at defaults.
+
+**Target guard / behavior under test:**
+- `pvm()` aborts with `rotostats_error_zero_pool` during Step 5 (or during Step 4 pool computation), naming the affected category.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_missing_replacement_attrs` — attributes present.
+- `rotostats_error_stat_units_mismatch` — stat_units is `"raw_projected"`.
+- `rotostats_error_cat_pct_sum` — cat_pct default.
+- `rotostats_error_category_mismatch` — cat_pct default.
+- `rotostats_error_multi_pos_all_unsupported` — TODO(planner): enumerate upstream guards.
+- `rotostats_warning_pvm_concentration` — unreachable; abort precedes pvm computation for the zero-pool category.
+- `rotostats_warning_pvm_sum` — unreachable; abort precedes invariant check.
+
+**Expected outcome:**
+- Abort with class string `"rotostats_error_zero_pool"`.
+
+### TS-PVM-7 — Concentration warning when a single player exceeds 25% share
+
+**Preconditions (inputs must satisfy):**
+- Valid `replacement` object.
+- Projection set where exactly one player's projected value in category `c*` dominates (e.g., a single elite closer with projected SV far above all peers), so `pvm[i*, c*] > 0.25` after normalization.
+- No category has all-sub-replacement players; sum-to-1 invariant still holds.
+- Parameters at defaults.
+
+**Target guard / behavior under test:**
+- `rotostats_warning_pvm_concentration` fires for player `i*` and category `c*`; `pvm()` returns a valid data frame (warning, not abort).
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_missing_replacement_attrs` — attributes present.
+- `rotostats_error_stat_units_mismatch` — stat_units correct.
+- `rotostats_error_zero_pool` — pool non-zero by construction.
+- `rotostats_error_cat_pct_sum` — cat_pct default.
+- `rotostats_error_category_mismatch` — cat_pct default.
+- `rotostats_error_multi_pos_all_unsupported` — TODO(planner): enumerate upstream guards.
+- `rotostats_warning_pvm_sum` — fixture sized so invariant holds within tolerance.
+
+**Expected outcome:**
+- Warning class `"rotostats_warning_pvm_concentration"` emitted naming player `i*` and category `c*`; returned data frame includes the expected `pvm_[cat]` columns.
+
+### TS-PVM-8 — cat_pct named-vector sum and membership guards
+
+**Preconditions (inputs must satisfy):**
+- Valid `replacement` object.
+- `cat_pct` supplied as a named numeric vector.
+- Two sub-fixtures: (a) values sum to 0.95 (not 1.0 within tolerance); (b) values sum to 1.0 but names omit a scored category.
+- Other parameters at defaults.
+
+**Target guard / behavior under test:**
+- (a) aborts with `rotostats_error_cat_pct_sum`. (b) aborts with `rotostats_error_category_mismatch`.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_missing_replacement_attrs` — attributes present.
+- `rotostats_error_stat_units_mismatch` — stat_units correct.
+- `rotostats_error_zero_pool` — unreachable; cat_pct validation occurs before pool computation (TODO(planner): confirm ordering in implementation).
+- `rotostats_error_multi_pos_all_unsupported` — TODO(planner): enumerate upstream guards.
+- `rotostats_warning_pvm_concentration` — unreachable; aborts before pvm output.
+- `rotostats_warning_pvm_sum` — unreachable; aborts before invariant check.
+- In sub-fixture (a), `rotostats_error_category_mismatch` MUST NOT fire first — names may match but sum fails; TODO(planner): confirm sum check ordering relative to name check.
+- In sub-fixture (b), `rotostats_error_cat_pct_sum` MUST NOT fire first — sum is 1.0; name check is the target.
+
+**Expected outcome:**
+- Sub-fixture (a): abort with class string `"rotostats_error_cat_pct_sum"`.
+- Sub-fixture (b): abort with class string `"rotostats_error_category_mismatch"`.
+
+### TS-PVM-9 — Pipe-compatibility: piped and nested calls produce identical output
+
+**Preconditions (inputs must satisfy):**
+- Valid `projections` and `config` inputs that produce a well-formed `replacement_level()` output.
+- Call path A: `replacement_level(projections, config) |> pvm()`.
+- Call path B: `pvm(replacement_level(projections, config))`.
+- Parameters at defaults in both paths.
+
+**Target guard / behavior under test:**
+- Outputs from A and B are structurally identical: same columns, same row order, element-wise equal within 1e-12, and identical `units` / `anchor` attributes.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_missing_replacement_attrs` — attributes present.
+- `rotostats_error_stat_units_mismatch` — stat_units correct.
+- `rotostats_error_zero_pool` — fixture has positive pools.
+- `rotostats_error_cat_pct_sum` — cat_pct default.
+- `rotostats_error_category_mismatch` — cat_pct default.
+- `rotostats_error_multi_pos_all_unsupported` — TODO(planner): enumerate upstream guards.
+- `rotostats_warning_pvm_concentration` — fixture sized so no player exceeds 25%.
+- `rotostats_warning_pvm_sum` — fixture sized so invariant holds.
+
+**Expected outcome:**
+- `identical(A[order(A$player_id), ], B[order(B$player_id), ])` is `TRUE`; `attr(A, "units") == attr(B, "units") == "budget_fraction"`; `attr(A, "anchor") == attr(B, "anchor") == "replacement"`.
 
 ### Manual diagnostics
 
