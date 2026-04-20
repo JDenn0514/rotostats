@@ -14,6 +14,43 @@ and scarcity analysis; also the internal building block for `zar()`.
 
 ---
 
+## Surfaces
+
+**Reads (builder, simulator, tester may read):**
+- R/zaa.R (self)
+- R/league-config.R (consumes `league_config()` output via `config` arg)
+- R/replacement-level.R (consumes `replacement_level()` output and its `projections`, `config`, `stat_units` attributes)
+- TODO(user): confirm R/utils.R or other internal helpers
+- tests/testthat/test-zaa.R
+- inst/ (TODO(user): confirm any fixture data paths under inst/)
+- data/ (TODO(user): confirm any package data files consumed at runtime)
+
+**Writes — builder:**
+- R/zaa.R
+
+**Writes — simulator:**
+- TODO(user): confirm simulator write paths (pure algebraic transform — likely none)
+
+**Writes — tester:**
+- tests/testthat/test-zaa.R
+
+**Writes — scriber:**
+- R/zaa.R roxygen, man/zaa.Rd, NEWS.md, ARCHITECTURE.md
+
+**Frozen surfaces (NO teammate may modify):**
+- R/zar.R (downstream caller — must not be edited by the zaa run)
+- R/replacement.R (upstream — consumed via attributes only)
+- R/replacement-level.R (upstream — consumed via attributes only)
+- R/sgp.R (sibling valuation function)
+- R/par.R (sibling valuation function)
+- R/pvm.R (sibling valuation function)
+- R/dollar-values.R (sibling)
+- R/league-config.R (upstream — consumed as config object)
+- R/value-plus.R (planned downstream consumer)
+- TODO(user): confirm full sibling-file list under R/
+
+---
+
 ## Formal Definition
 
 `zaa(stats = NULL, config = NULL, replacement = NULL, pitcher_pool = "combined", hitter_pool = "positional", category_weight = NULL, weight_method = "none", ...)`
@@ -271,6 +308,50 @@ zaa(
 | `category_weight` | named numeric | no | Manual per-position multipliers applied to `total_zaa` (e.g., `c(SP = 0.8, RP = 0.8)`). Overrides `weight_method` when provided. |
 | `weight_method` | character | no | `"none"` (default) \| `"linear"` \| `"sqrt"`. Auto-computes category-count normalization for `total_zaa`. Ignored when `category_weight` is supplied. |
 
+### Parameter semantics (default vs explicit)
+
+### Parameter: `stats`
+
+**Default-path behavior (`missing(stats)` or `stats = NULL`):** When `replacement` is supplied and carries a `projections` attribute, that attribute supersedes `stats` and no separate validation of `stats` is required. When `replacement = NULL` and `stats` is also `NULL`, `zaa()` must abort — `stats` is required in that path. TODO(user): decide default-path semantics for the no-replacement case (which error class fires on the missing-stats abort).
+
+**Explicit-path behavior (user supplied):** Must be a data frame containing `config$categories` columns and, when ERA/WHIP/AVG are scored, `IP` and `AB` as full-season totals. TODO(user): decide default-path semantics for column-type and column-presence checks (which error class fires — candidates: `rotostats_error_not_data_frame`, `rotostats_error_missing_column`, `rotostats_error_wrong_column_type`).
+
+### Parameter: `config`
+
+**Default-path behavior (`missing(config)` or `config = NULL`):** When `replacement` is supplied and carries a `config` attribute, that attribute supersedes `config` and no separate validation of `config` is required. When `replacement = NULL` and `config` is also `NULL`, `zaa()` must abort — `config` is required in that path. TODO(user): decide default-path semantics for the no-replacement case (which error class fires on the missing-config abort).
+
+**Explicit-path behavior (user supplied):** Must be a `league_config` object exposing `config$categories` (non-empty character vector) and `config$pitcher_slots` (when `pitcher_pool = "split"`). TODO(user): decide default-path semantics for type/shape checks of an explicitly supplied `config`.
+
+### Parameter: `replacement`
+
+**Default-path behavior (`missing(replacement)` or `replacement = NULL`):** Validation of the `stat_units` attribute and `projections`/`config` attribute presence is skipped. `zaa()` emits `cli_inform()` noting the pool is unrestricted and uses all rows in `stats`.
+
+**Explicit-path behavior (user supplied):** Must be a `replacement_level()` object. Missing `projections` or `config` attributes fire `rotostats_error_missing_replacement_attrs`. When `attr(replacement, "stat_units") == "full_season_normalized"`, fires `rotostats_error_stat_units_mismatch`. Only `"raw_projected"` is accepted for the `stat_units` attribute.
+
+### Parameter: `pitcher_pool`
+
+**Default-path behavior (`missing(pitcher_pool)`):** Value defaults to `"combined"`; membership-check validation is skipped because the default is known-valid.
+
+**Explicit-path behavior (user supplied):** Must be one of `"combined"`, `"split"`, `"none"`. TODO(user): decide default-path semantics for invalid-value abort (error class name is not yet registered in `plans/error-messages.md` for `zaa()` — candidates: `rotostats_error_invalid_parameter` or a new `rotostats_error_invalid_pitcher_pool`).
+
+### Parameter: `hitter_pool`
+
+**Default-path behavior (`missing(hitter_pool)`):** Value defaults to `"positional"`; membership-check validation is skipped because the default is known-valid.
+
+**Explicit-path behavior (user supplied):** Must be one of `"positional"`, `"combined"`. TODO(user): decide default-path semantics for invalid-value abort (error class not yet registered for `zaa()` — candidates: `rotostats_error_invalid_parameter` or a new `rotostats_error_invalid_hitter_pool`).
+
+### Parameter: `category_weight`
+
+**Default-path behavior (`missing(category_weight)` or `category_weight = NULL`):** No manual override is applied; `weight_method` governs normalization. Type/shape validation is skipped.
+
+**Explicit-path behavior (user supplied):** Must be a named numeric vector whose names are position labels (e.g., `SP`, `RP`, hitter positions). Takes precedence over `weight_method`. TODO(user): decide default-path semantics for validation (length, naming, numeric coercion) and which error class fires on violation.
+
+### Parameter: `weight_method`
+
+**Default-path behavior (`missing(weight_method)`):** Value defaults to `"none"`; membership-check validation is skipped because the default is known-valid. No normalization is applied.
+
+**Explicit-path behavior (user supplied):** Must be one of `"none"`, `"linear"`, `"sqrt"`. TODO(user): decide default-path semantics for invalid-value abort (error class not yet registered for `zaa()` — candidates: `rotostats_error_invalid_parameter` or a new `rotostats_error_invalid_weight_method`).
+
 ---
 
 ## Decision This Informs
@@ -309,6 +390,8 @@ zaa(
 ---
 
 ## Known Validity Threats
+
+**Simulation studies:** N/A — `zaa()` is a pure algebraic transform; no Monte Carlo study is required for validation. Signal pre-check block intentionally omitted.
 
 ### Conceptual (Q1)
 
@@ -389,45 +472,212 @@ _Pending — fill in after validation harness results_
 
 ## Validation Approach
 
-- **Rate stat sign check:** A pitcher projected with ERA below the position-average ERA
-  must produce positive `zaa_era`. Assert `sign(mean_ERA - player_ERA) == sign(zaa_era)`
-  for all pitchers. Automatable as a unit test.
-- **Pool restriction effect:** Compare `total_zaa` SD with and without a
-  `replacement_level()` pool restriction. When restricted, the SD should be narrower.
-  If SD is identical, the pool restriction is not being applied.
-- **Volume-weighting effect:** Two pitchers with identical projected ERA but different
-  projected IP must produce different `zaa_era` — the higher-IP pitcher must have the
-  larger absolute value. Construct a synthetic test case (e.g., Pitcher A: ERA 3.50,
-  IP 200; Pitcher B: ERA 3.50, IP 60) and assert `abs(zaa_era_A) / abs(zaa_era_B) ≈
-  200/60 ≈ 3.33` before re-standardization. After re-standardization the ratio is
-  preserved. Same check applies to `zaa_avg` with AB. Automatable as a unit test.
+### TS-ZAA-1 — Rate stat sign check
+
+**Preconditions (inputs must satisfy):**
+- `stats` contains valid pitcher rows with `ERA` as a scored category.
+- Position pool has at least 2 pitchers so that `mean_ERA` is well-defined.
+- A test pitcher has `ERA` strictly below the position-average `ERA`.
+- `config$categories` includes `ERA`; `IP` column present as full-season totals with `IP > 0`.
+
+**Target guard / behavior under test:**
+- `sign(mean_ERA - player_ERA) == sign(zaa_era)` for all pitchers (i.e., negation of rate stats is applied so positive z = positive standings contribution).
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_stat_units_mismatch` — fixture uses `attr(replacement, "stat_units") = "raw_projected"`, so this guard does not fire.
+- `rotostats_error_missing_replacement_attrs` — fixture uses a `replacement_level()` object with both `projections` and `config` attributes present.
+- TODO(planner): enumerate upstream guards
+
+**Expected outcome:**
+- For every pitcher row, `sign(zaa_era) == sign(mean_ERA - player_ERA)`; no error or warning class fires.
+
+### TS-ZAA-2 — Pool restriction effect
+
+**Preconditions (inputs must satisfy):**
+- Two parallel calls: (a) `zaa(stats = S, config = C)` with `replacement = NULL`; (b) `zaa(stats = S, config = C, replacement = R)` with a `replacement_level()` object built from the same `S`.
+- Fringe / below-replacement players exist in `S` (so the restricted pool is a strict subset).
+
+**Target guard / behavior under test:**
+- With a `replacement` restriction, the within-position SD of any scored category is narrower than without, because fringe players widening the tails are excluded.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_stat_units_mismatch` — `replacement` carries `stat_units = "raw_projected"`.
+- `rotostats_error_missing_replacement_attrs` — `replacement` is built via `replacement_level()` so attributes are present.
+- TODO(planner): enumerate upstream guards
+
+**Expected outcome:**
+- `SD(total_zaa_restricted) < SD(total_zaa_unrestricted)` for at least one position pool; equality indicates the pool restriction is not being applied.
+
+### TS-ZAA-3 — Volume-weighting effect (ERA / WHIP by IP, AVG by AB)
+
+**Preconditions (inputs must satisfy):**
+- Two pitcher rows with identical projected `ERA` (e.g., 3.50) and different projected `IP` (e.g., 200 vs 60).
+- Parallel two-hitter case: identical projected `AVG`, different projected `AB`.
+- `IP > 0` and `AB > 0` for all affected rows.
+- `config$categories` includes the rate stat under test.
+
+**Target guard / behavior under test:**
+- Volume-weighted re-standardization in Step 2b: higher-IP pitcher must produce a larger `abs(zaa_era)`; pre-re-standardization ratio ≈ `IP_A / IP_B` (e.g., 200/60 ≈ 3.33). Post-re-standardization the ratio is preserved. Same logic for `AB` and `zaa_avg`.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_stat_units_mismatch` — `stat_units = "raw_projected"` on `replacement`.
+- `rotostats_error_missing_replacement_attrs` — attributes present.
+- `rotostats_warning_zero_playing_time` — fixture guarantees `IP > 0` and `AB > 0`, so the zero-IP/AB edge case does not fire.
+- TODO(planner): enumerate upstream guards
+
+**Expected outcome:**
+- `abs(zaa_era_A) > abs(zaa_era_B)` with the ratio reflecting the IP ratio; analogous for `zaa_avg`.
+
+### TS-ZAA-4 — `weight_method` identity check (`"none"`)
+
+**Preconditions (inputs must satisfy):**
+- `weight_method = "none"`; `category_weight = NULL`.
+- At least one player with valid per-category `zaa_[cat]` outputs across all scored categories.
+
+**Target guard / behavior under test:**
+- `total_zaa[i] == sum(zaa_[cat][i])` exactly (within floating-point tolerance) for every player `i` — no normalization applied.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_stat_units_mismatch` — inapplicable; `replacement` uses `raw_projected` or is absent.
+- No `cli_warn()` about weight_method / pitcher_pool interaction: `weight_method = "none"` skips that interaction entirely.
+- TODO(planner): enumerate upstream guards
+
+**Expected outcome:**
+- `all.equal(total_zaa, rowSums(zaa_[cat] columns))` returns `TRUE`.
+
+### TS-ZAA-5 — `weight_method` scaling check (`"linear"` and `"sqrt"`)
+
+**Preconditions (inputs must satisfy):**
+- 5-hitting / 4-pitching category format via `config$categories`.
+- Two fixture calls: (a) `weight_method = "linear"`; (b) `weight_method = "sqrt"`.
+- `category_weight = NULL` (no manual override).
+- `pitcher_pool` set to avoid the warning interaction — use `"split"` so `rotostats_warning_*` about combined auto-weights does not fire. TODO(planner): confirm the warning class name once registered.
+
+**Target guard / behavior under test:**
+- Under `"linear"`: `pitcher total_zaa == 0.8 × rowSum(pitcher zaa_[cat])` (4/5 ratio).
+- Under `"sqrt"`: multiplier == `sqrt(4/5) ≈ 0.894`.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_stat_units_mismatch` — `stat_units = "raw_projected"`.
+- `rotostats_error_missing_replacement_attrs` — attributes present when `replacement` is supplied.
+- The `weight_method` / `pitcher_pool = "combined"` `cli_warn()` interaction — suppressed by using `pitcher_pool = "split"`.
+- TODO(planner): enumerate upstream guards
+
+**Expected outcome:**
+- `pitcher total_zaa / rowSum(zaa_[cat])` equals `0.8` (linear) or `sqrt(0.8)` (sqrt), within tolerance.
+
+### TS-ZAA-6 — `category_weight` override precedence
+
+**Preconditions (inputs must satisfy):**
+- Both `category_weight` (e.g., `c(SP = 0.5, RP = 0.5, C = 1.2, ...)`) AND `weight_method != "none"` are supplied simultaneously.
+- `category_weight` names match the position labels produced by the pool definition.
+
+**Target guard / behavior under test:**
+- The manual `category_weight` multiplier is applied; the auto-computed `weight_method` multiplier is discarded.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_stat_units_mismatch` — inapplicable here.
+- TODO(user): decide which error class fires if `category_weight` is malformed (named numeric check) — the fixture must pass a valid vector so that guard does not fire.
+- TODO(planner): enumerate upstream guards
+
+**Expected outcome:**
+- `total_zaa[pos == "SP"] == 0.5 × rowSum(zaa_[cat][pos == "SP"])`; the `weight_method` factor does not appear anywhere in the output.
+
+### TS-ZAA-7 — `pitcher_pool` comparison (`"split"` vs `"combined"`)
+
+**Preconditions (inputs must satisfy):**
+- Fixture data includes a high-save RP (e.g., 30 SV) alongside multiple SPs with zero SV.
+- `config$categories` includes `SV` and `HLD` (or at least `SV`).
+- Parallel calls: one with `pitcher_pool = "combined"`, one with `pitcher_pool = "split"`.
+
+**Target guard / behavior under test:**
+- Under `"split"`, the RP's `total_zaa` rank among RPs is higher than under `"combined"`, because combined-pool dilution from SP zero-save contributions no longer lowers the RP's saves-category mean relative to its own within-group mean.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_stat_units_mismatch` — inapplicable.
+- `rotostats_error_missing_replacement_attrs` — attributes present.
+- TODO(planner): enumerate upstream guards
+
+**Expected outcome:**
+- `rank(RP_total_zaa_among_RPs, split) <= rank(RP_total_zaa_among_RPs, combined)` (lower rank number = higher placement).
+
+### TS-ZAA-8 — `hitter_pool` attribute structure
+
+**Preconditions (inputs must satisfy):**
+- Two parallel calls: `hitter_pool = "combined"` and `hitter_pool = "positional"`.
+- `stats` contains hitters across multiple positions (at least 2 distinct positions).
+
+**Target guard / behavior under test:**
+- `hitter_pool = "combined"`: `attr(result, "distribution")` is a flat category-keyed list (e.g., `distribution$HR` directly).
+- `hitter_pool = "positional"`: `attr(result, "distribution")` is position-keyed then category-keyed (e.g., `distribution$C$HR`).
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_stat_units_mismatch` — inapplicable.
+- TODO(planner): enumerate upstream guards
+
+**Expected outcome:**
+- Names structure matches the documented `attr(result, "distribution")` schema exactly; `sd_vol` present for rate stats only.
+
+### TS-ZAA-9 — `hitter_pool` effect on z-score magnitude
+
+**Preconditions (inputs must satisfy):**
+- Two synthetic hitter rows with identical `HR` total, one eligible at `C`, one at `1B`.
+- Parallel calls with `hitter_pool = "combined"` and `hitter_pool = "positional"`.
+- Catcher pool SD is narrower than combined-pool SD (a property of the synthetic data).
+
+**Target guard / behavior under test:**
+- Under `hitter_pool = "combined"`, the catcher's `zaa_hr` magnitude is smaller than under `hitter_pool = "positional"` because the combined SD is wider.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_stat_units_mismatch` — inapplicable.
+- TODO(planner): enumerate upstream guards
+
+**Expected outcome:**
+- `abs(zaa_hr[C, combined]) < abs(zaa_hr[C, positional])`.
+
+### TS-ZAA-10 — Attribute extraction precedence
+
+**Preconditions (inputs must satisfy):**
+- `zaa(stats = different_df, replacement = repl)` where `repl` carries a `projections` attribute that differs from `different_df` (different rows, different values).
+- `repl` also carries a valid `config` attribute.
+
+**Target guard / behavior under test:**
+- `attr(replacement, "projections")` supersedes the explicit `stats` argument; output rows reflect `repl`'s projections.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_stat_units_mismatch` — `stat_units = "raw_projected"` on `repl`.
+- `rotostats_error_missing_replacement_attrs` — both `projections` and `config` attributes are present on `repl`.
+- TODO(planner): enumerate upstream guards
+
+**Expected outcome:**
+- Output row set and per-player values match a control call `zaa(stats = attr(repl, "projections"), config = attr(repl, "config"), replacement = repl)` exactly.
+
+### Manual diagnostics
+
 - **Directional sanity:** Top-10 players by `total_zaa` at each position should be
   recognizable contributors in the projection vintage. A non-rostered player appearing
-  in the top 10 indicates a pool definition error.
-- **`weight_method` identity check:** With `weight_method = "none"` and no manual
-  `category_weight`, `total_zaa[i]` must equal the arithmetic sum of all `zaa_[cat]`
-  columns for player i. Automatable as a unit test.
-- **`weight_method` scaling check:** With `weight_method = "linear"` in a 5-hitting /
-  4-pitching format, pitcher `total_zaa` must equal 0.8 × the arithmetic sum of their
-  `zaa_[cat]` columns. With `weight_method = "sqrt"`, the multiplier must be
-  `sqrt(4/5) ≈ 0.894`. Both are automatable as unit tests.
-- **`category_weight` override check:** When both `category_weight` and
-  `weight_method != "none"` are supplied, `total_zaa` must reflect the manual
-  `category_weight` multiplier, not the auto-computed one. Automatable as a unit test.
-- **`pitcher_pool` comparison:** Under `"split"`, a 30-save closer should rank higher
-  among RPs than under `"combined"`, where their z-score is diluted by SP volume in
-  shared categories.
-- **`hitter_pool` attribute structure check:** When `hitter_pool = "combined"`,
-  `attr(result, "distribution")` must be a flat category-keyed list. When
-  `hitter_pool = "positional"`, it must be a position-keyed nested list.
-  Automatable as a unit test on the attribute structure.
-- **`hitter_pool` effect on z-scores:** Under `hitter_pool = "combined"`, a
-  catcher with elite HR production will have a lower `zaa_hr` than under
-  `hitter_pool = "positional"` (the combined SD is wider, so the same HR total
-  is worth fewer standard deviations). Verify directionally with a synthetic
-  two-player test: same HR total, one at C, one at 1B. The combined-pool C
-  z-score must be smaller in magnitude than the positional-pool C z-score.
-- **Attribute extraction precedence:** When both explicit `stats` and
-  `attr(replacement, "projections")` are supplied, the replacement attribute
-  wins. Automatable: call `zaa(stats = different_df, replacement = repl)` and
-  assert output reflects `repl`'s projections, not `different_df`.
+  in the top 10 indicates a pool definition error. (Requires human judgment against the
+  projection vintage — not automatable.)
+
+---
+
+## Error Handling
+
+Classes below are drawn from references in the spec body (e.g., §Formal Definition,
+§Parameter semantics). The canonical registry is `plans/error-messages.md` — this
+table only binds each class to the fixture that exercises it.
+
+| Class | Condition | Trigger fixture |
+|-------|-----------|-----------------|
+| `rotostats_error_stat_units_mismatch` | `attr(replacement, "stat_units") != "raw_projected"` (e.g., `"full_season_normalized"`) | TODO(planner): bind to fixture |
+| `rotostats_error_missing_replacement_attrs` | `replacement` provided but missing `projections` or `config` attribute | TODO(planner): bind to fixture |
+| `rotostats_error_not_data_frame` (candidate — explicit-path `stats`) | `stats` supplied but is not a data frame | TODO(planner): bind to fixture |
+| `rotostats_error_missing_column` (candidate — explicit-path `stats`) | `stats` missing a scored-category column, `IP`, or `AB` when a rate stat is scored | TODO(planner): bind to fixture |
+| `rotostats_error_wrong_column_type` (candidate — explicit-path `stats`) | A scored category column in `stats` is not numeric | TODO(planner): bind to fixture |
+| `rotostats_error_invalid_parameter` (candidate — `pitcher_pool`, `hitter_pool`, `weight_method`) | Explicit value not in the allowed membership set | TODO(planner): bind to fixture |
+| `cli_inform()` — unrestricted pool notice (no registered class) | `replacement = NULL`; pool is unrestricted | TODO(planner): bind to fixture |
+| `cli_warn()` — `weight_method` × `pitcher_pool = "combined"` interaction (no registered class) | `weight_method != "none"` AND `pitcher_pool = "combined"` | TODO(planner): bind to fixture |
+
+Notes:
+- `rotostats_error_stat_units_mismatch` and `rotostats_error_missing_replacement_attrs` are the only classes registered in `plans/error-messages.md` as thrown by `zaa()`. The remaining rows are candidates surfaced by the Parameter-semantics audit (Fix 1) and have not yet been registered; binding them here is deferred to the planner.
+- `cli_inform()` and `cli_warn()` sites have no registered warning class yet; registration in `plans/error-messages.md` is a prerequisite before a fixture binding can be meaningful.

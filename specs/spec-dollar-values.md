@@ -13,6 +13,48 @@ in a single call and optionally adjusts for keeper-league inflation.
 
 ---
 
+## Surfaces
+
+**Reads (builder, simulator, tester may read):**
+- R/par.R (for par() output)
+- R/zar.R (for zar() output)
+- R/pvm.R (for pvm() output)
+- R/league_config.R (implied)
+- R/replacement.R (indirect — upstream of par/zar/pvm)
+- R/sgp.R (indirect — upstream of par/zar for SGP units)
+- `TODO(user): confirm R/replacement.R is a read surface`
+- `TODO(user): confirm R/sgp.R is a read surface`
+
+**Writes — builder:**
+- R/dollar_values.R
+- R/adjust_keeper_inflation.R
+- R/calibrate_budget_split.R (if sibling utility is in scope for this run)
+- `TODO(user): confirm calibrate_budget_split scope for this run`
+
+**Writes — simulator:**
+- inst/simulations/sim-dollar-values.R (if a sim harness is added; else "none")
+- tests/simulations/sim-dollar-values-results.rds (if simulation run occurs)
+- tests/simulations/sim-dollar-values-summary.csv (ditto)
+
+**Writes — tester:**
+- tests/testthat/test-dollar-values.R
+- tests/testthat/test-adjust-keeper-inflation.R (if helper is separately tested)
+
+**Writes — scriber:**
+- R/dollar_values.R roxygen, man/dollar_values.Rd, man/adjust_keeper_inflation.Rd, NEWS.md, ARCHITECTURE.md
+
+**Frozen surfaces (NO teammate may modify):**
+- R/par.R
+- R/zar.R
+- R/pvm.R
+- R/zaa.R
+- R/replacement.R
+- R/sgp.R
+- R/league_config.R (unless this run explicitly adds the new `budget_split` field — in that case surface as `TODO(user): confirm budget_split scope` — this spec introduces `budget_split`, so league_config.R may need a surface extension)
+- `TODO(user): confirm whether this run extends R/league_config.R to add budget_split, or whether that extension is out of scope`
+
+---
+
 ## Formal Definition
 
 `dollar_values(valuation, config, keepers = NULL, include_cat = FALSE, pivot = FALSE)`
@@ -259,6 +301,67 @@ dollar_values(
 introduces it). Default `0.60`. Use `calibrate_budget_split(league_history, config)` to
 derive from observed spending history.
 
+### Parameter semantics (default vs explicit)
+
+Parameters with both a default and a validation rule. `valuation` and `config` are
+required (no default) and are covered by the input-validation rules elsewhere in the
+spec; they are not surfaced here.
+
+### Parameter: `keepers`
+
+**Default-path behavior (`missing(x)`):** When omitted, `keepers` takes its default
+value `NULL`. No keeper-adjustment step runs: Step 5 is skipped, `adjust_keeper_inflation()`
+is not invoked, and columns `dollars_[label]_adj`, `is_keeper`, `keeper_salary`,
+`surplus_[label]` are absent from the output. No keeper-related guards
+(`rotostats_error_keeper_config_missing`, `rotostats_error_missing_keeper_columns`,
+`rotostats_warning_keeper_player_not_found`, `rotostats_warning_negative_inflation`)
+can fire on the default path.
+
+**Explicit-path behavior (user supplied):** Must be a `data.frame` with one row per
+retained player. Must include a player identity column (name from `config$keeper$keeper_col`)
+and a salary column (name from `config$keeper$salary_col`). Missing either column
+aborts with `rotostats_error_missing_keeper_columns`. If `config$keeper = FALSE` while
+`keepers` is non-NULL, aborts with `rotostats_error_keeper_config_missing`. Players in
+`keepers` not found in the valuation output emit `rotostats_warning_keeper_player_not_found`.
+
+### Parameter: `include_cat`
+
+**Default-path behavior (`missing(x)`):** When omitted, `include_cat` takes its default
+value `FALSE`. Per-category attribution (Step 4) is skipped; no `dollars_[label]_[cat]`
+columns appear in the output. No per-category guards are evaluated.
+
+**Explicit-path behavior (user supplied):** Must be `TRUE` or `FALSE` (logical scalar).
+`TODO(user): decide default-path semantics for type-coercion on explicit non-logical input (e.g., `include_cat = 1`) — abort, coerce, or silently accept?`
+When `TRUE`, Step 4 runs: for PVM valuations, requires `attr(valuation, "cat_pct")` to
+be present (used to weight per-category contributions). `TODO(planner): confirm explicit error class for missing cat_pct attribute when include_cat = TRUE with PVM units.`
+
+### Parameter: `pivot`
+
+**Default-path behavior (`missing(x)`):** When omitted, `pivot` takes its default value
+`FALSE`. Output is in wide format: one row per player, one `dollars_[label]` column per
+method. No reshape step runs.
+
+**Explicit-path behavior (user supplied):** Must be `TRUE` or `FALSE` (logical scalar).
+`TODO(user): decide default-path semantics for type-coercion on explicit non-logical input.`
+When `TRUE`, output is reshaped to long format: one row per player × method, with
+columns `method`, `dollars`, and — when `keepers` supplied — `dollars_adj`, `is_keeper`,
+`keeper_salary`, `surplus`.
+
+### Parameter: `config$budget_split` (implicit parameter)
+
+`config$budget_split` is not a top-level argument but is an implicit parameter with a
+documented default (`0.60`) and a validation rule (strictly in `(0, 1)`).
+
+**Default-path behavior (`missing(x)`):** When `config` is produced by `league_config()`
+without an explicit `budget_split` value, the field defaults to `0.60`. This default is
+a reasonable prior, not an empirical estimate. `TODO(user): confirm where the 0.60
+default is injected — in `league_config()` constructor, or read as a fallback inside `dollar_values()`?`
+
+**Explicit-path behavior (user supplied):** Must be a numeric scalar strictly in
+`(0, 1)`. Values outside this open interval (including `0`, `1`, `NA`, `NaN`, negatives,
+and values `> 1`) abort with `rotostats_error_invalid_budget_split`. `config` missing
+the field entirely aborts with `rotostats_error_missing_config_field`.
+
 **Outputs:**
 
 Returns a data frame with one row per player (wide, default) or one row per player ×
@@ -327,20 +430,20 @@ attr(result, "methods")      = character vector of method labels used
 
 ## Error Handling
 
-| Condition | Handler | Error Class |
-|-----------|---------|-------------|
-| Any valuation element has `attr(..., "anchor") != "replacement"` | `cli_abort()` | `rotostats_error_invalid_anchor` |
-| Any valuation element has unrecognized `units` value | `cli_abort()` | `rotostats_error_invalid_valuation_units` |
-| `config` missing `budget`, `n_teams`, or `budget_split` | `cli_abort()` | `rotostats_error_missing_config_field` |
-| `config$budget_split` not in (0, 1) | `cli_abort()` | `rotostats_error_invalid_budget_split` |
-| `alloc_h ≤ 0` or `alloc_p ≤ 0` after $1 minimums | `cli_abort()` | `rotostats_error_negative_allocatable_budget` |
-| `sum(val[hitters]) = 0` or `sum(val[pitchers]) = 0` for SGP or z-score | `cli_abort()` | `rotostats_error_zero_pool` |
-| `keepers` non-NULL but `config$keeper = FALSE` | `cli_abort()` | `rotostats_error_keeper_config_missing` |
-| `keepers` missing player identity or salary column | `cli_abort()` | `rotostats_error_missing_keeper_columns` |
-| Player in `keepers` not found in `valuation` output | `cli_warn()` (always), names unmatched players | `rotostats_warning_keeper_player_not_found` |
-| `inflation_mult < 1.0` (keeper salaries exceed model value) | `cli_warn()` (always) | `rotostats_warning_negative_inflation` |
-| Unnamed list supplied | `cli_warn()` (always) | `rotostats_warning_unnamed_valuation_list` |
-| `\|sum(dollars_m) - total_budget\| > 1` for SGP or z-score | `cli_warn()` (always) | `rotostats_warning_budget_reconciliation` |
+| Condition | Handler | Error Class | Trigger fixture |
+|-----------|---------|-------------|-----------------|
+| Any valuation element has `attr(..., "anchor") != "replacement"` | `cli_abort()` | `rotostats_error_invalid_anchor` | `TODO(planner): bind to fixture` |
+| Any valuation element has unrecognized `units` value | `cli_abort()` | `rotostats_error_invalid_valuation_units` | `TODO(planner): bind to fixture` |
+| `config` missing `budget`, `n_teams`, or `budget_split` | `cli_abort()` | `rotostats_error_missing_config_field` | `TODO(planner): bind to fixture` |
+| `config$budget_split` not in (0, 1) | `cli_abort()` | `rotostats_error_invalid_budget_split` | `TODO(planner): bind to fixture` |
+| `alloc_h ≤ 0` or `alloc_p ≤ 0` after $1 minimums | `cli_abort()` | `rotostats_error_negative_allocatable_budget` | TS-DV-3 |
+| `sum(val[hitters]) = 0` or `sum(val[pitchers]) = 0` for SGP or z-score | `cli_abort()` | `rotostats_error_zero_pool` | `TODO(planner): bind to fixture` |
+| `keepers` non-NULL but `config$keeper = FALSE` | `cli_abort()` | `rotostats_error_keeper_config_missing` | `TODO(planner): bind to fixture` |
+| `keepers` missing player identity or salary column | `cli_abort()` | `rotostats_error_missing_keeper_columns` | `TODO(planner): bind to fixture` |
+| Player in `keepers` not found in `valuation` output | `cli_warn()` (always), names unmatched players | `rotostats_warning_keeper_player_not_found` | `TODO(planner): bind to fixture` |
+| `inflation_mult < 1.0` (keeper salaries exceed model value) | `cli_warn()` (always) | `rotostats_warning_negative_inflation` | `TODO(planner): bind to fixture` |
+| Unnamed list supplied | `cli_warn()` (always) | `rotostats_warning_unnamed_valuation_list` | TS-DV-4 |
+| `\|sum(dollars_m) - total_budget\| > 1` for SGP or z-score | `cli_warn()` (always) | `rotostats_warning_budget_reconciliation` | `TODO(planner): bind to fixture` |
 
 _All classes must be registered in `plans/error-messages.md` before implementation._
 
@@ -388,6 +491,25 @@ the upstream pool was correctly filtered.
 
 ### Statistical (Q2)
 
+### Simulation studies — Signal pre-check (mandatory before R ≥ 100)
+
+`dollar_values()` is a deterministic budget-allocation transform on top of PAR/ZAR/PVM; simulation applies when evaluating finite-sample behavior of:
+- Budget reconciliation under floating-point accumulation for SGP/z-score methods.
+- Keeper inflation multiplier stability as the keeper set changes.
+- Method rank agreement (SGP vs. zscore vs. PVM) under varying DGPs.
+
+For each sim study (when added):
+
+**Estimator used:** <name — e.g., "proportional budget allocation", "salary_adjust inflation">
+
+**Analytical signal prediction:** <closed-form or approximate expression for the estimand under this DGP>. `TODO(planner): derive analytical prediction`
+
+**Small-R pre-check (R ≤ 50):**
+- Gate: <quantitative PASS condition that must hold at R=50 before proceeding to R=500>
+- If gate fails: BLOCK. Route to planner — DGP or estimator assumption is wrong.
+
+**Estimator-threshold compatibility:** Thresholds derived for the SGP method do NOT apply to the PVM method (PVM reconciles budget by construction; SGP only approximately). Thresholds for `method = "salary_adjust"` do NOT apply to `method = "pool_shrink"` (no price adjustment in the latter). `TODO(planner): calibrate per method`.
+
 _Pending — fill in after code audit of `R/dollar_values.R` and `R/adjust_keeper_inflation.R`._
 
 Key areas to audit:
@@ -405,25 +527,153 @@ _Pending — fill in after validation harness results._
 
 ### Runtime checks
 
-- **Budget reconciliation:** `sum(dollars_[label])` across all players must equal
-  `total_budget` within $1 tolerance for all methods. For PVM this holds by construction
-  (sum-to-1 invariant from pvm()); for SGP and z-score it must be verified at runtime.
-  `rotostats_warning_budget_reconciliation` fires on violation.
+Each fixture below specifies a single behavioral guard or property. All fixtures
+assume valid `config` with `budget`, `n_teams`, `budget_split`, `categories`,
+`keeper` fields unless stated otherwise, and valuation inputs produced by
+`replacement_level()` → `par()`/`zar()`/`pvm()` with `attr(..., "anchor") = "replacement"`
+and recognized `units` values.
 
-- **Per-category attribution sum:** When `include_cat = TRUE`, for each player `i`,
-  `sum_c(dollars_[label]_[cat][i])` must equal `dollars_[label][i]` within floating-point
-  tolerance. Assert this in unit tests with synthetic data.
+### TS-DV-1 — Budget reconciliation within $1 tolerance (SGP/z-score)
 
-- **Negative allocatable budget guard:** With a misconfigured `budget_split` (e.g., 0.99)
-  and a large roster, `alloc_h` or `alloc_p` becomes negative before the $1 minimums are
-  subtracted. Assert that `rotostats_error_negative_allocatable_budget` fires in this
-  scenario.
+**Preconditions (inputs must satisfy):**
+- Valuation is a `par()` or `zar()` output (`units = "sgp"` or `"zscore"`, `anchor = "replacement"`).
+- `config$budget_split` ∈ (0, 1); `alloc_h > 0` and `alloc_p > 0`.
+- `sum(val[hitters]) > 0` and `sum(val[pitchers]) > 0` (non-zero pools).
+- `keepers = NULL`.
+- Valuation list is named (or single valuation).
 
-- **Unnamed list warning:** Passing an unnamed list must emit
-  `rotostats_warning_unnamed_valuation_list`. Assert in unit tests.
+**Target guard / behavior under test:**
+- `|sum(dollars_[label]) - total_budget| ≤ 1` (SGP and z-score reconcile within $1 tolerance).
 
-- **Keeper inflation multiplier:** When all keepers have salary = 0, `inflation_mult`
-  should equal 1.0 (no inflation). Assert with synthetic data.
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_invalid_anchor` — not satisfied: anchor is "replacement".
+- `rotostats_error_invalid_valuation_units` — not satisfied: units recognized.
+- `rotostats_error_missing_config_field` — not satisfied: all fields present.
+- `rotostats_error_invalid_budget_split` — not satisfied: in (0, 1).
+- `rotostats_error_negative_allocatable_budget` — not satisfied: both allocs > 0.
+- `rotostats_error_zero_pool` — not satisfied: both pool sums > 0.
+- `rotostats_error_keeper_config_missing` — not satisfied: keepers is NULL.
+- `rotostats_error_missing_keeper_columns` — not satisfied: keepers is NULL.
+- `rotostats_warning_keeper_player_not_found` — not satisfied: keepers is NULL.
+- `rotostats_warning_negative_inflation` — not satisfied: keepers is NULL.
+- `rotostats_warning_unnamed_valuation_list` — not satisfied: list is named or single.
+- `rotostats_warning_budget_reconciliation` — this is the target; MUST NOT fire (reconciliation holds).
+
+**Expected outcome:**
+- Return a data frame with `dollars_[label]` column; `abs(sum(dollars_[label]) - config$n_teams * config$budget) ≤ 1`.
+
+### TS-DV-2 — Per-category attribution sums to player total
+
+**Preconditions (inputs must satisfy):**
+- Valuation is a single `par()`, `zar()`, or `pvm()` output with valid `anchor` and `units`.
+- `include_cat = TRUE`.
+- For PVM: `attr(valuation, "cat_pct")` is present.
+- No zero pools; allocatable budgets positive.
+- `keepers = NULL`.
+
+**Target guard / behavior under test:**
+- For every player `i`: `sum_c(dollars_[label]_[cat][i]) = dollars_[label][i]` within floating-point tolerance.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_invalid_anchor` — not satisfied.
+- `rotostats_error_invalid_valuation_units` — not satisfied.
+- `rotostats_error_missing_config_field` — not satisfied.
+- `rotostats_error_invalid_budget_split` — not satisfied.
+- `rotostats_error_negative_allocatable_budget` — not satisfied.
+- `rotostats_error_zero_pool` — not satisfied.
+- `rotostats_error_keeper_config_missing` — not satisfied: keepers NULL.
+- `rotostats_error_missing_keeper_columns` — not satisfied: keepers NULL.
+- `rotostats_warning_keeper_player_not_found` — not satisfied: keepers NULL.
+- `rotostats_warning_negative_inflation` — not satisfied: keepers NULL.
+- `rotostats_warning_unnamed_valuation_list` — not satisfied: single valuation.
+- `rotostats_warning_budget_reconciliation` — not expected to fire for the fixture (budget holds).
+
+**Expected outcome:**
+- `all(abs(rowSums(dollars_[label]_[cat]) - dollars_[label]) < 1e-8)` returns TRUE.
+
+### TS-DV-3 — Negative allocatable budget aborts
+
+**Preconditions (inputs must satisfy):**
+- Valuation is a valid `par()`/`zar()`/`pvm()` output.
+- `config$budget_split = 0.99` (extreme misconfiguration) combined with a large `n_p` such that `alloc_p = total_budget * (1 - 0.99) - n_p * 1 ≤ 0`.
+- `config$budget_split` is still within (0, 1), so the upstream `rotostats_error_invalid_budget_split` does not fire.
+- `keepers = NULL`; valuation list named or single.
+
+**Target guard / behavior under test:**
+- `rotostats_error_negative_allocatable_budget` aborts with `cli_abort()`.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_invalid_anchor` — not satisfied.
+- `rotostats_error_invalid_valuation_units` — not satisfied.
+- `rotostats_error_missing_config_field` — not satisfied: all fields present.
+- `rotostats_error_invalid_budget_split` — not satisfied: 0.99 is in (0, 1).
+- `rotostats_error_zero_pool` — not reached (negative-alloc check runs first).
+- `rotostats_error_keeper_config_missing` — not satisfied.
+- `rotostats_error_missing_keeper_columns` — not satisfied.
+- `rotostats_warning_keeper_player_not_found` — not reached.
+- `rotostats_warning_negative_inflation` — not reached.
+- `rotostats_warning_unnamed_valuation_list` — not satisfied.
+- `rotostats_warning_budget_reconciliation` — not reached.
+
+**Expected outcome:**
+- `expect_error(..., class = "rotostats_error_negative_allocatable_budget")`.
+- `TODO(planner): confirm guard ordering — negative-alloc check must run before zero-pool check`.
+
+### TS-DV-4 — Unnamed valuation list emits positional-label warning
+
+**Preconditions (inputs must satisfy):**
+- Valuation is a `list()` of length ≥ 2 with valid elements but NO `names()` set (i.e., `is.null(names(valuation))` is TRUE).
+- Each element has `anchor = "replacement"` and recognized `units`.
+- Valid `config`; `keepers = NULL`; no zero pools; no negative alloc.
+
+**Target guard / behavior under test:**
+- `rotostats_warning_unnamed_valuation_list` fires with `cli_warn()`; positional labels (`A`, `B`, …) are used in output columns.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_invalid_anchor` — not satisfied.
+- `rotostats_error_invalid_valuation_units` — not satisfied.
+- `rotostats_error_missing_config_field` — not satisfied.
+- `rotostats_error_invalid_budget_split` — not satisfied.
+- `rotostats_error_negative_allocatable_budget` — not satisfied.
+- `rotostats_error_zero_pool` — not satisfied.
+- `rotostats_error_keeper_config_missing` — not satisfied (keepers NULL).
+- `rotostats_error_missing_keeper_columns` — not satisfied.
+- `rotostats_warning_keeper_player_not_found` — not satisfied.
+- `rotostats_warning_negative_inflation` — not satisfied.
+- `rotostats_warning_budget_reconciliation` — not expected for the fixture.
+
+**Expected outcome:**
+- `expect_warning(..., class = "rotostats_warning_unnamed_valuation_list")`.
+- Output has `dollars_A`, `dollars_B`, ... columns.
+
+### TS-DV-5 — Keeper salary = 0 implies inflation_mult == 1
+
+**Preconditions (inputs must satisfy):**
+- Valuation is a valid single `par()` output.
+- `config$keeper` is a list with `method = "salary_adjust"`, `keeper_col`, `salary_col` set.
+- `keepers` is a non-NULL data frame; all rows have `salary = 0`; all player identity values present in the valuation pool.
+- Non-zero pools; positive alloc.
+
+**Target guard / behavior under test:**
+- `inflation_mult = open_market_budget / sum(dollars_m[!is_keeper]) = 1.0` (within floating-point tolerance). Output `dollars_[label]_adj` for non-keepers equals `dollars_[label]`.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_invalid_anchor` — not satisfied.
+- `rotostats_error_invalid_valuation_units` — not satisfied.
+- `rotostats_error_missing_config_field` — not satisfied.
+- `rotostats_error_invalid_budget_split` — not satisfied.
+- `rotostats_error_negative_allocatable_budget` — not satisfied.
+- `rotostats_error_zero_pool` — not satisfied.
+- `rotostats_error_keeper_config_missing` — not satisfied (`config$keeper` is a list, not FALSE).
+- `rotostats_error_missing_keeper_columns` — not satisfied (both columns present).
+- `rotostats_warning_keeper_player_not_found` — not satisfied (all keepers in pool).
+- `rotostats_warning_negative_inflation` — not satisfied (mult = 1.0, not < 1.0).
+- `rotostats_warning_unnamed_valuation_list` — not satisfied (single valuation).
+- `rotostats_warning_budget_reconciliation` — not expected.
+
+**Expected outcome:**
+- `abs(inflation_mult - 1.0) < 1e-8`.
+- `all(dollars_[label]_adj[!is_keeper] == dollars_[label][!is_keeper])` within floating-point tolerance.
 
 ### Manual diagnostics
 

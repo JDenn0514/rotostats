@@ -14,6 +14,36 @@ dollar values anchored to the free-agent baseline.
 
 ---
 
+## Surfaces
+
+**Reads (builder, simulator, tester may read):**
+- R/zaa.R (zar() calls zaa() internally)
+- R/replacement.R (zar() takes replacement_level() output)
+- TODO(user): confirm R/dollar_values.R (listed as downstream consumer)
+- TODO(user): confirm R/value_plus.R (planned downstream consumer)
+
+**Writes — builder:**
+- R/zar.R
+
+**Writes — simulator:**
+- none
+
+**Writes — tester:**
+- tests/testthat/test-zar.R
+
+**Writes — scriber:**
+- R/zar.R roxygen, man/zar.Rd, NEWS.md, ARCHITECTURE.md
+
+**Frozen surfaces (NO teammate may modify):**
+- R/zaa.R (must be stable; zar runs must not reach into the sibling)
+- R/replacement.R
+- R/sgp.R
+- R/par.R
+- TODO(user): confirm R/dollar_values.R is frozen for zar scope
+- TODO(user): confirm R/value_plus.R is frozen for zar scope
+
+---
+
 ## Formal Definition
 
 `zar(replacement, pitcher_pool = "combined", hitter_pool = "positional", category_weight = NULL, weight_method = "none", ...)`
@@ -182,6 +212,38 @@ attr(result, "units")  = "zscore"
 attr(result, "anchor") = "replacement"
 ```
 
+### Parameter semantics (default vs explicit)
+
+### Parameter: `include_raw`
+
+**Default-path behavior (`missing(x)`):** TODO(user): decide default-path semantics — the spec states the default is `FALSE` but is silent on whether the default path skips a logical-type check.
+
+**Explicit-path behavior (user supplied):** Must be a logical scalar. TODO(planner): enumerate the error class fired on type violation — no explicit class is bound in the spec's Error Handling table.
+
+### Parameter: `pitcher_pool`
+
+**Default-path behavior (`missing(x)`):** TODO(user): decide default-path semantics — the spec states the default is `"combined"` but is silent on whether membership validation is skipped when the parameter is omitted.
+
+**Explicit-path behavior (user supplied):** Must be one of `"combined"` or `"split"`. Passed to the internal `zaa()` call. TODO(planner): enumerate the error class fired on membership violation — no explicit class is bound in the spec's Error Handling table (delegation to `zaa()` is implied but not named).
+
+### Parameter: `hitter_pool`
+
+**Default-path behavior (`missing(x)`):** TODO(user): decide default-path semantics — the spec states the default is `"positional"` but is silent on whether membership validation is skipped when the parameter is omitted.
+
+**Explicit-path behavior (user supplied):** Must be one of `"positional"` or `"combined"`. Passed to the internal `zaa()` call. TODO(planner): enumerate the error class fired on membership violation — no explicit class is bound in the spec's Error Handling table (delegation to `zaa()` is implied but not named).
+
+### Parameter: `category_weight`
+
+**Default-path behavior (`missing(x)`):** TODO(user): decide default-path semantics — the spec states the default is `NULL` but is silent on whether type validation is skipped when the parameter is omitted.
+
+**Explicit-path behavior (user supplied):** Must be a named numeric vector (e.g., `c(SP = 0.8)`). Overrides `weight_method`. Passed to the internal `zaa()` call. TODO(planner): enumerate the error class fired on type or naming violation — no explicit class is bound in the spec's Error Handling table (delegation to `zaa()` is implied but not named).
+
+### Parameter: `weight_method`
+
+**Default-path behavior (`missing(x)`):** TODO(user): decide default-path semantics — the spec states the default is `"none"` but is silent on whether membership validation is skipped when the parameter is omitted.
+
+**Explicit-path behavior (user supplied):** Must be one of `"none"`, `"linear"`, or `"sqrt"`. Passed to the internal `zaa()` call. TODO(planner): enumerate the error class fired on membership violation — no explicit class is bound in the spec's Error Handling table (delegation to `zaa()` is implied but not named).
+
 ---
 
 ## Decision This Informs
@@ -228,16 +290,18 @@ attr(result, "anchor") = "replacement"
 
 ## Error Handling
 
-| Condition | Handler | Error Class |
-|-----------|---------|-------------|
-| `replacement` lacks `projections` or `config` attributes | Abort | `rotostats_error_missing_replacement_attrs` |
-| `replacement` carries `stat_units != "raw_projected"` (inherited from `zaa()`) | Abort | `rotostats_error_stat_units_mismatch` |
+| Condition | Handler | Error Class | Trigger fixture |
+|-----------|---------|-------------|-----------------|
+| `replacement` lacks `projections` or `config` attributes | Abort | `rotostats_error_missing_replacement_attrs` | TS-ZAR-1 |
+| `replacement` carries `stat_units != "raw_projected"` (inherited from `zaa()`) | Abort | `rotostats_error_stat_units_mismatch` | TODO(planner): bind to fixture |
 
 Error classes are registered in `plans/error-messages.md`.
 
 ---
 
 ## Known Validity Threats
+
+**Simulation studies:** N/A — `zar()` delegates all numerical work to `zaa()` (itself a pure algebraic transform); no Monte Carlo study is required for validation. Signal pre-check block intentionally omitted.
 
 ### Conceptual (Q1)
 
@@ -302,19 +366,96 @@ _Pending — fill in after validation harness results_
 These fire on every call or run automatically in the test harness. Each is automatable
 as a unit test with fixture data.
 
-- **Attribute extraction error:** `zar()` must abort with
-  `rotostats_error_missing_replacement_attrs` when passed a plain list lacking
-  `projections` or `config` attributes.
-- **Replacement boundary check:** The replacement-level player at each position must
-  have `total_zar ≈ 0`. Assert deviations < 0.5 SD; failure indicates the replacement
-  line was not applied correctly — verify the same `replacement_level()` object was used
-  for both pool definition and replacement player identification in Steps 1 and 2.
-- **Consistency with `zaa()`:** For every player and category, `zar_[cat]` must equal
-  `zaa_[cat]` minus the replacement player's `zaa_[cat]`.
-- **Rate stat sign check:** Inherited from `zaa()`. Assert
-  `sign(mean_ERA - player_ERA) == sign(zar_era)` for all pitchers.
-- **Pipe-compatibility check:** `replacement_level(projections, config) |> zar()`
-  must produce output structurally identical to `zar(replacement_level(projections, config))`.
+### TS-ZAR-1 — Attribute extraction error
+
+**Preconditions (inputs must satisfy):**
+- `replacement` is a plain list (not produced by `replacement_level()`).
+- `replacement` lacks at least one of `attr(., "projections")` or `attr(., "config")`.
+
+**Target guard / behavior under test:**
+- `zar()` aborts with `rotostats_error_missing_replacement_attrs` when the required attributes are absent.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_stat_units_mismatch` — must NOT fire first; this guard is enforced inside `zaa()` and is downstream of attribute extraction in `zar()`.
+- `rotostats_error_multi_pos_all_unsupported` — must NOT fire first; the fixture's plain list does not carry `params$multi_pos == "all"`.
+- TODO(planner): enumerate upstream guards — spec does not fully order the internal check sequence in `zar()`.
+
+**Expected outcome:**
+- Abort with condition class `"rotostats_error_missing_replacement_attrs"`.
+
+### TS-ZAR-2 — Replacement boundary check
+
+**Preconditions (inputs must satisfy):**
+- `replacement` is a valid `replacement_level()` output with `projections`, `config`, and `stat_units = "raw_projected"` attributes intact.
+- `position_assignments` is present and complete (every player has exactly one valuation position).
+- `params$multi_pos` is not `"all"`.
+
+**Target guard / behavior under test:**
+- For the replacement-level player at each position, `total_zar ≈ 0` (deviations < 0.5 SD). Failure signals that the replacement line was not applied correctly (Steps 1 and 2 used different `replacement_level()` objects).
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_missing_replacement_attrs` — must NOT fire first; fixture carries valid attributes.
+- `rotostats_error_stat_units_mismatch` — must NOT fire first; fixture carries `stat_units = "raw_projected"`.
+- `rotostats_error_multi_pos_all_unsupported` — must NOT fire first; fixture is produced with single-assignment `multi_pos`.
+- TODO(planner): enumerate upstream guards — spec does not enumerate every `zaa()` guard reached by this path.
+
+**Expected outcome:**
+- For each replacement-level player, `abs(total_zar) < 0.5`.
+
+### TS-ZAR-3 — Consistency with `zaa()`
+
+**Preconditions (inputs must satisfy):**
+- `replacement` is a valid `replacement_level()` output.
+- The same `replacement` object is used to derive both the `zaa()` output and the replacement player's z-scores.
+
+**Target guard / behavior under test:**
+- For every player `i` and category `c`, `zar[i, c] == zaa[i, c] - zaa[replacement_pos, c]`.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_missing_replacement_attrs` — must NOT fire first; fixture carries valid attributes.
+- `rotostats_error_stat_units_mismatch` — must NOT fire first; fixture carries `stat_units = "raw_projected"`.
+- `rotostats_error_multi_pos_all_unsupported` — must NOT fire first; fixture is produced with single-assignment `multi_pos`.
+- TODO(planner): enumerate upstream guards — spec does not enumerate every `zaa()` guard reached by this path.
+
+**Expected outcome:**
+- Per-cell equality: `zar_[cat] == zaa_[cat] - zaa_[cat](replacement_pos)` within floating-point tolerance for all rows and all scored categories.
+
+### TS-ZAR-4 — Rate stat sign check
+
+**Preconditions (inputs must satisfy):**
+- `replacement` is a valid `replacement_level()` output.
+- ERA is in the scored category set and is flagged as an inverse (rate) stat.
+- Fixture includes pitchers with both above- and below-mean ERA values.
+
+**Target guard / behavior under test:**
+- `sign(mean_ERA - player_ERA) == sign(zar_era)` for all pitchers (inherited from `zaa()` rate-stat sign convention).
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_missing_replacement_attrs` — must NOT fire first; fixture carries valid attributes.
+- `rotostats_error_stat_units_mismatch` — must NOT fire first; fixture carries `stat_units = "raw_projected"`.
+- `rotostats_error_multi_pos_all_unsupported` — must NOT fire first; fixture uses single-assignment `multi_pos`.
+- TODO(planner): enumerate upstream guards — spec does not enumerate every `zaa()` guard reached by this path.
+
+**Expected outcome:**
+- For every pitcher with non-missing ERA: `sign(mean_ERA - player_ERA) == sign(zar_era)`.
+
+### TS-ZAR-5 — Pipe-compatibility check
+
+**Preconditions (inputs must satisfy):**
+- `projections` and `config` are valid inputs to `replacement_level()`.
+- The same `projections` and `config` are used in both the piped and nested call forms.
+
+**Target guard / behavior under test:**
+- `replacement_level(projections, config) |> zar()` produces output structurally identical to `zar(replacement_level(projections, config))`.
+
+**Guards that MUST NOT fire first (non-target):**
+- `rotostats_error_missing_replacement_attrs` — must NOT fire first; both call forms pass a valid `replacement_level()` output.
+- `rotostats_error_stat_units_mismatch` — must NOT fire first; both call forms carry `stat_units = "raw_projected"`.
+- `rotostats_error_multi_pos_all_unsupported` — must NOT fire first; `replacement_level()` default assignment is single-position.
+- TODO(planner): enumerate upstream guards — spec does not enumerate every `zaa()` guard reached by this path.
+
+**Expected outcome:**
+- Structural equality of the two output data frames (same column names, same column types, same row count, same per-cell values within floating-point tolerance); attributes `units` and `anchor` equal across forms.
 
 ### Manual diagnostics
 
