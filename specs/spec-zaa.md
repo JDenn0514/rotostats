@@ -20,16 +20,16 @@ and scarcity analysis; also the internal building block for `zar()`.
 - R/zaa.R (self)
 - R/league-config.R (consumes `league_config()` output via `config` arg)
 - R/replacement-level.R (consumes `replacement_level()` output and its `projections`, `config`, `stat_units` attributes)
-- TODO(user): confirm R/utils.R or other internal helpers
+- No `R/utils.R` or other shared internal helpers are consumed — `zaa()` is self-contained in `R/zaa.R` except for the upstream attribute reads listed above.
 - tests/testthat/test-zaa.R
-- inst/ (TODO(user): confirm any fixture data paths under inst/)
-- data/ (TODO(user): confirm any package data files consumed at runtime)
+- No fixture data paths under `inst/` are consumed — fixtures are constructed inline in the test file.
+- No package data files (`data/*`) are consumed at runtime.
 
 **Writes — builder:**
 - R/zaa.R
 
 **Writes — simulator:**
-- TODO(user): confirm simulator write paths (pure algebraic transform — likely none)
+- None. `zaa()` is a pure algebraic transform; no simulator harness is required for validation. See §Known Validity Threats (Simulation studies: N/A).
 
 **Writes — tester:**
 - tests/testthat/test-zaa.R
@@ -47,7 +47,8 @@ and scarcity analysis; also the internal building block for `zar()`.
 - R/dollar-values.R (sibling)
 - R/league-config.R (upstream — consumed as config object)
 - R/value-plus.R (planned downstream consumer)
-- TODO(user): confirm full sibling-file list under R/
+
+The sibling-file list above is complete. All other files currently present under `R/` (`league-history.R`, `replacement_internal.R`, `replacement_params.R`, `rotostats-package.R`, `sgp-denominators.R` and its helpers) are not read or written by the `zaa()` run.
 
 ---
 
@@ -312,15 +313,15 @@ zaa(
 
 ### Parameter: `stats`
 
-**Default-path behavior (`missing(stats)` or `stats = NULL`):** When `replacement` is supplied and carries a `projections` attribute, that attribute supersedes `stats` and no separate validation of `stats` is required. When `replacement = NULL` and `stats` is also `NULL`, `zaa()` must abort — `stats` is required in that path. TODO(user): decide default-path semantics for the no-replacement case (which error class fires on the missing-stats abort).
+**Default-path behavior (`missing(stats)` or `stats = NULL`):** When `replacement` is supplied and carries a `projections` attribute, that attribute supersedes `stats` and no separate validation of `stats` is required. When `replacement = NULL` and `stats` is also `NULL`, `zaa()` aborts with `rotostats_error_not_data_frame` (treating `NULL` as "not a data frame"); the same class fires in the explicit-path non-data-frame case, so a single guard covers both routes to the missing-stats abort.
 
-**Explicit-path behavior (user supplied):** Must be a data frame containing `config$categories` columns and, when ERA/WHIP/AVG are scored, `IP` and `AB` as full-season totals. TODO(user): decide default-path semantics for column-type and column-presence checks (which error class fires — candidates: `rotostats_error_not_data_frame`, `rotostats_error_missing_column`, `rotostats_error_wrong_column_type`).
+**Explicit-path behavior (user supplied):** Must be a data frame containing `config$categories` columns and, when ERA/WHIP/AVG are scored, `IP` and `AB` as full-season totals. Three guards fire in this order: (1) `rotostats_error_not_data_frame` if `stats` is not a data frame; (2) `rotostats_error_missing_column` if a required column (scored category, `IP`, `AB`) is absent; (3) `rotostats_error_wrong_column_type` if a scored-category column is present but not numeric. All three classes are already registered in `plans/error-messages.md` (bound to `replacement_level()`); `zaa()` reuses them — no new registrations required.
 
 ### Parameter: `config`
 
-**Default-path behavior (`missing(config)` or `config = NULL`):** When `replacement` is supplied and carries a `config` attribute, that attribute supersedes `config` and no separate validation of `config` is required. When `replacement = NULL` and `config` is also `NULL`, `zaa()` must abort — `config` is required in that path. TODO(user): decide default-path semantics for the no-replacement case (which error class fires on the missing-config abort).
+**Default-path behavior (`missing(config)` or `config = NULL`):** When `replacement` is supplied and carries a `config` attribute, that attribute supersedes `config` and no separate validation of `config` is required. When `replacement = NULL` and `config` is also `NULL`, `zaa()` aborts with `rotostats_error_missing_config_field` — a `NULL` config is treated as "every required field missing"; the same class fires when an explicitly supplied `config` is missing a required field, so a single guard covers both paths.
 
-**Explicit-path behavior (user supplied):** Must be a `league_config` object exposing `config$categories` (non-empty character vector) and `config$pitcher_slots` (when `pitcher_pool = "split"`). TODO(user): decide default-path semantics for type/shape checks of an explicitly supplied `config`.
+**Explicit-path behavior (user supplied):** Must be a `league_config` object exposing `config$categories` (non-empty character vector) and `config$pitcher_slots` (when `pitcher_pool = "split"`). Three guards fire: (1) `rotostats_error_missing_config_field` when a required field is absent; (2) `rotostats_error_invalid_categories` when `config$categories` is not a non-empty character vector; (3) `rotostats_error_invalid_pitcher_slots` when `pitcher_pool = "split"` and `config$pitcher_slots` is malformed. All three classes are already registered (bound to `league_config()`); `zaa()` reuses them — no new registrations required.
 
 ### Parameter: `replacement`
 
@@ -332,25 +333,25 @@ zaa(
 
 **Default-path behavior (`missing(pitcher_pool)`):** Value defaults to `"combined"`; membership-check validation is skipped because the default is known-valid.
 
-**Explicit-path behavior (user supplied):** Must be one of `"combined"`, `"split"`, `"none"`. TODO(user): decide default-path semantics for invalid-value abort (error class name is not yet registered in `plans/error-messages.md` for `zaa()` — candidates: `rotostats_error_invalid_parameter` or a new `rotostats_error_invalid_pitcher_pool`).
+**Explicit-path behavior (user supplied):** Must be one of `"combined"`, `"split"`, `"none"`. Any other value aborts with `rotostats_error_invalid_parameter` — reuse the existing class registered in `plans/error-messages.md` rather than introducing a per-parameter class. `zaa()` is added to the "Thrown by" column for that class at implementation time.
 
 ### Parameter: `hitter_pool`
 
 **Default-path behavior (`missing(hitter_pool)`):** Value defaults to `"positional"`; membership-check validation is skipped because the default is known-valid.
 
-**Explicit-path behavior (user supplied):** Must be one of `"positional"`, `"combined"`. TODO(user): decide default-path semantics for invalid-value abort (error class not yet registered for `zaa()` — candidates: `rotostats_error_invalid_parameter` or a new `rotostats_error_invalid_hitter_pool`).
+**Explicit-path behavior (user supplied):** Must be one of `"positional"`, `"combined"`. Any other value aborts with `rotostats_error_invalid_parameter` — same reuse rationale as `pitcher_pool`; no new class.
 
 ### Parameter: `category_weight`
 
 **Default-path behavior (`missing(category_weight)` or `category_weight = NULL`):** No manual override is applied; `weight_method` governs normalization. Type/shape validation is skipped.
 
-**Explicit-path behavior (user supplied):** Must be a named numeric vector whose names are position labels (e.g., `SP`, `RP`, hitter positions). Takes precedence over `weight_method`. TODO(user): decide default-path semantics for validation (length, naming, numeric coercion) and which error class fires on violation.
+**Explicit-path behavior (user supplied):** Must be a named numeric vector whose names are position labels (e.g., `SP`, `RP`, hitter positions). Takes precedence over `weight_method`. Four failure modes all abort with `rotostats_error_invalid_parameter`: (1) not numeric; (2) unnamed or partially named; (3) contains `NA` / `NaN` / non-finite values; (4) contains names that are not recognized position labels from the rostered pool. No silent coercion. Reuses the existing class rather than introducing `rotostats_error_invalid_category_weight`.
 
 ### Parameter: `weight_method`
 
 **Default-path behavior (`missing(weight_method)`):** Value defaults to `"none"`; membership-check validation is skipped because the default is known-valid. No normalization is applied.
 
-**Explicit-path behavior (user supplied):** Must be one of `"none"`, `"linear"`, `"sqrt"`. TODO(user): decide default-path semantics for invalid-value abort (error class not yet registered for `zaa()` — candidates: `rotostats_error_invalid_parameter` or a new `rotostats_error_invalid_weight_method`).
+**Explicit-path behavior (user supplied):** Must be one of `"none"`, `"linear"`, `"sqrt"`. Any other value aborts with `rotostats_error_invalid_parameter` — same reuse rationale as `pitcher_pool` and `hitter_pool`; no new class.
 
 ---
 
@@ -577,7 +578,7 @@ _Pending — fill in after validation harness results_
 
 **Guards that MUST NOT fire first (non-target):**
 - `rotostats_error_stat_units_mismatch` — inapplicable here.
-- TODO(user): decide which error class fires if `category_weight` is malformed (named numeric check) — the fixture must pass a valid vector so that guard does not fire.
+- `rotostats_error_invalid_parameter` — would fire if `category_weight` were not a named numeric vector (non-numeric, unnamed, contains `NA`, or names not in the rostered position set), per the §Parameter: `category_weight` explicit-path rule. The fixture must pass a valid named numeric vector so this guard does not fire first.
 - TODO(planner): enumerate upstream guards
 
 **Expected outcome:**

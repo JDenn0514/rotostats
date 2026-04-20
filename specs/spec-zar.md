@@ -19,8 +19,8 @@ dollar values anchored to the free-agent baseline.
 **Reads (builder, simulator, tester may read):**
 - R/zaa.R (zar() calls zaa() internally)
 - R/replacement.R (zar() takes replacement_level() output)
-- TODO(user): confirm R/dollar_values.R (listed as downstream consumer)
-- TODO(user): confirm R/value_plus.R (planned downstream consumer)
+- R/dollar_values.R — **not a read surface.** Listed elsewhere only as a downstream consumer; `zar()` emits attributes (`units`, `anchor`) that `dollar_values()` reads, but the reverse direction is not taken.
+- R/value_plus.R — **not a read surface.** Planned downstream consumer; file does not exist yet and `zar()` does not depend on it.
 
 **Writes — builder:**
 - R/zar.R
@@ -39,8 +39,8 @@ dollar values anchored to the free-agent baseline.
 - R/replacement.R
 - R/sgp.R
 - R/par.R
-- TODO(user): confirm R/dollar_values.R is frozen for zar scope
-- TODO(user): confirm R/value_plus.R is frozen for zar scope
+- R/dollar_values.R — **frozen for the `zar()` scope.** Any modification to the consumer is out of scope; changes must land via the `dollar_values()` feature branch.
+- R/value_plus.R — **frozen for the `zar()` scope.** File is planned but not yet present; if it is added during this run by another teammate, it must not be modified here.
 
 ---
 
@@ -216,31 +216,31 @@ attr(result, "anchor") = "replacement"
 
 ### Parameter: `include_raw`
 
-**Default-path behavior (`missing(x)`):** TODO(user): decide default-path semantics — the spec states the default is `FALSE` but is silent on whether the default path skips a logical-type check.
+**Default-path behavior (`missing(x)`):** Value defaults to `FALSE`; logical-type validation is skipped because the default is known-valid. Same rule as `zaa()` applied to parameters with known-valid defaults.
 
 **Explicit-path behavior (user supplied):** Must be a logical scalar. TODO(planner): enumerate the error class fired on type violation — no explicit class is bound in the spec's Error Handling table.
 
 ### Parameter: `pitcher_pool`
 
-**Default-path behavior (`missing(x)`):** TODO(user): decide default-path semantics — the spec states the default is `"combined"` but is silent on whether membership validation is skipped when the parameter is omitted.
+**Default-path behavior (`missing(x)`):** Value defaults to `"combined"`; membership-check validation is skipped because the default is known-valid. Mirrors the rule enforced inside `zaa()` for the same parameter.
 
 **Explicit-path behavior (user supplied):** Must be one of `"combined"` or `"split"`. Passed to the internal `zaa()` call. TODO(planner): enumerate the error class fired on membership violation — no explicit class is bound in the spec's Error Handling table (delegation to `zaa()` is implied but not named).
 
 ### Parameter: `hitter_pool`
 
-**Default-path behavior (`missing(x)`):** TODO(user): decide default-path semantics — the spec states the default is `"positional"` but is silent on whether membership validation is skipped when the parameter is omitted.
+**Default-path behavior (`missing(x)`):** Value defaults to `"positional"`; membership-check validation is skipped because the default is known-valid. Mirrors the rule enforced inside `zaa()` for the same parameter.
 
 **Explicit-path behavior (user supplied):** Must be one of `"positional"` or `"combined"`. Passed to the internal `zaa()` call. TODO(planner): enumerate the error class fired on membership violation — no explicit class is bound in the spec's Error Handling table (delegation to `zaa()` is implied but not named).
 
 ### Parameter: `category_weight`
 
-**Default-path behavior (`missing(x)`):** TODO(user): decide default-path semantics — the spec states the default is `NULL` but is silent on whether type validation is skipped when the parameter is omitted.
+**Default-path behavior (`missing(x)` or `NULL`):** No manual override is applied; `weight_method` governs normalization. Type/shape validation is skipped because `NULL` disables the override path entirely. Same rule as `zaa()` for this parameter.
 
 **Explicit-path behavior (user supplied):** Must be a named numeric vector (e.g., `c(SP = 0.8)`). Overrides `weight_method`. Passed to the internal `zaa()` call. TODO(planner): enumerate the error class fired on type or naming violation — no explicit class is bound in the spec's Error Handling table (delegation to `zaa()` is implied but not named).
 
 ### Parameter: `weight_method`
 
-**Default-path behavior (`missing(x)`):** TODO(user): decide default-path semantics — the spec states the default is `"none"` but is silent on whether membership validation is skipped when the parameter is omitted.
+**Default-path behavior (`missing(x)`):** Value defaults to `"none"`; membership-check validation is skipped because the default is known-valid. No normalization is applied. Mirrors the rule enforced inside `zaa()` for the same parameter.
 
 **Explicit-path behavior (user supplied):** Must be one of `"none"`, `"linear"`, or `"sqrt"`. Passed to the internal `zaa()` call. TODO(planner): enumerate the error class fired on membership violation — no explicit class is bound in the spec's Error Handling table (delegation to `zaa()` is implied but not named).
 

@@ -20,16 +20,13 @@ in a single call and optionally adjusts for keeper-league inflation.
 - R/zar.R (for zar() output)
 - R/pvm.R (for pvm() output)
 - R/league_config.R (implied)
-- R/replacement.R (indirect — upstream of par/zar/pvm)
-- R/sgp.R (indirect — upstream of par/zar for SGP units)
-- `TODO(user): confirm R/replacement.R is a read surface`
-- `TODO(user): confirm R/sgp.R is a read surface`
+- R/replacement.R (indirect — upstream of par/zar/pvm; read for context only, never sourced directly)
+- R/sgp.R (indirect — upstream of par/zar for SGP units; read for context only, never sourced directly)
 
 **Writes — builder:**
 - R/dollar_values.R
 - R/adjust_keeper_inflation.R
-- R/calibrate_budget_split.R (if sibling utility is in scope for this run)
-- `TODO(user): confirm calibrate_budget_split scope for this run`
+- R/calibrate_budget_split.R — **out of scope for this run.** Listed as a planned sibling utility only; defer implementation until `dollar_values()` and `adjust_keeper_inflation()` are landed.
 
 **Writes — simulator:**
 - inst/simulations/sim-dollar-values.R (if a sim harness is added; else "none")
@@ -50,8 +47,7 @@ in a single call and optionally adjusts for keeper-league inflation.
 - R/zaa.R
 - R/replacement.R
 - R/sgp.R
-- R/league_config.R (unless this run explicitly adds the new `budget_split` field — in that case surface as `TODO(user): confirm budget_split scope` — this spec introduces `budget_split`, so league_config.R may need a surface extension)
-- `TODO(user): confirm whether this run extends R/league_config.R to add budget_split, or whether that extension is out of scope`
+- R/league-config.R — **partially unfrozen for this run only to add the `budget_split` field** (this spec introduces it). All other `league_config()` fields and validation remain frozen. The `budget_split` addition covers: constructor default (`0.60`), `rotostats_error_invalid_budget_split` guard registration, and `rotostats_error_missing_config_field` coverage when the field is absent. No other behavior in `league-config.R` is touched by the `dollar_values()` run.
 
 ---
 
@@ -331,7 +327,9 @@ value `FALSE`. Per-category attribution (Step 4) is skipped; no `dollars_[label]
 columns appear in the output. No per-category guards are evaluated.
 
 **Explicit-path behavior (user supplied):** Must be `TRUE` or `FALSE` (logical scalar).
-`TODO(user): decide default-path semantics for type-coercion on explicit non-logical input (e.g., `include_cat = 1`) — abort, coerce, or silently accept?`
+Non-logical input (e.g., `include_cat = 1`, `"yes"`, `NA`, or length > 1) aborts with
+`rotostats_error_invalid_parameter`. No silent coercion — `rotostats` validates strictly at
+explicit-path boundaries, consistent with `league_config()`'s treatment of `keeper`, `n_teams`, etc.
 When `TRUE`, Step 4 runs: for PVM valuations, requires `attr(valuation, "cat_pct")` to
 be present (used to weight per-category contributions). `TODO(planner): confirm explicit error class for missing cat_pct attribute when include_cat = TRUE with PVM units.`
 
@@ -342,7 +340,8 @@ be present (used to weight per-category contributions). `TODO(planner): confirm 
 method. No reshape step runs.
 
 **Explicit-path behavior (user supplied):** Must be `TRUE` or `FALSE` (logical scalar).
-`TODO(user): decide default-path semantics for type-coercion on explicit non-logical input.`
+Non-logical input aborts with `rotostats_error_invalid_parameter` — same strict-validation
+rule as `include_cat`. No silent coercion.
 When `TRUE`, output is reshaped to long format: one row per player × method, with
 columns `method`, `dollars`, and — when `keepers` supplied — `dollars_adj`, `is_keeper`,
 `keeper_salary`, `surplus`.
@@ -354,8 +353,12 @@ documented default (`0.60`) and a validation rule (strictly in `(0, 1)`).
 
 **Default-path behavior (`missing(x)`):** When `config` is produced by `league_config()`
 without an explicit `budget_split` value, the field defaults to `0.60`. This default is
-a reasonable prior, not an empirical estimate. `TODO(user): confirm where the 0.60
-default is injected — in `league_config()` constructor, or read as a fallback inside `dollar_values()`?`
+a reasonable prior, not an empirical estimate. The default is injected by the
+`league_config()` constructor (not read as a fallback inside `dollar_values()`) — consistent
+with how `league_config()` injects defaults for `n_teams`, `roster_slots`, `budget`, and
+`keeper`. `dollar_values()` always reads `config$budget_split` as a pre-populated field and
+validates it via the explicit-path rule below; a `config` missing the field entirely aborts
+with `rotostats_error_missing_config_field`.
 
 **Explicit-path behavior (user supplied):** Must be a numeric scalar strictly in
 `(0, 1)`. Values outside this open interval (including `0`, `1`, `NA`, `NaN`, negatives,
