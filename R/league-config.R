@@ -306,9 +306,10 @@ validate_inverse_categories <- function(x, categories) {
   # Membership check: every element must appear in config$categories.
   bad <- setdiff(x_upper, categories)
   if (length(bad) > 0L) {
+    n_bad <- length(bad)
     cli::cli_abort(
       c(
-        "{.arg inverse_categories} contains element{?s} not in {.arg categories}.",
+        "{n_bad} element{?s} of {.arg inverse_categories} not in {.arg categories}.",
         "x" = "Invalid: {.val {bad}}",
         "i" = "Valid categories: {.val {categories}}"
       ),
