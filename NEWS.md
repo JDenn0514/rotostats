@@ -13,6 +13,15 @@
   set (otherwise aborts with `rotostats_error_invalid_inverse_categories`).
   Existing callers are unaffected.
 
+* `inverse_categories` infrastructure: new `inverse_categories()` accessor
+  (package-level lower-is-better category list); `league_config()` gains an
+  optional `inverse_categories` field (validated, uppercased, stored;
+  `NULL` = inherit from package default); `sgp_denominators()` default changes
+  from `c("ERA", "WHIP")` to `NULL` with three-layer resolution (user arg >
+  `config$inverse_categories` > `intersect(scoring_categories,
+  inverse_categories())`); legacy ERA/WHIP behavior preserved unchanged when
+  those categories are scored.
+
 ## New functions
 
 * `par()` — Computes per-player Points Above Replacement (PAR) in SGP units.

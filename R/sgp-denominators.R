@@ -103,14 +103,23 @@ convert_rate_stats <- function(
 #'   category-year are excluded before fitting. Default: `FALSE`.
 #' @param exclude_years Integer vector of years excluded from all calibration
 #'   windows. Default: `2020L` (COVID-shortened season).
-#' @param inverse_categories Character vector of scoring category names whose
-#'   OLS rank should be direction-flipped before fitting (`n + 1 - rank(total)`
-#'   replaces `rank(total)`), so that lower totals receive higher standings
-#'   positions. Default: `c("ERA", "WHIP")`. An empty vector (`character(0)`)
-#'   disables all direction flips. Values are normalized to uppercase
-#'   internally; every element must appear in the effective scored-category set
-#'   after normalization (otherwise aborts with
-#'   `rotostats_error_invalid_inverse_categories`).
+#' @param inverse_categories Optional character vector. Categories whose OLS
+#'   rank is direction-flipped before fitting (`n + 1 - rank(total)` replaces
+#'   `rank(total)`), so that lower totals receive higher standings positions.
+#'   Default `NULL` triggers three-layer resolution: (1) this explicit argument
+#'   when non-NULL (full replacement — config is not consulted); (2)
+#'   `config$inverse_categories` when `config` is supplied and its field is
+#'   non-NULL; (3) `intersect(scoring_categories, inverse_categories())`
+#'   (package default, preserves ERA/WHIP behavior). Normalized to uppercase
+#'   internally. When passed explicitly, every element must be in the effective
+#'   scored-category set; otherwise aborts with
+#'   `rotostats_error_invalid_inverse_categories`. An empty vector
+#'   (`character(0)`) may be passed as an explicit Layer-1 override that
+#'   disables all direction flips (bypasses all three layers).
+#' @param config Optional [`league_config`] object from [league_config()].
+#'   When non-NULL, `config$inverse_categories` is consulted as Layer-2
+#'   fallback when `inverse_categories` is `NULL`. No other fields of `config`
+#'   are used in this function. Default `NULL`.
 #' @param rate_conversion Character. One of `"blended_pool"` (default) or
 #'   `"fixed_baseline"`. The `"fixed_baseline"` path requires `league_history`
 #'   to already be of class `"sgp_history_transformed"`; otherwise it calls the
@@ -298,14 +307,14 @@ sgp_denominators <- function(
   category_spec       = NULL,
   outlier_filter      = FALSE,
   exclude_years       = 2020L,
-  inverse_categories  = c("ERA", "WHIP"),
+  inverse_categories  = NULL,
+  config              = NULL,
   rate_conversion     = "blended_pool",
   roto_pts_col        = "roto_pts",
   n_bootstrap         = 0L,
   denom_floor         = 1e-9,
   ci_level            = 0.95
 ) {
-  inverse_categories_is_default <- missing(inverse_categories)
   the_call <- match.call()
 
   # ----- 5.1 Input Acquisition and Validation --------------------------------
@@ -438,57 +447,81 @@ sgp_denominators <- function(
     }
   }
 
-  # ----- Validate and normalize inverse_categories ----------------------------
+  # ----- Validate config arg -------------------------------------------------
 
-  # Must be a character vector.
-  if (!is.character(inverse_categories)) {
+  if (!is.null(config) && !inherits(config, "league_config")) {
     cli::cli_abort(
-      "{.arg inverse_categories} must be a character vector, not {.cls {class(inverse_categories)}}.",
-      class = "rotostats_error_invalid_inverse_categories"
+      "{.arg config} must be a {.cls league_config} object from {.fn league_config}, or {.code NULL}.",
+      class = "rotostats_error_invalid_parameter"
     )
   }
 
-  # Normalize to uppercase (matches scoring_categories convention).
-  inverse_categories <- toupper(inverse_categories)
+  # ----- Three-layer inverse_categories resolution ---------------------------
+  #
+  # Layer 1: user passed an explicit (non-NULL) value
+  #          -> use it as-is (full replacement; validate against scoring_categories)
+  # Layer 2: user omitted arg (NULL) AND config carries a non-NULL list
+  #          -> inherit from config$inverse_categories
+  # Layer 3: all else (no explicit arg, no config, or config has NULL field)
+  #          -> intersect(scoring_categories, inverse_categories())
+  #             This preserves today's effective ERA/WHIP behavior when scored.
 
-  # Silently deduplicate.
-  inverse_categories <- unique(inverse_categories)
+  if (!is.null(inverse_categories)) {
+    # Layer 1: explicit user override.
+    inv_source <- "user override"
 
-  # Membership check — behavior differs by source:
-  # - Default path: silently intersect with scored categories (no abort, no warning).
-  #   A batting-only league produces character(0) here; rank-flip becomes a no-op.
-  # - Explicit path: abort on any element not in the scored-category set.
-  bad_cats <- setdiff(inverse_categories, scoring_categories)
-  if (length(bad_cats) > 0L) {
-    if (inverse_categories_is_default) {
-      # Silent intersection: keep only the default elements that are actually scored.
-      inverse_categories <- intersect(inverse_categories, scoring_categories)
-    } else {
+    # Must be a character vector.
+    if (!is.character(inverse_categories)) {
+      cli::cli_abort(
+        "{.arg inverse_categories} must be a character vector, not {.cls {class(inverse_categories)}}.",
+        class = "rotostats_error_invalid_inverse_categories"
+      )
+    }
+
+    # Normalize to uppercase and deduplicate.
+    inverse_categories <- unique(toupper(inverse_categories))
+
+    # Membership check: every element must be in the effective scored-category set.
+    bad_cats <- setdiff(inverse_categories, scoring_categories)
+    if (length(bad_cats) > 0L) {
+      n_bad <- length(bad_cats)
       cli::cli_abort(
         c(
-          "{.arg inverse_categories} contains element(s) not in the effective scored-category set.",
+          "{n_bad} element{?s} of {.arg inverse_categories} not in the effective scored-category set.",
           "x" = "Invalid: {.val {bad_cats}}",
           "i" = "Valid scored categories: {.val {scoring_categories}}"
         ),
         class = "rotostats_error_invalid_inverse_categories"
       )
     }
+
+  } else if (!is.null(config) && !is.null(config$inverse_categories)) {
+    # Layer 2: inherit from config.
+    inv_source         <- "from config"
+    inverse_categories <- config$inverse_categories
+    # config$inverse_categories is already validated and uppercased at
+    # league_config() construction time; no re-validation needed here.
+
+  } else {
+    # Layer 3: package default — intersect with what the league actually scores.
+    inv_source         <- "package default"
+    inverse_categories <- intersect(scoring_categories, inverse_categories())
   }
 
-  # One-shot inform: report effective inverse_categories once per configuration.
+  # One-shot cli_inform: report effective list and its source.
   .freq_id <- paste0(
     "rotostats_sgp_denom_inverse_",
     paste(sort(inverse_categories), collapse = ",")
   )
   if (length(inverse_categories) == 0L) {
     cli::cli_inform(
-      "No categories will be direction-flipped ({.arg inverse_categories} is empty).",
+      "No categories will be direction-flipped (inverse_categories is empty). ({inv_source})",
       .frequency    = "once",
       .frequency_id = .freq_id
     )
   } else {
     cli::cli_inform(
-      "Direction-flipping categories (rank-flip before OLS): {.val {inverse_categories}}.",
+      "Effective inverse categories: {.val {inverse_categories}}. ({inv_source})",
       .frequency    = "once",
       .frequency_id = .freq_id
     )

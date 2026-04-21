@@ -14,7 +14,8 @@ sgp_denominators(
   category_spec = NULL,
   outlier_filter = FALSE,
   exclude_years = 2020L,
-  inverse_categories = c("ERA", "WHIP"),
+  inverse_categories = NULL,
+  config = NULL,
   rate_conversion = "blended_pool",
   roto_pts_col = "roto_pts",
   n_bootstrap = 0L,
@@ -75,14 +76,24 @@ category-year are excluded before fitting. Default: \code{FALSE}.}
 \item{exclude_years}{Integer vector of years excluded from all calibration
 windows. Default: \code{2020L} (COVID-shortened season).}
 
-\item{inverse_categories}{Character vector of scoring category names whose
-OLS rank should be direction-flipped before fitting (\code{n + 1 - rank(total)}
-replaces \code{rank(total)}), so that lower totals receive higher standings
-positions. Default: \code{c("ERA", "WHIP")}. An empty vector (\code{character(0)})
-disables all direction flips. Values are normalized to uppercase
-internally; every element must appear in the effective scored-category set
-after normalization (otherwise aborts with
-\code{rotostats_error_invalid_inverse_categories}).}
+\item{inverse_categories}{Optional character vector. Categories whose OLS
+rank is direction-flipped before fitting (\code{n + 1 - rank(total)} replaces
+\code{rank(total)}), so that lower totals receive higher standings positions.
+Default \code{NULL} triggers three-layer resolution: (1) this explicit argument
+when non-NULL (full replacement — config is not consulted); (2)
+\code{config$inverse_categories} when \code{config} is supplied and its field is
+non-NULL; (3) \code{intersect(scoring_categories, inverse_categories())}
+(package default, preserves ERA/WHIP behavior). Normalized to uppercase
+internally. When passed explicitly, every element must be in the effective
+scored-category set; otherwise aborts with
+\code{rotostats_error_invalid_inverse_categories}. An empty vector
+(\code{character(0)}) may be passed as an explicit Layer-1 override that
+disables all direction flips (bypasses all three layers).}
+
+\item{config}{Optional \code{\link{league_config}} object from \code{\link[=league_config]{league_config()}}.
+When non-NULL, \code{config$inverse_categories} is consulted as Layer-2
+fallback when \code{inverse_categories} is \code{NULL}. No other fields of \code{config}
+are used in this function. Default \code{NULL}.}
 
 \item{rate_conversion}{Character. One of \code{"blended_pool"} (default) or
 \code{"fixed_baseline"}. The \code{"fixed_baseline"} path requires \code{league_history}
