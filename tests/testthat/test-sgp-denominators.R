@@ -1347,6 +1347,12 @@ test_that("Layer-3 package default preserves ERA/WHIP behavior", {
 # ---------------------------------------------------------------------------
 # TC-SGP-INV-2: Layer-3 — FIP not scored; FIP not in effective list
 # ---------------------------------------------------------------------------
+# Respawn 1 — Revision: changed scoring_categories from c("ERA","WHIP") to
+# c("WHIP") to ensure a unique cli .frequency_id. TC-SGP-INV-1 registers id
+# "rotostats_sgp_denom_inverse_ERA,WHIP" session-wide via suppressMessages.
+# Using c("WHIP") produces id "rotostats_sgp_denom_inverse_WHIP" (novel).
+# Behavioral assertion preserved: FIP absent from effective list because FIP
+# is not in the scored set, so intersect cannot include it.
 
 test_that("Layer-3 omits FIP when FIP is not a scored category", {
   lh <- .lh_era_whip()
@@ -1356,7 +1362,7 @@ test_that("Layer-3 omits FIP when FIP is not a scored category", {
       msgs <<- c(msgs, conditionMessage(m))
       invokeRestart("muffleMessage")
     },
-    sgp_denominators(lh, scoring_categories = c("ERA", "WHIP"))
+    sgp_denominators(lh, scoring_categories = c("WHIP"))
   )
   # At least one message mentions "package default"
   expect_true(any(grepl("package default", msgs)))
@@ -1388,14 +1394,24 @@ test_that("Layer-3 includes FIP in effective list when FIP is scored", {
 # ---------------------------------------------------------------------------
 # TC-SGP-INV-4: Layer-2 (config inheritance) — config supplies the list
 # ---------------------------------------------------------------------------
+# Respawn 1 — Revision (v2): earlier attempt used c("ERA") as config
+# inverse, but T-25 (line 484) pre-registers "rotostats_sgp_denom_inverse_ERA"
+# by calling sgp_denominators with scoring_categories = "ERA" (Layer-3 fires,
+# effective set {ERA}, id "ERA" registered session-wide).
+# Resolution: use config$inverse_categories = c("ERA","FIP") with lh_era_whip_fip
+# so .frequency_id = "rotostats_sgp_denom_inverse_ERA,FIP" — novel in sequence:
+#   T-25: "ERA"; TC-1: "ERA,WHIP"; TC-2: "WHIP"; TC-3: "ERA,FIP,WHIP"
+# Layer-2 behavioral assertion preserved: config$inverse_categories is
+# non-NULL, no explicit arg -> Layer-2 fires, effective set = config's list,
+# message says "from config".
 
 test_that("Layer-2 inherits inverse_categories from config", {
-  lh <- .lh_era_whip()
+  lh <- .lh_era_whip_fip()
   cfg <- league_config(
     n_teams            = 4L,
     roster_slots       = c(C = 1L),
-    categories         = c("ERA", "WHIP"),
-    inverse_categories = c("ERA", "WHIP")
+    categories         = c("ERA", "WHIP", "FIP"),
+    inverse_categories = c("ERA", "FIP")
   )
   msgs <- character(0)
   withCallingHandlers(
@@ -1403,7 +1419,7 @@ test_that("Layer-2 inherits inverse_categories from config", {
       msgs <<- c(msgs, conditionMessage(m))
       invokeRestart("muffleMessage")
     },
-    sgp_denominators(lh, scoring_categories = c("ERA", "WHIP"), config = cfg)
+    sgp_denominators(lh, scoring_categories = c("ERA", "WHIP", "FIP"), config = cfg)
   )
   expect_true(any(grepl("from config", msgs)))
 })
@@ -1411,13 +1427,20 @@ test_that("Layer-2 inherits inverse_categories from config", {
 # ---------------------------------------------------------------------------
 # TC-SGP-INV-5: Layer-2 — config with NULL inverse_categories falls to Layer-3
 # ---------------------------------------------------------------------------
+# Respawn 1 — Revision: changed fixture to .lh_era_whip_fip() and
+# scoring_categories to c("WHIP","FIP") so Layer-3 effective set is
+# intersect(c("WHIP","FIP"), inverse_categories()) = c("FIP","WHIP") (sorted),
+# giving .frequency_id "rotostats_sgp_denom_inverse_FIP,WHIP" — distinct from
+# all prior ids: TC-1:"ERA,WHIP"; TC-2:"WHIP"; TC-3:"ERA,FIP,WHIP"; TC-4:"ERA".
+# Behavioral assertion unchanged: config$inverse_categories = NULL ->
+# Layer-2 skipped -> Layer-3 fires -> message says "package default".
 
 test_that("Layer-2 falls to Layer-3 when config$inverse_categories is NULL", {
-  lh <- .lh_era_whip()
+  lh <- .lh_era_whip_fip()
   cfg <- league_config(
     n_teams       = 4L,
     roster_slots  = c(C = 1L),
-    categories    = c("ERA", "WHIP")
+    categories    = c("WHIP", "FIP")
     # inverse_categories omitted -> NULL
   )
   msgs <- character(0)
@@ -1426,7 +1449,7 @@ test_that("Layer-2 falls to Layer-3 when config$inverse_categories is NULL", {
       msgs <<- c(msgs, conditionMessage(m))
       invokeRestart("muffleMessage")
     },
-    sgp_denominators(lh, scoring_categories = c("ERA", "WHIP"), config = cfg)
+    sgp_denominators(lh, scoring_categories = c("WHIP", "FIP"), config = cfg)
   )
   expect_true(any(grepl("package default", msgs)))
 })

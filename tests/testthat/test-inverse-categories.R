@@ -18,13 +18,17 @@ test_that("inverse_categories() returns a character vector", {
 # ---------------------------------------------------------------------------
 # TC-INV-2: Accessor returns exactly the eight starter elements
 # ---------------------------------------------------------------------------
+# Respawn 1 — Revision: removed expect_equal(result, toupper(result)).
+# The starter list uses mixed-case "xFIP" and "xERA" (conventional FanGraphs
+# notation; lowercase-x prefix is intentional per plan §API Decisions §1).
+# The toupper assertion was self-contradictory with the setequal assertion's
+# own mixed-case elements. setequal + length + no-duplicates are sufficient.
 
 test_that("inverse_categories() contains the starter list", {
   result <- inverse_categories()
   starter <- c("ERA", "WHIP", "FIP", "xFIP", "SIERA", "xERA", "BB/9", "HR/9")
   expect_setequal(result, starter)
   expect_length(result, 8L)
-  expect_equal(result, toupper(result))
   expect_equal(length(result), length(unique(result)))
 })
 
