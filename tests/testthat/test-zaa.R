@@ -1037,3 +1037,224 @@ test_that("TS-ZAA-18: config=NULL and replacement=NULL -> rotostats_error_invali
     class = "rotostats_error_invalid_parameter"
   )
 })
+
+# ---------------------------------------------------------------------------
+# TS-ZAA-Z1a — replacement + hitter_pool="positional" (default) + mixed pool
+# Closes Note 1 from review.md (zaa-2026-04-21): the blank_labels fix
+# (setNames + is.na guard) was exercised by code inspection but had no
+# end-to-end test with replacement + hitter_pool="positional" + mixed pool.
+# ---------------------------------------------------------------------------
+
+test_that("TS-ZAA-Z1a: replacement + hitter_pool='positional' + mixed pool returns data frame", {
+  # Mixed stats: 2 catchers, 2 first basemen, 2 SPs.
+  # n_teams=1 so all 6 players are in the rostered set.
+  h_cats <- c("HR", "R", "RBI", "SB")
+  p_cats <- c("W", "K", "SV", "QS")
+
+  stats_df <- data.frame(
+    player_id       = c("C1", "C2", "B1", "B2", "SP1", "SP2"),
+    player_name     = c("C1", "C2", "B1", "B2", "SP1", "SP2"),
+    pos_eligibility = c("C", "C", "1B", "1B", "SP", "SP"),
+    team            = rep("NYY", 6), league = rep("AL", 6),
+    HR  = c(15, 20, 25, 30, NA, NA),
+    R   = c(55, 65, 75, 85, NA, NA),
+    RBI = c(50, 60, 70, 80, NA, NA),
+    SB  = c(3,  5,  10, 15, NA, NA),
+    W   = c(NA, NA, NA, NA, 12, 10),
+    K   = c(NA, NA, NA, NA, 155, 140),
+    SV  = c(NA, NA, NA, NA, 0,  0),
+    QS  = c(NA, NA, NA, NA, 18, 15),
+    IP  = c(NA, NA, NA, NA, 180, 160),
+    stringsAsFactors = FALSE
+  )
+  cfg <- make_zaa_cfg(
+    categories    = c(h_cats, p_cats),
+    n_teams       = 1L,
+    roster_slots  = c(C = 2L, "1B" = 2L),
+    pitcher_slots = c(SP = 2L, RP = 0L)
+  )
+  repl <- suppressWarnings(replacement_level(stats_df, config = cfg))
+
+  # Assertion 1: call does not throw; returns data frame.
+  result <- withCallingHandlers(
+    suppressWarnings(
+      zaa(stats = stats_df, config = cfg, replacement = repl,
+          hitter_pool = "positional")
+    ),
+    message = function(m) invokeRestart("muffleMessage")
+  )
+  expect_no_error(
+    withCallingHandlers(
+      suppressWarnings(
+        zaa(stats = stats_df, config = cfg, replacement = repl,
+            hitter_pool = "positional")
+      ),
+      message = function(m) invokeRestart("muffleMessage")
+    )
+  )
+  expect_true(is.data.frame(result),
+              label = "TS-ZAA-Z1a: result is a data.frame")
+
+  # Assertion 2: nrow(result) equals the rostered-set size from
+  # attr(repl, "position_assignments") (spec §Step 1).
+  pa <- attr(repl, "position_assignments")
+  expect_false(
+    is.null(pa),
+    label = "TS-ZAA-Z1a: position_assignments attribute is not NULL"
+  )
+  expect_equal(
+    nrow(result),
+    length(pa),
+    label = "TS-ZAA-Z1a: nrow(result) == length(position_assignments)"
+  )
+
+  # Assertion 3: distribution is nested on hitter side.
+  # Spec §"attr(result,'distribution') schema": when hitter_pool="positional",
+  # distribution is position-keyed then category-keyed.
+  # Hitter position keys ("C", "1B") appear at the TOP level of distribution.
+  # Under each hitter position key, category keys (e.g., "HR") appear.
+  dist <- attr(result, "distribution")
+  expect_true(is.list(dist), label = "TS-ZAA-Z1a: distribution is list")
+  expect_true("C"  %in% names(dist),
+              label = "TS-ZAA-Z1a: hitter position key 'C' at top level")
+  expect_true("1B" %in% names(dist),
+              label = "TS-ZAA-Z1a: hitter position key '1B' at top level")
+  expect_true("HR" %in% names(dist[["C"]]),
+              label = "TS-ZAA-Z1a: category key 'HR' under 'C'")
+  expect_true("HR" %in% names(dist[["1B"]]),
+              label = "TS-ZAA-Z1a: category key 'HR' under '1B'")
+  # Confirm these are leaf entries (lists with 'mean' and 'sd')
+  c_hr_entry <- dist[["C"]][["HR"]]
+  expect_true(is.list(c_hr_entry),
+              label = "TS-ZAA-Z1a: dist$C$HR is a list")
+  expect_true("mean" %in% names(c_hr_entry),
+              label = "TS-ZAA-Z1a: dist$C$HR has 'mean'")
+  expect_true("sd"   %in% names(c_hr_entry),
+              label = "TS-ZAA-Z1a: dist$C$HR has 'sd'")
+
+  # Assertion 4 (sanity): standard output attribute schema.
+  expect_equal(attr(result, "units"),  "zscore",
+               label = "TS-ZAA-Z1a: units == 'zscore'")
+  expect_equal(attr(result, "anchor"), "average",
+               label = "TS-ZAA-Z1a: anchor == 'average'")
+})
+
+# ---------------------------------------------------------------------------
+# TS-ZAA-19 — AVG in mixed hitter/pitcher pool with weight_method="linear"
+# Closes Note 2 from review.md (zaa-2026-04-21): the interaction
+# weight_method != "none" + mixed pool + AVG (causing pitcher total_zaa=NA
+# via NA AB -> NA zaa_AVG -> NA rowSum) was not covered.
+# ---------------------------------------------------------------------------
+
+test_that("TS-ZAA-19: AVG + mixed pool + weight_method='linear': pitcher zaa_AVG and total_zaa are NA", {
+  # DOCUMENTED BEHAVIOR: spec-zaa.md §Step 2 (pitchers have NA AB -> NA
+  # zaa_AVG via volume-weighting in Step 2b) and §Step 3/§Step 4 (na.rm=FALSE
+  # rowSums; weight_method applied to row-summed total).
+  #
+  # Scored cats: 5 hitter (HR, R, RBI, SB, AVG) + 4 pitcher counting
+  # (W, K, SV, QS).  AVG requires AB; pitchers have NA AB -> NA zaa_AVG
+  # -> NA total_zaa (na.rm=FALSE).  Hitters have NA for W/K/SV/QS but those
+  # are counting stats that produce z=0 for hitters, so hitter total_zaa
+  # is finite.  Linear multiplier for hitters = 5/5 = 1.0 (n_hitter/n_hitter).
+
+  h_cats <- c("HR", "R", "RBI", "SB", "AVG")
+  p_cats <- c("W", "K", "SV", "QS")
+
+  hitters <- data.frame(
+    player_id       = c("H1", "H2", "H3"),
+    player_name     = c("H1", "H2", "H3"),
+    pos_eligibility = c("C", "C", "C"),
+    team            = rep("NYY", 3), league = rep("AL", 3),
+    HR  = c(20, 15, 25),
+    R   = c(70, 60, 80),
+    RBI = c(75, 65, 85),
+    SB  = c(5,  10, 15),
+    AVG = c(0.280, 0.265, 0.295),
+    AB  = c(420, 380, 460),
+    IP  = rep(NA_real_, 3),
+    stringsAsFactors = FALSE
+  )
+  pitchers <- data.frame(
+    player_id       = c("SP1", "SP2"),
+    player_name     = c("SP1", "SP2"),
+    pos_eligibility = c("SP", "SP"),
+    team            = rep("NYY", 2), league = rep("AL", 2),
+    W   = c(12, 10),
+    K   = c(155, 140),
+    SV  = c(0, 0),
+    QS  = c(18, 15),
+    IP  = c(180, 160),
+    # No AB and no AVG: these are NA for pitchers by construction.
+    stringsAsFactors = FALSE
+  )
+
+  # Use .build_mixed_stats to add cross-position NA columns so rbind works.
+  stats_df <- .build_mixed_stats(pitchers, hitters,
+                                 pitcher_cats = p_cats,
+                                 hitter_cats  = h_cats)
+
+  cfg <- make_zaa_cfg(
+    categories    = c(h_cats, p_cats),
+    n_teams       = 12L,
+    roster_slots  = c(C = 3L),
+    pitcher_slots = c(SP = 2L, RP = 0L)
+  )
+
+  # pitcher_pool="split" avoids the combined-pool warning interaction (TS-ZAA-15).
+  result <- suppressWarnings(
+    withCallingHandlers(
+      zaa(stats = stats_df, config = cfg,
+          weight_method = "linear", pitcher_pool = "split"),
+      message = function(m) invokeRestart("muffleMessage")
+    )
+  )
+
+  expect_true(is.data.frame(result),
+              label = "TS-ZAA-19: result is a data.frame")
+
+  sp_rows  <- result$player_id %in% c("SP1", "SP2")
+  hit_rows <- result$player_id %in% c("H1", "H2", "H3")
+
+  # Assertion 1: every pitcher row has NA zaa_AVG.
+  # DOCUMENTED BEHAVIOR: spec-zaa.md §Step 2 (pitchers have NA AB ->
+  # NA raw z-score -> NA zaa_AVG via Step 2b volume-weighting).
+  expect_true(
+    all(is.na(result$zaa_AVG[sp_rows])),
+    label = "TS-ZAA-19: every pitcher row has NA zaa_AVG (NA AB -> NA z)"
+  )
+
+  # Assertion 2: every pitcher row has NA total_zaa.
+  # DOCUMENTED BEHAVIOR: spec-zaa.md §Step 3 says total_zaa = sum of scored
+  # category z-scores; na.rm=FALSE semantics mean any NA in a scored category
+  # propagates to NA total_zaa.
+  expect_true(
+    all(is.na(result$total_zaa[sp_rows])),
+    label = "TS-ZAA-19: every pitcher row has NA total_zaa (na.rm=FALSE propagation)"
+  )
+
+  # Assertion 3: every hitter row has finite total_zaa.
+  # Hitters have full AB coverage -> finite zaa_AVG.
+  # Hitter z-scores for W/K/SV/QS are 0 (not NA) per counting-stat behavior.
+  expect_true(
+    all(is.finite(result$total_zaa[hit_rows])),
+    label = "TS-ZAA-19: every hitter row has finite total_zaa"
+  )
+
+  # Assertion 4: hitter multiplier preservation.
+  # Linear weight_method: multiplier = n_hitter_cats / n_hitter_cats = 5/5 = 1.0.
+  # total_zaa[i] / sum(hitter_zaa_cats[i]) must equal 1.0 within tolerance=1e-6.
+  # This mirrors TS-ZAA-5's hitter-side ratio check.
+  hitter_zaa_cols <- paste0("zaa_", h_cats)  # zaa_HR, zaa_R, zaa_RBI, zaa_SB, zaa_AVG
+  for (pid in c("H1", "H2", "H3")) {
+    row  <- result[result$player_id == pid, , drop = FALSE]
+    rsum <- sum(as.numeric(row[, hitter_zaa_cols, drop = FALSE]), na.rm = FALSE)
+    if (!is.na(rsum) && abs(rsum) > 1e-10) {
+      ratio <- row$total_zaa / rsum
+      expect_equal(
+        ratio, 1.0, tolerance = 1e-6,
+        label = paste0("TS-ZAA-19: hitter ", pid,
+                       " ratio total_zaa / sum(hitter_zaa_cats) == 1.0")
+      )
+    }
+  }
+})
