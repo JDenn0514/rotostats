@@ -380,13 +380,14 @@ sgp(
   league_config      = NULL,
   baseline_era       = NULL,
   baseline_whip      = NULL,
-  baseline_avg       = NULL
+  baseline_avg       = NULL,
+  rate_stat_formulas = NULL
 )
 ```
 
 | Parameter | Type | Required | Default | Notes |
 |-----------|------|----------|---------|-------|
-| `projections` | data frame | Yes | — | Player-level projected stat lines; one row per player. Must include a column for each scored category |
+| `projections` | data frame | Yes | — | Player-level projected stat lines; one row per player. Must include a column for each scored category, plus the playing-time denominator column required by each scored rate stat (e.g., `IP` when any pitcher rate stat is scored, `AB` when `AVG` is scored). A missing denominator column aborts with `rotostats_error_missing_rate_denominator_column` |
 | `denominators` | named numeric vector | Yes | — | Output of `sgp_denominators()`. Must carry `attr(denominators, "rate_conversion")`; used to detect method incompatibilities |
 | `rate_conversion` | character | No | `"blended_pool"` | One of `"blended_pool"`, `"fixed_baseline"`, `"team_ip_normalized"` (last not recommended). Should match `attr(denominators, "rate_conversion")` |
 | `pool_baseline` | character | No | `"projection_pool"` | One of `"projection_pool"`, `"per_player"`, `"universal_constants"`. Controls how the pool context is constructed for `rate_conversion = "blended_pool"`. Ignored when `rate_conversion = "fixed_baseline"` |
@@ -394,6 +395,24 @@ sgp(
 | `baseline_era` | numeric | No | `NULL` | Explicit ERA baseline for `rate_conversion = "fixed_baseline"`. Auto-derived from `projections` pool mean or `denominators` history when `NULL` |
 | `baseline_whip` | numeric | No | `NULL` | Explicit WHIP baseline. Same fallback |
 | `baseline_avg` | numeric | No | `NULL` | Explicit AVG baseline. Same fallback |
+| `rate_stat_formulas` | named list or `NULL` | No | `NULL` | Blended-pool rate-stat formula registry. `NULL` uses the built-in registry (`rate_stat_formulas()`) covering `ERA`, `WHIP`, `AVG`, `FIP`, `XFIP`, `SIERA`, `XERA`, `K/9`, `BB/9`, `HR/9`. Passing a list **fully replaces** the default registry (symmetric with `sgp_denominators()`'s `inverse_categories` override semantic). Each entry must be a five-field list: `denominator_col` (character, name of the playing-time column), `scale` (numeric; multiplier used when recomposing the blended rate from summed numerator and summed denominator), `numerator_fn` (`function(rate, denom) -> numeric`), `direction` (`"inverse"` or `"standard"`), and `pool_type` (`"pitcher"` or `"hitter"`). Malformed overrides abort with `rotostats_error_invalid_rate_stat_formula`. A scored rate-stat category not in the effective registry aborts with `rotostats_error_unknown_rate_stat_formula`. Names are uppercased during validation, but slashes in `K/9`/`BB/9`/`HR/9` are preserved |
+
+**Supported rate stats (default registry):**
+
+| Category | `denominator_col` | `scale` | `numerator_fn` | `direction` | `pool_type` |
+|----------|-------------------|---------|----------------|-------------|-------------|
+| `ERA` | `IP` | 9 | `rate * IP / 9` | inverse | pitcher |
+| `WHIP` | `IP` | 1 | `rate * IP` | inverse | pitcher |
+| `AVG` | `AB` | 1 | `rate * AB` | standard | hitter |
+| `FIP` | `IP` | 1 | `rate * IP` | inverse | pitcher |
+| `XFIP` | `IP` | 1 | `rate * IP` | inverse | pitcher |
+| `SIERA` | `IP` | 1 | `rate * IP` | inverse | pitcher |
+| `XERA` | `IP` | 1 | `rate * IP` | inverse | pitcher |
+| `K/9` | `IP` | 9 | `rate * IP / 9` | standard | pitcher |
+| `BB/9` | `IP` | 9 | `rate * IP / 9` | inverse | pitcher |
+| `HR/9` | `IP` | 9 | `rate * IP / 9` | inverse | pitcher |
+
+Counting categories (HR, R, RBI, SB, SO, etc.) are not registry-driven; they remain subtractive (`(player - avg_per_player) / denom`) and are unaffected by this argument.
 
 **Outputs:**
 
@@ -401,7 +420,7 @@ Returns a data frame with one row per player:
 
 | Column | Type | Description |
 |--------|------|-------------|
-| `sgp_[cat]` | numeric | SGP per category; one column per scored category |
+| `sgp_[cat]` | numeric | SGP per category; one column per scored category. Non-slash category names preserve case (`sgp_ERA`, `sgp_FIP`, `sgp_HR`). Slash-containing rate-stat categories (`K/9`, `BB/9`, `HR/9`) are sanitized to lowercase `_per_` form (`sgp_k_per_9`, `sgp_bb_per_9`, `sgp_hr_per_9`) to keep results round-trippable through `data.frame()` |
 | `total_sgp` | numeric | Sum of `sgp_[cat]` across all scored categories |
 
 No output attributes. `attr(denominators, "rate_conversion")` on the input denominators is consumed at call time to detect method incompatibilities; no corresponding attribute is set on the output.
@@ -472,6 +491,9 @@ No output attributes. `attr(denominators, "rate_conversion")` on the input denom
 | Player has 0 projected IP or 0 projected AB for a scored rate stat | `sgp()` | `sgp_[stat] = NA` + `cli_warn()` | TBD |
 | Player missing a scored category in `projections` | `sgp()` | `NA` for that column + `cli_warn()` | TBD |
 | QS column absent from `projections` (e.g., ZiPS) | `sgp()` | `cli_warn()` + `NA` for all QS rows | TBD |
+| User-supplied `rate_stat_formulas` override is not a named list, has a non-list entry, is missing a required field, or has an invalid field type/value | `sgp()` (via `.validate_rate_stat_formulas()`) | `cli_abort()`, names the offending entry/field | `rotostats_error_invalid_rate_stat_formula` |
+| A scored rate-stat category has no entry in the effective `rate_stat_formulas` registry (typo or missing from a user override) | `sgp()` | `cli_abort()`, names the unknown category | `rotostats_error_unknown_rate_stat_formula` |
+| A rate-stat category's required playing-time denominator column (e.g., `IP`, `AB`) is absent from `projections` | `sgp()` | `cli_abort()`, names the missing column and the dependent category | `rotostats_error_missing_rate_denominator_column` |
 
 ---
 
