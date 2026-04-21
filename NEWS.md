@@ -49,6 +49,10 @@
 
 ## New functions
 
+* `zaa()` — z-scores above average. Computes per-player, per-category z-scores
+  above the within-position average for rotisserie baseball projection data.
+  Internal building block for `zar()`. See `?zaa`.
+
 * `par()` — Computes per-player Points Above Replacement (PAR) in SGP units.
   Takes a `replacement_level()` output and `sgp_denominators()` output, calls
   `sgp()` internally to convert projected statistics, and subtracts the
