@@ -307,3 +307,95 @@ test_that("pool_sizes() handles single-integer pitcher_slots", {
   ps  <- pool_sizes(cfg)
   expect_equal(ps$pitchers, 12L * 9L)
 })
+
+# ===========================================================================
+# inverse_categories — TC-LC-INV-1 through TC-LC-INV-7
+# Added by Tester pipeline, inverse-categories-2026-04-21
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# Fixture helper (self-contained; does not depend on fixtures above)
+# ---------------------------------------------------------------------------
+
+# Minimal valid config for inverse_categories tests.
+.minimal_config_args <- function(...) {
+  defaults <- list(
+    n_teams       = 12L,
+    roster_slots  = c(C = 1L, "1B" = 1L, OF = 3L),
+    categories    = c("HR", "R", "RBI", "ERA", "WHIP", "FIP")
+  )
+  args <- modifyList(defaults, list(...))
+  do.call(league_config, args)
+}
+
+# ---------------------------------------------------------------------------
+# TC-LC-INV-1: NULL default — field stored as NULL
+# ---------------------------------------------------------------------------
+
+test_that("league_config stores NULL when inverse_categories omitted", {
+  lg <- .minimal_config_args()
+  expect_null(lg$inverse_categories)
+})
+
+# ---------------------------------------------------------------------------
+# TC-LC-INV-2: Valid vector — stored and uppercased
+# ---------------------------------------------------------------------------
+
+test_that("league_config stores and uppercases a valid inverse_categories vector", {
+  lg <- .minimal_config_args(inverse_categories = c("era", "WHIP", "fip"))
+  expect_equal(lg$inverse_categories, c("ERA", "WHIP", "FIP"))
+})
+
+# ---------------------------------------------------------------------------
+# TC-LC-INV-3: Invalid element (not in categories) aborts with correct class
+# ---------------------------------------------------------------------------
+
+test_that("league_config aborts when inverse_categories element not in categories", {
+  expect_error(
+    .minimal_config_args(inverse_categories = c("ERA", "FOO")),
+    class = "rotostats_error_invalid_inverse_categories"
+  )
+})
+
+# ---------------------------------------------------------------------------
+# TC-LC-INV-4: Non-character (non-NULL) aborts with correct class
+# ---------------------------------------------------------------------------
+
+test_that("league_config aborts when inverse_categories is non-character non-NULL", {
+  expect_error(
+    .minimal_config_args(inverse_categories = 1:3),
+    class = "rotostats_error_invalid_inverse_categories"
+  )
+})
+
+# ---------------------------------------------------------------------------
+# TC-LC-INV-5: print output shows "(none declared)" when NULL
+# ---------------------------------------------------------------------------
+
+test_that("print.league_config shows (none declared) when inverse_categories is NULL", {
+  lg <- .minimal_config_args()
+  out <- capture.output(print(lg))
+  expect_true(any(grepl("\\(none declared\\)", out)))
+})
+
+# ---------------------------------------------------------------------------
+# TC-LC-INV-6: print output shows the effective list when non-NULL
+# ---------------------------------------------------------------------------
+
+test_that("print.league_config shows effective inverse list when non-NULL", {
+  lg <- .minimal_config_args(inverse_categories = c("ERA", "WHIP"))
+  out <- capture.output(print(lg))
+  expect_true(any(grepl("ERA", out)))
+  expect_true(any(grepl("WHIP", out)))
+  expect_false(any(grepl("\\(none declared\\)", out)))
+})
+
+# ---------------------------------------------------------------------------
+# TC-LC-INV-7: Field accessible on returned S3 object
+# ---------------------------------------------------------------------------
+
+test_that("lg$inverse_categories is readable on the returned S3 object", {
+  lg <- .minimal_config_args(inverse_categories = c("fip", "ERA"))
+  expect_true(is.character(lg$inverse_categories))
+  expect_setequal(lg$inverse_categories, c("FIP", "ERA"))
+})

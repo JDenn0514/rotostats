@@ -1296,3 +1296,220 @@ test_that("T-70 (T-NEW-13): explicit inverse_categories with batting-only league
     class = "rotostats_error_invalid_inverse_categories"
   )
 })
+
+# ===========================================================================
+# inverse_categories resolution — TC-SGP-INV-1 through TC-SGP-INV-9
+# Added by Tester pipeline, inverse-categories-2026-04-21
+# ===========================================================================
+
+# ---------------------------------------------------------------------------
+# Fixture helpers (self-contained)
+# ---------------------------------------------------------------------------
+
+# Minimal team_season data scored with ERA and WHIP only.
+.ts_era_whip <- function() {
+  data.frame(
+    year    = rep(2021:2023, each = 4L),
+    team_id = rep(paste0("T", 1:4), 3L),
+    ERA     = c(4.1, 3.8, 4.5, 3.9,  4.0, 3.7, 4.3, 4.1,  3.9, 3.6, 4.4, 4.0),
+    WHIP    = c(1.30, 1.25, 1.35, 1.28,  1.28, 1.22, 1.32, 1.29,
+                1.27, 1.20, 1.33, 1.28)
+  )
+}
+
+# Minimal team_season scored with ERA, WHIP, FIP.
+.ts_era_whip_fip <- function() {
+  set.seed(123)
+  df <- .ts_era_whip()
+  df$FIP <- df$ERA + runif(nrow(df), -0.2, 0.2)  # FIP tracks ERA loosely
+  df
+}
+
+# league_history objects
+.lh_era_whip     <- function() league_history(team_season = .ts_era_whip())
+.lh_era_whip_fip <- function() league_history(team_season = .ts_era_whip_fip())
+
+# ---------------------------------------------------------------------------
+# TC-SGP-INV-1: Layer-3 (package default) — ERA/WHIP behavior preserved
+# ---------------------------------------------------------------------------
+
+test_that("Layer-3 package default preserves ERA/WHIP behavior", {
+  lh <- .lh_era_whip()
+  expect_no_error({
+    d <- suppressMessages(
+      sgp_denominators(lh, scoring_categories = c("ERA", "WHIP"))
+    )
+  })
+  expect_true(is.numeric(d$denominators))
+  expect_named(d$denominators, c("ERA", "WHIP"), ignore.order = TRUE)
+})
+
+# ---------------------------------------------------------------------------
+# TC-SGP-INV-2: Layer-3 — FIP not scored; FIP not in effective list
+# ---------------------------------------------------------------------------
+
+test_that("Layer-3 omits FIP when FIP is not a scored category", {
+  lh <- .lh_era_whip()
+  msgs <- character(0)
+  withCallingHandlers(
+    message = function(m) {
+      msgs <<- c(msgs, conditionMessage(m))
+      invokeRestart("muffleMessage")
+    },
+    sgp_denominators(lh, scoring_categories = c("ERA", "WHIP"))
+  )
+  # At least one message mentions "package default"
+  expect_true(any(grepl("package default", msgs)))
+  # FIP not mentioned as an inverse category in the Effective inverse message
+  inv_msgs <- msgs[grepl("Effective inverse", msgs)]
+  expect_false(any(grepl("FIP", inv_msgs)))
+})
+
+# ---------------------------------------------------------------------------
+# TC-SGP-INV-3: Layer-3 — FIP scored; FIP appears in effective list
+# ---------------------------------------------------------------------------
+
+test_that("Layer-3 includes FIP in effective list when FIP is scored", {
+  lh <- .lh_era_whip_fip()
+  msgs <- character(0)
+  withCallingHandlers(
+    message = function(m) {
+      msgs <<- c(msgs, conditionMessage(m))
+      invokeRestart("muffleMessage")
+    },
+    sgp_denominators(lh, scoring_categories = c("ERA", "WHIP", "FIP"))
+  )
+  expect_true(any(grepl("package default", msgs)))
+  inv_msg <- msgs[grepl("Effective inverse", msgs)]
+  expect_true(length(inv_msg) > 0)
+  expect_true(any(grepl("FIP", inv_msg)))
+})
+
+# ---------------------------------------------------------------------------
+# TC-SGP-INV-4: Layer-2 (config inheritance) — config supplies the list
+# ---------------------------------------------------------------------------
+
+test_that("Layer-2 inherits inverse_categories from config", {
+  lh <- .lh_era_whip()
+  cfg <- league_config(
+    n_teams            = 4L,
+    roster_slots       = c(C = 1L),
+    categories         = c("ERA", "WHIP"),
+    inverse_categories = c("ERA", "WHIP")
+  )
+  msgs <- character(0)
+  withCallingHandlers(
+    message = function(m) {
+      msgs <<- c(msgs, conditionMessage(m))
+      invokeRestart("muffleMessage")
+    },
+    sgp_denominators(lh, scoring_categories = c("ERA", "WHIP"), config = cfg)
+  )
+  expect_true(any(grepl("from config", msgs)))
+})
+
+# ---------------------------------------------------------------------------
+# TC-SGP-INV-5: Layer-2 — config with NULL inverse_categories falls to Layer-3
+# ---------------------------------------------------------------------------
+
+test_that("Layer-2 falls to Layer-3 when config$inverse_categories is NULL", {
+  lh <- .lh_era_whip()
+  cfg <- league_config(
+    n_teams       = 4L,
+    roster_slots  = c(C = 1L),
+    categories    = c("ERA", "WHIP")
+    # inverse_categories omitted -> NULL
+  )
+  msgs <- character(0)
+  withCallingHandlers(
+    message = function(m) {
+      msgs <<- c(msgs, conditionMessage(m))
+      invokeRestart("muffleMessage")
+    },
+    sgp_denominators(lh, scoring_categories = c("ERA", "WHIP"), config = cfg)
+  )
+  expect_true(any(grepl("package default", msgs)))
+})
+
+# ---------------------------------------------------------------------------
+# TC-SGP-INV-6: Layer-1 (user override) — full replacement; config ignored
+# ---------------------------------------------------------------------------
+
+test_that("Layer-1 full-replacement: user arg wins over config", {
+  lh <- .lh_era_whip_fip()
+  cfg <- league_config(
+    n_teams            = 4L,
+    roster_slots       = c(C = 1L),
+    categories         = c("ERA", "WHIP", "FIP"),
+    inverse_categories = c("ERA", "WHIP")
+  )
+  msgs <- character(0)
+  withCallingHandlers(
+    message = function(m) {
+      msgs <<- c(msgs, conditionMessage(m))
+      invokeRestart("muffleMessage")
+    },
+    sgp_denominators(
+      lh,
+      scoring_categories = c("ERA", "WHIP", "FIP"),
+      inverse_categories = "FIP",
+      config             = cfg
+    )
+  )
+  # Message must mention "user override"
+  expect_true(any(grepl("user override", msgs)))
+  # Effective inverse message must mention FIP but NOT ERA or WHIP
+  inv_msg <- msgs[grepl("Effective inverse", msgs)]
+  expect_true(length(inv_msg) > 0L)
+  expect_true(any(grepl("FIP", inv_msg)))
+  # ERA and WHIP should NOT appear in the "Effective inverse" line
+  expect_false(any(grepl("ERA", inv_msg)))
+  expect_false(any(grepl("WHIP", inv_msg)))
+})
+
+# ---------------------------------------------------------------------------
+# TC-SGP-INV-7: Layer-1 — validation abort on unknown element
+# ---------------------------------------------------------------------------
+
+test_that("Layer-1 explicit arg aborts on element not in scoring_categories", {
+  lh <- .lh_era_whip_fip()
+  expect_error(
+    sgp_denominators(
+      lh,
+      scoring_categories = c("ERA", "WHIP", "FIP"),
+      inverse_categories = c("FIP", "NOSUCHCAT")
+    ),
+    class = "rotostats_error_invalid_inverse_categories"
+  )
+})
+
+# ---------------------------------------------------------------------------
+# TC-SGP-INV-8: Invalid `config` arg aborts
+# ---------------------------------------------------------------------------
+
+test_that("sgp_denominators aborts when config is not a league_config object", {
+  lh <- .lh_era_whip()
+  expect_error(
+    sgp_denominators(
+      lh,
+      scoring_categories = c("ERA", "WHIP"),
+      config             = list(x = 1)
+    ),
+    class = "rotostats_error_invalid_parameter"
+  )
+})
+
+# ---------------------------------------------------------------------------
+# TC-SGP-INV-9: Legacy back-compat — existing ERA/WHIP behavior unchanged
+# ---------------------------------------------------------------------------
+
+test_that("legacy ERA/WHIP default behavior is preserved (back-compat)", {
+  lh <- .lh_era_whip()
+  d <- suppressMessages(
+    sgp_denominators(lh, scoring_categories = c("ERA", "WHIP"))
+  )
+  expect_true(is.numeric(d$denominators))
+  expect_named(d$denominators, c("ERA", "WHIP"), ignore.order = TRUE)
+  expect_true(all(is.finite(d$denominators)))
+  expect_true(all(d$denominators > 0))
+})
