@@ -2,6 +2,31 @@
 
 ## New arguments
 
+* `sgp()` gains a `rate_stat_formulas` argument (default `NULL` = use the
+  built-in registry) that declares how each rate stat converts between
+  per-player rates, a poolable numerator, and the blended-pool SGP baseline.
+  Each registry entry specifies its playing-time denominator column, recomposition
+  scale, numerator function, `direction` (`"inverse"` for lower-is-better
+  stats like ERA/WHIP/FIP, `"standard"` for higher-is-better stats like
+  AVG/K/9), and `pool_type` (`"pitcher"` or `"hitter"`). This generalizes
+  rate-stat support beyond the hardcoded ERA / WHIP / AVG trio: FIP, xFIP,
+  SIERA, xERA, K/9, BB/9, and HR/9 are now supported out of the box, and
+  users can add custom linear rate stats (e.g. `OBP` backed by `PA`) by
+  passing a fully-replaced registry. Override semantics are symmetric with
+  `sgp_denominators()`'s `inverse_categories` argument: a user-supplied list
+  defines the entire effective set, not an augmentation of the default.
+  Malformed overrides abort with `rotostats_error_invalid_rate_stat_formula`;
+  a scored rate-stat category that is not in the effective registry aborts
+  with `rotostats_error_unknown_rate_stat_formula`; a missing playing-time
+  column in `projections` aborts with
+  `rotostats_error_missing_rate_denominator_column`.
+
+* Slash-containing rate-stat categories (`K/9`, `BB/9`, `HR/9`) are written
+  to the `sgp()` output as lowercase-with-`_per_` columns (`sgp_k_per_9`,
+  `sgp_bb_per_9`, `sgp_hr_per_9`) to keep results round-trippable through
+  `data.frame()`. Non-slash category names (ERA, WHIP, AVG, FIP, SIERA, …)
+  continue to use the legacy case-preserving `sgp_<CAT>` form.
+
 * `sgp_denominators()` gains an `inverse_categories` argument (default
   `c("ERA", "WHIP")`) to declare which scoring categories use a
   direction-flipped rank before OLS fitting. Leagues scoring OAVG, BB9, or
@@ -57,6 +82,15 @@
   mapping rate-stat category names to their denominator columns (e.g.,
   `ERA -> "IP"`, `AVG -> "AB"`); used internally by `replacement_level()` for
   weighted averaging and unknown-rate-stat validation.
+
+* `rate_stat_formulas()` — Returns the built-in named list of blended-pool
+  rate-stat formula descriptors consumed by `sgp()`. Each entry documents
+  the denominator column, recomposition scale, numerator function,
+  direction (inverse vs standard), and pool type (pitcher vs hitter) for a
+  single linear rate stat. Built-ins cover `ERA`, `WHIP`, `AVG`, `FIP`,
+  `XFIP`, `SIERA`, `XERA`, `K/9`, `BB/9`, and `HR/9`. Pass a list of the
+  same shape to `sgp()` via the `rate_stat_formulas` argument to fully
+  replace the default registry (e.g., to add a custom `OBP` backed by `PA`).
 
 * `sgp()` — Converts projected per-player statistics into SGP units using
   pre-calibrated denominators from `sgp_denominators()`. Implements the

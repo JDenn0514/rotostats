@@ -13,7 +13,8 @@ sgp(
   league_config = NULL,
   baseline_era = NULL,
   baseline_whip = NULL,
-  baseline_avg = NULL
+  baseline_avg = NULL,
+  rate_stat_formulas = NULL
 )
 }
 \arguments{
@@ -66,6 +67,15 @@ See \code{baseline_era}.}
 
 \item{baseline_avg}{Numeric scalar or \code{NULL}.  Explicit AVG baseline.
 See \code{baseline_era}.}
+
+\item{rate_stat_formulas}{A named list of blended-pool formula descriptors
+in the shape returned by \code{\link[=rate_stat_formulas]{rate_stat_formulas()}}, or \code{NULL} (the default)
+to use the package registry. When supplied, the user list \strong{fully
+replaces} the package default — every rate stat the league scores must
+have an entry. This is symmetric with \code{\link[=sgp_denominators]{sgp_denominators()}}'s
+\code{inverse_categories} argument. A scored rate stat with no matching
+registry entry aborts with \code{rotostats_error_unknown_rate_stat_formula};
+a malformed override aborts with \code{rotostats_error_invalid_rate_stat_formula}.}
 }
 \value{
 A plain \code{data.frame} (no attributes) with:
@@ -98,30 +108,50 @@ division applied across all players at once:
 No player-level loop is used; computation is fully vectorized.
 }
 
-\subsection{Rate categories (ERA, WHIP, AVG) — blended-pool method}{
+\subsection{Rate categories — blended-pool method}{
 
 With \code{rate_conversion = "blended_pool"} and
 \code{pool_baseline = "projection_pool"} (the defaults), rate-stat SGP is
-computed via the \emph{blended-pool} marginal contribution formula.  Pool
-constants (\code{pool_ER}, \code{pool_IP}, \code{pool_WH}, \code{pool_H}, \code{pool_AB}) are
-derived once from the top-\code{pool_size_p} / top-\code{pool_size_h} projected
-players by playing time (IP for pitchers, AB for hitters).  Pool sizes
-are taken from \code{pool_sizes(league_config)} and therefore automatically
-reflect your league's roster structure.
+computed via the \emph{blended-pool} marginal-contribution formula. Supported
+linear rate stats are defined by the formula registry exposed via
+\code{\link[=rate_stat_formulas]{rate_stat_formulas()}}: ERA, WHIP, AVG, FIP, xFIP, SIERA, xERA, K/9,
+BB/9, and HR/9 are built in, and users can supply a custom registry via
+the \code{rate_stat_formulas} argument (see below).
 
-The per-player formulas are:
+Pool constants are derived once from the top-\code{pool_size_p} pitchers (for
+entries with \code{pool_type = "pitcher"}) or top-\code{pool_size_h} hitters (for
+entries with \code{pool_type = "hitter"}) by the registry's \code{denominator_col}.
+Pool sizes come from \code{pool_sizes(league_config)} and therefore reflect
+the league's roster structure.
 
-\deqn{ERA\_SGP[i]  = (avg\_ERA  - (pool\_ER  + player\_ER)  \times 9 \;/\; (pool\_IP + player\_IP)) \;/\; d_{ERA}}
-\deqn{WHIP\_SGP[i] = (avg\_WHIP - (pool\_WH  + player\_WH)  \;/\; (pool\_IP + player\_IP)) \;/\; d_{WHIP}}
-\deqn{AVG\_SGP[i]  = ((pool\_H  + player\_H)  \;/\; (pool\_AB + player\_AB) - avg\_AVG) \;/\; d_{AVG}}
+For each scored rate stat c with registry entry f the per-player formula
+is:
 
-Note the sign flip for AVG: higher batting average helps the team, whereas
-higher ERA or WHIP hurts it, so the subtraction order is reversed.
+\preformatted{
+  player_num = f$numerator_fn(projections[[c]], projections[[f$denominator_col]])
+  pool_num   = sum( f$numerator_fn(pool[[c]], pool[[f$denominator_col]]) )
+  pool_denom = sum( pool[[f$denominator_col]] )
+  blended    = (pool_num + player_num) * f$scale / (pool_denom + player_denom)
+  SGP[i, c]  = ( baseline_c - blended ) / denominators[c]    if f$direction == "inverse"
+            or ( blended - baseline_c ) / denominators[c]    if f$direction == "standard"
+}
 
-\code{avg_ERA}, \code{avg_WHIP}, and \code{avg_AVG} are derived from the most recent
-non-excluded year in \code{league_history$team_season} using IP-weighted (ERA,
-WHIP) or AB-weighted (AVG) means across all teams.  A \code{cli_inform()} message
-names the year used so callers can verify the baseline.
+\code{baseline_c} is the weighted mean of \code{league_history$team_season[[c]]}
+using \code{team_season[[f$denominator_col]]} as weights, computed from the
+most recent non-excluded year. A \code{cli_inform()} message names the year
+used. The direction flag encodes whether higher or lower rate values
+help the team (ERA / WHIP / FIP / xFIP / SIERA / xERA / BB/9 / HR/9 are
+\code{"inverse"}; AVG and K/9 are \code{"standard"}).
+}
+
+\subsection{Column names for slash-containing categories}{
+
+Rate stats whose category name contains a forward slash (\code{K/9}, \code{BB/9},
+\code{HR/9}) would produce invalid R column names under the standard
+\verb{sgp_<CAT>} convention. \code{sgp()} substitutes \code{/} with \verb{_per_} and
+lowercases the result, yielding \code{sgp_k_per_9}, \code{sgp_bb_per_9}, and
+\code{sgp_hr_per_9}. Non-slash categories preserve the uppercase convention
+(\code{sgp_HR}, \code{sgp_ERA}).
 }
 
 \subsection{\code{total_sgp}}{

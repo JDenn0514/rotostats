@@ -439,7 +439,7 @@ test_that("missing league_config aborts with rotostats_error_missing_config_fiel
   )
 })
 
-test_that("projections missing IP column (ERA scored) aborts with rotostats_error_missing_required_column", {
+test_that("projections missing IP column (ERA scored) aborts with rotostats_error_missing_rate_denominator_column", {
   cats   <- c("ERA")
   denoms <- make_denominators(cats, values = c(ERA = 0.3))
   # No IP column
@@ -449,11 +449,11 @@ test_that("projections missing IP column (ERA scored) aborts with rotostats_erro
 
   expect_error(
     sgp(proj, denoms, league_history = lh, league_config = lc),
-    class = "rotostats_error_missing_required_column"
+    class = "rotostats_error_missing_rate_denominator_column"
   )
 })
 
-test_that("projections missing AB column (AVG scored) aborts with rotostats_error_missing_required_column", {
+test_that("projections missing AB column (AVG scored) aborts with rotostats_error_missing_rate_denominator_column", {
   cats   <- c("AVG")
   denoms <- make_denominators(cats, values = c(AVG = 0.003))
   # No AB column
@@ -463,7 +463,7 @@ test_that("projections missing AB column (AVG scored) aborts with rotostats_erro
 
   expect_error(
     sgp(proj, denoms, league_history = lh, league_config = lc),
-    class = "rotostats_error_missing_required_column"
+    class = "rotostats_error_missing_rate_denominator_column"
   )
 })
 
@@ -863,4 +863,357 @@ test_that("invalid pool_baseline fires before rate_conversion check", {
               label = "pool_baseline check should fire before rate_conversion check")
   expect_false(inherits(err, "rotostats_error_invalid_rate_conversion"),
                label = "Should NOT raise rotostats_error_invalid_rate_conversion here")
+})
+
+# ---------------------------------------------------------------------------
+# Section 14: Extended rate-stat registry — FIP, K/9
+# ---------------------------------------------------------------------------
+
+# Helper: build a team_season with arbitrary rate columns (ERA/WHIP/AVG +
+# any additional rate col like FIP or "K/9") alongside IP and AB.
+make_league_history_extended <- function(
+  year     = 2023L,
+  rate_cols = list(),    # named list of numeric vectors (e.g., list(FIP = c(3.6, 4.0, 3.8, 4.2)))
+  era_vals  = c(4.00, 4.10, 3.90, 4.05),
+  whip_vals = c(1.25, 1.30, 1.20, 1.28),
+  avg_vals  = c(0.260, 0.265, 0.258, 0.262),
+  ip_vals   = c(1400, 1350, 1380, 1420),
+  ab_vals   = c(5500, 5400, 5600, 5450)
+) {
+  n  <- length(era_vals)
+  df <- data.frame(
+    YEAR    = rep(year, n),
+    TEAM_ID = paste0("T", seq_len(n)),
+    ERA     = era_vals,
+    WHIP    = whip_vals,
+    AVG     = avg_vals,
+    IP      = ip_vals,
+    AB      = ab_vals,
+    stringsAsFactors = FALSE,
+    check.names      = FALSE
+  )
+  for (nm in names(rate_cols)) {
+    df[[nm]] <- rate_cols[[nm]]
+  }
+  list(team_season = df)
+}
+
+test_that("sgp() produces a valid sgp_FIP column for a FIP-scoring league", {
+  cats   <- c("HR", "R", "RBI", "SB", "AVG", "W", "K", "SV", "FIP", "WHIP")
+  dvals  <- stats::setNames(
+    c(12.0, 15.0, 13.5, 8.0, 0.003, 2.5, 22.0, 3.0, 0.18, 0.07),
+    cats
+  )
+  denoms <- make_denominators(cats, values = dvals)
+  lh     <- make_league_history_extended(
+    rate_cols = list(FIP = c(3.80, 4.00, 3.70, 4.10))
+  )
+  lc     <- make_league_config()
+
+  set.seed(7L)
+  n <- 30L
+  proj <- data.frame(
+    HR   = sample(0:45, n, replace = TRUE),
+    R    = sample(20:110, n, replace = TRUE),
+    RBI  = sample(20:115, n, replace = TRUE),
+    SB   = sample(0:45, n, replace = TRUE),
+    AVG  = round(runif(n, 0.210, 0.320), 3),
+    AB   = c(rep(550, 15), rep(100, 15)),
+    W    = sample(0:18, n, replace = TRUE),
+    K    = sample(50:260, n, replace = TRUE),
+    SV   = sample(0:35, n, replace = TRUE),
+    FIP  = round(runif(n, 2.50, 5.50), 2),
+    WHIP = round(runif(n, 0.90, 1.80), 2),
+    IP   = c(rep(200, 10), rep(60, 10), rep(20, 10))
+  )
+
+  result <- suppressMessages(suppressWarnings(
+    sgp(proj, denoms, league_history = lh, league_config = lc)
+  ))
+
+  expect_true("sgp_FIP" %in% names(result))
+  expect_true(is.numeric(result$sgp_FIP))
+  expect_false(all(is.na(result$sgp_FIP)))
+  # Legacy ERA/WHIP/AVG output preserved
+  expect_true(all(c("sgp_WHIP", "sgp_AVG") %in% names(result)))
+})
+
+test_that("FIP SGP is negative when a pitcher's FIP is well above pool average (inverse direction)", {
+  cats   <- c("FIP")
+  denoms <- make_denominators(cats, values = c(FIP = 0.20))
+  lh     <- make_league_history_extended(
+    rate_cols = list(FIP = c(3.50, 3.60, 3.40, 3.55))
+  )
+  lc     <- make_league_config()
+
+  # avg_FIP ≈ 3.51. A pitcher with FIP = 6.0 drags the blended pool above
+  # the baseline → sgp_FIP < 0.
+  proj <- data.frame(FIP = c(6.0), IP = c(180))
+
+  result <- suppressMessages(sgp(proj, denoms, league_history = lh, league_config = lc))
+  expect_lt(result$sgp_FIP[1L], 0,
+            label = "poor FIP pitcher should have negative sgp_FIP under inverse direction")
+})
+
+test_that("K/9 produces sgp_k_per_9 column with slash-safe sanitization", {
+  cats   <- c("K/9")
+  denoms <- make_denominators(cats, values = stats::setNames(0.20, "K/9"))
+  lh     <- make_league_history_extended(
+    rate_cols = stats::setNames(
+      list(c(8.5, 9.1, 8.3, 8.9)),
+      "K/9"
+    )
+  )
+  lc     <- make_league_config()
+
+  proj <- data.frame(
+    IP  = c(200, 60),
+    stringsAsFactors = FALSE,
+    check.names      = FALSE
+  )
+  proj[["K/9"]] <- c(10.5, 7.0)
+
+  result <- suppressMessages(sgp(proj, denoms, league_history = lh, league_config = lc))
+
+  expect_true("sgp_k_per_9" %in% names(result))
+  expect_false("sgp_K/9" %in% names(result))
+  # K/9 is higher-is-better (standard direction)
+  # A pitcher with K/9 = 10.5 (above pool ~8.7) should have positive SGP
+  expect_gt(result$sgp_k_per_9[1L], 0,
+            label = "elite K/9 pitcher should have positive sgp_k_per_9 (standard direction)")
+})
+
+# ---------------------------------------------------------------------------
+# Section 15: rate_stat_formulas user override
+# ---------------------------------------------------------------------------
+
+test_that("user override: custom rate stat with PA denominator computes sgp column", {
+  # Build a minimal override registry with AVG and a custom PA-denominated stat.
+  my_formulas <- list(
+    AVG = list(
+      denominator_col = "AB",
+      scale           = 1,
+      numerator_fn    = function(rate, denom) rate * denom,
+      direction       = "standard",
+      pool_type       = "hitter"
+    ),
+    MYSTAT = list(
+      denominator_col = "PA",
+      scale           = 1,
+      numerator_fn    = function(rate, denom) rate * denom,
+      direction       = "standard",
+      pool_type       = "hitter"
+    )
+  )
+
+  cats   <- c("AVG", "MYSTAT")
+  denoms <- make_denominators(cats, values = c(AVG = 0.003, MYSTAT = 0.010))
+
+  lh <- list(
+    team_season = data.frame(
+      YEAR    = rep(2023L, 4L),
+      TEAM_ID = paste0("T", 1:4),
+      ERA     = rep(4.0, 4L),
+      WHIP    = rep(1.25, 4L),
+      AVG     = c(0.260, 0.265, 0.258, 0.262),
+      MYSTAT  = c(0.330, 0.340, 0.325, 0.335),
+      IP      = rep(1400L, 4L),
+      AB      = rep(5500L, 4L),
+      PA      = rep(6200L, 4L),
+      stringsAsFactors = FALSE
+    )
+  )
+  lc <- make_league_config()
+
+  proj <- data.frame(
+    AVG    = c(0.300, 0.250),
+    MYSTAT = c(0.360, 0.310),
+    AB     = c(550, 500),
+    PA     = c(620, 560)
+  )
+
+  result <- suppressMessages(
+    sgp(proj, denoms, league_history = lh, league_config = lc,
+        rate_stat_formulas = my_formulas)
+  )
+
+  expect_true("sgp_MYSTAT" %in% names(result))
+  expect_true(is.numeric(result$sgp_MYSTAT))
+  expect_false(all(is.na(result$sgp_MYSTAT)))
+  # Higher MYSTAT → positive SGP (standard direction)
+  expect_gt(result$sgp_MYSTAT[1L], 0)
+  expect_lt(result$sgp_MYSTAT[2L], 0)
+})
+
+test_that("user override is full replacement — dropping ERA from override aborts when ERA is scored", {
+  # Override contains only AVG. If league scores ERA too, ERA has no
+  # registry entry → unknown rate stat abort.
+  my_formulas <- list(
+    AVG = list(
+      denominator_col = "AB",
+      scale           = 1,
+      numerator_fn    = function(rate, denom) rate * denom,
+      direction       = "standard",
+      pool_type       = "hitter"
+    )
+  )
+
+  cats   <- c("ERA", "AVG")
+  denoms <- make_denominators(cats, values = c(ERA = 0.3, AVG = 0.003))
+  lh     <- make_league_history()
+  lc     <- make_league_config()
+  proj   <- data.frame(ERA = 3.5, WHIP = 1.2, IP = 200, AVG = 0.260, AB = 550)
+
+  expect_error(
+    sgp(proj, denoms, league_history = lh, league_config = lc,
+        rate_stat_formulas = my_formulas),
+    class = "rotostats_error_unknown_rate_stat_formula"
+  )
+})
+
+# ---------------------------------------------------------------------------
+# Section 16: New error classes
+# ---------------------------------------------------------------------------
+
+test_that("malformed rate_stat_formulas entry aborts with rotostats_error_invalid_rate_stat_formula", {
+  # Missing pool_type field
+  bad_formulas <- list(
+    ERA = list(
+      denominator_col = "IP",
+      scale           = 9,
+      numerator_fn    = function(rate, denom) rate * denom / 9,
+      direction       = "inverse"
+      # pool_type missing
+    )
+  )
+
+  cats   <- c("ERA")
+  denoms <- make_denominators(cats, values = c(ERA = 0.3))
+  lh     <- make_league_history()
+  lc     <- make_league_config()
+  proj   <- data.frame(ERA = 3.5, WHIP = 1.2, IP = 200)
+
+  expect_error(
+    sgp(proj, denoms, league_history = lh, league_config = lc,
+        rate_stat_formulas = bad_formulas),
+    class = "rotostats_error_invalid_rate_stat_formula"
+  )
+})
+
+test_that("non-list rate_stat_formulas aborts with rotostats_error_invalid_rate_stat_formula", {
+  cats   <- c("ERA")
+  denoms <- make_denominators(cats, values = c(ERA = 0.3))
+  lh     <- make_league_history()
+  lc     <- make_league_config()
+  proj   <- data.frame(ERA = 3.5, WHIP = 1.2, IP = 200)
+
+  expect_error(
+    sgp(proj, denoms, league_history = lh, league_config = lc,
+        rate_stat_formulas = "not a list"),
+    class = "rotostats_error_invalid_rate_stat_formula"
+  )
+})
+
+test_that("invalid direction field aborts with rotostats_error_invalid_rate_stat_formula", {
+  bad_formulas <- list(
+    ERA = list(
+      denominator_col = "IP",
+      scale           = 9,
+      numerator_fn    = function(rate, denom) rate * denom / 9,
+      direction       = "sideways",   # invalid
+      pool_type       = "pitcher"
+    )
+  )
+
+  cats   <- c("ERA")
+  denoms <- make_denominators(cats, values = c(ERA = 0.3))
+  lh     <- make_league_history()
+  lc     <- make_league_config()
+  proj   <- data.frame(ERA = 3.5, WHIP = 1.2, IP = 200)
+
+  expect_error(
+    sgp(proj, denoms, league_history = lh, league_config = lc,
+        rate_stat_formulas = bad_formulas),
+    class = "rotostats_error_invalid_rate_stat_formula"
+  )
+})
+
+test_that("scored rate stat with no registry entry under override aborts with rotostats_error_unknown_rate_stat_formula", {
+  # AVG scored, but override only defines WHIP — AVG has no entry
+  my_formulas <- list(
+    WHIP = list(
+      denominator_col = "IP",
+      scale           = 1,
+      numerator_fn    = function(rate, denom) rate * denom,
+      direction       = "inverse",
+      pool_type       = "pitcher"
+    )
+  )
+  cats   <- c("AVG")
+  denoms <- make_denominators(cats, values = c(AVG = 0.003))
+  lh     <- make_league_history()
+  lc     <- make_league_config()
+  proj   <- data.frame(AVG = 0.270, AB = 500)
+
+  expect_error(
+    sgp(proj, denoms, league_history = lh, league_config = lc,
+        rate_stat_formulas = my_formulas),
+    class = "rotostats_error_unknown_rate_stat_formula"
+  )
+})
+
+test_that("missing denominator column for a default-registry rate stat aborts with rotostats_error_missing_rate_denominator_column", {
+  # FIP scored but projections lack IP
+  cats   <- c("FIP")
+  denoms <- make_denominators(cats, values = c(FIP = 0.20))
+  lh     <- make_league_history_extended(
+    rate_cols = list(FIP = c(3.80, 4.00, 3.70, 4.10))
+  )
+  lc     <- make_league_config()
+  proj   <- data.frame(FIP = c(3.5, 4.0))   # no IP
+
+  expect_error(
+    sgp(proj, denoms, league_history = lh, league_config = lc),
+    class = "rotostats_error_missing_rate_denominator_column"
+  )
+})
+
+# ---------------------------------------------------------------------------
+# Section 17: Legacy parity — ERA/WHIP/AVG output unchanged
+# ---------------------------------------------------------------------------
+
+test_that("refactored sgp() matches legacy ERA/WHIP/AVG output exactly (parity)", {
+  # All-equal ERA/WHIP/AVG in history and projections → blended = baseline
+  # → SGP = 0 for every player. This invariant must be preserved byte-for-byte.
+  cats   <- c("ERA", "WHIP", "AVG")
+  denoms <- make_denominators(cats, values = c(ERA = 0.25, WHIP = 0.05, AVG = 0.003))
+
+  lh <- list(
+    team_season = data.frame(
+      YEAR    = rep(2023L, 4L),
+      TEAM_ID = paste0("T", 1:4),
+      ERA     = rep(4.00, 4L),
+      WHIP    = rep(1.25, 4L),
+      AVG     = rep(0.260, 4L),
+      IP      = rep(1400, 4L),
+      AB      = rep(5500, 4L),
+      stringsAsFactors = FALSE
+    )
+  )
+  lc <- make_league_config()
+
+  n <- 150L
+  proj <- data.frame(
+    ERA  = rep(4.00, n),
+    WHIP = rep(1.25, n),
+    AVG  = rep(0.260, n),
+    IP   = c(rep(200, 50), rep(60, 100)),
+    AB   = c(rep(550, 50), rep(100, 100))
+  )
+
+  result <- suppressMessages(sgp(proj, denoms, league_history = lh, league_config = lc))
+
+  expect_equal(result$sgp_ERA,  rep(0, n), tolerance = 1e-10)
+  expect_equal(result$sgp_WHIP, rep(0, n), tolerance = 1e-10)
+  expect_equal(result$sgp_AVG,  rep(0, n), tolerance = 1e-10)
 })

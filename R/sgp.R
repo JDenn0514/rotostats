@@ -22,30 +22,49 @@
 #'
 #' No player-level loop is used; computation is fully vectorized.
 #'
-#' ## Rate categories (ERA, WHIP, AVG) — blended-pool method
+#' ## Rate categories — blended-pool method
 #'
 #' With `rate_conversion = "blended_pool"` and
 #' `pool_baseline = "projection_pool"` (the defaults), rate-stat SGP is
-#' computed via the *blended-pool* marginal contribution formula.  Pool
-#' constants (`pool_ER`, `pool_IP`, `pool_WH`, `pool_H`, `pool_AB`) are
-#' derived once from the top-`pool_size_p` / top-`pool_size_h` projected
-#' players by playing time (IP for pitchers, AB for hitters).  Pool sizes
-#' are taken from `pool_sizes(league_config)` and therefore automatically
-#' reflect your league's roster structure.
+#' computed via the *blended-pool* marginal-contribution formula. Supported
+#' linear rate stats are defined by the formula registry exposed via
+#' [rate_stat_formulas()]: ERA, WHIP, AVG, FIP, xFIP, SIERA, xERA, K/9,
+#' BB/9, and HR/9 are built in, and users can supply a custom registry via
+#' the `rate_stat_formulas` argument (see below).
 #'
-#' The per-player formulas are:
+#' Pool constants are derived once from the top-`pool_size_p` pitchers (for
+#' entries with `pool_type = "pitcher"`) or top-`pool_size_h` hitters (for
+#' entries with `pool_type = "hitter"`) by the registry's `denominator_col`.
+#' Pool sizes come from `pool_sizes(league_config)` and therefore reflect
+#' the league's roster structure.
 #'
-#' \deqn{ERA\_SGP[i]  = (avg\_ERA  - (pool\_ER  + player\_ER)  \times 9 \;/\; (pool\_IP + player\_IP)) \;/\; d_{ERA}}
-#' \deqn{WHIP\_SGP[i] = (avg\_WHIP - (pool\_WH  + player\_WH)  \;/\; (pool\_IP + player\_IP)) \;/\; d_{WHIP}}
-#' \deqn{AVG\_SGP[i]  = ((pool\_H  + player\_H)  \;/\; (pool\_AB + player\_AB) - avg\_AVG) \;/\; d_{AVG}}
+#' For each scored rate stat c with registry entry f the per-player formula
+#' is:
 #'
-#' Note the sign flip for AVG: higher batting average helps the team, whereas
-#' higher ERA or WHIP hurts it, so the subtraction order is reversed.
+#' \preformatted{
+#'   player_num = f$numerator_fn(projections[[c]], projections[[f$denominator_col]])
+#'   pool_num   = sum( f$numerator_fn(pool[[c]], pool[[f$denominator_col]]) )
+#'   pool_denom = sum( pool[[f$denominator_col]] )
+#'   blended    = (pool_num + player_num) * f$scale / (pool_denom + player_denom)
+#'   SGP[i, c]  = ( baseline_c - blended ) / denominators[c]    if f$direction == "inverse"
+#'             or ( blended - baseline_c ) / denominators[c]    if f$direction == "standard"
+#' }
 #'
-#' `avg_ERA`, `avg_WHIP`, and `avg_AVG` are derived from the most recent
-#' non-excluded year in `league_history$team_season` using IP-weighted (ERA,
-#' WHIP) or AB-weighted (AVG) means across all teams.  A `cli_inform()` message
-#' names the year used so callers can verify the baseline.
+#' `baseline_c` is the weighted mean of `league_history$team_season[[c]]`
+#' using `team_season[[f$denominator_col]]` as weights, computed from the
+#' most recent non-excluded year. A `cli_inform()` message names the year
+#' used. The direction flag encodes whether higher or lower rate values
+#' help the team (ERA / WHIP / FIP / xFIP / SIERA / xERA / BB/9 / HR/9 are
+#' `"inverse"`; AVG and K/9 are `"standard"`).
+#'
+#' ## Column names for slash-containing categories
+#'
+#' Rate stats whose category name contains a forward slash (`K/9`, `BB/9`,
+#' `HR/9`) would produce invalid R column names under the standard
+#' `sgp_<CAT>` convention. `sgp()` substitutes `/` with `_per_` and
+#' lowercases the result, yielding `sgp_k_per_9`, `sgp_bb_per_9`, and
+#' `sgp_hr_per_9`. Non-slash categories preserve the uppercase convention
+#' (`sgp_HR`, `sgp_ERA`).
 #'
 #' ## `total_sgp`
 #'
@@ -127,6 +146,14 @@
 #'   See `baseline_era`.
 #' @param baseline_avg Numeric scalar or `NULL`.  Explicit AVG baseline.
 #'   See `baseline_era`.
+#' @param rate_stat_formulas A named list of blended-pool formula descriptors
+#'   in the shape returned by [rate_stat_formulas()], or `NULL` (the default)
+#'   to use the package registry. When supplied, the user list **fully
+#'   replaces** the package default — every rate stat the league scores must
+#'   have an entry. This is symmetric with [sgp_denominators()]'s
+#'   `inverse_categories` argument. A scored rate stat with no matching
+#'   registry entry aborts with `rotostats_error_unknown_rate_stat_formula`;
+#'   a malformed override aborts with `rotostats_error_invalid_rate_stat_formula`.
 #'
 #' @return A plain `data.frame` (no attributes) with:
 #'   \describe{
@@ -222,13 +249,14 @@
 sgp <- function(
   projections,
   denominators,
-  league_history  = NULL,
-  rate_conversion = "blended_pool",
-  pool_baseline   = "projection_pool",
-  league_config   = NULL,
-  baseline_era    = NULL,
-  baseline_whip   = NULL,
-  baseline_avg    = NULL
+  league_history     = NULL,
+  rate_conversion    = "blended_pool",
+  pool_baseline      = "projection_pool",
+  league_config      = NULL,
+  baseline_era       = NULL,
+  baseline_whip      = NULL,
+  baseline_avg       = NULL,
+  rate_stat_formulas = NULL
 ) {
 
   # -------------------------------------------------------------------------
@@ -356,8 +384,43 @@ sgp <- function(
   # Step 7 — Derive scored_cats, rate_cats, count_cats
   # -------------------------------------------------------------------------
   scored_cats <- names(denominators)   # dispatches names.sgp_denominators()
-  rate_cats   <- intersect(scored_cats, c("ERA", "WHIP", "AVG"))
-  count_cats  <- setdiff(scored_cats, rate_cats)
+
+  # Resolve effective rate-stat formula registry. NULL = package default;
+  # a user override fully replaces the registry (symmetric with
+  # sgp_denominators()'s inverse_categories override).
+  effective_registry <- if (is.null(rate_stat_formulas)) {
+    RATE_STAT_FORMULAS
+  } else {
+    .validate_rate_stat_formulas(rate_stat_formulas)
+  }
+
+  # Detect rate stats as those scored categories that have a registry entry.
+  # (Counting stats are the complement.) Known non-linear rate stats (OPS,
+  # wOBA, etc.) that aren't in the registry fall through to the counting
+  # branch and divide by their denominator directly — not ideal, but
+  # outside the scope of this plan; non-linear rate-stat support is a
+  # separate follow-up.
+  registry_names <- names(effective_registry)
+  linear_rate_set <- c("ERA", "WHIP", "AVG", "FIP", "XFIP", "SIERA", "XERA",
+                       "K/9", "BB/9", "HR/9")
+  rate_cats  <- intersect(scored_cats, registry_names)
+  count_cats <- setdiff(scored_cats, rate_cats)
+
+  # A scored category that *looks* like a linear rate stat (appears in the
+  # canonical list above) but is missing from the effective registry means
+  # the user supplied an override that dropped it. Abort so they either
+  # restore the entry or remove the category.
+  scored_linear_like <- intersect(scored_cats, linear_rate_set)
+  unknown_rate_stats <- setdiff(scored_linear_like, rate_cats)
+  if (length(unknown_rate_stats) > 0L) {
+    cli::cli_abort(
+      c(
+        "Scored rate stat(s) {.val {unknown_rate_stats}} have no entry in the effective {.arg rate_stat_formulas} registry.",
+        "i" = "Add entries for the missing rate stat(s), drop them from {.code config$categories}, or pass {.arg rate_stat_formulas = NULL} to use the package default."
+      ),
+      class = "rotostats_error_unknown_rate_stat_formula"
+    )
+  }
 
   # -------------------------------------------------------------------------
   # Step 8 — Detect and warn about missing scored category columns
@@ -365,10 +428,11 @@ sgp <- function(
   missing_cats <- character(0L)
   for (cat in scored_cats) {
     if (!cat %in% names(projections)) {
+      col_name <- .sgp_col_name(cat)
       cli::cli_warn(
         paste0(
           "Scored category {.val {cat}} is absent from {.arg projections}. ",
-          "{.code sgp_{tolower(cat)}} will be {.code NA} for all players."
+          "{.code ", col_name, "} will be {.code NA} for all players."
         ),
         class = "rotostats_warning_missing_category_column"
       )
@@ -406,32 +470,15 @@ sgp <- function(
   # Step 10 — Compute baseline year and pool-weighted averages
   # -------------------------------------------------------------------------
 
-  # Validate ts has the required rate-stat columns (only for scored rate stats)
-  if ("ERA" %in% rate_cats || "WHIP" %in% rate_cats) {
-    ts_era_whip_cols <- setdiff(
-      intersect(c("ERA", "WHIP", "IP"), rate_cats),
-      c("ERA", "WHIP")   # we specifically need IP + the rate cols
-    )
-    # Check ERA/WHIP presence in ts if they are scored
-    needed_in_ts <- c(
-      if ("ERA" %in% rate_cats) c("ERA", "IP") else character(0L),
-      if ("WHIP" %in% rate_cats) c("WHIP", "IP") else character(0L)
-    )
-    needed_in_ts <- unique(needed_in_ts)
-    ts_missing <- setdiff(needed_in_ts, names(ts))
+  # Validate ts has each scored rate stat's rate column and denominator column.
+  # Rate stats in missing_cats are skipped — their SGP columns are NA-filled.
+  for (cat in setdiff(rate_cats, missing_cats)) {
+    f <- effective_registry[[cat]]
+    needed_in_ts <- c(cat, f$denominator_col)
+    ts_missing   <- setdiff(needed_in_ts, names(ts))
     if (length(ts_missing) > 0L) {
       cli::cli_abort(
-        "{.code league_history$team_season} must contain {.val IP} and {.val AB} columns to derive rate-stat baselines.",
-        class = "rotostats_error_missing_required_column"
-      )
-    }
-  }
-  if ("AVG" %in% rate_cats) {
-    needed_in_ts <- c("AVG", "AB")
-    ts_missing <- setdiff(needed_in_ts, names(ts))
-    if (length(ts_missing) > 0L) {
-      cli::cli_abort(
-        "{.code league_history$team_season} must contain {.val IP} and {.val AB} columns to derive rate-stat baselines.",
+        "{.code league_history$team_season} must contain {.val {needed_in_ts}} columns to derive the {.val {cat}} rate-stat baseline.",
         class = "rotostats_error_missing_required_column"
       )
     }
@@ -441,29 +488,17 @@ sgp <- function(
   baseline_year <- max(ts$YEAR)
 
   cli::cli_inform(
-    "Using {.val {baseline_year}} as the baseline year for {.code avg_ERA} / {.code avg_WHIP} / {.code avg_AVG}."
+    "Using {.val {baseline_year}} as the baseline year for rate-stat pool averages."
   )
 
   # 10b. Filter ts to baseline_year
   ts_base <- ts[ts$YEAR == baseline_year, , drop = FALSE]
 
-  # 10c. Compute weighted means for the scored rate stats
-  avg_ERA  <- if ("ERA" %in% rate_cats && "ERA" %in% names(ts_base)) {
-    stats::weighted.mean(ts_base$ERA, ts_base$IP)
-  } else {
-    NULL
-  }
-
-  avg_WHIP <- if ("WHIP" %in% rate_cats && "WHIP" %in% names(ts_base)) {
-    stats::weighted.mean(ts_base$WHIP, ts_base$IP)
-  } else {
-    NULL
-  }
-
-  avg_AVG  <- if ("AVG" %in% rate_cats && "AVG" %in% names(ts_base)) {
-    stats::weighted.mean(ts_base$AVG, ts_base$AB)
-  } else {
-    NULL
+  # 10c. Compute weighted means for each scored rate stat
+  baselines <- list()
+  for (cat in setdiff(rate_cats, missing_cats)) {
+    f <- effective_registry[[cat]]
+    baselines[[cat]] <- stats::weighted.mean(ts_base[[cat]], ts_base[[f$denominator_col]])
   }
 
   # -------------------------------------------------------------------------
@@ -475,46 +510,50 @@ sgp <- function(
   pool_size_p <- ps$pitchers
   pool_size_h <- ps$hitters
 
-  # Validate that IP is in projections if ERA or WHIP is scored
-  if (length(intersect(c("ERA", "WHIP"), rate_cats)) > 0L && !"IP" %in% names(projections)) {
-    cli::cli_abort(
-      "{.arg projections} must contain an {.val IP} column when {.val ERA} or {.val WHIP} is a scored category.",
-      class = "rotostats_error_missing_required_column"
-    )
-  }
-
-  # Validate that AB is in projections if AVG is scored
-  if ("AVG" %in% rate_cats && !"AB" %in% names(projections)) {
-    cli::cli_abort(
-      "{.arg projections} must contain an {.val AB} column when {.val AVG} is a scored category.",
-      class = "rotostats_error_missing_required_column"
-    )
-  }
-
-  # 11b-11c. Pitcher pool (needed if ERA or WHIP scored)
-  pool_IP <- NULL
-  pool_ER <- NULL
-  pool_WH <- NULL
-  if (length(intersect(c("ERA", "WHIP"), rate_cats)) > 0L) {
-    pitcher_rows  <- order(projections$IP, decreasing = TRUE)
-    pool_pitchers <- projections[head(pitcher_rows, pool_size_p), , drop = FALSE]
-    pool_IP <- sum(pool_pitchers$IP,                          na.rm = TRUE)
-    if ("ERA" %in% rate_cats) {
-      pool_ER <- sum(pool_pitchers$ERA * pool_pitchers$IP / 9, na.rm = TRUE)
-    }
-    if ("WHIP" %in% rate_cats) {
-      pool_WH <- sum(pool_pitchers$WHIP * pool_pitchers$IP,    na.rm = TRUE)
+  # Validate that each scored rate stat's denominator column is present in
+  # projections. Skipped for rate stats whose rate column is entirely absent
+  # (already handled via Step 8's missing_cats NA-fill).
+  for (cat in setdiff(rate_cats, missing_cats)) {
+    f <- effective_registry[[cat]]
+    if (!f$denominator_col %in% names(projections)) {
+      cli::cli_abort(
+        "{.arg projections} must contain a {.val {f$denominator_col}} column when {.val {cat}} is a scored rate stat.",
+        class = "rotostats_error_missing_rate_denominator_column"
+      )
     }
   }
 
-  # 11d-11e. Hitter pool (needed if AVG scored)
-  pool_AB <- NULL
-  pool_H  <- NULL
-  if ("AVG" %in% rate_cats) {
-    hitter_rows  <- order(projections$AB, decreasing = TRUE)
-    pool_hitters <- projections[head(hitter_rows, pool_size_h), , drop = FALSE]
-    pool_AB <- sum(pool_hitters$AB,                           na.rm = TRUE)
-    pool_H  <- sum(pool_hitters$AVG * pool_hitters$AB,        na.rm = TRUE)
+  # 11b. Build one pool per unique (pool_type, denominator_col) across the
+  # scored rate stats, then compute the pool denominator sum and per-cat
+  # pool numerator. Pools are keyed by denominator_col because in practice
+  # pool_type is determined by denominator_col (IP=pitcher, AB/PA=hitter).
+  pool_meta <- list()   # keyed by denominator_col; stores players df + denom total
+  pool_num  <- list()   # keyed by rate-stat name; stores numerator total
+
+  for (cat in setdiff(rate_cats, missing_cats)) {
+    f <- effective_registry[[cat]]
+    key <- f$denominator_col
+
+    if (is.null(pool_meta[[key]])) {
+      pool_size   <- if (identical(f$pool_type, "pitcher")) pool_size_p else pool_size_h
+      sort_rows   <- order(projections[[key]], decreasing = TRUE)
+      pool_df     <- projections[head(sort_rows, pool_size), , drop = FALSE]
+      denom_total <- sum(pool_df[[key]], na.rm = TRUE)
+      pool_meta[[key]] <- list(players = pool_df, denom_total = denom_total)
+    }
+
+    players_df <- pool_meta[[key]]$players
+    # If the rate column is not in the pool df (shouldn't happen — caught
+    # earlier by missing_cats and denominator validation — but be defensive),
+    # treat numerator total as 0 so blended reduces to pool-only.
+    if (cat %in% names(players_df)) {
+      pool_num[[cat]] <- sum(
+        f$numerator_fn(players_df[[cat]], players_df[[key]]),
+        na.rm = TRUE
+      )
+    } else {
+      pool_num[[cat]] <- 0
+    }
   }
 
   # -------------------------------------------------------------------------
@@ -529,15 +568,16 @@ sgp <- function(
 
   n_players <- nrow(projections)
 
-  # Pre-allocate named list of SGP vectors
+  # Pre-allocate named list of SGP vectors keyed by sanitized column name.
+  sgp_col_names <- .sgp_col_name(scored_cats)
   sgp_cols <- stats::setNames(
     vector("list", length(scored_cats)),
-    paste0("sgp_", scored_cats)
+    sgp_col_names
   )
 
   # ---- Counting stats (Step 13) -------------------------------------------
   for (cat in count_cats) {
-    col_sgp <- paste0("sgp_", cat)
+    col_sgp <- .sgp_col_name(cat)
     if (cat %in% missing_cats) {
       sgp_cols[[col_sgp]] <- rep(NA_real_, n_players)
     } else {
@@ -546,110 +586,67 @@ sgp <- function(
   }
 
   # ---- Rate stats (Step 14) ------------------------------------------------
+  # Iterate over scored rate stats in registry order. Emit a single
+  # zero-playing-time warning per denominator column so that scoring
+  # multiple rate stats that share a denominator (e.g., ERA + WHIP both
+  # depending on IP) doesn't produce duplicate warnings.
+  warned_denom_cols <- character(0L)
 
-  # ERA
-  if ("ERA" %in% rate_cats) {
-    col_sgp <- "sgp_ERA"
-    if ("ERA" %in% missing_cats) {
-      sgp_cols[[col_sgp]] <- rep(NA_real_, n_players)
-    } else {
-      # 14a. Detect zero-IP players
-      zero_ip <- projections$IP == 0 | is.na(projections$IP)
-      if (any(zero_ip)) {
-        zero_ip_names <- if ("NAME" %in% names(projections)) {
-          projections$NAME[zero_ip]
-        } else {
-          which(zero_ip)
-        }
-        cli::cli_warn(
-          paste0(
-            "Player(s) with 0 or NA projected IP: ",
-            paste(zero_ip_names, collapse = ", "),
-            ". {.code sgp_ERA} and {.code sgp_WHIP} set to {.code NA}."
-          ),
-          class = "rotostats_warning_zero_playing_time"
-        )
-      }
-      # 14b. Compute ERA SGP vectorized
-      player_ER   <- projections$ERA * projections$IP / 9
-      blended_era <- (pool_ER + player_ER) * 9 / (pool_IP + projections$IP)
-      era_sgp_vec <- (avg_ERA - blended_era) / denominators["ERA"]
-      era_sgp_vec[zero_ip] <- NA_real_
-      sgp_cols[[col_sgp]] <- era_sgp_vec
-    }
-  }
+  for (cat in rate_cats) {
+    col_sgp <- .sgp_col_name(cat)
 
-  # WHIP
-  if ("WHIP" %in% rate_cats) {
-    col_sgp <- "sgp_WHIP"
-    if ("WHIP" %in% missing_cats) {
+    if (cat %in% missing_cats) {
       sgp_cols[[col_sgp]] <- rep(NA_real_, n_players)
-    } else {
-      # 14c. Reuse or re-derive zero_ip
-      zero_ip <- projections$IP == 0 | is.na(projections$IP)
-      # (warn already emitted if ERA was also scored — avoid double warning)
-      if (any(zero_ip) && !"ERA" %in% rate_cats) {
-        zero_ip_names <- if ("NAME" %in% names(projections)) {
-          projections$NAME[zero_ip]
-        } else {
-          which(zero_ip)
-        }
-        cli::cli_warn(
-          paste0(
-            "Player(s) with 0 or NA projected IP: ",
-            paste(zero_ip_names, collapse = ", "),
-            ". {.code sgp_WHIP} set to {.code NA}."
-          ),
-          class = "rotostats_warning_zero_playing_time"
-        )
-      }
-      player_WH    <- projections$WHIP * projections$IP
-      blended_whip <- (pool_WH + player_WH) / (pool_IP + projections$IP)
-      whip_sgp_vec <- (avg_WHIP - blended_whip) / denominators["WHIP"]
-      whip_sgp_vec[zero_ip] <- NA_real_
-      sgp_cols[[col_sgp]] <- whip_sgp_vec
+      next
     }
-  }
 
-  # AVG
-  if ("AVG" %in% rate_cats) {
-    col_sgp <- "sgp_AVG"
-    if ("AVG" %in% missing_cats) {
-      sgp_cols[[col_sgp]] <- rep(NA_real_, n_players)
-    } else {
-      # 14d. Detect zero-AB players
-      zero_ab <- projections$AB == 0 | is.na(projections$AB)
-      if (any(zero_ab)) {
-        zero_ab_names <- if ("NAME" %in% names(projections)) {
-          projections$NAME[zero_ab]
-        } else {
-          which(zero_ab)
-        }
-        cli::cli_warn(
-          paste0(
-            "Player(s) with 0 or NA projected AB: ",
-            paste(zero_ab_names, collapse = ", "),
-            ". {.code sgp_AVG} set to {.code NA}."
-          ),
-          class = "rotostats_warning_zero_playing_time"
-        )
+    f            <- effective_registry[[cat]]
+    denom_col    <- f$denominator_col
+    player_denom <- projections[[denom_col]]
+    zero_denom   <- player_denom == 0 | is.na(player_denom)
+
+    if (any(zero_denom) && !denom_col %in% warned_denom_cols) {
+      zero_names <- if ("NAME" %in% names(projections)) {
+        projections$NAME[zero_denom]
+      } else {
+        which(zero_denom)
       }
-      # 14e. Compute AVG SGP vectorized (sign flip: blended - avg, not avg - blended)
-      player_H    <- projections$AVG * projections$AB
-      blended_avg <- (pool_H + player_H) / (pool_AB + projections$AB)
-      avg_sgp_vec <- (blended_avg - avg_AVG) / denominators["AVG"]
-      avg_sgp_vec[zero_ab] <- NA_real_
-      sgp_cols[[col_sgp]] <- avg_sgp_vec
+      cli::cli_warn(
+        paste0(
+          "Player(s) with 0 or NA projected ", denom_col, ": ",
+          paste(zero_names, collapse = ", "),
+          ". Rate-stat SGP for {.val ", denom_col, "}-denominated categories set to {.code NA}."
+        ),
+        class = "rotostats_warning_zero_playing_time"
+      )
+      warned_denom_cols <- c(warned_denom_cols, denom_col)
     }
+
+    player_rate <- projections[[cat]]
+    player_num  <- f$numerator_fn(player_rate, player_denom)
+    denom_total <- pool_meta[[denom_col]]$denom_total
+    num_total   <- pool_num[[cat]]
+
+    blended <- (num_total + player_num) * f$scale / (denom_total + player_denom)
+    baseline <- baselines[[cat]]
+
+    sgp_vec <- if (identical(f$direction, "standard")) {
+      (blended - baseline) / denominators[cat]
+    } else {
+      (baseline - blended) / denominators[cat]
+    }
+    sgp_vec[zero_denom] <- NA_real_
+
+    sgp_cols[[col_sgp]] <- unname(sgp_vec)
   }
 
   # -------------------------------------------------------------------------
   # Step 15 — Assemble result data frame
   # -------------------------------------------------------------------------
-  result <- as.data.frame(sgp_cols, row.names = seq_len(n_players))
+  result <- as.data.frame(sgp_cols, row.names = seq_len(n_players),
+                          check.names = FALSE)
 
   # total_sgp: rowSums with na.rm = FALSE so NA propagates
-  sgp_col_names <- paste0("sgp_", scored_cats)
   result$total_sgp <- rowSums(result[, sgp_col_names, drop = FALSE], na.rm = FALSE)
 
   result
