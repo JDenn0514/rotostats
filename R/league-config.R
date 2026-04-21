@@ -53,6 +53,14 @@ VALID_KEEPER_METHODS <- c("pool_shrink", "salary_adjust", "none")
 #' @param categories Character vector of scored category names. Normalized to
 #'   uppercase at construction; a one-time `cli_inform()` lists any changes.
 #'   Unrecognized names are accepted with a `cli_warn()`.
+#' @param inverse_categories Optional character vector of scoring category
+#'   names where a lower value is better (lower-is-better categories, e.g.,
+#'   ERA, WHIP, FIP). Normalized to uppercase at construction. Every element
+#'   must appear in `categories`; unknown names abort with
+#'   `rotostats_error_invalid_inverse_categories`. `NULL` (default) means no
+#'   league-level override; [sgp_denominators()] and future consumers fall
+#'   through to the package lookup ([inverse_categories()]). Pass
+#'   `character(0)` is not valid; use `NULL` for "no override".
 #' @param league_type One of `"mixed"`, `"AL"`, `"NL"`. Controls DH eligibility
 #'   and downstream player-pool filtering. `"NL"` drops DH from `roster_slots`
 #'   with a warning if present.
@@ -83,35 +91,38 @@ VALID_KEEPER_METHODS <- c("pool_shrink", "salary_adjust", "none")
 #' )
 #' print(lg)
 league_config <- function(
-  n_teams       = 12L,
+  n_teams            = 12L,
   roster_slots,
-  pitcher_slots = 9L,
+  pitcher_slots      = 9L,
   categories,
-  league_type   = "mixed",
-  budget        = 260L,
-  budget_split  = 0.60,
-  keeper        = FALSE
+  inverse_categories = NULL,
+  league_type        = "mixed",
+  budget             = 260L,
+  budget_split       = 0.60,
+  keeper             = FALSE
 ) {
-  n_teams       <- validate_n_teams(n_teams)
-  league_type   <- validate_league_type(league_type)
-  roster_slots  <- validate_roster_slots(roster_slots)
-  pitcher_slots <- validate_pitcher_slots(pitcher_slots)
-  budget        <- validate_budget(budget)
-  budget_split  <- validate_budget_split(budget_split)
-  categories    <- validate_categories(categories)
-  roster_slots  <- drop_dh_for_nl(roster_slots, league_type)
-  keeper        <- resolve_keeper(keeper)
+  n_teams            <- validate_n_teams(n_teams)
+  league_type        <- validate_league_type(league_type)
+  roster_slots       <- validate_roster_slots(roster_slots)
+  pitcher_slots      <- validate_pitcher_slots(pitcher_slots)
+  budget             <- validate_budget(budget)
+  budget_split       <- validate_budget_split(budget_split)
+  categories         <- validate_categories(categories)
+  inverse_categories <- validate_inverse_categories(inverse_categories, categories)
+  roster_slots       <- drop_dh_for_nl(roster_slots, league_type)
+  keeper             <- resolve_keeper(keeper)
 
   structure(
     list(
-      n_teams       = n_teams,
-      roster_slots  = roster_slots,
-      pitcher_slots = pitcher_slots,
-      categories    = categories,
-      league_type   = league_type,
-      budget        = budget,
-      budget_split  = budget_split,
-      keeper        = keeper
+      n_teams            = n_teams,
+      roster_slots       = roster_slots,
+      pitcher_slots      = pitcher_slots,
+      categories         = categories,
+      inverse_categories = inverse_categories,
+      league_type        = league_type,
+      budget             = budget,
+      budget_split       = budget_split,
+      keeper             = keeper
     ),
     class = c("league_config", "list")
   )
@@ -273,6 +284,43 @@ validate_categories <- function(categories) {
 }
 
 #' @noRd
+validate_inverse_categories <- function(x, categories) {
+  # NULL is valid: user is declaring no override; downstream falls through
+  # to package lookup.
+  if (is.null(x)) return(NULL)
+
+  # Must be a character vector.
+  if (!is.character(x) || length(x) == 0L) {
+    cli::cli_abort(
+      paste0(
+        "{.arg inverse_categories} must be a non-empty character vector or ",
+        "{.code NULL}; got {.cls {class(x)}}."
+      ),
+      class = "rotostats_error_invalid_inverse_categories"
+    )
+  }
+
+  # Normalize to uppercase.
+  x_upper <- toupper(x)
+
+  # Membership check: every element must appear in config$categories.
+  bad <- setdiff(x_upper, categories)
+  if (length(bad) > 0L) {
+    n_bad <- length(bad)
+    cli::cli_abort(
+      c(
+        "{n_bad} element{?s} of {.arg inverse_categories} not in {.arg categories}.",
+        "x" = "Invalid: {.val {bad}}",
+        "i" = "Valid categories: {.val {categories}}"
+      ),
+      class = "rotostats_error_invalid_inverse_categories"
+    )
+  }
+
+  unique(x_upper)
+}
+
+#' @noRd
 drop_dh_for_nl <- function(roster_slots, league_type) {
   if (league_type == "NL" && "DH" %in% names(roster_slots)) {
     cli::cli_warn(
@@ -388,6 +436,12 @@ print.league_config <- function(x, ...) {
   cat(sprintf("  Categories: %s  (%d)\n",
               paste(x$categories, collapse = " "),
               length(x$categories)))
+  inv_txt <- if (is.null(x$inverse_categories)) {
+    "(none declared)"
+  } else {
+    paste(x$inverse_categories, collapse = " ")
+  }
+  cat(sprintf("  Inverse:    %s\n", inv_txt))
   keeper_txt <- if (isFALSE(x$keeper)) {
     "no"
   } else {

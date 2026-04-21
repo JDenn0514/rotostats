@@ -1,10 +1,10 @@
 # Architecture: rotostats
 
-**Run:** `replacement-higher-order-cycle-2026-04-17`
-**Branch:** `feature/replacement-higher-order-cycle`
-**Date:** 2026-04-20
+**Run:** `inverse-categories-2026-04-21`
+**Branch:** `feature/inverse-categories`
+**Date:** 2026-04-21
 
-(Previous run: `par-2026-04-18` — see git log for prior state)
+(Previous run: `replacement-higher-order-cycle-2026-04-17` — see git log for prior state)
 
 ---
 
@@ -20,6 +20,7 @@ graph TD
         RFP["replacement_from_prices()"]
         DRP["default_replacement_params"]
         RSD["rate_stat_denominators()"]
+        IC["inverse_categories()"]
         SGP["sgp()"]
         SGPD["sgp_denominators()"]
         CRS["convert_rate_stats()"]
@@ -44,6 +45,11 @@ graph TD
         RL_PARAMS["replacement_params.R\nRATE_STAT_DENOMINATORS\ndefault_replacement_params\n(10 entries incl. cycle_history_window)"]
     end
 
+    subgraph INVC["Inverse-Categories Lookup"]
+        IC_CONST["INVERSE_CATEGORIES\nc(ERA,WHIP,FIP,XFIP,\nSIERA,XERA,BB/9,HR/9)"]
+        IC_FN["inverse_categories()\nexported accessor"]
+    end
+
     subgraph CORE["SGP Core Logic"]
         SGP_BODY["sgp() body\nSteps 1-15\ncounting + rate SGP\npool construction\nbaseline derivation"]
         SGPD_BODY["sgp_denominators() body\ncalibration loop\nOLS / gap / SD\nbootstrap CIs"]
@@ -62,6 +68,9 @@ graph TD
     subgraph PKG["Package Skeleton"]
         PKG_R["rotostats-package.R\n@keywords internal"]
     end
+
+    IC --> IC_FN
+    IC_FN --> IC_CONST
 
     RL --> RL_BODY
     RFP --> RFP_BODY
@@ -87,6 +96,7 @@ graph TD
     SGPD_BODY --> SGPDH
     SGPD_BODY --> NEWDENOM
     SGPD_BODY --> CRS
+    SGPD_BODY --> IC_FN
 
     NEWDENOM --> S3D
     S3LC --> POOL
@@ -101,20 +111,23 @@ graph TD
     PAR_BODY --> SGP_BODY
     PAR_BODY --> RL_BODY
 
-    style RL_BODY fill:#1e90ff,stroke:#1565c0,color:#fff
-    style RL_PARAMS fill:#1e90ff,stroke:#1565c0,color:#fff
-    style PAR fill:#1e90ff,stroke:#1565c0,color:#fff
-    style PAR_BODY fill:#1e90ff,stroke:#1565c0,color:#fff
+    style IC fill:#1e90ff,stroke:#1565c0,color:#fff
+    style IC_FN fill:#1e90ff,stroke:#1565c0,color:#fff
+    style IC_CONST fill:#1e90ff,stroke:#1565c0,color:#fff
+    style LC fill:#1e90ff,stroke:#1565c0,color:#fff
+    style SGPD fill:#1e90ff,stroke:#1565c0,color:#fff
+    style SGPD_BODY fill:#1e90ff,stroke:#1565c0,color:#fff
 ```
 
 | Module | Purpose | Key Dependencies | Changed in This Run |
 |--------|---------|-----------------|---------------------|
-| `replacement_level()` body | Per-position estimator; boundary-band + state-hash cycle detection loop | `replacement_internal.R`, `replacement_params.R`, `cli`, `checkmate` | Yes — state-hash detector replaces 2-lag |
-| `default_replacement_params` | Exported list of 10 numeric constants (was 9); 10th is `cycle_history_window = 5L` | — | Yes — 9 to 10 entries |
-| `dgp_c.R` | DGP-C simulation: 393-row pool with 3 deterministic cycle players + rejection-sampling guard | — | Yes — rejection sampling added |
-| `test-replacement.R` | Unit tests: TS-R6-1/2/3 + TS-60 to TS-64 added | `testthat` | Yes — 311 lines added |
+| `inverse_categories()` | New exported accessor; returns `INVERSE_CATEGORIES` (8-element vector of lower-is-better pitcher ratio stats) | — | **YES — new file** |
+| `league_config()` | Constructor; gains `inverse_categories = NULL` param, `validate_inverse_categories()` helper, new S3 slot, and `print.league_config()` `Inverse:` line | `cli` | **YES — new param + validator** |
+| `sgp_denominators()` | Denominator calibration; default changed from `c("ERA","WHIP")` to `NULL` with three-layer resolution; new `config = NULL` arg | `inverse_categories()`, `sgp-denominators-helpers.R` | **YES — 3-layer resolution** |
+| `replacement_level()` body | Per-position estimator; boundary-band + state-hash cycle detection loop | `replacement_internal.R`, `replacement_params.R`, `cli`, `checkmate` | No |
+| `default_replacement_params` | Exported list of 10 numeric constants (incl. `cycle_history_window = 5L`) | — | No |
 | `par()` | PAR computation layer | `sgp.R`, `replacement.R` | No |
-| `sgp()`, `sgp_denominators()` | SGP computation and denominator calibration | `sgp-denominators-helpers.R` | No |
+| `sgp()` | SGP computation | `sgp-denominators-helpers.R` | No |
 | All other modules | Unchanged | — | No |
 
 ---
@@ -260,19 +273,29 @@ graph TD
     style S11 fill:#1e90ff,stroke:#1565c0,color:#fff
 ```
 
-**sgp_denominators() call graph (unchanged — for reference):**
+**sgp_denominators() call graph (changed in this run — three-layer resolution):**
 
 ```mermaid
 %%{init: {'theme': 'neutral'}}%%
 graph TD
-    SD["sgp_denominators()"] --> SD0["capture missing() flag"]
-    SD --> SD1["validate inputs"]
+    SD["sgp_denominators()"] --> SD1["validate inputs"]
     SD --> SD2["infer / validate scoring_categories"]
-    SD --> SDV["validate inverse_categories"]
+    SD --> SDCFG["validate config arg\nrotostats_error_invalid_parameter"]
+    SD --> SDLYR["three-layer resolution"]
     SD --> SD3["build year sets + weight fns"]
     SD --> SD4["denominator loop per category"]
     SD --> SD5["bootstrap CIs (optional)"]
     SD --> SD6["new_sgp_denominators()"]
+
+    SDLYR --> L1{"inverse_categories\nnon-NULL?"}
+    L1 -->|"yes"| L1A["Layer 1: user override\nupcase + dedup + membership check\nrotostats_error_invalid_inverse_categories"]
+    L1 -->|"no"| L2{"config non-NULL\nAND config$inverse_categories\nnon-NULL?"}
+    L2 -->|"yes"| L2A["Layer 2: inherit from config\n(already validated at construction)"]
+    L2 -->|"no"| L3["Layer 3: package default\nintersect(scoring_categories,\ninverse_categories())"]
+
+    L1A --> INFO["cli_inform (once)\n'Effective inverse categories: ...\n(user override / from config /\npackage default)'"]
+    L2A --> INFO
+    L3 --> INFO
 
     SD4 --> SD4a["apply_year_window()"]
     SD4 --> SD4b["compute_weight()"]
@@ -281,7 +304,24 @@ graph TD
     SD4 --> SD4e["sd: expected_range_normal()"]
 
     style SD fill:#1e90ff,stroke:#1565c0,color:#fff
+    style SDCFG fill:#1e90ff,stroke:#1565c0,color:#fff
+    style SDLYR fill:#1e90ff,stroke:#1565c0,color:#fff
+    style L1 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style L1A fill:#1e90ff,stroke:#1565c0,color:#fff
+    style L2 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style L2A fill:#1e90ff,stroke:#1565c0,color:#fff
+    style L3 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style INFO fill:#1e90ff,stroke:#1565c0,color:#fff
 ```
+
+| Function / Block | Purpose | Key Dependencies | Changed |
+|---|---|---|---|
+| `inverse_categories()` | New exported accessor; returns `INVERSE_CATEGORIES` (8-element vector) | — | **YES — new** |
+| Config validation guard | Aborts with `rotostats_error_invalid_parameter` if `config` is non-NULL and not `league_config` class | base R | **YES — new** |
+| Layer-1 resolution | Non-NULL `inverse_categories` arg: upcase + dedup + membership check vs. `scoring_categories` | base R, `cli` | **YES — replaces old block** |
+| Layer-2 resolution | Config non-NULL and `config$inverse_categories` non-NULL: inherit from config verbatim | `league_config` S3 | **YES — new** |
+| Layer-3 resolution | Fallback: `intersect(scoring_categories, inverse_categories())` — preserves ERA/WHIP legacy behavior | `inverse_categories()` | **YES — replaces old default** |
+| `cli_inform` source attribution | One-shot message naming effective set and its source (user override / from config / package default) | `cli` | **YES — updated wording** |
 
 ---
 
@@ -297,6 +337,8 @@ graph TD
 
     IN1 --> SD["sgp_denominators()"]
     IN2 --> SD
+    IN4["league_config (optional)\nconfig$inverse_categories\nfor Layer-2 resolution"] --> SD
+    IC_PKG["inverse_categories()\nINVERSE_CATEGORIES\nLayer-3 fallback"] --> SD
     SD --> DENOM["sgp_denominators S3 object\nnamed denominator vector\nrate_conversion attr"]
 
     IN2 --> RL["replacement_level()"]
@@ -343,6 +385,8 @@ graph TD
     BANDCHECK -- no --> PAROUT["data.frame\npar_[CAT] + total_par\nattr: replacement_sgp\nunits = 'sgp'\nanchor = 'replacement'"]
     WARN --> PAROUT
 
+    style IN4 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style IC_PKG fill:#1e90ff,stroke:#1565c0,color:#fff
     style HASH fill:#1e90ff,stroke:#1565c0,color:#fff
     style HCHECK fill:#1e90ff,stroke:#1565c0,color:#fff
     style PUSHBUF fill:#1e90ff,stroke:#1565c0,color:#fff
@@ -370,19 +414,21 @@ graph TD
 | `R/replacement_internal.R` — other internal helpers | `compute_band_indices()`, `detect_cliff()`, `compute_replacement_stat_line()`, `infer_pitcher_roles()`, `normalize_name()`, `compute_zscores()`, `assert_zero_sum()`, `compute_par_at_pos()`, `detect_kde_trough()` | `stats`, `stringi` | No |
 | `R/replacement_params.R` — `default_replacement_params` | Exported list of **10** numeric constants (was 9); 10th is `cycle_history_window = 5L` | — | **YES** |
 | `R/replacement_params.R` — `rate_stat_denominators()` | Returns `RATE_STAT_DENOMINATORS` named character vector; 17 built-in entries including BABIP | — | No |
+| `R/inverse-categories.R` — `inverse_categories()` | New exported accessor; returns `INVERSE_CATEGORIES` (`c("ERA","WHIP","FIP","XFIP","SIERA","XERA","BB/9","HR/9")`); Layer-3 fallback for `sgp_denominators()` | — | **YES — new file** |
 | `R/sgp.R` — `sgp()` | Per-player SGP converter; called internally by `replacement_level()` when `sort_by = "sgp"` and twice inside `par()` | `sgp_denominators` S3, `pool_sizes()`, `cli`, `rlang`, `stats` | No |
-| `R/sgp-denominators.R` — `sgp_denominators()` | Calibrates per-category SGP denominators from league history | `sgp-denominators-helpers.R`, `sgp-denominators-s3.R`, `cli`, `stats` | No |
+| `R/sgp-denominators.R` — `sgp_denominators()` | Calibrates per-category SGP denominators; `inverse_categories` default changed from `c("ERA","WHIP")` to `NULL` with three-layer resolution; new `config = NULL` arg | `inverse_categories()`, `sgp-denominators-helpers.R`, `sgp-denominators-s3.R`, `cli`, `stats` | **YES — 3-layer resolution + config arg** |
 | `R/sgp-denominators.R` — `convert_rate_stats()` | Stub; always aborts with `rotostats_error_not_implemented` | `cli` | No |
 | `R/sgp-denominators-s3.R` — `new_sgp_denominators()` | Constructor for `sgp_denominators` S3 object; sets `attr(., "rate_conversion")` | Base R | No |
 | `R/sgp-denominators-s3.R` — S3 methods | `print`, `names`, `length`, `as.double`, `[`, `[[` for `sgp_denominators` | Base R | No |
 | `R/sgp-denominators-helpers.R` | `METADATA_COLS`, weight helpers, year-window helpers, `expected_range_normal()` | `stats` | No |
-| `R/league-config.R` — `league_config()` | Constructor for `league_config` S3 object; validates roster / budget config | `cli` | No |
+| `R/league-config.R` — `league_config()` | Constructor for `league_config` S3 object; gains `inverse_categories = NULL` param, `validate_inverse_categories()` helper, `$inverse_categories` S3 slot, and `Inverse:` print line | `cli` | **YES — new param + validator + print line** |
+| `R/league-config.R` — `validate_inverse_categories()` | New internal helper; validates and uppercases `inverse_categories` arg; aborts with `rotostats_error_invalid_inverse_categories` on non-character or element not in `config$categories` | `cli` | **YES — new function** |
 | `R/league-config.R` — `pool_sizes()` | Returns `list(pitchers, hitters)` from config; shared by `sgp()` and `replacement_level()` | `league_config` S3 | No |
 | `R/league-history.R` — `league_history()` | Constructor for `league_history` S3 object; validates `team_season` schema | `cli` | No |
 | `R/rotostats-package.R` | Package-level Rd stub and `@keywords internal` | — | No |
 | `inst/simulations/dgp/dgp_c.R` | DGP-C: 393-row pool (258 hitters incl. 3 deterministic cycle players 9901-9903); rejection-sampling guard ensures mono_count >= 12 at all infield positions | — | **YES** |
 | `tests/testthat/test-replacement.R` | TS-R6-1/2/3 (cycle fixtures); TS-34 updated; TS-60 to TS-64 (hash invariants + param validation) | `testthat` | **YES** — 311 lines added |
-| `plans/error-messages.md` | Error/warning class registry; `rotostats_warning_band_check` added in par-2026-04-18 run | — | No |
+| `plans/error-messages.md` | Error/warning class registry; `rotostats_error_invalid_inverse_categories` "Thrown by" column updated to add `league_config()` alongside `sgp_denominators()` | — | **YES — row updated** |
 
 ---
 
@@ -695,6 +741,22 @@ Both sites use `normalize_player_name()` from `replacement_internal.R`. See `pla
 
 5. **`total_sgp` uses `na.rm = FALSE`**: Any per-category NA propagates to `total_sgp` to surface data quality issues downstream.
 
-6. **`INVERSE_CATEGORIES` constant replaced by `inverse_categories` argument**: The `missing()` primitive distinguishes the default-path behavior (silent intersection) from the explicit-path behavior (strict validation).
+6. **`INVERSE_CATEGORIES` constant replaced by `inverse_categories` argument**: The `missing()` primitive distinguishes the default-path behavior (silent intersection) from the explicit-path behavior (strict validation). **Note:** This is superseded by the inverse-categories-2026-04-21 run — see below.
 
 7. **BABIP added to `RATE_STAT_DENOMINATORS`**: BABIP is AB-denominated (like SLG). Adding it to the built-in lookup means users can include BABIP as a scored category without supplying `rate_denominators`.
+
+---
+
+## Key Design Decisions (inverse-categories-2026-04-21)
+
+1. **Option (a) for Layer-2 — new `config = NULL` arg on `sgp_denominators()`**: Three candidate approaches for Layer-2 config inheritance were evaluated: (a) new `config` arg on `sgp_denominators()`, (b) attach a `config` slot to `league_history`, (c) punt Layer-2 to future work. Option (a) was chosen because it is minimal, explicit, and matches the existing pattern (`convert_rate_stats()` already accepts `league_config = NULL`). Option (b) was rejected: `league_history`'s own header comment reads "Holds only historical data. Structural league settings live in league_config()" — adding config to a data-holding object violates its design intent. Option (c) was rejected: it would violate plan acceptance criterion §5.
+
+2. **Full-replacement override semantics (Layer-1 wins unconditionally)**: When the user passes both `inverse_categories = "FIP"` and `config = some_config`, Layer-1 wins and config is never consulted. No merging or augmentation occurs. This matches the existing `sgp_denominators()` philosophy: explicit beats implicit, and silent merging would be a source of hard-to-debug surprises when users want to test a specific configuration.
+
+3. **All-uppercase `INVERSE_CATEGORIES` (post-review fix)**: The constant is stored as `"XFIP"` and `"XERA"` (all-uppercase) to match the package-wide normalization convention. `validate_categories()` uppercases `config$categories`, `sgp_denominators()` uppercases `team_season` column names, and Layer-1 `inverse_categories` input is uppercased before validation. Storing the constant in mixed-case would have broken Layer-3 `intersect(scoring_categories, inverse_categories())` because the LHS is already uppercase — mixed-case entries in the RHS would never match scored columns. Users who type `"xFIP"` have it uppercased at config/arg validation time, so the mixed-case form is never observed by downstream consumers.
+
+4. **`!is.null()` detection instead of `missing()` for Layer-1**: The old `inverse_categories_is_default <- missing(inverse_categories)` flag (line 308 of the original source) was eliminated. With the new default of `NULL`, Layer-1 detection uses `!is.null(inverse_categories)` directly. Both approaches are equivalent when the default is NULL; the `!is.null()` form is simpler, avoids the `missing()` primitive (which has subtle semantics in do.call contexts), and removes one variable from the resolution block.
+
+5. **Layer-3 as `intersect(scoring_categories, inverse_categories())`**: Rather than returning the full `INVERSE_CATEGORIES` vector, Layer-3 intersects with the actually-scored categories. This ensures that a batting-only league never gets ERA/WHIP direction-flips, and a league scoring FIP automatically gets FIP direction-flips. The intersection is the same formula that was implicit in the old hardcoded default (which was equivalent to `intersect(scoring_categories, c("ERA","WHIP"))` when those were the only inverse categories). Extending the lookup to 8 entries preserves the old ERA/WHIP behavior while enabling FIP/XFIP/SIERA/XERA/BB9/HR9 leagues to get correct directionality without user action.
+
+6. **Minimum-viable config consultation surface**: Only `config$inverse_categories` is read in `sgp_denominators()`. No other config fields (`config$categories`, `config$n_teams`, etc.) are consulted in this run. This was a deliberate "minimal surface" decision: additive for Plan B and future consumers without introducing hidden cross-field coupling now.

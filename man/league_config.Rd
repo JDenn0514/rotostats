@@ -9,6 +9,7 @@ league_config(
   roster_slots,
   pitcher_slots = 9L,
   categories,
+  inverse_categories = NULL,
   league_type = "mixed",
   budget = 260L,
   budget_split = 0.6,
@@ -30,6 +31,15 @@ from \code{c("SP", "RP")}. Default \code{9L}.}
 \item{categories}{Character vector of scored category names. Normalized to
 uppercase at construction; a one-time \code{cli_inform()} lists any changes.
 Unrecognized names are accepted with a \code{cli_warn()}.}
+
+\item{inverse_categories}{Optional character vector of scoring category
+names where a lower value is better (lower-is-better categories, e.g.,
+ERA, WHIP, FIP). Normalized to uppercase at construction. Every element
+must appear in \code{categories}; unknown names abort with
+\code{rotostats_error_invalid_inverse_categories}. \code{NULL} (default) means no
+league-level override; \code{\link[=sgp_denominators]{sgp_denominators()}} and future consumers fall
+through to the package lookup (\code{\link[=inverse_categories]{inverse_categories()}}). Pass
+\code{character(0)} is not valid; use \code{NULL} for "no override".}
 
 \item{league_type}{One of \code{"mixed"}, \code{"AL"}, \code{"NL"}. Controls DH eligibility
 and downstream player-pool filtering. \code{"NL"} drops DH from \code{roster_slots}
