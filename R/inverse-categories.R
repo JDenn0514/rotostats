@@ -9,7 +9,7 @@
 
 #' @noRd
 INVERSE_CATEGORIES <- c(
-  "ERA", "WHIP", "FIP", "xFIP", "SIERA", "xERA", "BB/9", "HR/9"
+  "ERA", "WHIP", "FIP", "XFIP", "SIERA", "XERA", "BB/9", "HR/9"
 )
 
 # ---------------------------------------------------------------------------
@@ -25,9 +25,13 @@ INVERSE_CATEGORIES <- c(
 #' per-call override nor a [league_config()] declaration is present.
 #'
 #' @details
-#' The built-in list covers pitcher ratio stats: ERA, WHIP, FIP, xFIP,
-#' SIERA, xERA, BB/9, HR/9. Higher-is-better pitching categories (K/9, K%,
-#' K-BB%) are NOT included. Declare a custom set via
+#' The built-in list covers pitcher ratio stats: ERA, WHIP, FIP, XFIP,
+#' SIERA, XERA, BB/9, HR/9. Higher-is-better pitching categories (K/9, K%,
+#' K-BB%) are NOT included. All names are uppercase to match the
+#' package-wide category-normalization convention; user-supplied mixed-case
+#' inputs (e.g. "xFIP") are uppercased by [league_config()] and
+#' [sgp_denominators()] before matching against this list. Declare a
+#' custom set via
 #' [league_config()]'s `inverse_categories` argument and pass the config
 #' to [sgp_denominators()].
 #'

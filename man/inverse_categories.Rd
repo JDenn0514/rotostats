@@ -18,9 +18,13 @@ Used as the Layer-3 fallback in \code{\link[=sgp_denominators]{sgp_denominators(
 per-call override nor a \code{\link[=league_config]{league_config()}} declaration is present.
 }
 \details{
-The built-in list covers pitcher ratio stats: ERA, WHIP, FIP, xFIP,
-SIERA, xERA, BB/9, HR/9. Higher-is-better pitching categories (K/9, K\%,
-K-BB\%) are NOT included. Declare a custom set via
+The built-in list covers pitcher ratio stats: ERA, WHIP, FIP, XFIP,
+SIERA, XERA, BB/9, HR/9. Higher-is-better pitching categories (K/9, K\%,
+K-BB\%) are NOT included. All names are uppercase to match the
+package-wide category-normalization convention; user-supplied mixed-case
+inputs (e.g. "xFIP") are uppercased by \code{\link[=league_config]{league_config()}} and
+\code{\link[=sgp_denominators]{sgp_denominators()}} before matching against this list. Declare a
+custom set via
 \code{\link[=league_config]{league_config()}}'s \code{inverse_categories} argument and pass the config
 to \code{\link[=sgp_denominators]{sgp_denominators()}}.
 }
