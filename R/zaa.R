@@ -114,8 +114,8 @@
 #' # proj <- <data frame of projections>
 #' # result <- zaa(stats = proj, config = cfg)
 #'
-#' @seealso [zar()] (anchors to replacement level rather than average),
-#'   [replacement_level()], [league_config()], [inverse_categories()]
+#' @seealso [par()], [sgp()], [replacement_level()], [league_config()],
+#'   [inverse_categories()]
 #'
 #' @export
 zaa <- function(
@@ -365,7 +365,7 @@ zaa <- function(
     } else {
       # Named character vector: names = player_id, values = pool label
       pa_ids   <- names(position_assignments)
-      pa_pools <- as.character(position_assignments)
+      pa_pools <- stats::setNames(as.character(position_assignments), names(position_assignments))
     }
 
     # Restrict to rostered players
@@ -443,7 +443,7 @@ zaa <- function(
     pool_labels[is_pitcher] <- row_pools[is_pitcher]
     # If row_pools for pitchers didn't give SP/RP (e.g., already "ALL_PITCHERS"),
     # keep them as-is so they still get processed
-    is_empty <- is_pitcher & pool_labels == ""
+    is_empty <- is_pitcher & (is.na(pool_labels) | pool_labels == "")
     if (any(is_empty)) {
       pool_labels[is_empty] <- "ALL_PITCHERS"
     }
@@ -452,8 +452,8 @@ zaa <- function(
     pool_labels[is_pitcher] <- "ALL_PITCHERS"
   }
 
-  # Fill any remaining blanks (players whose row_pools didn't classify above)
-  blank_labels <- pool_labels == ""
+  # Fill any remaining blanks or NAs (players whose row_pools didn't classify above)
+  blank_labels <- is.na(pool_labels) | pool_labels == ""
   if (any(blank_labels)) {
     pool_labels[blank_labels] <- row_pools[blank_labels]
   }
