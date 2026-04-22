@@ -15,13 +15,13 @@ new_sgp_denominators <- function(
 ) {
   structure(
     list(
-      denominators     = denominators,
+      denominators = denominators,
       year_diagnostics = year_diagnostics,
-      bootstrap_ci     = bootstrap_ci,
-      call             = call,
-      meta             = meta
+      bootstrap_ci = bootstrap_ci,
+      call = call,
+      meta = meta
     ),
-    class           = c("sgp_denominators", "list"),
+    class = c("sgp_denominators", "list"),
     rate_conversion = rate_conversion
   )
 }
@@ -48,7 +48,10 @@ print.sgp_denominators <- function(x, ...) {
   cat("SGP Denominators\n")
   cat(sprintf("  Method:          %s\n", x$meta$method))
   cat(sprintf("  Rate conversion: %s\n", x$meta$rate_conversion))
-  cat(sprintf("  Years used:      %s\n", paste(x$meta$years_used, collapse = ", ")))
+  cat(sprintf(
+    "  Years used:      %s\n",
+    paste(x$meta$years_used, collapse = ", ")
+  ))
   cat(sprintf("  Categories (%d):\n", length(x$denominators)))
   print(round(x$denominators, 4))
   if (!is.null(x$bootstrap_ci)) {

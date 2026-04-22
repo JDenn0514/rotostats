@@ -169,19 +169,18 @@
 par <- function(
   replacement,
   denominators,
-  include_raw        = FALSE,
+  include_raw = FALSE,
   boundary_threshold = 1.0,
-  rate_conversion    = "blended_pool",
-  pool_baseline      = "projection_pool",
-  baseline           = NULL,
-  league_history     = NULL
+  rate_conversion = "blended_pool",
+  pool_baseline = "projection_pool",
+  baseline = NULL,
+  league_history = NULL
 ) {
-
   # ---------------------------------------------------------------------------
   # Step 1 — Validate replacement attributes (MUST be first)
   # ---------------------------------------------------------------------------
   projections <- attr(replacement, "projections")
-  config      <- attr(replacement, "config")
+  config <- attr(replacement, "config")
 
   if (is.null(projections) || is.null(config)) {
     cli::cli_abort(
@@ -201,16 +200,16 @@ par <- function(
   # Step 2 — Extract remaining attributes
   # ---------------------------------------------------------------------------
   position_assignments <- attr(replacement, "position_assignments")
-  repl_stats           <- replacement$replacement_stats
-  K                    <- replacement$params$band_width
+  repl_stats <- replacement$replacement_stats
+  K <- replacement$params$band_width
 
   # ---------------------------------------------------------------------------
   # Step 1b — Validate replacement_stats covers all scored categories
   # (must be before Step 5 so NA-fill does not silently mask missing columns)
   # ---------------------------------------------------------------------------
   scored_cat_names <- names(denominators)
-  repl_stat_cols   <- names(repl_stats)
-  missing_in_repl  <- setdiff(toupper(scored_cat_names), toupper(repl_stat_cols))
+  repl_stat_cols <- names(repl_stats)
+  missing_in_repl <- setdiff(toupper(scored_cat_names), toupper(repl_stat_cols))
 
   if (length(missing_in_repl) > 0L) {
     n_missing <- length(missing_in_repl)
@@ -232,23 +231,23 @@ par <- function(
   # ---------------------------------------------------------------------------
   # Step 3 — Unpack baseline
   # ---------------------------------------------------------------------------
-  baseline_era  <- baseline[["era"]]
+  baseline_era <- baseline[["era"]]
   baseline_whip <- baseline[["whip"]]
-  baseline_avg  <- baseline[["avg"]]
+  baseline_avg <- baseline[["avg"]]
 
   # ---------------------------------------------------------------------------
   # Step 4 — Call sgp() on full player projections
   # ---------------------------------------------------------------------------
   sgp_out <- sgp(
-    projections     = projections,
-    denominators    = denominators,
-    league_history  = league_history,
+    projections = projections,
+    denominators = denominators,
+    league_history = league_history,
     rate_conversion = rate_conversion,
-    pool_baseline   = pool_baseline,
-    league_config   = config,
-    baseline_era    = baseline_era,
-    baseline_whip   = baseline_whip,
-    baseline_avg    = baseline_avg
+    pool_baseline = pool_baseline,
+    league_config = config,
+    baseline_era = baseline_era,
+    baseline_whip = baseline_whip,
+    baseline_avg = baseline_avg
   )
 
   # ---------------------------------------------------------------------------
@@ -263,12 +262,12 @@ par <- function(
   repl_marked$.is_replacement <- TRUE
 
   # 5b-5c. Align columns: drop extra repl columns, fill missing ones with NA
-  extra_cols  <- setdiff(
+  extra_cols <- setdiff(
     names(repl_marked),
     c(names(projections_marked), ".is_replacement")
   )
-  repl_marked <- repl_marked[
-    , setdiff(names(repl_marked), extra_cols),
+  repl_marked <- repl_marked[,
+    setdiff(names(repl_marked), extra_cols),
     drop = FALSE
   ]
 
@@ -281,29 +280,29 @@ par <- function(
 
   # 5d. Call sgp() on the combined frame (drop the marker column)
   combined_sgp <- sgp(
-    projections     = combined[
-      , setdiff(names(combined), ".is_replacement"),
+    projections = combined[,
+      setdiff(names(combined), ".is_replacement"),
       drop = FALSE
     ],
-    denominators    = denominators,
-    league_history  = league_history,
+    denominators = denominators,
+    league_history = league_history,
     rate_conversion = rate_conversion,
-    pool_baseline   = pool_baseline,
-    league_config   = config,
-    baseline_era    = baseline_era,
-    baseline_whip   = baseline_whip,
-    baseline_avg    = baseline_avg
+    pool_baseline = pool_baseline,
+    league_config = config,
+    baseline_era = baseline_era,
+    baseline_whip = baseline_whip,
+    baseline_avg = baseline_avg
   )
 
   # 5e. Extract replacement rows and attach position labels
-  repl_row_idx         <- which(combined$.is_replacement)
-  repl_sgp_df          <- combined_sgp[repl_row_idx, , drop = FALSE]
+  repl_row_idx <- which(combined$.is_replacement)
+  repl_sgp_df <- combined_sgp[repl_row_idx, , drop = FALSE]
   repl_sgp_df$position <- repl_stats$position
 
   # ---------------------------------------------------------------------------
   # Step 6 — Validate category name consistency
   # ---------------------------------------------------------------------------
-  sgp_cats      <- grep("^sgp_", names(sgp_out),     value = TRUE)
+  sgp_cats <- grep("^sgp_", names(sgp_out), value = TRUE)
   repl_sgp_cats <- grep("^sgp_", names(repl_sgp_df), value = TRUE)
 
   if (!setequal(sgp_cats, repl_sgp_cats)) {
@@ -345,29 +344,34 @@ par <- function(
   # ---------------------------------------------------------------------------
   # Step 10 — Compute total_par
   # ---------------------------------------------------------------------------
-  par_df        <- as.data.frame(par_cols, row.names = seq_len(nrow(projections)))
+  par_df <- as.data.frame(par_cols, row.names = seq_len(nrow(projections)))
   par_col_names <- paste0("par_", scored_cats)
-  par_df$total_par <- rowSums(par_df[, par_col_names, drop = FALSE], na.rm = TRUE)
+  par_df$total_par <- rowSums(
+    par_df[, par_col_names, drop = FALSE],
+    na.rm = TRUE
+  )
 
   # ---------------------------------------------------------------------------
   # Step 11 — Band calibration check
   # ---------------------------------------------------------------------------
-  n_teams      <- replacement$params$n_teams
+  n_teams <- replacement$params$n_teams
   roster_slots <- replacement$params$roster_slots
 
   band_total_par_list <- lapply(
     names(roster_slots[roster_slots > 0L]),
     function(pos) {
       pos_players <- which(player_positions == pos)
-      if (length(pos_players) == 0L) return(numeric(0L))
+      if (length(pos_players) == 0L) {
+        return(numeric(0L))
+      }
 
       boundary_rank <- n_teams * roster_slots[[pos]]
-      K_eff         <- min(K, floor(length(pos_players) / 4L))
-      band_lo       <- max(1L, boundary_rank - K_eff)
-      band_hi       <- min(length(pos_players), boundary_rank + K_eff)
+      K_eff <- min(K, floor(length(pos_players) / 4L))
+      band_lo <- max(1L, boundary_rank - K_eff)
+      band_hi <- min(length(pos_players), boundary_rank + K_eff)
 
-      tp_pos   <- par_df$total_par[pos_players]
-      ord      <- order(tp_pos, decreasing = TRUE)
+      tp_pos <- par_df$total_par[pos_players]
+      ord <- order(tp_pos, decreasing = TRUE)
       band_idx <- ord[seq(band_lo, band_hi)]
       tp_pos[band_idx]
     }
@@ -410,8 +414,8 @@ par <- function(
   result <- par_df
 
   if (include_raw) {
-    sgp_part <- sgp_out[
-      , c(paste0("sgp_", scored_cats), "total_sgp"),
+    sgp_part <- sgp_out[,
+      c(paste0("sgp_", scored_cats), "total_sgp"),
       drop = FALSE
     ]
     result <- cbind(sgp_part, result)
@@ -429,8 +433,8 @@ par <- function(
   )
 
   attr(result, "replacement_sgp") <- repl_sgp_list
-  attr(result, "units")           <- "sgp"
-  attr(result, "anchor")          <- "replacement"
+  attr(result, "units") <- "sgp"
+  attr(result, "anchor") <- "replacement"
 
   result
 }

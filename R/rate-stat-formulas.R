@@ -16,73 +16,73 @@
 RATE_STAT_FORMULAS <- list(
   ERA = list(
     denominator_col = "IP",
-    scale           = 9,
-    numerator_fn    = function(rate, denom) rate * denom / 9,
-    direction       = "inverse",
-    pool_type       = "pitcher"
+    scale = 9,
+    numerator_fn = function(rate, denom) rate * denom / 9,
+    direction = "inverse",
+    pool_type = "pitcher"
   ),
   WHIP = list(
     denominator_col = "IP",
-    scale           = 1,
-    numerator_fn    = function(rate, denom) rate * denom,
-    direction       = "inverse",
-    pool_type       = "pitcher"
+    scale = 1,
+    numerator_fn = function(rate, denom) rate * denom,
+    direction = "inverse",
+    pool_type = "pitcher"
   ),
   AVG = list(
     denominator_col = "AB",
-    scale           = 1,
-    numerator_fn    = function(rate, denom) rate * denom,
-    direction       = "standard",
-    pool_type       = "hitter"
+    scale = 1,
+    numerator_fn = function(rate, denom) rate * denom,
+    direction = "standard",
+    pool_type = "hitter"
   ),
   FIP = list(
     denominator_col = "IP",
-    scale           = 1,
-    numerator_fn    = function(rate, denom) rate * denom,
-    direction       = "inverse",
-    pool_type       = "pitcher"
+    scale = 1,
+    numerator_fn = function(rate, denom) rate * denom,
+    direction = "inverse",
+    pool_type = "pitcher"
   ),
   XFIP = list(
     denominator_col = "IP",
-    scale           = 1,
-    numerator_fn    = function(rate, denom) rate * denom,
-    direction       = "inverse",
-    pool_type       = "pitcher"
+    scale = 1,
+    numerator_fn = function(rate, denom) rate * denom,
+    direction = "inverse",
+    pool_type = "pitcher"
   ),
   SIERA = list(
     denominator_col = "IP",
-    scale           = 1,
-    numerator_fn    = function(rate, denom) rate * denom,
-    direction       = "inverse",
-    pool_type       = "pitcher"
+    scale = 1,
+    numerator_fn = function(rate, denom) rate * denom,
+    direction = "inverse",
+    pool_type = "pitcher"
   ),
   XERA = list(
     denominator_col = "IP",
-    scale           = 1,
-    numerator_fn    = function(rate, denom) rate * denom,
-    direction       = "inverse",
-    pool_type       = "pitcher"
+    scale = 1,
+    numerator_fn = function(rate, denom) rate * denom,
+    direction = "inverse",
+    pool_type = "pitcher"
   ),
   "K/9" = list(
     denominator_col = "IP",
-    scale           = 9,
-    numerator_fn    = function(rate, denom) rate * denom / 9,
-    direction       = "standard",
-    pool_type       = "pitcher"
+    scale = 9,
+    numerator_fn = function(rate, denom) rate * denom / 9,
+    direction = "standard",
+    pool_type = "pitcher"
   ),
   "BB/9" = list(
     denominator_col = "IP",
-    scale           = 9,
-    numerator_fn    = function(rate, denom) rate * denom / 9,
-    direction       = "inverse",
-    pool_type       = "pitcher"
+    scale = 9,
+    numerator_fn = function(rate, denom) rate * denom / 9,
+    direction = "inverse",
+    pool_type = "pitcher"
   ),
   "HR/9" = list(
     denominator_col = "IP",
-    scale           = 9,
-    numerator_fn    = function(rate, denom) rate * denom / 9,
-    direction       = "inverse",
-    pool_type       = "pitcher"
+    scale = 9,
+    numerator_fn = function(rate, denom) rate * denom / 9,
+    direction = "inverse",
+    pool_type = "pitcher"
   )
 )
 
@@ -160,7 +160,13 @@ rate_stat_formulas <- function() {
     )
   }
 
-  required_fields <- c("denominator_col", "scale", "numerator_fn", "direction", "pool_type")
+  required_fields <- c(
+    "denominator_col",
+    "scale",
+    "numerator_fn",
+    "direction",
+    "pool_type"
+  )
 
   for (cat in names(rsf)) {
     entry <- rsf[[cat]]
@@ -177,13 +183,21 @@ rate_stat_formulas <- function() {
         class = "rotostats_error_invalid_rate_stat_formula"
       )
     }
-    if (!is.character(entry$denominator_col) || length(entry$denominator_col) != 1L || !nzchar(entry$denominator_col)) {
+    if (
+      !is.character(entry$denominator_col) ||
+        length(entry$denominator_col) != 1L ||
+        !nzchar(entry$denominator_col)
+    ) {
       cli::cli_abort(
         "Entry {.val {cat}}: {.field denominator_col} must be a non-empty character scalar.",
         class = "rotostats_error_invalid_rate_stat_formula"
       )
     }
-    if (!is.numeric(entry$scale) || length(entry$scale) != 1L || !is.finite(entry$scale)) {
+    if (
+      !is.numeric(entry$scale) ||
+        length(entry$scale) != 1L ||
+        !is.finite(entry$scale)
+    ) {
       cli::cli_abort(
         "Entry {.val {cat}}: {.field scale} must be a finite numeric scalar.",
         class = "rotostats_error_invalid_rate_stat_formula"
@@ -195,13 +209,19 @@ rate_stat_formulas <- function() {
         class = "rotostats_error_invalid_rate_stat_formula"
       )
     }
-    if (!identical(entry$direction, "inverse") && !identical(entry$direction, "standard")) {
+    if (
+      !identical(entry$direction, "inverse") &&
+        !identical(entry$direction, "standard")
+    ) {
       cli::cli_abort(
         "Entry {.val {cat}}: {.field direction} must be {.val inverse} or {.val standard}, not {.val {entry$direction}}.",
         class = "rotostats_error_invalid_rate_stat_formula"
       )
     }
-    if (!identical(entry$pool_type, "pitcher") && !identical(entry$pool_type, "hitter")) {
+    if (
+      !identical(entry$pool_type, "pitcher") &&
+        !identical(entry$pool_type, "hitter")
+    ) {
       cli::cli_abort(
         "Entry {.val {cat}}: {.field pool_type} must be {.val pitcher} or {.val hitter}, not {.val {entry$pool_type}}.",
         class = "rotostats_error_invalid_rate_stat_formula"

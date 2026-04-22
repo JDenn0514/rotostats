@@ -13,9 +13,9 @@
 
 | Ticket | Slug | Type | Status |
 |---|---|---|---|
-| Z1 | `zaa-test-coverage-extensions` | Test-only | ⏳ **Open** |
-| Z2 | `zar-implementation` | Code + Simulation | ⏳ **Open** (next function) |
-| Z3 | `zaa-test-spec-ts7-prose-correction` | Archive note | — non-actionable |
+| Z1 | `zaa-test-coverage-extensions` | Test-only | ✅ **Complete** (PR #24) |
+| Z2 | `zar-implementation` | Code + Simulation | ✅ **Complete** (PR #25) |
+| Z3 | `zaa-test-spec-ts7-prose-correction` | Archive note | ✅ **Closed** — non-actionable |
 
 Each request = one statsclaw run with its own request ID, its own feature
 branch (`feature/<slug>`), and its own PR into `develop`. The slug gets

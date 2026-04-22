@@ -162,29 +162,29 @@ utils::globalVariables(c("PRIMARY_HITTER_SLOTS", "pool_sizes", "sgp"))
 replacement_level <- function(
   projections,
   config,
-  sort_by                      = "zscore",
-  sgp_denominators             = NULL,
-  boundary_method              = "head_count",
-  seed_method                  = "hierarchy",
+  sort_by = "zscore",
+  sgp_denominators = NULL,
+  boundary_method = "head_count",
+  seed_method = "hierarchy",
   positional_adjustment_method = "fvarz",
-  pos_weight                   = NULL,
-  boundary_rate_method         = "raw_ip",
-  cliff_method                 = "mad",
-  cliff_gap_ratio_threshold    = 0.375,
-  catcher_adjustment_method    = "split_pool",
-  sp_ip_threshold              = 100,
-  normalize_to_season          = FALSE,
-  band_width                   = NULL,
-  cliff_threshold              = 1.5,
-  rate_denominators            = NULL,
-  league_history               = NULL,
-  trim_method                  = "iqr",
-  multi_pos                    = "highest_par",
-  position_assignments         = NULL,
-  replacement_params           = list(),
-  max_iter                     = 25L,
-  tol                          = 0.01,
-  verbose                      = FALSE
+  pos_weight = NULL,
+  boundary_rate_method = "raw_ip",
+  cliff_method = "mad",
+  cliff_gap_ratio_threshold = 0.375,
+  catcher_adjustment_method = "split_pool",
+  sp_ip_threshold = 100,
+  normalize_to_season = FALSE,
+  band_width = NULL,
+  cliff_threshold = 1.5,
+  rate_denominators = NULL,
+  league_history = NULL,
+  trim_method = "iqr",
+  multi_pos = "highest_par",
+  position_assignments = NULL,
+  replacement_params = list(),
+  max_iter = 25L,
+  tol = 0.01,
+  verbose = FALSE
 ) {
   call_env <- rlang::caller_env()
 
@@ -203,7 +203,7 @@ replacement_level <- function(
         "i" = "Supply a {.cls sgp_denominators} object from {.fn sgp_denominators}."
       ),
       class = "rotostats_error_missing_sgp_denominators",
-      call  = call_env
+      call = call_env
     )
   }
 
@@ -217,7 +217,7 @@ replacement_level <- function(
         "i" = "Supply a {.cls league_history} object or switch to {.code seed_method = \"hierarchy\"}."
       ),
       class = "rotostats_error_missing_league_history",
-      call  = call_env
+      call = call_env
     )
   }
 
@@ -233,7 +233,7 @@ replacement_level <- function(
         "i" = "Provide a numeric value in [0, 1]."
       ),
       class = "rotostats_error_missing_pos_weight",
-      call  = call_env
+      call = call_env
     )
   }
 
@@ -253,7 +253,7 @@ replacement_level <- function(
           "i" = "Fix: re-run {.fn sgp_denominators} with {.code rate_conversion = \"blended_pool\"}, or switch to {.code boundary_rate_method = \"raw_ip\"}."
         ),
         class = "rotostats_error_rate_method_mismatch",
-        call  = call_env
+        call = call_env
       )
     }
   }
@@ -283,7 +283,10 @@ replacement_level <- function(
   }
 
   checkmate::assert_choice(trim_method, c("iqr", "mad", "kde"))
-  checkmate::assert_choice(multi_pos, c("highest_par", "primary", "all", "custom"))
+  checkmate::assert_choice(
+    multi_pos,
+    c("highest_par", "primary", "all", "custom")
+  )
   checkmate::assert_int(max_iter, lower = 1L)
   checkmate::assert_number(tol, lower = 0)
   checkmate::assert_flag(verbose)
@@ -307,13 +310,18 @@ replacement_level <- function(
 
   # Determine required columns
   cats_upper <- toupper(config$categories)
-  needs_ab   <- any(cats_upper %in% c("AVG", "OBP", "SLG", "OPS", "WOBA",
-                                       "K%", "BB%"))
-  needs_ip   <- TRUE  # always need IP for pitcher pool determination
+  needs_ab <- any(
+    cats_upper %in% c("AVG", "OBP", "SLG", "OPS", "WOBA", "K%", "BB%")
+  )
+  needs_ip <- TRUE # always need IP for pitcher pool determination
 
-  stats_required <- union(cats_upper,
-                          c(if (needs_ip) "IP" else character(0L),
-                            if (needs_ab) "AB" else character(0L)))
+  stats_required <- union(
+    cats_upper,
+    c(
+      if (needs_ip) "IP" else character(0L),
+      if (needs_ab) "AB" else character(0L)
+    )
+  )
   id_cols_required <- c("PLAYER_ID", "PLAYER_NAME", "POS_ELIGIBILITY", "LEAGUE")
 
   # Step 29: Check for missing columns
@@ -326,7 +334,7 @@ replacement_level <- function(
         "i" = "Ensure the data frame includes all required columns."
       ),
       class = "rotostats_error_missing_column",
-      call  = call_env
+      call = call_env
     )
   }
 
@@ -339,7 +347,7 @@ replacement_level <- function(
           "i" = "Convert the column to numeric before calling {.fn replacement_level}."
         ),
         class = "rotostats_error_wrong_column_type",
-        call  = call_env
+        call = call_env
       )
     }
   }
@@ -363,7 +371,7 @@ replacement_level <- function(
             "i" = "See {.fn rate_stat_denominators} for the built-in lookup."
           ),
           class = "rotostats_error_unknown_rate_stat",
-          call  = call_env
+          call = call_env
         )
       }
     }
@@ -374,17 +382,25 @@ replacement_level <- function(
   # -------------------------------------------------------------------------
   params <- utils::modifyList(default_replacement_params, replacement_params)
 
-  checkmate::assert_int(params$cycle_history_window, lower = 2L, upper = 50L,
-                        .var.name = "replacement_params$cycle_history_window")
+  checkmate::assert_int(
+    params$cycle_history_window,
+    lower = 2L,
+    upper = 50L,
+    .var.name = "replacement_params$cycle_history_window"
+  )
 
-  K <- if (!is.null(band_width)) as.integer(band_width) else as.integer(params$band_width_K)
-  cliff_thr <- cliff_threshold   # top-level arg always wins
+  K <- if (!is.null(band_width)) {
+    as.integer(band_width)
+  } else {
+    as.integer(params$band_width_K)
+  }
+  cliff_thr <- cliff_threshold # top-level arg always wins
 
   # -------------------------------------------------------------------------
   # §5.2  SP/RP role inference and swingman flagging
   # -------------------------------------------------------------------------
-  role_info     <- infer_pitcher_roles(projections, sp_ip_threshold)
-  role          <- role_info$role
+  role_info <- infer_pitcher_roles(projections, sp_ip_threshold)
+  role <- role_info$role
   swingman_flag <- role_info$swingman_flag
 
   # -------------------------------------------------------------------------
@@ -397,26 +413,26 @@ replacement_level <- function(
   # -------------------------------------------------------------------------
   if (!is.null(league_history)) {
     .validate_league_history_inputs(
-      projections   = projections,
+      projections = projections,
       league_history = league_history,
-      config        = config,
-      params        = params,
-      trim_method   = trim_method,
-      verbose       = verbose,
-      call_env      = call_env
+      config = config,
+      params = params,
+      trim_method = trim_method,
+      verbose = verbose,
+      call_env = call_env
     )
   }
 
   # -------------------------------------------------------------------------
   # Pool size computation
   # -------------------------------------------------------------------------
-  ps          <- get_pool_sizes(config)
+  ps <- get_pool_sizes(config)
   pool_size_h <- ps$hitters
   pool_size_p <- ps$pitchers
 
   # Determine positions with slots > 0
-  active_hitter_pos  <- names(config$roster_slots[config$roster_slots > 0])
-  active_hitter_pos  <- intersect(active_hitter_pos, PRIMARY_HITTER_SLOTS)
+  active_hitter_pos <- names(config$roster_slots[config$roster_slots > 0])
+  active_hitter_pos <- intersect(active_hitter_pos, PRIMARY_HITTER_SLOTS)
 
   # SP/RP positions
   pitcher_slots <- config$pitcher_slots
@@ -437,8 +453,7 @@ replacement_level <- function(
   for (pos in active_hitter_pos) {
     n_rostered <- config$n_teams * config$roster_slots[pos]
     pool_players <- sum(
-      grepl(paste0("(^|\\|)", pos, "(\\||$)"),
-            projections$POS_ELIGIBILITY)
+      grepl(paste0("(^|\\|)", pos, "(\\||$)"), projections$POS_ELIGIBILITY)
     )
     if (pool_players < n_rostered) {
       cli::cli_abort(
@@ -447,7 +462,7 @@ replacement_level <- function(
           "i" = "Expand the player pool or adjust {.arg config$roster_slots}."
         ),
         class = "rotostats_error_pool_too_small",
-        call  = call_env
+        call = call_env
       )
     }
   }
@@ -472,14 +487,14 @@ replacement_level <- function(
   # -------------------------------------------------------------------------
   # §5.5  Iteration loop
   # -------------------------------------------------------------------------
-  converged                <- FALSE
-  pass                     <- 1L
-  old_assignments          <- NULL
-  assignment_hash_history  <- character(0L)  # rolling window of assignment hashes
-  cycle_window             <- params$cycle_history_window
-  old_repl_stats_vec       <- NULL
-  delta                    <- NA_real_
-  sgp_result               <- NULL
+  converged <- FALSE
+  pass <- 1L
+  old_assignments <- NULL
+  assignment_hash_history <- character(0L) # rolling window of assignment hashes
+  cycle_window <- params$cycle_history_window
+  old_repl_stats_vec <- NULL
+  delta <- NA_real_
+  sgp_result <- NULL
 
   # Determine which stats are counted (non-rate) vs rate
   rate_cats_scored <- intersect(cats_upper, names(rate_lookup))
@@ -491,8 +506,11 @@ replacement_level <- function(
     # -----------------------------------------------------------------------
 
     # Hitter z-scores for sorting (pass 1 always uses z-scores)
-    hitter_rows <- which(projections$LEAGUE %in% c("AL", "NL") &
-                           !grepl("(SP|RP)", projections$POS_ELIGIBILITY))
+    hitter_rows <- which(
+      projections$LEAGUE %in%
+        c("AL", "NL") &
+        !grepl("(SP|RP)", projections$POS_ELIGIBILITY)
+    )
     pitcher_rows_idx <- which(grepl("(SP|RP)", projections$POS_ELIGIBILITY))
 
     # Compute composite z-scores for hitters and pitchers
@@ -501,39 +519,49 @@ replacement_level <- function(
       order_col_h <- if ("AB" %in% names(projections)) "AB" else cats_upper[1]
       order_col_p <- "IP"
 
-      z_hitters  <- compute_pool_zscores(
+      z_hitters <- compute_pool_zscores(
         projections[hitter_rows, , drop = FALSE],
-        pool_size_h, cats_upper, K, order_col_h, is_pitcher = FALSE
+        pool_size_h,
+        cats_upper,
+        K,
+        order_col_h,
+        is_pitcher = FALSE
       )
       z_pitchers <- compute_pool_zscores(
         projections[pitcher_rows_idx, , drop = FALSE],
-        pool_size_p, cats_upper, K, order_col_p, is_pitcher = TRUE
+        pool_size_p,
+        cats_upper,
+        K,
+        order_col_p,
+        is_pitcher = TRUE
       )
 
       # Assign composite scores back (length = all players)
       composite_score <- rep(NA_real_, nrow(projections))
-      composite_score[hitter_rows]      <- z_hitters
+      composite_score[hitter_rows] <- z_hitters
       composite_score[pitcher_rows_idx] <- z_pitchers
     }
 
     if (pass >= 2L && sort_by == "sgp") {
       # Step F: Call sgp() internally to get total_sgp
       sgp_result <- sgp(
-        projections   = projections,
-        denominators  = sgp_denominators,
+        projections = projections,
+        denominators = sgp_denominators,
         league_history = league_history,
-        league_config  = config
+        league_config = config
       )
       composite_score <- rep(NA_real_, nrow(projections))
-      composite_score[hitter_rows]      <- sgp_result$total_sgp[hitter_rows]
-      composite_score[pitcher_rows_idx] <- sgp_result$total_sgp[pitcher_rows_idx]
+      composite_score[hitter_rows] <- sgp_result$total_sgp[hitter_rows]
+      composite_score[pitcher_rows_idx] <- sgp_result$total_sgp[
+        pitcher_rows_idx
+      ]
     }
 
     # -----------------------------------------------------------------------
     # B. Compute replacement stat line per position
     # -----------------------------------------------------------------------
-    repl_stats_list  <- vector("list", length(all_positions))
-    cliff_rows_list  <- vector("list", length(all_positions))
+    repl_stats_list <- vector("list", length(all_positions))
+    cliff_rows_list <- vector("list", length(all_positions))
     names(repl_stats_list) <- all_positions
     names(cliff_rows_list) <- all_positions
 
@@ -544,35 +572,44 @@ replacement_level <- function(
       if (is_pitcher_pos) {
         # Pitchers assigned to SP or RP based on role
         pos_mask <- grepl("(SP|RP)", projections$POS_ELIGIBILITY) &
-                    !is.na(role) & role == pos
+          !is.na(role) &
+          role == pos
       } else {
-        player_ids_at_pos <- names(current_assignments)[current_assignments == pos]
+        player_ids_at_pos <- names(current_assignments)[
+          current_assignments == pos
+        ]
         pos_mask <- projections$PLAYER_ID %in% player_ids_at_pos
       }
 
-      pos_indices    <- which(pos_mask)
-      pos_composite  <- composite_score[pos_mask]
+      pos_indices <- which(pos_mask)
+      pos_composite <- composite_score[pos_mask]
 
       if (length(pos_indices) == 0L) {
         # No players at this position — create empty row
-        empty_stats        <- stats::setNames(rep(NA_real_, length(cats_upper)), cats_upper)
-        repl_stats_list[[pos]] <- c(empty_stats, list(
-          n_band_players = 0L,
-          cliff_detected = FALSE
-        ))
+        empty_stats <- stats::setNames(
+          rep(NA_real_, length(cats_upper)),
+          cats_upper
+        )
+        repl_stats_list[[pos]] <- c(
+          empty_stats,
+          list(
+            n_band_players = 0L,
+            cliff_detected = FALSE
+          )
+        )
         cliff_rows_list[[pos]] <- list(
-          position       = pos,
+          position = pos,
           cliff_detected = FALSE,
           cliff_location = NA_integer_,
           cliff_magnitude = NA_real_,
-          swingman       = FALSE,
+          swingman = FALSE,
           n_band_players = 0L
         )
         next
       }
 
       # Sort by composite score (descending = best first)
-      sorted_order   <- order(pos_composite, decreasing = TRUE, na.last = TRUE)
+      sorted_order <- order(pos_composite, decreasing = TRUE, na.last = TRUE)
       sorted_indices <- pos_indices[sorted_order]
 
       n_rostered_pos <- if (is_pitcher_pos) {
@@ -589,16 +626,20 @@ replacement_level <- function(
             "i" = "Expand the player pool or adjust league configuration."
           ),
           class = "rotostats_error_pool_too_small",
-          call  = call_env
+          call = call_env
         )
       }
 
       # Compute band indices
-      band_info  <- compute_band_indices(n_rostered_pos, length(sorted_indices), K)
-      K_eff      <- band_info$K_eff
+      band_info <- compute_band_indices(
+        n_rostered_pos,
+        length(sorted_indices),
+        K
+      )
+      K_eff <- band_info$K_eff
       band_upper <- sorted_indices[band_info$band_upper]
       band_lower <- sorted_indices[band_info$band_lower]
-      B_all      <- c(band_upper, band_lower)
+      B_all <- c(band_upper, band_lower)
 
       # Check for swingman in band
       has_swingman <- any(swingman_flag[B_all])
@@ -613,7 +654,9 @@ replacement_level <- function(
         cats_upper[1L]
       }
 
-      B_lower_vals <- if (primary_cliff_cat %in% names(projections) && length(band_lower) > 0L) {
+      B_lower_vals <- if (
+        primary_cliff_cat %in% names(projections) && length(band_lower) > 0L
+      ) {
         projections[[primary_cliff_cat]][band_lower]
       } else {
         numeric(0L)
@@ -626,19 +669,25 @@ replacement_level <- function(
       }
 
       cliff_result <- detect_cliff(
-        B_lower_values        = B_lower_vals,
-        band_all_values       = B_all_vals,
-        cliff_method          = cliff_method,
-        cliff_threshold       = cliff_thr,
+        B_lower_values = B_lower_vals,
+        band_all_values = B_all_vals,
+        cliff_method = cliff_method,
+        cliff_threshold = cliff_thr,
         cliff_gap_ratio_threshold = cliff_gap_ratio_threshold,
-        cliff_min_n           = params$cliff_min_n
+        cliff_min_n = params$cliff_min_n
       )
 
       # If cliff detected, truncate band at j-1 in lower half
-      B_final <- if (cliff_result$cliff_detected && !is.na(cliff_result$cliff_location)) {
+      B_final <- if (
+        cliff_result$cliff_detected && !is.na(cliff_result$cliff_location)
+      ) {
         j <- cliff_result$cliff_location
         # Keep only band players up to b + j - 1 in the lower half
-        truncated_lower <- if (j > 1L) band_lower[seq_len(j - 1L)] else integer(0L)
+        truncated_lower <- if (j > 1L) {
+          band_lower[seq_len(j - 1L)]
+        } else {
+          integer(0L)
+        }
         c(band_upper, truncated_lower)
       } else {
         B_all
@@ -647,14 +696,26 @@ replacement_level <- function(
       # Verbose: swingman band ERA/WHIP shift check
       if (verbose && has_swingman && is_pitcher_pos) {
         sw_in_band <- swingman_flag[B_final]
-        if (any(sw_in_band) && "ERA" %in% names(projections) && "IP" %in% names(projections)) {
-          with_sw    <- projections[B_final, , drop = FALSE]
+        if (
+          any(sw_in_band) &&
+            "ERA" %in% names(projections) &&
+            "IP" %in% names(projections)
+        ) {
+          with_sw <- projections[B_final, , drop = FALSE]
           without_sw <- projections[B_final[!sw_in_band], , drop = FALSE]
           if (nrow(without_sw) > 0 && "IP" %in% names(with_sw)) {
-            ip_sum_w  <- sum(with_sw$IP, na.rm = TRUE)
+            ip_sum_w <- sum(with_sw$IP, na.rm = TRUE)
             ip_sum_wo <- sum(without_sw$IP, na.rm = TRUE)
-            era_w  <- if (ip_sum_w  > 0) sum(with_sw$ERA  * with_sw$IP,  na.rm = TRUE) / ip_sum_w  else NA
-            era_wo <- if (ip_sum_wo > 0) sum(without_sw$ERA * without_sw$IP, na.rm = TRUE) / ip_sum_wo else NA
+            era_w <- if (ip_sum_w > 0) {
+              sum(with_sw$ERA * with_sw$IP, na.rm = TRUE) / ip_sum_w
+            } else {
+              NA
+            }
+            era_wo <- if (ip_sum_wo > 0) {
+              sum(without_sw$ERA * without_sw$IP, na.rm = TRUE) / ip_sum_wo
+            } else {
+              NA
+            }
             if (!is.na(era_w) && !is.na(era_wo) && abs(era_w - era_wo) > 0.10) {
               cli::cli_inform(
                 "Swingman in {pos} band shifts mean ERA by {round(abs(era_w - era_wo), 3)}."
@@ -668,97 +729,126 @@ replacement_level <- function(
       include_ip <- is_pitcher_pos || "IP" %in% cats_upper
       include_ab <- !is_pitcher_pos && needs_ab
 
-      band_df   <- projections[B_final, , drop = FALSE]
+      band_df <- projections[B_final, , drop = FALSE]
       repl_line <- compute_replacement_stat_line(
-        band_df     = band_df,
+        band_df = band_df,
         scored_cats = cats_upper,
-        rate_cats   = rate_cats_scored,
-        include_ip  = include_ip,
-        include_ab  = include_ab
+        rate_cats = rate_cats_scored,
+        include_ip = include_ip,
+        include_ab = include_ab
       )
 
       n_band <- length(B_final)
 
       repl_stats_list[[pos]] <- c(
         as.list(repl_line),
-        list(n_band_players = as.integer(n_band),
-             cliff_detected  = cliff_result$cliff_detected)
+        list(
+          n_band_players = as.integer(n_band),
+          cliff_detected = cliff_result$cliff_detected
+        )
       )
 
       cliff_rows_list[[pos]] <- list(
-        position        = pos,
-        cliff_detected  = cliff_result$cliff_detected,
-        cliff_location  = cliff_result$cliff_location,
+        position = pos,
+        cliff_detected = cliff_result$cliff_detected,
+        cliff_location = cliff_result$cliff_location,
         cliff_magnitude = cliff_result$cliff_magnitude,
-        swingman        = has_swingman,
-        n_band_players  = as.integer(n_band)
+        swingman = has_swingman,
+        n_band_players = as.integer(n_band)
       )
     }
 
     # Determine which aux columns exist across all position rows
-    has_ip_col <- any(vapply(repl_stats_list, function(r) "IP" %in% names(r), logical(1L)))
-    has_ab_col <- any(vapply(repl_stats_list, function(r) "AB" %in% names(r), logical(1L)))
+    has_ip_col <- any(vapply(
+      repl_stats_list,
+      function(r) "IP" %in% names(r),
+      logical(1L)
+    ))
+    has_ab_col <- any(vapply(
+      repl_stats_list,
+      function(r) "AB" %in% names(r),
+      logical(1L)
+    ))
     aux_cols_all <- c(
       if (has_ip_col) "IP" else character(0L),
       if (has_ab_col) "AB" else character(0L)
     )
 
     # Assemble replacement_stats data frame with uniform columns
-    repl_stats_df <- do.call(rbind, lapply(names(repl_stats_list), function(pos) {
-      row <- repl_stats_list[[pos]]
-      # Build a one-row data.frame with a fixed column set
-      # category stats
-      vals <- lapply(cats_upper, function(cat) {
-        if (cat %in% names(row)) as.numeric(row[[cat]]) else NA_real_
+    repl_stats_df <- do.call(
+      rbind,
+      lapply(names(repl_stats_list), function(pos) {
+        row <- repl_stats_list[[pos]]
+        # Build a one-row data.frame with a fixed column set
+        # category stats
+        vals <- lapply(cats_upper, function(cat) {
+          if (cat %in% names(row)) as.numeric(row[[cat]]) else NA_real_
+        })
+        names(vals) <- cats_upper
+        # aux cols
+        for (ac in aux_cols_all) {
+          vals[[ac]] <- if (ac %in% names(row)) {
+            as.numeric(row[[ac]])
+          } else {
+            NA_real_
+          }
+        }
+        vals[["n_band_players"]] <- as.integer(row[["n_band_players"]])
+        vals[["cliff_detected"]] <- as.logical(row[["cliff_detected"]])
+        vals[["position"]] <- pos
+        as.data.frame(vals, stringsAsFactors = FALSE)
       })
-      names(vals) <- cats_upper
-      # aux cols
-      for (ac in aux_cols_all) {
-        vals[[ac]] <- if (ac %in% names(row)) as.numeric(row[[ac]]) else NA_real_
-      }
-      vals[["n_band_players"]] <- as.integer(row[["n_band_players"]])
-      vals[["cliff_detected"]]  <- as.logical(row[["cliff_detected"]])
-      vals[["position"]]        <- pos
-      as.data.frame(vals, stringsAsFactors = FALSE)
-    }))
+    )
 
     # Reorder columns: position first, then cats, then IP, AB, n_band, cliff
-    stat_cols    <- cats_upper
-    col_order    <- c("position", stat_cols, aux_cols_all, "n_band_players", "cliff_detected")
-    col_order    <- intersect(col_order, names(repl_stats_df))
+    stat_cols <- cats_upper
+    col_order <- c(
+      "position",
+      stat_cols,
+      aux_cols_all,
+      "n_band_players",
+      "cliff_detected"
+    )
+    col_order <- intersect(col_order, names(repl_stats_df))
     repl_stats_df <- repl_stats_df[, col_order, drop = FALSE]
     rownames(repl_stats_df) <- NULL
 
     # Assemble cliff_metric data frame
-    cliff_metric_df <- do.call(rbind, lapply(cliff_rows_list, function(r) {
-      as.data.frame(r, stringsAsFactors = FALSE)
-    }))
+    cliff_metric_df <- do.call(
+      rbind,
+      lapply(cliff_rows_list, function(r) {
+        as.data.frame(r, stringsAsFactors = FALSE)
+      })
+    )
     rownames(cliff_metric_df) <- NULL
 
     # -----------------------------------------------------------------------
     # C/D. Compute positional adjustments
     # -----------------------------------------------------------------------
     scarcity_premium <- compute_positional_adjustments(
-      replacement_stats            = repl_stats_df,
-      config                       = config,
+      replacement_stats = repl_stats_df,
+      config = config,
       positional_adjustment_method = positional_adjustment_method,
-      catcher_adjustment_method    = catcher_adjustment_method,
-      pos_weight                   = pos_weight,
-      sgp_denominators             = sgp_denominators,
-      pass_number                  = pass,
-      verbose                      = verbose
+      catcher_adjustment_method = catcher_adjustment_method,
+      pos_weight = pos_weight,
+      sgp_denominators = sgp_denominators,
+      pass_number = pass,
+      verbose = verbose
     )
 
     # -----------------------------------------------------------------------
     # E. Zero-sum assertion (if adjustments computed)
     # -----------------------------------------------------------------------
     if (!is.null(scarcity_premium)) {
-      active_primary_hitter_pos <- intersect(active_hitter_pos, PRIMARY_HITTER_SLOTS)
+      active_primary_hitter_pos <- intersect(
+        active_hitter_pos,
+        PRIMARY_HITTER_SLOTS
+      )
       assert_zero_sum(
-        scarcity_premium           = scarcity_premium,
-        config                     = config,
-        catcher_adjustment_method  = catcher_adjustment_method,
-        primary_hitter_slots       = active_primary_hitter_pos
+        scarcity_premium = scarcity_premium,
+        config = config,
+        catcher_adjustment_method = catcher_adjustment_method,
+        primary_hitter_slots = active_primary_hitter_pos
       )
     }
 
@@ -770,23 +860,35 @@ replacement_level <- function(
     if (multi_pos == "highest_par" && pass >= 2L) {
       # For each multi-eligible player, assign to position with highest PAR
       multi_eligible_mask <- grepl("\\|", projections$POS_ELIGIBILITY) &
-                             !grepl("(SP|RP)", projections$POS_ELIGIBILITY)
+        !grepl("(SP|RP)", projections$POS_ELIGIBILITY)
       multi_player_ids <- projections$PLAYER_ID[multi_eligible_mask]
 
       for (pid in multi_player_ids) {
-        player_row  <- projections[projections$PLAYER_ID == pid, , drop = FALSE]
-        elig_pos    <- strsplit(player_row$POS_ELIGIBILITY, "\\|")[[1]]
+        player_row <- projections[projections$PLAYER_ID == pid, , drop = FALSE]
+        elig_pos <- strsplit(player_row$POS_ELIGIBILITY, "\\|")[[1]]
         elig_hitter <- setdiff(elig_pos, c("SP", "RP", "P"))
         elig_hitter <- intersect(elig_hitter, active_hitter_pos)
 
-        if (length(elig_hitter) <= 1L) next
+        if (length(elig_hitter) <= 1L) {
+          next
+        }
 
         # Compute PAR at each eligible position
-        par_vals <- vapply(elig_hitter, function(p) {
-          repl_row <- repl_stats_df[repl_stats_df$position == p, , drop = FALSE]
-          if (nrow(repl_row) == 0L) return(-Inf)
-          compute_par_at_pos(player_row, repl_row, cats_upper)
-        }, numeric(1L))
+        par_vals <- vapply(
+          elig_hitter,
+          function(p) {
+            repl_row <- repl_stats_df[
+              repl_stats_df$position == p,
+              ,
+              drop = FALSE
+            ]
+            if (nrow(repl_row) == 0L) {
+              return(-Inf)
+            }
+            compute_par_at_pos(player_row, repl_row, cats_upper)
+          },
+          numeric(1L)
+        )
 
         best_pos <- elig_hitter[which.max(par_vals)]
         new_assignments[pid] <- best_pos
@@ -801,7 +903,11 @@ replacement_level <- function(
       new_assignments <- stats::setNames(primary_pos, projections$PLAYER_ID)
     } else if (multi_pos == "custom") {
       # Use caller-supplied position_assignments unchanged
-      new_assignments <- if (!is.null(position_assignments)) position_assignments else current_assignments
+      new_assignments <- if (!is.null(position_assignments)) {
+        position_assignments
+      } else {
+        current_assignments
+      }
     }
 
     # -----------------------------------------------------------------------
@@ -809,21 +915,29 @@ replacement_level <- function(
     # -----------------------------------------------------------------------
     # Flatten repl_stats to numeric vector for delta computation
     new_repl_stats_vec <- unlist(
-      repl_stats_df[, intersect(c(cats_upper, "IP", "AB"), names(repl_stats_df)), drop = FALSE],
+      repl_stats_df[,
+        intersect(c(cats_upper, "IP", "AB"), names(repl_stats_df)),
+        drop = FALSE
+      ],
       use.names = FALSE
     )
     new_repl_stats_vec <- as.numeric(new_repl_stats_vec)
 
     assignments_converged <- !is.null(old_assignments) &&
       length(new_assignments) == length(old_assignments) &&
-      all(new_assignments[names(old_assignments)] == old_assignments, na.rm = TRUE)
+      all(
+        new_assignments[names(old_assignments)] == old_assignments,
+        na.rm = TRUE
+      )
 
     stats_converged <- !is.null(old_repl_stats_vec) &&
       length(new_repl_stats_vec) == length(old_repl_stats_vec) &&
       max(abs(new_repl_stats_vec - old_repl_stats_vec), na.rm = TRUE) < tol
 
-    if (!is.null(old_repl_stats_vec) &&
-        length(new_repl_stats_vec) == length(old_repl_stats_vec)) {
+    if (
+      !is.null(old_repl_stats_vec) &&
+        length(new_repl_stats_vec) == length(old_repl_stats_vec)
+    ) {
       delta <- max(abs(new_repl_stats_vec - old_repl_stats_vec), na.rm = TRUE)
     }
 
@@ -839,7 +953,7 @@ replacement_level <- function(
     # comparison.
     if (multi_pos == "highest_par") {
       sorted_idx <- order(names(new_assignments))
-      new_hash   <- paste(
+      new_hash <- paste(
         names(new_assignments)[sorted_idx],
         new_assignments[sorted_idx],
         collapse = "|"
@@ -857,13 +971,15 @@ replacement_level <- function(
       }
     }
 
-    if (pass >= max_iter) break
+    if (pass >= max_iter) {
+      break
+    }
 
-    old_assignments     <- new_assignments
-    old_repl_stats_vec  <- new_repl_stats_vec
+    old_assignments <- new_assignments
+    old_repl_stats_vec <- new_repl_stats_vec
     current_assignments <- new_assignments
     pass <- pass + 1L
-  }  # end repeat
+  } # end repeat
 
   # Convergence warning (unconditional, not gated by verbose)
   if (!converged) {
@@ -884,27 +1000,31 @@ replacement_level <- function(
 
   if (normalize_to_season) {
     stat_units <- "full_season_normalized"
-    repl_stats_df <- .normalize_repl_stats(repl_stats_df, cats_upper, active_pitcher_pos)
+    repl_stats_df <- .normalize_repl_stats(
+      repl_stats_df,
+      cats_upper,
+      active_pitcher_pos
+    )
   }
 
   # -------------------------------------------------------------------------
   # Two-way player computation
   # -------------------------------------------------------------------------
   two_way_players <- .compute_two_way_players(
-    projections     = projections,
-    repl_stats_df   = repl_stats_df,
+    projections = projections,
+    repl_stats_df = repl_stats_df,
     current_assignments = new_assignments,
-    cats_upper      = cats_upper,
-    role            = role
+    cats_upper = cats_upper,
+    role = role
   )
 
   # -------------------------------------------------------------------------
   # Pool diagnostics
   # -------------------------------------------------------------------------
   pool_diagnostics <- .compute_pool_diagnostics(
-    projections   = projections,
+    projections = projections,
     repl_stats_df = repl_stats_df,
-    cats_upper    = cats_upper,
+    cats_upper = cats_upper,
     active_hitter_pos = active_hitter_pos,
     active_pitcher_pos = active_pitcher_pos,
     current_assignments = new_assignments
@@ -914,37 +1034,37 @@ replacement_level <- function(
   # Construct output
   # -------------------------------------------------------------------------
   params_out <- list(
-    converged                 = converged,
-    iterations                = pass,
-    delta                     = delta,
-    n_teams                   = config$n_teams,
-    roster_slots              = config$roster_slots,
-    band_width                = K,
-    cliff_threshold           = cliff_thr,
-    sort_by                   = sort_by,
-    stat_units                = stat_units,
+    converged = converged,
+    iterations = pass,
+    delta = delta,
+    n_teams = config$n_teams,
+    roster_slots = config$roster_slots,
+    band_width = K,
+    cliff_threshold = cliff_thr,
+    sort_by = sort_by,
+    stat_units = stat_units,
     catcher_adjustment_method = catcher_adjustment_method,
-    method                    = "boundary_band"
+    method = "boundary_band"
   )
 
   result <- format_replacement_output(
-    replacement_stats      = repl_stats_df,
+    replacement_stats = repl_stats_df,
     positional_adjustments = scarcity_premium,
-    cliff_metric           = cliff_metric_df,
-    two_way_players        = two_way_players,
-    pool_diagnostics       = pool_diagnostics,
-    method                 = "boundary_band",
-    params                 = params_out
+    cliff_metric = cliff_metric_df,
+    two_way_players = two_way_players,
+    pool_diagnostics = pool_diagnostics,
+    method = "boundary_band",
+    params = params_out
   )
 
   # Attach output attributes
-  attr(result, "stat_units")           <- stat_units
-  attr(result, "config")               <- config
-  attr(result, "projections")          <- stored_projections
+  attr(result, "stat_units") <- stat_units
+  attr(result, "config") <- config
+  attr(result, "projections") <- stored_projections
   attr(result, "position_assignments") <- new_assignments
-  attr(result, "converged")            <- converged
-  attr(result, "iterations")           <- pass
-  attr(result, "delta")                <- delta
+  attr(result, "converged") <- converged
+  attr(result, "iterations") <- pass
+  attr(result, "delta") <- delta
 
   assert_replacement_output_contract(result)
 
@@ -1025,9 +1145,9 @@ replacement_from_prices <- function(
   n_teams,
   roster_slots,
   categories,
-  trim_method       = "iqr",
+  trim_method = "iqr",
   calibration_min_n = 15L,
-  verbose           = FALSE
+  verbose = FALSE
 ) {
   call_env <- rlang::caller_env()
 
@@ -1040,7 +1160,7 @@ replacement_from_prices <- function(
   checkmate::assert_character(categories, min.len = 1L)
 
   required_price_cols <- c("year", "player_name", "price", "pos_eligibility")
-  missing_price_cols  <- setdiff(required_price_cols, names(prices))
+  missing_price_cols <- setdiff(required_price_cols, names(prices))
   if (length(missing_price_cols) > 0L) {
     cli::cli_abort(
       c(
@@ -1048,7 +1168,7 @@ replacement_from_prices <- function(
         "i" = "The {.fn replacement_from_prices} function requires: {.val {required_price_cols}}."
       ),
       class = "rotostats_error_missing_column",
-      call  = call_env
+      call = call_env
     )
   }
 
@@ -1058,21 +1178,25 @@ replacement_from_prices <- function(
 
   # Normalize column names to uppercase
   names(prices) <- toupper(names(prices))
-  cats_upper    <- toupper(categories)
+  cats_upper <- toupper(categories)
 
   if (verbose && !("PLAYER_ID" %in% names(prices))) {
-    raw_names  <- prices$PLAYER_NAME
+    raw_names <- prices$PLAYER_NAME
     norm_names <- normalize_player_name(raw_names)
 
     # For each normalized name, count distinct raw spellings
     # Use split() to group raw spellings by normalized key (vectorized, no loop)
-    raw_by_norm    <- split(raw_names, norm_names)
-    n_distinct_raw <- vapply(raw_by_norm, function(raws) length(unique(raws)), integer(1L))
+    raw_by_norm <- split(raw_names, norm_names)
+    n_distinct_raw <- vapply(
+      raw_by_norm,
+      function(raws) length(unique(raws)),
+      integer(1L)
+    )
     collision_keys <- names(n_distinct_raw[n_distinct_raw > 1L])
 
     if (length(collision_keys) > 0L) {
       n_collisions <- length(collision_keys)
-      sample_keys  <- head(collision_keys, 3L)
+      sample_keys <- head(collision_keys, 3L)
 
       cli::cli_warn(
         c(
@@ -1097,8 +1221,12 @@ replacement_from_prices <- function(
   # Step 3: Exclude keepers or apply trim_method
   if ("IS_KEEPER" %in% names(dollar_pool)) {
     # Exact exclusion
-    dollar_pool <- dollar_pool[!isTRUE(dollar_pool$IS_KEEPER) &
-                               !dollar_pool$IS_KEEPER %in% TRUE, , drop = FALSE]
+    dollar_pool <- dollar_pool[
+      !isTRUE(dollar_pool$IS_KEEPER) &
+        !dollar_pool$IS_KEEPER %in% TRUE,
+      ,
+      drop = FALSE
+    ]
   } else {
     # Statistical trimming on a composite score (sum of scored category values)
     score_cols <- intersect(cats_upper, names(dollar_pool))
@@ -1108,16 +1236,17 @@ replacement_from_prices <- function(
         na.rm = TRUE
       )
       if (trim_method == "iqr") {
-        q3  <- stats::quantile(composite, 0.75, na.rm = TRUE)
+        q3 <- stats::quantile(composite, 0.75, na.rm = TRUE)
         iqr <- stats::IQR(composite, na.rm = TRUE)
         keep <- composite <= q3 + 1.5 * iqr
       } else if (trim_method == "mad") {
-        med  <- stats::median(composite, na.rm = TRUE)
+        med <- stats::median(composite, na.rm = TRUE)
         mad_ <- stats::mad(composite, constant = 1.4826, na.rm = TRUE)
         keep <- composite <= med + 3 * mad_
-      } else {  # "kde"
+      } else {
+        # "kde"
         trough <- kde_trough(composite)
-        keep   <- composite <= trough
+        keep <- composite <= trough
       }
       dollar_pool <- dollar_pool[keep, , drop = FALSE]
     }
@@ -1139,19 +1268,22 @@ replacement_from_prices <- function(
   # Step 5: Per-position mean stat line
   positions <- names(roster_slots[roster_slots > 0])
 
-  repl_rows_list  <- vector("list", length(positions))
+  repl_rows_list <- vector("list", length(positions))
   cliff_rows_list <- vector("list", length(positions))
-  names(repl_rows_list)  <- positions
+  names(repl_rows_list) <- positions
   names(cliff_rows_list) <- positions
 
   for (pos in positions) {
     # Find players eligible at this position
     pos_pattern <- paste0("(^|\\|)", pos, "(\\||$)")
-    pos_mask    <- grepl(pos_pattern, dollar_pool$POS_ELIGIBILITY)
-    pos_df      <- dollar_pool[pos_mask, , drop = FALSE]
+    pos_mask <- grepl(pos_pattern, dollar_pool$POS_ELIGIBILITY)
+    pos_df <- dollar_pool[pos_mask, , drop = FALSE]
 
     if (nrow(pos_df) == 0L) {
-      empty_stats <- stats::setNames(rep(NA_real_, length(cats_upper)), cats_upper)
+      empty_stats <- stats::setNames(
+        rep(NA_real_, length(cats_upper)),
+        cats_upper
+      )
       repl_rows_list[[pos]] <- c(
         list(position = pos),
         as.list(empty_stats),
@@ -1159,9 +1291,17 @@ replacement_from_prices <- function(
       )
     } else {
       # Mean stat line (no IP-weighted ERA/WHIP here — prices method uses simple means)
-      stat_means <- vapply(cats_upper, function(cat) {
-        if (cat %in% names(pos_df)) mean(pos_df[[cat]], na.rm = TRUE) else NA_real_
-      }, numeric(1L))
+      stat_means <- vapply(
+        cats_upper,
+        function(cat) {
+          if (cat %in% names(pos_df)) {
+            mean(pos_df[[cat]], na.rm = TRUE)
+          } else {
+            NA_real_
+          }
+        },
+        numeric(1L)
+      )
 
       repl_rows_list[[pos]] <- c(
         list(position = pos),
@@ -1171,90 +1311,96 @@ replacement_from_prices <- function(
     }
 
     cliff_rows_list[[pos]] <- list(
-      position        = pos,
-      cliff_detected  = FALSE,
-      cliff_location  = NA_integer_,
+      position = pos,
+      cliff_detected = FALSE,
+      cliff_location = NA_integer_,
       cliff_magnitude = NA_real_,
-      swingman        = FALSE,
-      n_band_players  = as.integer(nrow(pos_df))
+      swingman = FALSE,
+      n_band_players = as.integer(nrow(pos_df))
     )
   }
 
   # Assemble data frames
-  repl_stats_df <- do.call(rbind, lapply(names(repl_rows_list), function(pos) {
-    row <- repl_rows_list[[pos]]
-    df  <- as.data.frame(row, stringsAsFactors = FALSE)
-    for (cat in cats_upper) {
-      if (cat %in% names(df)) df[[cat]] <- as.numeric(df[[cat]])
-    }
-    df$n_band_players <- as.integer(row$n_band_players)
-    df$cliff_detected <- FALSE
-    df
-  }))
+  repl_stats_df <- do.call(
+    rbind,
+    lapply(names(repl_rows_list), function(pos) {
+      row <- repl_rows_list[[pos]]
+      df <- as.data.frame(row, stringsAsFactors = FALSE)
+      for (cat in cats_upper) {
+        if (cat %in% names(df)) df[[cat]] <- as.numeric(df[[cat]])
+      }
+      df$n_band_players <- as.integer(row$n_band_players)
+      df$cliff_detected <- FALSE
+      df
+    })
+  )
   rownames(repl_stats_df) <- NULL
 
-  cliff_metric_df <- do.call(rbind, lapply(cliff_rows_list, function(r) {
-    as.data.frame(r, stringsAsFactors = FALSE)
-  }))
+  cliff_metric_df <- do.call(
+    rbind,
+    lapply(cliff_rows_list, function(r) {
+      as.data.frame(r, stringsAsFactors = FALSE)
+    })
+  )
   rownames(cliff_metric_df) <- NULL
 
   # Step 6: Compute positional adjustments (minimal config-like object)
   # Build a minimal config substitute for compute_positional_adjustments
   fake_config <- list(
-    n_teams       = as.integer(n_teams),
-    roster_slots  = roster_slots,
+    n_teams = as.integer(n_teams),
+    roster_slots = roster_slots,
     pitcher_slots = integer(0L),
-    budget        = 260L,
-    budget_split  = 0.67,
-    categories    = categories
+    budget = 260L,
+    budget_split = 0.67,
+    categories = categories
   )
   class(fake_config) <- c("league_config", "list")
 
   scarcity_premium <- compute_positional_adjustments(
-    replacement_stats            = repl_stats_df,
-    config                       = fake_config,
+    replacement_stats = repl_stats_df,
+    config = fake_config,
     positional_adjustment_method = "fvarz",
-    catcher_adjustment_method    = "split_pool",
-    pos_weight                   = NULL,
-    sgp_denominators             = NULL,
-    pass_number                  = 1L,
-    verbose                      = verbose
+    catcher_adjustment_method = "split_pool",
+    pos_weight = NULL,
+    sgp_denominators = NULL,
+    pass_number = 1L,
+    verbose = verbose
   )
 
   # Params
   params_out <- list(
-    converged                 = TRUE,
-    iterations                = 1L,
-    delta                     = 0.0,
-    n_teams                   = as.integer(n_teams),
-    roster_slots              = roster_slots,
-    band_width                = NA_integer_,
-    cliff_threshold           = NA_real_,
-    sort_by                   = NA_character_,
-    stat_units                = "raw_projected",
+    converged = TRUE,
+    iterations = 1L,
+    delta = 0.0,
+    n_teams = as.integer(n_teams),
+    roster_slots = roster_slots,
+    band_width = NA_integer_,
+    cliff_threshold = NA_real_,
+    sort_by = NA_character_,
+    stat_units = "raw_projected",
     catcher_adjustment_method = "split_pool",
-    method                    = "prices"
+    method = "prices"
   )
 
   # Step 7: Construct output
   result <- format_replacement_output(
-    replacement_stats      = repl_stats_df,
+    replacement_stats = repl_stats_df,
     positional_adjustments = scarcity_premium,
-    cliff_metric           = cliff_metric_df,
-    two_way_players        = character(0L),
-    pool_diagnostics       = list(position_sd_ratio = NULL),
-    method                 = "prices",
-    params                 = params_out
+    cliff_metric = cliff_metric_df,
+    two_way_players = character(0L),
+    pool_diagnostics = list(position_sd_ratio = NULL),
+    method = "prices",
+    params = params_out
   )
 
   # Step 9: Attach attributes
-  attr(result, "stat_units")           <- "raw_projected"
-  attr(result, "config")               <- fake_config
-  attr(result, "projections")          <- NULL
+  attr(result, "stat_units") <- "raw_projected"
+  attr(result, "config") <- fake_config
+  attr(result, "projections") <- NULL
   attr(result, "position_assignments") <- NULL
-  attr(result, "converged")            <- TRUE
-  attr(result, "iterations")           <- 1L
-  attr(result, "delta")                <- 0.0
+  attr(result, "converged") <- TRUE
+  attr(result, "iterations") <- 1L
+  attr(result, "delta") <- 0.0
 
   # Step 8: Validate contract
   assert_replacement_output_contract(result)
@@ -1268,7 +1414,13 @@ replacement_from_prices <- function(
 
 #' @noRd
 .validate_league_history_inputs <- function(
-  projections, league_history, config, params, trim_method, verbose, call_env
+  projections,
+  league_history,
+  config,
+  params,
+  trim_method,
+  verbose,
+  call_env
 ) {
   # $1 calibration check and IP/AB divergence
   if (!is.null(league_history$prices)) {
@@ -1282,17 +1434,17 @@ replacement_from_prices <- function(
       cli::cli_abort(
         "league_history$prices is missing column{?s}: {.val {miss_cols}}.",
         class = "rotostats_error_missing_column",
-        call  = call_env
+        call = call_env
       )
     }
 
     if (verbose) {
       norm_prices_names <- normalize_player_name(prices_df$PLAYER_NAME)
-      norm_proj_names   <- normalize_player_name(projections$PLAYER_NAME)
-      unmatched_names   <- setdiff(norm_prices_names, norm_proj_names)
+      norm_proj_names <- normalize_player_name(projections$PLAYER_NAME)
+      unmatched_names <- setdiff(norm_prices_names, norm_proj_names)
 
       if (length(unmatched_names) > 0L) {
-        n_unmatched  <- length(unmatched_names)
+        n_unmatched <- length(unmatched_names)
         sample_names <- head(unmatched_names, 3L)
 
         cli::cli_warn(
@@ -1317,7 +1469,10 @@ replacement_from_prices <- function(
       proj_team_ip <- sum(projections$IP, na.rm = TRUE) / config$n_teams
       hist_team_ip <- mean(ts$IP, na.rm = TRUE)
       if (!is.na(hist_team_ip) && hist_team_ip > 0) {
-        if (abs(proj_team_ip - hist_team_ip) / hist_team_ip > params$ip_ab_divergence_tol) {
+        if (
+          abs(proj_team_ip - hist_team_ip) / hist_team_ip >
+            params$ip_ab_divergence_tol
+        ) {
           if (verbose) {
             cli::cli_warn(
               c(
@@ -1335,7 +1490,10 @@ replacement_from_prices <- function(
       proj_team_ab <- sum(projections$AB, na.rm = TRUE) / config$n_teams
       hist_team_ab <- mean(ts$AB, na.rm = TRUE)
       if (!is.na(hist_team_ab) && hist_team_ab > 0) {
-        if (abs(proj_team_ab - hist_team_ab) / hist_team_ab > params$ip_ab_divergence_tol) {
+        if (
+          abs(proj_team_ab - hist_team_ab) / hist_team_ab >
+            params$ip_ab_divergence_tol
+        ) {
           if (verbose) {
             cli::cli_warn(
               c(
@@ -1354,7 +1512,11 @@ replacement_from_prices <- function(
 }
 
 #' @noRd
-.normalize_repl_stats <- function(repl_stats_df, cats_upper, active_pitcher_pos) {
+.normalize_repl_stats <- function(
+  repl_stats_df,
+  cats_upper,
+  active_pitcher_pos
+) {
   # Normalize counting stats to full-season baselines
   # Hitters: 600 PA (550 AB when PA unavailable); SP: 200 IP; RP: 70 IP
   for (i in seq_len(nrow(repl_stats_df))) {
@@ -1362,7 +1524,12 @@ replacement_from_prices <- function(
     is_sp <- pos %in% intersect(active_pitcher_pos, "SP")
     is_rp <- pos %in% intersect(active_pitcher_pos, "RP")
 
-    if (is_sp && "IP" %in% names(repl_stats_df) && !is.na(repl_stats_df$IP[i]) && repl_stats_df$IP[i] > 0) {
+    if (
+      is_sp &&
+        "IP" %in% names(repl_stats_df) &&
+        !is.na(repl_stats_df$IP[i]) &&
+        repl_stats_df$IP[i] > 0
+    ) {
       scale <- 200 / repl_stats_df$IP[i]
       for (cat in intersect(cats_upper, names(repl_stats_df))) {
         # Don't scale rate stats
@@ -1370,7 +1537,12 @@ replacement_from_prices <- function(
           repl_stats_df[[cat]][i] <- repl_stats_df[[cat]][i] * scale
         }
       }
-    } else if (is_rp && "IP" %in% names(repl_stats_df) && !is.na(repl_stats_df$IP[i]) && repl_stats_df$IP[i] > 0) {
+    } else if (
+      is_rp &&
+        "IP" %in% names(repl_stats_df) &&
+        !is.na(repl_stats_df$IP[i]) &&
+        repl_stats_df$IP[i] > 0
+    ) {
       scale <- 70 / repl_stats_df$IP[i]
       for (cat in intersect(cats_upper, names(repl_stats_df))) {
         if (!cat %in% c("ERA", "WHIP", "AVG", "OBP", "SLG", "OPS")) {
@@ -1379,7 +1551,12 @@ replacement_from_prices <- function(
       }
     } else if (!is_sp && !is_rp) {
       # Hitter: scale to 550 AB if AB available, else use PA-based scaling
-      if ("AB" %in% names(repl_stats_df) && !is.na(repl_stats_df$AB[i]) && repl_stats_df$AB[i] > 0) {
+      if (
+        "AB" %in%
+          names(repl_stats_df) &&
+          !is.na(repl_stats_df$AB[i]) &&
+          repl_stats_df$AB[i] > 0
+      ) {
         scale <- 550 / repl_stats_df$AB[i]
         for (cat in intersect(cats_upper, names(repl_stats_df))) {
           if (!cat %in% c("ERA", "WHIP", "AVG", "OBP", "SLG", "OPS")) {
@@ -1394,10 +1571,14 @@ replacement_from_prices <- function(
 
 #' @noRd
 .compute_two_way_players <- function(
-  projections, repl_stats_df, current_assignments, cats_upper, role
+  projections,
+  repl_stats_df,
+  current_assignments,
+  cats_upper,
+  role
 ) {
   # Two-way players: those with PAR > 0 in both hitter and pitcher roles
-  has_hitter_elig  <- !is.na(current_assignments)
+  has_hitter_elig <- !is.na(current_assignments)
   has_pitcher_elig <- !is.na(role) & role %in% c("SP", "RP")
 
   # A two-way player must have both hitter and pitcher eligibility
@@ -1411,25 +1592,51 @@ replacement_from_prices <- function(
     has_hit <- any(!pos_parts %in% c("SP", "RP", "P"))
     has_pit <- any(pos_parts %in% c("SP", "RP"))
 
-    if (!has_hit || !has_pit) next
+    if (!has_hit || !has_pit) {
+      next
+    }
 
     # Compute PAR as hitter
     assigned_pos <- current_assignments[pid]
-    if (is.null(assigned_pos) || is.na(assigned_pos)) next
+    if (is.null(assigned_pos) || is.na(assigned_pos)) {
+      next
+    }
 
-    repl_row_hit <- repl_stats_df[repl_stats_df$position == assigned_pos, , drop = FALSE]
-    if (nrow(repl_row_hit) == 0L) next
+    repl_row_hit <- repl_stats_df[
+      repl_stats_df$position == assigned_pos,
+      ,
+      drop = FALSE
+    ]
+    if (nrow(repl_row_hit) == 0L) {
+      next
+    }
 
-    par_hit <- compute_par_at_pos(projections[i, , drop = FALSE], repl_row_hit, cats_upper)
+    par_hit <- compute_par_at_pos(
+      projections[i, , drop = FALSE],
+      repl_row_hit,
+      cats_upper
+    )
 
     # Compute PAR as pitcher
     pitcher_role <- role[i]
-    if (is.na(pitcher_role)) next
+    if (is.na(pitcher_role)) {
+      next
+    }
 
-    repl_row_pit <- repl_stats_df[repl_stats_df$position == pitcher_role, , drop = FALSE]
-    if (nrow(repl_row_pit) == 0L) next
+    repl_row_pit <- repl_stats_df[
+      repl_stats_df$position == pitcher_role,
+      ,
+      drop = FALSE
+    ]
+    if (nrow(repl_row_pit) == 0L) {
+      next
+    }
 
-    par_pit <- compute_par_at_pos(projections[i, , drop = FALSE], repl_row_pit, cats_upper)
+    par_pit <- compute_par_at_pos(
+      projections[i, , drop = FALSE],
+      repl_row_pit,
+      cats_upper
+    )
 
     if (par_hit > 0 && par_pit > 0) {
       two_way_ids <- c(two_way_ids, pid)
@@ -1441,8 +1648,12 @@ replacement_from_prices <- function(
 
 #' @noRd
 .compute_pool_diagnostics <- function(
-  projections, repl_stats_df, cats_upper, active_hitter_pos,
-  active_pitcher_pos, current_assignments
+  projections,
+  repl_stats_df,
+  cats_upper,
+  active_hitter_pos,
+  active_pitcher_pos,
+  current_assignments
 ) {
   # position_sd_ratio: per-category ratio of within-position SD to global SD
   positions <- c(active_hitter_pos, active_pitcher_pos)
@@ -1455,22 +1666,34 @@ replacement_from_prices <- function(
     if (is_pitcher_pos) {
       pos_mask <- grepl("(SP|RP)", projections$POS_ELIGIBILITY)
     } else {
-      player_ids_at_pos <- names(current_assignments)[current_assignments == pos]
+      player_ids_at_pos <- names(current_assignments)[
+        current_assignments == pos
+      ]
       pos_mask <- projections$PLAYER_ID %in% player_ids_at_pos
     }
 
     pos_df <- projections[pos_mask, , drop = FALSE]
 
-    ratios <- vapply(cats_upper, function(cat) {
-      if (!cat %in% names(projections)) return(NA_real_)
-      global_vals <- projections[[cat]]
-      pos_vals    <- pos_df[[cat]]
-      global_sd   <- stats::sd(global_vals, na.rm = TRUE)
-      pos_sd      <- stats::sd(pos_vals,    na.rm = TRUE)
-      if (is.na(global_sd) || global_sd == 0) return(NA_real_)
-      if (is.na(pos_sd)) return(NA_real_)
-      pos_sd / global_sd
-    }, numeric(1L))
+    ratios <- vapply(
+      cats_upper,
+      function(cat) {
+        if (!cat %in% names(projections)) {
+          return(NA_real_)
+        }
+        global_vals <- projections[[cat]]
+        pos_vals <- pos_df[[cat]]
+        global_sd <- stats::sd(global_vals, na.rm = TRUE)
+        pos_sd <- stats::sd(pos_vals, na.rm = TRUE)
+        if (is.na(global_sd) || global_sd == 0) {
+          return(NA_real_)
+        }
+        if (is.na(pos_sd)) {
+          return(NA_real_)
+        }
+        pos_sd / global_sd
+      },
+      numeric(1L)
+    )
 
     sd_ratios[[pos]] <- ratios
   }

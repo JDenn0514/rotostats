@@ -97,14 +97,21 @@
 #' applied by [zaa()] to individual players.
 #'
 #' @examples
-#' cfg <- league_config(
-#'   n_teams       = 12,
-#'   roster_slots  = c(C = 1, `1B` = 1, `2B` = 1, `3B` = 1, SS = 1, OF = 3,
-#'                     UTIL = 1),
-#'   pitcher_slots = c(SP = 5, RP = 3),
-#'   categories    = c("HR", "R", "RBI", "SB", "AVG", "W", "K", "SV",
-#'                     "ERA", "WHIP"),
-#'   budget        = 260
+#' config <- league_config(
+#'   n_teams = 12L,
+#'   roster_slots = c(
+#'     "C" = 1,
+#'     "1B" = 1,
+#'     "2B" = 1,
+#'     "3B" = 1,
+#'     "SS" = 1,
+#'     "OF" = 3,
+#'     "DH" = 1
+#'   ),
+#'   pitcher_slots = 9,
+#'   budget = 260L,
+#'   budget_split = 0.67,
+#'   categories = c("HR", "R")
 #' )
 #' # proj   <- <data frame of projections>
 #' # repl   <- replacement_level(proj, cfg)
@@ -120,14 +127,13 @@
 #' @export
 zar <- function(
   replacement,
-  include_raw     = FALSE,
-  pitcher_pool    = "combined",
-  hitter_pool     = "positional",
+  include_raw = FALSE,
+  pitcher_pool = "combined",
+  hitter_pool = "positional",
   category_weight = NULL,
-  weight_method   = "none",
+  weight_method = "none",
   ...
 ) {
-
   # ---------------------------------------------------------------------------
   # Step V1 — include_raw validation (explicit-path only)
   # ---------------------------------------------------------------------------
@@ -142,7 +148,7 @@ zar <- function(
             "i" = "You supplied: {.cls {class(include_raw)}}"
           ),
           class = "rotostats_error_invalid_parameter",
-          call  = rlang::caller_env()
+          call = rlang::caller_env()
         )
       }
     )
@@ -153,7 +159,7 @@ zar <- function(
   # ---------------------------------------------------------------------------
 
   projections <- attr(replacement, "projections")
-  config      <- attr(replacement, "config")
+  config <- attr(replacement, "config")
 
   if (is.null(projections) || is.null(config)) {
     cli::cli_abort(
@@ -162,7 +168,7 @@ zar <- function(
         "i" = "Use {.fn replacement_level} to build the {.arg replacement} object."
       ),
       class = "rotostats_error_missing_replacement_attrs",
-      call  = rlang::caller_env()
+      call = rlang::caller_env()
     )
   }
 
@@ -180,7 +186,7 @@ zar <- function(
         )
       ),
       class = "rotostats_error_multi_pos_all_unsupported",
-      call  = rlang::caller_env()
+      call = rlang::caller_env()
     )
   }
 
@@ -189,7 +195,7 @@ zar <- function(
   # ---------------------------------------------------------------------------
 
   position_assignments <- attr(replacement, "position_assignments")
-  replacement_stats    <- replacement$replacement_stats
+  replacement_stats <- replacement$replacement_stats
 
   # ---------------------------------------------------------------------------
   # Step 1 — Compute within-position z-scores via zaa()
@@ -199,11 +205,11 @@ zar <- function(
   # ---------------------------------------------------------------------------
 
   zaa_result <- zaa(
-    replacement     = replacement,
-    pitcher_pool    = pitcher_pool,
-    hitter_pool     = hitter_pool,
+    replacement = replacement,
+    pitcher_pool = pitcher_pool,
+    hitter_pool = hitter_pool,
     category_weight = category_weight,
-    weight_method   = weight_method,
+    weight_method = weight_method,
     ...
   )
 
@@ -213,7 +219,7 @@ zar <- function(
   # ---------------------------------------------------------------------------
 
   distribution <- attr(zaa_result, "distribution")
-  categories   <- config$categories
+  categories <- config$categories
 
   # Identify which positions are in replacement_stats
   repl_positions <- unique(replacement_stats$position)
@@ -224,7 +230,6 @@ zar <- function(
   names(zar_repl) <- repl_positions
 
   for (pos in repl_positions) {
-
     # Determine the distribution extraction path for this position
     # Pitchers: split -> nested under pos; combined/none -> flat
     # Hitters:  positional -> nested under pos; combined -> flat
@@ -238,7 +243,8 @@ zar <- function(
 
     # Get the replacement stat row for this position (use toupper for safety)
     repl_row <- replacement_stats[
-      toupper(replacement_stats$position) == toupper(pos), ,
+      toupper(replacement_stats$position) == toupper(pos),
+      ,
       drop = FALSE
     ]
 
@@ -267,8 +273,12 @@ zar <- function(
       }
       repl_c <- repl_row[[repl_stat_col[1L]]]
 
-      if (is.null(dist_entry) || is.null(dist_entry$sd) ||
-          is.na(dist_entry$sd) || dist_entry$sd == 0) {
+      if (
+        is.null(dist_entry) ||
+          is.null(dist_entry$sd) ||
+          is.na(dist_entry$sd) ||
+          dist_entry$sd == 0
+      ) {
         # SD = 0 or missing: pool is degenerate; replacement z-score = 0
         repl_z_vec[cat] <- 0
         next
@@ -287,13 +297,15 @@ zar <- function(
         z_raw_repl <- -(repl_c - dist_entry$mean) / dist_entry$sd
         z_vol_repl <- z_raw_repl * repl_ip
 
-        if (is.null(dist_entry$sd_vol) || is.na(dist_entry$sd_vol) ||
-            dist_entry$sd_vol == 0) {
+        if (
+          is.null(dist_entry$sd_vol) ||
+            is.na(dist_entry$sd_vol) ||
+            dist_entry$sd_vol == 0
+        ) {
           repl_z_vec[cat] <- if (is.na(z_vol_repl)) NA_real_ else 0
         } else {
           repl_z_vec[cat] <- z_vol_repl / dist_entry$sd_vol
         }
-
       } else if (cat_upper == "AVG") {
         # ---- AVG: no negation, volume-weight by AB ----
         repl_ab_col <- names(repl_row)[toupper(names(repl_row)) == "AB"]
@@ -306,13 +318,15 @@ zar <- function(
         z_raw_repl <- (repl_c - dist_entry$mean) / dist_entry$sd
         z_vol_repl <- z_raw_repl * repl_ab
 
-        if (is.null(dist_entry$sd_vol) || is.na(dist_entry$sd_vol) ||
-            dist_entry$sd_vol == 0) {
+        if (
+          is.null(dist_entry$sd_vol) ||
+            is.na(dist_entry$sd_vol) ||
+            dist_entry$sd_vol == 0
+        ) {
           repl_z_vec[cat] <- if (is.na(z_vol_repl)) NA_real_ else 0
         } else {
           repl_z_vec[cat] <- z_vol_repl / dist_entry$sd_vol
         }
-
       } else {
         # ---- Counting stat: unweighted z-score ----
         repl_z_vec[cat] <- (repl_c - dist_entry$mean) / dist_entry$sd
@@ -354,7 +368,7 @@ zar <- function(
   # ---------------------------------------------------------------------------
 
   zaa_col_names <- grep("^zaa_", names(zaa_result), value = TRUE)
-  n_players     <- nrow(zaa_result)
+  n_players <- nrow(zaa_result)
 
   # Build a per-player replacement z-score matrix (n_players x n_cats)
   # using position_assignments to look up the replacement z-score per position.
@@ -367,7 +381,9 @@ zar <- function(
     repl_z_matrix[, ci] <- vapply(
       player_positions,
       function(pos) {
-        if (is.na(pos) || is.null(zar_repl[[pos]])) return(NA_real_)
+        if (is.na(pos) || is.null(zar_repl[[pos]])) {
+          return(NA_real_)
+        }
         val <- zar_repl[[pos]][cat]
         if (is.null(val) || length(val) == 0L) NA_real_ else val
       },
@@ -377,7 +393,7 @@ zar <- function(
 
   # Subtract: zar[i, c] = zaa[i, c] - repl_z[i, c]
   zar_col_names <- sub("^zaa_", "zar_", zaa_col_names)
-  zar_matrix    <- as.matrix(zaa_result[, zaa_col_names, drop = FALSE]) -
+  zar_matrix <- as.matrix(zaa_result[, zaa_col_names, drop = FALSE]) -
     repl_z_matrix
   colnames(zar_matrix) <- zar_col_names
 
@@ -414,7 +430,7 @@ zar <- function(
 
   result <- as.data.frame(
     result_list,
-    row.names   = seq_len(n_players),
+    row.names = seq_len(n_players),
     check.names = FALSE
   )
 
@@ -422,7 +438,7 @@ zar <- function(
   # Step 7 — Attach output attributes
   # ---------------------------------------------------------------------------
 
-  attr(result, "units")  <- "zscore"
+  attr(result, "units") <- "zscore"
   attr(result, "anchor") <- "replacement"
 
   result

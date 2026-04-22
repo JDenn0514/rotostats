@@ -200,48 +200,55 @@
 #' # Toy example: two counting categories, three players
 #' history <- list(
 #'   team_season = data.frame(
-#'     year    = c(2022L, 2022L, 2022L, 2023L, 2023L, 2023L),
+#'     year = c(2022L, 2022L, 2022L, 2023L, 2023L, 2023L),
 #'     team_id = rep(c("A", "B", "C"), 2),
-#'     HR      = c(150, 180, 210, 155, 185, 215),
-#'     R       = c(650, 700, 740, 660, 710, 750),
-#'     IP      = c(1350, 1380, 1410, 1360, 1390, 1420),
-#'     AB      = c(5400, 5500, 5600, 5420, 5520, 5620),
+#'     HR = c(150, 180, 210, 155, 185, 215),
+#'     R = c(650, 700, 740, 660, 710, 750),
+#'     IP = c(1350, 1380, 1410, 1360, 1390, 1420),
+#'     AB = c(5400, 5500, 5600, 5420, 5520, 5620),
 #'     stringsAsFactors = FALSE
 #'   )
 #' )
 #'
 #' config <- league_config(
-#'   n_teams       = 12L,
-#'   roster_slots  = c(C = 1L, `1B` = 1L, `2B` = 1L, `3B` = 1L,
-#'                     SS = 1L, OF = 3L, DH = 1L),
+#'   n_teams = 12L,
+#'   roster_slots = c(
+#'     "C" = 1,
+#'     "1B" = 1,
+#'     "2B" = 1,
+#'     "3B" = 1,
+#'     "SS" = 1,
+#'     "OF" = 3,
+#'     "DH" = 1
+#'   ),
 #'   pitcher_slots = 9L,
-#'   budget        = 260L,
-#'   budget_split  = 0.67,
-#'   categories    = c("HR", "R")
+#'   budget = 260L,
+#'   budget_split = 0.67,
+#'   categories = c("HR", "R")
 #' )
 #'
 #' denoms <- sgp_denominators(
 #'   history,
 #'   scoring_categories = c("HR", "R"),
-#'   exclude_years      = integer(0)
+#'   exclude_years = integer(0)
 #' )
 #'
 #' projections <- data.frame(
 #'   HR = c(40L, 25L, 10L),
-#'   R  = c(90L, 80L, 70L),
-#'   IP = c(0L,  0L,  0L),    # pitching not scored — zeroes are fine
+#'   R = c(90L, 80L, 70L),
+#'   IP = c(0L, 0L, 0L), # pitching not scored — zeroes are fine
 #'   AB = c(500L, 450L, 400L)
 #' )
 #'
 #' \dontrun{
-#' # blended_pool requires league_history and league_config:
-#' result <- sgp(
-#'   projections   = projections,
-#'   denominators  = denoms,
-#'   league_history = history,
-#'   league_config  = config
-#' )
-#' result  # data frame: sgp_HR, sgp_R, total_sgp
+#'   # blended_pool requires league_history and league_config:
+#'   result <- sgp(
+#'     projections   = projections,
+#'     denominators  = denoms,
+#'     league_history = history,
+#'     league_config  = config
+#'   )
+#'   result  # data frame: sgp_HR, sgp_R, total_sgp
 #' }
 #'
 #' @importFrom utils head
@@ -249,16 +256,15 @@
 sgp <- function(
   projections,
   denominators,
-  league_history     = NULL,
-  rate_conversion    = "blended_pool",
-  pool_baseline      = "projection_pool",
-  league_config      = NULL,
-  baseline_era       = NULL,
-  baseline_whip      = NULL,
-  baseline_avg       = NULL,
+  league_history = NULL,
+  rate_conversion = "blended_pool",
+  pool_baseline = "projection_pool",
+  league_config = NULL,
+  baseline_era = NULL,
+  baseline_whip = NULL,
+  baseline_avg = NULL,
   rate_stat_formulas = NULL
 ) {
-
   # -------------------------------------------------------------------------
   # Step 1 — Normalize projections column names to uppercase (silent)
   # -------------------------------------------------------------------------
@@ -281,8 +287,11 @@ sgp <- function(
   # Step 2 — Validate rate_conversion (value check)
   # -------------------------------------------------------------------------
   valid_rate_conversions <- c(
-    "blended_pool", "fixed_baseline",
-    "per_player", "universal_constants", "team_ip_normalized"
+    "blended_pool",
+    "fixed_baseline",
+    "per_player",
+    "universal_constants",
+    "team_ip_normalized"
   )
   if (!rate_conversion %in% valid_rate_conversions) {
     cli::cli_abort(
@@ -312,7 +321,10 @@ sgp <- function(
   # -------------------------------------------------------------------------
   # Step 4 — Abort for not-implemented methods
   # -------------------------------------------------------------------------
-  if (rate_conversion %in% c("per_player", "universal_constants", "team_ip_normalized")) {
+  if (
+    rate_conversion %in%
+      c("per_player", "universal_constants", "team_ip_normalized")
+  ) {
     cli::cli_abort(
       paste0(
         "{.code rate_conversion = \"{rate_conversion}\"} is not yet implemented. ",
@@ -329,11 +341,11 @@ sgp <- function(
   if (rate_conversion == "fixed_baseline") {
     convert_rate_stats(
       league_history = league_history,
-      baseline_era   = baseline_era,
-      baseline_whip  = baseline_whip,
-      baseline_avg   = baseline_avg,
-      projections    = projections,
-      league_config  = league_config
+      baseline_era = baseline_era,
+      baseline_whip = baseline_whip,
+      baseline_avg = baseline_avg,
+      projections = projections,
+      league_config = league_config
     )
     # convert_rate_stats() always aborts — this line is never reached.
   }
@@ -383,7 +395,7 @@ sgp <- function(
   # -------------------------------------------------------------------------
   # Step 7 — Derive scored_cats, rate_cats, count_cats
   # -------------------------------------------------------------------------
-  scored_cats <- names(denominators)   # dispatches names.sgp_denominators()
+  scored_cats <- names(denominators) # dispatches names.sgp_denominators()
 
   # Resolve effective rate-stat formula registry. NULL = package default;
   # a user override fully replaces the registry (symmetric with
@@ -401,9 +413,19 @@ sgp <- function(
   # outside the scope of this plan; non-linear rate-stat support is a
   # separate follow-up.
   registry_names <- names(effective_registry)
-  linear_rate_set <- c("ERA", "WHIP", "AVG", "FIP", "XFIP", "SIERA", "XERA",
-                       "K/9", "BB/9", "HR/9")
-  rate_cats  <- intersect(scored_cats, registry_names)
+  linear_rate_set <- c(
+    "ERA",
+    "WHIP",
+    "AVG",
+    "FIP",
+    "XFIP",
+    "SIERA",
+    "XERA",
+    "K/9",
+    "BB/9",
+    "HR/9"
+  )
+  rate_cats <- intersect(scored_cats, registry_names)
   count_cats <- setdiff(scored_cats, rate_cats)
 
   # A scored category that *looks* like a linear rate stat (appears in the
@@ -432,7 +454,9 @@ sgp <- function(
       cli::cli_warn(
         paste0(
           "Scored category {.val {cat}} is absent from {.arg projections}. ",
-          "{.code ", col_name, "} will be {.code NA} for all players."
+          "{.code ",
+          col_name,
+          "} will be {.code NA} for all players."
         ),
         class = "rotostats_warning_missing_category_column"
       )
@@ -448,15 +472,23 @@ sgp <- function(
     NULL
   } else if ("SVHD" %in% scored_cats && "SVHD" %in% missing_cats) {
     # Try to derive from SV + HLD (or HD)
-    hld_col <- if ("HLD" %in% names(projections)) "HLD" else if ("HD" %in% names(projections)) "HD" else NULL
+    hld_col <- if ("HLD" %in% names(projections)) {
+      "HLD"
+    } else if ("HD" %in% names(projections)) {
+      "HD"
+    } else {
+      NULL
+    }
     if ("SV" %in% names(projections) && !is.null(hld_col)) {
       projections$SVHD <- projections$SV + projections[[hld_col]]
       rlang::inform(
         paste0(
-          "SVHD derived as SV + ", hld_col, ". ",
+          "SVHD derived as SV + ",
+          hld_col,
+          ". ",
           "Verify that this definition matches your league's hold rules."
         ),
-        .frequency    = "once",
+        .frequency = "once",
         .frequency_id = "sgp_svhd_derivation"
       )
       # Remove SVHD from missing_cats since we just derived it
@@ -475,7 +507,7 @@ sgp <- function(
   for (cat in setdiff(rate_cats, missing_cats)) {
     f <- effective_registry[[cat]]
     needed_in_ts <- c(cat, f$denominator_col)
-    ts_missing   <- setdiff(needed_in_ts, names(ts))
+    ts_missing <- setdiff(needed_in_ts, names(ts))
     if (length(ts_missing) > 0L) {
       cli::cli_abort(
         "{.code league_history$team_season} must contain {.val {needed_in_ts}} columns to derive the {.val {cat}} rate-stat baseline.",
@@ -498,7 +530,10 @@ sgp <- function(
   baselines <- list()
   for (cat in setdiff(rate_cats, missing_cats)) {
     f <- effective_registry[[cat]]
-    baselines[[cat]] <- stats::weighted.mean(ts_base[[cat]], ts_base[[f$denominator_col]])
+    baselines[[cat]] <- stats::weighted.mean(
+      ts_base[[cat]],
+      ts_base[[f$denominator_col]]
+    )
   }
 
   # -------------------------------------------------------------------------
@@ -506,7 +541,7 @@ sgp <- function(
   # -------------------------------------------------------------------------
 
   # 11a. Get pool sizes
-  ps          <- pool_sizes(league_config)
+  ps <- pool_sizes(league_config)
   pool_size_p <- ps$pitchers
   pool_size_h <- ps$hitters
 
@@ -527,17 +562,21 @@ sgp <- function(
   # scored rate stats, then compute the pool denominator sum and per-cat
   # pool numerator. Pools are keyed by denominator_col because in practice
   # pool_type is determined by denominator_col (IP=pitcher, AB/PA=hitter).
-  pool_meta <- list()   # keyed by denominator_col; stores players df + denom total
-  pool_num  <- list()   # keyed by rate-stat name; stores numerator total
+  pool_meta <- list() # keyed by denominator_col; stores players df + denom total
+  pool_num <- list() # keyed by rate-stat name; stores numerator total
 
   for (cat in setdiff(rate_cats, missing_cats)) {
     f <- effective_registry[[cat]]
     key <- f$denominator_col
 
     if (is.null(pool_meta[[key]])) {
-      pool_size   <- if (identical(f$pool_type, "pitcher")) pool_size_p else pool_size_h
-      sort_rows   <- order(projections[[key]], decreasing = TRUE)
-      pool_df     <- projections[head(sort_rows, pool_size), , drop = FALSE]
+      pool_size <- if (identical(f$pool_type, "pitcher")) {
+        pool_size_p
+      } else {
+        pool_size_h
+      }
+      sort_rows <- order(projections[[key]], decreasing = TRUE)
+      pool_df <- projections[head(sort_rows, pool_size), , drop = FALSE]
       denom_total <- sum(pool_df[[key]], na.rm = TRUE)
       pool_meta[[key]] <- list(players = pool_df, denom_total = denom_total)
     }
@@ -600,10 +639,10 @@ sgp <- function(
       next
     }
 
-    f            <- effective_registry[[cat]]
-    denom_col    <- f$denominator_col
+    f <- effective_registry[[cat]]
+    denom_col <- f$denominator_col
     player_denom <- projections[[denom_col]]
-    zero_denom   <- player_denom == 0 | is.na(player_denom)
+    zero_denom <- player_denom == 0 | is.na(player_denom)
 
     if (any(zero_denom) && !denom_col %in% warned_denom_cols) {
       zero_names <- if ("NAME" %in% names(projections)) {
@@ -613,9 +652,13 @@ sgp <- function(
       }
       cli::cli_warn(
         paste0(
-          "Player(s) with 0 or NA projected ", denom_col, ": ",
+          "Player(s) with 0 or NA projected ",
+          denom_col,
+          ": ",
           paste(zero_names, collapse = ", "),
-          ". Rate-stat SGP for {.val ", denom_col, "}-denominated categories set to {.code NA}."
+          ". Rate-stat SGP for {.val ",
+          denom_col,
+          "}-denominated categories set to {.code NA}."
         ),
         class = "rotostats_warning_zero_playing_time"
       )
@@ -623,9 +666,9 @@ sgp <- function(
     }
 
     player_rate <- projections[[cat]]
-    player_num  <- f$numerator_fn(player_rate, player_denom)
+    player_num <- f$numerator_fn(player_rate, player_denom)
     denom_total <- pool_meta[[denom_col]]$denom_total
-    num_total   <- pool_num[[cat]]
+    num_total <- pool_num[[cat]]
 
     blended <- (num_total + player_num) * f$scale / (denom_total + player_denom)
     baseline <- baselines[[cat]]
@@ -643,11 +686,27 @@ sgp <- function(
   # -------------------------------------------------------------------------
   # Step 15 — Assemble result data frame
   # -------------------------------------------------------------------------
-  result <- as.data.frame(sgp_cols, row.names = seq_len(n_players),
-                          check.names = FALSE)
+  result <- as.data.frame(
+    sgp_cols,
+    row.names = seq_len(n_players),
+    check.names = FALSE
+  )
 
   # total_sgp: rowSums with na.rm = FALSE so NA propagates
-  result$total_sgp <- rowSums(result[, sgp_col_names, drop = FALSE], na.rm = FALSE)
+  result$total_sgp <- rowSums(
+    result[, sgp_col_names, drop = FALSE],
+    na.rm = FALSE
+  )
 
   result
 }
+
+
+# blended_pool requires league_history and league_config:
+result <- sgp(
+  projections = projections,
+  denominators = denoms,
+  league_history = history,
+  league_config = config
+)
+result # data frame: sgp_HR, sgp_R, total_sgp
