@@ -185,5 +185,8 @@ head(result)
 \code{\link{sgp}} for the underlying SGP conversion;
 \code{\link{replacement_level}} for producing the \code{replacement} input;
 \code{\link{sgp_denominators}} for calibrating the \code{denominators} input.
+
+Other valuation: 
+\code{\link{zar}()}
 }
 \concept{valuation}
