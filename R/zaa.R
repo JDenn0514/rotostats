@@ -104,12 +104,21 @@
 #'
 #' @examples
 #' # Minimal example with explicit stats and config
-#' cfg <- league_config(
-#'   n_teams = 12,
-#'   roster_slots = c(C = 1, `1B` = 1, `2B` = 1, `3B` = 1, SS = 1, OF = 3, UTIL = 1),
-#'   pitcher_slots = c(SP = 5, RP = 3),
-#'   categories = c("HR", "R", "RBI", "SB", "AVG", "W", "K", "SV", "ERA", "WHIP"),
-#'   budget = 260
+#' config <- league_config(
+#'   n_teams = 12L,
+#'   roster_slots = c(
+#'     "C" = 1,
+#'     "1B" = 1,
+#'     "2B" = 1,
+#'     "3B" = 1,
+#'     "SS" = 1,
+#'     "OF" = 3,
+#'     "DH" = 1
+#'   ),
+#'   pitcher_slots = 9,
+#'   budget = 260L,
+#'   budget_split = 0.67,
+#'   categories = c("HR", "R")
 #' )
 #' # proj <- <data frame of projections>
 #' # result <- zaa(stats = proj, config = cfg)
@@ -120,16 +129,15 @@
 #' @importFrom stats setNames
 #' @export
 zaa <- function(
-  stats           = NULL,
-  config          = NULL,
-  replacement     = NULL,
-  pitcher_pool    = "combined",
-  hitter_pool     = "positional",
+  stats = NULL,
+  config = NULL,
+  replacement = NULL,
+  pitcher_pool = "combined",
+  hitter_pool = "positional",
   category_weight = NULL,
-  weight_method   = "none",
+  weight_method = "none",
   ...
 ) {
-
   # ---------------------------------------------------------------------------
   # Step V1 — Parameter membership (user-supplied non-default values only)
   # ---------------------------------------------------------------------------
@@ -144,7 +152,7 @@ zaa <- function(
             "i" = "You supplied: {.val {pitcher_pool}}"
           ),
           class = "rotostats_error_invalid_parameter",
-          call  = rlang::caller_env()
+          call = rlang::caller_env()
         )
       }
     )
@@ -160,7 +168,7 @@ zaa <- function(
             "i" = "You supplied: {.val {hitter_pool}}"
           ),
           class = "rotostats_error_invalid_parameter",
-          call  = rlang::caller_env()
+          call = rlang::caller_env()
         )
       }
     )
@@ -176,7 +184,7 @@ zaa <- function(
             "i" = "You supplied: {.val {weight_method}}"
           ),
           class = "rotostats_error_invalid_parameter",
-          call  = rlang::caller_env()
+          call = rlang::caller_env()
         )
       }
     )
@@ -188,7 +196,7 @@ zaa <- function(
 
   if (!is.null(replacement)) {
     projections_from_repl <- attr(replacement, "projections")
-    config_from_repl      <- attr(replacement, "config")
+    config_from_repl <- attr(replacement, "config")
 
     if (is.null(projections_from_repl) || is.null(config_from_repl)) {
       cli::cli_abort(
@@ -197,7 +205,7 @@ zaa <- function(
           "i" = "Use {.fn replacement_level} to build the {.arg replacement} object."
         ),
         class = "rotostats_error_missing_replacement_attrs",
-        call  = rlang::caller_env()
+        call = rlang::caller_env()
       )
     }
 
@@ -209,7 +217,7 @@ zaa <- function(
           "i" = "Ensure the replacement level is built from raw projected statistics."
         ),
         class = "rotostats_error_stat_units_mismatch",
-        call  = rlang::caller_env()
+        call = rlang::caller_env()
       )
     }
   }
@@ -219,7 +227,7 @@ zaa <- function(
   # ---------------------------------------------------------------------------
 
   if (!is.null(replacement)) {
-    working_stats  <- projections_from_repl
+    working_stats <- projections_from_repl
     working_config <- config_from_repl
   } else {
     if (is.null(stats)) {
@@ -228,7 +236,7 @@ zaa <- function(
           "Required argument missing: supply {.arg stats} (or {.arg replacement} with a {.code projections} attribute)."
         ),
         class = "rotostats_error_invalid_parameter",
-        call  = rlang::caller_env()
+        call = rlang::caller_env()
       )
     }
     if (is.null(config)) {
@@ -237,10 +245,10 @@ zaa <- function(
           "Required argument missing: supply {.arg config} (or {.arg replacement} with a {.code config} attribute)."
         ),
         class = "rotostats_error_invalid_parameter",
-        call  = rlang::caller_env()
+        call = rlang::caller_env()
       )
     }
-    working_stats  <- stats
+    working_stats <- stats
     working_config <- config
 
     # Step V6a — Unrestricted-pool inform
@@ -259,16 +267,19 @@ zaa <- function(
 
   if (!is.data.frame(working_stats)) {
     cli::cli_abort(
-      c("{.arg stats} must be a data frame.", "i" = "Got: {.cls {class(working_stats)}}"),
+      c(
+        "{.arg stats} must be a data frame.",
+        "i" = "Got: {.cls {class(working_stats)}}"
+      ),
       class = "rotostats_error_not_data_frame",
-      call  = rlang::caller_env()
+      call = rlang::caller_env()
     )
   }
 
-  categories    <- working_config$categories
-  stats_cols    <- toupper(names(working_stats))
-  cat_upper     <- toupper(categories)
-  missing_cats  <- categories[!cat_upper %in% stats_cols]
+  categories <- working_config$categories
+  stats_cols <- toupper(names(working_stats))
+  cat_upper <- toupper(categories)
+  missing_cats <- categories[!cat_upper %in% stats_cols]
 
   if (length(missing_cats) > 0) {
     cli::cli_abort(
@@ -277,7 +288,7 @@ zaa <- function(
         "i" = "All elements of {.code config$categories} must be columns in {.arg stats}."
       ),
       class = "rotostats_error_missing_column",
-      call  = rlang::caller_env()
+      call = rlang::caller_env()
     )
   }
 
@@ -292,7 +303,7 @@ zaa <- function(
         "i" = "Add full-season projected IP to {.arg stats}."
       ),
       class = "rotostats_error_missing_column",
-      call  = rlang::caller_env()
+      call = rlang::caller_env()
     )
   }
 
@@ -303,13 +314,16 @@ zaa <- function(
         "i" = "Add full-season projected AB to {.arg stats}."
       ),
       class = "rotostats_error_missing_column",
-      call  = rlang::caller_env()
+      call = rlang::caller_env()
     )
   }
 
   # Numeric type check for scored categories
   # Resolve actual column names (case-insensitive match)
-  col_map <- stats::setNames(names(working_stats), toupper(names(working_stats)))
+  col_map <- stats::setNames(
+    names(working_stats),
+    toupper(names(working_stats))
+  )
   for (cat in categories) {
     actual_col <- col_map[toupper(cat)]
     if (!is.numeric(working_stats[[actual_col]])) {
@@ -319,7 +333,7 @@ zaa <- function(
           "i" = "Got: {.cls {class(working_stats[[actual_col]])}}"
         ),
         class = "rotostats_error_wrong_column_type",
-        call  = rlang::caller_env()
+        call = rlang::caller_env()
       )
     }
   }
@@ -338,7 +352,7 @@ zaa <- function(
             "i" = "Example: {.code c(SP = 0.8, RP = 0.8, C = 1.0)}"
           ),
           class = "rotostats_error_invalid_parameter",
-          call  = rlang::caller_env()
+          call = rlang::caller_env()
         )
       }
     )
@@ -349,7 +363,10 @@ zaa <- function(
   # ---------------------------------------------------------------------------
 
   # Build a column-name lookup (uppercase key -> actual column name in working_stats)
-  upper_col_map <- stats::setNames(names(working_stats), toupper(names(working_stats)))
+  upper_col_map <- stats::setNames(
+    names(working_stats),
+    toupper(names(working_stats))
+  )
 
   # Determine position_assignments
   if (!is.null(replacement)) {
@@ -358,24 +375,30 @@ zaa <- function(
     # or data frame with player_id and pool_label columns
     # Restrict working_stats to players in position_assignments
     if (is.data.frame(position_assignments)) {
-      pa_ids   <- position_assignments$player_id
+      pa_ids <- position_assignments$player_id
       pa_pools <- stats::setNames(
         as.character(position_assignments$pool_label),
         as.character(position_assignments$player_id)
       )
     } else {
       # Named character vector: names = player_id, values = pool label
-      pa_ids   <- names(position_assignments)
-      pa_pools <- stats::setNames(as.character(position_assignments), names(position_assignments))
+      pa_ids <- names(position_assignments)
+      pa_pools <- stats::setNames(
+        as.character(position_assignments),
+        names(position_assignments)
+      )
     }
 
     # Restrict to rostered players
     if ("PLAYER_ID" %in% toupper(names(working_stats))) {
       pid_col <- upper_col_map["PLAYER_ID"]
-      keep    <- working_stats[[pid_col]] %in% pa_ids
+      keep <- working_stats[[pid_col]] %in% pa_ids
       working_stats <- working_stats[keep, , drop = FALSE]
       # Re-compute column map after row restriction (columns unchanged)
-      upper_col_map <- stats::setNames(names(working_stats), toupper(names(working_stats)))
+      upper_col_map <- stats::setNames(
+        names(working_stats),
+        toupper(names(working_stats))
+      )
       # Pool labels per row
       row_pools <- pa_pools[as.character(working_stats[[pid_col]])]
     } else {
@@ -385,7 +408,9 @@ zaa <- function(
   } else {
     # No replacement: use pos_eligibility (first position only)
     pos_col <- if ("pos_eligibility" %in% tolower(names(working_stats))) {
-      names(working_stats)[tolower(names(working_stats)) == "pos_eligibility"][1]
+      names(working_stats)[tolower(names(working_stats)) == "pos_eligibility"][
+        1
+      ]
     } else {
       NULL
     }
@@ -408,7 +433,9 @@ zaa <- function(
     # Return empty data frame with correct structure
     zaa_cols_empty <- .zaa_col_name(categories)
     out_cols <- c(
-      if ("PLAYER_ID" %in% toupper(names(working_stats))) upper_col_map["PLAYER_ID"],
+      if ("PLAYER_ID" %in% toupper(names(working_stats))) {
+        upper_col_map["PLAYER_ID"]
+      },
       zaa_cols_empty,
       "total_zaa"
     )
@@ -416,8 +443,8 @@ zaa <- function(
       matrix(numeric(0), nrow = 0, ncol = length(out_cols)),
       col.names = out_cols
     )
-    attr(result, "units")        <- "zscore"
-    attr(result, "anchor")       <- "average"
+    attr(result, "units") <- "zscore"
+    attr(result, "anchor") <- "average"
     attr(result, "distribution") <- list()
     return(result)
   }
@@ -425,7 +452,7 @@ zaa <- function(
   # Classify each player row as hitter or pitcher
   # SP / RP are pitcher slots; all others are hitters
   is_pitcher <- row_pools %in% c("SP", "RP", "P", "ALL_PITCHERS")
-  is_hitter  <- !is_pitcher
+  is_hitter <- !is_pitcher
 
   # Finalize pool labels given pitcher_pool and hitter_pool settings
   pool_labels <- character(n_players)
@@ -463,15 +490,25 @@ zaa <- function(
   # Step V7 — Warning: weight_method x pitcher_pool = "combined" interaction
   # ---------------------------------------------------------------------------
 
-  if (weight_method != "none" && pitcher_pool == "combined" && is.null(category_weight)) {
+  if (
+    weight_method != "none" &&
+      pitcher_pool == "combined" &&
+      is.null(category_weight)
+  ) {
     pitcher_row_idx <- which(is_pitcher)
     if (length(pitcher_row_idx) > 0L) {
       n_pitcher_cats <- sum(
-        vapply(categories, function(cat) {
-          col <- upper_col_map[toupper(cat)]
-          any(!is.na(working_stats[[col]][pitcher_row_idx]) &
-                working_stats[[col]][pitcher_row_idx] != 0)
-        }, logical(1))
+        vapply(
+          categories,
+          function(cat) {
+            col <- upper_col_map[toupper(cat)]
+            any(
+              !is.na(working_stats[[col]][pitcher_row_idx]) &
+                working_stats[[col]][pitcher_row_idx] != 0
+            )
+          },
+          logical(1)
+        )
       )
     } else {
       n_pitcher_cats <- 0L
@@ -480,7 +517,8 @@ zaa <- function(
       c(
         "!" = paste0(
           "Auto-computed {.arg weight_method} weights treat all pitchers as having ",
-          n_pitcher_cats, " non-zero categories."
+          n_pitcher_cats,
+          " non-zero categories."
         ),
         " " = "SPs contribute ~0 to saves/holds; RPs contribute ~0 to wins.",
         " " = "The normalization factor may overstate for both groups.",
@@ -490,7 +528,7 @@ zaa <- function(
         )
       ),
       class = "rotostats_warning_auto_weight_combined_pool",
-      call  = rlang::caller_env()
+      call = rlang::caller_env()
     )
   }
 
@@ -500,10 +538,10 @@ zaa <- function(
 
   # Initialize z-score matrix (players x categories)
   zaa_col_names <- .zaa_col_name(categories)
-  zaa_matrix    <- matrix(
+  zaa_matrix <- matrix(
     NA_real_,
-    nrow     = n_players,
-    ncol     = length(categories),
+    nrow = n_players,
+    ncol = length(categories),
     dimnames = list(NULL, zaa_col_names)
   )
 
@@ -512,7 +550,7 @@ zaa <- function(
 
   # Identify rate stats: INVERSE_CATEGORIES or AVG
   is_rate_cat <- toupper(categories) %in% c(INVERSE_CATEGORIES, "AVG")
-  rate_warned_denom <- character(0)  # track warned denominator columns
+  rate_warned_denom <- character(0) # track warned denominator columns
 
   # Get unique pool labels
   unique_pools <- unique(pool_labels)
@@ -520,15 +558,17 @@ zaa <- function(
   for (pool_lbl in unique_pools) {
     pool_rows <- which(pool_labels == pool_lbl)
     pool_data <- working_stats[pool_rows, , drop = FALSE]
-    n_pool    <- length(pool_rows)
+    n_pool <- length(pool_rows)
 
-    if (n_pool == 0L) next
+    if (n_pool == 0L) {
+      next
+    }
 
     for (ci in seq_along(categories)) {
-      cat        <- categories[ci]
+      cat <- categories[ci]
       cat_upper_i <- toupper(cat)
-      col_name   <- upper_col_map[cat_upper_i]
-      zaa_col    <- zaa_col_names[ci]
+      col_name <- upper_col_map[cat_upper_i]
+      zaa_col <- zaa_col_names[ci]
       cat_values <- pool_data[[col_name]]
 
       if (is_rate_cat[ci]) {
@@ -536,7 +576,7 @@ zaa <- function(
         # Step 2a — Rate stat: raw z-score (unweighted)
         # ------------------------------------------------------------------
         mean_c <- mean(cat_values)
-        sd_c   <- .pop_sd(cat_values)
+        sd_c <- .pop_sd(cat_values)
 
         # Guard: SD = 0, NA — all players identical; set z-scores to 0
         if (isTRUE(sd_c == 0) || is.na(sd_c)) {
@@ -555,8 +595,8 @@ zaa <- function(
         # Step 2b — Volume-weight and re-standardize
         # ------------------------------------------------------------------
         denom_col_upper <- if (cat_upper_i == "AVG") "AB" else "IP"
-        denom_col       <- upper_col_map[denom_col_upper]
-        denom_values    <- pool_data[[denom_col]]
+        denom_col <- upper_col_map[denom_col_upper]
+        denom_values <- pool_data[[denom_col]]
 
         # Zero/NA volume check — warn once per denominator column
         zero_vol <- is.na(denom_values) | denom_values == 0
@@ -568,13 +608,14 @@ zaa <- function(
           }
           cli::cli_warn(
             paste0(
-              "Player(s) with 0 or NA projected ", denom_col_upper,
+              "Player(s) with 0 or NA projected ",
+              denom_col_upper,
               " in category {.val {cat}}: ",
               paste(affected_ids, collapse = ", "),
               ". Rate-stat z-score set to {.code NA}."
             ),
             class = "rotostats_warning_zero_playing_time",
-            call  = rlang::caller_env()
+            call = rlang::caller_env()
           )
           rate_warned_denom <- c(rate_warned_denom, denom_col_upper)
         }
@@ -604,13 +645,12 @@ zaa <- function(
 
         # Distribution entry includes sd_vol (present for rate stats only)
         dist_entry <- list(mean = mean_c, sd = sd_c, sd_vol = sd_vol_c)
-
       } else {
         # ------------------------------------------------------------------
         # Step 2 — Counting stat: unweighted z-score
         # ------------------------------------------------------------------
         mean_c <- mean(cat_values)
-        sd_c   <- .pop_sd(cat_values)
+        sd_c <- .pop_sd(cat_values)
 
         if (isTRUE(sd_c == 0) || is.na(sd_c)) {
           # All identical (e.g., all zeros): z-score = 0
@@ -660,11 +700,17 @@ zaa <- function(
 
   if (length(hitter_rows) > 0L) {
     n_hitter_cats <- sum(
-      vapply(categories, function(cat) {
-        col <- upper_col_map[toupper(cat)]
-        any(!is.na(working_stats[[col]][hitter_rows]) &
-              working_stats[[col]][hitter_rows] != 0)
-      }, logical(1))
+      vapply(
+        categories,
+        function(cat) {
+          col <- upper_col_map[toupper(cat)]
+          any(
+            !is.na(working_stats[[col]][hitter_rows]) &
+              working_stats[[col]][hitter_rows] != 0
+          )
+        },
+        logical(1)
+      )
     )
   } else {
     # No hitters in pool: use total category count as baseline
@@ -675,57 +721,84 @@ zaa <- function(
     # Step 4b — Apply manual category_weight (overrides weight_method)
     for (pos_label in names(category_weight)) {
       pos_rows <- which(pool_labels == pos_label)
-      if (length(pos_rows) == 0L) next
+      if (length(pos_rows) == 0L) {
+        next
+      }
       total_zaa[pos_rows] <- rowSums(
         zaa_matrix[pos_rows, , drop = FALSE],
         na.rm = FALSE
-      ) * category_weight[[pos_label]]
+      ) *
+        category_weight[[pos_label]]
     }
     # For pool groups NOT covered by category_weight, fall back to weight_method
     covered <- pool_labels %in% names(category_weight)
     if (weight_method != "none" && any(!covered)) {
       for (pool_lbl in unique(pool_labels[!covered])) {
         pos_rows <- which(pool_labels == pool_lbl)
-        if (length(pos_rows) == 0L) next
+        if (length(pos_rows) == 0L) {
+          next
+        }
         n_pos_cats <- sum(
-          vapply(categories, function(cat) {
-            col <- upper_col_map[toupper(cat)]
-            any(!is.na(working_stats[[col]][pos_rows]) &
-                  working_stats[[col]][pos_rows] != 0)
-          }, logical(1))
+          vapply(
+            categories,
+            function(cat) {
+              col <- upper_col_map[toupper(cat)]
+              any(
+                !is.na(working_stats[[col]][pos_rows]) &
+                  working_stats[[col]][pos_rows] != 0
+              )
+            },
+            logical(1)
+          )
         )
-        multiplier <- switch(weight_method,
-          "none"   = 1,
+        multiplier <- switch(
+          weight_method,
+          "none" = 1,
           "linear" = if (n_hitter_cats > 0) n_pos_cats / n_hitter_cats else 1,
-          "sqrt"   = if (n_hitter_cats > 0) sqrt(n_pos_cats / n_hitter_cats) else 1
+          "sqrt" = if (n_hitter_cats > 0) {
+            sqrt(n_pos_cats / n_hitter_cats)
+          } else {
+            1
+          }
         )
         total_zaa[pos_rows] <- rowSums(
           zaa_matrix[pos_rows, , drop = FALSE],
           na.rm = FALSE
-        ) * multiplier
+        ) *
+          multiplier
       }
     }
   } else if (weight_method != "none") {
     # Step 4a — Auto-computed multipliers per pool group
     for (pool_lbl in unique_pools) {
       pos_rows <- which(pool_labels == pool_lbl)
-      if (length(pos_rows) == 0L) next
+      if (length(pos_rows) == 0L) {
+        next
+      }
       n_pos_cats <- sum(
-        vapply(categories, function(cat) {
-          col <- upper_col_map[toupper(cat)]
-          any(!is.na(working_stats[[col]][pos_rows]) &
-                working_stats[[col]][pos_rows] != 0)
-        }, logical(1))
+        vapply(
+          categories,
+          function(cat) {
+            col <- upper_col_map[toupper(cat)]
+            any(
+              !is.na(working_stats[[col]][pos_rows]) &
+                working_stats[[col]][pos_rows] != 0
+            )
+          },
+          logical(1)
+        )
       )
-      multiplier <- switch(weight_method,
-        "none"   = 1,
+      multiplier <- switch(
+        weight_method,
+        "none" = 1,
         "linear" = if (n_hitter_cats > 0) n_pos_cats / n_hitter_cats else 1,
-        "sqrt"   = if (n_hitter_cats > 0) sqrt(n_pos_cats / n_hitter_cats) else 1
+        "sqrt" = if (n_hitter_cats > 0) sqrt(n_pos_cats / n_hitter_cats) else 1
       )
       total_zaa[pos_rows] <- rowSums(
         zaa_matrix[pos_rows, , drop = FALSE],
         na.rm = FALSE
-      ) * multiplier
+      ) *
+        multiplier
     }
   }
   # weight_method == "none" and category_weight NULL: total_zaa is already rowSums
@@ -746,12 +819,15 @@ zaa <- function(
   }
   result_list[["total_zaa"]] <- unname(total_zaa)
 
-  result <- as.data.frame(result_list, row.names = seq_len(n_players),
-                          check.names = FALSE)
+  result <- as.data.frame(
+    result_list,
+    row.names = seq_len(n_players),
+    check.names = FALSE
+  )
 
   # Attach output attributes
-  attr(result, "units")        <- "zscore"
-  attr(result, "anchor")       <- "average"
+  attr(result, "units") <- "zscore"
+  attr(result, "anchor") <- "average"
   attr(result, "distribution") <- distribution
 
   result

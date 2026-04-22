@@ -52,7 +52,7 @@ league_history <- function(team_season, prices = NULL) {
   structure(
     list(
       team_season = team_season,
-      prices      = prices
+      prices = prices
     ),
     class = c("league_history", "list")
   )
@@ -72,7 +72,7 @@ validate_team_season <- function(ts) {
   }
 
   nm_lower <- tolower(names(ts))
-  missing  <- setdiff(c("year", "team_id"), nm_lower)
+  missing <- setdiff(c("year", "team_id"), nm_lower)
   if (length(missing) > 0L) {
     cli::cli_abort(
       "{.arg team_season} is missing required column{?s}: {.val {missing}}.",
@@ -111,7 +111,7 @@ validate_team_season <- function(ts) {
 #' @noRd
 normalize_history_columns <- function(ts) {
   original <- names(ts)
-  upper    <- toupper(original)
+  upper <- toupper(original)
   if (!identical(original, upper)) {
     changed <- original != upper
     cli::cli_inform(
@@ -128,8 +128,10 @@ normalize_history_columns <- function(ts) {
 
 #' @noRd
 check_team_counts <- function(ts) {
-  counts   <- table(ts$YEAR)
-  if (length(counts) <= 1L) return(invisible(NULL))
+  counts <- table(ts$YEAR)
+  if (length(counts) <= 1L) {
+    return(invisible(NULL))
+  }
   if (length(unique(counts)) > 1L) {
     years <- names(counts)
     pairs <- paste0(years, "=", as.integer(counts), collapse = ", ")
@@ -146,13 +148,17 @@ check_team_counts <- function(ts) {
 
 #' @noRd
 check_na_stat_values <- function(ts) {
-  id_cols    <- c("YEAR", "TEAM_ID")
-  stat_cols  <- setdiff(names(ts), id_cols)
-  if (length(stat_cols) == 0L) return(invisible(NULL))
+  id_cols <- c("YEAR", "TEAM_ID")
+  stat_cols <- setdiff(names(ts), id_cols)
+  if (length(stat_cols) == 0L) {
+    return(invisible(NULL))
+  }
   na_mask <- vapply(ts[stat_cols], anyNA, logical(1L))
-  if (!any(na_mask)) return(invisible(NULL))
+  if (!any(na_mask)) {
+    return(invisible(NULL))
+  }
   bad_cols <- stat_cols[na_mask]
-  rows     <- which(
+  rows <- which(
     Reduce(`|`, lapply(ts[bad_cols], is.na))
   )
   pairs <- paste(
@@ -171,7 +177,9 @@ check_na_stat_values <- function(ts) {
 
 #' @noRd
 maybe_inform_2020 <- function(ts) {
-  if (!(2020L %in% ts$YEAR)) return(invisible(NULL))
+  if (!(2020L %in% ts$YEAR)) {
+    return(invisible(NULL))
+  }
   cli::cli_inform(
     c(
       "{.val 2020} present in {.arg team_season$year}.",
@@ -188,7 +196,9 @@ maybe_inform_2020 <- function(ts) {
 
 #' @noRd
 validate_prices <- function(prices) {
-  if (is.null(prices)) return(NULL)
+  if (is.null(prices)) {
+    return(NULL)
+  }
 
   if (!is.data.frame(prices)) {
     cli::cli_abort(
@@ -198,7 +208,7 @@ validate_prices <- function(prices) {
   }
 
   required <- c("year", "player_name", "price")
-  missing  <- setdiff(required, names(prices))
+  missing <- setdiff(required, names(prices))
   if (length(missing) > 0L) {
     cli::cli_abort(
       "{.arg prices} is missing required column{?s}: {.val {missing}}.",
@@ -207,7 +217,7 @@ validate_prices <- function(prices) {
   }
 
   if (any(is.finite(prices$price) & prices$price < 0)) {
-    bad   <- which(is.finite(prices$price) & prices$price < 0)
+    bad <- which(is.finite(prices$price) & prices$price < 0)
     n_bad <- length(bad)
     cli::cli_warn(
       c(
@@ -219,7 +229,7 @@ validate_prices <- function(prices) {
   }
 
   if ("player_type" %in% names(prices)) {
-    raw   <- prices$player_type
+    raw <- prices$player_type
     lower <- tolower(raw)
     if (!identical(raw, lower)) {
       cli::cli_inform(
@@ -251,29 +261,38 @@ validate_prices <- function(prices) {
 #' @export
 print.league_history <- function(x, ...) {
   cat("League history\n")
-  ts        <- x$team_season
-  years     <- sort(unique(ts$YEAR))
-  n_teams   <- length(unique(ts$TEAM_ID))
+  ts <- x$team_season
+  years <- sort(unique(ts$YEAR))
+  n_teams <- length(unique(ts$TEAM_ID))
   year_span <- if (length(years) > 1L) {
     sprintf("%d-%d", min(years), max(years))
   } else {
     as.character(years)
   }
-  cat(sprintf("  Team seasons: %d teams x %d year(s) (%s)\n",
-              n_teams, length(years), year_span))
+  cat(sprintf(
+    "  Team seasons: %d teams x %d year(s) (%s)\n",
+    n_teams,
+    length(years),
+    year_span
+  ))
   stat_cols <- setdiff(names(ts), c("YEAR", "TEAM_ID"))
-  cat(sprintf("  Stat columns: %s  (%d cols)\n",
-              paste(stat_cols, collapse = " "),
-              length(stat_cols)))
+  cat(sprintf(
+    "  Stat columns: %s  (%d cols)\n",
+    paste(stat_cols, collapse = " "),
+    length(stat_cols)
+  ))
   if (!is.null(x$prices)) {
     pr_years <- sort(unique(x$prices$year))
-    pr_span  <- if (length(pr_years) > 1L) {
+    pr_span <- if (length(pr_years) > 1L) {
       sprintf("%d-%d", min(pr_years), max(pr_years))
     } else {
       as.character(pr_years)
     }
-    cat(sprintf("  Prices:       %s player-seasons (%s)\n",
-                format(nrow(x$prices), big.mark = ","), pr_span))
+    cat(sprintf(
+      "  Prices:       %s player-seasons (%s)\n",
+      format(nrow(x$prices), big.mark = ","),
+      pr_span
+    ))
   }
   if (2020L %in% years) {
     cat("  Note:         2020 present - consider exclude_years = 2020L\n")

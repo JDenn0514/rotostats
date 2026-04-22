@@ -9,7 +9,14 @@
 
 #' @noRd
 INVERSE_CATEGORIES <- c(
-  "ERA", "WHIP", "FIP", "XFIP", "SIERA", "XERA", "BB/9", "HR/9"
+  "ERA",
+  "WHIP",
+  "FIP",
+  "XFIP",
+  "SIERA",
+  "XERA",
+  "BB/9",
+  "HR/9"
 )
 
 # ---------------------------------------------------------------------------

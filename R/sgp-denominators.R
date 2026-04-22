@@ -33,10 +33,10 @@
 #' @export
 convert_rate_stats <- function(
   league_history,
-  baseline_era  = NULL,
+  baseline_era = NULL,
   baseline_whip = NULL,
-  baseline_avg  = NULL,
-  projections   = NULL,
+  baseline_avg = NULL,
+  projections = NULL,
   league_config = NULL
 ) {
   cli::cli_abort(
@@ -299,21 +299,21 @@ convert_rate_stats <- function(
 #' }
 sgp_denominators <- function(
   league_history,
-  scoring_categories  = NULL,
-  n_teams             = NULL,
-  years               = "all",
-  weights             = exp_decay(0.9),
-  method              = "ols",
-  category_spec       = NULL,
-  outlier_filter      = FALSE,
-  exclude_years       = 2020L,
-  inverse_categories  = NULL,
-  config              = NULL,
-  rate_conversion     = "blended_pool",
-  roto_pts_col        = "roto_pts",
-  n_bootstrap         = 0L,
-  denom_floor         = 1e-9,
-  ci_level            = 0.95
+  scoring_categories = NULL,
+  n_teams = NULL,
+  years = "all",
+  weights = exp_decay(0.9),
+  method = "ols",
+  category_spec = NULL,
+  outlier_filter = FALSE,
+  exclude_years = 2020L,
+  inverse_categories = NULL,
+  config = NULL,
+  rate_conversion = "blended_pool",
+  roto_pts_col = "roto_pts",
+  n_bootstrap = 0L,
+  denom_floor = 1e-9,
+  ci_level = 0.95
 ) {
   the_call <- match.call()
 
@@ -371,7 +371,7 @@ sgp_denominators <- function(
   # Step 5. Handle rate_conversion = "fixed_baseline".
   if (rate_conversion == "fixed_baseline") {
     if (!inherits(league_history, "sgp_history_transformed")) {
-      convert_rate_stats(league_history)  # always aborts via stub
+      convert_rate_stats(league_history) # always aborts via stub
     }
   }
 
@@ -394,11 +394,12 @@ sgp_denominators <- function(
 
   # Step 8. Validate n_bootstrap.
   if (
-    !is.numeric(n_bootstrap) && !is.integer(n_bootstrap) ||
-    length(n_bootstrap) != 1L ||
-    is.na(n_bootstrap) ||
-    n_bootstrap < 0 ||
-    n_bootstrap != floor(n_bootstrap)
+    !is.numeric(n_bootstrap) &&
+      !is.integer(n_bootstrap) ||
+      length(n_bootstrap) != 1L ||
+      is.na(n_bootstrap) ||
+      n_bootstrap < 0 ||
+      n_bootstrap != floor(n_bootstrap)
   ) {
     cli::cli_abort(
       "{.arg n_bootstrap} must be a non-negative integer scalar.",
@@ -427,7 +428,7 @@ sgp_denominators <- function(
     exclude_from_inference <- c(METADATA_COLS, roto_pts_col_upper, pts_cols)
     candidate_cols <- names(ts)[
       vapply(ts, is.numeric, logical(1L)) &
-      !names(ts) %in% exclude_from_inference
+        !names(ts) %in% exclude_from_inference
     ]
     cli::cli_inform(c(
       "Inferring scoring categories from {.code league_history$team_season} columns:",
@@ -494,17 +495,15 @@ sgp_denominators <- function(
         class = "rotostats_error_invalid_inverse_categories"
       )
     }
-
   } else if (!is.null(config) && !is.null(config$inverse_categories)) {
     # Layer 2: inherit from config.
-    inv_source         <- "from config"
+    inv_source <- "from config"
     inverse_categories <- config$inverse_categories
     # config$inverse_categories is already validated and uppercased at
     # league_config() construction time; no re-validation needed here.
-
   } else {
     # Layer 3: package default — intersect with what the league actually scores.
-    inv_source         <- "package default"
+    inv_source <- "package default"
     inverse_categories <- intersect(scoring_categories, inverse_categories())
   }
 
@@ -516,20 +515,25 @@ sgp_denominators <- function(
   if (length(inverse_categories) == 0L) {
     cli::cli_inform(
       "No categories will be direction-flipped (inverse_categories is empty). ({inv_source})",
-      .frequency    = "once",
+      .frequency = "once",
       .frequency_id = .freq_id
     )
   } else {
     cli::cli_inform(
       "Effective inverse categories: {.val {inverse_categories}}. ({inv_source})",
-      .frequency    = "once",
+      .frequency = "once",
       .frequency_id = .freq_id
     )
   }
 
   # Now emit the unrecognized-column warning with full knowledge of categories.
   pts_cols_all <- grep(pts_pattern, names(ts), value = TRUE)
-  known_cols_full <- c(METADATA_COLS, roto_pts_col_upper, pts_cols_all, scoring_categories)
+  known_cols_full <- c(
+    METADATA_COLS,
+    roto_pts_col_upper,
+    pts_cols_all,
+    scoring_categories
+  )
   unrecognized <- setdiff(names(ts), known_cols_full)
   if (length(unrecognized) > 0L) {
     cli::cli_warn(
@@ -548,7 +552,11 @@ sgp_denominators <- function(
   # ----- 5.5 n_teams Validation ----------------------------------------------
 
   all_ts_years <- sort(unique(ts$YEAR))
-  year_nrow <- vapply(all_ts_years, function(y) nrow(ts[ts$YEAR == y, ]), integer(1L))
+  year_nrow <- vapply(
+    all_ts_years,
+    function(y) nrow(ts[ts$YEAR == y, ]),
+    integer(1L)
+  )
   names(year_nrow) <- as.character(all_ts_years)
 
   if (is.null(n_teams)) {
@@ -566,10 +574,11 @@ sgp_denominators <- function(
     n_teams_per_year <- year_nrow
   } else {
     if (
-      !is.numeric(n_teams) && !is.integer(n_teams) ||
-      length(n_teams) != 1L ||
-      n_teams != floor(n_teams) ||
-      n_teams < 1L
+      !is.numeric(n_teams) &&
+        !is.integer(n_teams) ||
+        length(n_teams) != 1L ||
+        n_teams != floor(n_teams) ||
+        n_teams < 1L
     ) {
       cli::cli_abort(
         "{.arg n_teams} must be a positive integer scalar or {.code NULL}.",
@@ -644,7 +653,7 @@ sgp_denominators <- function(
 
   for (cat in scoring_categories) {
     eff_years <- cat_years[[cat]]
-    eff_wfn   <- cat_weight_fns[[cat]]
+    eff_wfn <- cat_weight_fns[[cat]]
     spans_break <- any(eff_years <= 2022) && any(eff_years >= 2023)
     if (spans_break && inherits(eff_wfn, "flat_weight")) {
       cli::cli_warn(
@@ -666,7 +675,7 @@ sgp_denominators <- function(
   cat_valid_rows <- stats::setNames(
     lapply(scoring_categories, function(cat) {
       vals <- ts[[cat]]
-      bad  <- which(is.na(vals) | is.nan(vals))
+      bad <- which(is.na(vals) | is.nan(vals))
       if (length(bad) > 0L) {
         pairs <- paste(ts$YEAR[bad], ts$TEAM_ID[bad], sep = ":")
         cli::cli_warn(
@@ -687,17 +696,17 @@ sgp_denominators <- function(
     stats::setNames(
       lapply(scoring_categories, function(cat) {
         valid_base <- cat_valid_rows[[cat]]
-        ts_valid   <- ts[valid_base, , drop = FALSE]
+        ts_valid <- ts[valid_base, , drop = FALSE]
         exclude_local <- integer(0L)
         for (y in unique(ts_valid$YEAR)) {
           idx_in_valid <- which(ts_valid$YEAR == y)
           vals <- ts_valid[[cat]][idx_in_valid]
-          q1   <- stats::quantile(vals, 0.25, names = FALSE)
-          q3   <- stats::quantile(vals, 0.75, names = FALSE)
-          iqr  <- q3 - q1
-          lo   <- q1 - 1.5 * iqr
-          hi   <- q3 + 1.5 * iqr
-          out  <- idx_in_valid[vals < lo | vals > hi]
+          q1 <- stats::quantile(vals, 0.25, names = FALSE)
+          q3 <- stats::quantile(vals, 0.75, names = FALSE)
+          iqr <- q3 - q1
+          lo <- q1 - 1.5 * iqr
+          hi <- q3 + 1.5 * iqr
+          out <- idx_in_valid[vals < lo | vals > hi]
           exclude_local <- c(exclude_local, valid_base[out])
         }
         setdiff(valid_base, exclude_local)
@@ -713,241 +722,270 @@ sgp_denominators <- function(
   # We compute per-category denominators and collect year_diagnostics rows.
   all_diag_rows <- list()
 
-  denominators <- vapply(scoring_categories, function(cat) {
+  denominators <- vapply(
+    scoring_categories,
+    function(cat) {
+      eff_years <- cat_years[[cat]]
+      weight_fn <- cat_weight_fns[[cat]]
+      valid_rows <- cat_valid_rows[[cat]]
+      ts_cat <- ts[valid_rows, , drop = FALSE]
 
-    eff_years  <- cat_years[[cat]]
-    weight_fn  <- cat_weight_fns[[cat]]
-    valid_rows <- cat_valid_rows[[cat]]
-    ts_cat     <- ts[valid_rows, , drop = FALSE]
+      # Per-year estimates.
+      n_eff_years <- length(eff_years)
+      max_year <- if (n_eff_years > 0L) max(eff_years) else NA_real_
 
-    # Per-year estimates.
-    n_eff_years <- length(eff_years)
-    max_year    <- if (n_eff_years > 0L) max(eff_years) else NA_real_
+      per_year <- lapply(eff_years, function(y) {
+        ts_y <- ts_cat[ts_cat$YEAR == y, , drop = FALSE]
+        n_y <- nrow(ts_y)
+        n_y_i <- as.integer(n_y)
 
-    per_year <- lapply(eff_years, function(y) {
-      ts_y  <- ts_cat[ts_cat$YEAR == y, , drop = FALSE]
-      n_y   <- nrow(ts_y)
-      n_y_i <- as.integer(n_y)
-
-      # Determine standings position source.
-      pts_col <- paste0(cat, "_PTS")
-      if (pts_col %in% names(ts_y)) {
-        standings_pos        <- ts_y[[pts_col]]
-        sp_source            <- "category_pts"
-      } else {
-        # Direction-aware rank: rank 1 = worst, rank n_y = best.
-        # For normal categories, raw rank() already satisfies this (lowest value = rank 1).
-        # For inverse categories (ERA, WHIP), lower values are better (best team has lowest
-        # ERA), so we flip: standings_pos = n_y + 1 - rank(). This makes the best team
-        # (lowest ERA) receive rank n_y and produces a negative OLS slope (rank decreases
-        # as total increases), consistent with rank-1=worst / rank-n=best convention.
-        raw_rank <- rank(ts_y[[cat]], ties.method = "average")
-        standings_pos <- if (cat %in% inverse_categories) {
-          n_y + 1L - raw_rank
+        # Determine standings position source.
+        pts_col <- paste0(cat, "_PTS")
+        if (pts_col %in% names(ts_y)) {
+          standings_pos <- ts_y[[pts_col]]
+          sp_source <- "category_pts"
         } else {
-          raw_rank
+          # Direction-aware rank: rank 1 = worst, rank n_y = best.
+          # For normal categories, raw rank() already satisfies this (lowest value = rank 1).
+          # For inverse categories (ERA, WHIP), lower values are better (best team has lowest
+          # ERA), so we flip: standings_pos = n_y + 1 - rank(). This makes the best team
+          # (lowest ERA) receive rank n_y and produces a negative OLS slope (rank decreases
+          # as total increases), consistent with rank-1=worst / rank-n=best convention.
+          raw_rank <- rank(ts_y[[cat]], ties.method = "average")
+          standings_pos <- if (cat %in% inverse_categories) {
+            n_y + 1L - raw_rank
+          } else {
+            raw_rank
+          }
+          sp_source <- "rank"
         }
-        sp_source <- "rank"
-      }
-      totals <- ts_y[[cat]]
+        totals <- ts_y[[cat]]
 
-      # Compute the per-year estimate for the selected method.
-      years_ago <- max_year - y
-      raw_w     <- compute_weight(weight_fn, years_ago, n_eff_years)
+        # Compute the per-year estimate for the selected method.
+        years_ago <- max_year - y
+        raw_w <- compute_weight(weight_fn, years_ago, n_eff_years)
 
-      if (method == "ols") {
-        # Zero-variance guard.
-        if (stats::var(totals) < denom_floor) {
-          cli::cli_warn(
-            "Zero variance in category {.val {cat}} for year {.val {y}}. OLS slope set to NA.",
-            class = "rotostats_warning_zero_variance_category"
-          )
-          return(list(
-            year = y, category = cat, n_teams = n_y_i,
-            slope = NA_real_, r_squared = NA_real_,
-            raw_weight = 0,
+        if (method == "ols") {
+          # Zero-variance guard.
+          if (stats::var(totals) < denom_floor) {
+            cli::cli_warn(
+              "Zero variance in category {.val {cat}} for year {.val {y}}. OLS slope set to NA.",
+              class = "rotostats_warning_zero_variance_category"
+            )
+            return(list(
+              year = y,
+              category = cat,
+              n_teams = n_y_i,
+              slope = NA_real_,
+              r_squared = NA_real_,
+              raw_weight = 0,
+              gap = NA_real_,
+              standings_pos_source = sp_source
+            ))
+          }
+          fit <- stats::lm(standings_pos ~ totals)
+          beta_y <- stats::coef(fit)[["totals"]]
+          r2_y <- summary(fit)$r.squared
+          if (!is.na(r2_y) && r2_y < 0.80) {
+            cli::cli_warn(
+              "OLS R\u00b2 = {round(r2_y, 3)} (< 0.80) for category {.val {cat}}, year {.val {y}}.",
+              class = "rotostats_warning_low_r_squared"
+            )
+          }
+          list(
+            year = y,
+            category = cat,
+            n_teams = n_y_i,
+            slope = beta_y,
+            r_squared = r2_y,
+            raw_weight = raw_w,
             gap = NA_real_,
             standings_pos_source = sp_source
-          ))
-        }
-        fit    <- stats::lm(standings_pos ~ totals)
-        beta_y <- stats::coef(fit)[["totals"]]
-        r2_y   <- summary(fit)$r.squared
-        if (!is.na(r2_y) && r2_y < 0.80) {
-          cli::cli_warn(
-            "OLS R\u00b2 = {round(r2_y, 3)} (< 0.80) for category {.val {cat}}, year {.val {y}}.",
-            class = "rotostats_warning_low_r_squared"
+          )
+        } else if (method == "gap") {
+          tot_sorted <- sort(totals)
+          gaps <- diff(tot_sorted)
+          gap_y <- mean(gaps)
+          list(
+            year = y,
+            category = cat,
+            n_teams = n_y_i,
+            slope = NA_real_,
+            r_squared = NA_real_,
+            raw_weight = raw_w,
+            gap = gap_y,
+            standings_pos_source = sp_source
+          )
+        } else if (method == "trimmed_gap") {
+          tot_sorted <- sort(totals)
+          gaps <- diff(tot_sorted)
+          k <- floor(0.1 * length(gaps))
+          gaps_tr <- if (k > 0L) gaps[(k + 1L):(length(gaps) - k)] else gaps
+          gap_y <- mean(gaps_tr)
+          list(
+            year = y,
+            category = cat,
+            n_teams = n_y_i,
+            slope = NA_real_,
+            r_squared = NA_real_,
+            raw_weight = raw_w,
+            gap = gap_y,
+            standings_pos_source = sp_source
+          )
+        } else {
+          # method == "sd"
+          sd_y <- stats::sd(totals)
+          e_rn <- expected_range_normal(n_y)
+          gap_y <- sd_y * (n_y - 1) / e_rn
+          list(
+            year = y,
+            category = cat,
+            n_teams = n_y_i,
+            slope = NA_real_,
+            r_squared = NA_real_,
+            raw_weight = raw_w,
+            gap = gap_y,
+            standings_pos_source = sp_source
           )
         }
-        list(
-          year = y, category = cat, n_teams = n_y_i,
-          slope = beta_y, r_squared = r2_y,
-          raw_weight = raw_w,
-          gap = NA_real_,
-          standings_pos_source = sp_source
-        )
-      } else if (method == "gap") {
-        tot_sorted <- sort(totals)
-        gaps       <- diff(tot_sorted)
-        gap_y      <- mean(gaps)
-        list(
-          year = y, category = cat, n_teams = n_y_i,
-          slope = NA_real_, r_squared = NA_real_,
-          raw_weight = raw_w, gap = gap_y,
-          standings_pos_source = sp_source
-        )
-      } else if (method == "trimmed_gap") {
-        tot_sorted <- sort(totals)
-        gaps       <- diff(tot_sorted)
-        k          <- floor(0.1 * length(gaps))
-        gaps_tr    <- if (k > 0L) gaps[(k + 1L):(length(gaps) - k)] else gaps
-        gap_y      <- mean(gaps_tr)
-        list(
-          year = y, category = cat, n_teams = n_y_i,
-          slope = NA_real_, r_squared = NA_real_,
-          raw_weight = raw_w, gap = gap_y,
-          standings_pos_source = sp_source
-        )
-      } else {  # method == "sd"
-        sd_y     <- stats::sd(totals)
-        e_rn     <- expected_range_normal(n_y)
-        gap_y    <- sd_y * (n_y - 1) / e_rn
-        list(
-          year = y, category = cat, n_teams = n_y_i,
-          slope = NA_real_, r_squared = NA_real_,
-          raw_weight = raw_w, gap = gap_y,
-          standings_pos_source = sp_source
-        )
-      }
-    })
+      })
 
-    # --- Compute weighted estimate across years ---
+      # --- Compute weighted estimate across years ---
 
-    if (method == "ols") {
-      valid_mask <- !vapply(per_year, function(r) is.na(r$slope), logical(1L))
-      valid_ys   <- per_year[valid_mask]
-      if (length(valid_ys) == 0L) {
-        cli::cli_warn(
-          "No valid years remain for category {.val {cat}}. Denominator set to NA.",
-          class = "rotostats_warning_no_valid_years"
-        )
-        # Normalize weights to NA for diagnostics.
+      if (method == "ols") {
+        valid_mask <- !vapply(per_year, function(r) is.na(r$slope), logical(1L))
+        valid_ys <- per_year[valid_mask]
+        if (length(valid_ys) == 0L) {
+          cli::cli_warn(
+            "No valid years remain for category {.val {cat}}. Denominator set to NA.",
+            class = "rotostats_warning_no_valid_years"
+          )
+          # Normalize weights to NA for diagnostics.
+          diag_rows <- lapply(per_year, function(r) {
+            r$raw_weight <- NA_real_
+            r
+          })
+          all_diag_rows[[cat]] <<- diag_rows
+          return(NA_real_)
+        }
+        raw_weights_valid <- vapply(valid_ys, `[[`, numeric(1L), "raw_weight")
+        w_sum <- sum(raw_weights_valid)
+        norm_weights <- raw_weights_valid / w_sum
+        slopes_valid <- vapply(valid_ys, `[[`, numeric(1L), "slope")
+        beta_c <- sum(norm_weights * slopes_valid)
+
+        # Two-sided sign check (spec §5.11 Step 6).
+        # After the direction-aware rank-flip in Step 2:
+        #   Normal categories: higher totals -> higher rank -> positive slope expected.
+        #   Inverse categories: higher totals -> lower standings pos -> negative slope expected.
+        if (cat %in% inverse_categories && beta_c > 0) {
+          cli::cli_warn(
+            paste0(
+              "Unexpected positive OLS slope for inverse category {.val {cat}} ",
+              "(\u03b2\u0302 = {round(beta_c, 4)}). ",
+              "Expected negative slope after rank-flip (n+1 - rank). Check data quality."
+            ),
+            class = "rotostats_warning_unexpected_slope_sign"
+          )
+        } else if (!(cat %in% inverse_categories) && beta_c < 0) {
+          cli::cli_warn(
+            paste0(
+              "Unexpected negative OLS slope for normal category {.val {cat}} ",
+              "(\u03b2\u0302 = {round(beta_c, 4)}). ",
+              "Check that data is not an inverse category mislabeled as normal."
+            ),
+            class = "rotostats_warning_unexpected_slope_sign"
+          )
+        }
+
+        # Near-zero guard.
+        d_c <- if (abs(beta_c) < denom_floor) {
+          cli::cli_warn(
+            "Near-zero OLS slope ({.val {beta_c}}) for category {.val {cat}}. Denominator set to Inf.",
+            class = "rotostats_warning_near_zero_slope"
+          )
+          Inf
+        } else {
+          1 / abs(beta_c)
+        }
+
+        # CV check: compute per-year denominator estimates and their CV.
+        per_year_denoms <- 1 / abs(slopes_valid)
+        if (length(per_year_denoms) > 1L) {
+          cv_val <- stats::sd(per_year_denoms) / mean(per_year_denoms)
+          if (!is.na(cv_val) && cv_val > 0.20) {
+            cli::cli_warn(
+              "High year-over-year denominator CV ({round(cv_val, 3)}) for category {.val {cat}}.",
+              class = "rotostats_warning_high_denominator_cv"
+            )
+          }
+        }
+
+        # Build normalized diagnostics for all years (invalid years get weight=0).
         diag_rows <- lapply(per_year, function(r) {
-          r$raw_weight <- NA_real_
+          if (is.na(r$slope)) {
+            r$norm_weight <- 0
+          } else {
+            idx <- which(vapply(
+              valid_ys,
+              function(v) v$year == r$year,
+              logical(1L)
+            ))
+            r$norm_weight <- if (length(idx) > 0L) norm_weights[[idx]] else 0
+          }
           r
         })
         all_diag_rows[[cat]] <<- diag_rows
-        return(NA_real_)
-      }
-      raw_weights_valid <- vapply(valid_ys, `[[`, numeric(1L), "raw_weight")
-      w_sum             <- sum(raw_weights_valid)
-      norm_weights      <- raw_weights_valid / w_sum
-      slopes_valid      <- vapply(valid_ys, `[[`, numeric(1L), "slope")
-      beta_c            <- sum(norm_weights * slopes_valid)
-
-      # Two-sided sign check (spec §5.11 Step 6).
-      # After the direction-aware rank-flip in Step 2:
-      #   Normal categories: higher totals -> higher rank -> positive slope expected.
-      #   Inverse categories: higher totals -> lower standings pos -> negative slope expected.
-      if (cat %in% inverse_categories && beta_c > 0) {
-        cli::cli_warn(
-          paste0(
-            "Unexpected positive OLS slope for inverse category {.val {cat}} ",
-            "(\u03b2\u0302 = {round(beta_c, 4)}). ",
-            "Expected negative slope after rank-flip (n+1 - rank). Check data quality."
-          ),
-          class = "rotostats_warning_unexpected_slope_sign"
-        )
-      } else if (!(cat %in% inverse_categories) && beta_c < 0) {
-        cli::cli_warn(
-          paste0(
-            "Unexpected negative OLS slope for normal category {.val {cat}} ",
-            "(\u03b2\u0302 = {round(beta_c, 4)}). ",
-            "Check that data is not an inverse category mislabeled as normal."
-          ),
-          class = "rotostats_warning_unexpected_slope_sign"
-        )
-      }
-
-      # Near-zero guard.
-      d_c <- if (abs(beta_c) < denom_floor) {
-        cli::cli_warn(
-          "Near-zero OLS slope ({.val {beta_c}}) for category {.val {cat}}. Denominator set to Inf.",
-          class = "rotostats_warning_near_zero_slope"
-        )
-        Inf
+        return(d_c)
       } else {
-        1 / abs(beta_c)
-      }
-
-      # CV check: compute per-year denominator estimates and their CV.
-      per_year_denoms <- 1 / abs(slopes_valid)
-      if (length(per_year_denoms) > 1L) {
-        cv_val <- stats::sd(per_year_denoms) / mean(per_year_denoms)
-        if (!is.na(cv_val) && cv_val > 0.20) {
+        # gap / trimmed_gap / sd: weighted mean of gap_y.
+        valid_mask <- !vapply(per_year, function(r) is.na(r$gap), logical(1L))
+        valid_ys <- per_year[valid_mask]
+        if (length(valid_ys) == 0L) {
           cli::cli_warn(
-            "High year-over-year denominator CV ({round(cv_val, 3)}) for category {.val {cat}}.",
-            class = "rotostats_warning_high_denominator_cv"
+            "No valid years remain for category {.val {cat}}. Denominator set to NA.",
+            class = "rotostats_warning_no_valid_years"
           )
+          all_diag_rows[[cat]] <<- per_year
+          return(NA_real_)
         }
+        raw_weights_valid <- vapply(valid_ys, `[[`, numeric(1L), "raw_weight")
+        w_sum <- sum(raw_weights_valid)
+        norm_weights <- raw_weights_valid / w_sum
+        gaps_valid <- vapply(valid_ys, `[[`, numeric(1L), "gap")
+        d_c <- sum(norm_weights * gaps_valid)
+
+        # CV check.
+        if (length(gaps_valid) > 1L) {
+          cv_val <- stats::sd(gaps_valid) / mean(gaps_valid)
+          if (!is.na(cv_val) && cv_val > 0.20) {
+            cli::cli_warn(
+              "High year-over-year denominator CV ({round(cv_val, 3)}) for category {.val {cat}}.",
+              class = "rotostats_warning_high_denominator_cv"
+            )
+          }
+        }
+
+        # Build diagnostics.
+        diag_rows <- lapply(per_year, function(r) {
+          if (is.na(r$gap)) {
+            r$norm_weight <- 0
+          } else {
+            idx <- which(vapply(
+              valid_ys,
+              function(v) v$year == r$year,
+              logical(1L)
+            ))
+            r$norm_weight <- if (length(idx) > 0L) norm_weights[[idx]] else 0
+          }
+          r
+        })
+        all_diag_rows[[cat]] <<- diag_rows
+        return(d_c)
       }
-
-      # Build normalized diagnostics for all years (invalid years get weight=0).
-      diag_rows <- lapply(per_year, function(r) {
-        if (is.na(r$slope)) {
-          r$norm_weight <- 0
-        } else {
-          idx <- which(vapply(valid_ys, function(v) v$year == r$year, logical(1L)))
-          r$norm_weight <- if (length(idx) > 0L) norm_weights[[idx]] else 0
-        }
-        r
-      })
-      all_diag_rows[[cat]] <<- diag_rows
-      return(d_c)
-
-    } else {
-      # gap / trimmed_gap / sd: weighted mean of gap_y.
-      valid_mask <- !vapply(per_year, function(r) is.na(r$gap), logical(1L))
-      valid_ys   <- per_year[valid_mask]
-      if (length(valid_ys) == 0L) {
-        cli::cli_warn(
-          "No valid years remain for category {.val {cat}}. Denominator set to NA.",
-          class = "rotostats_warning_no_valid_years"
-        )
-        all_diag_rows[[cat]] <<- per_year
-        return(NA_real_)
-      }
-      raw_weights_valid <- vapply(valid_ys, `[[`, numeric(1L), "raw_weight")
-      w_sum             <- sum(raw_weights_valid)
-      norm_weights      <- raw_weights_valid / w_sum
-      gaps_valid        <- vapply(valid_ys, `[[`, numeric(1L), "gap")
-      d_c               <- sum(norm_weights * gaps_valid)
-
-      # CV check.
-      if (length(gaps_valid) > 1L) {
-        cv_val <- stats::sd(gaps_valid) / mean(gaps_valid)
-        if (!is.na(cv_val) && cv_val > 0.20) {
-          cli::cli_warn(
-            "High year-over-year denominator CV ({round(cv_val, 3)}) for category {.val {cat}}.",
-            class = "rotostats_warning_high_denominator_cv"
-          )
-        }
-      }
-
-      # Build diagnostics.
-      diag_rows <- lapply(per_year, function(r) {
-        if (is.na(r$gap)) {
-          r$norm_weight <- 0
-        } else {
-          idx <- which(vapply(valid_ys, function(v) v$year == r$year, logical(1L)))
-          r$norm_weight <- if (length(idx) > 0L) norm_weights[[idx]] else 0
-        }
-        r
-      })
-      all_diag_rows[[cat]] <<- diag_rows
-      return(d_c)
-    }
-  }, numeric(1L))
+    },
+    numeric(1L)
+  )
 
   names(denominators) <- scoring_categories
 
@@ -956,14 +994,18 @@ sgp_denominators <- function(
   diag_list <- unlist(all_diag_rows, recursive = FALSE)
 
   year_diagnostics <- data.frame(
-    year     = vapply(diag_list, `[[`, integer(1L),  "year"),
+    year = vapply(diag_list, `[[`, integer(1L), "year"),
     category = vapply(diag_list, `[[`, character(1L), "category"),
-    n_teams  = vapply(diag_list, `[[`, integer(1L),  "n_teams"),
-    slope    = vapply(diag_list, `[[`, numeric(1L),  "slope"),
+    n_teams = vapply(diag_list, `[[`, integer(1L), "n_teams"),
+    slope = vapply(diag_list, `[[`, numeric(1L), "slope"),
     r_squared = vapply(diag_list, `[[`, numeric(1L), "r_squared"),
-    weight   = vapply(diag_list, function(r) {
-      if (is.null(r$norm_weight)) NA_real_ else r$norm_weight
-    }, numeric(1L)),
+    weight = vapply(
+      diag_list,
+      function(r) {
+        if (is.null(r$norm_weight)) NA_real_ else r$norm_weight
+      },
+      numeric(1L)
+    ),
     standings_pos_source = factor(
       vapply(diag_list, `[[`, character(1L), "standings_pos_source"),
       levels = c("category_pts", "rank")
@@ -974,76 +1016,93 @@ sgp_denominators <- function(
   # ----- 5.12 Bootstrap CI ---------------------------------------------------
 
   bootstrap_ci <- if (n_bootstrap > 0L) {
-    boot_denoms <- matrix(NA_real_, nrow = n_bootstrap, ncol = length(scoring_categories))
+    boot_denoms <- matrix(
+      NA_real_,
+      nrow = n_bootstrap,
+      ncol = length(scoring_categories)
+    )
     colnames(boot_denoms) <- scoring_categories
 
     for (b in seq_len(n_bootstrap)) {
       for (cat in scoring_categories) {
-        eff_years  <- cat_years[[cat]]
-        weight_fn  <- cat_weight_fns[[cat]]
+        eff_years <- cat_years[[cat]]
+        weight_fn <- cat_weight_fns[[cat]]
         valid_rows <- cat_valid_rows[[cat]]
-        ts_cat     <- ts[valid_rows, , drop = FALSE]
-        n_eff      <- length(eff_years)
-        max_year   <- if (n_eff > 0L) max(eff_years) else NA_real_
+        ts_cat <- ts[valid_rows, , drop = FALSE]
+        n_eff <- length(eff_years)
+        max_year <- if (n_eff > 0L) max(eff_years) else NA_real_
 
-        if (n_eff == 0L) next
+        if (n_eff == 0L) {
+          next
+        }
 
         sample_years <- sample(eff_years, size = n_eff, replace = TRUE)
 
         # Compute per-sampled-year estimates.
-        slopes_b <- vapply(sample_years, function(y) {
-          ts_y    <- ts_cat[ts_cat$YEAR == y, , drop = FALSE]
-          totals  <- ts_y[[cat]]
-          if (length(totals) < 2L || stats::var(totals) < denom_floor) {
-            return(NA_real_)
-          }
-          if (method == "ols") {
-            pts_col <- paste0(cat, "_PTS")
-            if (pts_col %in% names(ts_y)) {
-              sp <- ts_y[[pts_col]]
-            } else {
-              # Direction-aware rank (mirrors main computation path).
-              n_y_b <- length(totals)
-              raw_rank_b <- rank(totals, ties.method = "average")
-              sp <- if (cat %in% inverse_categories) {
-                n_y_b + 1L - raw_rank_b
-              } else {
-                raw_rank_b
-              }
+        slopes_b <- vapply(
+          sample_years,
+          function(y) {
+            ts_y <- ts_cat[ts_cat$YEAR == y, , drop = FALSE]
+            totals <- ts_y[[cat]]
+            if (length(totals) < 2L || stats::var(totals) < denom_floor) {
+              return(NA_real_)
             }
-            fit <- stats::lm(sp ~ totals)
-            stats::coef(fit)[["totals"]]
-          } else if (method == "gap") {
-            mean(diff(sort(totals)))
-          } else if (method == "trimmed_gap") {
-            gaps <- diff(sort(totals))
-            k    <- floor(0.1 * length(gaps))
-            if (k > 0L) mean(gaps[(k + 1L):(length(gaps) - k)]) else mean(gaps)
-          } else {  # sd
-            n_y  <- length(totals)
-            sd_y <- stats::sd(totals)
-            e_rn <- expected_range_normal(n_y)
-            sd_y * (n_y - 1) / e_rn
-          }
-        }, numeric(1L))
+            if (method == "ols") {
+              pts_col <- paste0(cat, "_PTS")
+              if (pts_col %in% names(ts_y)) {
+                sp <- ts_y[[pts_col]]
+              } else {
+                # Direction-aware rank (mirrors main computation path).
+                n_y_b <- length(totals)
+                raw_rank_b <- rank(totals, ties.method = "average")
+                sp <- if (cat %in% inverse_categories) {
+                  n_y_b + 1L - raw_rank_b
+                } else {
+                  raw_rank_b
+                }
+              }
+              fit <- stats::lm(sp ~ totals)
+              stats::coef(fit)[["totals"]]
+            } else if (method == "gap") {
+              mean(diff(sort(totals)))
+            } else if (method == "trimmed_gap") {
+              gaps <- diff(sort(totals))
+              k <- floor(0.1 * length(gaps))
+              if (k > 0L) {
+                mean(gaps[(k + 1L):(length(gaps) - k)])
+              } else {
+                mean(gaps)
+              }
+            } else {
+              # sd
+              n_y <- length(totals)
+              sd_y <- stats::sd(totals)
+              e_rn <- expected_range_normal(n_y)
+              sd_y * (n_y - 1) / e_rn
+            }
+          },
+          numeric(1L)
+        )
 
         years_ago_b <- max_year - sample_years
-        raw_w_b     <- vapply(
+        raw_w_b <- vapply(
           seq_along(sample_years),
           function(i) compute_weight(weight_fn, years_ago_b[[i]], n_eff),
           numeric(1L)
         )
 
         valid_b <- !is.na(slopes_b)
-        if (!any(valid_b)) next
+        if (!any(valid_b)) {
+          next
+        }
 
-        raw_w_v  <- raw_w_b[valid_b]
+        raw_w_v <- raw_w_b[valid_b]
         slopes_v <- slopes_b[valid_b]
-        w_sum_b  <- sum(raw_w_v)
+        w_sum_b <- sum(raw_w_v)
 
         if (method == "ols") {
-          beta_b  <- sum(raw_w_v * slopes_v) / w_sum_b
-          d_b     <- if (abs(beta_b) < denom_floor) Inf else 1 / abs(beta_b)
+          beta_b <- sum(raw_w_v * slopes_v) / w_sum_b
+          d_b <- if (abs(beta_b) < denom_floor) Inf else 1 / abs(beta_b)
         } else {
           d_b <- sum(raw_w_v * slopes_v) / w_sum_b
         }
@@ -1053,18 +1112,36 @@ sgp_denominators <- function(
     }
 
     alpha <- 1 - ci_level
-    ci_lower <- vapply(scoring_categories, function(cat) {
-      stats::quantile(boot_denoms[, cat], alpha / 2, names = FALSE, na.rm = TRUE)
-    }, numeric(1L))
-    ci_upper <- vapply(scoring_categories, function(cat) {
-      stats::quantile(boot_denoms[, cat], 1 - alpha / 2, names = FALSE, na.rm = TRUE)
-    }, numeric(1L))
+    ci_lower <- vapply(
+      scoring_categories,
+      function(cat) {
+        stats::quantile(
+          boot_denoms[, cat],
+          alpha / 2,
+          names = FALSE,
+          na.rm = TRUE
+        )
+      },
+      numeric(1L)
+    )
+    ci_upper <- vapply(
+      scoring_categories,
+      function(cat) {
+        stats::quantile(
+          boot_denoms[, cat],
+          1 - alpha / 2,
+          names = FALSE,
+          na.rm = TRUE
+        )
+      },
+      numeric(1L)
+    )
 
     data.frame(
-      category    = scoring_categories,
-      ci_lower    = ci_lower,
-      ci_upper    = ci_upper,
-      ci_level    = ci_level,
+      category = scoring_categories,
+      ci_lower = ci_lower,
+      ci_upper = ci_upper,
+      ci_level = ci_level,
       n_bootstrap = n_bootstrap,
       stringsAsFactors = FALSE
     )
@@ -1078,19 +1155,19 @@ sgp_denominators <- function(
 
   meta <- list(
     rate_conversion = rate_conversion,
-    method          = method,
-    years_used      = years_used,
-    exclude_years   = exclude_years,
+    method = method,
+    years_used = years_used,
+    exclude_years = exclude_years,
     package_version = utils::packageVersion("rotostats")
   )
 
   new_sgp_denominators(
-    denominators     = denominators,
+    denominators = denominators,
     year_diagnostics = year_diagnostics,
-    bootstrap_ci     = bootstrap_ci,
-    call             = the_call,
-    meta             = meta,
-    rate_conversion  = rate_conversion
+    bootstrap_ci = bootstrap_ci,
+    call = the_call,
+    meta = meta,
+    rate_conversion = rate_conversion
   )
 }
 

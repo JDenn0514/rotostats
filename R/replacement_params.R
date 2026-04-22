@@ -10,11 +10,23 @@
 
 #' @noRd
 RATE_STAT_DENOMINATORS <- c(
-  AVG   = "AB",  OBP   = "PA",   SLG   = "AB",   OPS   = "PA",
-  ERA   = "IP",  WHIP  = "IP",  "K/9" = "IP",  "BB/9" = "IP",  "HR/9" = "IP",
-  SVHD  = "G",   QS    = "GS",
-  "K%"  = "PA", "BB%" = "PA",
-  wOBA  = "PA",  xFIP  = "IP",  SIERA = "IP",   FIP   = "IP",
+  AVG = "AB",
+  OBP = "PA",
+  SLG = "AB",
+  OPS = "PA",
+  ERA = "IP",
+  WHIP = "IP",
+  "K/9" = "IP",
+  "BB/9" = "IP",
+  "HR/9" = "IP",
+  SVHD = "G",
+  QS = "GS",
+  "K%" = "PA",
+  "BB%" = "PA",
+  wOBA = "PA",
+  xFIP = "IP",
+  SIERA = "IP",
+  FIP = "IP",
   BABIP = "AB"
 )
 
@@ -45,16 +57,16 @@ RATE_STAT_DENOMINATORS <- c(
 #'
 #' @export
 default_replacement_params <- list(
-  band_width_K          = 3L,
-  cliff_threshold       = 1.5,
-  cliff_min_n           = 4L,
-  sp_ip_threshold       = 100,
-  sp_rp_split_default   = c(SP = 0.60, RP = 0.40),
-  ip_ab_divergence_tol  = 0.15,
-  calibration_min_n     = 15L,
-  convergence_eps       = 0.01,
-  convergence_max_iter  = 25L,
-  cycle_history_window  = 5L
+  band_width_K = 3L,
+  cliff_threshold = 1.5,
+  cliff_min_n = 4L,
+  sp_ip_threshold = 100,
+  sp_rp_split_default = c(SP = 0.60, RP = 0.40),
+  ip_ab_divergence_tol = 0.15,
+  calibration_min_n = 15L,
+  convergence_eps = 0.01,
+  convergence_max_iter = 25L,
+  cycle_history_window = 5L
 )
 
 # ---------------------------------------------------------------------------

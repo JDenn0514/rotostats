@@ -10,8 +10,20 @@
 
 #' @noRd
 CANONICAL_CATEGORIES <- c(
-  "HR", "R", "RBI", "SB", "AVG", "OPS",
-  "W", "K", "SV", "HLD", "QS", "SVHD", "ERA", "WHIP"
+  "HR",
+  "R",
+  "RBI",
+  "SB",
+  "AVG",
+  "OPS",
+  "W",
+  "K",
+  "SV",
+  "HLD",
+  "QS",
+  "SVHD",
+  "ERA",
+  "WHIP"
 )
 
 #' @noRd
@@ -91,38 +103,41 @@ VALID_KEEPER_METHODS <- c("pool_shrink", "salary_adjust", "none")
 #' )
 #' print(lg)
 league_config <- function(
-  n_teams            = 12L,
+  n_teams = 12L,
   roster_slots,
-  pitcher_slots      = 9L,
+  pitcher_slots = 9L,
   categories,
   inverse_categories = NULL,
-  league_type        = "mixed",
-  budget             = 260L,
-  budget_split       = 0.60,
-  keeper             = FALSE
+  league_type = "mixed",
+  budget = 260L,
+  budget_split = 0.60,
+  keeper = FALSE
 ) {
-  n_teams            <- validate_n_teams(n_teams)
-  league_type        <- validate_league_type(league_type)
-  roster_slots       <- validate_roster_slots(roster_slots)
-  pitcher_slots      <- validate_pitcher_slots(pitcher_slots)
-  budget             <- validate_budget(budget)
-  budget_split       <- validate_budget_split(budget_split)
-  categories         <- validate_categories(categories)
-  inverse_categories <- validate_inverse_categories(inverse_categories, categories)
-  roster_slots       <- drop_dh_for_nl(roster_slots, league_type)
-  keeper             <- resolve_keeper(keeper)
+  n_teams <- validate_n_teams(n_teams)
+  league_type <- validate_league_type(league_type)
+  roster_slots <- validate_roster_slots(roster_slots)
+  pitcher_slots <- validate_pitcher_slots(pitcher_slots)
+  budget <- validate_budget(budget)
+  budget_split <- validate_budget_split(budget_split)
+  categories <- validate_categories(categories)
+  inverse_categories <- validate_inverse_categories(
+    inverse_categories,
+    categories
+  )
+  roster_slots <- drop_dh_for_nl(roster_slots, league_type)
+  keeper <- resolve_keeper(keeper)
 
   structure(
     list(
-      n_teams            = n_teams,
-      roster_slots       = roster_slots,
-      pitcher_slots      = pitcher_slots,
-      categories         = categories,
+      n_teams = n_teams,
+      roster_slots = roster_slots,
+      pitcher_slots = pitcher_slots,
+      categories = categories,
       inverse_categories = inverse_categories,
-      league_type        = league_type,
-      budget             = budget,
-      budget_split       = budget_split,
-      keeper             = keeper
+      league_type = league_type,
+      budget = budget,
+      budget_split = budget_split,
+      keeper = keeper
     ),
     class = c("league_config", "list")
   )
@@ -135,10 +150,10 @@ league_config <- function(
 #' @noRd
 validate_n_teams <- function(n_teams) {
   ok <- is.numeric(n_teams) &&
-        length(n_teams) == 1L &&
-        !is.na(n_teams) &&
-        n_teams > 0 &&
-        isTRUE(all.equal(n_teams, round(n_teams)))
+    length(n_teams) == 1L &&
+    !is.na(n_teams) &&
+    n_teams > 0 &&
+    isTRUE(all.equal(n_teams, round(n_teams)))
   if (!ok) {
     cli::cli_abort(
       "{.arg n_teams} must be a single positive integer; got {.val {n_teams}}.",
@@ -150,13 +165,18 @@ validate_n_teams <- function(n_teams) {
 
 #' @noRd
 validate_roster_slots <- function(roster_slots) {
-  if (!is.numeric(roster_slots) ||
+  if (
+    !is.numeric(roster_slots) ||
       is.null(names(roster_slots)) ||
       any(names(roster_slots) == "") ||
       any(!is.finite(roster_slots)) ||
       any(roster_slots < 0) ||
-      !all(vapply(roster_slots, function(x) isTRUE(all.equal(x, round(x))),
-                  logical(1L)))) {
+      !all(vapply(
+        roster_slots,
+        function(x) isTRUE(all.equal(x, round(x))),
+        logical(1L)
+      ))
+  ) {
     cli::cli_abort(
       "{.arg roster_slots} must be a named integer vector of non-negative slot counts.",
       class = "rotostats_error_invalid_roster_slots"
@@ -174,20 +194,23 @@ validate_pitcher_slots <- function(pitcher_slots) {
     "integer vector with names from {.val SP} / {.val RP}."
   )
 
-  if (!is.numeric(pitcher_slots) ||
+  if (
+    !is.numeric(pitcher_slots) ||
       any(!is.finite(pitcher_slots)) ||
       any(pitcher_slots < 0) ||
-      !all(vapply(pitcher_slots, function(x) isTRUE(all.equal(x, round(x))),
-                  logical(1L)))) {
-    cli::cli_abort(base_msg,
-                   class = "rotostats_error_invalid_pitcher_slots")
+      !all(vapply(
+        pitcher_slots,
+        function(x) isTRUE(all.equal(x, round(x))),
+        logical(1L)
+      ))
+  ) {
+    cli::cli_abort(base_msg, class = "rotostats_error_invalid_pitcher_slots")
   }
 
   nms <- names(pitcher_slots)
   if (is.null(nms)) {
     if (length(pitcher_slots) != 1L) {
-      cli::cli_abort(base_msg,
-                     class = "rotostats_error_invalid_pitcher_slots")
+      cli::cli_abort(base_msg, class = "rotostats_error_invalid_pitcher_slots")
     }
     return(as.integer(pitcher_slots))
   }
@@ -195,8 +218,7 @@ validate_pitcher_slots <- function(pitcher_slots) {
   bad <- setdiff(nms, VALID_PITCHER_SLOT_NAMES)
   if (length(bad) > 0L) {
     cli::cli_abort(
-      c(base_msg,
-        "i" = "Unrecognized name{?s}: {.val {bad}}."),
+      c(base_msg, "i" = "Unrecognized name{?s}: {.val {bad}}."),
       class = "rotostats_error_invalid_pitcher_slots"
     )
   }
@@ -207,9 +229,11 @@ validate_pitcher_slots <- function(pitcher_slots) {
 
 #' @noRd
 validate_league_type <- function(league_type) {
-  if (!is.character(league_type) ||
+  if (
+    !is.character(league_type) ||
       length(league_type) != 1L ||
-      !(league_type %in% VALID_LEAGUE_TYPES)) {
+      !(league_type %in% VALID_LEAGUE_TYPES)
+  ) {
     cli::cli_abort(
       "{.arg league_type} must be one of {.val {VALID_LEAGUE_TYPES}}; got {.val {league_type}}.",
       class = "rotostats_error_invalid_league_type"
@@ -221,10 +245,10 @@ validate_league_type <- function(league_type) {
 #' @noRd
 validate_budget <- function(budget) {
   ok <- is.numeric(budget) &&
-        length(budget) == 1L &&
-        !is.na(budget) &&
-        budget > 0 &&
-        isTRUE(all.equal(budget, round(budget)))
+    length(budget) == 1L &&
+    !is.na(budget) &&
+    budget > 0 &&
+    isTRUE(all.equal(budget, round(budget)))
   if (!ok) {
     cli::cli_abort(
       "{.arg budget} must be a single positive integer; got {.val {budget}}.",
@@ -237,10 +261,10 @@ validate_budget <- function(budget) {
 #' @noRd
 validate_budget_split <- function(budget_split) {
   ok <- is.numeric(budget_split) &&
-        length(budget_split) == 1L &&
-        !is.na(budget_split) &&
-        budget_split > 0 &&
-        budget_split < 1
+    length(budget_split) == 1L &&
+    !is.na(budget_split) &&
+    budget_split > 0 &&
+    budget_split < 1
   if (!ok) {
     cli::cli_abort(
       "{.arg budget_split} must be a single numeric value strictly in (0, 1); got {.val {budget_split}}.",
@@ -258,7 +282,7 @@ validate_categories <- function(categories) {
       class = "rotostats_error_invalid_categories"
     )
   }
-  upper   <- toupper(categories)
+  upper <- toupper(categories)
   changed <- categories != upper
   if (any(changed)) {
     n_changed <- sum(changed)
@@ -287,7 +311,9 @@ validate_categories <- function(categories) {
 validate_inverse_categories <- function(x, categories) {
   # NULL is valid: user is declaring no override; downstream falls through
   # to package lookup.
-  if (is.null(x)) return(NULL)
+  if (is.null(x)) {
+    return(NULL)
+  }
 
   # Must be a character vector.
   if (!is.character(x) || length(x) == 0L) {
@@ -337,12 +363,14 @@ drop_dh_for_nl <- function(roster_slots, league_type) {
 
 #' @noRd
 resolve_keeper <- function(keeper) {
-  if (isFALSE(keeper)) return(FALSE)
+  if (isFALSE(keeper)) {
+    return(FALSE)
+  }
 
   if (isTRUE(keeper)) {
     return(list(
-      is_keeper  = TRUE,
-      method     = "pool_shrink",
+      is_keeper = TRUE,
+      method = "pool_shrink",
       keeper_col = "is_keeper",
       salary_col = NULL
     ))
@@ -356,7 +384,7 @@ resolve_keeper <- function(keeper) {
   }
 
   required <- c("is_keeper", "method", "keeper_col")
-  missing  <- setdiff(required, names(keeper))
+  missing <- setdiff(required, names(keeper))
   if (length(missing) > 0L) {
     cli::cli_abort(
       c(
@@ -374,8 +402,10 @@ resolve_keeper <- function(keeper) {
     )
   }
 
-  if (identical(keeper$method, "salary_adjust") &&
-      (is.null(keeper$salary_col) || !nzchar(keeper$salary_col))) {
+  if (
+    identical(keeper$method, "salary_adjust") &&
+      (is.null(keeper$salary_col) || !nzchar(keeper$salary_col))
+  ) {
     cli::cli_abort(
       c(
         "{.arg keeper$salary_col} is required when {.code method = \"salary_adjust\"}.",
@@ -385,7 +415,9 @@ resolve_keeper <- function(keeper) {
     )
   }
 
-  if (is.null(keeper$salary_col)) keeper["salary_col"] <- list(NULL)
+  if (is.null(keeper$salary_col)) {
+    keeper["salary_col"] <- list(NULL)
+  }
   keeper
 }
 
@@ -398,7 +430,7 @@ pool_sizes <- function(config) {
   primary <- intersect(names(config$roster_slots), PRIMARY_HITTER_SLOTS)
   list(
     pitchers = as.integer(config$n_teams * sum(config$pitcher_slots)),
-    hitters  = as.integer(config$n_teams * sum(config$roster_slots[primary]))
+    hitters = as.integer(config$n_teams * sum(config$roster_slots[primary]))
   )
 }
 
@@ -417,25 +449,32 @@ pool_sizes <- function(config) {
 #' @export
 print.league_config <- function(x, ...) {
   cat("League configuration\n")
-  cat(sprintf("  Teams:      %d | Budget: $%d | Type: %s\n",
-              x$n_teams, x$budget, x$league_type))
+  cat(sprintf(
+    "  Teams:      %d | Budget: $%d | Type: %s\n",
+    x$n_teams,
+    x$budget,
+    x$league_type
+  ))
   hitter_txt <- paste(
     sprintf("%s=%d", names(x$roster_slots), x$roster_slots),
     collapse = ", "
   )
-  cat(sprintf("  Hitters:    %s (%d slots)\n",
-              hitter_txt, sum(x$roster_slots)))
+  cat(sprintf("  Hitters:    %s (%d slots)\n", hitter_txt, sum(x$roster_slots)))
   p_total <- sum(x$pitcher_slots)
   pitcher_txt <- if (!is.null(names(x$pitcher_slots))) {
-    paste(sprintf("%s=%d", names(x$pitcher_slots), x$pitcher_slots),
-          collapse = ", ")
+    paste(
+      sprintf("%s=%d", names(x$pitcher_slots), x$pitcher_slots),
+      collapse = ", "
+    )
   } else {
     sprintf("total=%d", p_total)
   }
   cat(sprintf("  Pitchers:   %s (%d slots)\n", pitcher_txt, p_total))
-  cat(sprintf("  Categories: %s  (%d)\n",
-              paste(x$categories, collapse = " "),
-              length(x$categories)))
+  cat(sprintf(
+    "  Categories: %s  (%d)\n",
+    paste(x$categories, collapse = " "),
+    length(x$categories)
+  ))
   inv_txt <- if (is.null(x$inverse_categories)) {
     "(none declared)"
   } else {
