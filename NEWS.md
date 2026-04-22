@@ -53,6 +53,20 @@
   above the within-position average for rotisserie baseball projection data.
   Internal building block for `zar()`. See `?zaa`.
 
+* `zar()` — z-scores above replacement. Computes per-player, per-category
+  z-scores above the replacement level by calling `zaa()` internally and
+  subtracting the per-position replacement-band z-score from each player's
+  `zaa_<cat>` score. Supports `include_raw`, `pitcher_pool`, `hitter_pool`,
+  `category_weight`, and `weight_method`; all forwarded to the internal
+  `zaa()` call. SP and RP always use separate replacement baselines regardless
+  of `pitcher_pool`. Returns a data frame with `zar_<CAT>` columns and
+  `total_zar`; when `include_raw = TRUE`, prepends `zaa_<CAT>` and `total_zaa`
+  columns. Output carries `attr(., "units") = "zscore"` and
+  `attr(., "anchor") = "replacement"`. Validated by an 800-replication Monte
+  Carlo study (`inst/simulation/sim-zar.R`, 4 scenarios x 200 reps) confirming
+  algebraic identity (max error 8.88e-16) and band-mean invariant (0/800
+  violations).
+
 * `par()` — Computes per-player Points Above Replacement (PAR) in SGP units.
   Takes a `replacement_level()` output and `sgp_denominators()` output, calls
   `sgp()` internally to convert projected statistics, and subtracts the

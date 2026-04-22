@@ -1,10 +1,10 @@
 # Architecture: rotostats
 
-**Run:** `zaa-2026-04-21`
-**Branch:** `feature/zaa`
+**Run:** `zar-2026-04-21`
+**Branch:** `feature/zar`
 **Date:** 2026-04-21
 
-(Previous run: `inverse-categories-2026-04-21` — see git log for prior state)
+(Previous run: `zaa-2026-04-21` — see git log for prior state)
 
 ---
 
@@ -28,6 +28,7 @@ graph TD
         LH["league_history()"]
         PAR["par()"]
         ZAA["zaa()"]
+        ZAR["zar()"]
         W["Weight constructors\nflat / linear_decay / exp_decay"]
         YW["Year-window helpers\nafter / before / between / last"]
         CS["cal / cal_spec"]
@@ -64,6 +65,10 @@ graph TD
         ZAA_BODY["zaa() body\nV1–V7 validation\npool construction\nper-pool z-scores\ntotal_zaa scaling\ndistribution attr"]
         POP_SD[".pop_sd()\npopulation SD\ndenominator n"]
         ZAA_COL[".zaa_col_name()\ncolumn sanitizer\nzaa_HR / zaa_bb_per_9"]
+    end
+
+    subgraph ZAR_LAYER["ZAR Layer"]
+        ZAR_BODY["zar() body\nV1–V3 validation\nzaa() delegation\ndist extraction\nrepl-band z-score\nvectorized subtraction\ntotal_zar"]
     end
 
     subgraph HELPERS["Internal Helpers"]
@@ -124,6 +129,11 @@ graph TD
     ZAA_BODY --> IC_CONST
     ZAA_BODY --> POOL
 
+    ZAR --> ZAR_BODY
+    ZAR_BODY --> ZAA_BODY
+    ZAR_BODY --> RL_BODY
+    ZAR_BODY --> IC_CONST
+
     style IC fill:#1e90ff,stroke:#1565c0,color:#fff
     style IC_FN fill:#1e90ff,stroke:#1565c0,color:#fff
     style IC_CONST fill:#1e90ff,stroke:#1565c0,color:#fff
@@ -134,11 +144,14 @@ graph TD
     style ZAA_BODY fill:#1e90ff,stroke:#1565c0,color:#fff
     style POP_SD fill:#1e90ff,stroke:#1565c0,color:#fff
     style ZAA_COL fill:#1e90ff,stroke:#1565c0,color:#fff
+    style ZAR fill:#1e90ff,stroke:#1565c0,color:#fff
+    style ZAR_BODY fill:#1e90ff,stroke:#1565c0,color:#fff
 ```
 
 | Module | Purpose | Key Dependencies | Changed in This Run |
 |--------|---------|-----------------|---------------------|
-| `zaa()` | Z-scores above average; per-player per-category z-scores within the rostered pool; internal building block for `zar()` | `INVERSE_CATEGORIES`, `pool_sizes()`, `cli`, `rlang`, `checkmate`, `stats` | **YES — new file** |
+| `zaa()` | Z-scores above average; per-player per-category z-scores within the rostered pool; internal building block for `zar()` | `INVERSE_CATEGORIES`, `pool_sizes()`, `cli`, `rlang`, `checkmate`, `stats` | No |
+| `zar()` | Z-scores above replacement; calls `zaa()` and subtracts per-position replacement-band z-score; SP/RP use separate baselines; `include_raw` flag; `attr(., "units") = "zscore"`, `attr(., "anchor") = "replacement"` | `zaa()`, `replacement_level()`, `INVERSE_CATEGORIES`, `cli`, `rlang`, `checkmate`, `stats` | **YES — new file** |
 | `inverse_categories()` | Exported accessor; returns `INVERSE_CATEGORIES` (8-element vector of lower-is-better pitcher ratio stats) | — | No |
 | `league_config()` | Constructor; `inverse_categories = NULL` param, `validate_inverse_categories()` helper, new S3 slot, and `print.league_config()` `Inverse:` line | `cli` | No |
 | `sgp_denominators()` | Denominator calibration; `NULL` default with three-layer resolution; `config = NULL` arg | `inverse_categories()`, `sgp-denominators-helpers.R` | No |
@@ -352,6 +365,50 @@ graph TD
 | `distribution` attr assembly | Nested (pool → category) when positional; flat (category only) when combined; `sd_vol` present for rate stats only | — | **YES — new** |
 | `total_zaa` scaling | `rowSums(na.rm=FALSE)`; per-pool multiplier from `weight_method` or `category_weight`; only `total_zaa` is scaled, per-category columns never touched | — | **YES — new** |
 
+**zar() call graph (new in this run):**
+
+```mermaid
+%%{init: {'theme': 'neutral'}}%%
+graph TD
+    ZAR["zar()"] --> V1["V1: include_raw type check\n!missing guard\nrotostats_error_invalid_parameter"]
+    ZAR --> V2["V2: attr extraction\nprojections + config non-NULL\nrotostats_error_missing_replacement_attrs"]
+    ZAR --> V3["V3: multi_pos=all guard\nrotostats_error_multi_pos_all_unsupported"]
+    ZAR --> S1["Step 1: call zaa()\nforwards pitcher_pool\nhitter_pool category_weight\nweight_method ..."]
+    S1 --> ZAA_INNER["zaa() — all V1–V7 validation\npool z-scores\ndistribution attr"]
+    ZAR --> S2["Step 2: extract distribution\nper-position replacement-band\nz-score computation\ncounting / AVG / INVERSE paths"]
+    S2 --> DIST["attr(zaa_result, 'distribution')\nnested or flat\nbased on pool settings"]
+    S2 --> REPL_STATS["replacement$replacement_stats\none row per position\nband-average stat line"]
+    ZAR --> S3["Step 3: player position lookup\nposition_assignments\nnnamed vec or df\nplayer_id or row fallback"]
+    ZAR --> S4["Step 4: vectorized subtraction\nrepl_z_matrix\nzar = zaa - repl_z\nno row-wise player loop"]
+    ZAR --> S5["Step 5: total_zar\nrowSums na.rm=FALSE"]
+    ZAR --> S6["Step 6: assemble output\ninclude_raw ordering\nzaa_* before zar_*"]
+    ZAR --> S7["Step 7: attach attrs\nunits=zscore\nanchor=replacement"]
+
+    style ZAR fill:#1e90ff,stroke:#1565c0,color:#fff
+    style V1 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style V2 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style V3 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S1 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style ZAA_INNER fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S2 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style DIST fill:#1e90ff,stroke:#1565c0,color:#fff
+    style REPL_STATS fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S4 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S7 fill:#1e90ff,stroke:#1565c0,color:#fff
+```
+
+| Function / Block | Purpose | Key Dependencies | Changed |
+|---|---|---|---|
+| `zar()` entry | Orchestrates V1–V3 own validation, delegates V4+ to `zaa()`; extracts distribution; computes replacement z-scores; vectorized subtraction; output assembly | `cli`, `rlang`, `checkmate`, `stats`, `zaa()` | **YES — new** |
+| V1: `include_raw` check | `!missing(include_raw)` guard + `checkmate::assert_flag`; explicit-path only | `checkmate`, `cli`, `rlang` | **YES — new** |
+| V2: attr extraction | `attr(replacement, "projections")` / `"config"` non-NULL check; fires before any `replacement$…` access | `cli`, `rlang` | **YES — new** |
+| V3: `multi_pos = "all"` guard | Aborts with `rotostats_error_multi_pos_all_unsupported`; fires after V2 (needs valid object) | `cli`, `rlang` | **YES — new** |
+| Step 1: `zaa()` call | Forwards all four pool/weight parameters; `zaa()` performs all remaining validation | `zaa()` | **YES — new** |
+| Step 2: replacement z-score | Per-position loop over `replacement_stats`; nested vs flat `distribution` path; counting / AVG / INVERSE_CATEGORIES formula branches; degenerate SD → 0 guard; volume-weight for rate stats (IP / AB) | `INVERSE_CATEGORIES`, `stats::setNames` | **YES — new** |
+| Step 3: position lookup | Normalizes `position_assignments` (named vec or df); matches by `player_id` if present, else row order | base R | **YES — new** |
+| Step 4: vectorized subtraction | `vapply` over categories (not players) to build `repl_z_matrix`; single matrix subtraction | base R | **YES — new** |
+| Step 7: output attrs | `attr(result, "units") = "zscore"`, `attr(result, "anchor") = "replacement"` | base R | **YES — new** |
+
 **sgp_denominators() call graph (changed in previous run — three-layer resolution):**
 
 ```mermaid
@@ -484,11 +541,12 @@ graph TD
 
 | Module / Function | Purpose | Key Dependencies | Changed in This Run |
 |---|---|---|---|
-| `R/zaa.R` — `zaa()` | Z-scores above average; per-player per-category z-scores vs within-position mean; pool-definition semantics (positional vs combined for hitters, split/combined/none for pitchers); `attr(result, "distribution")` stores per-pool per-category `{mean, sd, sd_vol?}`; internal building block for `zar()` | `INVERSE_CATEGORIES` constant, `cli`, `rlang`, `checkmate`, `stats::setNames` | **YES — new file** |
-| `R/zaa.R` — `.pop_sd()` | Population SD helper (denominator n, never `stats::sd()`); used for both counting-stat z-scores and rate-stat re-standardization | base R | **YES — new** |
-| `R/zaa.R` — `.zaa_col_name()` | Column name sanitizer: `zaa_HR`, `zaa_ERA`, `zaa_bb_per_9`; slashes replaced with `_per_` and lowercased, matching `sgp` convention | base R | **YES — new** |
+| `R/zar.R` — `zar()` | Z-scores above replacement; calls `zaa()` internally and subtracts per-position replacement-band z-score; SP/RP always use separate baselines; `include_raw` flag prepends `zaa_*` columns; `attr(., "units") = "zscore"`, `attr(., "anchor") = "replacement"` | `zaa()`, `INVERSE_CATEGORIES`, `cli`, `rlang`, `checkmate`, `stats::setNames` | **YES — new file** |
+| `R/zaa.R` — `zaa()` | Z-scores above average; per-player per-category z-scores vs within-position mean; pool-definition semantics (positional vs combined for hitters, split/combined/none for pitchers); `attr(result, "distribution")` stores per-pool per-category `{mean, sd, sd_vol?}`; internal building block for `zar()` | `INVERSE_CATEGORIES` constant, `cli`, `rlang`, `checkmate`, `stats::setNames` | No |
+| `R/zaa.R` — `.pop_sd()` | Population SD helper (denominator n, never `stats::sd()`); used for both counting-stat z-scores and rate-stat re-standardization | base R | No |
+| `R/zaa.R` — `.zaa_col_name()` | Column name sanitizer: `zaa_HR`, `zaa_ERA`, `zaa_bb_per_9`; slashes replaced with `_per_` and lowercased, matching `sgp` convention | base R | No |
 | `R/par.R` — `par()` | Per-player PAR (Points Above Replacement) in SGP units; delegates all SGP computation to `sgp()`, subtracts position-specific replacement SGP, applies band calibration check | `sgp.R`, `replacement.R` (produces `replacement` arg), `cli`, `stats` | No |
-| `R/replacement.R` — `replacement_level()` | Per-position replacement-level estimator; boundary-band + state-hash cycle detection loop | `replacement_internal.R`, `replacement_params.R`, `league-config.R`, `sgp.R`, `cli`, `checkmate`, `rlang`, `stats`, `stringi` | **YES** — state-hash detector replaces 2-lag; `cycle_history_window` validation added |
+| `R/replacement.R` — `replacement_level()` | Per-position replacement-level estimator; boundary-band + state-hash cycle detection loop | `replacement_internal.R`, `replacement_params.R`, `league-config.R`, `sgp.R`, `cli`, `checkmate`, `rlang`, `stats`, `stringi` | No |
 | `R/replacement.R` — `replacement_from_prices()` | Price-based replacement estimator; no projections or band computation | `replacement_internal.R`, `cli`, `checkmate`, `rlang`, `stringi` | No |
 | `R/replacement_internal.R` — `format_replacement_output()` | Constructs the 7-element output list; called by both exported functions | Base R | No |
 | `R/replacement_internal.R` — `compute_positional_adjustments()` | Computes scarcity premiums via fvarz/sgp/dollar/posblend; enforces zero-sum | `cli`, `rlang` | No |
@@ -523,9 +581,9 @@ average for rotisserie baseball projection data. The anchor is the position mean
 a player at the position mean scores `total_zaa = 0`.
 
 `zaa()` is the primary internal building block for `zar()` (z-scores above
-replacement; not yet implemented). `zar()` will consume the `distribution`
-attribute from `zaa()` to score replacement players without re-running the full
-z-score loop.
+replacement). `zar()` reads `attr(zaa_result, "distribution")` to score the
+replacement-band stat line without re-running the full z-score loop. See the
+ZAR Section.
 
 `zaa()` is a sibling of `par()` in the valuation function family. `par()` computes
 points above replacement in SGP units; `zaa()` computes the same concept in z-score
@@ -697,11 +755,10 @@ matches `stats` row order when `replacement = NULL`.
    `withCallingHandlers(rotostats_warning_zero_playing_time = ...)` and impute
    or filter.
 
-2. **`zar()` is not yet implemented**: `zaa()` is designed as the building block
-   for `zar()`, which will consume `attr(result, "distribution")` to score
-   replacement players in z-score units. The `@seealso` tag in `?zaa` does not
-   link to `zar()` until that function is implemented (link would cause
-   `R CMD check WARNING`).
+2. **`zar()` implemented**: `zar()` consumes `attr(result, "distribution")` to
+   score the replacement-band stat line in z-score units without re-running the
+   full pool loop. The `@seealso` tag in `?zaa` now links to `[zar()]`. See the
+   ZAR Section below.
 
 3. **`weight_method` with mixed hitter/pitcher categories**: When a combined
    pitcher pool scores different categories than hitters (e.g., no HR for
@@ -720,6 +777,137 @@ matches `stats` row order when `replacement = NULL`.
 | Replacement level (produces `replacement` arg) | `R/replacement.R` |
 | Error/warning class registry | `plans/error-messages.md` |
 | Unit tests | `tests/testthat/test-zaa.R`, `tests/testthat/helper-zaa-fixtures.R` |
+
+---
+
+## ZAR Section
+
+### Purpose
+
+`zar()` computes per-player, per-category z-scores above the replacement level.
+It calls `zaa()` internally and subtracts the per-position replacement-band
+z-score from each player's `zaa_<cat>` score. A player at exactly the
+replacement level for their position has `total_zar` approximately equal to 0
+by construction.
+
+`zar()` is the z-score equivalent of `par()` in the valuation function family.
+`par()` computes points above replacement in SGP units; `zar()` computes the
+same concept in z-score units. Both consume the same `replacement_level()` output
+as their first argument. `value_plus()` (planned) will consume `zar()` as one of
+its composite inputs.
+
+### Architecture Pattern
+
+`zar()` follows a delegation-heavy pattern:
+
+1. **Own validation** (Steps V1–V3): `include_raw` type check, attribute
+   extraction guard (`projections` + `config`), and `multi_pos = "all"` guard.
+2. **Delegation to `zaa()`** (Step 1): all parameter validation for
+   `pitcher_pool`, `hitter_pool`, `weight_method`, `category_weight`,
+   `stat_units`, column presence, and column types is delegated. `zar()` forwards
+   these parameters by explicit value; `zaa()`'s `!missing()` guards always apply.
+3. **Distribution extraction** (Step 2): reads `attr(zaa_result, "distribution")`
+   to score the replacement-band stat line. The replacement player is never passed
+   through `zaa()` — the distribution parameters are computed once from rostered
+   players and then applied directly to the band-average stat line.
+4. **Vectorized subtraction** (Step 4): builds a `(n_players × n_cats)` matrix
+   of per-player replacement z-scores via `vapply` over categories (not over
+   players), then subtracts in a single matrix operation.
+
+### SP/RP Separate Baseline Rule
+
+SP and RP always use separate replacement stat lines regardless of `pitcher_pool`.
+`pitcher_pool` controls the z-score normalization pool in `zaa()` (flat vs.
+nested `distribution`). It does NOT affect which `replacement_stats` row is
+used as the baseline:
+
+- `pitcher_pool = "combined"`: both SP and RP read from the flat `distribution`
+  (same distribution parameters) but from their own row in `replacement_stats`
+  (different band-average stat values). An SP replacement player and an RP
+  replacement player produce different `total_zar` values from the same
+  distribution parameters.
+- `pitcher_pool = "split"`: SP and RP each read from their own nested
+  `distribution[[pos]]` entry, and from their own `replacement_stats` row.
+  Both the normalization and the baseline are position-specific.
+
+### `include_raw` Output Shape Contract
+
+| `include_raw` | Column order |
+|---|---|
+| `FALSE` (default) | `player_id?`, `zar_<cat1>`, ..., `total_zar` |
+| `TRUE` | `player_id?`, `zaa_<cat1>`, ..., `total_zaa`, `zar_<cat1>`, ..., `total_zar` |
+
+`zaa_*` columns always precede `zar_*` columns. Category order within each block
+follows `config$categories` order.
+
+### Attribute Contract
+
+| Attribute | Value |
+|---|---|
+| `attr(result, "units")` | `"zscore"` |
+| `attr(result, "anchor")` | `"replacement"` |
+
+### Input Contract
+
+| Argument | Type | Required? | Notes |
+|---|---|---|---|
+| `replacement` | `replacement_level` output | Yes | Must carry `projections` and `config` attributes; must NOT have `multi_pos = "all"` |
+| `include_raw` | logical scalar | No | Default `FALSE`; type-checked only when supplied explicitly |
+| `pitcher_pool` | character(1) | No | `"combined"` (default), `"split"`, `"none"`; forwarded to `zaa()` |
+| `hitter_pool` | character(1) | No | `"positional"` (default), `"combined"`; forwarded to `zaa()` |
+| `category_weight` | named numeric | No | Forwarded to `zaa()` |
+| `weight_method` | character(1) | No | `"none"` (default), `"linear"`, `"sqrt"`; forwarded to `zaa()` |
+
+### Algorithm Sketch
+
+For each position `pos` in `replacement_stats$position`:
+
+1. Determine `dist_path`: nested `distribution[[pos]]` when using positional
+   hitter pool or split pitcher pool; flat `distribution` otherwise.
+2. For each category `c`:
+   - **Counting stat**: `repl_z = (repl_stat - dist$mean) / dist$sd`
+   - **INVERSE category** (ERA/WHIP-family): `repl_z = -(repl_stat - dist$mean) / dist$sd * repl_IP / dist$sd_vol`
+   - **AVG**: `repl_z = (repl_stat - dist$mean) / dist$sd * repl_AB / dist$sd_vol`
+   - **Degenerate SD**: `repl_z = 0` when `dist$sd == 0`
+
+Then: `zar[i, c] = zaa[i, c] - repl_z[pos_of_i, c]`
+
+### Error Classes
+
+| Class | Type | Step | Condition |
+|---|---|---|---|
+| `rotostats_error_invalid_parameter` | error | V1 | `include_raw` not a logical scalar (explicit-path only) |
+| `rotostats_error_missing_replacement_attrs` | error | V2 | `projections` or `config` attribute absent from `replacement` |
+| `rotostats_error_multi_pos_all_unsupported` | error | V3 | `replacement$params$multi_pos == "all"` |
+
+All remaining validation errors (`pitcher_pool`, `hitter_pool`, etc.) are
+delegated to `zaa()` and surface unchanged to the caller.
+
+### Monte Carlo Validation
+
+`zar()` was validated by an 800-replication simulation (`inst/simulation/sim-zar.R`,
+4 scenarios × 200 reps) confirming:
+
+| Criterion | Threshold | Observed | Result |
+|---|---|---|---|
+| Algebraic identity (`zar = zaa - repl_z`) | max error < 1e-10 | 8.88e-16 | PASS |
+| Band-mean invariant (replacement player's `zar` = 0) | 0/800 violations | 0/800 | PASS |
+| Rank stability (consecutive-rep Spearman rho) | > 0.55 | 0.622 | PASS |
+| Call failure rate | < 1% | 0.0% | PASS |
+| Regime-break sensitivity (SV hierarchy shift) | directional | S4 > S1 | PASS |
+
+### Cross-References
+
+| Surface | Location |
+|---|---|
+| Implementation | `R/zar.R` |
+| Internal building block | `R/zaa.R` (`zaa()`, `.pop_sd()`, `.zaa_col_name()`) |
+| Replacement level (produces `replacement` arg) | `R/replacement.R` |
+| `INVERSE_CATEGORIES` constant | `R/inverse-categories.R` |
+| Error/warning class registry | `plans/error-messages.md` |
+| Monte Carlo harness | `inst/simulation/sim-zar.R` |
+| Simulation results | `inst/simulation/sim-zar-results.rds`, `inst/simulation/sim-zar-summary.csv` |
+| Unit tests | `tests/testthat/test-zar.R` |
 
 ---
 

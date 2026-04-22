@@ -113,6 +113,6 @@ cfg <- league_config(
 
 }
 \seealso{
-\code{\link[=par]{par()}}, \code{\link[=sgp]{sgp()}}, \code{\link[=replacement_level]{replacement_level()}}, \code{\link[=league_config]{league_config()}},
+\code{\link[=par]{par()}}, \code{\link[=zar]{zar()}}, \code{\link[=sgp]{sgp()}}, \code{\link[=replacement_level]{replacement_level()}}, \code{\link[=league_config]{league_config()}},
 \code{\link[=inverse_categories]{inverse_categories()}}
 }

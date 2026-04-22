@@ -114,7 +114,7 @@
 #' # proj <- <data frame of projections>
 #' # result <- zaa(stats = proj, config = cfg)
 #'
-#' @seealso [par()], [sgp()], [replacement_level()], [league_config()],
+#' @seealso [par()], [zar()], [sgp()], [replacement_level()], [league_config()],
 #'   [inverse_categories()]
 #'
 #' @importFrom stats setNames
