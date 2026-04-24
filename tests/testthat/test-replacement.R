@@ -1237,13 +1237,12 @@ test_that("TS-R6-3: pathological pool — max_iter fires, converged = FALSE, war
 test_that("PITCHER_ELIG_REGEX matches SP, RP, and bare P tokens", {
   pos <- c("SP", "RP", "P", "SP|RP", "OF|SP", "1B|P", "SP|1B|OF",
            "OF", "1B", "C", "2B|SS", "DH", NA_character_, "")
+  # grepl() on NA_character_ returns FALSE in R 4.x (no warning).
   expected <- c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
-                FALSE, FALSE, FALSE, FALSE, FALSE, NA, FALSE)
+                FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE)
 
   got <- grepl(rotostats:::PITCHER_ELIG_REGEX, pos)
-  # grepl() on NA returns FALSE with a warning; treat NA as FALSE for match check
-  na_idx <- which(is.na(pos))
-  expect_equal(got[-na_idx], expected[-na_idx][!is.na(expected[-na_idx])])
+  expect_equal(got, expected)
 })
 
 test_that("PITCHER_ELIG_REGEX does NOT match substrings inside hitter tokens", {
