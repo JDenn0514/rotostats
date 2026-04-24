@@ -16,11 +16,11 @@ Imports:
     checkmate,
     cli (>= 3.6.0),
     httr2 (>= 1.0.0),
-    jsonlite (>= 1.8.0),
     rlang (>= 1.0.0),
     stringi
 Suggests:
     classInt,
+    jsonlite (>= 1.8.0),
     mixtools,
     testthat (>= 3.0.0),
     withr (>= 2.5.0),
