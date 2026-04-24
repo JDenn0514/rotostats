@@ -78,6 +78,7 @@ All `cli_abort()` and `cli_warn()` calls must use a class from this table.
 | `rotostats_error_unsupported_year` | `get_projections()` | `year` differs from the current season (FanGraphs projections endpoint only serves current-season data) | Omit `year`, or pass the current season integer |
 | `rotostats_error_projection_fetch_failed` | `get_projections()` | FanGraphs API returned a non-2xx status or the request failed at the transport layer | Check network connectivity; if FanGraphs is up, file an issue with the failing source/player_type combination |
 | `rotostats_error_empty_projection_response` | `get_projections()` | API returned a well-formed response with zero projection rows | Verify the source is still publishing projections for the current season |
+| `rotostats_error_invalid_mlb_only` | `get_projections()` | `mlb_only` is not a length-1 non-NA logical | Pass `TRUE` or `FALSE` |
 
 ## Warnings
 
