@@ -9,7 +9,8 @@
   column distinguishing batters from pitchers. `SVHD` is derived as
   `SV + HLD` for pitcher rows, with a once-per-session reminder that the
   user should confirm this matches their league's definition. This adds
-  `httr2` and `jsonlite` to `Imports`.
+  `httr2` to `Imports` and `jsonlite` to `Suggests` (used only by the
+  test fixture loader).
 
 ## New arguments
 

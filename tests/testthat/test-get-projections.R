@@ -275,7 +275,7 @@ test_that(".parse_projections_json() aborts on empty input", {
 # ---------------------------------------------------------------------------
 
 test_that(".normalize_projection_cols() renames PlayerName → name", {
-  df <- data.frame(playerid = "1", PlayerName = "A", Team = "NYY", Pos = "2B")
+  df <- data.frame(playerid = "1", PlayerName = "A", Team = "NYY", minpos = "2B")
   out <- rotostats:::.normalize_projection_cols(df)
   expect_setequal(names(out), c("playerid", "name", "team", "pos"))
 })
@@ -490,6 +490,7 @@ load_fixture <- function(name) {
 }
 
 test_that("get_projections('steamer', 'batters') parses the recorded fixture cleanly", {
+  testthat::skip_if_not_installed("jsonlite")
   testthat::local_mocked_bindings(
     .fetch_projections_api = function(url) load_fixture("projections-steamer-bat.json"),
     .package = "rotostats"
@@ -499,9 +500,13 @@ test_that("get_projections('steamer', 'batters') parses the recorded fixture cle
   expect_gt(nrow(out), 0L)
   expect_true(all(c("playerid", "name", "team", "pos", "player_type") %in% names(out)))
   expect_true(all(out$player_type == "batter"))
+  expect_type(out$pos, "character")
+  expect_true(all(out$pos %in% c("C", "1B", "2B", "3B", "SS", "LF", "CF", "RF", "OF", "DH", "UT", "IF", "NA")) |
+              all(nchar(out$pos) <= 6))
 })
 
 test_that("get_projections('steamer', 'pitchers') derives SVHD from the recorded fixture", {
+  testthat::skip_if_not_installed("jsonlite")
   testthat::local_mocked_bindings(
     .fetch_projections_api = function(url) load_fixture("projections-steamer-pit.json"),
     .package = "rotostats"
@@ -513,9 +518,12 @@ test_that("get_projections('steamer', 'pitchers') derives SVHD from the recorded
   expect_true("SVHD" %in% names(out))
   expect_true(all(out$SVHD == out$SV + out$HLD |
                   is.na(out$SV) | is.na(out$HLD) | out$SVHD >= 0))
+  expect_true("pos" %in% names(out))
+  expect_true(all(out$pos == "P"))
 })
 
 test_that("ZiPS pitcher fixture parses even without QS", {
+  testthat::skip_if_not_installed("jsonlite")
   testthat::local_mocked_bindings(
     .fetch_projections_api = function(url) load_fixture("projections-zips-pit.json"),
     .package = "rotostats"

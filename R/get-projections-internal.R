@@ -194,9 +194,8 @@ VALID_PLAYER_TYPES <- c("batters", "pitchers", "both")
 PROJECTION_COLUMN_RENAME <- c(
   PlayerName = "name",
   Team       = "team",
-  Pos        = "pos",
+  minpos     = "pos",
   playerId   = "playerid",
-  ShortName  = "playerid",
   `wRC+`     = "wRC_plus",
   `K/9`      = "K_per_9",
   `BB/9`     = "BB_per_9",
@@ -272,5 +271,6 @@ PROJECTION_COLUMN_RENAME <- c(
   df  <- .parse_projections_json(raw)
   df  <- .normalize_projection_cols(df)
   if (player_type == "pitchers") df <- .derive_svhd(df)
+  if (player_type == "pitchers" && !("pos" %in% names(df))) df$pos <- "P"
   .attach_player_type(df, if (player_type == "batters") "batter" else "pitcher")
 }
