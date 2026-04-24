@@ -252,6 +252,14 @@ PROJECTION_COLUMN_RENAME <- c(
 }
 
 #' @noRd
+.normalize_pos_eligibility <- function(df) {
+  if (!("pos" %in% names(df))) return(df)
+  df$pos_eligibility <- gsub("/", "|", df$pos, fixed = TRUE)
+  df$pos <- NULL
+  df
+}
+
+#' @noRd
 .attach_player_type <- function(df, type) {
   stopifnot(type %in% c("batter", "pitcher"))
   df$player_type <- type
@@ -288,7 +296,10 @@ PROJECTION_COLUMN_RENAME <- c(
   raw <- .fetch_projections_api(url)
   df  <- .parse_projections_json(raw)
   df  <- .normalize_projection_cols(df)
-  if (player_type == "pitchers") df <- .derive_svhd(df)
-  if (player_type == "pitchers" && !("pos" %in% names(df))) df$pos <- "P"
+  if (player_type == "pitchers") {
+    df <- .derive_svhd(df)
+    if (!("pos" %in% names(df))) df$pos <- "P"
+  }
+  df <- .normalize_pos_eligibility(df)
   .attach_player_type(df, if (player_type == "batters") "batter" else "pitcher")
 }

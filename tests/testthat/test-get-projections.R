@@ -397,7 +397,7 @@ test_that("get_projections('steamer', player_type = 'batters') returns a normali
 
   expect_s3_class(out, "data.frame")
   expect_equal(nrow(out), 3L)
-  expect_true(all(c("player_id", "player_name", "team", "pos", "player_type") %in% names(out)))
+  expect_true(all(c("player_id", "player_name", "team", "pos_eligibility", "player_type") %in% names(out)))
   expect_true(all(out$player_type == "batter"))
   expect_true("wrc_plus" %in% names(out))
   expect_false("wRC+" %in% names(out))
@@ -498,11 +498,12 @@ test_that("get_projections('steamer', 'batters') parses the recorded fixture cle
   out <- get_projections(source = "steamer", player_type = "batters")
   expect_s3_class(out, "data.frame")
   expect_gt(nrow(out), 0L)
-  expect_true(all(c("player_id", "player_name", "team", "pos", "player_type") %in% names(out)))
+  expect_true(all(c("player_id", "player_name", "team", "pos_eligibility", "player_type") %in% names(out)))
   expect_true(all(out$player_type == "batter"))
-  expect_type(out$pos, "character")
-  expect_true(all(out$pos %in% c("C", "1B", "2B", "3B", "SS", "LF", "CF", "RF", "OF", "DH", "UT", "IF", "NA")) |
-              all(nchar(out$pos) <= 6))
+  expect_type(out$pos_eligibility, "character")
+  expect_true(all(nchar(out$pos_eligibility) <= 6, na.rm = TRUE))
+  # Pipe-delimited now — no slashes should remain
+  expect_false(any(grepl("/", out$pos_eligibility, fixed = TRUE), na.rm = TRUE))
 })
 
 test_that("get_projections('steamer', 'pitchers') derives SVHD from the recorded fixture", {
@@ -518,8 +519,8 @@ test_that("get_projections('steamer', 'pitchers') derives SVHD from the recorded
   expect_true("svhd" %in% names(out))
   expect_true(all(out$svhd == out$sv + out$hld |
                   is.na(out$sv) | is.na(out$hld) | out$svhd >= 0))
-  expect_true("pos" %in% names(out))
-  expect_true(all(out$pos == "P"))
+  expect_true("pos_eligibility" %in% names(out))
+  expect_true(all(out$pos_eligibility[out$player_type == "pitcher"] == "P"))
 })
 
 test_that("ZiPS pitcher fixture parses even without QS", {
@@ -536,4 +537,40 @@ test_that("ZiPS pitcher fixture parses even without QS", {
   # QS may or may not be present — this is documented in the spec. Either way,
   # no error is thrown and the rest of the pipeline works.
   expect_gt(nrow(out), 0L)
+})
+
+# ---------------------------------------------------------------------------
+# .normalize_pos_eligibility()
+# ---------------------------------------------------------------------------
+
+test_that(".normalize_pos_eligibility() renames pos to pos_eligibility", {
+  df <- data.frame(pos = c("2B", "SS/OF"), stringsAsFactors = FALSE)
+  out <- rotostats:::.normalize_pos_eligibility(df)
+  expect_true("pos_eligibility" %in% names(out))
+  expect_false("pos" %in% names(out))
+})
+
+test_that(".normalize_pos_eligibility() converts / separators to |", {
+  df <- data.frame(pos = c("2B", "SS/OF", "1B/3B/OF"), stringsAsFactors = FALSE)
+  out <- rotostats:::.normalize_pos_eligibility(df)
+  expect_equal(out$pos_eligibility, c("2B", "SS|OF", "1B|3B|OF"))
+})
+
+test_that(".normalize_pos_eligibility() leaves single positions alone", {
+  df <- data.frame(pos = c("P", "C", "DH"), stringsAsFactors = FALSE)
+  out <- rotostats:::.normalize_pos_eligibility(df)
+  expect_equal(out$pos_eligibility, c("P", "C", "DH"))
+})
+
+test_that(".normalize_pos_eligibility() is a no-op when pos is absent", {
+  df <- data.frame(player_name = "X", stringsAsFactors = FALSE)
+  out <- rotostats:::.normalize_pos_eligibility(df)
+  expect_identical(out, df)
+  expect_false("pos_eligibility" %in% names(out))
+})
+
+test_that(".normalize_pos_eligibility() preserves NA in pos", {
+  df <- data.frame(pos = c("2B", NA_character_, "SS/OF"), stringsAsFactors = FALSE)
+  out <- rotostats:::.normalize_pos_eligibility(df)
+  expect_equal(out$pos_eligibility, c("2B", NA_character_, "SS|OF"))
 })
