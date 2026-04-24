@@ -8,7 +8,8 @@ league_config(
   n_teams = 12L,
   roster_slots,
   pitcher_slots = 9L,
-  categories,
+  batting_categories,
+  pitcher_categories,
   inverse_categories = NULL,
   league_type = "mixed",
   budget = 260L,
@@ -28,9 +29,15 @@ pool. Positions with zero slots may be omitted.}
 SP/RP split inferred downstream) or a named integer vector with names
 from \code{c("SP", "RP")}. Default \code{9L}.}
 
-\item{categories}{Character vector of scored category names. Normalized to
-uppercase at construction; a one-time \code{cli_inform()} lists any changes.
-Unrecognized names are accepted with a \code{cli_warn()}.}
+\item{batting_categories}{Character vector of scored batting categories.
+Normalized to uppercase. Required. Validates against
+\code{CANONICAL_BATTING_CATEGORIES}; categories belonging to the canonical
+pitcher list emit \code{rotostats_warning_category_side_mismatch}.}
+
+\item{pitcher_categories}{Character vector of scored pitcher categories.
+Normalized to uppercase. Required. Validates against
+\code{CANONICAL_PITCHER_CATEGORIES}; categories belonging to the canonical
+batting list emit \code{rotostats_warning_category_side_mismatch}.}
 
 \item{inverse_categories}{Optional character vector of scoring category
 names where a lower value is better (lower-is-better categories, e.g.,
@@ -74,12 +81,12 @@ weights) remain as arguments on the functions that consume them.
 }
 \examples{
 lg <- league_config(
-  n_teams       = 12L,
-  roster_slots  = c(C = 1, "1B" = 1, "2B" = 1, "3B" = 1,
-                    SS = 1, OF = 5, UTIL = 1),
-  pitcher_slots = c(SP = 6L, RP = 3L),
-  categories    = c("R", "HR", "RBI", "SB", "AVG",
-                    "W", "K", "SV", "ERA", "WHIP")
+  n_teams            = 12L,
+  roster_slots       = c(C = 1, "1B" = 1, "2B" = 1, "3B" = 1,
+                         SS = 1, OF = 5, UTIL = 1),
+  pitcher_slots      = c(SP = 6L, RP = 3L),
+  batting_categories = c("R", "HR", "RBI", "SB", "AVG"),
+  pitcher_categories = c("W", "K", "SV", "ERA", "WHIP")
 )
 print(lg)
 }
