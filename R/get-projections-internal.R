@@ -189,3 +189,33 @@ VALID_PLAYER_TYPES <- c("batters", "pitchers", "both")
   }
   df
 }
+
+#' @noRd
+PROJECTION_COLUMN_RENAME <- c(
+  PlayerName = "name",
+  Team       = "team",
+  Pos        = "pos",
+  playerId   = "playerid",
+  ShortName  = "playerid",
+  `wRC+`     = "wRC_plus",
+  `K/9`      = "K_per_9",
+  `BB/9`     = "BB_per_9",
+  `HR/9`     = "HR_per_9",
+  `K/BB`     = "K_per_BB",
+  `K%`       = "K_pct",
+  `BB%`      = "BB_pct"
+)
+
+#' @noRd
+.normalize_projection_cols <- function(df) {
+  nm <- names(df)
+  for (raw in names(PROJECTION_COLUMN_RENAME)) {
+    target <- PROJECTION_COLUMN_RENAME[[raw]]
+    hits <- which(nm == raw)
+    if (length(hits) == 1L && !(target %in% nm)) {
+      nm[hits] <- target
+    }
+  }
+  names(df) <- nm
+  df
+}

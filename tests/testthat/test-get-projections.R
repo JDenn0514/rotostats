@@ -269,3 +269,34 @@ test_that(".parse_projections_json() aborts on empty input", {
     class = "rotostats_error_empty_projection_response"
   )
 })
+
+# ---------------------------------------------------------------------------
+# .normalize_projection_cols()
+# ---------------------------------------------------------------------------
+
+test_that(".normalize_projection_cols() renames PlayerName → name", {
+  df <- data.frame(playerid = "1", PlayerName = "A", Team = "NYY", Pos = "2B")
+  out <- rotostats:::.normalize_projection_cols(df)
+  expect_setequal(names(out), c("playerid", "name", "team", "pos"))
+})
+
+test_that(".normalize_projection_cols() normalizes slash-containing pitcher stats", {
+  df <- data.frame(playerid = "1", `K/9` = 9.5, `BB/9` = 2.1, `K/BB` = 4.5,
+                   check.names = FALSE)
+  out <- rotostats:::.normalize_projection_cols(df)
+  expect_setequal(names(out), c("playerid", "K_per_9", "BB_per_9", "K_per_BB"))
+})
+
+test_that(".normalize_projection_cols() normalizes wRC+", {
+  df <- data.frame(playerid = "1", `wRC+` = 120, check.names = FALSE)
+  out <- rotostats:::.normalize_projection_cols(df)
+  expect_true("wRC_plus" %in% names(out))
+  expect_false("wRC+" %in% names(out))
+})
+
+test_that(".normalize_projection_cols() leaves already-canonical columns alone", {
+  df <- data.frame(playerid = "1", name = "A", team = "NYY", pos = "2B",
+                   HR = 30)
+  out <- rotostats:::.normalize_projection_cols(df)
+  expect_setequal(names(out), c("playerid", "name", "team", "pos", "HR"))
+})
