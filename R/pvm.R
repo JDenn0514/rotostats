@@ -580,6 +580,12 @@ pvm <- function(
     }
   } else if (identical(rate_pool, "pool_average")) {
     # ------- Option B: pool_average -------
+    # For rate stats, extras can be negative for above-replacement players who
+    # are worse than the pool mean.  Pool is computed as sum of POSITIVE extras
+    # only (sum(pmax(ex, 0))) so that the denominator is always non-negative and
+    # the pvm numerator (contrib_vol) sums to Pool, guaranteeing sum-to-1.
+    # Under "clip": contrib_vol = pmax(ex, 0)  → pvm in [0,1], sums to 1.
+    # Under "negative": contrib_vol = ex        → positive pvm values sum to 1.
     for (cat in scored_cats) {
       if (cat %in% ip_cats) {
         pos_mask <- contrib[, cat] > 0 & ip_pos
@@ -600,8 +606,10 @@ pvm <- function(
         }
         ex[is.na(ex)] <- 0
         extras[, cat] <- ex
-        Pool[cat] <- sum(ex[contrib[, cat] > 0], na.rm = TRUE)
-        contrib_vol[, cat] <- extras[, cat]
+        # Pool = sum of positive extras; guarantees Pool > 0 whenever any
+        # pitcher beats the pool mean and avoids cancellation.
+        Pool[cat] <- sum(pmax(ex, 0), na.rm = TRUE)
+        contrib_vol[, cat] <- if (sub_replacement == "clip") pmax(ex, 0) else ex
       } else if (cat %in% ab_cats) {
         pos_mask <- contrib[, cat] > 0 & ab_pos
         if (any(pos_mask, na.rm = TRUE)) {
@@ -612,8 +620,8 @@ pvm <- function(
         ex <- rostered_AB * (rostered_proj[[cat]] - mean_pool_stat)
         ex[is.na(ex)] <- 0
         extras[, cat] <- ex
-        Pool[cat] <- sum(ex[contrib[, cat] > 0], na.rm = TRUE)
-        contrib_vol[, cat] <- extras[, cat]
+        Pool[cat] <- sum(pmax(ex, 0), na.rm = TRUE)
+        contrib_vol[, cat] <- if (sub_replacement == "clip") pmax(ex, 0) else ex
       } else {
         # Counting stats: same as ip_weighted
         contrib_vol[, cat] <- contrib[, cat]
@@ -626,6 +634,9 @@ pvm <- function(
     }
   } else {
     # ------- Option C: fixed_baseline -------
+    # Same correction as pool_average: Pool = sum(pmax(ex, 0)) to prevent
+    # cancellation when above-replacement players straddle the fixed baseline.
+    # contrib_vol = pmax(ex, 0) under clip; raw ex under negative.
     for (cat in scored_cats) {
       if (cat %in% ip_cats) {
         bl_cat <- baseline[[cat]]
@@ -636,16 +647,16 @@ pvm <- function(
           ex <- rostered_IP * (bl_cat - rostered_proj[[cat]])
         }
         ex[is.na(ex)] <- 0
-        extras[, cat]    <- ex
-        contrib_vol[, cat] <- extras[, cat]
-        Pool[cat] <- sum(ex[contrib[, cat] > 0], na.rm = TRUE)
+        extras[, cat]      <- ex
+        Pool[cat]          <- sum(pmax(ex, 0), na.rm = TRUE)
+        contrib_vol[, cat] <- if (sub_replacement == "clip") pmax(ex, 0) else ex
       } else if (cat %in% ab_cats) {
         bl_cat <- baseline[[cat]]
         ex <- rostered_AB * (rostered_proj[[cat]] - bl_cat)
         ex[is.na(ex)] <- 0
-        extras[, cat]    <- ex
-        contrib_vol[, cat] <- extras[, cat]
-        Pool[cat] <- sum(ex[contrib[, cat] > 0], na.rm = TRUE)
+        extras[, cat]      <- ex
+        Pool[cat]          <- sum(pmax(ex, 0), na.rm = TRUE)
+        contrib_vol[, cat] <- if (sub_replacement == "clip") pmax(ex, 0) else ex
       } else {
         contrib_vol[, cat] <- contrib[, cat]
         if (sub_replacement == "clip") {
