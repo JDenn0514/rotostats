@@ -527,9 +527,14 @@ print.league_config <- function(x, ...) {
   }
   cat(sprintf("  Pitchers:   %s (%d slots)\n", pitcher_txt, p_total))
   cat(sprintf(
-    "  Categories: %s  (%d)\n",
-    paste(x$categories, collapse = " "),
-    length(x$categories)
+    "  Batting:    %s  (%d)\n",
+    paste(x$batting_categories, collapse = " "),
+    length(x$batting_categories)
+  ))
+  cat(sprintf(
+    "  Pitching:   %s  (%d)\n",
+    paste(x$pitcher_categories, collapse = " "),
+    length(x$pitcher_categories)
   ))
   inv_txt <- if (is.null(x$inverse_categories)) {
     "(none declared)"

@@ -289,6 +289,19 @@ test_that("config$categories convenience field returns the union", {
   expect_setequal(cfg$categories, c("HR", "R", "W", "K"))
 })
 
+test_that("print.league_config() shows batting and pitcher cats on separate lines", {
+  cfg <- league_config(
+    n_teams            = 12L,
+    roster_slots       = c(C = 1L),
+    pitcher_slots      = 9L,
+    batting_categories = c("HR", "R", "AVG"),
+    pitcher_categories = c("W", "K", "ERA")
+  )
+  txt <- capture.output(print(cfg))
+  expect_true(any(grepl("Batting:.*HR.*R.*AVG", txt)))
+  expect_true(any(grepl("Pitching:.*W.*K.*ERA", txt)))
+})
+
 # ---------------------------------------------------------------------------
 # keeper
 # ---------------------------------------------------------------------------
