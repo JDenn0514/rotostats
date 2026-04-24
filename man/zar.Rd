@@ -63,10 +63,11 @@ order.}
 \code{NA} when the corresponding \code{zaa_<cat>} is \code{NA} or the
 player has no position assignment.}
 \item{\code{total_zar}}{\code{rowSums()} across all \code{zar_<cat>}
-columns with \code{na.rm = FALSE}. Mixed hitter/pitcher pools carry
+columns with \code{na.rm = TRUE}. Mixed hitter/pitcher pools carry
 \code{NA} for opposite-side categories (a hitter has \code{NA} for
-ERA/K; a pitcher has \code{NA} for HR/R/SB), so \code{total_zar}
-will be \code{NA} for those players.}
+ERA/WHIP; a pitcher has \code{NA} for AVG), and those \code{NA}s are
+treated as zero contribution so \code{total_zar} sums the categories
+each player actually participates in.}
 }
 
 The returned data frame carries two attributes:

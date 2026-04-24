@@ -1298,3 +1298,94 @@ test_that(".compute_two_way_players() accepts bare P as pitcher eligibility", {
   pos_parts <- strsplit("1B|P", "\\|")[[1]]
   expect_true(any(pos_parts %in% c("SP", "RP", "P")))
 })
+
+# ---------------------------------------------------------------------------
+# Bug-C regression — DH-only players in a league without a DH slot must be
+# seeded to an active hitter slot (not "DH"), so their position_assignments
+# label is a valid key in replacement_stats.
+# ---------------------------------------------------------------------------
+test_that("DH-only hitters are not seeded as 'DH' when the league has no DH slot", {
+  # Toy fixture: 5 DH-only, 5 1B, 10 OF hitters + 6 SP + 4 RP.
+  proj <- data.frame(
+    player_id = c(paste0("H", 1:10), paste0("O", 1:10),
+                  paste0("S", 1:6), paste0("R", 1:4)),
+    player_name = c(paste0("H", 1:10), paste0("O", 1:10),
+                    paste0("S", 1:6), paste0("R", 1:4)),
+    pos_eligibility = c(rep("DH", 5), rep("1B", 5), rep("OF", 10),
+                        rep("SP", 6), rep("RP", 4)),
+    league = rep("AL", 30),
+    AB = c(rep(500, 20), rep(NA_real_, 10)),
+    HR = c(rep(15, 20), rep(NA_real_, 10)),
+    R  = c(rep(65, 20), rep(NA_real_, 10)),
+    RBI = c(rep(60, 20), rep(NA_real_, 10)),
+    SB = c(rep(5, 20), rep(NA_real_, 10)),
+    AVG = c(rep(0.260, 20), rep(NA_real_, 10)),
+    IP = c(rep(NA_real_, 20), rep(180, 6), rep(70, 4)),
+    K  = c(rep(NA_real_, 20), rep(180, 6), rep(70, 4)),
+    W  = c(rep(NA_real_, 20), rep(13, 6), rep(3, 4)),
+    SV = c(rep(NA_real_, 20), rep(0, 6), rep(15, 4)),
+    ERA = c(rep(NA_real_, 20), rep(3.6, 6), rep(3.2, 4)),
+    WHIP = c(rep(NA_real_, 20), rep(1.2, 6), rep(1.1, 4)),
+    stringsAsFactors = FALSE
+  )
+  cfg <- league_config(
+    n_teams = 2L,
+    roster_slots = c(`1B` = 1L, OF = 2L),         # no DH slot
+    pitcher_slots = c(SP = 2L, RP = 1L),
+    categories = c("HR", "R", "RBI", "SB", "AVG",
+                   "W", "K", "SV", "ERA", "WHIP")
+  )
+  repl <- replacement_level(proj, cfg)
+
+  pa <- attr(repl, "position_assignments")
+  repl_keys <- unique(repl$replacement_stats$position)
+
+  expect_false("DH" %in% unique(pa),
+               info = "no player is assigned 'DH' when DH is not a roster slot")
+
+  dh_ids <- paste0("H", 1:5)
+  expect_true(all(pa[dh_ids] == "OF"),
+              info = "DH-only hitters fall back to the most-slots hitter position (OF)")
+
+  # Every hitter label (non-pitcher) in pa is a key in replacement_stats.
+  hitter_labels <- unique(pa[!pa %in% c("SP", "RP", "P")])
+  expect_true(all(hitter_labels %in% repl_keys),
+              info = "every hitter pa label is a key in replacement_stats")
+})
+
+test_that("DH|OF multi-eligible hitters in a no-DH league pick OF, not DH", {
+  proj <- data.frame(
+    player_id = c(paste0("H", 1:4), paste0("O", 1:10),
+                  paste0("S", 1:6), paste0("R", 1:4)),
+    player_name = c(paste0("H", 1:4), paste0("O", 1:10),
+                    paste0("S", 1:6), paste0("R", 1:4)),
+    pos_eligibility = c(rep("DH|OF", 4), rep("OF", 10),
+                        rep("SP", 6), rep("RP", 4)),
+    league = rep("AL", 24),
+    AB = c(rep(500, 14), rep(NA_real_, 10)),
+    HR = c(rep(15, 14), rep(NA_real_, 10)),
+    R  = c(rep(65, 14), rep(NA_real_, 10)),
+    RBI = c(rep(60, 14), rep(NA_real_, 10)),
+    SB = c(rep(5, 14), rep(NA_real_, 10)),
+    AVG = c(rep(0.260, 14), rep(NA_real_, 10)),
+    IP = c(rep(NA_real_, 14), rep(180, 6), rep(70, 4)),
+    K  = c(rep(NA_real_, 14), rep(180, 6), rep(70, 4)),
+    W  = c(rep(NA_real_, 14), rep(13, 6), rep(3, 4)),
+    SV = c(rep(NA_real_, 14), rep(0, 6), rep(15, 4)),
+    ERA = c(rep(NA_real_, 14), rep(3.6, 6), rep(3.2, 4)),
+    WHIP = c(rep(NA_real_, 14), rep(1.2, 6), rep(1.1, 4)),
+    stringsAsFactors = FALSE
+  )
+  cfg <- league_config(
+    n_teams = 2L,
+    roster_slots = c(OF = 2L),
+    pitcher_slots = c(SP = 2L, RP = 1L),
+    categories = c("HR", "R", "RBI", "SB", "AVG",
+                   "W", "K", "SV", "ERA", "WHIP")
+  )
+  repl <- replacement_level(proj, cfg)
+  pa <- attr(repl, "position_assignments")
+
+  expect_equal(unname(pa[paste0("H", 1:4)]), rep("OF", 4),
+               info = "DH|OF players resolve to OF (the active eligibility) not DH")
+})

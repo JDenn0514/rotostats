@@ -372,38 +372,57 @@ zaa <- function(
   if (!is.null(replacement)) {
     position_assignments <- attr(replacement, "position_assignments")
     # position_assignments: named character vector (player_id -> pool label)
-    # or data frame with player_id and pool_label columns
-    # Restrict working_stats to players in position_assignments
+    # or data frame with player_id and pool_label columns.
+    #
+    # Note: two-way players (e.g. Shohei Ohtani) appear twice — once as a
+    # hitter row and once as a pitcher row — with the same player_id but
+    # distinct pool labels. Named-vector lookup (pa_pools[player_id]) only
+    # returns the first match per name and would collapse both rows to the
+    # same pool. To preserve duplicates we instead keep positional alignment
+    # between position_assignments and the stored projections (both share
+    # the same row order) and index by position, not by name.
     if (is.data.frame(position_assignments)) {
-      pa_ids <- position_assignments$player_id
-      pa_pools <- stats::setNames(
-        as.character(position_assignments$pool_label),
-        as.character(position_assignments$player_id)
-      )
+      pa_ids <- as.character(position_assignments$player_id)
+      pa_pool_values <- as.character(position_assignments$pool_label)
     } else {
-      # Named character vector: names = player_id, values = pool label
       pa_ids <- names(position_assignments)
-      pa_pools <- stats::setNames(
-        as.character(position_assignments),
-        names(position_assignments)
-      )
+      pa_pool_values <- as.character(position_assignments)
     }
 
     # Restrict to rostered players
     if ("PLAYER_ID" %in% toupper(names(working_stats))) {
       pid_col <- upper_col_map["PLAYER_ID"]
       keep <- working_stats[[pid_col]] %in% pa_ids
-      working_stats <- working_stats[keep, , drop = FALSE]
-      # Re-compute column map after row restriction (columns unchanged)
-      upper_col_map <- stats::setNames(
-        names(working_stats),
-        toupper(names(working_stats))
-      )
-      # Pool labels per row
-      row_pools <- pa_pools[as.character(working_stats[[pid_col]])]
+      # Positional alignment path: working_stats rows are in the same order
+      # as the original projections (and therefore as position_assignments).
+      # Using which(keep) lets two-way players retain their side-specific
+      # pool labels.
+      if (length(pa_pool_values) == nrow(working_stats)) {
+        keep_idx <- which(keep)
+        working_stats <- working_stats[keep_idx, , drop = FALSE]
+        upper_col_map <- stats::setNames(
+          names(working_stats),
+          toupper(names(working_stats))
+        )
+        row_pools <- pa_pool_values[keep_idx]
+      } else {
+        # Shape mismatch (e.g. caller-supplied position_assignments that
+        # doesn't match projections row-for-row): fall back to name-based
+        # lookup. Duplicates will collapse in this path, but it preserves
+        # behaviour for custom workflows.
+        working_stats <- working_stats[keep, , drop = FALSE]
+        upper_col_map <- stats::setNames(
+          names(working_stats),
+          toupper(names(working_stats))
+        )
+        pa_named <- stats::setNames(pa_pool_values, pa_ids)
+        row_pools <- pa_named[as.character(working_stats[[pid_col]])]
+      }
     } else {
       # No player_id column — use row position matching (best-effort)
-      row_pools <- pa_pools[seq_len(min(nrow(working_stats), length(pa_pools)))]
+      row_pools <- pa_pool_values[
+        seq_len(min(nrow(working_stats), length(pa_pool_values)))
+      ]
     }
   } else {
     # No replacement: use pos_eligibility (first position only)
@@ -829,6 +848,17 @@ zaa <- function(
   attr(result, "units") <- "zscore"
   attr(result, "anchor") <- "average"
   attr(result, "distribution") <- distribution
+  # pool_labels: per-row zaa pool label (e.g. "ALL_HITTERS", "ALL_PITCHERS",
+  # or positional labels under positional/split pools) used for the
+  # within-pool z-score computation.
+  attr(result, "pool_labels") <- pool_labels
+  # position_labels: per-row raw position_assignments label (e.g. "SP", "RP",
+  # "C", "1B", "OF", "DH") aligned positionally with result rows. zar()
+  # consumes this to look up replacement-band z-scores by position without
+  # doing a by-name position_assignments lookup, which would collapse
+  # two-way players (e.g. Shohei Ohtani) whose player_id appears in more
+  # than one row with different side-specific positions.
+  attr(result, "position_labels") <- row_pools
 
   result
 }
