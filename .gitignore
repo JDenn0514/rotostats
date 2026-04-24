@@ -55,3 +55,6 @@ rsconnect/
 
 # Playwright MCP artifacts
 .playwright-mcp/
+
+# Git worktrees
+.worktrees/

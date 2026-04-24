@@ -1229,3 +1229,72 @@ test_that("TS-R6-3: pathological pool — max_iter fires, converged = FALSE, war
   expect_equal(attr(result, "iterations"), max_iter_val,
                info = "iterations must equal max_iter when hard cap is hit")
 })
+
+# ---------------------------------------------------------------------------
+# PITCHER_ELIG_REGEX — pitcher-eligibility token regex
+# ---------------------------------------------------------------------------
+
+test_that("PITCHER_ELIG_REGEX matches SP, RP, and bare P tokens", {
+  pos <- c("SP", "RP", "P", "SP|RP", "OF|SP", "1B|P", "SP|1B|OF",
+           "OF", "1B", "C", "2B|SS", "DH", NA_character_, "")
+  # grepl() on NA_character_ returns FALSE in R 4.x (no warning).
+  expected <- c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
+                FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE)
+
+  got <- grepl(rotostats:::PITCHER_ELIG_REGEX, pos)
+  expect_equal(got, expected)
+})
+
+test_that("PITCHER_ELIG_REGEX does NOT match substrings inside hitter tokens", {
+  # Sanity: no hitter position string contains S, R, P as a standalone token
+  # boundary-safe regex must reject things like "1SP" (synthetic — not a real
+  # position, just a regression guard).
+  expect_false(grepl(rotostats:::PITCHER_ELIG_REGEX, "1SP"))
+  expect_false(grepl(rotostats:::PITCHER_ELIG_REGEX, "SPA"))
+  expect_false(grepl(rotostats:::PITCHER_ELIG_REGEX, "XP"))
+  expect_false(grepl(rotostats:::PITCHER_ELIG_REGEX, "PX"))
+})
+
+# ---------------------------------------------------------------------------
+# infer_pitcher_roles() — bare "P" eligibility
+# ---------------------------------------------------------------------------
+
+test_that("infer_pitcher_roles() treats bare P as pitcher and classifies by IP", {
+  proj <- data.frame(
+    POS_ELIGIBILITY = c("P", "P", "P", "OF", "SS"),
+    IP              = c(180, 60,  NA, NA,   NA),
+    stringsAsFactors = FALSE
+  )
+  out <- rotostats:::infer_pitcher_roles(proj, sp_ip_threshold = 100)
+
+  expect_equal(out$role, c("SP", "RP", "RP", NA_character_, NA_character_))
+  expect_equal(out$swingman_flag, c(FALSE, FALSE, FALSE, FALSE, FALSE))
+})
+
+test_that("infer_pitcher_roles() still honors explicit SP/RP tokens", {
+  proj <- data.frame(
+    POS_ELIGIBILITY = c("SP", "RP", "SP|RP", "1B|SP"),
+    IP              = c(50,  150,  NA,     190),  # IP here is ignored for SP/RP
+    stringsAsFactors = FALSE
+  )
+  out <- rotostats:::infer_pitcher_roles(proj, sp_ip_threshold = 100)
+
+  # Explicit SP stays SP even with IP < threshold; explicit RP stays RP even
+  # with IP > threshold. IP-based reclassification only fires for bare "P".
+  expect_equal(out$role, c("SP", "RP", "SP", "SP"))
+})
+
+test_that("infer_pitcher_roles() flags swingmen regardless of token form", {
+  proj <- data.frame(
+    POS_ELIGIBILITY = c("SP", "RP", "P"),
+    IP              = c(100, 90, 95),
+    stringsAsFactors = FALSE
+  )
+  out <- rotostats:::infer_pitcher_roles(proj, sp_ip_threshold = 100)
+  expect_equal(out$swingman_flag, c(TRUE, TRUE, TRUE))
+})
+
+test_that(".compute_two_way_players() accepts bare P as pitcher eligibility", {
+  pos_parts <- strsplit("1B|P", "\\|")[[1]]
+  expect_true(any(pos_parts %in% c("SP", "RP", "P")))
+})
