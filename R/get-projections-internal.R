@@ -124,3 +124,37 @@ VALID_PLAYER_TYPES <- c("batters", "pitchers", "both")
     )
   )
 }
+
+#' @noRd
+.fetch_projections_api <- function(url) {
+  result <- tryCatch(
+    {
+      req  <- httr2::request(url)
+      resp <- httr2::req_perform(req)
+      if (httr2::resp_is_error(resp)) {
+        cli::cli_abort(
+          c(
+            "FanGraphs projections request failed.",
+            i = "URL: {.url {url}}.",
+            i = "HTTP status: {.val {httr2::resp_status(resp)}}."
+          ),
+          class = "rotostats_error_projection_fetch_failed"
+        )
+      }
+      httr2::resp_body_json(resp)
+    },
+    error = function(e) {
+      if (inherits(e, "rotostats_error_projection_fetch_failed")) stop(e)
+      cli::cli_abort(
+        c(
+          "FanGraphs projections request failed.",
+          i = "URL: {.url {url}}.",
+          i = "Cause: {conditionMessage(e)}."
+        ),
+        class = "rotostats_error_projection_fetch_failed",
+        parent = e
+      )
+    }
+  )
+  result
+}

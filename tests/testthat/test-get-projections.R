@@ -185,3 +185,53 @@ test_that(".build_projections_url() maps player_type to stats param", {
   expect_match(rotostats:::.build_projections_url("zips", "batters"),  "stats=bat")
   expect_match(rotostats:::.build_projections_url("zips", "pitchers"), "stats=pit")
 })
+
+# ---------------------------------------------------------------------------
+# .fetch_projections_api()
+# ---------------------------------------------------------------------------
+
+test_that(".fetch_projections_api() returns parsed JSON on 2xx", {
+  # Stub httr2 so we never hit the network in unit tests
+  fake_resp <- structure(
+    list(
+      body_json = list(list(playerid = "1", PlayerName = "Test", HR = 30))
+    ),
+    class = "fake_response"
+  )
+  testthat::local_mocked_bindings(
+    request       = function(url) list(url = url),
+    req_perform   = function(req) fake_resp,
+    resp_body_json = function(r) r$body_json,
+    resp_is_error = function(r) FALSE,
+    .package = "httr2"
+  )
+  result <- rotostats:::.fetch_projections_api("https://example.com/fake")
+  expect_type(result, "list")
+  expect_equal(result[[1]]$playerid, "1")
+})
+
+test_that(".fetch_projections_api() aborts on transport-level failure", {
+  testthat::local_mocked_bindings(
+    request     = function(url) list(url = url),
+    req_perform = function(req) stop("connection refused"),
+    .package = "httr2"
+  )
+  expect_error(
+    rotostats:::.fetch_projections_api("https://example.com/fake"),
+    class = "rotostats_error_projection_fetch_failed"
+  )
+})
+
+test_that(".fetch_projections_api() aborts on non-2xx", {
+  testthat::local_mocked_bindings(
+    request       = function(url) list(url = url),
+    req_perform   = function(req) list(status_code = 500L),
+    resp_is_error = function(r) TRUE,
+    resp_status   = function(r) 500L,
+    .package = "httr2"
+  )
+  expect_error(
+    rotostats:::.fetch_projections_api("https://example.com/fake"),
+    class = "rotostats_error_projection_fetch_failed"
+  )
+})
