@@ -238,16 +238,24 @@ PROJECTION_COLUMN_RENAME <- c(
   }
   # Step 2: any column not already snake_case gets lowercased.
   # Leaves map-produced names untouched (they're already snake_case).
-  # Skip lowercasing any column whose lowered name would collide with
-  # an existing (post-map) name — this preserves the map's preferred
-  # binding for that slot (e.g. minpos->pos wins over a raw Pos column).
+  # If lowering a column would collide with an existing (post-map) name,
+  # drop the losing column instead of keeping its non-snake_case form —
+  # this preserves the map's preferred binding for that slot (e.g.
+  # minpos->pos wins over a raw Pos column) while keeping the output
+  # strictly snake_case.
+  drop_idx <- integer(0)
   untouched_idx <- which(!(nm %in% unname(PROJECTION_COLUMN_RENAME)))
   for (i in untouched_idx) {
     lowered <- tolower(nm[i])
     if (lowered == nm[i]) next
-    if (!(lowered %in% nm)) nm[i] <- lowered
+    if (!(lowered %in% nm)) {
+      nm[i] <- lowered
+    } else {
+      drop_idx <- c(drop_idx, i)
+    }
   }
   names(df) <- nm
+  if (length(drop_idx)) df <- df[, -drop_idx, drop = FALSE]
   df
 }
 
