@@ -8,13 +8,6 @@
 # Internal constants
 # ---------------------------------------------------------------------------
 
-#' @noRd
-PVM_PITCHER_CATEGORIES <- c(
-  "W", "K", "SV", "HLD", "SVHD", "QS",
-  "ERA", "WHIP", "FIP", "XFIP", "SIERA", "XERA",
-  "K/9", "BB/9", "HR/9"
-)
-
 # ---------------------------------------------------------------------------
 # Exported function: pvm()
 # ---------------------------------------------------------------------------
@@ -467,8 +460,8 @@ pvm <- function(
   # ---------------------------------------------------------------------------
   if (is.character(cat_pct) && length(cat_pct) == 1L && !is.na(cat_pct)) {
     if (cat_pct == "auto") {
-      hitter_cats  <- scored_cats[!(scored_cats %in% PVM_PITCHER_CATEGORIES)]
-      pitcher_cats <- scored_cats[scored_cats %in% PVM_PITCHER_CATEGORIES]
+      hitter_cats  <- scored_cats[!(scored_cats %in% CANONICAL_PITCHER_CATEGORIES)]
+      pitcher_cats <- scored_cats[scored_cats %in% CANONICAL_PITCHER_CATEGORIES]
       bsplit       <- config$budget_split
       if (is.null(bsplit) || !is.numeric(bsplit) || length(bsplit) != 1L) {
         bsplit <- 0.60
@@ -593,7 +586,7 @@ pvm <- function(
     }
 
     # Determine if this is a hitter or pitcher category to pick slot weights
-    is_pitcher_cat <- cat %in% PVM_PITCHER_CATEGORIES
+    is_pitcher_cat <- cat %in% CANONICAL_PITCHER_CATEGORIES
     if (is_pitcher_cat) {
       relevant_pos <- intersect(repl_stats$position, pitcher_pos_names)
       slot_weights <- vapply(relevant_pos, function(p) {
