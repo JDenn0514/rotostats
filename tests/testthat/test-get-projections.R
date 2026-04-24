@@ -235,3 +235,37 @@ test_that(".fetch_projections_api() aborts on non-2xx", {
     class = "rotostats_error_projection_fetch_failed"
   )
 })
+
+# ---------------------------------------------------------------------------
+# .parse_projections_json()
+# ---------------------------------------------------------------------------
+
+test_that(".parse_projections_json() rbinds uniform records", {
+  raw <- list(
+    list(playerid = "1", PlayerName = "A", HR = 30),
+    list(playerid = "2", PlayerName = "B", HR = 25)
+  )
+  out <- rotostats:::.parse_projections_json(raw)
+  expect_s3_class(out, "data.frame")
+  expect_equal(nrow(out), 2L)
+  expect_setequal(names(out), c("playerid", "PlayerName", "HR"))
+  expect_equal(out$HR, c(30, 25))
+})
+
+test_that(".parse_projections_json() handles ragged records with NA fill", {
+  raw <- list(
+    list(playerid = "1", HR = 30, SB = 10),
+    list(playerid = "2", HR = 25)         # SB missing
+  )
+  out <- rotostats:::.parse_projections_json(raw)
+  expect_equal(nrow(out), 2L)
+  expect_true("SB" %in% names(out))
+  expect_true(is.na(out$SB[2]))
+})
+
+test_that(".parse_projections_json() aborts on empty input", {
+  expect_error(
+    rotostats:::.parse_projections_json(list()),
+    class = "rotostats_error_empty_projection_response"
+  )
+})

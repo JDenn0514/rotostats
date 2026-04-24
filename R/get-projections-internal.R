@@ -158,3 +158,34 @@ VALID_PLAYER_TYPES <- c("batters", "pitchers", "both")
   )
   result
 }
+
+#' @noRd
+.parse_projections_json <- function(raw) {
+  if (!is.list(raw) || length(raw) == 0L) {
+    cli::cli_abort(
+      "FanGraphs returned zero projection rows.",
+      class = "rotostats_error_empty_projection_response"
+    )
+  }
+  all_keys <- unique(unlist(lapply(raw, names), use.names = FALSE))
+  rows <- lapply(raw, function(rec) {
+    missing <- setdiff(all_keys, names(rec))
+    rec[missing] <- NA
+    rec[all_keys]
+  })
+  # jsonlite::rbind_pages handles mixed types cleanly; fallback to do.call(rbind, ...)
+  df <- as.data.frame(
+    do.call(rbind, lapply(rows, function(r) lapply(r, function(x) if (is.null(x)) NA else x))),
+    stringsAsFactors = FALSE
+  )
+  # flatten list columns to atomic where possible
+  for (nm in names(df)) {
+    col <- df[[nm]]
+    if (is.list(col) && all(lengths(col) <= 1L)) {
+      df[[nm]] <- unlist(
+        lapply(col, function(x) if (length(x) == 0L) NA else x[[1L]])
+      )
+    }
+  }
+  df
+}
