@@ -165,3 +165,23 @@ test_that(".validate_custom_data() aborts when neither name nor playerid is pres
     class = "rotostats_error_invalid_custom_data"
   )
 })
+
+# ---------------------------------------------------------------------------
+# .build_projections_url()
+# ---------------------------------------------------------------------------
+
+test_that(".build_projections_url() builds the documented URL shape", {
+  url <- rotostats:::.build_projections_url("steamer", "batters")
+  expect_match(url, "^https://www\\.fangraphs\\.com/api/projections\\?")
+  expect_match(url, "type=steamer")
+  expect_match(url, "stats=bat")
+  expect_match(url, "pos=all")
+  expect_match(url, "team=0")
+  expect_match(url, "players=0")
+  expect_match(url, "lg=all")
+})
+
+test_that(".build_projections_url() maps player_type to stats param", {
+  expect_match(rotostats:::.build_projections_url("zips", "batters"),  "stats=bat")
+  expect_match(rotostats:::.build_projections_url("zips", "pitchers"), "stats=pit")
+})

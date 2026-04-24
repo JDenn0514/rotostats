@@ -107,3 +107,20 @@ VALID_PLAYER_TYPES <- c("batters", "pitchers", "both")
   }
   data
 }
+
+#' @noRd
+.build_projections_url <- function(source, player_type) {
+  stopifnot(player_type %in% c("batters", "pitchers"))
+  stats <- if (player_type == "batters") "bat" else "pit"
+  httr2::url_modify(
+    "https://www.fangraphs.com/api/projections",
+    query = list(
+      type    = source,
+      stats   = stats,
+      pos     = "all",
+      team    = "0",
+      players = "0",
+      lg      = "all"
+    )
+  )
+}
