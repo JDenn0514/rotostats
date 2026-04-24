@@ -473,14 +473,20 @@ replacement_level <- function(
   scarcity_order <- c("C", "SS", "2B", "3B", "1B", "OF")
 
   if (is.null(position_assignments)) {
-    # Seed: assign each player to primary position. For pitcher rows, use the
-    # role inferred by infer_pitcher_roles() ("SP"/"RP") so that bare-"P"
-    # eligibility (the get_projections() fallback for FanGraphs pitchers)
-    # is propagated as a valid position label rather than the literal "P".
+    # Seed: assign each player to a primary position that matches a key in
+    # replacement_stats. resolve_seed_pos() handles the DH-only-in-no-DH-
+    # league fallback so hitter labels always match replacement_stats keys.
+    # For pitcher rows, the role inferred by infer_pitcher_roles() ("SP"/
+    # "RP") then overrides the seed so that bare-"P" eligibility (the
+    # get_projections() fallback for FanGraphs pitchers) is propagated as
+    # a valid position label rather than the literal "P".
     primary_pos <- vapply(
-      strsplit(projections$POS_ELIGIBILITY, "\\|"),
-      function(x) x[1L],
-      character(1L)
+      projections$POS_ELIGIBILITY,
+      resolve_seed_pos,
+      character(1L),
+      active_hitter_pos = active_hitter_pos,
+      roster_slots = config$roster_slots,
+      USE.NAMES = FALSE
     )
     pitcher_seed <- !is.na(role)
     primary_pos[pitcher_seed] <- role[pitcher_seed]
@@ -900,11 +906,15 @@ replacement_level <- function(
         new_assignments[pid] <- best_pos
       }
     } else if (multi_pos == "primary") {
-      # Always use primary position
+      # Always use primary position (via resolve_seed_pos so DH-only hitters
+      # in no-DH leagues fall back to an active hitter slot).
       primary_pos <- vapply(
-        strsplit(projections$POS_ELIGIBILITY, "\\|"),
-        function(x) x[1L],
-        character(1L)
+        projections$POS_ELIGIBILITY,
+        resolve_seed_pos,
+        character(1L),
+        active_hitter_pos = active_hitter_pos,
+        roster_slots = config$roster_slots,
+        USE.NAMES = FALSE
       )
       new_assignments <- stats::setNames(primary_pos, projections$PLAYER_ID)
     } else if (multi_pos == "custom") {

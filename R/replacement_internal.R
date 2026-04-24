@@ -640,6 +640,63 @@ infer_pitcher_roles <- function(projections, sp_ip_threshold) {
 
 # ---------------------------------------------------------------------------
 
+# resolve_seed_pos()
+# Resolve a player row's seed position to a label that matches a key in
+# `replacement_stats`.
+#
+# Preserves the legacy first-position-wins seed behavior in all cases
+# EXCEPT the DH-only-in-no-DH-league corner case, which is the one Bug C
+# targets. Legacy behavior is preserved deliberately so that seed-dependent
+# convergence paths (and the tests seeded against them) keep their prior
+# numerical outcomes.
+#
+# Pipeline:
+#   1. Split POS_ELIGIBILITY on "|" and take the first element as the
+#      legacy primary.
+#   2. If the primary is NOT "DH", return it unchanged — this covers every
+#      hitter whose first eligibility is a real positional slot (even if it
+#      is inactive in this league, e.g. "3B|1B" in a C/1B/OF league) and
+#      every pitcher row ("SP", "RP", "P").
+#   3. If "DH" is itself an active hitter slot, return "DH" — the league
+#      actually has a DH bucket and the label matches replacement_stats.
+#   4. Otherwise the player is DH-only (or "DH|…") in a league without a
+#      DH slot. Prefer another listed eligibility that IS active, and fall
+#      back to the least-scarce active hitter position (most roster slots)
+#      so the seed always lands on a key in replacement_stats.
+#
+# Args:
+#   pos_elig           character scalar ("DH", "DH|OF", "1B|3B", "P", ...)
+#   active_hitter_pos  character vector of active hitter slot names
+#   roster_slots       named integer vector from league_config
+#
+# Returns: character scalar — the resolved seed position.
+
+#' @noRd
+resolve_seed_pos <- function(pos_elig, active_hitter_pos, roster_slots) {
+  parts <- strsplit(pos_elig, "|", fixed = TRUE)[[1]]
+  first <- parts[1L]
+
+  # Legacy path: preserve first-position-wins unless the primary is DH in
+  # a league without a DH slot.
+  if (!identical(first, "DH") || "DH" %in% active_hitter_pos) {
+    return(first)
+  }
+
+  # DH-only-in-no-DH-league corner case — prefer another active eligibility.
+  other_active <- intersect(parts[-1L], active_hitter_pos)
+  if (length(other_active) > 0L) {
+    return(other_active[1L])
+  }
+
+  hit_slots <- roster_slots[names(roster_slots) %in% active_hitter_pos]
+  if (length(hit_slots) == 0L) {
+    return(first)
+  }
+  names(hit_slots)[which.max(hit_slots)]
+}
+
+# ---------------------------------------------------------------------------
+
 # compute_band_indices()
 # Compute effective K and band indices for a sorted pool.
 #

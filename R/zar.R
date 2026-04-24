@@ -73,10 +73,11 @@
 #'       \code{NA} when the corresponding \code{zaa_<cat>} is \code{NA} or the
 #'       player has no position assignment.}
 #'     \item{\code{total_zar}}{\code{rowSums()} across all \code{zar_<cat>}
-#'       columns with \code{na.rm = FALSE}. Mixed hitter/pitcher pools carry
+#'       columns with \code{na.rm = TRUE}. Mixed hitter/pitcher pools carry
 #'       \code{NA} for opposite-side categories (a hitter has \code{NA} for
-#'       ERA/K; a pitcher has \code{NA} for HR/R/SB), so \code{total_zar}
-#'       will be \code{NA} for those players.}
+#'       ERA/WHIP; a pitcher has \code{NA} for AVG), and those \code{NA}s are
+#'       treated as zero contribution so \code{total_zar} sums the categories
+#'       each player actually participates in.}
 #'   }
 #'
 #'   The returned data frame carries two attributes:
@@ -340,26 +341,40 @@ zar <- function(
   # Step 3 — Identify each player's valuation position
   # ---------------------------------------------------------------------------
 
-  # position_assignments is a named character vector (player_id -> pool label)
-  # or a data frame with player_id and pool_label columns.
-  # Normalize to a named character vector pa_pools: player_id -> pool label.
-  if (is.data.frame(position_assignments)) {
-    pa_pools <- stats::setNames(
-      as.character(position_assignments$pool_label),
-      as.character(position_assignments$player_id)
-    )
-  } else {
-    pa_pools <- stats::setNames(
-      as.character(position_assignments),
-      names(position_assignments)
-    )
-  }
+  # Prefer the per-row position_labels attribute emitted by zaa() — it
+  # preserves positional alignment with zaa_result, so two-way players
+  # (e.g. Shohei Ohtani) keep their side-specific position labels instead
+  # of collapsing to whichever label comes first for that player_id in
+  # position_assignments. These labels are the raw position_assignments
+  # values (SP/RP/C/1B/OF/DH/…), which are the keys used in zar_repl.
+  zaa_position_labels <- attr(zaa_result, "position_labels")
 
-  if ("player_id" %in% names(zaa_result)) {
-    player_positions <- pa_pools[as.character(zaa_result$player_id)]
+  if (
+    !is.null(zaa_position_labels) &&
+      length(zaa_position_labels) == nrow(zaa_result)
+  ) {
+    player_positions <- as.character(zaa_position_labels)
   } else {
-    # Fallback: row-order matching
-    player_positions <- pa_pools[seq_len(nrow(zaa_result))]
+    # Fallback: legacy by-name lookup against position_assignments (used when
+    # zaa_result came from an older/external path without pool_labels). This
+    # path collapses duplicate player_ids — acceptable for single-side pools.
+    if (is.data.frame(position_assignments)) {
+      pa_pools <- stats::setNames(
+        as.character(position_assignments$pool_label),
+        as.character(position_assignments$player_id)
+      )
+    } else {
+      pa_pools <- stats::setNames(
+        as.character(position_assignments),
+        names(position_assignments)
+      )
+    }
+
+    if ("player_id" %in% names(zaa_result)) {
+      player_positions <- pa_pools[as.character(zaa_result$player_id)]
+    } else {
+      player_positions <- pa_pools[seq_len(nrow(zaa_result))]
+    }
   }
 
   # ---------------------------------------------------------------------------
@@ -400,11 +415,12 @@ zar <- function(
   # ---------------------------------------------------------------------------
   # Step 5 — Compute total_zar
   #
-  # na.rm = FALSE matches zaa()'s total_zaa convention. NA categories
-  # (cross-side hitter/pitcher stats) propagate to total_zar.
+  # na.rm = TRUE so cross-side NAs (hitter categories for pitchers and vice
+  # versa) contribute 0 rather than propagating to total_zar. Matches par()'s
+  # convention (see R/par.R total_par).
   # ---------------------------------------------------------------------------
 
-  total_zar <- rowSums(zar_matrix, na.rm = FALSE)
+  total_zar <- rowSums(zar_matrix, na.rm = TRUE)
 
   # ---------------------------------------------------------------------------
   # Step 6 — Assemble output data frame
