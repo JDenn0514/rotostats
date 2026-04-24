@@ -662,3 +662,74 @@ test_that(".filter_mlb() is a no-op when league column is absent", {
   out <- rotostats:::.filter_mlb(df)
   expect_identical(out, df)
 })
+
+# ---------------------------------------------------------------------------
+# .validate_mlb_only()
+# ---------------------------------------------------------------------------
+
+test_that(".validate_mlb_only() accepts TRUE and FALSE", {
+  expect_true(rotostats:::.validate_mlb_only(TRUE))
+  expect_false(rotostats:::.validate_mlb_only(FALSE))
+})
+
+test_that(".validate_mlb_only() rejects non-logical", {
+  expect_error(
+    rotostats:::.validate_mlb_only("yes"),
+    class = "rotostats_error_invalid_mlb_only"
+  )
+  expect_error(
+    rotostats:::.validate_mlb_only(1),
+    class = "rotostats_error_invalid_mlb_only"
+  )
+})
+
+test_that(".validate_mlb_only() rejects length != 1", {
+  expect_error(
+    rotostats:::.validate_mlb_only(c(TRUE, FALSE)),
+    class = "rotostats_error_invalid_mlb_only"
+  )
+  expect_error(
+    rotostats:::.validate_mlb_only(logical(0)),
+    class = "rotostats_error_invalid_mlb_only"
+  )
+})
+
+test_that(".validate_mlb_only() rejects NA", {
+  expect_error(
+    rotostats:::.validate_mlb_only(NA),
+    class = "rotostats_error_invalid_mlb_only"
+  )
+})
+
+test_that(".fetch_and_assemble_projections() applies .filter_mlb when mlb_only is TRUE", {
+  fake_df <- data.frame(
+    player_id   = 1:3,
+    player_name = c("A", "B", "C"),
+    league      = c("AL", "AAA", "NL"),
+    player_type = "batter",
+    stringsAsFactors = FALSE
+  )
+  testthat::local_mocked_bindings(
+    .fetch_one_side = function(source, player_type) fake_df,
+    .package = "rotostats"
+  )
+  out <- rotostats:::.fetch_and_assemble_projections("steamer", "batters", mlb_only = TRUE)
+  expect_equal(nrow(out), 2L)
+  expect_equal(out$player_name, c("A", "C"))
+})
+
+test_that(".fetch_and_assemble_projections() preserves all rows when mlb_only is FALSE", {
+  fake_df <- data.frame(
+    player_id   = 1:3,
+    player_name = c("A", "B", "C"),
+    league      = c("AL", "AAA", "NL"),
+    player_type = "batter",
+    stringsAsFactors = FALSE
+  )
+  testthat::local_mocked_bindings(
+    .fetch_one_side = function(source, player_type) fake_df,
+    .package = "rotostats"
+  )
+  out <- rotostats:::.fetch_and_assemble_projections("steamer", "batters", mlb_only = FALSE)
+  expect_equal(nrow(out), 3L)
+})

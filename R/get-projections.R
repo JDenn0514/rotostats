@@ -44,5 +44,6 @@ get_projections <- function(source      = "steamer",
   if (source == "custom") return(data)
 
   # Non-custom sources — implemented in Task 14
-  .fetch_and_assemble_projections(source, player_type)
+  # mlb_only defaults to FALSE here; Task 7 adds the exported `mlb_only` arg.
+  .fetch_and_assemble_projections(source, player_type, mlb_only = FALSE)
 }

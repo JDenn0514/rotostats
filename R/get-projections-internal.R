@@ -109,6 +109,20 @@ VALID_PLAYER_TYPES <- c("batters", "pitchers", "both")
 }
 
 #' @noRd
+.validate_mlb_only <- function(mlb_only) {
+  if (!is.logical(mlb_only) || length(mlb_only) != 1L || is.na(mlb_only)) {
+    cli::cli_abort(
+      c(
+        "{.arg mlb_only} must be a length-1 non-NA logical.",
+        i = "Received: {.val {mlb_only}}."
+      ),
+      class = "rotostats_error_invalid_mlb_only"
+    )
+  }
+  mlb_only
+}
+
+#' @noRd
 .build_projections_url <- function(source, player_type) {
   stopifnot(player_type %in% c("batters", "pitchers"))
   stats <- if (player_type == "batters") "bat" else "pit"
@@ -294,14 +308,16 @@ PROJECTION_COLUMN_RENAME <- c(
 }
 
 #' @noRd
-.fetch_and_assemble_projections <- function(source, player_type) {
+.fetch_and_assemble_projections <- function(source, player_type, mlb_only) {
   bat <- if (player_type %in% c("batters", "both")) {
     .fetch_one_side(source, "batters")
   } else NULL
   pit <- if (player_type %in% c("pitchers", "both")) {
     .fetch_one_side(source, "pitchers")
   } else NULL
-  .combine_batter_pitcher(bat, pit)
+  df <- .combine_batter_pitcher(bat, pit)
+  if (isTRUE(mlb_only)) df <- .filter_mlb(df)
+  df
 }
 
 #' @noRd
