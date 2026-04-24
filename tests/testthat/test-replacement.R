@@ -1295,14 +1295,6 @@ test_that("infer_pitcher_roles() flags swingmen regardless of token form", {
 })
 
 test_that(".compute_two_way_players() accepts bare P as pitcher eligibility", {
-  # Contract test: after Task 2 reroutes bare-"P" players to a pitcher role,
-  # the two-way pre-filter in .compute_two_way_players() must accept "P" as
-  # a pitcher token (alongside "SP" and "RP"). This test pins the regex
-  # contract; the integration test in Task 5 is the end-to-end regression
-  # guard. We avoid invoking .compute_two_way_players() directly here
-  # because PAR math requires fully-populated stat columns that aren't
-  # relevant to the pre-filter being asserted.
-  pos_elig <- "1B|P"
-  pos_parts <- strsplit(pos_elig, "\\|")[[1]]
+  pos_parts <- strsplit("1B|P", "\\|")[[1]]
   expect_true(any(pos_parts %in% c("SP", "RP", "P")))
 })
