@@ -273,18 +273,6 @@ test_that("replacement_level() classifies pitchers when pos_eligibility = 'P'", 
 
 test_that("replacement_level() + zar() pipeline produces finite pitcher zar", {
   skip_if_not_installed("withr")
-  # Downstream gap: even after replacement_level() classifies bare-P pitchers
-  # into SP/RP via infer_pitcher_roles(), the position_assignments attribute
-  # still labels those pitchers as "P". zar() looks up replacement z-scores
-  # by that label, but replacement_stats only carries SP/RP rows -> all
-  # pitcher zar values come back NA. The fix lives in
-  # replacement.R::position_assignments propagation (or zar.R label
-  # resolution) and is outside the Task 5 scope.
-  skip(paste0(
-    "zar() returns NA for pitchers when pos_eligibility = 'P' because ",
-    "position_assignments still labels them 'P' rather than SP/RP. ",
-    "Tracked as a separate downstream fix."
-  ))
 
   set.seed(7L)
   hit_positions <- c(

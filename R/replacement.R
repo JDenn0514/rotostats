@@ -473,12 +473,17 @@ replacement_level <- function(
   scarcity_order <- c("C", "SS", "2B", "3B", "1B", "OF")
 
   if (is.null(position_assignments)) {
-    # Seed: assign each player to primary position
+    # Seed: assign each player to primary position. For pitcher rows, use the
+    # role inferred by infer_pitcher_roles() ("SP"/"RP") so that bare-"P"
+    # eligibility (the get_projections() fallback for FanGraphs pitchers)
+    # is propagated as a valid position label rather than the literal "P".
     primary_pos <- vapply(
       strsplit(projections$POS_ELIGIBILITY, "\\|"),
       function(x) x[1L],
       character(1L)
     )
+    pitcher_seed <- !is.na(role)
+    primary_pos[pitcher_seed] <- role[pitcher_seed]
     current_assignments <- stats::setNames(primary_pos, projections$PLAYER_ID)
   } else {
     current_assignments <- position_assignments
