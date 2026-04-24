@@ -381,7 +381,7 @@ test_that(".combine_batter_pitcher() rbinds with NA fill across non-shared cols"
 test_that("get_projections(source = 'custom') returns user data unchanged", {
   d <- data.frame(name = "Test", HR = 30, player_type = "batter")
   out <- get_projections(source = "custom", data = d)
-  expect_identical(out, d)
+  expect_identical(out, tibble::as_tibble(d))
 })
 
 # ---------------------------------------------------------------------------
@@ -732,4 +732,77 @@ test_that(".fetch_and_assemble_projections() preserves all rows when mlb_only is
   )
   out <- rotostats:::.fetch_and_assemble_projections("steamer", "batters", mlb_only = FALSE)
   expect_equal(nrow(out), 3L)
+})
+
+# ---------------------------------------------------------------------------
+# get_projections() — tibble return + mlb_only argument
+# ---------------------------------------------------------------------------
+
+test_that("get_projections() returns a tibble (API path)", {
+  fake_df <- data.frame(
+    player_id   = 1:2,
+    player_name = c("A", "B"),
+    league      = c("AL", "NL"),
+    player_type = "batter",
+    stringsAsFactors = FALSE
+  )
+  testthat::local_mocked_bindings(
+    .fetch_one_side = function(source, player_type) fake_df,
+    .package = "rotostats"
+  )
+  out <- get_projections(source = "steamer", player_type = "batters")
+  expect_s3_class(out, "tbl_df")
+})
+
+test_that("get_projections() returns a tibble (custom path)", {
+  custom <- data.frame(
+    name = c("X", "Y"),
+    HR   = c(20, 25),
+    stringsAsFactors = FALSE
+  )
+  out <- get_projections(source = "custom", data = custom)
+  expect_s3_class(out, "tbl_df")
+})
+
+test_that("get_projections() defaults mlb_only = TRUE and drops non-AL/NL rows", {
+  fake_df <- data.frame(
+    player_id   = 1:3,
+    player_name = c("A", "B", "C"),
+    league      = c("AL", "AAA", "NL"),
+    player_type = "batter",
+    stringsAsFactors = FALSE
+  )
+  testthat::local_mocked_bindings(
+    .fetch_one_side = function(source, player_type) fake_df,
+    .package = "rotostats"
+  )
+  out <- get_projections(source = "steamer", player_type = "batters")
+  expect_equal(nrow(out), 2L)
+})
+
+test_that("get_projections(mlb_only = FALSE) preserves all rows", {
+  fake_df <- data.frame(
+    player_id   = 1:3,
+    player_name = c("A", "B", "C"),
+    league      = c("AL", "AAA", "NL"),
+    player_type = "batter",
+    stringsAsFactors = FALSE
+  )
+  testthat::local_mocked_bindings(
+    .fetch_one_side = function(source, player_type) fake_df,
+    .package = "rotostats"
+  )
+  out <- get_projections(
+    source      = "steamer",
+    player_type = "batters",
+    mlb_only    = FALSE
+  )
+  expect_equal(nrow(out), 3L)
+})
+
+test_that("get_projections() surfaces invalid mlb_only error class", {
+  expect_error(
+    get_projections(source = "steamer", mlb_only = "yes"),
+    class = "rotostats_error_invalid_mlb_only"
+  )
 })

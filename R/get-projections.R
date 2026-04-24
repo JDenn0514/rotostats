@@ -35,15 +35,17 @@
 get_projections <- function(source      = "steamer",
                             year        = NULL,
                             player_type = "both",
-                            data        = NULL) {
+                            data        = NULL,
+                            mlb_only    = TRUE) {
   source      <- .validate_source(source)
   player_type <- .validate_player_type(player_type)
   year        <- .validate_year(year)
   data        <- .validate_custom_data(source, data)
+  mlb_only    <- .validate_mlb_only(mlb_only)
 
-  if (source == "custom") return(data)
+  if (source == "custom") return(tibble::as_tibble(data))
 
-  # Non-custom sources — implemented in Task 14
-  # mlb_only defaults to FALSE here; Task 7 adds the exported `mlb_only` arg.
-  .fetch_and_assemble_projections(source, player_type, mlb_only = FALSE)
+  tibble::as_tibble(
+    .fetch_and_assemble_projections(source, player_type, mlb_only)
+  )
 }
