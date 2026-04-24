@@ -187,6 +187,7 @@ head(result)
 \code{\link{sgp_denominators}} for calibrating the \code{denominators} input.
 
 Other valuation: 
+\code{\link{pvm}()},
 \code{\link{zar}()}
 }
 \concept{valuation}

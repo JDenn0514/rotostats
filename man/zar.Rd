@@ -113,14 +113,21 @@ applied by \code{\link[=zaa]{zaa()}} to individual players.
 }
 
 \examples{
-cfg <- league_config(
-  n_teams       = 12,
-  roster_slots  = c(C = 1, `1B` = 1, `2B` = 1, `3B` = 1, SS = 1, OF = 3,
-                    UTIL = 1),
-  pitcher_slots = c(SP = 5, RP = 3),
-  categories    = c("HR", "R", "RBI", "SB", "AVG", "W", "K", "SV",
-                    "ERA", "WHIP"),
-  budget        = 260
+config <- league_config(
+  n_teams = 12L,
+  roster_slots = c(
+    "C" = 1,
+    "1B" = 1,
+    "2B" = 1,
+    "3B" = 1,
+    "SS" = 1,
+    "OF" = 3,
+    "DH" = 1
+  ),
+  pitcher_slots = 9,
+  budget = 260L,
+  budget_split = 0.67,
+  categories = c("HR", "R")
 )
 # proj   <- <data frame of projections>
 # repl   <- replacement_level(proj, cfg)
@@ -134,6 +141,7 @@ cfg <- league_config(
 \code{\link[=par]{par()}} for the SGP-units analog.
 
 Other valuation: 
-\code{\link{par}()}
+\code{\link{par}()},
+\code{\link{pvm}()}
 }
 \concept{valuation}

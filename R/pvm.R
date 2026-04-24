@@ -27,93 +27,228 @@ PVM_PITCHER_CATEGORIES <- c(
 #' Computes per-player, per-category proportional shares of above-replacement
 #' production, returning a data frame in \code{units = "budget_fraction"} with
 #' columns \code{pvm_[CAT]} and \code{total_pvm}. Consumes a
-#' \code{replacement_level()} output (carrying \code{projections} and
-#' \code{config} as attributes).
+#' \code{\link{replacement_level}} output (carrying \code{projections} and
+#' \code{config} as attributes). A player at exactly the replacement level
+#' receives \code{pvm_[CAT] = 0} in every category and
+#' \code{total_pvm = 0}.
 #'
 #' @details
-#' The pipe form \code{replacement_level(projections, config) |> pvm()} is the
-#' primary usage pattern.
+#' ## Pipe usage
+#'
+#' The canonical usage pattern is:
+#' \preformatted{
+#'   replacement_level(projections, cfg) |> pvm()
+#' }
+#'
+#' ## Algorithm outline
+#'
+#' \enumerate{
+#'   \item \strong{Above-replacement contribution.} For each rostered player
+#'     \eqn{i} and scored category \eqn{c}:
+#'     \itemize{
+#'       \item Counting stats and AVG: \eqn{contrib = PS[i,c] - RS[c]}
+#'         (higher is better; no sign flip).
+#'       \item ERA, WHIP (lower is better): \eqn{contrib = RS[c] - PS[i,c]}
+#'         (sign-flipped so a below-replacement ERA yields a positive
+#'         contribution).
+#'       \item Under \code{sub_replacement = "clip"} (default): sub-replacement
+#'         contributions are floored at 0.
+#'       \item Under \code{sub_replacement = "negative"}: sub-replacement
+#'         contributions are retained as-is.
+#'     }
+#'   \item \strong{Pool denominator \eqn{Pool[c]}.} Depends on
+#'     \code{rate_pool}:
+#'     \itemize{
+#'       \item \code{"ip_weighted"} (default): counting stats use the simple
+#'         sum of clipped contributions; rate stats (ERA, WHIP) use IP-weighted
+#'         contributions; AVG (and OPS) use AB-weighted contributions. Volume
+#'         weights are \eqn{PS[i,IP] / mean\_rostered\_IP} and
+#'         \eqn{PS[i,AB] / mean\_rostered\_AB} respectively.
+#'       \item \code{"pool_average"} (Zola extras): rate-stat extras are
+#'         computed relative to the mean stat of above-replacement players,
+#'         using \eqn{IP \times (mean\_ERA - player\_ERA) / 9} for ERA and
+#'         \eqn{IP \times (mean\_WHIP - player\_WHIP)} for WHIP. The pool
+#'         denominator is the sum of positive extras. This is endogenous — the
+#'         baseline shifts with the pool composition each call.
+#'       \item \code{"fixed_baseline"} (counting-equivalent): same extras
+#'         formula as \code{"pool_average"} but the reference point is a
+#'         user-supplied constant vector passed via \code{baseline}. The
+#'         \code{baseline} argument is required (non-NULL) whenever any scored
+#'         rate stat is present.
+#'     }
+#'   \item \strong{Proportional shares.} \eqn{pvm[i,c] = contrib\_vol[i,c] / Pool[c]}.
+#'     Under \code{"clip"}: shares sum to 1.0 per category within 1e-10.
+#'     Under \code{"negative"}: shares of positive contributors sum to 1.0.
+#'   \item \strong{Category-weighted total.}
+#'     \eqn{total\_pvm[i] = \sum_c pvm[i,c] \times CAT\%[c]}, where
+#'     \eqn{CAT\%[c]} comes from the \code{cat_pct} argument. Sub-role NA
+#'     values (pitchers have NA for hitter categories and vice-versa) are
+#'     treated as 0 in this weighted sum.
+#' }
+#'
+#' ## Attribute input contract
+#'
+#' \code{pvm()} extracts \code{projections} and \code{config} from
+#' \code{attr(replacement, "projections")} and \code{attr(replacement,
+#' "config")} respectively. The rostered player pool and replacement stat
+#' line are inherited from the \code{\link{replacement_level}} call;
+#' \code{pvm()} does not recompute the roster boundary. The function aborts
+#' with \code{rotostats_error_missing_replacement_attrs} if either attribute
+#' is absent, and with \code{rotostats_error_stat_units_mismatch} if
+#' \code{attr(replacement, "stat_units") != "raw_projected"}.
 #'
 #' @param replacement A \code{replacement_level} output object produced by
 #'   \code{\link{replacement_level}}. Must carry non-NULL
 #'   \code{attr(., "projections")} and \code{attr(., "config")} attributes
-#'   and \code{attr(., "stat_units") == "raw_projected"}.
+#'   with \code{attr(., "stat_units") == "raw_projected"}.
 #'   Objects from \code{\link{replacement_from_prices}} carry
 #'   \code{NULL} \code{projections} and are not compatible.
-#' @param include_raw Logical scalar. Default \code{FALSE}. When \code{TRUE},
-#'   include \code{contrib_[CAT]} columns (raw above-replacement contributions)
-#'   in the output.
+#'   Must NOT have been produced with \code{multi_pos = "all"}.
+#' @param include_raw Logical scalar (\code{TRUE} or \code{FALSE}).
+#'   Default \code{FALSE}. When \code{TRUE}, prepends one
+#'   \code{contrib_[CAT]} column per scored category containing the raw
+#'   above-replacement contribution before normalization (after clipping or
+#'   sign-retention per \code{sub_replacement}).
 #' @param cat_pct One of \code{"auto"} (default), \code{"equal"}, or a named
-#'   numeric vector. Controls the per-category weight in \code{total_pvm}.
-#'   \code{"auto"} derives weights from \code{config$budget_split}:
-#'   hitter categories receive equal shares of \code{budget_split}; pitcher
-#'   categories receive equal shares of \code{1 - budget_split}.
-#'   \code{"equal"} divides weight equally across all scored categories.
-#'   A named numeric vector is used directly; names must cover all scored
-#'   categories and values must sum to 1.0 within 1e-10.
+#'   numeric vector summing to 1.0. Controls the per-category weight used to
+#'   compute \code{total_pvm}.
+#'   \itemize{
+#'     \item \code{"auto"}: weights derived from \code{config$budget_split}
+#'       (default 0.60). Hitter categories each receive
+#'       \eqn{budget\_split / n\_hitter\_cats}; pitcher categories each
+#'       receive \eqn{(1 - budget\_split) / n\_pitcher\_cats}. For a standard
+#'       5x5 league with \code{budget_split = 0.60}: each hitter category
+#'       gets 0.12, each pitcher category gets 0.08.
+#'     \item \code{"equal"}: all scored categories receive equal weight
+#'       \eqn{1 / n\_scored\_cats}.
+#'     \item Named numeric vector: used directly. Names must cover all scored
+#'       categories (abort with \code{rotostats_error_category_mismatch} if
+#'       any category is missing); values must sum to 1.0 within 1e-10 (abort
+#'       with \code{rotostats_error_cat_pct_sum} otherwise). Names coverage is
+#'       checked before the sum.
+#'   }
 #' @param rate_pool Character scalar. One of \code{"ip_weighted"} (default),
-#'   \code{"pool_average"}, or \code{"fixed_baseline"}. Controls how
-#'   rate-stat (ERA, WHIP, AVG) pool denominators are computed.
+#'   \code{"pool_average"}, or \code{"fixed_baseline"}. Controls how the pool
+#'   denominator is computed for rate stats (ERA, WHIP, AVG, OPS).
+#'   \itemize{
+#'     \item \code{"ip_weighted"}: rate-stat contributions are volume-weighted
+#'       by \eqn{PS[i,IP] / mean\_rostered\_IP} (ERA, WHIP) or
+#'       \eqn{PS[i,AB] / mean\_rostered\_AB} (AVG, OPS) before summing into
+#'       the pool. Stays in raw stat space — no SGP infrastructure required.
+#'     \item \code{"pool_average"}: Zola extras method. For each rate stat,
+#'       an extras value is computed relative to the mean stat of
+#'       above-replacement players:
+#'       \eqn{IP \times (mean\_pool\_ERA - player\_ERA) / 9} for ERA;
+#'       \eqn{IP \times (mean\_pool\_WHIP - player\_WHIP)} for WHIP;
+#'       \eqn{AB \times (player\_AVG - mean\_pool\_AVG)} for AVG.
+#'       Pool denominator = sum of positive extras.
+#'     \item \code{"fixed_baseline"}: same extras formula as
+#'       \code{"pool_average"} but using user-supplied constants from the
+#'       \code{baseline} argument instead of an endogenous pool mean.
+#'       Requires \code{baseline} to be non-NULL when any scored rate stat is
+#'       present (abort with \code{rotostats_error_missing_config_field}
+#'       otherwise).
+#'   }
+#'   The three options produce structurally different denominators and are
+#'   not interchangeable; Monte Carlo thresholds are calibrated per-option.
 #' @param sub_replacement One of \code{"clip"} (default) or
-#'   \code{"negative"}. Under \code{"clip"}, sub-replacement contributions
-#'   are floored at 0; under \code{"negative"}, they are retained as
-#'   negative values.
-#' @param baseline Named numeric vector or \code{NULL} (default). Required
-#'   (non-NULL) when \code{rate_pool = "fixed_baseline"}; ignored (no-op)
-#'   otherwise. Names must be scored rate-stat category names; values are
-#'   the fixed baseline statistics (e.g., \code{c(ERA = 4.20, WHIP = 1.30,
-#'   AVG = 0.265)}).
-#'
-#' @return A plain \code{data.frame} with one row per rostered player (row
+#'   \code{"negative"}. Controls treatment of players who project below the
+#'   replacement stat line in a given category.
+#'   \itemize{
+#'     \item \code{"clip"}: sub-replacement contributions are floored at 0.
+#'       All \code{pvm_[CAT]} values are in \eqn{[0, 1]} and sum to exactly
+#'       1.0 per category (within 1e-10).
+#'     \item \code{"negative"}: sub-replacement contributions are retained as
+#'       negative values. Positive \code{pvm_[CAT]} values sum to 1.0;
+#'       sub-replacement players carry strictly negative shares. The total
+#'       sum per category is less than 1.0.
+#'   }
+#' @param baseline Named numeric vector or \code{NULL} (default). Used only
+#'   when \code{rate_pool = "fixed_baseline"}; silently ignored otherwise.
+#'   Names must be uppercase scored rate-stat category names (e.g., \code{"ERA"},
+#'   \code{"WHIP"}, \code{"AVG"}); values are the fixed reference statistics
+#'   (e.g., \code{c(ERA = 4.20, WHIP = 1.30, AVG = 0.265)}). Names not in
+#'   scored categories abort with \code{rotostats_error_category_mismatch}.
+#' @return A plain \code{data.frame} with one row per rostered player. Row
 #'   order matches \code{attr(replacement, "projections")} restricted to
-#'   rostered players):
+#'   rostered players.
+#'
+#'   Columns (in order):
 #'   \describe{
 #'     \item{\code{contrib_[CAT]}}{(only when \code{include_raw = TRUE}) Raw
-#'       above-replacement contribution per category; one column per scored
-#'       category.}
-#'     \item{\code{pvm_[CAT]}}{Proportional pool share per category; named
-#'       \code{pvm_<CAT>} (uppercase). Under \code{sub_replacement = "clip"},
-#'       values are in \code{[0, 1]} and sum to 1.0 per category. Under
-#'       \code{"negative"}, positive values sum to 1.0 and sub-replacement
-#'       players have strictly negative shares.}
-#'     \item{\code{total_pvm}}{CAT%-weighted sum of pvm columns.}
+#'       above-replacement contribution for each scored category, after
+#'       sign-flipping inverse categories and applying \code{sub_replacement}
+#'       mode but before volume-weighting or normalization. One column per
+#'       scored category, named \code{contrib_<CAT>} (uppercase). Hitters have
+#'       \code{NA} for pitcher-only categories; pitchers have \code{NA} for
+#'       hitter-only categories.}
+#'     \item{\code{pvm_[CAT]}}{Proportional pool share for each scored
+#'       category, named \code{pvm_<CAT>} (uppercase). Under
+#'       \code{sub_replacement = "clip"}: values in \eqn{[0, 1]}, summing to
+#'       1.0 per category. Under \code{"negative"}: positive values sum to
+#'       1.0; sub-replacement players have negative values. Hitters have
+#'       \code{NA} for pitcher categories and vice-versa.}
+#'     \item{\code{total_pvm}}{CAT%-weighted sum of \code{pvm_[CAT]} columns.
+#'       Cross-role \code{NA} cells are treated as 0 in the weighted sum, so
+#'       \code{total_pvm} is always finite for every rostered player.}
 #'   }
-#'   Attributes: \code{attr(result, "units") == "budget_fraction"} and
-#'   \code{attr(result, "anchor") == "replacement"}.
+#'
+#'   The returned data frame carries two attributes:
+#'   \describe{
+#'     \item{\code{attr(result, "units")}}{\code{"budget_fraction"}}
+#'     \item{\code{attr(result, "anchor")}}{\code{"replacement"}}
+#'   }
 #'
 #' @section Warnings:
 #'
 #' \subsection{rotostats_warning_pvm_sum}{
 #'   Fires when the sum invariant deviates from 1.0 by more than 1e-10 for
-#'   any scored category. Under \code{"clip"} the total-sum check is used;
-#'   under \code{"negative"} only positive-contributing shares are summed.
+#'   any scored category. Under \code{sub_replacement = "clip"} the total
+#'   column sum is checked; under \code{"negative"} only positive-valued shares
+#'   are summed before comparing to 1.0. Typically indicates floating-point
+#'   accumulation with an unusually large or unbalanced projection pool, or a
+#'   DGP that violates the above-replacement assumption.
 #' }
 #'
 #' \subsection{rotostats_warning_pvm_concentration}{
-#'   Fires when any single player exceeds a 0.25 share in any scored category.
+#'   Fires when any single player's \code{pvm_[CAT]} exceeds 0.25 (a 25 percent
+#'   share) in any scored category. Indicates that one player dominates the
+#'   above-replacement pool for that category. Consider widening the player pool
+#'   or reviewing the projection inputs.
 #' }
 #'
 #' @seealso
-#' \code{\link{replacement_level}} for producing the \code{replacement} input;
-#' \code{\link{par}} for the SGP-units analog;
-#' \code{\link{zar}} for the z-score analog.
+#' \code{\link{replacement_level}} for producing the \code{replacement} input.
+#' \code{\link{par}} for the SGP-units analog (Points Above Replacement).
+#' \code{\link{zar}} for the z-score analog (Z-Scores Above Replacement).
+#' \code{\link{zaa}} for within-pool z-scores (the building block used by
+#' \code{\link{zar}}).
 #'
 #' @family valuation
 #'
 #' @examples
-#' \dontrun{
-#' cfg  <- league_config(
-#'   n_teams = 12L,
-#'   roster_slots = c(C = 1, "1B" = 1, "2B" = 1, "3B" = 1, SS = 1, OF = 3),
-#'   pitcher_slots = c(SP = 5L, RP = 4L),
-#'   budget = 260L,
-#'   budget_split = 0.60,
-#'   categories = c("HR", "R", "RBI", "SB", "AVG", "W", "K", "SV", "ERA", "WHIP")
+#' cfg <- league_config(
+#'   n_teams       = 10L,
+#'   roster_slots  = c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L,
+#'                     SS = 1L, OF = 3L, UTIL = 1L),
+#'   pitcher_slots = c(SP = 5L, RP = 3L),
+#'   budget        = 260L,
+#'   budget_split  = 0.67,
+#'   categories    = c("HR", "R", "RBI", "SB", "AVG",
+#'                     "W", "K", "SV", "ERA", "WHIP")
 #' )
-#' repl   <- replacement_level(projections, cfg)
-#' result <- pvm(repl)
-#' result <- replacement_level(projections, cfg) |> pvm()
-#' }
+#' # proj   <- <data frame with player projections and PLAYER_ID column>
+#' # repl   <- replacement_level(proj, cfg)
+#' # result <- pvm(repl)
+#' # result <- replacement_level(proj, cfg) |> pvm()   # pipe-compatible
+#' #
+#' # With raw contributions and equal category weights:
+#' # result <- pvm(repl, include_raw = TRUE, cat_pct = "equal")
+#' #
+#' # Using a fixed baseline for rate stats:
+#' # result <- pvm(repl,
+#' #               rate_pool = "fixed_baseline",
+#' #               baseline  = c(ERA = 4.20, WHIP = 1.30, AVG = 0.265))
 #'
 #' @importFrom stats setNames
 #' @export
