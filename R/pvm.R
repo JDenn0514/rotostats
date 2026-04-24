@@ -727,9 +727,9 @@ pvm <- function(
   # Step 9 — Compute total_pvm (vectorized matrix multiply)
   # ---------------------------------------------------------------------------
   cw_vec      <- as.numeric(cat_weights[scored_cats])
-  total_pvm_vec <- as.numeric(
-    pvm_mat[, scored_cats, drop = FALSE] %*% cw_vec
-  )
+  pvm_mat_for_total <- pvm_mat[, scored_cats, drop = FALSE]
+  pvm_mat_for_total[is.na(pvm_mat_for_total)] <- 0
+  total_pvm_vec <- as.numeric(pvm_mat_for_total %*% cw_vec)
 
   # ---------------------------------------------------------------------------
   # Step 10 — Assemble output data frame
