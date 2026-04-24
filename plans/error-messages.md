@@ -70,6 +70,14 @@ All `cli_abort()` and `cli_warn()` calls must use a class from this table.
 | `rotostats_error_sgp_pool_degenerate` | `replacement_level()` | A position's rostered pool (from `position_assignments`) has fewer than 2 players; the N−1 marginal-pool formula is undefined | Check `n_teams` and `roster_slots`; use `boundary_rate_method = "raw_ip"` for positions with only 1 roster slot |
 | `rotostats_error_sgp_pool_sort_mismatch` | `replacement_level()` | `boundary_rate_method = "sgp_pool"` paired with `sort_by = "zscore"` | Set `sort_by = "sgp"` when using `boundary_rate_method = "sgp_pool"` |
 | `rotostats_error_multi_pos_all_unsupported` | `par()`, `zar()`, `dollar_values()` | Function receives a replacement object where `params$multi_pos == "all"`; these functions require a single-assignment replacement object | Re-run `replacement_level()` with `multi_pos = "best"` (or `"highest_par"`, `"primary"`, or `"custom"`) before calling this function; use `multi_pos = "all"` only for diagnostic inspection |
+| `rotostats_error_invalid_source` | `get_projections()` | `source` not one of `"steamer"`, `"zips"`, `"atc"`, `"fangraphsdc"`, `"thebat"`, `"thebatx"`, `"custom"` | Pass a supported source name |
+| `rotostats_error_invalid_player_type` | `get_projections()` | `player_type` not one of `"batters"`, `"pitchers"`, `"both"` | Pass one of the three supported values |
+| `rotostats_error_missing_custom_data` | `get_projections()` | `source = "custom"` but `data` is `NULL` | Supply a data frame to `data` when `source = "custom"` |
+| `rotostats_error_invalid_custom_data` | `get_projections()` | `source = "custom"` and `data` is not a data.frame, or is missing both `name` and `playerid` columns | Pass a data.frame containing at least one of `name` or `playerid` |
+| `rotostats_error_data_ignored` | `get_projections()` | `data` is supplied with a non-`"custom"` source | Set `source = "custom"` to use supplied `data`, or omit `data` |
+| `rotostats_error_unsupported_year` | `get_projections()` | `year` differs from the current season (FanGraphs projections endpoint only serves current-season data) | Omit `year`, or pass the current season integer |
+| `rotostats_error_projection_fetch_failed` | `get_projections()` | FanGraphs API returned a non-2xx status or the request failed at the transport layer | Check network connectivity; if FanGraphs is up, file an issue with the failing source/player_type combination |
+| `rotostats_error_empty_projection_response` | `get_projections()` | API returned a well-formed response with zero projection rows | Verify the source is still publishing projections for the current season |
 
 ## Warnings
 
