@@ -1410,7 +1410,10 @@ test_that("Layer-2 inherits inverse_categories from config", {
   cfg <- league_config(
     n_teams            = 4L,
     roster_slots       = c(C = 1L),
-    categories         = c("ERA", "WHIP", "FIP"),
+    # batting_categories supplied as a placeholder; this fixture only exercises
+    # pitcher ERA/WHIP/FIP. The placeholder ensures league_config() accepts the call.
+    batting_categories = c("HR"),
+    pitcher_categories = c("ERA", "WHIP", "FIP"),
     inverse_categories = c("ERA", "FIP")
   )
   msgs <- character(0)
@@ -1438,9 +1441,12 @@ test_that("Layer-2 inherits inverse_categories from config", {
 test_that("Layer-2 falls to Layer-3 when config$inverse_categories is NULL", {
   lh <- .lh_era_whip_fip()
   cfg <- league_config(
-    n_teams       = 4L,
-    roster_slots  = c(C = 1L),
-    categories    = c("WHIP", "FIP")
+    n_teams            = 4L,
+    roster_slots       = c(C = 1L),
+    # batting_categories supplied as a placeholder; this fixture only exercises
+    # pitcher WHIP/FIP. The placeholder ensures league_config() accepts the call.
+    batting_categories = c("HR"),
+    pitcher_categories = c("WHIP", "FIP")
     # inverse_categories omitted -> NULL
   )
   msgs <- character(0)
@@ -1463,7 +1469,10 @@ test_that("Layer-1 full-replacement: user arg wins over config", {
   cfg <- league_config(
     n_teams            = 4L,
     roster_slots       = c(C = 1L),
-    categories         = c("ERA", "WHIP", "FIP"),
+    # batting_categories supplied as a placeholder; this fixture only exercises
+    # pitcher ERA/WHIP/FIP. The placeholder ensures league_config() accepts the call.
+    batting_categories = c("HR"),
+    pitcher_categories = c("ERA", "WHIP", "FIP"),
     inverse_categories = c("ERA", "WHIP")
   )
   msgs <- character(0)

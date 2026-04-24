@@ -71,10 +71,11 @@ library(testthat)
 
   cfg <- suppressWarnings(
     league_config(
-      n_teams       = 12L,
-      roster_slots  = c("1B" = 2L, OF = 3L),
-      pitcher_slots = c(SP = 2L, RP = 2L),
-      categories    = c(h_cats, p_cats)
+      n_teams            = 12L,
+      roster_slots       = c("1B" = 2L, OF = 3L),
+      pitcher_slots      = c(SP = 2L, RP = 2L),
+      batting_categories = h_cats,
+      pitcher_categories = p_cats
     )
   )
   list(
@@ -360,10 +361,13 @@ test_that("TS-ZAA-10: attr(replacement,'projections') supersedes explicit stats 
     stringsAsFactors = FALSE
   )
   cfg_small <- league_config(
-    n_teams       = 1L,
-    roster_slots  = c("1B" = 3L),
-    pitcher_slots = c(SP = 0L, RP = 0L),
-    categories    = "HR"
+    n_teams            = 1L,
+    roster_slots       = c("1B" = 3L),
+    pitcher_slots      = c(SP = 0L, RP = 0L),
+    batting_categories = "HR",
+    # pitcher_categories supplied as a placeholder; this fixture only exercises
+    # hitter HR. The placeholder ensures league_config() accepts the call.
+    pitcher_categories = c("K")
   )
   repl <- suppressWarnings(replacement_level(stats_in_repl, config = cfg_small))
 
@@ -572,7 +576,12 @@ test_that("TS-ZAA-16: replacement non-NULL emits NO message", {
     HR = c(15, 25, 35), IP = rep(NA_real_, 3), stringsAsFactors = FALSE
   )
   cfg <- league_config(n_teams = 1L, roster_slots = c("1B" = 2L),
-                       pitcher_slots = c(SP = 0L, RP = 0L), categories = "HR")
+                       pitcher_slots = c(SP = 0L, RP = 0L),
+                       batting_categories = "HR",
+                       # pitcher_categories supplied as a placeholder; this
+                       # fixture only exercises hitter HR. The placeholder
+                       # ensures league_config() accepts the call.
+                       pitcher_categories = "K")
   repl <- suppressWarnings(replacement_level(players, config = cfg))
 
   expect_no_message(
@@ -722,7 +731,12 @@ test_that("TS-ZAA-2: replacement=NULL emits inform; replacement non-NULL does no
     stringsAsFactors = FALSE
   )
   cfg <- league_config(n_teams = 1L, roster_slots = c("1B" = 4L),
-                       pitcher_slots = c(SP = 0L, RP = 0L), categories = "HR")
+                       pitcher_slots = c(SP = 0L, RP = 0L),
+                       batting_categories = "HR",
+                       # pitcher_categories supplied as a placeholder; this
+                       # fixture only exercises hitter HR. The placeholder
+                       # ensures league_config() accepts the call.
+                       pitcher_categories = "K")
   repl <- suppressWarnings(replacement_level(hitters, config = cfg))
 
   expect_message(zaa(stats = hitters, config = cfg))
@@ -744,7 +758,12 @@ test_that("TS-ZAA-2: hitter-only replacement restricts output rows to rostered s
     stringsAsFactors = FALSE
   )
   cfg <- league_config(n_teams = 1L, roster_slots = c("1B" = 2L),
-                       pitcher_slots = c(SP = 0L, RP = 0L), categories = "HR")
+                       pitcher_slots = c(SP = 0L, RP = 0L),
+                       batting_categories = "HR",
+                       # pitcher_categories supplied as a placeholder; this
+                       # fixture only exercises hitter HR. The placeholder
+                       # ensures league_config() accepts the call.
+                       pitcher_categories = "K")
   repl <- suppressWarnings(replacement_level(good_hitters, config = cfg))
   result_B <- zaa(stats = good_hitters, replacement = repl, config = cfg,
                   hitter_pool = "combined")

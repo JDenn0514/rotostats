@@ -64,11 +64,12 @@ fake_league_history <- function(
 # SP=5, RP=4 = 9 pitcher slots per team
 fake_league_config <- function(n_teams = 12L) {
   league_config(
-    n_teams       = n_teams,
-    roster_slots  = c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L,
-                      SS = 1L, OF = 3L, DH = 1L),
-    pitcher_slots = c(SP = 5L, RP = 4L),
-    categories    = c("HR", "R", "RBI", "SB", "AVG", "ERA", "WHIP")
+    n_teams            = n_teams,
+    roster_slots       = c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L,
+                           SS = 1L, OF = 3L, DH = 1L),
+    pitcher_slots      = c(SP = 5L, RP = 4L),
+    batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
+    pitcher_categories = c("ERA", "WHIP")
   )
 }
 
@@ -229,10 +230,11 @@ test_that("TS-5: ERA SGP sign correct — negative above pool mean, positive bel
 
   # pool_size_p = n_teams * pitcher_slots = 1 * 5 = 5
   lc <- league_config(
-    n_teams       = 1L,
-    roster_slots  = c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L, SS = 1L),
-    pitcher_slots = 5L,
-    categories    = c("HR", "ERA")
+    n_teams            = 1L,
+    roster_slots       = c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L, SS = 1L),
+    pitcher_slots      = 5L,
+    batting_categories = c("HR"),
+    pitcher_categories = c("ERA")
   )
 
   result <- suppressMessages(
@@ -285,10 +287,11 @@ test_that("TS-6: WHIP SGP sign correct — negative above pool mean, positive be
 
   # pool_size_p = 1 * 5 = 5
   lc <- league_config(
-    n_teams       = 1L,
-    roster_slots  = c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L, SS = 1L),
-    pitcher_slots = 5L,
-    categories    = c("HR", "WHIP")
+    n_teams            = 1L,
+    roster_slots       = c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L, SS = 1L),
+    pitcher_slots      = 5L,
+    batting_categories = c("HR"),
+    pitcher_categories = c("WHIP")
   )
 
   result <- suppressMessages(
@@ -343,10 +346,13 @@ test_that("TS-7: AVG SGP sign correct — positive above pool mean (sign flip vs
 
   # pool_size_h = n_teams * sum(primary_slots) = 1 * 5 = 5
   lc <- league_config(
-    n_teams       = 1L,
-    roster_slots  = c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L, SS = 1L),
-    pitcher_slots = 1L,
-    categories    = c("HR", "AVG")
+    n_teams            = 1L,
+    roster_slots       = c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L, SS = 1L),
+    pitcher_slots      = 1L,
+    batting_categories = c("HR", "AVG"),
+    # pitcher_categories supplied as a placeholder; this fixture only exercises
+    # hitter cats. The placeholder ensures league_config() accepts the call.
+    pitcher_categories = c("K")
   )
 
   result <- suppressMessages(
@@ -412,10 +418,11 @@ test_that("TS-8: ERA SGP equals exact hand-computed formula", {
 
   # pool_size_p = n_teams * pitcher_slots = 2 * 2 = 4
   lc <- league_config(
-    n_teams       = 2L,
-    roster_slots  = c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L, SS = 1L),
-    pitcher_slots = 2L,
-    categories    = c("HR", "ERA")
+    n_teams            = 2L,
+    roster_slots       = c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L, SS = 1L),
+    pitcher_slots      = 2L,
+    batting_categories = c("HR"),
+    pitcher_categories = c("ERA")
   )
 
   result <- suppressMessages(
@@ -478,10 +485,13 @@ test_that("TS-9: AVG SGP equals exact hand-computed formula (sign flip verified)
 
   # pool_size_h = 2 * 2 = 4
   lc <- league_config(
-    n_teams       = 2L,
-    roster_slots  = c(C = 1L, "1B" = 1L),
-    pitcher_slots = 1L,
-    categories    = c("HR", "AVG")
+    n_teams            = 2L,
+    roster_slots       = c(C = 1L, "1B" = 1L),
+    pitcher_slots      = 1L,
+    batting_categories = c("HR", "AVG"),
+    # pitcher_categories supplied as a placeholder; this fixture only exercises
+    # hitter cats. The placeholder ensures league_config() accepts the call.
+    pitcher_categories = c("K")
   )
 
   result <- suppressMessages(
@@ -556,10 +566,11 @@ test_that("TS-11: zero IP player gets NA for ERA and WHIP SGP, others computed n
   ))
   # pool_size_p = 1 * 3 = 3
   lc <- league_config(
-    n_teams       = 1L,
-    roster_slots  = c(C = 1L, "1B" = 1L, "2B" = 1L),
-    pitcher_slots = 3L,
-    categories    = c("HR", "ERA", "WHIP")
+    n_teams            = 1L,
+    roster_slots       = c(C = 1L, "1B" = 1L, "2B" = 1L),
+    pitcher_slots      = 3L,
+    batting_categories = c("HR"),
+    pitcher_categories = c("ERA", "WHIP")
   )
 
   result <- NULL
@@ -609,10 +620,13 @@ test_that("TS-12: zero AB player gets NA for AVG SGP, others computed normally",
   ))
   # pool_size_h = 2 * 3 = 6; only 4 rows available, head() returns all 4
   lc <- league_config(
-    n_teams       = 2L,
-    roster_slots  = c(C = 1L, "1B" = 1L, "2B" = 1L),
-    pitcher_slots = 1L,
-    categories    = c("HR", "AVG")
+    n_teams            = 2L,
+    roster_slots       = c(C = 1L, "1B" = 1L, "2B" = 1L),
+    pitcher_slots      = 1L,
+    batting_categories = c("HR", "AVG"),
+    # pitcher_categories supplied as a placeholder; this fixture only exercises
+    # hitter cats. The placeholder ensures league_config() accepts the call.
+    pitcher_categories = c("K")
   )
 
   result <- NULL
@@ -702,10 +716,11 @@ test_that("TS-14: total_sgp equals rowSums of sgp_ columns for all players", {
   ))
   # pool_size_p = 2 * 3 = 6
   lc <- league_config(
-    n_teams       = 2L,
-    roster_slots  = c(C = 1L, "1B" = 1L, "2B" = 1L),
-    pitcher_slots = 3L,
-    categories    = c("HR", "RBI", "ERA", "WHIP")
+    n_teams            = 2L,
+    roster_slots       = c(C = 1L, "1B" = 1L, "2B" = 1L),
+    pitcher_slots      = 3L,
+    batting_categories = c("HR", "RBI"),
+    pitcher_categories = c("ERA", "WHIP")
   )
 
   result <- suppressMessages(
@@ -1001,10 +1016,11 @@ test_that("EC-10: pool_size_p exceeding available pitchers uses all pitchers wit
 
   # 20 teams × 10 pitcher slots = pool_size_p of 200, but only 50 players
   lc <- league_config(
-    n_teams       = 20L,
-    roster_slots  = c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L, SS = 1L),
-    pitcher_slots = 10L,
-    categories    = c("HR", "ERA")
+    n_teams            = 20L,
+    roster_slots       = c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L, SS = 1L),
+    pitcher_slots      = 10L,
+    batting_categories = c("HR"),
+    pitcher_categories = c("ERA")
   )
 
   expect_no_error(
@@ -1219,10 +1235,11 @@ test_that("INV-6: player ERA exactly equal to avg_ERA produces sgp_ERA near 0", 
 
   # pool_size_p = 5 * 20 = 100
   lc <- league_config(
-    n_teams       = 5L,
-    roster_slots  = c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L, SS = 1L),
-    pitcher_slots = 20L,
-    categories    = c("HR", "ERA")
+    n_teams            = 5L,
+    roster_slots       = c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L, SS = 1L),
+    pitcher_slots      = 20L,
+    batting_categories = c("HR"),
+    pitcher_categories = c("ERA")
   )
 
   result <- suppressMessages(
@@ -1254,17 +1271,19 @@ test_that("INV-7: changing n_teams changes pool size and rate-stat SGP values", 
   )
 
   lc_10 <- league_config(
-    n_teams       = 10L,
-    roster_slots  = c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L, SS = 1L),
-    pitcher_slots = 9L,
-    categories    = c("HR", "ERA")
+    n_teams            = 10L,
+    roster_slots       = c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L, SS = 1L),
+    pitcher_slots      = 9L,
+    batting_categories = c("HR"),
+    pitcher_categories = c("ERA")
   )
 
   lc_15 <- league_config(
-    n_teams       = 15L,
-    roster_slots  = c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L, SS = 1L),
-    pitcher_slots = 9L,
-    categories    = c("HR", "ERA")
+    n_teams            = 15L,
+    roster_slots       = c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L, SS = 1L),
+    pitcher_slots      = 9L,
+    batting_categories = c("HR"),
+    pitcher_categories = c("ERA")
   )
 
   result_10 <- suppressMessages(

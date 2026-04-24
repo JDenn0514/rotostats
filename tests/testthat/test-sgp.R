@@ -83,8 +83,9 @@ make_league_config <- function(n_teams = 12L) {
       OF = 5L,
       UTIL = 1L
     ),
-    pitcher_slots = c(SP = 6L, RP = 3L),
-    categories = c("HR", "R", "RBI", "SB", "AVG", "ERA", "WHIP")
+    pitcher_slots      = c(SP = 6L, RP = 3L),
+    batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
+    pitcher_categories = c("ERA", "WHIP")
   )
 }
 

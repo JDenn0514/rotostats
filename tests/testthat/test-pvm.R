@@ -590,12 +590,15 @@ test_that("BENCH-1: sum-to-1 holds for a 2-player hitter-only fixture", {
   # 1 team, 2 1B slots (both rostered); hitter cats only
   cfg <- tryCatch(
     league_config(
-      n_teams      = 1L,
-      roster_slots = c(`1B` = 2L),
-      pitcher_slots = 0L,
-      categories   = c("HR", "R", "RBI", "SB", "AVG"),
-      budget       = 260L,
-      budget_split = 0.67
+      n_teams            = 1L,
+      roster_slots       = c(`1B` = 2L),
+      pitcher_slots      = 0L,
+      batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
+      # pitcher_categories supplied as a placeholder; this fixture only exercises
+      # hitter cats. The placeholder ensures league_config() accepts the call.
+      pitcher_categories = c("K"),
+      budget             = 260L,
+      budget_split       = 0.67
     ),
     error = function(e) NULL
   )

@@ -403,11 +403,14 @@ test_that("R-1: Manual calculation verification with 3-player toy fixture", {
   )
 
   toy_cfg <- league_config(
-    n_teams       = 1L,
-    roster_slots  = c(`1B` = 1L),
-    pitcher_slots = c(SP = 0L, RP = 0L),
-    categories    = c("HR"),
-    league_type   = "AL"
+    n_teams            = 1L,
+    roster_slots       = c(`1B` = 1L),
+    pitcher_slots      = c(SP = 0L, RP = 0L),
+    batting_categories = c("HR"),
+    # pitcher_categories supplied as a placeholder; this fixture only exercises
+    # hitter HR. The placeholder ensures league_config() accepts the call.
+    pitcher_categories = c("K"),
+    league_type        = "AL"
   )
 
   toy_denoms <- c(HR = 30)
@@ -466,11 +469,14 @@ test_that("R-1b: Delegation identity holds for 10-player toy fixture", {
   )
 
   toy10_cfg <- league_config(
-    n_teams       = 1L,
-    roster_slots  = c(`1B` = 1L),
-    pitcher_slots = c(SP = 0L, RP = 0L),
-    categories    = "HR",
-    league_type   = "AL"
+    n_teams            = 1L,
+    roster_slots       = c(`1B` = 1L),
+    pitcher_slots      = c(SP = 0L, RP = 0L),
+    batting_categories = "HR",
+    # pitcher_categories supplied as a placeholder; this fixture only exercises
+    # hitter HR. The placeholder ensures league_config() accepts the call.
+    pitcher_categories = "K",
+    league_type        = "AL"
   )
 
   toy10_denoms <- c(HR = 30)

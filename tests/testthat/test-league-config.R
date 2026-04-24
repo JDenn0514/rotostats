@@ -11,19 +11,23 @@
 basic_roster <- c(C = 1L, "1B" = 1L, "2B" = 1L, "3B" = 1L,
                   SS = 1L, OF = 5L, UTIL = 1L)
 
-basic_cats <- c("R", "HR", "RBI", "SB", "AVG",
-                "W", "K", "SV", "ERA", "WHIP")
+basic_batting_cats <- c("R", "HR", "RBI", "SB", "AVG")
+basic_pitcher_cats <- c("W", "K", "SV", "ERA", "WHIP")
+# basic_cats reflects the new union ordering of cfg$categories (batting first,
+# then pitcher) returned by league_config() under the split signature.
+basic_cats <- c(basic_batting_cats, basic_pitcher_cats)
 
 make_cfg <- function(...) {
   args <- list(
-    n_teams       = 12L,
-    roster_slots  = basic_roster,
-    pitcher_slots = c(SP = 6L, RP = 3L),
-    categories    = basic_cats,
-    league_type   = "mixed",
-    budget        = 260L,
-    budget_split  = 0.60,
-    keeper        = FALSE
+    n_teams            = 12L,
+    roster_slots       = basic_roster,
+    pitcher_slots      = c(SP = 6L, RP = 3L),
+    batting_categories = basic_batting_cats,
+    pitcher_categories = basic_pitcher_cats,
+    league_type        = "mixed",
+    budget             = 260L,
+    budget_split       = 0.60,
+    keeper             = FALSE
   )
   args <- utils::modifyList(args, list(...))
   do.call(league_config, args)
@@ -48,8 +52,9 @@ test_that("league_config() returns an S3 object with resolved fields", {
 
 test_that("league_config() defaults match the documented signature", {
   cfg <- league_config(
-    roster_slots = basic_roster,
-    categories   = basic_cats
+    roster_slots       = basic_roster,
+    batting_categories = basic_batting_cats,
+    pitcher_categories = basic_pitcher_cats
   )
   expect_equal(cfg$n_teams, 12L)
   expect_equal(cfg$pitcher_slots, 9L)
@@ -181,25 +186,18 @@ test_that("budget_split must be strictly in (0, 1)", {
 # categories
 # ---------------------------------------------------------------------------
 
-test_that("category names are normalized to uppercase with a cli_inform", {
-  mixed_case <- c("r", "hr", "RBI", "sb", "avg",
-                  "W", "K", "SV", "ERA", "WHIP")
-  expect_message(
-    cfg <- make_cfg(categories = mixed_case),
-    class = "rotostats_info_category_normalized"
-  )
-  expect_equal(cfg$categories, basic_cats)
-})
-
 test_that("unrecognized categories emit a cli_warn", {
   expect_warning(
-    make_cfg(categories = c(basic_cats, "BLARG")),
+    make_cfg(batting_categories = c(basic_batting_cats, "BLARG")),
     class = "rotostats_warning_unknown_category"
   )
 })
 
 test_that("canonical categories construct silently", {
-  expect_silent(make_cfg(categories = basic_cats))
+  expect_silent(make_cfg(
+    batting_categories = basic_batting_cats,
+    pitcher_categories = basic_pitcher_cats
+  ))
 })
 
 # ---------------------------------------------------------------------------
@@ -420,9 +418,10 @@ test_that("pool_sizes() handles single-integer pitcher_slots", {
 # Minimal valid config for inverse_categories tests.
 .minimal_config_args <- function(...) {
   defaults <- list(
-    n_teams       = 12L,
-    roster_slots  = c(C = 1L, "1B" = 1L, OF = 3L),
-    categories    = c("HR", "R", "RBI", "ERA", "WHIP", "FIP")
+    n_teams            = 12L,
+    roster_slots       = c(C = 1L, "1B" = 1L, OF = 3L),
+    batting_categories = c("HR", "R", "RBI"),
+    pitcher_categories = c("ERA", "WHIP", "FIP")
   )
   args <- modifyList(defaults, list(...))
   do.call(league_config, args)

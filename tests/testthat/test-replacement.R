@@ -11,25 +11,25 @@ library(testthat)
 # ---------------------------------------------------------------------------
 
 cfg_mixed_12 <- league_config(
-  n_teams       = 12L,
-  roster_slots  = c(C = 1L, `1B` = 1L, `2B` = 1L, `3B` = 1L, SS = 1L,
-                    OF = 3L, UTIL = 1L),
-  pitcher_slots = c(SP = 6L, RP = 3L),
-  categories    = c("HR", "R", "RBI", "SB", "AVG",
-                    "W", "K", "SV", "ERA", "WHIP"),
-  league_type   = "mixed",
-  budget        = 260L
+  n_teams            = 12L,
+  roster_slots       = c(C = 1L, `1B` = 1L, `2B` = 1L, `3B` = 1L, SS = 1L,
+                         OF = 3L, UTIL = 1L),
+  pitcher_slots      = c(SP = 6L, RP = 3L),
+  batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
+  pitcher_categories = c("W", "K", "SV", "ERA", "WHIP"),
+  league_type        = "mixed",
+  budget             = 260L
 )
 
 cfg_al_12 <- league_config(
-  n_teams       = 12L,
-  roster_slots  = c(C = 1L, `1B` = 1L, `2B` = 1L, `3B` = 1L, SS = 1L,
-                    OF = 3L, DH = 1L, UTIL = 1L),
-  pitcher_slots = c(SP = 6L, RP = 3L),
-  categories    = c("HR", "R", "RBI", "SB", "AVG",
-                    "W", "K", "SV", "ERA", "WHIP"),
-  league_type   = "AL",
-  budget        = 260L
+  n_teams            = 12L,
+  roster_slots       = c(C = 1L, `1B` = 1L, `2B` = 1L, `3B` = 1L, SS = 1L,
+                         OF = 3L, DH = 1L, UTIL = 1L),
+  pitcher_slots      = c(SP = 6L, RP = 3L),
+  batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
+  pitcher_categories = c("W", "K", "SV", "ERA", "WHIP"),
+  league_type        = "AL",
+  budget             = 260L
 )
 
 # ---------------------------------------------------------------------------
@@ -120,11 +120,14 @@ test_that("TS-05: counting stat replacement = arithmetic mean of band", {
     stringsAsFactors = FALSE
   )
   cfg_1b <- league_config(
-    n_teams       = 12L,
-    roster_slots  = c(`1B` = 1L),
-    pitcher_slots = c(SP = 6L, RP = 3L),
-    categories    = c("HR", "R", "RBI", "SB", "AVG"),
-    league_type   = "AL"
+    n_teams            = 12L,
+    roster_slots       = c(`1B` = 1L),
+    pitcher_slots      = c(SP = 6L, RP = 3L),
+    batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
+    # pitcher_categories supplied as a placeholder; this fixture only exercises
+    # hitter cats. The placeholder ensures league_config() accepts the call.
+    pitcher_categories = c("K"),
+    league_type        = "AL"
   )
   result  <- replacement_level(proj_1b, config = cfg_1b)
   repl_hr <- result$replacement_stats[
@@ -282,12 +285,12 @@ test_that("TS-10: cliff detected in lower half (MAD method) via integration test
     stringsAsFactors = FALSE
   )
   cfg_ss20 <- league_config(
-    n_teams       = 20L,
-    roster_slots  = c(SS = 1L),
-    pitcher_slots = c(SP = 6L, RP = 3L),
-    categories    = c("HR", "R", "RBI", "SB", "AVG",
-                      "W", "K", "SV", "ERA", "WHIP"),
-    league_type   = "AL"
+    n_teams            = 20L,
+    roster_slots       = c(SS = 1L),
+    pitcher_slots      = c(SP = 6L, RP = 3L),
+    batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
+    pitcher_categories = c("W", "K", "SV", "ERA", "WHIP"),
+    league_type        = "AL"
   )
   result_cliff <- replacement_level(
     proj_cliff,
@@ -586,11 +589,14 @@ test_that("TS-27: unknown rate stat → error", {
 test_that("TS-28: pool too small → error", {
   # 15 teams × 2 SS slots = need 30 SS; provide only 20
   cfg_deep_ss <- league_config(
-    n_teams       = 15L,
-    roster_slots  = c(SS = 2L),
-    pitcher_slots = c(SP = 6L, RP = 3L),
-    categories    = c("HR", "R", "RBI", "SB", "AVG"),
-    league_type   = "AL"
+    n_teams            = 15L,
+    roster_slots       = c(SS = 2L),
+    pitcher_slots      = c(SP = 6L, RP = 3L),
+    batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
+    # pitcher_categories supplied as a placeholder; this fixture only exercises
+    # hitter cats. The placeholder ensures league_config() accepts the call.
+    pitcher_categories = c("K"),
+    league_type        = "AL"
   )
   thin_proj <- data.frame(
     player_id       = paste0("SS", 1:30),
@@ -1329,11 +1335,11 @@ test_that("DH-only hitters are not seeded as 'DH' when the league has no DH slot
     stringsAsFactors = FALSE
   )
   cfg <- league_config(
-    n_teams = 2L,
-    roster_slots = c(`1B` = 1L, OF = 2L),         # no DH slot
-    pitcher_slots = c(SP = 2L, RP = 1L),
-    categories = c("HR", "R", "RBI", "SB", "AVG",
-                   "W", "K", "SV", "ERA", "WHIP")
+    n_teams            = 2L,
+    roster_slots       = c(`1B` = 1L, OF = 2L),         # no DH slot
+    pitcher_slots      = c(SP = 2L, RP = 1L),
+    batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
+    pitcher_categories = c("W", "K", "SV", "ERA", "WHIP")
   )
   repl <- replacement_level(proj, cfg)
 
@@ -1377,11 +1383,11 @@ test_that("DH|OF multi-eligible hitters in a no-DH league pick OF, not DH", {
     stringsAsFactors = FALSE
   )
   cfg <- league_config(
-    n_teams = 2L,
-    roster_slots = c(OF = 2L),
-    pitcher_slots = c(SP = 2L, RP = 1L),
-    categories = c("HR", "R", "RBI", "SB", "AVG",
-                   "W", "K", "SV", "ERA", "WHIP")
+    n_teams            = 2L,
+    roster_slots       = c(OF = 2L),
+    pitcher_slots      = c(SP = 2L, RP = 1L),
+    batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
+    pitcher_categories = c("W", "K", "SV", "ERA", "WHIP")
   )
   repl <- replacement_level(proj, cfg)
   pa <- attr(repl, "position_assignments")
