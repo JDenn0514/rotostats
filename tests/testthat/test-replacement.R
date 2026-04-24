@@ -1229,3 +1229,29 @@ test_that("TS-R6-3: pathological pool — max_iter fires, converged = FALSE, war
   expect_equal(attr(result, "iterations"), max_iter_val,
                info = "iterations must equal max_iter when hard cap is hit")
 })
+
+# ---------------------------------------------------------------------------
+# PITCHER_ELIG_REGEX — pitcher-eligibility token regex
+# ---------------------------------------------------------------------------
+
+test_that("PITCHER_ELIG_REGEX matches SP, RP, and bare P tokens", {
+  pos <- c("SP", "RP", "P", "SP|RP", "OF|SP", "1B|P", "SP|1B|OF",
+           "OF", "1B", "C", "2B|SS", "DH", NA_character_, "")
+  expected <- c(TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
+                FALSE, FALSE, FALSE, FALSE, FALSE, NA, FALSE)
+
+  got <- grepl(rotostats:::PITCHER_ELIG_REGEX, pos)
+  # grepl() on NA returns FALSE with a warning; treat NA as FALSE for match check
+  na_idx <- which(is.na(pos))
+  expect_equal(got[-na_idx], expected[-na_idx][!is.na(expected[-na_idx])])
+})
+
+test_that("PITCHER_ELIG_REGEX does NOT match substrings inside hitter tokens", {
+  # Sanity: no hitter position string contains S, R, P as a standalone token
+  # boundary-safe regex must reject things like "1SP" (synthetic — not a real
+  # position, just a regression guard).
+  expect_false(grepl(rotostats:::PITCHER_ELIG_REGEX, "1SP"))
+  expect_false(grepl(rotostats:::PITCHER_ELIG_REGEX, "SPA"))
+  expect_false(grepl(rotostats:::PITCHER_ELIG_REGEX, "XP"))
+  expect_false(grepl(rotostats:::PITCHER_ELIG_REGEX, "PX"))
+})

@@ -6,6 +6,22 @@
 # inference, name normalisation, z-score computation, and pool-size delegation.
 
 # ---------------------------------------------------------------------------
+# Pitcher-eligibility regex
+#
+# Matches a POS_ELIGIBILITY string whose pipe-separated tokens include any of
+# `SP`, `RP`, or a bare `P` (the get_projections() fallback for FanGraphs
+# pitchers, which return no position field). Anchored with `(^|\|)` / `(\||$)`
+# so hitter tokens containing the letter "P" (e.g. a hypothetical "1P") do not
+# match, and so substrings like "SPA" / "XP" are not false positives.
+#
+# Use this instead of open-coding `grepl("(SP|RP)", ...)` anywhere pitcher
+# eligibility is tested against POS_ELIGIBILITY in replacement_level().
+# ---------------------------------------------------------------------------
+
+#' @noRd
+PITCHER_ELIG_REGEX <- "(^|\\|)(SP|RP|P)(\\||$)"
+
+# ---------------------------------------------------------------------------
 # §7.1  Mandated shared helpers
 # ---------------------------------------------------------------------------
 
