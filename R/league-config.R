@@ -10,20 +10,8 @@
 
 #' @noRd
 CANONICAL_CATEGORIES <- c(
-  "HR",
-  "R",
-  "RBI",
-  "SB",
-  "AVG",
-  "OPS",
-  "W",
-  "K",
-  "SV",
-  "HLD",
-  "QS",
-  "SVHD",
-  "ERA",
-  "WHIP"
+  CANONICAL_BATTING_CATEGORIES,
+  CANONICAL_PITCHER_CATEGORIES
 )
 
 #' @noRd
