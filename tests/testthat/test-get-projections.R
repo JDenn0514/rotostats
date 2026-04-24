@@ -383,3 +383,22 @@ test_that("get_projections(source = 'custom') returns user data unchanged", {
   out <- get_projections(source = "custom", data = d)
   expect_identical(out, d)
 })
+
+# ---------------------------------------------------------------------------
+# get_projections() — FanGraphs sources (HTTP stubbed)
+# ---------------------------------------------------------------------------
+
+test_that("get_projections('steamer', player_type = 'batters') returns a normalized batter frame", {
+  testthat::local_mocked_bindings(
+    .fetch_projections_api = function(url) fx_batter_json(3L),
+    .package = "rotostats"
+  )
+  out <- get_projections(source = "steamer", player_type = "batters")
+
+  expect_s3_class(out, "data.frame")
+  expect_equal(nrow(out), 3L)
+  expect_true(all(c("playerid", "name", "team", "pos", "player_type") %in% names(out)))
+  expect_true(all(out$player_type == "batter"))
+  expect_true("wRC_plus" %in% names(out))
+  expect_false("wRC+" %in% names(out))
+})

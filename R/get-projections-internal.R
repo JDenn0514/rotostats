@@ -255,6 +255,22 @@ PROJECTION_COLUMN_RENAME <- c(
 
 #' @noRd
 .fetch_and_assemble_projections <- function(source, player_type) {
-  # Stub for now — implemented in Task 14
-  cli::cli_abort("not yet implemented")
+  bat <- if (player_type %in% c("batters", "both")) {
+    .fetch_one_side(source, "batters")
+  } else NULL
+  pit <- if (player_type %in% c("pitchers", "both")) {
+    .fetch_one_side(source, "pitchers")
+  } else NULL
+  .combine_batter_pitcher(bat, pit)
+}
+
+#' @noRd
+.fetch_one_side <- function(source, player_type) {
+  stopifnot(player_type %in% c("batters", "pitchers"))
+  url <- .build_projections_url(source, player_type)
+  raw <- .fetch_projections_api(url)
+  df  <- .parse_projections_json(raw)
+  df  <- .normalize_projection_cols(df)
+  if (player_type == "pitchers") df <- .derive_svhd(df)
+  .attach_player_type(df, if (player_type == "batters") "batter" else "pitcher")
 }
