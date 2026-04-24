@@ -373,3 +373,13 @@ test_that(".combine_batter_pitcher() rbinds with NA fill across non-shared cols"
   expect_equal(out$W[out$player_type == "pitcher"], 15)
   expect_true(is.na(out$W[out$player_type == "batter"]))
 })
+
+# ---------------------------------------------------------------------------
+# get_projections() — custom source
+# ---------------------------------------------------------------------------
+
+test_that("get_projections(source = 'custom') returns user data unchanged", {
+  d <- data.frame(name = "Test", HR = 30, player_type = "batter")
+  out <- get_projections(source = "custom", data = d)
+  expect_identical(out, d)
+})

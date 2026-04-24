@@ -252,3 +252,9 @@ PROJECTION_COLUMN_RENAME <- c(
   }
   rbind(fill_missing(bat, all_cols), fill_missing(pit, all_cols))
 }
+
+#' @noRd
+.fetch_and_assemble_projections <- function(source, player_type) {
+  # Stub for now — implemented in Task 14
+  cli::cli_abort("not yet implemented")
+}
