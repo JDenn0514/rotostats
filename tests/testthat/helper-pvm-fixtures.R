@@ -166,6 +166,8 @@ make_concentration_replacement <- function(dominant_cat = "SV", dominant_pct = 0
 }
 
 # ---------------------------------------------------------------------------
-# Pre-built base fixture (loaded once at file scope, shared across tests).
+# Pre-built base fixture. Uses delayedAssign so the expression forces only on
+# first access — testthat sources helpers alphabetically, and the body relies
+# on make_projections_data() from helper-test-data.R which loads later.
 # ---------------------------------------------------------------------------
-.pvm_base <- make_pvm_replacement()
+delayedAssign(".pvm_base", make_pvm_replacement())
