@@ -1,5 +1,16 @@
 # rotostats (development version)
 
+## New features
+
+* `get_projections()` fetches current-season projections directly from
+  FanGraphs for Steamer, ZiPS, ATC, FanGraphs Depth Charts, THE BAT, and
+  THE BAT X; or accepts a user-supplied `data` frame via
+  `source = "custom"`. Returns one row per player with a `player_type`
+  column distinguishing batters from pitchers. `SVHD` is derived as
+  `SV + HLD` for pitcher rows, with a once-per-session reminder that the
+  user should confirm this matches their league's definition. This adds
+  `httr2` and `jsonlite` to `Imports`.
+
 ## New arguments
 
 * `sgp()` gains a `rate_stat_formulas` argument (default `NULL` = use the
