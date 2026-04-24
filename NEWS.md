@@ -12,6 +12,17 @@
   `httr2` to `Imports` and `jsonlite` to `Suggests` (used only by the
   test fixture loader).
 
+* `get_projections()` gains an `mlb_only` argument (default `TRUE`) that
+  drops rows whose `league` is not `"AL"` or `"NL"`. Set to `FALSE` to
+  retain minor-league and free-agent rows.
+
+* `get_projections()` pitcher rows gain a derived `k` column
+  (`k = k_per_9 * ip / 9`) so that strikeouts can be scored as a counting
+  category without downstream arithmetic.
+
+* `get_projections()` output now plugs directly into `replacement_level()`
+  and `sgp()` without an adapter step.
+
 ## New arguments
 
 * `sgp()` gains a `rate_stat_formulas` argument (default `NULL` = use the
@@ -217,6 +228,20 @@
   The condition triggering `rotostats_warning_missing_category_column` is
   unchanged: it fires only when a scored category column is entirely absent
   from `projections`.
+
+* `get_projections()` now returns a tibble with snake_case column names.
+  Identifier columns are `player_id`, `player_name`, `team`, `league`,
+  `pos_eligibility`, and `player_type`. Stat columns are lowercased
+  (`ab`, `hr`, `k_per_9`, etc.). Existing code that referenced columns
+  like `PlayerName`, `playerid`, `League`, `SVHD`, or `K_per_9` must be
+  updated.
+
+* `get_projections()` emits position eligibility in `pos_eligibility` with
+  `|` as the multi-position separator (e.g. `"SS|OF"`). The previous `pos`
+  column (with `/` separator) is removed. FanGraphs' raw `Pos` numeric
+  column (a positional-value estimate) is dropped during normalization to
+  avoid collision with the map-produced `pos`/`pos_eligibility` slot;
+  rotostats computes positional scarcity internally, so no signal is lost.
 
 ## Implementation notes for maintainers
 
