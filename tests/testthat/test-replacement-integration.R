@@ -272,8 +272,6 @@ test_that("replacement_level() classifies pitchers when pos_eligibility = 'P'", 
 })
 
 test_that("replacement_level() + zar() pipeline produces finite pitcher zar", {
-  skip_if_not_installed("withr")
-
   set.seed(7L)
   hit_positions <- c(
     rep("C",  20L),
