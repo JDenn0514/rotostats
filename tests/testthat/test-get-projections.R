@@ -73,3 +73,45 @@ test_that(".validate_player_type() rejects anything else", {
     class = "rotostats_error_invalid_player_type"
   )
 })
+
+# ---------------------------------------------------------------------------
+# .validate_year()
+# ---------------------------------------------------------------------------
+
+test_that(".validate_year(NULL) returns the current season", {
+  yr <- rotostats:::.validate_year(NULL)
+  expect_identical(yr, rotostats:::.current_season_year())
+})
+
+test_that(".validate_year() accepts the current season explicitly", {
+  cur <- rotostats:::.current_season_year()
+  expect_identical(rotostats:::.validate_year(cur), cur)
+  expect_identical(rotostats:::.validate_year(as.numeric(cur)), cur)
+})
+
+test_that(".validate_year() aborts on non-current years", {
+  cur <- rotostats:::.current_season_year()
+  expect_error(
+    rotostats:::.validate_year(cur - 1L),
+    class = "rotostats_error_unsupported_year"
+  )
+  expect_error(
+    rotostats:::.validate_year(cur + 1L),
+    class = "rotostats_error_unsupported_year"
+  )
+})
+
+test_that(".validate_year() aborts on non-scalar / non-integer input", {
+  expect_error(
+    rotostats:::.validate_year(c(2026, 2027)),
+    class = "rotostats_error_unsupported_year"
+  )
+  expect_error(
+    rotostats:::.validate_year("2026"),
+    class = "rotostats_error_unsupported_year"
+  )
+  expect_error(
+    rotostats:::.validate_year(2026.5),
+    class = "rotostats_error_unsupported_year"
+  )
+})

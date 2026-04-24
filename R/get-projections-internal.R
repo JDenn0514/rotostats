@@ -46,3 +46,22 @@ VALID_PLAYER_TYPES <- c("batters", "pitchers", "both")
   }
   player_type
 }
+
+#' @noRd
+.validate_year <- function(year) {
+  cur <- .current_season_year()
+  if (is.null(year)) return(cur)
+  if (!is.numeric(year) || length(year) != 1L || is.na(year) ||
+      year != as.integer(year) || as.integer(year) != cur) {
+    cli::cli_abort(
+      c(
+        "FanGraphs projections are only available for the current season.",
+        i = "Current season: {.val {cur}}.",
+        i = "Received {.arg year} = {.val {year}}.",
+        "*" = "Omit {.arg year} to use the current season."
+      ),
+      class = "rotostats_error_unsupported_year"
+    )
+  }
+  as.integer(year)
+}
