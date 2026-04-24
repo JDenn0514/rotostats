@@ -22,11 +22,12 @@ make_zar_fixture <- function(n_teams = 2L, seed = 99L) {
   projections <- make_projections_data(seed = seed)
 
   config <- league_config(
-    n_teams       = n_teams,
-    roster_slots  = c(C = 1L, `1B` = 1L, OF = 1L),
-    pitcher_slots = c(SP = 1L, RP = 1L),
-    categories    = c("HR", "R", "SB", "K", "SV"),
-    league_type   = "mixed"
+    n_teams            = n_teams,
+    roster_slots       = c(C = 1L, `1B` = 1L, OF = 1L),
+    pitcher_slots      = c(SP = 1L, RP = 1L),
+    batting_categories = c("HR", "R", "SB"),
+    pitcher_categories = c("K", "SV"),
+    league_type        = "mixed"
   )
 
   replacement <- replacement_level(projections, config)
@@ -57,11 +58,12 @@ make_zar_rate_fixture <- function(seed = 42L) {
   sp_bad_id  <- projections$player_id[sp_idx[2L]]
 
   config <- league_config(
-    n_teams       = 4L,
-    roster_slots  = c(C = 1L, `1B` = 1L, OF = 1L),
-    pitcher_slots = c(SP = 3L, RP = 2L),
-    categories    = c("HR", "R", "ERA"),
-    league_type   = "mixed"
+    n_teams            = 4L,
+    roster_slots       = c(C = 1L, `1B` = 1L, OF = 1L),
+    pitcher_slots      = c(SP = 3L, RP = 2L),
+    batting_categories = c("HR", "R"),
+    pitcher_categories = c("ERA"),
+    league_type        = "mixed"
   )
 
   replacement <- replacement_level(projections, config)
@@ -91,11 +93,12 @@ make_zar_sv_fixture <- function(seed = 42L) {
   projections$SV[projections$pos_eligibility == "SP"] <- 0L
 
   config <- league_config(
-    n_teams       = 12L,
-    roster_slots  = c(C = 1L, `1B` = 1L, OF = 1L),
-    pitcher_slots = c(SP = 3L, RP = 3L),
-    categories    = c("HR", "R", "SB", "K", "SV"),
-    league_type   = "mixed"
+    n_teams            = 12L,
+    roster_slots       = c(C = 1L, `1B` = 1L, OF = 1L),
+    pitcher_slots      = c(SP = 3L, RP = 3L),
+    batting_categories = c("HR", "R", "SB"),
+    pitcher_categories = c("K", "SV"),
+    league_type        = "mixed"
   )
 
   replacement <- replacement_level(projections, config)
@@ -134,11 +137,12 @@ make_zar_boundary_fixture <- function() {
   )
 
   cfg <- league_config(
-    n_teams       = 2L,
-    roster_slots  = c(C = 1L, `1B` = 1L),
-    pitcher_slots = c(SP = 1L, RP = 1L),
-    categories    = c("HR", "R", "SB", "K", "SV"),
-    league_type   = "mixed"
+    n_teams            = 2L,
+    roster_slots       = c(C = 1L, `1B` = 1L),
+    pitcher_slots      = c(SP = 1L, RP = 1L),
+    batting_categories = c("HR", "R", "SB"),
+    pitcher_categories = c("K", "SV"),
+    league_type        = "mixed"
   )
 
   repl <- replacement_level(proj, cfg)
