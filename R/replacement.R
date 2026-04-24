@@ -1591,7 +1591,7 @@ replacement_from_prices <- function(
     pos_parts <- strsplit(pos_elig, "\\|")[[1]]
 
     has_hit <- any(!pos_parts %in% c("SP", "RP", "P"))
-    has_pit <- any(pos_parts %in% c("SP", "RP"))
+    has_pit <- any(pos_parts %in% c("SP", "RP", "P"))
 
     if (!has_hit || !has_pit) {
       next
