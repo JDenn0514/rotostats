@@ -49,6 +49,30 @@
 
 ## New functions
 
+* `pvm()` — Percentage Valuation Method. Computes per-player, per-category
+  proportional shares of above-replacement production in budget-fraction units.
+  Takes a `replacement_level()` output (carrying `projections`, `config`, and
+  `stat_units` attributes) as its sole data-bearing input; the pipe form
+  `replacement_level(projections, cfg) |> pvm()` is the canonical usage.
+  Returns a data frame with one `pvm_<CAT>` column per scored category plus
+  `total_pvm` (the CAT%-weighted sum); when `include_raw = TRUE`, prepends raw
+  `contrib_<CAT>` columns. Output carries `attr(., "units") = "budget_fraction"`
+  and `attr(., "anchor") = "replacement"`.
+  Supports three rate-stat pool modes via `rate_pool`: `"ip_weighted"` (default,
+  volume-weighted in raw stat space), `"pool_average"` (Zola extras with
+  endogenous pool-mean baseline), and `"fixed_baseline"` (user-supplied
+  constants via the `baseline` argument). Supports two sub-replacement modes via
+  `sub_replacement`: `"clip"` (default, floor at 0; per-category sums equal 1.0)
+  and `"negative"` (retain below-replacement players; positive shares sum to
+  1.0). Category weights for `total_pvm` are controlled by `cat_pct`: `"auto"`
+  (split by `config$budget_split`), `"equal"`, or a user-supplied named vector.
+  Emits `rotostats_warning_pvm_concentration` when any player exceeds a 0.25
+  share in any category; emits `rotostats_warning_pvm_sum` when the sum
+  invariant is violated beyond 1e-10. Validated by a 9,000-draw Monte Carlo
+  study (4 studies × up to 200 replications × 52 scenarios) confirming sum-to-1
+  invariant (max deviation 2.1e-15), sub-replacement parity (max diff 0.0), and
+  concentration warning threshold calibration (step function at exactly 0.25).
+
 * `zaa()` — z-scores above average. Computes per-player, per-category z-scores
   above the within-position average for rotisserie baseball projection data.
   Internal building block for `zar()`. See `?zaa`.

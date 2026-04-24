@@ -101,12 +101,21 @@ the replacement boundary are excluded. When \code{replacement = NULL}, all rows 
 
 \examples{
 # Minimal example with explicit stats and config
-cfg <- league_config(
-  n_teams = 12,
-  roster_slots = c(C = 1, `1B` = 1, `2B` = 1, `3B` = 1, SS = 1, OF = 3, UTIL = 1),
-  pitcher_slots = c(SP = 5, RP = 3),
-  categories = c("HR", "R", "RBI", "SB", "AVG", "W", "K", "SV", "ERA", "WHIP"),
-  budget = 260
+config <- league_config(
+  n_teams = 12L,
+  roster_slots = c(
+    "C" = 1,
+    "1B" = 1,
+    "2B" = 1,
+    "3B" = 1,
+    "SS" = 1,
+    "OF" = 3,
+    "DH" = 1
+  ),
+  pitcher_slots = 9,
+  budget = 260L,
+  budget_split = 0.67,
+  categories = c("HR", "R")
 )
 # proj <- <data frame of projections>
 # result <- zaa(stats = proj, config = cfg)

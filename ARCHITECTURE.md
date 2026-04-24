@@ -1,10 +1,10 @@
 # Architecture: rotostats
 
-**Run:** `zar-2026-04-21`
-**Branch:** `feature/zar`
-**Date:** 2026-04-21
+**Run:** `pvm-2026-04-23`
+**Branch:** `feature/pvm`
+**Date:** 2026-04-23
 
-(Previous run: `zaa-2026-04-21` — see git log for prior state)
+(Previous run: `zar-2026-04-21` — see git log for prior state)
 
 ---
 
@@ -29,6 +29,7 @@ graph TD
         PAR["par()"]
         ZAA["zaa()"]
         ZAR["zar()"]
+        PVM["pvm()"]
         W["Weight constructors\nflat / linear_decay / exp_decay"]
         YW["Year-window helpers\nafter / before / between / last"]
         CS["cal / cal_spec"]
@@ -69,6 +70,11 @@ graph TD
 
     subgraph ZAR_LAYER["ZAR Layer"]
         ZAR_BODY["zar() body\nV1–V3 validation\nzaa() delegation\ndist extraction\nrepl-band z-score\nvectorized subtraction\ntotal_zar"]
+    end
+
+    subgraph PVM_LAYER["PVM Layer"]
+        PVM_BODY["pvm() body\nV1–V4 validation\nRS computation\ncontrib matrix\nPool[c] computation\n3 rate_pool options\nsum / concentration warns\ntotal_pvm matrix multiply"]
+        PVM_CONST["PVM_PITCHER_CATEGORIES\nconstant vector\nclassifies cats for cat_pct=auto"]
     end
 
     subgraph HELPERS["Internal Helpers"]
@@ -134,6 +140,12 @@ graph TD
     ZAR_BODY --> RL_BODY
     ZAR_BODY --> IC_CONST
 
+    PVM --> PVM_BODY
+    PVM_BODY --> RL_BODY
+    PVM_BODY --> IC_CONST
+    PVM_BODY --> RL_PARAMS
+    PVM_BODY --> PVM_CONST
+
     style IC fill:#1e90ff,stroke:#1565c0,color:#fff
     style IC_FN fill:#1e90ff,stroke:#1565c0,color:#fff
     style IC_CONST fill:#1e90ff,stroke:#1565c0,color:#fff
@@ -146,12 +158,16 @@ graph TD
     style ZAA_COL fill:#1e90ff,stroke:#1565c0,color:#fff
     style ZAR fill:#1e90ff,stroke:#1565c0,color:#fff
     style ZAR_BODY fill:#1e90ff,stroke:#1565c0,color:#fff
+    style PVM fill:#1e90ff,stroke:#1565c0,color:#fff
+    style PVM_BODY fill:#1e90ff,stroke:#1565c0,color:#fff
+    style PVM_CONST fill:#1e90ff,stroke:#1565c0,color:#fff
 ```
 
 | Module | Purpose | Key Dependencies | Changed in This Run |
 |--------|---------|-----------------|---------------------|
 | `zaa()` | Z-scores above average; per-player per-category z-scores within the rostered pool; internal building block for `zar()` | `INVERSE_CATEGORIES`, `pool_sizes()`, `cli`, `rlang`, `checkmate`, `stats` | No |
-| `zar()` | Z-scores above replacement; calls `zaa()` and subtracts per-position replacement-band z-score; SP/RP use separate baselines; `include_raw` flag; `attr(., "units") = "zscore"`, `attr(., "anchor") = "replacement"` | `zaa()`, `replacement_level()`, `INVERSE_CATEGORIES`, `cli`, `rlang`, `checkmate`, `stats` | **YES — new file** |
+| `zar()` | Z-scores above replacement; calls `zaa()` and subtracts per-position replacement-band z-score; SP/RP use separate baselines; `include_raw` flag; `attr(., "units") = "zscore"`, `attr(., "anchor") = "replacement"` | `zaa()`, `replacement_level()`, `INVERSE_CATEGORIES`, `cli`, `rlang`, `checkmate`, `stats` | No |
+| `pvm()` | Percentage Valuation Method; per-player proportional pool shares in budget-fraction units; three `rate_pool` modes (`ip_weighted`, `pool_average`, `fixed_baseline`); two `sub_replacement` modes (`clip`, `negative`); `attr(., "units") = "budget_fraction"`, `attr(., "anchor") = "replacement"` | `replacement_level()`, `RATE_STAT_FORMULAS`, `INVERSE_CATEGORIES`, `PVM_PITCHER_CATEGORIES`, `cli`, `rlang`, `checkmate`, `stats` | **YES — new file** |
 | `inverse_categories()` | Exported accessor; returns `INVERSE_CATEGORIES` (8-element vector of lower-is-better pitcher ratio stats) | — | No |
 | `league_config()` | Constructor; `inverse_categories = NULL` param, `validate_inverse_categories()` helper, new S3 slot, and `print.league_config()` `Inverse:` line | `cli` | No |
 | `sgp_denominators()` | Denominator calibration; `NULL` default with three-layer resolution; `config = NULL` arg | `inverse_categories()`, `sgp-denominators-helpers.R` | No |
@@ -399,15 +415,83 @@ graph TD
 
 | Function / Block | Purpose | Key Dependencies | Changed |
 |---|---|---|---|
-| `zar()` entry | Orchestrates V1–V3 own validation, delegates V4+ to `zaa()`; extracts distribution; computes replacement z-scores; vectorized subtraction; output assembly | `cli`, `rlang`, `checkmate`, `stats`, `zaa()` | **YES — new** |
-| V1: `include_raw` check | `!missing(include_raw)` guard + `checkmate::assert_flag`; explicit-path only | `checkmate`, `cli`, `rlang` | **YES — new** |
-| V2: attr extraction | `attr(replacement, "projections")` / `"config"` non-NULL check; fires before any `replacement$…` access | `cli`, `rlang` | **YES — new** |
-| V3: `multi_pos = "all"` guard | Aborts with `rotostats_error_multi_pos_all_unsupported`; fires after V2 (needs valid object) | `cli`, `rlang` | **YES — new** |
-| Step 1: `zaa()` call | Forwards all four pool/weight parameters; `zaa()` performs all remaining validation | `zaa()` | **YES — new** |
-| Step 2: replacement z-score | Per-position loop over `replacement_stats`; nested vs flat `distribution` path; counting / AVG / INVERSE_CATEGORIES formula branches; degenerate SD → 0 guard; volume-weight for rate stats (IP / AB) | `INVERSE_CATEGORIES`, `stats::setNames` | **YES — new** |
-| Step 3: position lookup | Normalizes `position_assignments` (named vec or df); matches by `player_id` if present, else row order | base R | **YES — new** |
-| Step 4: vectorized subtraction | `vapply` over categories (not players) to build `repl_z_matrix`; single matrix subtraction | base R | **YES — new** |
-| Step 7: output attrs | `attr(result, "units") = "zscore"`, `attr(result, "anchor") = "replacement"` | base R | **YES — new** |
+| `zar()` entry | Orchestrates V1–V3 own validation, delegates V4+ to `zaa()`; extracts distribution; computes replacement z-scores; vectorized subtraction; output assembly | `cli`, `rlang`, `checkmate`, `stats`, `zaa()` | No |
+| V1: `include_raw` check | `!missing(include_raw)` guard + `checkmate::assert_flag`; explicit-path only | `checkmate`, `cli`, `rlang` | No |
+| V2: attr extraction | `attr(replacement, "projections")` / `"config"` non-NULL check; fires before any `replacement$…` access | `cli`, `rlang` | No |
+| V3: `multi_pos = "all"` guard | Aborts with `rotostats_error_multi_pos_all_unsupported`; fires after V2 (needs valid object) | `cli`, `rlang` | No |
+| Step 1: `zaa()` call | Forwards all four pool/weight parameters; `zaa()` performs all remaining validation | `zaa()` | No |
+| Step 2: replacement z-score | Per-position loop over `replacement_stats`; nested vs flat `distribution` path; counting / AVG / INVERSE_CATEGORIES formula branches; degenerate SD → 0 guard; volume-weight for rate stats (IP / AB) | `INVERSE_CATEGORIES`, `stats::setNames` | No |
+| Step 3: position lookup | Normalizes `position_assignments` (named vec or df); matches by `player_id` if present, else row order | base R | No |
+| Step 4: vectorized subtraction | `vapply` over categories (not players) to build `repl_z_matrix`; single matrix subtraction | base R | No |
+| Step 7: output attrs | `attr(result, "units") = "zscore"`, `attr(result, "anchor") = "replacement"` | base R | No |
+
+**pvm() call graph (new in this run):**
+
+```mermaid
+%%{init: {'theme': 'neutral'}}%%
+graph TD
+    PVM["pvm()"] --> V1["V1: attr extraction\nprojections + config non-NULL\nrotostats_error_missing_replacement_attrs"]
+    PVM --> V2["V2: stat_units check\nstat_units == raw_projected\nrotostats_error_stat_units_mismatch"]
+    PVM --> V3["V3: multi_pos=all guard\nrotostats_error_multi_pos_all_unsupported"]
+    PVM --> V4["V4: param type checks\ninclude_raw (assert_flag)\nrate_pool enum\nsub_replacement enum\nbaseline (numeric + named)\nrotostats_error_invalid_parameter"]
+    PVM --> S1["Step 1: extract inputs\nscored_cats, rate_stat_registry\ninverse_cats, ip_cats, ab_cats\nvalidate baseline names\nposition_assignments\nrostered_proj\nRS[c] position-weighted mean"]
+    PVM --> S2["Step 2: fixed_baseline check\nrate stats without baseline entry\nrotostats_error_missing_config_field"]
+    PVM --> S3["Step 3: resolve cat_pct\nauto / equal / named-numeric\nnames coverage check before sum\nrotostats_error_category_mismatch\nrotostats_error_cat_pct_sum"]
+    PVM --> S4["Step 4: above-repl contrib\nraw_contrib = sign-adjusted\ncontrib = clip or negative\nvectorized column-wise"]
+    PVM --> S5A["Step 5a: volume vectors\nw_IP = IP/mean_IP\nw_AB = AB/mean_AB\ndegenerate fallback to 1.0"]
+    PVM --> S5B["Step 5b: Pool + contrib_vol\n3 rate_pool branches:\nip_weighted / pool_average / fixed_baseline"]
+
+    S5B --> RPA["ip_weighted:\ncontrib_vol = contrib * w_vol\nPool = colSums(contrib_vol)"]
+    S5B --> RPB["pool_average (Zola):\nex = IP*(mean_pool - stat)/scale\nPool = sum(pmax(ex,0))\ncontrib_vol = pmax(ex,0) or ex"]
+    S5B --> RPC["fixed_baseline:\nex = IP*(bl - stat)/scale\nPool = sum(pmax(ex,0))\ncontrib_vol = pmax(ex,0) or ex"]
+
+    PVM --> S5C["Step 5c: zero-pool check\nPool <= 0 any category\nrotostats_error_zero_pool"]
+    PVM --> S6["Step 6: pvm_mat\npvm[i,c] = contrib_vol[i,c] / Pool[c]\nvectorized column division"]
+    PVM --> S7["Step 7: sum invariant\nclip: colSums(pvm_mat)\nneg: colSums(pvm_mat*(pvm_mat>0))\nrotostats_warning_pvm_sum"]
+    PVM --> S8["Step 8: concentration check\nany pvm_mat > 0.25\nrotostats_warning_pvm_concentration"]
+    PVM --> S9["Step 9: total_pvm\nNA-zero-fill pvm_mat\npvm_mat_nona %*% cat_weights"]
+    PVM --> S10["Step 10: assemble output\npvm_[CAT] + total_pvm\ncontrib_[CAT] when include_raw"]
+    PVM --> S11["Step 11: output attrs\nunits = budget_fraction\nanchor = replacement"]
+
+    style PVM fill:#1e90ff,stroke:#1565c0,color:#fff
+    style V1 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style V2 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style V3 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style V4 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S1 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S2 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S3 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S4 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S5A fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S5B fill:#1e90ff,stroke:#1565c0,color:#fff
+    style RPA fill:#1e90ff,stroke:#1565c0,color:#fff
+    style RPB fill:#1e90ff,stroke:#1565c0,color:#fff
+    style RPC fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S5C fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S6 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S7 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S8 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S9 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S10 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style S11 fill:#1e90ff,stroke:#1565c0,color:#fff
+```
+
+| Function / Block | Purpose | Key Dependencies | Changed |
+|---|---|---|---|
+| `pvm()` entry | Orchestrates V1–V4 validation + 11 algorithm steps; three `rate_pool` branches; NA-safe `total_pvm` via zero-fill before matrix multiply | `cli`, `rlang`, `checkmate`, `stats`, `RATE_STAT_FORMULAS`, `INVERSE_CATEGORIES` | **YES — new file** |
+| V1: attr extraction | `projections`/`config` non-NULL guard; fires before any other check; `replacement_from_prices` objects have NULL `projections` and are explicitly rejected | `cli`, `rlang` | **YES — new** |
+| V2: `stat_units` check | `identical(stat_units, "raw_projected")`; only `raw_projected` accepted by `pvm()` | `cli`, `rlang` | **YES — new** |
+| V3: `multi_pos = "all"` guard | Identical pattern to `zar()` V3; fires after attr check but before any computation | `cli`, `rlang` | **YES — new** |
+| V4: param type checks | `checkmate::assert_flag(include_raw)`; enum checks for `rate_pool` and `sub_replacement`; `is.numeric + !is.null(names)` for `baseline` | `checkmate`, `cli`, `rlang` | **YES — new** |
+| Step 1: input extraction | `scored_cats`, `rate_stat_registry` (RATE_STAT_FORMULAS), `ip_cats`/`ab_cats` via denominator_col lookup, `inverse_cats` (config or package default); position-weighted RS[c] per hitter/pitcher category; `position_assignments` normalization; `rostered_proj` mask | `RATE_STAT_FORMULAS`, `INVERSE_CATEGORIES`, `stats::setNames` | **YES — new** |
+| Step 2: fixed_baseline completeness | Per-rate-stat check that `baseline[cat]` is non-NULL; aborts with `rotostats_error_missing_config_field` listing missing categories | `cli`, `rlang` | **YES — new** |
+| Step 3: `cat_pct` resolution | String paths (`"auto"` / `"equal"`) and named-numeric path; names coverage check fires before sum check; `PVM_PITCHER_CATEGORIES` used for auto-split | `PVM_PITCHER_CATEGORIES`, `stats::setNames`, `cli`, `rlang` | **YES — new** |
+| Step 4: contrib matrix | Sign-aware vectorized subtraction per category; `pmax(raw_contrib, 0)` for clip; retains sign for negative | `INVERSE_CATEGORIES`, base R | **YES — new** |
+| Steps 5a–5c: Pool[c] | `ip_weighted`: volume-weighted `colSums`; `pool_average`: extras = `IP*(mean_pool-stat)/scale` or `AB*(stat-mean_pool)`, Pool = `sum(pmax(ex,0))`; `fixed_baseline`: same formula using user constant; zero-pool check fires before division | `RATE_STAT_FORMULAS`, base R | **YES — new (Cycle 2 fix: `sum(pmax(ex,0))` prevents zero-pool from mean-cancellation)** |
+| Steps 6–7: pvm_mat + invariant | Column-wise division; mode-aware sum check; `colSums(pvm_mat)` clip vs `colSums(pvm_mat*(pvm_mat>0))` negative | base R | **YES — new** |
+| Step 8: concentration warning | `any(pvm_mat > 0.25)` threshold | `cli` | **YES — new** |
+| Step 9: `total_pvm` | NA-zero-fill `pvm_mat` copy → `%*% cat_weights`; original `pvm_mat` with NAs preserved for output columns (Cycle 1 fix) | base R | **YES — new (Cycle 1 fix)** |
+| Steps 10–11: output assembly | `pvm_[CAT]` + `total_pvm`; `contrib_[CAT]` prepended when `include_raw = TRUE`; `units = "budget_fraction"`, `anchor = "replacement"` | base R | **YES — new** |
 
 **sgp_denominators() call graph (changed in previous run — three-layer resolution):**
 
@@ -521,18 +605,38 @@ graph TD
     BANDCHECK -- no --> PAROUT["data.frame\npar_[CAT] + total_par\nattr: replacement_sgp\nunits = 'sgp'\nanchor = 'replacement'"]
     WARN --> PAROUT
 
+    ROUT --> PVM_DF["pvm()"]
+    IN5["rate_pool option\ncat_pct\nsub_replacement\nbaseline (optional)"] --> PVM_DF
+
+    PVM_DF --> CONTRIB["contrib matrix\nRS[c] - PS or PS - RS[c]\nclip or retain negative"]
+    CONTRIB --> POOLC{"rate_pool?"}
+    POOLC -- ip_weighted --> POOL_IW["Pool = colSums\n(contrib * w_vol)\nw = IP/mean_IP or AB/mean_AB"]
+    POOLC -- pool_average --> POOL_PA["Pool = sum(pmax(ex,0))\nex = IP*(mean_pool-stat)/scale"]
+    POOLC -- fixed_baseline --> POOL_FB["Pool = sum(pmax(ex,0))\nex = IP*(baseline-stat)/scale"]
+
+    POOL_IW --> PVM_MAT["pvm[i,c] = contrib_vol[i,c] / Pool[c]"]
+    POOL_PA --> PVM_MAT
+    POOL_FB --> PVM_MAT
+
+    PVM_MAT --> PVMTOT["total_pvm = pvm_mat_nona %*% cat_weights\n(NA-zero-fill before multiply)"]
+    PVMTOT --> PVMOUT["data.frame\npvm_[CAT] + total_pvm\n(+ contrib_[CAT] if include_raw)\nattr: units=budget_fraction\nanchor=replacement"]
+
     style IN4 fill:#1e90ff,stroke:#1565c0,color:#fff
     style IC_PKG fill:#1e90ff,stroke:#1565c0,color:#fff
     style HASH fill:#1e90ff,stroke:#1565c0,color:#fff
     style HCHECK fill:#1e90ff,stroke:#1565c0,color:#fff
     style PUSHBUF fill:#1e90ff,stroke:#1565c0,color:#fff
     style CONV fill:#1e90ff,stroke:#1565c0,color:#fff
-    style PAR fill:#1e90ff,stroke:#1565c0,color:#fff
-    style PARSUB fill:#1e90ff,stroke:#1565c0,color:#fff
-    style TOTAL_PAR fill:#1e90ff,stroke:#1565c0,color:#fff
-    style BANDCHECK fill:#1e90ff,stroke:#1565c0,color:#fff
-    style PAROUT fill:#1e90ff,stroke:#1565c0,color:#fff
-    style REPL_SGP fill:#1e90ff,stroke:#1565c0,color:#fff
+    style PVM_DF fill:#1e90ff,stroke:#1565c0,color:#fff
+    style IN5 fill:#1e90ff,stroke:#1565c0,color:#fff
+    style CONTRIB fill:#1e90ff,stroke:#1565c0,color:#fff
+    style POOLC fill:#1e90ff,stroke:#1565c0,color:#fff
+    style POOL_IW fill:#1e90ff,stroke:#1565c0,color:#fff
+    style POOL_PA fill:#1e90ff,stroke:#1565c0,color:#fff
+    style POOL_FB fill:#1e90ff,stroke:#1565c0,color:#fff
+    style PVM_MAT fill:#1e90ff,stroke:#1565c0,color:#fff
+    style PVMTOT fill:#1e90ff,stroke:#1565c0,color:#fff
+    style PVMOUT fill:#1e90ff,stroke:#1565c0,color:#fff
 ```
 
 ---
@@ -541,7 +645,8 @@ graph TD
 
 | Module / Function | Purpose | Key Dependencies | Changed in This Run |
 |---|---|---|---|
-| `R/zar.R` — `zar()` | Z-scores above replacement; calls `zaa()` internally and subtracts per-position replacement-band z-score; SP/RP always use separate baselines; `include_raw` flag prepends `zaa_*` columns; `attr(., "units") = "zscore"`, `attr(., "anchor") = "replacement"` | `zaa()`, `INVERSE_CATEGORIES`, `cli`, `rlang`, `checkmate`, `stats::setNames` | **YES — new file** |
+| `R/pvm.R` — `pvm()` | Percentage Valuation Method; per-player proportional pool shares in `budget_fraction` units; three `rate_pool` modes; `sub_replacement = "clip"` or `"negative"`; `cat_pct` for total weighting; emits `rotostats_warning_pvm_concentration` (>0.25 share) and `rotostats_warning_pvm_sum` (invariant violation); `attr(., "units") = "budget_fraction"`, `attr(., "anchor") = "replacement"` | `replacement_level()`, `RATE_STAT_FORMULAS`, `INVERSE_CATEGORIES`, `PVM_PITCHER_CATEGORIES`, `cli`, `rlang`, `checkmate`, `stats` | **YES — new file** |
+| `R/zar.R` — `zar()` | Z-scores above replacement; calls `zaa()` internally and subtracts per-position replacement-band z-score; SP/RP always use separate baselines; `include_raw` flag prepends `zaa_*` columns; `attr(., "units") = "zscore"`, `attr(., "anchor") = "replacement"` | `zaa()`, `INVERSE_CATEGORIES`, `cli`, `rlang`, `checkmate`, `stats::setNames` | No |
 | `R/zaa.R` — `zaa()` | Z-scores above average; per-player per-category z-scores vs within-position mean; pool-definition semantics (positional vs combined for hitters, split/combined/none for pitchers); `attr(result, "distribution")` stores per-pool per-category `{mean, sd, sd_vol?}`; internal building block for `zar()` | `INVERSE_CATEGORIES` constant, `cli`, `rlang`, `checkmate`, `stats::setNames` | No |
 | `R/zaa.R` — `.pop_sd()` | Population SD helper (denominator n, never `stats::sd()`); used for both counting-stat z-scores and rate-stat re-standardization | base R | No |
 | `R/zaa.R` — `.zaa_col_name()` | Column name sanitizer: `zaa_HR`, `zaa_ERA`, `zaa_bb_per_9`; slashes replaced with `_per_` and lowercased, matching `sgp` convention | base R | No |
@@ -566,9 +671,15 @@ graph TD
 | `R/league-config.R` — `pool_sizes()` | Returns `list(pitchers, hitters)` from config; shared by `sgp()` and `replacement_level()` | `league_config` S3 | No |
 | `R/league-history.R` — `league_history()` | Constructor for `league_history` S3 object; validates `team_season` schema | `cli` | No |
 | `R/rotostats-package.R` | Package-level Rd stub and `@keywords internal` | — | No |
-| `inst/simulations/dgp/dgp_c.R` | DGP-C: 393-row pool (258 hitters incl. 3 deterministic cycle players 9901-9903); rejection-sampling guard ensures mono_count >= 12 at all infield positions | — | **YES** |
-| `tests/testthat/test-replacement.R` | TS-R6-1/2/3 (cycle fixtures); TS-34 updated; TS-60 to TS-64 (hash invariants + param validation) | `testthat` | **YES** — 311 lines added |
-| `plans/error-messages.md` | Error/warning class registry; `rotostats_error_invalid_inverse_categories` "Thrown by" column updated to add `league_config()` alongside `sgp_denominators()` | — | **YES — row updated** |
+| `inst/simulations/sim-pvm.R` | Monte Carlo harness for `pvm()`; 4 studies (sum-to-1, pool denominator signal, sub-replacement sensitivity, concentration warning); pre-check gates + full runs; 9,000 total DGP draws | `dgp_pvm.R`, `pvm()`, `stats`, base R | **YES — new file** |
+| `inst/simulations/dgp/dgp_pvm.R` | DGP for pvm() MC; generates hitter/pitcher projection frames + replacement objects with correct PLAYER_ID keying; Study 4 uses target_share parameterization for concentration-warning calibration | base R | **YES — new file** |
+| `tests/simulations/sim-pvm-results.rds` | Binary MC results (per-replication metrics for all 4 studies) | — | **YES — new file** |
+| `tests/simulations/sim-pvm-summary.csv` | Human-readable MC summary; columns: study, scenario_id, n_teams, rate_pool, sub_replacement, cat_pct, metric, value_mean, value_max, value_min, pass | — | **YES — new file** |
+| `tests/testthat/test-pvm.R` | TS-PVM-1 through TS-PVM-20 + PROP-1 through PROP-6 + BENCH-1; 130 tests; all PASS | `testthat`, `helper-pvm-fixtures.R` | **YES — new file** |
+| `tests/testthat/helper-pvm-fixtures.R` | `make_pvm_replacement()` fixture helper; 5×5 league with 310-player pool; position-keyed by PLAYER_ID | `testthat` | **YES — new file** |
+| `inst/simulations/dgp/dgp_c.R` | DGP-C: 393-row pool (258 hitters incl. 3 deterministic cycle players 9901-9903); rejection-sampling guard ensures mono_count >= 12 at all infield positions | — | No |
+| `tests/testthat/test-replacement.R` | TS-R6-1/2/3 (cycle fixtures); TS-34 updated; TS-60 to TS-64 (hash invariants + param validation) | `testthat` | No |
+| `plans/error-messages.md` | Error/warning class registry; `rotostats_error_invalid_inverse_categories` "Thrown by" column updated to add `league_config()` alongside `sgp_denominators()` | — | No |
 
 ---
 

@@ -228,48 +228,55 @@ independently.
 # Toy example: two counting categories, three players
 history <- list(
   team_season = data.frame(
-    year    = c(2022L, 2022L, 2022L, 2023L, 2023L, 2023L),
+    year = c(2022L, 2022L, 2022L, 2023L, 2023L, 2023L),
     team_id = rep(c("A", "B", "C"), 2),
-    HR      = c(150, 180, 210, 155, 185, 215),
-    R       = c(650, 700, 740, 660, 710, 750),
-    IP      = c(1350, 1380, 1410, 1360, 1390, 1420),
-    AB      = c(5400, 5500, 5600, 5420, 5520, 5620),
+    HR = c(150, 180, 210, 155, 185, 215),
+    R = c(650, 700, 740, 660, 710, 750),
+    IP = c(1350, 1380, 1410, 1360, 1390, 1420),
+    AB = c(5400, 5500, 5600, 5420, 5520, 5620),
     stringsAsFactors = FALSE
   )
 )
 
 config <- league_config(
-  n_teams       = 12L,
-  roster_slots  = c(C = 1L, `1B` = 1L, `2B` = 1L, `3B` = 1L,
-                    SS = 1L, OF = 3L, DH = 1L),
+  n_teams = 12L,
+  roster_slots = c(
+    "C" = 1,
+    "1B" = 1,
+    "2B" = 1,
+    "3B" = 1,
+    "SS" = 1,
+    "OF" = 3,
+    "DH" = 1
+  ),
   pitcher_slots = 9L,
-  budget        = 260L,
-  budget_split  = 0.67,
-  categories    = c("HR", "R")
+  budget = 260L,
+  budget_split = 0.67,
+  categories = c("HR", "R")
 )
 
 denoms <- sgp_denominators(
   history,
   scoring_categories = c("HR", "R"),
-  exclude_years      = integer(0)
+  exclude_years = integer(0)
 )
 
 projections <- data.frame(
   HR = c(40L, 25L, 10L),
-  R  = c(90L, 80L, 70L),
-  IP = c(0L,  0L,  0L),    # pitching not scored — zeroes are fine
+  R = c(90L, 80L, 70L),
+  IP = c(0L, 0L, 0L), # pitching not scored — zeroes are fine
   AB = c(500L, 450L, 400L)
 )
 
 \dontrun{
-# blended_pool requires league_history and league_config:
-result <- sgp(
-  projections   = projections,
-  denominators  = denoms,
-  league_history = history,
-  league_config  = config
-)
-result  # data frame: sgp_HR, sgp_R, total_sgp
+  # blended_pool requires league_history and league_config:
+  result <- sgp(
+    projections   = projections,
+    denominators  = denoms,
+    league_history = history,
+    league_config  = config
+  )
+  result  # data frame: sgp_HR, sgp_R, total_sgp
 }
 
 }
