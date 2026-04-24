@@ -8,7 +8,8 @@ get_projections(
   source = "steamer",
   year = NULL,
   player_type = "both",
-  data = NULL
+  data = NULL,
+  mlb_only = TRUE
 )
 }
 \arguments{
