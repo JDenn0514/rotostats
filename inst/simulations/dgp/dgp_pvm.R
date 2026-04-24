@@ -138,7 +138,7 @@ dgp_pvm <- function(seed, n_teams = 12L, baseline = NULL) {
     ids <- seq.int(player_counter - n_p + 1L, player_counter)
 
     hitter_rows[[i]] <- data.frame(
-      player_id       = ids,
+      PLAYER_ID       = ids,
       player_name     = paste0(pos_name, "_H_", seq_len(n_p)),
       position        = pos_name,
       pos_eligibility = pos_name,
@@ -177,7 +177,7 @@ dgp_pvm <- function(seed, n_teams = 12L, baseline = NULL) {
   player_counter <- player_counter + n_sp
   sp_ids <- seq.int(player_counter - n_sp + 1L, player_counter)
   sp_df <- data.frame(
-    player_id       = sp_ids,
+    PLAYER_ID       = sp_ids,
     player_name     = paste0("SP_", seq_len(n_sp)),
     position        = "SP",
     pos_eligibility = "SP",
@@ -209,7 +209,7 @@ dgp_pvm <- function(seed, n_teams = 12L, baseline = NULL) {
   player_counter <- player_counter + n_rp
   rp_ids <- seq.int(player_counter - n_rp + 1L, player_counter)
   rp_df <- data.frame(
-    player_id       = rp_ids,
+    PLAYER_ID       = rp_ids,
     player_name     = paste0("RP_", seq_len(n_rp)),
     position        = "RP",
     pos_eligibility = "RP",
@@ -227,7 +227,7 @@ dgp_pvm <- function(seed, n_teams = 12L, baseline = NULL) {
   )
 
   all_cols <- c(
-    "player_id", "player_name", "position", "pos_eligibility", "league", "role",
+    "PLAYER_ID", "player_name", "position", "pos_eligibility", "league", "role",
     "HR", "R", "RBI", "SB", "AB", "AVG",
     "IP", "ERA", "WHIP", "W", "K", "SV"
   )
@@ -314,10 +314,12 @@ dgp_pvm <- function(seed, n_teams = 12L, baseline = NULL) {
   )
 
   # ----- POSITION ASSIGNMENTS --------------------------------------------
-  # Named character vector: player_name -> position
+  # Named character vector: PLAYER_ID (as character) -> position
+  # pvm() looks up via as.character(projections$PLAYER_ID), so keys must be
+  # the integer PLAYER_ID values coerced to character (e.g., "1", "2", ...).
   pos_assign <- stats::setNames(
     rostered_all$position,
-    rostered_all$player_name
+    as.character(rostered_all$PLAYER_ID)
   )
 
   # ----- BUILD REPLACEMENT OBJECT ----------------------------------------
@@ -412,27 +414,28 @@ dgp_pvm_study4 <- function(seed, n_teams = 12L, target_share = 0.30) {
   dominant_sv  <- max(dominant_sv, 1L)   # ensure non-negative
 
   # Assign: first RP in rostered_rp gets dominant_sv, rest get per_other_sv
-  dominant_name  <- rostered_rp$player_name[1L]
-  other_names    <- rostered_rp$player_name[-1L]
+  # Key by PLAYER_ID (integer) — consistent with pvm() lookup convention.
+  dominant_id  <- rostered_rp$PLAYER_ID[1L]
+  other_ids    <- rostered_rp$PLAYER_ID[-1L]
 
   # Update projections SV for these players
-  projections$SV[projections$player_name == dominant_name]  <- dominant_sv
-  projections$SV[projections$player_name %in% other_names]  <- per_other_sv
+  projections$SV[projections$PLAYER_ID == dominant_id]  <- dominant_sv
+  projections$SV[projections$PLAYER_ID %in% other_ids]  <- per_other_sv
   # Non-rostered pitchers get SV = 0 to avoid contaminating the pool
   non_rostered_pitchers <- projections$position %in% c("SP", "RP") &
-    !(projections$player_name %in% rostered_all$player_name)
+    !(projections$PLAYER_ID %in% rostered_all$PLAYER_ID)
   projections$SV[non_rostered_pitchers] <- 0L
 
   # Also update rostered_all to reflect the new SV values.
   # The rostered_all snapshot from base still has original SV values;
   # we must propagate the override so pvm() sees the correct distribution.
-  rostered_all$SV[rostered_all$player_name == dominant_name]  <- dominant_sv
-  rostered_all$SV[rostered_all$player_name %in% other_names]  <- per_other_sv
+  rostered_all$SV[rostered_all$PLAYER_ID == dominant_id]  <- dominant_sv
+  rostered_all$SV[rostered_all$PLAYER_ID %in% other_ids]  <- per_other_sv
 
   # Also update rostered_pitchers (SP and RP subset)
   rostered_pitchers <- attr(base, "rostered_pitchers")
-  rostered_pitchers$SV[rostered_pitchers$player_name == dominant_name]  <- dominant_sv
-  rostered_pitchers$SV[rostered_pitchers$player_name %in% other_names]  <- per_other_sv
+  rostered_pitchers$SV[rostered_pitchers$PLAYER_ID == dominant_id]  <- dominant_sv
+  rostered_pitchers$SV[rostered_pitchers$PLAYER_ID %in% other_ids]  <- per_other_sv
 
   # Recompute replacement stat for SV from updated rostered pool
   n_pit_boundary <- nrow(rostered_pitchers)
@@ -448,7 +451,7 @@ dgp_pvm_study4 <- function(seed, n_teams = 12L, target_share = 0.30) {
   result$replacement_stats           <- rs_new
 
   # Annotate dominant player info for diagnostics
-  attr(result, "study4_dominant_name") <- dominant_name
+  attr(result, "study4_dominant_id")   <- dominant_id
   attr(result, "study4_target_share")  <- target_share
   attr(result, "study4_dominant_sv")   <- dominant_sv
   attr(result, "study4_S_other")       <- S_other
