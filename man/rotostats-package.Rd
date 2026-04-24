@@ -13,7 +13,11 @@ drafts, in-season roster decisions, and end-of-season analysis.
 \section{Key Functions}{
 
 \itemize{
-\item TBD
+\item \code{\link[=get_projections]{get_projections()}} — fetch FanGraphs projections (Steamer / ZiPS / ATC / …)
+\item \code{\link[=sgp]{sgp()}}, \code{\link[=sgp_denominators]{sgp_denominators()}}
+\item \code{\link[=replacement_level]{replacement_level()}}, \code{\link[=replacement_from_prices]{replacement_from_prices()}}
+\item \code{\link[=par]{par()}}, \code{\link[=zaa]{zaa()}}, \code{\link[=zar]{zar()}}, \code{\link[=pvm]{pvm()}}
+\item \code{\link[=league_config]{league_config()}}, \code{\link[=league_history]{league_history()}}
 }
 }
 

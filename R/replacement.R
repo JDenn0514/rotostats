@@ -157,7 +157,7 @@ utils::globalVariables(c("PRIMARY_HITTER_SLOTS", "pool_sizes", "sgp"))
 #' }
 #'
 #' @importFrom stats setNames sd mad density weighted.mean
-#' @importFrom utils head
+#' @importFrom utils head tail
 #' @export
 replacement_level <- function(
   projections,
