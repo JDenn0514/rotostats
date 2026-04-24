@@ -115,3 +115,53 @@ test_that(".validate_year() aborts on non-scalar / non-integer input", {
     class = "rotostats_error_unsupported_year"
   )
 })
+
+# ---------------------------------------------------------------------------
+# .validate_custom_data()
+# ---------------------------------------------------------------------------
+
+test_that(".validate_custom_data() returns data unchanged on valid custom input", {
+  d <- data.frame(name = "A", HR = 10)
+  expect_identical(rotostats:::.validate_custom_data("custom", d), d)
+
+  d2 <- data.frame(playerid = "abc", HR = 10)
+  expect_identical(rotostats:::.validate_custom_data("custom", d2), d2)
+})
+
+test_that(".validate_custom_data() returns NULL on non-custom source + NULL data", {
+  expect_null(rotostats:::.validate_custom_data("steamer", NULL))
+})
+
+test_that(".validate_custom_data() aborts when data supplied with non-custom source", {
+  d <- data.frame(name = "A")
+  expect_error(
+    rotostats:::.validate_custom_data("steamer", d),
+    class = "rotostats_error_data_ignored"
+  )
+})
+
+test_that(".validate_custom_data() aborts on custom + NULL", {
+  expect_error(
+    rotostats:::.validate_custom_data("custom", NULL),
+    class = "rotostats_error_missing_custom_data"
+  )
+})
+
+test_that(".validate_custom_data() aborts on non-data.frame data", {
+  expect_error(
+    rotostats:::.validate_custom_data("custom", list(name = "A")),
+    class = "rotostats_error_invalid_custom_data"
+  )
+  expect_error(
+    rotostats:::.validate_custom_data("custom", matrix(1:4, 2, 2)),
+    class = "rotostats_error_invalid_custom_data"
+  )
+})
+
+test_that(".validate_custom_data() aborts when neither name nor playerid is present", {
+  d <- data.frame(HR = 10, RBI = 20)
+  expect_error(
+    rotostats:::.validate_custom_data("custom", d),
+    class = "rotostats_error_invalid_custom_data"
+  )
+})

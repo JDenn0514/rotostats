@@ -65,3 +65,45 @@ VALID_PLAYER_TYPES <- c("batters", "pitchers", "both")
   }
   as.integer(year)
 }
+
+#' @noRd
+.validate_custom_data <- function(source, data) {
+  if (source != "custom") {
+    if (!is.null(data)) {
+      cli::cli_abort(
+        c(
+          "{.arg data} is only used when {.arg source = \"custom\"}.",
+          i = "Received {.arg source} = {.val {source}} with non-NULL {.arg data}."
+        ),
+        class = "rotostats_error_data_ignored"
+      )
+    }
+    return(NULL)
+  }
+  # source == "custom"
+  if (is.null(data)) {
+    cli::cli_abort(
+      "{.arg data} is required when {.arg source = \"custom\"}.",
+      class = "rotostats_error_missing_custom_data"
+    )
+  }
+  if (!is.data.frame(data)) {
+    cli::cli_abort(
+      c(
+        "{.arg data} must be a data.frame.",
+        i = "Received class: {.cls {class(data)}}."
+      ),
+      class = "rotostats_error_invalid_custom_data"
+    )
+  }
+  if (!any(c("name", "playerid") %in% names(data))) {
+    cli::cli_abort(
+      c(
+        "{.arg data} must contain at least one of {.field name} or {.field playerid}.",
+        i = "Columns present: {.val {names(data)}}."
+      ),
+      class = "rotostats_error_invalid_custom_data"
+    )
+  }
+  data
+}
