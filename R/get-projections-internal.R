@@ -109,6 +109,20 @@ VALID_PLAYER_TYPES <- c("batters", "pitchers", "both")
 }
 
 #' @noRd
+.validate_mlb_only <- function(mlb_only) {
+  if (!is.logical(mlb_only) || length(mlb_only) != 1L || is.na(mlb_only)) {
+    cli::cli_abort(
+      c(
+        "{.arg mlb_only} must be a length-1 non-NA logical.",
+        i = "Received: {.val {mlb_only}}."
+      ),
+      class = "rotostats_error_invalid_mlb_only"
+    )
+  }
+  mlb_only
+}
+
+#' @noRd
 .build_projections_url <- function(source, player_type) {
   stopifnot(player_type %in% c("batters", "pitchers"))
   stats <- if (player_type == "batters") "bat" else "pit"
@@ -191,23 +205,30 @@ VALID_PLAYER_TYPES <- c("batters", "pitchers", "both")
 }
 
 #' @noRd
+#' @description
+#' Maps raw FanGraphs column names to rotostats' snake_case contract.
+#' Every entry points at the final output name (no intermediate stop).
+#' Columns not in this map fall through to a generic `tolower()` pass
+#' inside `.normalize_projection_cols()`.
 PROJECTION_COLUMN_RENAME <- c(
-  PlayerName = "name",
+  playerid   = "player_id",
+  PlayerName = "player_name",
   Team       = "team",
+  League     = "league",
   minpos     = "pos",
-  playerId   = "playerid",
-  `wRC+`     = "wRC_plus",
-  `K/9`      = "K_per_9",
-  `BB/9`     = "BB_per_9",
-  `HR/9`     = "HR_per_9",
-  `K/BB`     = "K_per_BB",
-  `K%`       = "K_pct",
-  `BB%`      = "BB_pct"
+  `wRC+`     = "wrc_plus",
+  `K/9`      = "k_per_9",
+  `BB/9`     = "bb_per_9",
+  `HR/9`     = "hr_per_9",
+  `K/BB`     = "k_per_bb",
+  `K%`       = "k_pct",
+  `BB%`      = "bb_pct"
 )
 
 #' @noRd
 .normalize_projection_cols <- function(df) {
   nm <- names(df)
+  # Step 1: explicit renames from the map.
   for (raw in names(PROJECTION_COLUMN_RENAME)) {
     target <- PROJECTION_COLUMN_RENAME[[raw]]
     hits <- which(nm == raw)
@@ -215,21 +236,56 @@ PROJECTION_COLUMN_RENAME <- c(
       nm[hits] <- target
     }
   }
+  # Step 2: any column not already snake_case gets lowercased.
+  # Leaves map-produced names untouched (they're already snake_case).
+  # If lowering a column would collide with an existing (post-map) name,
+  # drop the losing column instead of keeping its non-snake_case form —
+  # this preserves the map's preferred binding for that slot (e.g.
+  # minpos->pos wins over a raw Pos column) while keeping the output
+  # strictly snake_case.
+  drop_idx <- integer(0)
+  untouched_idx <- which(!(nm %in% unname(PROJECTION_COLUMN_RENAME)))
+  for (i in untouched_idx) {
+    lowered <- tolower(nm[i])
+    if (lowered == nm[i]) next
+    if (!(lowered %in% nm)) {
+      nm[i] <- lowered
+    } else {
+      drop_idx <- c(drop_idx, i)
+    }
+  }
   names(df) <- nm
+  if (length(drop_idx)) df <- df[, -drop_idx, drop = FALSE]
   df
 }
 
 #' @noRd
 .derive_svhd <- function(df) {
-  if (!all(c("SV", "HLD") %in% names(df))) return(df)
-  sv  <- ifelse(is.na(df$SV),  0, df$SV)
-  hld <- ifelse(is.na(df$HLD), 0, df$HLD)
-  df$SVHD <- sv + hld
+  if (!all(c("sv", "hld") %in% names(df))) return(df)
+  sv  <- ifelse(is.na(df$sv),  0, df$sv)
+  hld <- ifelse(is.na(df$hld), 0, df$hld)
+  df$svhd <- sv + hld
   rlang::inform(
     "SVHD computed as SV + HLD. Verify this matches your league's SVHD definition.",
     .frequency = "once",
     .frequency_id = "rotostats_svhd_definition"
   )
+  df
+}
+
+#' @noRd
+.derive_k <- function(df) {
+  if (!all(c("k_per_9", "ip") %in% names(df))) return(df)
+  if ("k" %in% names(df)) return(df)
+  df$k <- df$k_per_9 * df$ip / 9
+  df
+}
+
+#' @noRd
+.normalize_pos_eligibility <- function(df) {
+  if (!("pos" %in% names(df))) return(df)
+  df$pos_eligibility <- gsub("/", "|", df$pos, fixed = TRUE)
+  df$pos <- NULL
   df
 }
 
@@ -253,14 +309,23 @@ PROJECTION_COLUMN_RENAME <- c(
 }
 
 #' @noRd
-.fetch_and_assemble_projections <- function(source, player_type) {
+.filter_mlb <- function(df) {
+  if (!("league" %in% names(df))) return(df)
+  keep <- !is.na(df$league) & df$league %in% c("AL", "NL")
+  df[keep, , drop = FALSE]
+}
+
+#' @noRd
+.fetch_and_assemble_projections <- function(source, player_type, mlb_only) {
   bat <- if (player_type %in% c("batters", "both")) {
     .fetch_one_side(source, "batters")
   } else NULL
   pit <- if (player_type %in% c("pitchers", "both")) {
     .fetch_one_side(source, "pitchers")
   } else NULL
-  .combine_batter_pitcher(bat, pit)
+  df <- .combine_batter_pitcher(bat, pit)
+  if (isTRUE(mlb_only)) df <- .filter_mlb(df)
+  df
 }
 
 #' @noRd
@@ -270,7 +335,11 @@ PROJECTION_COLUMN_RENAME <- c(
   raw <- .fetch_projections_api(url)
   df  <- .parse_projections_json(raw)
   df  <- .normalize_projection_cols(df)
-  if (player_type == "pitchers") df <- .derive_svhd(df)
-  if (player_type == "pitchers" && !("pos" %in% names(df))) df$pos <- "P"
+  if (player_type == "pitchers") {
+    df <- .derive_svhd(df)
+    df <- .derive_k(df)
+    if (!("pos" %in% names(df))) df$pos <- "P"
+  }
+  df <- .normalize_pos_eligibility(df)
   .attach_player_type(df, if (player_type == "batters") "batter" else "pitcher")
 }

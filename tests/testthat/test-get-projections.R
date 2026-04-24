@@ -274,31 +274,31 @@ test_that(".parse_projections_json() aborts on empty input", {
 # .normalize_projection_cols()
 # ---------------------------------------------------------------------------
 
-test_that(".normalize_projection_cols() renames PlayerName → name", {
+test_that(".normalize_projection_cols() renames PlayerName → player_name", {
   df <- data.frame(playerid = "1", PlayerName = "A", Team = "NYY", minpos = "2B")
   out <- rotostats:::.normalize_projection_cols(df)
-  expect_setequal(names(out), c("playerid", "name", "team", "pos"))
+  expect_setequal(names(out), c("player_id", "player_name", "team", "pos"))
 })
 
 test_that(".normalize_projection_cols() normalizes slash-containing pitcher stats", {
   df <- data.frame(playerid = "1", `K/9` = 9.5, `BB/9` = 2.1, `K/BB` = 4.5,
                    check.names = FALSE)
   out <- rotostats:::.normalize_projection_cols(df)
-  expect_setequal(names(out), c("playerid", "K_per_9", "BB_per_9", "K_per_BB"))
+  expect_setequal(names(out), c("player_id", "k_per_9", "bb_per_9", "k_per_bb"))
 })
 
 test_that(".normalize_projection_cols() normalizes wRC+", {
   df <- data.frame(playerid = "1", `wRC+` = 120, check.names = FALSE)
   out <- rotostats:::.normalize_projection_cols(df)
-  expect_true("wRC_plus" %in% names(out))
+  expect_true("wrc_plus" %in% names(out))
   expect_false("wRC+" %in% names(out))
 })
 
 test_that(".normalize_projection_cols() leaves already-canonical columns alone", {
-  df <- data.frame(playerid = "1", name = "A", team = "NYY", pos = "2B",
-                   HR = 30)
+  df <- data.frame(player_id = "1", player_name = "A", team = "NYY", pos = "2B",
+                   hr = 30)
   out <- rotostats:::.normalize_projection_cols(df)
-  expect_setequal(names(out), c("playerid", "name", "team", "pos", "HR"))
+  expect_setequal(names(out), c("player_id", "player_name", "team", "pos", "hr"))
 })
 
 # ---------------------------------------------------------------------------
@@ -306,25 +306,25 @@ test_that(".normalize_projection_cols() leaves already-canonical columns alone",
 # ---------------------------------------------------------------------------
 
 test_that(".derive_svhd() adds SV + HLD", {
-  df <- data.frame(playerid = c("1","2"), SV = c(30, 0), HLD = c(0, 25))
+  df <- data.frame(player_id = c("1","2"), sv = c(30, 0), hld = c(0, 25))
   out <- rotostats:::.derive_svhd(df)
-  expect_equal(out$SVHD, c(30, 25))
+  expect_equal(out$svhd, c(30, 25))
 })
 
 test_that(".derive_svhd() handles NA SV or HLD as 0", {
-  df <- data.frame(playerid = c("1","2"), SV = c(NA, 10), HLD = c(5, NA))
+  df <- data.frame(player_id = c("1","2"), sv = c(NA, 10), hld = c(5, NA))
   out <- rotostats:::.derive_svhd(df)
-  expect_equal(out$SVHD, c(5, 10))
+  expect_equal(out$svhd, c(5, 10))
 })
 
 test_that(".derive_svhd() is a no-op when SV or HLD column is absent", {
-  df <- data.frame(playerid = "1", SV = 5)   # no HLD
+  df <- data.frame(player_id = "1", sv = 5)   # no hld
   out <- rotostats:::.derive_svhd(df)
-  expect_false("SVHD" %in% names(out))
+  expect_false("svhd" %in% names(out))
 
-  df2 <- data.frame(playerid = "1", HLD = 5) # no SV
+  df2 <- data.frame(player_id = "1", hld = 5) # no sv
   out2 <- rotostats:::.derive_svhd(df2)
-  expect_false("SVHD" %in% names(out2))
+  expect_false("svhd" %in% names(out2))
 })
 
 test_that(".derive_svhd() emits a once-per-session inform message", {
@@ -332,7 +332,7 @@ test_that(".derive_svhd() emits a once-per-session inform message", {
   # Reset the session-once state so this test is deterministic
   rlang::reset_message_verbosity("rotostats_svhd_definition")
 
-  df <- data.frame(playerid = "1", SV = 30, HLD = 0)
+  df <- data.frame(player_id = "1", sv = 30, hld = 0)
 
   expect_message(
     rotostats:::.derive_svhd(df),
@@ -349,29 +349,29 @@ test_that(".derive_svhd() emits a once-per-session inform message", {
 # ---------------------------------------------------------------------------
 
 test_that(".attach_player_type() sets the player_type column", {
-  df <- data.frame(playerid = "1", HR = 30)
+  df <- data.frame(player_id = "1", hr = 30)
   out <- rotostats:::.attach_player_type(df, "batter")
   expect_equal(out$player_type, "batter")
 })
 
 test_that(".combine_batter_pitcher() rbinds with NA fill across non-shared cols", {
   bat <- data.frame(
-    playerid = "1", name = "A", team = "NYY", pos = "2B",
-    player_type = "batter", HR = 30, AB = 550
+    player_id = "1", player_name = "A", team = "NYY", pos = "2B",
+    player_type = "batter", hr = 30, ab = 550
   )
   pit <- data.frame(
-    playerid = "2", name = "B", team = "LAD", pos = "SP",
-    player_type = "pitcher", W = 15, IP = 200
+    player_id = "2", player_name = "B", team = "LAD", pos = "SP",
+    player_type = "pitcher", w = 15, ip = 200
   )
   out <- rotostats:::.combine_batter_pitcher(bat, pit)
   expect_equal(nrow(out), 2L)
   # columns from both sides are present
-  expect_true(all(c("HR", "AB", "W", "IP") %in% names(out)))
+  expect_true(all(c("hr", "ab", "w", "ip") %in% names(out)))
   # each row keeps its own non-NA side
-  expect_equal(out$HR[out$player_type == "batter"], 30)
-  expect_true(is.na(out$HR[out$player_type == "pitcher"]))
-  expect_equal(out$W[out$player_type == "pitcher"], 15)
-  expect_true(is.na(out$W[out$player_type == "batter"]))
+  expect_equal(out$hr[out$player_type == "batter"], 30)
+  expect_true(is.na(out$hr[out$player_type == "pitcher"]))
+  expect_equal(out$w[out$player_type == "pitcher"], 15)
+  expect_true(is.na(out$w[out$player_type == "batter"]))
 })
 
 # ---------------------------------------------------------------------------
@@ -381,7 +381,7 @@ test_that(".combine_batter_pitcher() rbinds with NA fill across non-shared cols"
 test_that("get_projections(source = 'custom') returns user data unchanged", {
   d <- data.frame(name = "Test", HR = 30, player_type = "batter")
   out <- get_projections(source = "custom", data = d)
-  expect_identical(out, d)
+  expect_identical(out, tibble::as_tibble(d))
 })
 
 # ---------------------------------------------------------------------------
@@ -397,9 +397,9 @@ test_that("get_projections('steamer', player_type = 'batters') returns a normali
 
   expect_s3_class(out, "data.frame")
   expect_equal(nrow(out), 3L)
-  expect_true(all(c("playerid", "name", "team", "pos", "player_type") %in% names(out)))
+  expect_true(all(c("player_id", "player_name", "team", "pos_eligibility", "player_type") %in% names(out)))
   expect_true(all(out$player_type == "batter"))
-  expect_true("wRC_plus" %in% names(out))
+  expect_true("wrc_plus" %in% names(out))
   expect_false("wRC+" %in% names(out))
 })
 
@@ -414,9 +414,15 @@ test_that("get_projections(..., player_type = 'pitchers') returns a pitcher fram
     regexp = "SVHD computed as SV \\+ HLD"
   )
   expect_equal(nrow(out), 3L)
-  expect_true("SVHD" %in% names(out))
+  expect_true("svhd" %in% names(out))
   expect_true(all(out$player_type == "pitcher"))
-  expect_true("QS" %in% names(out))
+  expect_true("qs" %in% names(out))
+  expect_true("k" %in% names(out))
+  expect_equal(
+    out$k[out$player_type == "pitcher"],
+    out$k_per_9[out$player_type == "pitcher"] *
+      out$ip[out$player_type == "pitcher"] / 9
+  )
 })
 
 test_that("get_projections(..., player_type = 'both') rbinds with NA fill", {
@@ -435,8 +441,8 @@ test_that("get_projections(..., player_type = 'both') rbinds with NA fill", {
   expect_equal(nrow(out), 4L)
   expect_setequal(unique(out$player_type), c("batter", "pitcher"))
   # Non-shared columns are NA-filled
-  expect_true(all(is.na(out$IP[out$player_type == "batter"])))
-  expect_true(all(is.na(out$AB[out$player_type == "pitcher"])))
+  expect_true(all(is.na(out$ip[out$player_type == "batter"])))
+  expect_true(all(is.na(out$ab[out$player_type == "pitcher"])))
 })
 
 # ---------------------------------------------------------------------------
@@ -498,11 +504,30 @@ test_that("get_projections('steamer', 'batters') parses the recorded fixture cle
   out <- get_projections(source = "steamer", player_type = "batters")
   expect_s3_class(out, "data.frame")
   expect_gt(nrow(out), 0L)
-  expect_true(all(c("playerid", "name", "team", "pos", "player_type") %in% names(out)))
+  expect_true(all(c("player_id", "player_name", "team", "pos_eligibility", "player_type") %in% names(out)))
   expect_true(all(out$player_type == "batter"))
-  expect_type(out$pos, "character")
-  expect_true(all(out$pos %in% c("C", "1B", "2B", "3B", "SS", "LF", "CF", "RF", "OF", "DH", "UT", "IF", "NA")) |
-              all(nchar(out$pos) <= 6))
+  expect_type(out$pos_eligibility, "character")
+  expect_true(all(nchar(out$pos_eligibility) <= 6, na.rm = TRUE))
+  # Pipe-delimited now — no slashes should remain
+  expect_false(any(grepl("/", out$pos_eligibility, fixed = TRUE), na.rm = TRUE))
+
+  # Snake_case contract
+  expect_true(all(names(out) == tolower(names(out))))
+
+  # Required identifier columns
+  required_ids <- c("player_id", "player_name", "team", "league", "player_type")
+  expect_true(all(required_ids %in% names(out)))
+
+  # pos_eligibility present; pos absent; no slashes
+  expect_true("pos_eligibility" %in% names(out))
+  expect_false("pos" %in% names(out))
+  expect_false(any(grepl("/", out$pos_eligibility, fixed = TRUE), na.rm = TRUE))
+
+  # league filter default
+  expect_true(all(out$league %in% c("AL", "NL")))
+
+  # tibble return
+  expect_s3_class(out, "tbl_df")
 })
 
 test_that("get_projections('steamer', 'pitchers') derives SVHD from the recorded fixture", {
@@ -515,11 +540,34 @@ test_that("get_projections('steamer', 'pitchers') derives SVHD from the recorded
   out <- suppressMessages(
     get_projections(source = "steamer", player_type = "pitchers")
   )
-  expect_true("SVHD" %in% names(out))
-  expect_true(all(out$SVHD == out$SV + out$HLD |
-                  is.na(out$SV) | is.na(out$HLD) | out$SVHD >= 0))
-  expect_true("pos" %in% names(out))
-  expect_true(all(out$pos == "P"))
+  expect_true("svhd" %in% names(out))
+  expect_true(all(out$svhd == out$sv + out$hld |
+                  is.na(out$sv) | is.na(out$hld) | out$svhd >= 0))
+  expect_true("pos_eligibility" %in% names(out))
+  expect_true(all(out$pos_eligibility[out$player_type == "pitcher"] == "P"))
+
+  # Snake_case contract
+  expect_true(all(names(out) == tolower(names(out))))
+
+  # Required identifier columns
+  required_ids <- c("player_id", "player_name", "team", "league", "player_type")
+  expect_true(all(required_ids %in% names(out)))
+
+  # pos_eligibility present; pos absent; no slashes
+  expect_true("pos_eligibility" %in% names(out))
+  expect_false("pos" %in% names(out))
+  expect_false(any(grepl("/", out$pos_eligibility, fixed = TRUE), na.rm = TRUE))
+
+  # league filter default
+  expect_true(all(out$league %in% c("AL", "NL")))
+
+  # tibble return
+  expect_s3_class(out, "tbl_df")
+
+  # k derivation for pitchers
+  pitcher_rows <- out[out$player_type == "pitcher", , drop = FALSE]
+  expect_true("k" %in% names(pitcher_rows))
+  expect_true(all(is.finite(pitcher_rows$k) | is.na(pitcher_rows$k)))
 })
 
 test_that("ZiPS pitcher fixture parses even without QS", {
@@ -536,4 +584,289 @@ test_that("ZiPS pitcher fixture parses even without QS", {
   # QS may or may not be present — this is documented in the spec. Either way,
   # no error is thrown and the rest of the pipeline works.
   expect_gt(nrow(out), 0L)
+
+  # Snake_case contract
+  expect_true(all(names(out) == tolower(names(out))))
+
+  # Required identifier columns
+  required_ids <- c("player_id", "player_name", "team", "league", "player_type")
+  expect_true(all(required_ids %in% names(out)))
+
+  # pos_eligibility present; pos absent; no slashes
+  expect_true("pos_eligibility" %in% names(out))
+  expect_false("pos" %in% names(out))
+  expect_false(any(grepl("/", out$pos_eligibility, fixed = TRUE), na.rm = TRUE))
+
+  # league filter default
+  expect_true(all(out$league %in% c("AL", "NL")))
+
+  # tibble return
+  expect_s3_class(out, "tbl_df")
+
+  # k derivation for pitchers
+  pitcher_rows <- out[out$player_type == "pitcher", , drop = FALSE]
+  expect_true("k" %in% names(pitcher_rows))
+  expect_true(all(is.finite(pitcher_rows$k) | is.na(pitcher_rows$k)))
+})
+
+# ---------------------------------------------------------------------------
+# .normalize_pos_eligibility()
+# ---------------------------------------------------------------------------
+
+test_that(".normalize_pos_eligibility() renames pos to pos_eligibility", {
+  df <- data.frame(pos = c("2B", "SS/OF"), stringsAsFactors = FALSE)
+  out <- rotostats:::.normalize_pos_eligibility(df)
+  expect_true("pos_eligibility" %in% names(out))
+  expect_false("pos" %in% names(out))
+})
+
+test_that(".normalize_pos_eligibility() converts / separators to |", {
+  df <- data.frame(pos = c("2B", "SS/OF", "1B/3B/OF"), stringsAsFactors = FALSE)
+  out <- rotostats:::.normalize_pos_eligibility(df)
+  expect_equal(out$pos_eligibility, c("2B", "SS|OF", "1B|3B|OF"))
+})
+
+test_that(".normalize_pos_eligibility() leaves single positions alone", {
+  df <- data.frame(pos = c("P", "C", "DH"), stringsAsFactors = FALSE)
+  out <- rotostats:::.normalize_pos_eligibility(df)
+  expect_equal(out$pos_eligibility, c("P", "C", "DH"))
+})
+
+test_that(".normalize_pos_eligibility() is a no-op when pos is absent", {
+  df <- data.frame(player_name = "X", stringsAsFactors = FALSE)
+  out <- rotostats:::.normalize_pos_eligibility(df)
+  expect_identical(out, df)
+  expect_false("pos_eligibility" %in% names(out))
+})
+
+test_that(".normalize_pos_eligibility() preserves NA in pos", {
+  df <- data.frame(pos = c("2B", NA_character_, "SS/OF"), stringsAsFactors = FALSE)
+  out <- rotostats:::.normalize_pos_eligibility(df)
+  expect_equal(out$pos_eligibility, c("2B", NA_character_, "SS|OF"))
+})
+
+# ---------------------------------------------------------------------------
+# .derive_k()
+# ---------------------------------------------------------------------------
+
+test_that(".derive_k() computes k = k_per_9 * ip / 9", {
+  df <- data.frame(ip = c(180, 90), k_per_9 = c(9.0, 10.0), stringsAsFactors = FALSE)
+  out <- rotostats:::.derive_k(df)
+  expect_equal(out$k, c(180, 100))
+})
+
+test_that(".derive_k() is a no-op if k_per_9 is absent", {
+  df <- data.frame(ip = 180, stringsAsFactors = FALSE)
+  out <- rotostats:::.derive_k(df)
+  expect_identical(out, df)
+  expect_false("k" %in% names(out))
+})
+
+test_that(".derive_k() is a no-op if ip is absent", {
+  df <- data.frame(k_per_9 = 9.0, stringsAsFactors = FALSE)
+  out <- rotostats:::.derive_k(df)
+  expect_identical(out, df)
+  expect_false("k" %in% names(out))
+})
+
+test_that(".derive_k() does not overwrite an existing k column", {
+  df <- data.frame(ip = 180, k_per_9 = 9.0, k = 42, stringsAsFactors = FALSE)
+  out <- rotostats:::.derive_k(df)
+  expect_equal(out$k, 42)
+})
+
+test_that(".derive_k() propagates NA in ip or k_per_9", {
+  df <- data.frame(
+    ip      = c(180, NA_real_, 90),
+    k_per_9 = c(9.0, 10.0,     NA_real_),
+    stringsAsFactors = FALSE
+  )
+  out <- rotostats:::.derive_k(df)
+  expect_equal(out$k, c(180, NA_real_, NA_real_))
+})
+
+# ---------------------------------------------------------------------------
+# .filter_mlb()
+# ---------------------------------------------------------------------------
+
+test_that(".filter_mlb() keeps AL and NL rows", {
+  df <- data.frame(
+    player_name = c("A", "B", "C"),
+    league      = c("AL", "NL", "AL"),
+    stringsAsFactors = FALSE
+  )
+  out <- rotostats:::.filter_mlb(df)
+  expect_equal(nrow(out), 3L)
+})
+
+test_that(".filter_mlb() drops rows with other league values", {
+  df <- data.frame(
+    player_name = c("A", "B", "C", "D"),
+    league      = c("AL", "AAA", "NL", "FA"),
+    stringsAsFactors = FALSE
+  )
+  out <- rotostats:::.filter_mlb(df)
+  expect_equal(nrow(out), 2L)
+  expect_equal(out$player_name, c("A", "C"))
+})
+
+test_that(".filter_mlb() drops rows with NA league", {
+  df <- data.frame(
+    player_name = c("A", "B", "C"),
+    league      = c("AL", NA_character_, "NL"),
+    stringsAsFactors = FALSE
+  )
+  out <- rotostats:::.filter_mlb(df)
+  expect_equal(nrow(out), 2L)
+  expect_equal(out$player_name, c("A", "C"))
+})
+
+test_that(".filter_mlb() is a no-op when league column is absent", {
+  df <- data.frame(player_name = "A", stringsAsFactors = FALSE)
+  out <- rotostats:::.filter_mlb(df)
+  expect_identical(out, df)
+})
+
+# ---------------------------------------------------------------------------
+# .validate_mlb_only()
+# ---------------------------------------------------------------------------
+
+test_that(".validate_mlb_only() accepts TRUE and FALSE", {
+  expect_true(rotostats:::.validate_mlb_only(TRUE))
+  expect_false(rotostats:::.validate_mlb_only(FALSE))
+})
+
+test_that(".validate_mlb_only() rejects non-logical", {
+  expect_error(
+    rotostats:::.validate_mlb_only("yes"),
+    class = "rotostats_error_invalid_mlb_only"
+  )
+  expect_error(
+    rotostats:::.validate_mlb_only(1),
+    class = "rotostats_error_invalid_mlb_only"
+  )
+})
+
+test_that(".validate_mlb_only() rejects length != 1", {
+  expect_error(
+    rotostats:::.validate_mlb_only(c(TRUE, FALSE)),
+    class = "rotostats_error_invalid_mlb_only"
+  )
+  expect_error(
+    rotostats:::.validate_mlb_only(logical(0)),
+    class = "rotostats_error_invalid_mlb_only"
+  )
+})
+
+test_that(".validate_mlb_only() rejects NA", {
+  expect_error(
+    rotostats:::.validate_mlb_only(NA),
+    class = "rotostats_error_invalid_mlb_only"
+  )
+})
+
+test_that(".fetch_and_assemble_projections() applies .filter_mlb when mlb_only is TRUE", {
+  fake_df <- data.frame(
+    player_id   = 1:3,
+    player_name = c("A", "B", "C"),
+    league      = c("AL", "AAA", "NL"),
+    player_type = "batter",
+    stringsAsFactors = FALSE
+  )
+  testthat::local_mocked_bindings(
+    .fetch_one_side = function(source, player_type) fake_df,
+    .package = "rotostats"
+  )
+  out <- rotostats:::.fetch_and_assemble_projections("steamer", "batters", mlb_only = TRUE)
+  expect_equal(nrow(out), 2L)
+  expect_equal(out$player_name, c("A", "C"))
+})
+
+test_that(".fetch_and_assemble_projections() preserves all rows when mlb_only is FALSE", {
+  fake_df <- data.frame(
+    player_id   = 1:3,
+    player_name = c("A", "B", "C"),
+    league      = c("AL", "AAA", "NL"),
+    player_type = "batter",
+    stringsAsFactors = FALSE
+  )
+  testthat::local_mocked_bindings(
+    .fetch_one_side = function(source, player_type) fake_df,
+    .package = "rotostats"
+  )
+  out <- rotostats:::.fetch_and_assemble_projections("steamer", "batters", mlb_only = FALSE)
+  expect_equal(nrow(out), 3L)
+})
+
+# ---------------------------------------------------------------------------
+# get_projections() — tibble return + mlb_only argument
+# ---------------------------------------------------------------------------
+
+test_that("get_projections() returns a tibble (API path)", {
+  fake_df <- data.frame(
+    player_id   = 1:2,
+    player_name = c("A", "B"),
+    league      = c("AL", "NL"),
+    player_type = "batter",
+    stringsAsFactors = FALSE
+  )
+  testthat::local_mocked_bindings(
+    .fetch_one_side = function(source, player_type) fake_df,
+    .package = "rotostats"
+  )
+  out <- get_projections(source = "steamer", player_type = "batters")
+  expect_s3_class(out, "tbl_df")
+})
+
+test_that("get_projections() returns a tibble (custom path)", {
+  custom <- data.frame(
+    name = c("X", "Y"),
+    HR   = c(20, 25),
+    stringsAsFactors = FALSE
+  )
+  out <- get_projections(source = "custom", data = custom)
+  expect_s3_class(out, "tbl_df")
+})
+
+test_that("get_projections() defaults mlb_only = TRUE and drops non-AL/NL rows", {
+  fake_df <- data.frame(
+    player_id   = 1:3,
+    player_name = c("A", "B", "C"),
+    league      = c("AL", "AAA", "NL"),
+    player_type = "batter",
+    stringsAsFactors = FALSE
+  )
+  testthat::local_mocked_bindings(
+    .fetch_one_side = function(source, player_type) fake_df,
+    .package = "rotostats"
+  )
+  out <- get_projections(source = "steamer", player_type = "batters")
+  expect_equal(nrow(out), 2L)
+})
+
+test_that("get_projections(mlb_only = FALSE) preserves all rows", {
+  fake_df <- data.frame(
+    player_id   = 1:3,
+    player_name = c("A", "B", "C"),
+    league      = c("AL", "AAA", "NL"),
+    player_type = "batter",
+    stringsAsFactors = FALSE
+  )
+  testthat::local_mocked_bindings(
+    .fetch_one_side = function(source, player_type) fake_df,
+    .package = "rotostats"
+  )
+  out <- get_projections(
+    source      = "steamer",
+    player_type = "batters",
+    mlb_only    = FALSE
+  )
+  expect_equal(nrow(out), 3L)
+})
+
+test_that("get_projections() surfaces invalid mlb_only error class", {
+  expect_error(
+    get_projections(source = "steamer", mlb_only = "yes"),
+    class = "rotostats_error_invalid_mlb_only"
+  )
 })

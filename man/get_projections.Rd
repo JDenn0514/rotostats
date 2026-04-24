@@ -8,7 +8,8 @@ get_projections(
   source = "steamer",
   year = NULL,
   player_type = "both",
-  data = NULL
+  data = NULL,
+  mlb_only = TRUE
 )
 }
 \arguments{
@@ -23,24 +24,42 @@ other value aborts.}
 
 \item{data}{Required when \code{source = "custom"}; a data.frame containing at
 minimum one of \code{name} or \code{playerid}, plus one column per scored
-category. Passed through unchanged (no normalization is applied).}
+category. Passed through unchanged (no normalization is applied),
+coerced to a tibble on return.}
+
+\item{mlb_only}{Logical, default \code{TRUE}. When \code{TRUE}, rows whose \code{league}
+value is not \code{"AL"} or \code{"NL"} (including \code{NA}) are dropped after fetch.
+Ignored on the \code{source = "custom"} path. Set to \code{FALSE} to retain minor
+league and free-agent rows.}
 }
 \value{
-A data.frame with one row per player. For non-custom sources, the
-always-present columns are \code{playerid}, \code{name}, \code{team}, \code{pos}, and
-\code{player_type}; source-specific stat columns follow.
+A tibble with one row per player. For non-custom sources, the
+always-present columns are \code{player_id}, \code{player_name}, \code{team}, \code{league},
+\code{pos_eligibility}, and \code{player_type}. Position strings use \code{|} as the
+multi-position separator (e.g. \code{"SS|OF"}). Pitcher rows additionally
+include derived \code{svhd} and \code{k}. Other stat columns are passed through
+from FanGraphs with column names lowercased. The output plugs into
+\code{\link[=replacement_level]{replacement_level()}} and \code{\link[=sgp]{sgp()}} without further reshaping.
 }
 \description{
 Retrieves projections for the current MLB season from one of six FanGraphs
 projection systems (Steamer, ZiPS, ATC, FanGraphs Depth Charts, THE BAT,
 THE BAT X) or accepts a user-supplied data frame of custom projections.
-The returned data frame is in long format: one row per player, with a
+The returned tibble is in long format: one row per player, with a
 \code{player_type} column (\code{"batter"} / \code{"pitcher"}) distinguishing the two
-groups. \code{SVHD} is always derived as \code{SV + HLD} for pitcher rows.
+groups. \code{svhd} is derived as \code{sv + hld} and \code{k} as \code{k_per_9 * ip / 9}
+for pitchers.
 }
 \examples{
 \dontrun{
+# Full current-season projections, AL/NL only
 proj <- get_projections(source = "steamer")
+
+# Keep minor-league rows too
+proj_all <- get_projections(source = "steamer", mlb_only = FALSE)
+
+# Pitchers only
+pit <- get_projections(source = "thebat", player_type = "pitchers")
 }
 
 }
