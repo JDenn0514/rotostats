@@ -509,9 +509,9 @@ replacement_level <- function(
     hitter_rows <- which(
       projections$LEAGUE %in%
         c("AL", "NL") &
-        !grepl("(SP|RP)", projections$POS_ELIGIBILITY)
+        !grepl(PITCHER_ELIG_REGEX, projections$POS_ELIGIBILITY)
     )
-    pitcher_rows_idx <- which(grepl("(SP|RP)", projections$POS_ELIGIBILITY))
+    pitcher_rows_idx <- which(grepl(PITCHER_ELIG_REGEX, projections$POS_ELIGIBILITY))
 
     # Compute composite z-scores for hitters and pitchers
     # Only recompute on pass 1 or when sort_by = "zscore"
@@ -570,8 +570,9 @@ replacement_level <- function(
 
       # Filter pool to players assigned to this position
       if (is_pitcher_pos) {
-        # Pitchers assigned to SP or RP based on role
-        pos_mask <- grepl("(SP|RP)", projections$POS_ELIGIBILITY) &
+        # Pitchers assigned to SP or RP based on role (role set by
+        # infer_pitcher_roles() — bare "P" was already classified to SP/RP).
+        pos_mask <- grepl(PITCHER_ELIG_REGEX, projections$POS_ELIGIBILITY) &
           !is.na(role) &
           role == pos
       } else {
@@ -860,7 +861,7 @@ replacement_level <- function(
     if (multi_pos == "highest_par" && pass >= 2L) {
       # For each multi-eligible player, assign to position with highest PAR
       multi_eligible_mask <- grepl("\\|", projections$POS_ELIGIBILITY) &
-        !grepl("(SP|RP)", projections$POS_ELIGIBILITY)
+        !grepl(PITCHER_ELIG_REGEX, projections$POS_ELIGIBILITY)
       multi_player_ids <- projections$PLAYER_ID[multi_eligible_mask]
 
       for (pid in multi_player_ids) {
@@ -1664,7 +1665,7 @@ replacement_from_prices <- function(
   for (pos in positions) {
     is_pitcher_pos <- pos %in% c("SP", "RP")
     if (is_pitcher_pos) {
-      pos_mask <- grepl("(SP|RP)", projections$POS_ELIGIBILITY)
+      pos_mask <- grepl(PITCHER_ELIG_REGEX, projections$POS_ELIGIBILITY)
     } else {
       player_ids_at_pos <- names(current_assignments)[
         current_assignments == pos
