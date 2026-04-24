@@ -438,3 +438,44 @@ test_that("get_projections(..., player_type = 'both') rbinds with NA fill", {
   expect_true(all(is.na(out$IP[out$player_type == "batter"])))
   expect_true(all(is.na(out$AB[out$player_type == "pitcher"])))
 })
+
+# ---------------------------------------------------------------------------
+# get_projections() — top-level error surfaces
+# ---------------------------------------------------------------------------
+
+test_that("get_projections() surfaces source validation", {
+  expect_error(
+    get_projections(source = "marcel"),
+    class = "rotostats_error_invalid_source"
+  )
+})
+
+test_that("get_projections() surfaces player_type validation", {
+  expect_error(
+    get_projections(source = "steamer", player_type = "batter"),
+    class = "rotostats_error_invalid_player_type"
+  )
+})
+
+test_that("get_projections() surfaces year validation", {
+  cur <- rotostats:::.current_season_year()
+  expect_error(
+    get_projections(source = "steamer", year = cur - 1L),
+    class = "rotostats_error_unsupported_year"
+  )
+})
+
+test_that("get_projections() rejects data supplied with non-custom source", {
+  d <- data.frame(name = "A", HR = 10)
+  expect_error(
+    get_projections(source = "steamer", data = d),
+    class = "rotostats_error_data_ignored"
+  )
+})
+
+test_that("get_projections(source = 'custom') requires data", {
+  expect_error(
+    get_projections(source = "custom"),
+    class = "rotostats_error_missing_custom_data"
+  )
+})
