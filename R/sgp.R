@@ -700,13 +700,3 @@ sgp <- function(
 
   result
 }
-
-
-# blended_pool requires league_history and league_config:
-result <- sgp(
-  projections = projections,
-  denominators = denoms,
-  league_history = history,
-  league_config = config
-)
-result # data frame: sgp_HR, sgp_R, total_sgp
