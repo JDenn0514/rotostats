@@ -278,7 +278,7 @@ test_that("TS-PVM-12: cat_pct = 'equal' produces equal-weight total_pvm", {
   # Replace NA with 0 for sum: players don't contribute to categories outside their position
   pvm_mat_nona <- result_equal[, pvm_cols, drop = FALSE]
   pvm_mat_nona[is.na(pvm_mat_nona)] <- 0
-  expected_total <- rowSums(pvm_mat_nona) / length(pvm_cols)
+  expected_total <- unname(rowSums(pvm_mat_nona) / length(pvm_cols))
 
   expect_equal(result_equal$total_pvm, expected_total, tolerance = 1e-12,
                info = "total_pvm must equal row mean of pvm_ columns under equal weighting")
@@ -305,8 +305,8 @@ test_that("TS-PVM-13: cat_pct = 'auto' produces budget_split-weighted total_pvm"
   h_mat[is.na(h_mat)] <- 0
   p_mat[is.na(p_mat)] <- 0
 
-  expected <- rowSums(h_mat) * (bsplit / 5) +
-              rowSums(p_mat) * ((1 - bsplit) / 5)
+  expected <- unname(rowSums(h_mat) * (bsplit / 5) +
+              rowSums(p_mat) * ((1 - bsplit) / 5))
 
   expect_equal(result_auto$total_pvm, expected, tolerance = 1e-12,
                info = "total_pvm must match budget_split-derived weights under auto mode")
