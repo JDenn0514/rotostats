@@ -510,6 +510,24 @@ test_that("get_projections('steamer', 'batters') parses the recorded fixture cle
   expect_true(all(nchar(out$pos_eligibility) <= 6, na.rm = TRUE))
   # Pipe-delimited now — no slashes should remain
   expect_false(any(grepl("/", out$pos_eligibility, fixed = TRUE), na.rm = TRUE))
+
+  # Snake_case contract
+  expect_true(all(names(out) == tolower(names(out))))
+
+  # Required identifier columns
+  required_ids <- c("player_id", "player_name", "team", "league", "player_type")
+  expect_true(all(required_ids %in% names(out)))
+
+  # pos_eligibility present; pos absent; no slashes
+  expect_true("pos_eligibility" %in% names(out))
+  expect_false("pos" %in% names(out))
+  expect_false(any(grepl("/", out$pos_eligibility, fixed = TRUE), na.rm = TRUE))
+
+  # league filter default
+  expect_true(all(out$league %in% c("AL", "NL")))
+
+  # tibble return
+  expect_s3_class(out, "tbl_df")
 })
 
 test_that("get_projections('steamer', 'pitchers') derives SVHD from the recorded fixture", {
@@ -527,6 +545,29 @@ test_that("get_projections('steamer', 'pitchers') derives SVHD from the recorded
                   is.na(out$sv) | is.na(out$hld) | out$svhd >= 0))
   expect_true("pos_eligibility" %in% names(out))
   expect_true(all(out$pos_eligibility[out$player_type == "pitcher"] == "P"))
+
+  # Snake_case contract
+  expect_true(all(names(out) == tolower(names(out))))
+
+  # Required identifier columns
+  required_ids <- c("player_id", "player_name", "team", "league", "player_type")
+  expect_true(all(required_ids %in% names(out)))
+
+  # pos_eligibility present; pos absent; no slashes
+  expect_true("pos_eligibility" %in% names(out))
+  expect_false("pos" %in% names(out))
+  expect_false(any(grepl("/", out$pos_eligibility, fixed = TRUE), na.rm = TRUE))
+
+  # league filter default
+  expect_true(all(out$league %in% c("AL", "NL")))
+
+  # tibble return
+  expect_s3_class(out, "tbl_df")
+
+  # k derivation for pitchers
+  pitcher_rows <- out[out$player_type == "pitcher", , drop = FALSE]
+  expect_true("k" %in% names(pitcher_rows))
+  expect_true(all(is.finite(pitcher_rows$k) | is.na(pitcher_rows$k)))
 })
 
 test_that("ZiPS pitcher fixture parses even without QS", {
@@ -543,6 +584,29 @@ test_that("ZiPS pitcher fixture parses even without QS", {
   # QS may or may not be present — this is documented in the spec. Either way,
   # no error is thrown and the rest of the pipeline works.
   expect_gt(nrow(out), 0L)
+
+  # Snake_case contract
+  expect_true(all(names(out) == tolower(names(out))))
+
+  # Required identifier columns
+  required_ids <- c("player_id", "player_name", "team", "league", "player_type")
+  expect_true(all(required_ids %in% names(out)))
+
+  # pos_eligibility present; pos absent; no slashes
+  expect_true("pos_eligibility" %in% names(out))
+  expect_false("pos" %in% names(out))
+  expect_false(any(grepl("/", out$pos_eligibility, fixed = TRUE), na.rm = TRUE))
+
+  # league filter default
+  expect_true(all(out$league %in% c("AL", "NL")))
+
+  # tibble return
+  expect_s3_class(out, "tbl_df")
+
+  # k derivation for pitchers
+  pitcher_rows <- out[out$player_type == "pitcher", , drop = FALSE]
+  expect_true("k" %in% names(pitcher_rows))
+  expect_true(all(is.finite(pitcher_rows$k) | is.na(pitcher_rows$k)))
 })
 
 # ---------------------------------------------------------------------------
