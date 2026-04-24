@@ -233,3 +233,22 @@ PROJECTION_COLUMN_RENAME <- c(
   )
   df
 }
+
+#' @noRd
+.attach_player_type <- function(df, type) {
+  stopifnot(type %in% c("batter", "pitcher"))
+  df$player_type <- type
+  df
+}
+
+#' @noRd
+.combine_batter_pitcher <- function(bat, pit) {
+  if (is.null(bat)) return(pit)
+  if (is.null(pit)) return(bat)
+  all_cols <- union(names(bat), names(pit))
+  fill_missing <- function(df, cols) {
+    for (c in setdiff(cols, names(df))) df[[c]] <- NA
+    df[cols]
+  }
+  rbind(fill_missing(bat, all_cols), fill_missing(pit, all_cols))
+}

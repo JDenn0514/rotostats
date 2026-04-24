@@ -343,3 +343,33 @@ test_that(".derive_svhd() emits a once-per-session inform message", {
     rotostats:::.derive_svhd(df)
   )
 })
+
+# ---------------------------------------------------------------------------
+# .attach_player_type() and .combine_batter_pitcher()
+# ---------------------------------------------------------------------------
+
+test_that(".attach_player_type() sets the player_type column", {
+  df <- data.frame(playerid = "1", HR = 30)
+  out <- rotostats:::.attach_player_type(df, "batter")
+  expect_equal(out$player_type, "batter")
+})
+
+test_that(".combine_batter_pitcher() rbinds with NA fill across non-shared cols", {
+  bat <- data.frame(
+    playerid = "1", name = "A", team = "NYY", pos = "2B",
+    player_type = "batter", HR = 30, AB = 550
+  )
+  pit <- data.frame(
+    playerid = "2", name = "B", team = "LAD", pos = "SP",
+    player_type = "pitcher", W = 15, IP = 200
+  )
+  out <- rotostats:::.combine_batter_pitcher(bat, pit)
+  expect_equal(nrow(out), 2L)
+  # columns from both sides are present
+  expect_true(all(c("HR", "AB", "W", "IP") %in% names(out)))
+  # each row keeps its own non-NA side
+  expect_equal(out$HR[out$player_type == "batter"], 30)
+  expect_true(is.na(out$HR[out$player_type == "pitcher"]))
+  expect_equal(out$W[out$player_type == "pitcher"], 15)
+  expect_true(is.na(out$W[out$player_type == "batter"]))
+})
