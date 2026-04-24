@@ -263,36 +263,74 @@ validate_budget_split <- function(budget_split) {
 }
 
 #' @noRd
-validate_categories <- function(categories) {
-  if (!is.character(categories) || length(categories) == 0L) {
+validate_side_categories <- function(
+  cats,
+  arg_name,
+  canonical_for_side,
+  canonical_for_other_side
+) {
+  if (!is.character(cats) || length(cats) == 0L || any(is.na(cats))) {
     cli::cli_abort(
-      "{.arg categories} must be a non-empty character vector.",
+      c(
+        "{.arg {arg_name}} must be a non-empty character vector.",
+        i = "Received: {.val {cats}}."
+      ),
       class = "rotostats_error_invalid_categories"
     )
   }
-  upper <- toupper(categories)
-  changed <- categories != upper
-  if (any(changed)) {
-    n_changed <- sum(changed)
-    cli::cli_inform(
-      c(
-        "{n_changed} category name{?s} normalized to uppercase.",
-        "i" = "{.val {categories[changed]}} -> {.val {upper[changed]}}"
-      ),
-      class = "rotostats_info_category_normalized"
-    )
-  }
-  unknown <- setdiff(upper, CANONICAL_CATEGORIES)
-  if (length(unknown) > 0L) {
+  cats_upper <- toupper(cats)
+
+  # Side-mismatch warning: a category present here that the canonical lists
+  # assign to the other side. Doesn't block — leagues can score odd combos —
+  # but loudly surfaces typos like batting_categories = c("HR", "ERA").
+  misplaced <- intersect(cats_upper, canonical_for_other_side)
+  if (length(misplaced)) {
     cli::cli_warn(
       c(
-        "Unrecognized scoring categor{?y/ies}: {.val {unknown}}.",
-        "i" = "Accepted; the package does not refuse non-canonical categories."
+        "{.val {misplaced}} {?is/are} normally scored on the other side; \\
+         appearing in {.arg {arg_name}}.",
+        i = "If this is intentional, ignore this warning."
+      ),
+      class = "rotostats_warning_category_side_mismatch"
+    )
+  }
+
+  # Unknown-category warning: not in either canonical list.
+  unknown <- setdiff(
+    cats_upper,
+    union(canonical_for_side, canonical_for_other_side)
+  )
+  if (length(unknown)) {
+    cli::cli_warn(
+      c(
+        "Unrecognized {.arg {arg_name}}: {.val {unknown}}.",
+        i = "Accepted but unvalidated against canonical lists."
       ),
       class = "rotostats_warning_unknown_category"
     )
   }
-  upper
+
+  cats_upper
+}
+
+#' @noRd
+validate_batting_categories <- function(cats) {
+  validate_side_categories(
+    cats,
+    arg_name                 = "batting_categories",
+    canonical_for_side       = CANONICAL_BATTING_CATEGORIES,
+    canonical_for_other_side = CANONICAL_PITCHER_CATEGORIES
+  )
+}
+
+#' @noRd
+validate_pitcher_categories <- function(cats) {
+  validate_side_categories(
+    cats,
+    arg_name                 = "pitcher_categories",
+    canonical_for_side       = CANONICAL_PITCHER_CATEGORIES,
+    canonical_for_other_side = CANONICAL_BATTING_CATEGORIES
+  )
 }
 
 #' @noRd

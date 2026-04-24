@@ -203,6 +203,93 @@ test_that("canonical categories construct silently", {
 })
 
 # ---------------------------------------------------------------------------
+# batting_categories / pitcher_categories (Phase 2 split)
+# ---------------------------------------------------------------------------
+
+test_that("league_config() requires batting_categories and pitcher_categories", {
+  expect_error(
+    league_config(
+      n_teams       = 12L,
+      roster_slots  = c(C = 1L),
+      pitcher_slots = 9L
+    ),
+    class = "rotostats_error_invalid_categories"
+  )
+})
+
+test_that("league_config() rejects empty character vectors for either side", {
+  expect_error(
+    league_config(
+      n_teams            = 12L,
+      roster_slots       = c(C = 1L),
+      pitcher_slots      = 9L,
+      batting_categories = character(0),
+      pitcher_categories = c("W", "K")
+    ),
+    class = "rotostats_error_invalid_categories"
+  )
+  expect_error(
+    league_config(
+      n_teams            = 12L,
+      roster_slots       = c(C = 1L),
+      pitcher_slots      = 9L,
+      batting_categories = c("HR", "R"),
+      pitcher_categories = character(0)
+    ),
+    class = "rotostats_error_invalid_categories"
+  )
+})
+
+test_that("league_config() warns when a batting cat is in the canonical pitcher list", {
+  expect_warning(
+    league_config(
+      n_teams            = 12L,
+      roster_slots       = c(C = 1L),
+      pitcher_slots      = 9L,
+      batting_categories = c("HR", "ERA"),  # ERA misplaced
+      pitcher_categories = c("W", "K")
+    ),
+    class = "rotostats_warning_category_side_mismatch"
+  )
+})
+
+test_that("league_config() warns when a pitcher cat is in the canonical batting list", {
+  expect_warning(
+    league_config(
+      n_teams            = 12L,
+      roster_slots       = c(C = 1L),
+      pitcher_slots      = 9L,
+      batting_categories = c("HR", "R"),
+      pitcher_categories = c("W", "K", "AVG")  # AVG misplaced
+    ),
+    class = "rotostats_warning_category_side_mismatch"
+  )
+})
+
+test_that("league_config() stores both fields normalized to uppercase", {
+  cfg <- league_config(
+    n_teams            = 12L,
+    roster_slots       = c(C = 1L),
+    pitcher_slots      = 9L,
+    batting_categories = c("hr", "r"),
+    pitcher_categories = c("w", "k")
+  )
+  expect_equal(cfg$batting_categories, c("HR", "R"))
+  expect_equal(cfg$pitcher_categories, c("W", "K"))
+})
+
+test_that("config$categories convenience field returns the union", {
+  cfg <- league_config(
+    n_teams            = 12L,
+    roster_slots       = c(C = 1L),
+    pitcher_slots      = 9L,
+    batting_categories = c("HR", "R"),
+    pitcher_categories = c("W", "K")
+  )
+  expect_setequal(cfg$categories, c("HR", "R", "W", "K"))
+})
+
+# ---------------------------------------------------------------------------
 # keeper
 # ---------------------------------------------------------------------------
 
