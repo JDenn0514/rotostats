@@ -287,6 +287,13 @@ PROJECTION_COLUMN_RENAME <- c(
 }
 
 #' @noRd
+.filter_mlb <- function(df) {
+  if (!("league" %in% names(df))) return(df)
+  keep <- !is.na(df$league) & df$league %in% c("AL", "NL")
+  df[keep, , drop = FALSE]
+}
+
+#' @noRd
 .fetch_and_assemble_projections <- function(source, player_type) {
   bat <- if (player_type %in% c("batters", "both")) {
     .fetch_one_side(source, "batters")

@@ -620,3 +620,45 @@ test_that(".derive_k() propagates NA in ip or k_per_9", {
   out <- rotostats:::.derive_k(df)
   expect_equal(out$k, c(180, NA_real_, NA_real_))
 })
+
+# ---------------------------------------------------------------------------
+# .filter_mlb()
+# ---------------------------------------------------------------------------
+
+test_that(".filter_mlb() keeps AL and NL rows", {
+  df <- data.frame(
+    player_name = c("A", "B", "C"),
+    league      = c("AL", "NL", "AL"),
+    stringsAsFactors = FALSE
+  )
+  out <- rotostats:::.filter_mlb(df)
+  expect_equal(nrow(out), 3L)
+})
+
+test_that(".filter_mlb() drops rows with other league values", {
+  df <- data.frame(
+    player_name = c("A", "B", "C", "D"),
+    league      = c("AL", "AAA", "NL", "FA"),
+    stringsAsFactors = FALSE
+  )
+  out <- rotostats:::.filter_mlb(df)
+  expect_equal(nrow(out), 2L)
+  expect_equal(out$player_name, c("A", "C"))
+})
+
+test_that(".filter_mlb() drops rows with NA league", {
+  df <- data.frame(
+    player_name = c("A", "B", "C"),
+    league      = c("AL", NA_character_, "NL"),
+    stringsAsFactors = FALSE
+  )
+  out <- rotostats:::.filter_mlb(df)
+  expect_equal(nrow(out), 2L)
+  expect_equal(out$player_name, c("A", "C"))
+})
+
+test_that(".filter_mlb() is a no-op when league column is absent", {
+  df <- data.frame(player_name = "A", stringsAsFactors = FALSE)
+  out <- rotostats:::.filter_mlb(df)
+  expect_identical(out, df)
+})
