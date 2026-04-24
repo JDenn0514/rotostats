@@ -274,31 +274,31 @@ test_that(".parse_projections_json() aborts on empty input", {
 # .normalize_projection_cols()
 # ---------------------------------------------------------------------------
 
-test_that(".normalize_projection_cols() renames PlayerName → name", {
+test_that(".normalize_projection_cols() renames PlayerName → player_name", {
   df <- data.frame(playerid = "1", PlayerName = "A", Team = "NYY", minpos = "2B")
   out <- rotostats:::.normalize_projection_cols(df)
-  expect_setequal(names(out), c("playerid", "name", "team", "pos"))
+  expect_setequal(names(out), c("player_id", "player_name", "team", "pos"))
 })
 
 test_that(".normalize_projection_cols() normalizes slash-containing pitcher stats", {
   df <- data.frame(playerid = "1", `K/9` = 9.5, `BB/9` = 2.1, `K/BB` = 4.5,
                    check.names = FALSE)
   out <- rotostats:::.normalize_projection_cols(df)
-  expect_setequal(names(out), c("playerid", "K_per_9", "BB_per_9", "K_per_BB"))
+  expect_setequal(names(out), c("player_id", "k_per_9", "bb_per_9", "k_per_bb"))
 })
 
 test_that(".normalize_projection_cols() normalizes wRC+", {
   df <- data.frame(playerid = "1", `wRC+` = 120, check.names = FALSE)
   out <- rotostats:::.normalize_projection_cols(df)
-  expect_true("wRC_plus" %in% names(out))
+  expect_true("wrc_plus" %in% names(out))
   expect_false("wRC+" %in% names(out))
 })
 
 test_that(".normalize_projection_cols() leaves already-canonical columns alone", {
-  df <- data.frame(playerid = "1", name = "A", team = "NYY", pos = "2B",
-                   HR = 30)
+  df <- data.frame(player_id = "1", player_name = "A", team = "NYY", pos = "2B",
+                   hr = 30)
   out <- rotostats:::.normalize_projection_cols(df)
-  expect_setequal(names(out), c("playerid", "name", "team", "pos", "HR"))
+  expect_setequal(names(out), c("player_id", "player_name", "team", "pos", "hr"))
 })
 
 # ---------------------------------------------------------------------------
@@ -306,25 +306,25 @@ test_that(".normalize_projection_cols() leaves already-canonical columns alone",
 # ---------------------------------------------------------------------------
 
 test_that(".derive_svhd() adds SV + HLD", {
-  df <- data.frame(playerid = c("1","2"), SV = c(30, 0), HLD = c(0, 25))
+  df <- data.frame(player_id = c("1","2"), sv = c(30, 0), hld = c(0, 25))
   out <- rotostats:::.derive_svhd(df)
-  expect_equal(out$SVHD, c(30, 25))
+  expect_equal(out$svhd, c(30, 25))
 })
 
 test_that(".derive_svhd() handles NA SV or HLD as 0", {
-  df <- data.frame(playerid = c("1","2"), SV = c(NA, 10), HLD = c(5, NA))
+  df <- data.frame(player_id = c("1","2"), sv = c(NA, 10), hld = c(5, NA))
   out <- rotostats:::.derive_svhd(df)
-  expect_equal(out$SVHD, c(5, 10))
+  expect_equal(out$svhd, c(5, 10))
 })
 
 test_that(".derive_svhd() is a no-op when SV or HLD column is absent", {
-  df <- data.frame(playerid = "1", SV = 5)   # no HLD
+  df <- data.frame(player_id = "1", sv = 5)   # no hld
   out <- rotostats:::.derive_svhd(df)
-  expect_false("SVHD" %in% names(out))
+  expect_false("svhd" %in% names(out))
 
-  df2 <- data.frame(playerid = "1", HLD = 5) # no SV
+  df2 <- data.frame(player_id = "1", hld = 5) # no sv
   out2 <- rotostats:::.derive_svhd(df2)
-  expect_false("SVHD" %in% names(out2))
+  expect_false("svhd" %in% names(out2))
 })
 
 test_that(".derive_svhd() emits a once-per-session inform message", {
@@ -332,7 +332,7 @@ test_that(".derive_svhd() emits a once-per-session inform message", {
   # Reset the session-once state so this test is deterministic
   rlang::reset_message_verbosity("rotostats_svhd_definition")
 
-  df <- data.frame(playerid = "1", SV = 30, HLD = 0)
+  df <- data.frame(player_id = "1", sv = 30, hld = 0)
 
   expect_message(
     rotostats:::.derive_svhd(df),
@@ -349,29 +349,29 @@ test_that(".derive_svhd() emits a once-per-session inform message", {
 # ---------------------------------------------------------------------------
 
 test_that(".attach_player_type() sets the player_type column", {
-  df <- data.frame(playerid = "1", HR = 30)
+  df <- data.frame(player_id = "1", hr = 30)
   out <- rotostats:::.attach_player_type(df, "batter")
   expect_equal(out$player_type, "batter")
 })
 
 test_that(".combine_batter_pitcher() rbinds with NA fill across non-shared cols", {
   bat <- data.frame(
-    playerid = "1", name = "A", team = "NYY", pos = "2B",
-    player_type = "batter", HR = 30, AB = 550
+    player_id = "1", player_name = "A", team = "NYY", pos = "2B",
+    player_type = "batter", hr = 30, ab = 550
   )
   pit <- data.frame(
-    playerid = "2", name = "B", team = "LAD", pos = "SP",
-    player_type = "pitcher", W = 15, IP = 200
+    player_id = "2", player_name = "B", team = "LAD", pos = "SP",
+    player_type = "pitcher", w = 15, ip = 200
   )
   out <- rotostats:::.combine_batter_pitcher(bat, pit)
   expect_equal(nrow(out), 2L)
   # columns from both sides are present
-  expect_true(all(c("HR", "AB", "W", "IP") %in% names(out)))
+  expect_true(all(c("hr", "ab", "w", "ip") %in% names(out)))
   # each row keeps its own non-NA side
-  expect_equal(out$HR[out$player_type == "batter"], 30)
-  expect_true(is.na(out$HR[out$player_type == "pitcher"]))
-  expect_equal(out$W[out$player_type == "pitcher"], 15)
-  expect_true(is.na(out$W[out$player_type == "batter"]))
+  expect_equal(out$hr[out$player_type == "batter"], 30)
+  expect_true(is.na(out$hr[out$player_type == "pitcher"]))
+  expect_equal(out$w[out$player_type == "pitcher"], 15)
+  expect_true(is.na(out$w[out$player_type == "batter"]))
 })
 
 # ---------------------------------------------------------------------------
@@ -397,9 +397,9 @@ test_that("get_projections('steamer', player_type = 'batters') returns a normali
 
   expect_s3_class(out, "data.frame")
   expect_equal(nrow(out), 3L)
-  expect_true(all(c("playerid", "name", "team", "pos", "player_type") %in% names(out)))
+  expect_true(all(c("player_id", "player_name", "team", "pos", "player_type") %in% names(out)))
   expect_true(all(out$player_type == "batter"))
-  expect_true("wRC_plus" %in% names(out))
+  expect_true("wrc_plus" %in% names(out))
   expect_false("wRC+" %in% names(out))
 })
 
@@ -414,9 +414,9 @@ test_that("get_projections(..., player_type = 'pitchers') returns a pitcher fram
     regexp = "SVHD computed as SV \\+ HLD"
   )
   expect_equal(nrow(out), 3L)
-  expect_true("SVHD" %in% names(out))
+  expect_true("svhd" %in% names(out))
   expect_true(all(out$player_type == "pitcher"))
-  expect_true("QS" %in% names(out))
+  expect_true("qs" %in% names(out))
 })
 
 test_that("get_projections(..., player_type = 'both') rbinds with NA fill", {
@@ -435,8 +435,8 @@ test_that("get_projections(..., player_type = 'both') rbinds with NA fill", {
   expect_equal(nrow(out), 4L)
   expect_setequal(unique(out$player_type), c("batter", "pitcher"))
   # Non-shared columns are NA-filled
-  expect_true(all(is.na(out$IP[out$player_type == "batter"])))
-  expect_true(all(is.na(out$AB[out$player_type == "pitcher"])))
+  expect_true(all(is.na(out$ip[out$player_type == "batter"])))
+  expect_true(all(is.na(out$ab[out$player_type == "pitcher"])))
 })
 
 # ---------------------------------------------------------------------------
@@ -498,7 +498,7 @@ test_that("get_projections('steamer', 'batters') parses the recorded fixture cle
   out <- get_projections(source = "steamer", player_type = "batters")
   expect_s3_class(out, "data.frame")
   expect_gt(nrow(out), 0L)
-  expect_true(all(c("playerid", "name", "team", "pos", "player_type") %in% names(out)))
+  expect_true(all(c("player_id", "player_name", "team", "pos", "player_type") %in% names(out)))
   expect_true(all(out$player_type == "batter"))
   expect_type(out$pos, "character")
   expect_true(all(out$pos %in% c("C", "1B", "2B", "3B", "SS", "LF", "CF", "RF", "OF", "DH", "UT", "IF", "NA")) |
@@ -515,9 +515,9 @@ test_that("get_projections('steamer', 'pitchers') derives SVHD from the recorded
   out <- suppressMessages(
     get_projections(source = "steamer", player_type = "pitchers")
   )
-  expect_true("SVHD" %in% names(out))
-  expect_true(all(out$SVHD == out$SV + out$HLD |
-                  is.na(out$SV) | is.na(out$HLD) | out$SVHD >= 0))
+  expect_true("svhd" %in% names(out))
+  expect_true(all(out$svhd == out$sv + out$hld |
+                  is.na(out$sv) | is.na(out$hld) | out$svhd >= 0))
   expect_true("pos" %in% names(out))
   expect_true(all(out$pos == "P"))
 })

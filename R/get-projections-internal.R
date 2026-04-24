@@ -191,23 +191,30 @@ VALID_PLAYER_TYPES <- c("batters", "pitchers", "both")
 }
 
 #' @noRd
+#' @description
+#' Maps raw FanGraphs column names to rotostats' snake_case contract.
+#' Every entry points at the final output name (no intermediate stop).
+#' Columns not in this map fall through to a generic `tolower()` pass
+#' inside `.normalize_projection_cols()`.
 PROJECTION_COLUMN_RENAME <- c(
-  PlayerName = "name",
+  playerid   = "player_id",
+  PlayerName = "player_name",
   Team       = "team",
+  League     = "league",
   minpos     = "pos",
-  playerId   = "playerid",
-  `wRC+`     = "wRC_plus",
-  `K/9`      = "K_per_9",
-  `BB/9`     = "BB_per_9",
-  `HR/9`     = "HR_per_9",
-  `K/BB`     = "K_per_BB",
-  `K%`       = "K_pct",
-  `BB%`      = "BB_pct"
+  `wRC+`     = "wrc_plus",
+  `K/9`      = "k_per_9",
+  `BB/9`     = "bb_per_9",
+  `HR/9`     = "hr_per_9",
+  `K/BB`     = "k_per_bb",
+  `K%`       = "k_pct",
+  `BB%`      = "bb_pct"
 )
 
 #' @noRd
 .normalize_projection_cols <- function(df) {
   nm <- names(df)
+  # Step 1: explicit renames from the map.
   for (raw in names(PROJECTION_COLUMN_RENAME)) {
     target <- PROJECTION_COLUMN_RENAME[[raw]]
     hits <- which(nm == raw)
@@ -215,16 +222,27 @@ PROJECTION_COLUMN_RENAME <- c(
       nm[hits] <- target
     }
   }
+  # Step 2: any column not already snake_case gets lowercased.
+  # Leaves map-produced names untouched (they're already snake_case).
+  # Skip lowercasing any column whose lowered name would collide with
+  # an existing (post-map) name — this preserves the map's preferred
+  # binding for that slot (e.g. minpos->pos wins over a raw Pos column).
+  untouched_idx <- which(!(nm %in% unname(PROJECTION_COLUMN_RENAME)))
+  for (i in untouched_idx) {
+    lowered <- tolower(nm[i])
+    if (lowered == nm[i]) next
+    if (!(lowered %in% nm)) nm[i] <- lowered
+  }
   names(df) <- nm
   df
 }
 
 #' @noRd
 .derive_svhd <- function(df) {
-  if (!all(c("SV", "HLD") %in% names(df))) return(df)
-  sv  <- ifelse(is.na(df$SV),  0, df$SV)
-  hld <- ifelse(is.na(df$HLD), 0, df$HLD)
-  df$SVHD <- sv + hld
+  if (!all(c("sv", "hld") %in% names(df))) return(df)
+  sv  <- ifelse(is.na(df$sv),  0, df$sv)
+  hld <- ifelse(is.na(df$hld), 0, df$hld)
+  df$svhd <- sv + hld
   rlang::inform(
     "SVHD computed as SV + HLD. Verify this matches your league's SVHD definition.",
     .frequency = "once",
