@@ -596,25 +596,42 @@ assert_replacement_output_contract <- function(result) {
 
 #' @noRd
 infer_pitcher_roles <- function(projections, sp_ip_threshold) {
+  # Pitcher detection accepts SP, RP, or bare P (the get_projections()
+  # fallback when FanGraphs returns no position for pitcher rows).
   is_pitcher <- grepl(
-    "(SP|RP)",
+    PITCHER_ELIG_REGEX,
     projections$POS_ELIGIBILITY,
     ignore.case = FALSE
   )
 
-  # Swingman flag computed BEFORE role assignment
+  # Swingman flag: computed from IP for every identified pitcher row, BEFORE
+  # role assignment (per spec §5.2).
   swingman_flag <- is_pitcher &
     !is.na(projections$IP) &
     projections$IP >= 80 &
     projections$IP <= 120
 
   if ("ROLE" %in% names(projections)) {
+    # Caller provided explicit ROLE column — honor it unchanged.
     role <- projections$ROLE
   } else {
-    role <- ifelse(
-      is_pitcher & !is.na(projections$IP) & projections$IP >= sp_ip_threshold,
+    # Token-aware classification:
+    #   - Explicit "SP" anywhere in the eligibility list  -> "SP"
+    #   - Explicit "RP" anywhere in the eligibility list  -> "RP" (unless SP
+    #     was already matched; SP wins for hybrid "SP|RP" tokens)
+    #   - Bare "P" (no explicit SP/RP token) -> infer from IP vs. threshold
+    has_sp <- grepl("(^|\\|)SP(\\||$)", projections$POS_ELIGIBILITY)
+    has_rp <- grepl("(^|\\|)RP(\\||$)", projections$POS_ELIGIBILITY)
+    has_bare_p <- is_pitcher & !has_sp & !has_rp
+
+    role <- rep(NA_character_, length(is_pitcher))
+    role[is_pitcher & has_sp] <- "SP"
+    role[is_pitcher & !has_sp & has_rp] <- "RP"
+    role[has_bare_p] <- ifelse(
+      !is.na(projections$IP[has_bare_p]) &
+        projections$IP[has_bare_p] >= sp_ip_threshold,
       "SP",
-      ifelse(is_pitcher, "RP", NA_character_)
+      "RP"
     )
   }
 
