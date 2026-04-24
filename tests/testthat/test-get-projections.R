@@ -402,3 +402,39 @@ test_that("get_projections('steamer', player_type = 'batters') returns a normali
   expect_true("wRC_plus" %in% names(out))
   expect_false("wRC+" %in% names(out))
 })
+
+test_that("get_projections(..., player_type = 'pitchers') returns a pitcher frame with SVHD", {
+  testthat::local_mocked_bindings(
+    .fetch_projections_api = function(url) fx_pitcher_json(3L, include_qs = TRUE),
+    .package = "rotostats"
+  )
+  rlang::reset_message_verbosity("rotostats_svhd_definition")
+  expect_message(
+    out <- get_projections(source = "steamer", player_type = "pitchers"),
+    regexp = "SVHD computed as SV \\+ HLD"
+  )
+  expect_equal(nrow(out), 3L)
+  expect_true("SVHD" %in% names(out))
+  expect_true(all(out$player_type == "pitcher"))
+  expect_true("QS" %in% names(out))
+})
+
+test_that("get_projections(..., player_type = 'both') rbinds with NA fill", {
+  # The mock needs to return different payloads depending on the URL's
+  # stats= parameter. Inspect the URL to decide.
+  testthat::local_mocked_bindings(
+    .fetch_projections_api = function(url) {
+      if (grepl("stats=bat", url)) fx_batter_json(2L) else fx_pitcher_json(2L)
+    },
+    .package = "rotostats"
+  )
+  rlang::reset_message_verbosity("rotostats_svhd_definition")
+  out <- suppressMessages(
+    get_projections(source = "steamer", player_type = "both")
+  )
+  expect_equal(nrow(out), 4L)
+  expect_setequal(unique(out$player_type), c("batter", "pitcher"))
+  # Non-shared columns are NA-filled
+  expect_true(all(is.na(out$IP[out$player_type == "batter"])))
+  expect_true(all(is.na(out$AB[out$player_type == "pitcher"])))
+})
