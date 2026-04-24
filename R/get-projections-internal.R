@@ -219,3 +219,17 @@ PROJECTION_COLUMN_RENAME <- c(
   names(df) <- nm
   df
 }
+
+#' @noRd
+.derive_svhd <- function(df) {
+  if (!all(c("SV", "HLD") %in% names(df))) return(df)
+  sv  <- ifelse(is.na(df$SV),  0, df$SV)
+  hld <- ifelse(is.na(df$HLD), 0, df$HLD)
+  df$SVHD <- sv + hld
+  rlang::inform(
+    "SVHD computed as SV + HLD. Verify this matches your league's SVHD definition.",
+    .frequency = "once",
+    .frequency_id = "rotostats_svhd_definition"
+  )
+  df
+}

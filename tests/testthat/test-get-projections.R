@@ -300,3 +300,46 @@ test_that(".normalize_projection_cols() leaves already-canonical columns alone",
   out <- rotostats:::.normalize_projection_cols(df)
   expect_setequal(names(out), c("playerid", "name", "team", "pos", "HR"))
 })
+
+# ---------------------------------------------------------------------------
+# .derive_svhd()
+# ---------------------------------------------------------------------------
+
+test_that(".derive_svhd() adds SV + HLD", {
+  df <- data.frame(playerid = c("1","2"), SV = c(30, 0), HLD = c(0, 25))
+  out <- rotostats:::.derive_svhd(df)
+  expect_equal(out$SVHD, c(30, 25))
+})
+
+test_that(".derive_svhd() handles NA SV or HLD as 0", {
+  df <- data.frame(playerid = c("1","2"), SV = c(NA, 10), HLD = c(5, NA))
+  out <- rotostats:::.derive_svhd(df)
+  expect_equal(out$SVHD, c(5, 10))
+})
+
+test_that(".derive_svhd() is a no-op when SV or HLD column is absent", {
+  df <- data.frame(playerid = "1", SV = 5)   # no HLD
+  out <- rotostats:::.derive_svhd(df)
+  expect_false("SVHD" %in% names(out))
+
+  df2 <- data.frame(playerid = "1", HLD = 5) # no SV
+  out2 <- rotostats:::.derive_svhd(df2)
+  expect_false("SVHD" %in% names(out2))
+})
+
+test_that(".derive_svhd() emits a once-per-session inform message", {
+  rlang::local_interactive()
+  # Reset the session-once state so this test is deterministic
+  rlang::reset_message_verbosity("rotostats_svhd_definition")
+
+  df <- data.frame(playerid = "1", SV = 30, HLD = 0)
+
+  expect_message(
+    rotostats:::.derive_svhd(df),
+    regexp = "SVHD computed as SV \\+ HLD"
+  )
+  # Second call in the same session: silent
+  expect_no_message(
+    rotostats:::.derive_svhd(df)
+  )
+})
