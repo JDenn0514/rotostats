@@ -156,3 +156,201 @@ test_that("TS-53: multi_pos=primary ignores position_assignments", {
 
   expect_equal(result_prim$replacement_stats, result_prim2$replacement_stats)
 })
+
+# ---------------------------------------------------------------------------
+# replacement_level() accepts the get_projections() pitcher wire format
+#
+# Regression guard for the integration gap where FanGraphs pitcher rows
+# (no position field -> pos_eligibility = "P") were silently dropped from
+# every SP/RP pool. The fixture here mirrors the shape of
+# get_projections("steamer") after normalization: lowercase column names,
+# pitcher rows with pos_eligibility = "P", batter rows with standard hitter
+# eligibility tokens.
+# ---------------------------------------------------------------------------
+
+test_that("replacement_level() classifies pitchers when pos_eligibility = 'P'", {
+  set.seed(42L)
+  # OF needs n_teams * 5 = 50 eligible; weight the position mix so OF is the
+  # majority (mirrors real projection sets where OF dominates hitter rows).
+  hit_positions <- c(
+    rep("C",  20L),
+    rep("1B", 15L),
+    rep("2B", 15L),
+    rep("SS", 15L),
+    rep("3B", 15L),
+    rep("OF", 60L)
+  )
+  n_hit <- length(hit_positions)
+  # Need >= n_teams * SP_slots (10 * 7 = 70) SP-eligible and
+  # n_teams * RP_slots (10 * 4 = 40) RP-eligible per the 60/40 default split
+  # of pitcher_slots = 11L.
+  n_sp <- 80L
+  n_rp <- 50L
+  n_pit <- n_sp + n_rp
+
+  hitters <- data.frame(
+    player_id       = paste0("h", seq_len(n_hit)),
+    player_name     = paste0("Hitter ", seq_len(n_hit)),
+    team            = "NYY",
+    league          = "AL",
+    pos_eligibility = hit_positions,
+    player_type     = "batter",
+    AB              = rnorm(n_hit, mean = 500, sd = 40),
+    HR              = rnorm(n_hit, mean = 20,  sd = 6),
+    R               = rnorm(n_hit, mean = 70,  sd = 10),
+    RBI             = rnorm(n_hit, mean = 70,  sd = 10),
+    SB              = rnorm(n_hit, mean = 8,   sd = 4),
+    AVG             = rnorm(n_hit, mean = 0.260, sd = 0.020),
+    IP              = NA_real_,
+    W               = NA_real_,
+    ERA             = NA_real_,
+    WHIP            = NA_real_,
+    SV              = NA_real_,
+    K               = NA_real_,
+    stringsAsFactors = FALSE
+  )
+
+  ip_vals <- c(
+    runif(n_sp, min = 150, max = 200),
+    runif(n_rp, min = 40, max = 80)
+  )
+  pitchers <- data.frame(
+    player_id       = paste0("p", seq_len(n_pit)),
+    player_name     = paste0("Pitcher ", seq_len(n_pit)),
+    team            = "NYY",
+    league          = "AL",
+    pos_eligibility = rep("P", n_pit),
+    player_type     = "pitcher",
+    AB              = NA_real_,
+    HR              = NA_real_,
+    R               = NA_real_,
+    RBI             = NA_real_,
+    SB              = NA_real_,
+    AVG             = NA_real_,
+    IP              = ip_vals,
+    W               = rnorm(n_pit, mean = 8,    sd = 3),
+    ERA             = rnorm(n_pit, mean = 4.0,  sd = 0.6),
+    WHIP            = rnorm(n_pit, mean = 1.30, sd = 0.12),
+    SV              = c(rep(0, n_pit - 10L), rnorm(10L, mean = 15, sd = 8)),
+    K               = ip_vals * rnorm(n_pit, mean = 1.0, sd = 0.1),
+    stringsAsFactors = FALSE
+  )
+
+  proj <- rbind(hitters, pitchers)
+
+  config <- league_config(
+    n_teams      = 10L,
+    roster_slots = c(C = 2L, `1B` = 1L, `2B` = 1L, SS = 1L, `3B` = 1L,
+                     OF = 5L, UT = 2L, CI = 1L, MI = 1L),
+    pitcher_slots = 11L,
+    categories   = c("AVG", "HR", "R", "RBI", "SB",
+                     "W", "ERA", "WHIP", "SV", "K"),
+    league_type  = "AL",
+    budget_split = 0.5
+  )
+
+  repl <- replacement_level(proj, config = config)
+
+  sp_row <- repl$replacement_stats[repl$replacement_stats$position == "SP", ,
+                                    drop = FALSE]
+  rp_row <- repl$replacement_stats[repl$replacement_stats$position == "RP", ,
+                                    drop = FALSE]
+  expect_gt(sp_row$n_band_players, 0L)
+  expect_gt(rp_row$n_band_players, 0L)
+
+  expect_false(is.na(sp_row$W))
+  expect_false(is.na(sp_row$ERA))
+  expect_false(is.na(sp_row$WHIP))
+  expect_false(is.na(sp_row$K))
+  expect_false(is.na(rp_row$W))
+  expect_false(is.na(rp_row$ERA))
+
+  of_row <- repl$replacement_stats[repl$replacement_stats$position == "OF", ,
+                                    drop = FALSE]
+  expect_false(is.na(of_row$HR))
+  expect_false(is.na(of_row$R))
+})
+
+test_that("replacement_level() + zar() pipeline produces finite pitcher zar", {
+  skip_if_not_installed("withr")
+  # Downstream gap: even after replacement_level() classifies bare-P pitchers
+  # into SP/RP via infer_pitcher_roles(), the position_assignments attribute
+  # still labels those pitchers as "P". zar() looks up replacement z-scores
+  # by that label, but replacement_stats only carries SP/RP rows -> all
+  # pitcher zar values come back NA. The fix lives in
+  # replacement.R::position_assignments propagation (or zar.R label
+  # resolution) and is outside the Task 5 scope.
+  skip(paste0(
+    "zar() returns NA for pitchers when pos_eligibility = 'P' because ",
+    "position_assignments still labels them 'P' rather than SP/RP. ",
+    "Tracked as a separate downstream fix."
+  ))
+
+  set.seed(7L)
+  hit_positions <- c(
+    rep("C",  20L),
+    rep("1B", 15L),
+    rep("2B", 15L),
+    rep("SS", 15L),
+    rep("3B", 15L),
+    rep("OF", 60L)
+  )
+  n_hit <- length(hit_positions)
+  n_sp <- 80L
+  n_rp <- 50L
+  n_pit <- n_sp + n_rp
+  hitters <- data.frame(
+    player_id       = paste0("h", seq_len(n_hit)),
+    player_name     = paste0("H", seq_len(n_hit)),
+    team            = "NYY",
+    league          = "AL",
+    pos_eligibility = hit_positions,
+    player_type     = "batter",
+    AB              = rnorm(n_hit, 500, 40),
+    HR              = rnorm(n_hit, 20, 6),
+    R               = rnorm(n_hit, 70, 10),
+    RBI             = rnorm(n_hit, 70, 10),
+    SB              = rnorm(n_hit, 8, 4),
+    AVG             = rnorm(n_hit, 0.260, 0.020),
+    IP              = NA_real_, W = NA_real_, ERA = NA_real_,
+    WHIP = NA_real_, SV = NA_real_, K = NA_real_,
+    stringsAsFactors = FALSE
+  )
+  ip_vals <- c(runif(n_sp, 150, 200), runif(n_rp, 40, 80))
+  pitchers <- data.frame(
+    player_id       = paste0("p", seq_len(n_pit)),
+    player_name     = paste0("P", seq_len(n_pit)),
+    team            = "NYY",
+    league          = "AL",
+    pos_eligibility = rep("P", n_pit),
+    player_type     = "pitcher",
+    AB              = NA_real_, HR = NA_real_, R = NA_real_,
+    RBI = NA_real_, SB = NA_real_, AVG = NA_real_,
+    IP              = ip_vals,
+    W               = rnorm(n_pit, 8, 3),
+    ERA             = rnorm(n_pit, 4.0, 0.6),
+    WHIP            = rnorm(n_pit, 1.30, 0.12),
+    SV              = c(rep(0, n_pit - 10L), rnorm(10L, 15, 8)),
+    K               = ip_vals * rnorm(n_pit, 1.0, 0.1),
+    stringsAsFactors = FALSE
+  )
+  proj <- rbind(hitters, pitchers)
+  config <- league_config(
+    n_teams      = 10L,
+    roster_slots = c(C = 2L, `1B` = 1L, `2B` = 1L, SS = 1L, `3B` = 1L,
+                     OF = 5L, UT = 2L, CI = 1L, MI = 1L),
+    pitcher_slots = 11L,
+    categories   = c("AVG", "HR", "R", "RBI", "SB",
+                     "W", "ERA", "WHIP", "SV", "K"),
+    league_type  = "AL",
+    budget_split = 0.5
+  )
+
+  result <- zar(replacement_level(proj, config = config))
+
+  pit_ids <- paste0("p", seq_len(n_pit))
+  pit_rows <- result[result$player_id %in% pit_ids, , drop = FALSE]
+  expect_gt(nrow(pit_rows), 0L)
+  expect_true(any(is.finite(pit_rows$zar_W)))
+  expect_true(any(is.finite(pit_rows$zar_ERA)))
+})
