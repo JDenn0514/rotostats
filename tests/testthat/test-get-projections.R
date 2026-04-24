@@ -417,6 +417,12 @@ test_that("get_projections(..., player_type = 'pitchers') returns a pitcher fram
   expect_true("svhd" %in% names(out))
   expect_true(all(out$player_type == "pitcher"))
   expect_true("qs" %in% names(out))
+  expect_true("k" %in% names(out))
+  expect_equal(
+    out$k[out$player_type == "pitcher"],
+    out$k_per_9[out$player_type == "pitcher"] *
+      out$ip[out$player_type == "pitcher"] / 9
+  )
 })
 
 test_that("get_projections(..., player_type = 'both') rbinds with NA fill", {
@@ -573,4 +579,44 @@ test_that(".normalize_pos_eligibility() preserves NA in pos", {
   df <- data.frame(pos = c("2B", NA_character_, "SS/OF"), stringsAsFactors = FALSE)
   out <- rotostats:::.normalize_pos_eligibility(df)
   expect_equal(out$pos_eligibility, c("2B", NA_character_, "SS|OF"))
+})
+
+# ---------------------------------------------------------------------------
+# .derive_k()
+# ---------------------------------------------------------------------------
+
+test_that(".derive_k() computes k = k_per_9 * ip / 9", {
+  df <- data.frame(ip = c(180, 90), k_per_9 = c(9.0, 10.0), stringsAsFactors = FALSE)
+  out <- rotostats:::.derive_k(df)
+  expect_equal(out$k, c(180, 100))
+})
+
+test_that(".derive_k() is a no-op if k_per_9 is absent", {
+  df <- data.frame(ip = 180, stringsAsFactors = FALSE)
+  out <- rotostats:::.derive_k(df)
+  expect_identical(out, df)
+  expect_false("k" %in% names(out))
+})
+
+test_that(".derive_k() is a no-op if ip is absent", {
+  df <- data.frame(k_per_9 = 9.0, stringsAsFactors = FALSE)
+  out <- rotostats:::.derive_k(df)
+  expect_identical(out, df)
+  expect_false("k" %in% names(out))
+})
+
+test_that(".derive_k() does not overwrite an existing k column", {
+  df <- data.frame(ip = 180, k_per_9 = 9.0, k = 42, stringsAsFactors = FALSE)
+  out <- rotostats:::.derive_k(df)
+  expect_equal(out$k, 42)
+})
+
+test_that(".derive_k() propagates NA in ip or k_per_9", {
+  df <- data.frame(
+    ip      = c(180, NA_real_, 90),
+    k_per_9 = c(9.0, 10.0,     NA_real_),
+    stringsAsFactors = FALSE
+  )
+  out <- rotostats:::.derive_k(df)
+  expect_equal(out$k, c(180, NA_real_, NA_real_))
 })
