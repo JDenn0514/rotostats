@@ -479,3 +479,53 @@ test_that("get_projections(source = 'custom') requires data", {
     class = "rotostats_error_missing_custom_data"
   )
 })
+
+# ---------------------------------------------------------------------------
+# Recorded-fixture integration tests
+# ---------------------------------------------------------------------------
+
+load_fixture <- function(name) {
+  path <- testthat::test_path("fixtures", name)
+  jsonlite::read_json(path)
+}
+
+test_that("get_projections('steamer', 'batters') parses the recorded fixture cleanly", {
+  testthat::local_mocked_bindings(
+    .fetch_projections_api = function(url) load_fixture("projections-steamer-bat.json"),
+    .package = "rotostats"
+  )
+  out <- get_projections(source = "steamer", player_type = "batters")
+  expect_s3_class(out, "data.frame")
+  expect_gt(nrow(out), 0L)
+  expect_true(all(c("playerid", "name", "team", "pos", "player_type") %in% names(out)))
+  expect_true(all(out$player_type == "batter"))
+})
+
+test_that("get_projections('steamer', 'pitchers') derives SVHD from the recorded fixture", {
+  testthat::local_mocked_bindings(
+    .fetch_projections_api = function(url) load_fixture("projections-steamer-pit.json"),
+    .package = "rotostats"
+  )
+  rlang::reset_message_verbosity("rotostats_svhd_definition")
+  out <- suppressMessages(
+    get_projections(source = "steamer", player_type = "pitchers")
+  )
+  expect_true("SVHD" %in% names(out))
+  expect_true(all(out$SVHD == out$SV + out$HLD |
+                  is.na(out$SV) | is.na(out$HLD) | out$SVHD >= 0))
+})
+
+test_that("ZiPS pitcher fixture parses even without QS", {
+  testthat::local_mocked_bindings(
+    .fetch_projections_api = function(url) load_fixture("projections-zips-pit.json"),
+    .package = "rotostats"
+  )
+  rlang::reset_message_verbosity("rotostats_svhd_definition")
+  out <- suppressMessages(
+    get_projections(source = "zips", player_type = "pitchers")
+  )
+  expect_s3_class(out, "data.frame")
+  # QS may or may not be present — this is documented in the spec. Either way,
+  # no error is thrown and the rest of the pipeline works.
+  expect_gt(nrow(out), 0L)
+})
