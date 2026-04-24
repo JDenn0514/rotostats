@@ -210,6 +210,18 @@
   diagnose player-name mismatches between data sources. These warnings are
   purely diagnostic — calibration output is unchanged.
 
+## Bug fixes
+
+* `replacement_level()` now recognizes `pos_eligibility = "P"` (the
+  `get_projections()` fallback for FanGraphs pitcher rows, which return no
+  position field) and classifies the role via `sp_ip_threshold`. Previously
+  pitchers emitted by `get_projections()` were silently dropped from every
+  SP/RP pool, yielding `n_band_players = 0` and NA-filled pitcher stat lines
+  in `replacement_level()$replacement_stats` and NA-filled pitcher columns
+  in `zar()` / `par()` downstream. The inferred SP/RP role is also propagated
+  into the `position_assignments` attribute so that downstream `zar()` and
+  `par()` lookups by position label resolve correctly for bare-`"P"` rows.
+
 ## Breaking changes
 
 * `sgp()` now validates `pool_baseline` at the top of the function.
