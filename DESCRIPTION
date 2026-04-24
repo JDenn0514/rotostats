@@ -17,7 +17,8 @@ Imports:
     cli (>= 3.6.0),
     httr2 (>= 1.0.0),
     rlang (>= 1.0.0),
-    stringi
+    stringi,
+    tibble (>= 3.0.0)
 Suggests:
     classInt,
     jsonlite (>= 1.8.0),
