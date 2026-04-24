@@ -28,3 +28,21 @@ VALID_PROJECTION_SOURCES <- c(
   }
   source
 }
+
+#' @noRd
+VALID_PLAYER_TYPES <- c("batters", "pitchers", "both")
+
+#' @noRd
+.validate_player_type <- function(player_type) {
+  if (!is.character(player_type) || length(player_type) != 1L ||
+      is.na(player_type) || !(player_type %in% VALID_PLAYER_TYPES)) {
+    cli::cli_abort(
+      c(
+        "{.arg player_type} must be one of {.val {VALID_PLAYER_TYPES}}.",
+        i = "Received: {.val {player_type}}."
+      ),
+      class = "rotostats_error_invalid_player_type"
+    )
+  }
+  player_type
+}

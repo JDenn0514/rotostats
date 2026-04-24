@@ -48,3 +48,28 @@ test_that(".validate_source() rejects non-scalar / non-character input", {
     class = "rotostats_error_invalid_source"
   )
 })
+
+# ---------------------------------------------------------------------------
+# .validate_player_type()
+# ---------------------------------------------------------------------------
+
+test_that(".validate_player_type() accepts 'batters', 'pitchers', 'both'", {
+  expect_identical(rotostats:::.validate_player_type("batters"), "batters")
+  expect_identical(rotostats:::.validate_player_type("pitchers"), "pitchers")
+  expect_identical(rotostats:::.validate_player_type("both"), "both")
+})
+
+test_that(".validate_player_type() rejects anything else", {
+  expect_error(
+    rotostats:::.validate_player_type("batter"),
+    class = "rotostats_error_invalid_player_type"
+  )
+  expect_error(
+    rotostats:::.validate_player_type(NA_character_),
+    class = "rotostats_error_invalid_player_type"
+  )
+  expect_error(
+    rotostats:::.validate_player_type(NULL),
+    class = "rotostats_error_invalid_player_type"
+  )
+})
