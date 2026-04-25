@@ -66,9 +66,12 @@ VALID_KEEPER_METHODS <- c("pool_shrink", "salary_adjust", "none")
 #'   league-level override; [sgp_denominators()] and future consumers fall
 #'   through to the package lookup ([inverse_categories()]). Pass
 #'   `character(0)` is not valid; use `NULL` for "no override".
-#' @param league_type One of `"mixed"`, `"AL"`, `"NL"`. Controls DH eligibility
-#'   and downstream player-pool filtering. `"NL"` drops DH from `roster_slots`
-#'   with a warning if present.
+#' @param league_type One of `"mixed"`, `"AL"`, `"NL"`. Default `"mixed"`.
+#'   Controls DH eligibility and downstream player-pool filtering: `"AL"` /
+#'   `"NL"` cause [replacement_level()] to drop rows where
+#'   `projections$LEAGUE` does not match before computing the replacement
+#'   pool. `"NL"` additionally drops `DH` from `roster_slots` with a warning
+#'   if present. `"mixed"` keeps both leagues.
 #' @param budget Positive integer. Per-team auction budget in dollars.
 #'   Default `260L`.
 #' @param budget_split Numeric in `(0, 1)`. Fraction of the total league
