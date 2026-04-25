@@ -48,9 +48,12 @@ league-level override; \code{\link[=sgp_denominators]{sgp_denominators()}} and f
 through to the package lookup (\code{\link[=inverse_categories]{inverse_categories()}}). Pass
 \code{character(0)} is not valid; use \code{NULL} for "no override".}
 
-\item{league_type}{One of \code{"mixed"}, \code{"AL"}, \code{"NL"}. Controls DH eligibility
-and downstream player-pool filtering. \code{"NL"} drops DH from \code{roster_slots}
-with a warning if present.}
+\item{league_type}{One of \code{"mixed"}, \code{"AL"}, \code{"NL"}. Default \code{"mixed"}.
+Controls DH eligibility and downstream player-pool filtering: \code{"AL"} /
+\code{"NL"} cause \code{\link[=replacement_level]{replacement_level()}} to drop rows where
+\code{projections$LEAGUE} does not match before computing the replacement
+pool. \code{"NL"} additionally drops \code{DH} from \code{roster_slots} with a warning
+if present. \code{"mixed"} keeps both leagues.}
 
 \item{budget}{Positive integer. Per-team auction budget in dollars.
 Default \code{260L}.}

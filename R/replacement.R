@@ -358,6 +358,34 @@ replacement_level <- function(
   # Step 31: league values
   checkmate::assert_subset(projections$LEAGUE, c("AL", "NL"))
 
+  # Step 31b: league_type pool filter
+  # When config$league_type is "AL" or "NL", restrict the pool to that league.
+  # "mixed" keeps both leagues. Filtering here means stored_projections (and
+  # therefore attr(result, "projections")) carry the filtered set, so all
+  # downstream consumers (zaa, zar, par, pvm) see only the matching league.
+  if (config$league_type %in% c("AL", "NL")) {
+    keep <- projections$LEAGUE == config$league_type
+    if (!any(keep)) {
+      cli::cli_abort(
+        c(
+          "No rows in {.arg projections} have {.code LEAGUE == {.val {config$league_type}}}.",
+          "i" = "Check the projection source's league coverage, or set {.code league_type = \"mixed\"} in {.fn league_config}."
+        ),
+        class = "rotostats_error_empty_league_pool",
+        call = call_env
+      )
+    }
+    if (verbose) {
+      n_dropped <- sum(!keep)
+      if (n_dropped > 0L) {
+        cli::cli_inform(
+          "Filtered {.arg projections}: dropped {n_dropped} row{?s} not in league {.val {config$league_type}}."
+        )
+      }
+    }
+    projections <- projections[keep, , drop = FALSE]
+  }
+
   # Step 32: Rate stat denominator lookup
   # Any scored category that is a known rate stat must resolve in rate_lookup.
   # Use RATE_STAT_DENOMINATORS (the canonical set) as the membership test so
