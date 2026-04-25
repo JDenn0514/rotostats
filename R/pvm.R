@@ -227,8 +227,8 @@
 #'   pitcher_slots = c(SP = 5L, RP = 3L),
 #'   budget        = 260L,
 #'   budget_split  = 0.67,
-#'   categories    = c("HR", "R", "RBI", "SB", "AVG",
-#'                     "W", "K", "SV", "ERA", "WHIP")
+#'   batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
+#'   pitcher_categories = c("W", "K", "SV", "ERA", "WHIP")
 #' )
 #' # proj   <- <data frame with player projections and PLAYER_ID column>
 #' # repl   <- replacement_level(proj, cfg)

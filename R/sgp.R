@@ -224,7 +224,8 @@
 #'   pitcher_slots = 9L,
 #'   budget = 260L,
 #'   budget_split = 0.67,
-#'   categories = c("HR", "R")
+#'   batting_categories = c("HR", "R"),
+#'   pitcher_categories = character(0L)
 #' )
 #'
 #' denoms <- sgp_denominators(

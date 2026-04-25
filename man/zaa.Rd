@@ -125,7 +125,8 @@ config <- league_config(
   pitcher_slots = 9,
   budget = 260L,
   budget_split = 0.67,
-  categories = c("HR", "R")
+  batting_categories = c("HR", "R"),
+  pitcher_categories = character(0L)
 )
 # proj <- <data frame of projections>
 # result <- zaa(stats = proj, config = cfg)
