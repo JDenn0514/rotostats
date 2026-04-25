@@ -1127,29 +1127,32 @@ test_that("TS-ZAA-Z1a: replacement + hitter_pool='positional' + mixed pool retur
     label = "TS-ZAA-Z1a: nrow(result) == length(position_assignments)"
   )
 
-  # Assertion 3: distribution is nested on hitter side.
-  # Spec §"attr(result,'distribution') schema": when hitter_pool="positional",
-  # distribution is position-keyed then category-keyed.
-  # Hitter position keys ("C", "1B") appear at the TOP level of distribution.
-  # Under each hitter position key, category keys (e.g., "HR") appear.
+  # Assertion 3: distribution is keyed by side first (Task 4.2 schema), then
+  # nested on the hitter side under hitter_pool="positional".
+  # Outer level: $batter / $pitcher.
+  # Under $batter: hitter position keys ("C", "1B"); under each, category
+  # keys (e.g., "HR").
   dist <- attr(result, "distribution")
   expect_true(is.list(dist), label = "TS-ZAA-Z1a: distribution is list")
-  expect_true("C"  %in% names(dist),
-              label = "TS-ZAA-Z1a: hitter position key 'C' at top level")
-  expect_true("1B" %in% names(dist),
-              label = "TS-ZAA-Z1a: hitter position key '1B' at top level")
-  expect_true("HR" %in% names(dist[["C"]]),
-              label = "TS-ZAA-Z1a: category key 'HR' under 'C'")
-  expect_true("HR" %in% names(dist[["1B"]]),
-              label = "TS-ZAA-Z1a: category key 'HR' under '1B'")
+  expect_true("batter" %in% names(dist),
+              label = "TS-ZAA-Z1a: top-level 'batter' key present")
+  bat_dist <- dist[["batter"]]
+  expect_true("C"  %in% names(bat_dist),
+              label = "TS-ZAA-Z1a: hitter position key 'C' under $batter")
+  expect_true("1B" %in% names(bat_dist),
+              label = "TS-ZAA-Z1a: hitter position key '1B' under $batter")
+  expect_true("HR" %in% names(bat_dist[["C"]]),
+              label = "TS-ZAA-Z1a: category key 'HR' under $batter$C")
+  expect_true("HR" %in% names(bat_dist[["1B"]]),
+              label = "TS-ZAA-Z1a: category key 'HR' under $batter$1B")
   # Confirm these are leaf entries (lists with 'mean' and 'sd')
-  c_hr_entry <- dist[["C"]][["HR"]]
+  c_hr_entry <- bat_dist[["C"]][["HR"]]
   expect_true(is.list(c_hr_entry),
-              label = "TS-ZAA-Z1a: dist$C$HR is a list")
+              label = "TS-ZAA-Z1a: dist$batter$C$HR is a list")
   expect_true("mean" %in% names(c_hr_entry),
-              label = "TS-ZAA-Z1a: dist$C$HR has 'mean'")
+              label = "TS-ZAA-Z1a: dist$batter$C$HR has 'mean'")
   expect_true("sd"   %in% names(c_hr_entry),
-              label = "TS-ZAA-Z1a: dist$C$HR has 'sd'")
+              label = "TS-ZAA-Z1a: dist$batter$C$HR has 'sd'")
 
   # Assertion 4 (sanity): standard output attribute schema.
   expect_equal(attr(result, "units"),  "zscore",
@@ -1235,20 +1238,23 @@ test_that("TS-ZAA-19: AVG + mixed pool + weight_method='linear': pitcher zaa_AVG
   hit_rows <- result$player_id %in% c("H1", "H2", "H3")
 
   # Assertion 1: every pitcher row has NA zaa_AVG.
-  # DOCUMENTED BEHAVIOR: spec-zaa.md §Step 2 (pitchers have NA AB ->
-  # NA raw z-score -> NA zaa_AVG via Step 2b volume-weighting).
+  # AVG is a hitter-side category (cross-side under Task 4.2 per-side
+  # scoping), so pitcher rows always carry NA zaa_AVG regardless of the
+  # legacy NA-AB / Step-2b path.
   expect_true(
     all(is.na(result$zaa_AVG[sp_rows])),
-    label = "TS-ZAA-19: every pitcher row has NA zaa_AVG (NA AB -> NA z)"
+    label = "TS-ZAA-19: every pitcher row has NA zaa_AVG (cross-side scoping)"
   )
 
-  # Assertion 2: every pitcher row has NA total_zaa.
-  # DOCUMENTED BEHAVIOR: spec-zaa.md §Step 3 says total_zaa = sum of scored
-  # category z-scores; na.rm=FALSE semantics mean any NA in a scored category
-  # propagates to NA total_zaa.
+  # Assertion 2: pitcher total_zaa is finite (Task 4.2 schema change).
+  # Pre-Task-4.2 behavior: na.rm=FALSE on the rowSum, so any NA in a
+  # cross-side cell (zaa_AVG for pitchers) propagated to NA total_zaa.
+  # Post-Task-4.2: total_zaa uses na.rm=TRUE so cross-side NAs contribute 0
+  # and each side's intra-side total stays well-defined. Pitcher total_zaa
+  # therefore reflects the W/K/SV/QS sum (multiplied by the linear weight).
   expect_true(
-    all(is.na(result$total_zaa[sp_rows])),
-    label = "TS-ZAA-19: every pitcher row has NA total_zaa (na.rm=FALSE propagation)"
+    all(is.finite(result$total_zaa[sp_rows])),
+    label = "TS-ZAA-19: every pitcher row has finite total_zaa (na.rm=TRUE)"
   )
 
   # Assertion 3: every hitter row has finite total_zaa.
@@ -1276,4 +1282,27 @@ test_that("TS-ZAA-19: AVG + mixed pool + weight_method='linear': pitcher zaa_AVG
       )
     }
   }
+})
+
+# ===========================================================================
+# Cross-side category scoping (Task 4.2)
+# ===========================================================================
+test_that("zaa() output has NA for cross-side categories", {
+  fx <- make_zar_fixture()  # batting_categories = c("HR","R","SB"),
+                            # pitcher_categories = c("K","SV")
+  out <- zaa(replacement = fx$replacement)
+
+  pitcher_rows <- subset(out, player_type == "pitcher")
+  batter_rows  <- subset(out, player_type == "batter")
+
+  expect_true(all(is.na(pitcher_rows$zaa_HR)))
+  expect_true(all(is.na(pitcher_rows$zaa_R)))
+  expect_true(all(is.na(pitcher_rows$zaa_SB)))
+  expect_true(all(is.na(batter_rows$zaa_K)))
+  expect_true(all(is.na(batter_rows$zaa_SV)))
+
+  # Same-side cells are finite (or NA only for valid same-side reasons like
+  # missing playing-time inputs).
+  expect_true(any(is.finite(pitcher_rows$zaa_K)))
+  expect_true(any(is.finite(batter_rows$zaa_HR)))
 })

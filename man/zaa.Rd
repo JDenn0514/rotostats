@@ -52,16 +52,26 @@ Ignored when \code{category_weight} is supplied.}
 \value{
 A data frame with one row per player in the selected pool, columns
 \verb{zaa_<CAT>} for each scored category in \code{config$categories} order, and
-\code{total_zaa}. If \code{player_id} is present in the working stats, it is
-prepended as the first column. Three attributes are set:
+\code{total_zaa}. Pitcher rows carry \code{NA} (not 0) in \verb{zaa_<batting_cat>}
+columns; batter rows carry \code{NA} in \verb{zaa_<pitcher_cat>} columns; this
+matches the per-side z-score scoping (each side is normalized only
+against same-side projection pools). \code{total_zaa} is \code{rowSums(..., na.rm = TRUE)} so cross-side \code{NA}s contribute 0 rather than
+propagating. If \code{player_id} is present in the working stats it is
+prepended as the first column, followed by a \code{player_type} column
+(\code{"batter"} / \code{"pitcher"}) used by downstream consumers and tests to
+subset rows by side. Three attributes are set:
 \describe{
 \item{\code{attr(result, "units")}}{\code{"zscore"}}
 \item{\code{attr(result, "anchor")}}{\code{"average"}}
-\item{\code{attr(result, "distribution")}}{Nested or flat list of per-pool,
-per-category distribution parameters. For counting stats: \code{list(mean, sd)}. For rate stats: \code{list(mean, sd, sd_vol)} where \code{sd_vol} is the
-population SD of the volume-weighted z-scores (Step 2b denominator),
-used by \code{zar()} to score replacement lines without re-running \code{zaa()}.
-Schema: nested (position-keyed -> category-keyed) when
+\item{\code{attr(result, "distribution")}}{List keyed by side
+(\code{batter}, \code{pitcher}); each side maps either category -> entry
+(flat schema, used for combined pools) or pool-label ->
+category -> entry (nested schema, used for positional/split
+pools). Each entry is \code{list(mean, sd)} for counting stats; rate
+stats add \code{sd_vol} (the population SD of volume-weighted
+z-scores; Step 2b denominator) used by \code{zar()} to score
+replacement lines without re-running \code{zaa()}. Inner schema:
+nested (pool-keyed -> category-keyed) when
 \code{hitter_pool = "positional"}; flat (category-keyed) when
 \code{hitter_pool = "combined"}. Pitchers: nested when
 \code{pitcher_pool = "split"}, flat otherwise.}
