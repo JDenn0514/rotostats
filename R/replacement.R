@@ -1034,7 +1034,8 @@ replacement_level <- function(
     projections = projections,
     repl_stats_df = repl_stats_df,
     current_assignments = new_assignments,
-    cats_upper = cats_upper,
+    batting_cats_upper = batting_cats_upper,
+    pitcher_cats_upper = pitcher_cats_upper,
     role = role
   )
 
@@ -1603,7 +1604,8 @@ replacement_from_prices <- function(
   projections,
   repl_stats_df,
   current_assignments,
-  cats_upper,
+  batting_cats_upper,
+  pitcher_cats_upper,
   role
 ) {
   # Two-way players: those with PAR > 0 in both hitter and pitcher roles
@@ -1643,7 +1645,7 @@ replacement_from_prices <- function(
     par_hit <- compute_par_at_pos(
       projections[i, , drop = FALSE],
       repl_row_hit,
-      cats_upper
+      batting_cats_upper
     )
 
     # Compute PAR as pitcher
@@ -1664,7 +1666,7 @@ replacement_from_prices <- function(
     par_pit <- compute_par_at_pos(
       projections[i, , drop = FALSE],
       repl_row_pit,
-      cats_upper
+      pitcher_cats_upper
     )
 
     if (par_hit > 0 && par_pit > 0) {
