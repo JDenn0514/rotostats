@@ -391,7 +391,7 @@ test_that("R-1: Manual calculation verification with 3-player toy fixture", {
   # Replacement HR = HR of rank-1 player (by band average of 1 player).
   # The delegation identity par_HR + repl_sgp[1B, HR] == sgp_HR must hold.
 
-  toy_proj <- data.frame(
+  toy_proj <- pad_cross_side_columns(data.frame(
     player_id       = c("P1", "P2", "P3"),
     player_name     = c("Alice", "Bob", "Carol"),
     pos_eligibility = rep("1B", 3),
@@ -400,7 +400,7 @@ test_that("R-1: Manual calculation verification with 3-player toy fixture", {
     HR              = c(40, 25, 10),
     IP              = rep(NA_real_, 3),
     stringsAsFactors = FALSE
-  )
+  ))
 
   toy_cfg <- league_config(
     n_teams            = 1L,
@@ -457,7 +457,7 @@ test_that("R-1b: Delegation identity holds for 10-player toy fixture", {
   n <- 10
   hr_vals <- c(100, 50, 40, 30, 20, 15, 10, 8, 5, 2)
 
-  toy10_proj <- data.frame(
+  toy10_proj <- pad_cross_side_columns(data.frame(
     player_id       = paste0("P", seq_len(n)),
     player_name     = paste0("Player", seq_len(n)),
     pos_eligibility = rep("1B", n),
@@ -466,7 +466,7 @@ test_that("R-1b: Delegation identity holds for 10-player toy fixture", {
     HR              = hr_vals,
     IP              = rep(NA_real_, n),
     stringsAsFactors = FALSE
-  )
+  ))
 
   toy10_cfg <- league_config(
     n_teams            = 1L,

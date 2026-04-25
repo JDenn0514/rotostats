@@ -96,14 +96,14 @@ test_that("TS-ZAA-11: zaa() uses population SD (denominator n), not stats::sd()"
   # HR = c(10, 20, 30, 40): mean = 25
   # pop_sd = sqrt(125) ~ 11.18034 (denominator n)
   # sample_sd = stats::sd(...) = sqrt(500/3) ~ 12.9099 (denominator n-1)
-  players <- data.frame(
+  players <- pad_cross_side_columns(data.frame(
     player_id       = c("P1", "P2", "P3", "P4"),
     player_name     = c("A", "B", "C", "D"),
     pos_eligibility = rep("1B", 4),
     team            = rep("NYY", 4), league = rep("AL", 4),
     HR              = c(10, 20, 30, 40),
     stringsAsFactors = FALSE
-  )
+  ))
   cfg <- make_zaa_cfg(categories = "HR",
                       roster_slots  = c("1B" = 4L),
                       pitcher_slots = c(SP = 0L, RP = 0L))
@@ -148,6 +148,7 @@ test_that("TS-ZAA-12: zero IP -> zaa_ERA = NA and rotostats_warning_zero_playing
     K               = c(150, 80, 120, 90),
     stringsAsFactors = FALSE
   )
+  pitchers <- pad_cross_side_columns(pitchers)
   cfg <- make_zaa_cfg(categories = c("ERA", "K"),
                       roster_slots  = c(C = 0L),
                       pitcher_slots = c(SP = 4L, RP = 0L))
@@ -161,8 +162,15 @@ test_that("TS-ZAA-12: zero IP -> zaa_ERA = NA and rotostats_warning_zero_playing
               label = "TS-ZAA-12: P2 (IP=0) has NA zaa_ERA")
   expect_false(is.na(result$zaa_ERA[result$player_id == "P1"]),
                label = "TS-ZAA-12: P1 (IP=180) has non-NA zaa_ERA")
-  expect_true(is.na(result$total_zaa[result$player_id == "P2"]),
-              label = "TS-ZAA-12: NA propagates to total_zaa for P2")
+  # Note: total_zaa uses rowSums(na.rm = TRUE) so cross-side NAs do not
+  # propagate. Same-side zero-playing-time NAs (here zaa_ERA for P2) also
+  # fall under na.rm = TRUE — P2's total_zaa reflects only zaa_K.
+  expect_equal(
+    result$total_zaa[result$player_id == "P2"],
+    result$zaa_K[result$player_id == "P2"],
+    tolerance = 1e-10,
+    label = "TS-ZAA-12: P2 total_zaa equals zaa_K (zaa_ERA dropped via na.rm)"
+  )
 })
 
 test_that("TS-ZAA-12: NA IP -> zaa_ERA = NA and warning fires", {
@@ -176,6 +184,7 @@ test_that("TS-ZAA-12: NA IP -> zaa_ERA = NA and warning fires", {
     K               = c(150, 80, 120, 90, 110),
     stringsAsFactors = FALSE
   )
+  pitchers <- pad_cross_side_columns(pitchers)
   cfg <- make_zaa_cfg(categories = c("ERA", "K"),
                       roster_slots  = c(C = 0L),
                       pitcher_slots = c(SP = 5L, RP = 0L))
@@ -199,6 +208,7 @@ test_that("TS-ZAA-12: zero AB -> zaa_AVG = NA and warning fires", {
     HR              = c(25, 10, 20, 30),
     stringsAsFactors = FALSE
   )
+  hitters <- pad_cross_side_columns(hitters)
   cfg <- make_zaa_cfg(categories = c("AVG", "HR"),
                       roster_slots  = c("1B" = 4L),
                       pitcher_slots = c(SP = 0L, RP = 0L))
@@ -228,6 +238,7 @@ test_that("TS-ZAA-1: below-mean ERA -> positive zaa_ERA; above-mean ERA -> negat
     K               = c(160, 150, 140, 130),
     stringsAsFactors = FALSE
   )
+  pitchers <- pad_cross_side_columns(pitchers)
   cfg <- make_zaa_cfg(categories = c("ERA", "K"),
                       roster_slots  = c(C = 0L),
                       pitcher_slots = c(SP = 4L, RP = 0L))
@@ -271,6 +282,7 @@ test_that("TS-ZAA-8A positional: distribution nested by position; sd_vol for rat
     AB              = c(380, 420, 480, 520),
     stringsAsFactors = FALSE
   )
+  hitters <- pad_cross_side_columns(hitters)
   cfg <- make_zaa_cfg(categories = c("HR", "AVG"),
                       roster_slots  = c(C = 2L, "1B" = 2L),
                       pitcher_slots = c(SP = 0L, RP = 0L))
@@ -281,24 +293,27 @@ test_that("TS-ZAA-8A positional: distribution nested by position; sd_vol for rat
   )
 
   dist_A <- attr(result_A, "distribution")
-  expect_true(is.list(dist_A),        label = "TS-ZAA-8A: distribution is list")
-  expect_true("C"  %in% names(dist_A), label = "TS-ZAA-8A: C key present")
-  expect_true("1B" %in% names(dist_A), label = "TS-ZAA-8A: 1B key present")
+  expect_true(is.list(dist_A),               label = "TS-ZAA-8A: distribution is list")
+  # Schema is nested by side first; positional pool keys live under $batter.
+  expect_true("batter" %in% names(dist_A),   label = "TS-ZAA-8A: batter side present")
+  bat_A <- dist_A[["batter"]]
+  expect_true("C"  %in% names(bat_A),         label = "TS-ZAA-8A: C key present")
+  expect_true("1B" %in% names(bat_A),         label = "TS-ZAA-8A: 1B key present")
 
   # HR (counting) — sd_vol ABSENT
-  hr_entry <- dist_A[["C"]][["HR"]]
+  hr_entry <- bat_A[["C"]][["HR"]]
   expect_true("mean" %in% names(hr_entry), label = "TS-ZAA-8A: C/HR has mean")
   expect_true("sd"   %in% names(hr_entry), label = "TS-ZAA-8A: C/HR has sd")
   expect_false("sd_vol" %in% names(hr_entry), label = "TS-ZAA-8A: C/HR has no sd_vol")
 
   # AVG (rate stat) — sd_vol PRESENT
-  avg_entry <- dist_A[["C"]][["AVG"]]
+  avg_entry <- bat_A[["C"]][["AVG"]]
   expect_true("mean"   %in% names(avg_entry), label = "TS-ZAA-8A: C/AVG has mean")
   expect_true("sd"     %in% names(avg_entry), label = "TS-ZAA-8A: C/AVG has sd")
   expect_true("sd_vol" %in% names(avg_entry), label = "TS-ZAA-8A: C/AVG has sd_vol")
 
   # No flat top-level HR key in positional mode
-  expect_false("HR" %in% names(dist_A), label = "TS-ZAA-8A: no flat HR key")
+  expect_false("HR" %in% names(bat_A), label = "TS-ZAA-8A: no flat HR key")
 
   expect_equal(attr(result_A, "units"),  "zscore",  label = "TS-ZAA-8A: units")
   expect_equal(attr(result_A, "anchor"), "average", label = "TS-ZAA-8A: anchor")
@@ -315,6 +330,7 @@ test_that("TS-ZAA-8B combined: distribution flat by category; no position keys",
     AB              = c(380, 420, 480, 520),
     stringsAsFactors = FALSE
   )
+  hitters <- pad_cross_side_columns(hitters)
   cfg <- make_zaa_cfg(categories = c("HR", "AVG"),
                       roster_slots  = c(C = 2L, "1B" = 2L),
                       pitcher_slots = c(SP = 0L, RP = 0L))
@@ -326,19 +342,22 @@ test_that("TS-ZAA-8B combined: distribution flat by category; no position keys",
 
   dist_B <- attr(result_B, "distribution")
   expect_true(is.list(dist_B), label = "TS-ZAA-8B: distribution is list")
-  expect_true("HR"  %in% names(dist_B), label = "TS-ZAA-8B: HR key at top level")
-  expect_true("AVG" %in% names(dist_B), label = "TS-ZAA-8B: AVG key at top level")
+  # Schema is nested by side first; combined-pool flat keys live under $batter.
+  expect_true("batter" %in% names(dist_B), label = "TS-ZAA-8B: batter side present")
+  bat_B <- dist_B[["batter"]]
+  expect_true("HR"  %in% names(bat_B), label = "TS-ZAA-8B: HR key at top level")
+  expect_true("AVG" %in% names(bat_B), label = "TS-ZAA-8B: AVG key at top level")
 
   # Flat HR: mean+sd but no sd_vol
-  expect_true("mean" %in% names(dist_B[["HR"]]),    label = "TS-ZAA-8B: HR has mean")
-  expect_true("sd"   %in% names(dist_B[["HR"]]),    label = "TS-ZAA-8B: HR has sd")
-  expect_false("sd_vol" %in% names(dist_B[["HR"]]), label = "TS-ZAA-8B: HR has no sd_vol")
+  expect_true("mean" %in% names(bat_B[["HR"]]),    label = "TS-ZAA-8B: HR has mean")
+  expect_true("sd"   %in% names(bat_B[["HR"]]),    label = "TS-ZAA-8B: HR has sd")
+  expect_false("sd_vol" %in% names(bat_B[["HR"]]), label = "TS-ZAA-8B: HR has no sd_vol")
 
   # Flat AVG: sd_vol present
-  expect_true("sd_vol" %in% names(dist_B[["AVG"]]), label = "TS-ZAA-8B: AVG has sd_vol")
+  expect_true("sd_vol" %in% names(bat_B[["AVG"]]), label = "TS-ZAA-8B: AVG has sd_vol")
 
   # No position keys
-  expect_false("C"  %in% names(dist_B), label = "TS-ZAA-8B: no C key at top level")
+  expect_false("C"  %in% names(bat_B), label = "TS-ZAA-8B: no C key at top level")
   expect_false("1B" %in% names(dist_B), label = "TS-ZAA-8B: no 1B key at top level")
 
   expect_equal(attr(result_B, "units"),  "zscore",  label = "TS-ZAA-8B: units")
@@ -360,6 +379,7 @@ test_that("TS-ZAA-10: attr(replacement,'projections') supersedes explicit stats 
     IP              = rep(NA_real_, 5),
     stringsAsFactors = FALSE
   )
+  stats_in_repl <- pad_cross_side_columns(stats_in_repl)
   cfg_small <- league_config(
     n_teams            = 1L,
     roster_slots       = c("1B" = 3L),
@@ -379,6 +399,7 @@ test_that("TS-ZAA-10: attr(replacement,'projections') supersedes explicit stats 
     HR              = c(10, 15, 20, 25, 30),
     stringsAsFactors = FALSE
   )
+  stats_explicit <- pad_cross_side_columns(stats_explicit)
 
   result_main    <- zaa(stats = stats_explicit, replacement = repl,
                         config = cfg_small, hitter_pool = "combined")
@@ -524,11 +545,11 @@ test_that("TS-ZAA-15: category_weight non-NULL suppresses rotostats_warning_auto
 # ---------------------------------------------------------------------------
 
 test_that("TS-ZAA-16: replacement=NULL emits a message (unrestricted-pool inform)", {
-  players <- data.frame(
+  players <- pad_cross_side_columns(data.frame(
     player_id = c("P1", "P2", "P3"), player_name = c("A", "B", "C"),
     pos_eligibility = rep("1B", 3), team = rep("NYY", 3), league = rep("AL", 3),
     HR = c(15, 25, 35), stringsAsFactors = FALSE
-  )
+  ))
   cfg <- make_zaa_cfg(categories = "HR",
                       roster_slots  = c("1B" = 3L),
                       pitcher_slots = c(SP = 0L, RP = 0L))
@@ -537,11 +558,11 @@ test_that("TS-ZAA-16: replacement=NULL emits a message (unrestricted-pool inform
 })
 
 test_that("TS-ZAA-16: inform message contains expected stable keyword", {
-  players <- data.frame(
+  players <- pad_cross_side_columns(data.frame(
     player_id = c("P1", "P2", "P3"), player_name = c("A", "B", "C"),
     pos_eligibility = rep("1B", 3), team = rep("NYY", 3), league = rep("AL", 3),
     HR = c(15, 25, 35), stringsAsFactors = FALSE
-  )
+  ))
   cfg <- make_zaa_cfg(categories = "HR",
                       roster_slots  = c("1B" = 3L),
                       pitcher_slots = c(SP = 0L, RP = 0L))
@@ -570,11 +591,11 @@ test_that("TS-ZAA-16: inform message contains expected stable keyword", {
 })
 
 test_that("TS-ZAA-16: replacement non-NULL emits NO message", {
-  players <- data.frame(
+  players <- pad_cross_side_columns(data.frame(
     player_id = c("P1", "P2", "P3"), player_name = c("A", "B", "C"),
     pos_eligibility = rep("1B", 3), team = rep("NYY", 3), league = rep("AL", 3),
     HR = c(15, 25, 35), IP = rep(NA_real_, 3), stringsAsFactors = FALSE
-  )
+  ))
   cfg <- league_config(n_teams = 1L, roster_slots = c("1B" = 2L),
                        pitcher_slots = c(SP = 0L, RP = 0L),
                        batting_categories = "HR",
@@ -721,7 +742,7 @@ test_that("TS-ZAA-6: category_weight overrides weight_method (not 0.8, but 0.5)"
 # ---------------------------------------------------------------------------
 
 test_that("TS-ZAA-2: replacement=NULL emits inform; replacement non-NULL does not", {
-  hitters <- data.frame(
+  hitters <- pad_cross_side_columns(data.frame(
     player_id       = paste0("H", 1:8),
     player_name     = paste0("H", 1:8),
     pos_eligibility = rep("1B", 8),
@@ -729,7 +750,7 @@ test_that("TS-ZAA-2: replacement=NULL emits inform; replacement non-NULL does no
     HR              = c(10, 15, 20, 25, 30, 35, 40, 45),
     IP              = rep(NA_real_, 8),
     stringsAsFactors = FALSE
-  )
+  ))
   cfg <- league_config(n_teams = 1L, roster_slots = c("1B" = 4L),
                        pitcher_slots = c(SP = 0L, RP = 0L),
                        batting_categories = "HR",
@@ -749,14 +770,14 @@ test_that("TS-ZAA-2: replacement=NULL emits inform; replacement non-NULL does no
 test_that("TS-ZAA-2: hitter-only replacement restricts output rows to rostered set", {
   # 8 hitters total, 4 rostered (good HR), 4 fringe (low HR).
   # replacement built from good_hitters only.
-  good_hitters <- data.frame(
+  good_hitters <- pad_cross_side_columns(data.frame(
     player_id       = paste0("G", 1:4),
     player_name     = paste0("Good", 1:4),
     pos_eligibility = rep("1B", 4),
     team            = rep("NYY", 4), league = rep("AL", 4),
     HR              = c(25, 30, 35, 40), IP = rep(NA_real_, 4),
     stringsAsFactors = FALSE
-  )
+  ))
   cfg <- league_config(n_teams = 1L, roster_slots = c("1B" = 2L),
                        pitcher_slots = c(SP = 0L, RP = 0L),
                        batting_categories = "HR",
@@ -789,6 +810,7 @@ test_that("TS-ZAA-3: higher IP with same ERA gets larger absolute z-score", {
     K               = c(180, 60, 160, 50),
     stringsAsFactors = FALSE
   )
+  pitchers <- pad_cross_side_columns(pitchers)
   cfg <- make_zaa_cfg(categories = c("ERA", "K"),
                       roster_slots  = c(C = 0L),
                       pitcher_slots = c(SP = 4L, RP = 0L))
@@ -820,6 +842,7 @@ test_that("TS-ZAA-3: higher AB with same AVG (above pool mean) gets larger absol
     HR              = c(25, 10, 20, 30),
     stringsAsFactors = FALSE
   )
+  hitters <- pad_cross_side_columns(hitters)
   cfg <- make_zaa_cfg(categories = c("AVG", "HR"),
                       roster_slots  = c("1B" = 4L),
                       pitcher_slots = c(SP = 0L, RP = 0L))
@@ -850,6 +873,7 @@ test_that("TS-ZAA-4: weight_method='none' total_zaa == rowSums(zaa_<cat>) within
     R               = c(60, 70, 75, 85, 68, 80),
     stringsAsFactors = FALSE
   )
+  players <- pad_cross_side_columns(players)
   cfg <- make_zaa_cfg(categories = c("HR", "R"),
                       roster_slots  = c(C = 2L, "1B" = 2L, OF = 2L),
                       pitcher_slots = c(SP = 0L, RP = 0L))
@@ -898,6 +922,7 @@ test_that("TS-ZAA-7: split pool gives RP1 a lower zaa_SV than combined pool", {
     IP              = c(190, 175, 165, 65, 60, 55),
     stringsAsFactors = FALSE
   )
+  pitchers <- pad_cross_side_columns(pitchers)
   cfg <- make_zaa_cfg(categories = c("W", "K", "SV", "ERA"),
                       roster_slots  = c(C = 0L),
                       pitcher_slots = c(SP = 3L, RP = 3L))
@@ -941,6 +966,7 @@ test_that("TS-ZAA-9: catcher HR z-score larger under positional than combined po
     HR              = c(15, 25, 20, 28, 35, 42),
     stringsAsFactors = FALSE
   )
+  hitters <- pad_cross_side_columns(hitters)
   cfg <- make_zaa_cfg(categories = "HR",
                       roster_slots  = c(C = 2L, "1B" = 4L),
                       pitcher_slots = c(SP = 0L, RP = 0L))

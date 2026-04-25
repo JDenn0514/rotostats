@@ -104,7 +104,7 @@ test_that("TS-05: counting stat replacement = arithmetic mean of band", {
   #                                           13=16, 14=14, 15=12
   # Expected mean = (24+22+20+18+16+14+12)/7 = 126/7 = 18
   # To isolate: make all non-HR stats identical so z-score rank = HR rank
-  proj_1b <- data.frame(
+  proj_1b <- pad_cross_side_columns(data.frame(
     player_id       = paste0("P", 1:20),
     player_name     = paste0("Player", 1:20),
     pos_eligibility = rep("1B", 20),
@@ -118,7 +118,7 @@ test_that("TS-05: counting stat replacement = arithmetic mean of band", {
     AB              = rep(450, 20),
     IP              = rep(NA_real_, 20),
     stringsAsFactors = FALSE
-  )
+  ))
   cfg_1b <- league_config(
     n_teams            = 12L,
     roster_slots       = c(`1B` = 1L),
@@ -598,7 +598,7 @@ test_that("TS-28: pool too small → error", {
     pitcher_categories = c("K"),
     league_type        = "AL"
   )
-  thin_proj <- data.frame(
+  thin_proj <- pad_cross_side_columns(data.frame(
     player_id       = paste0("SS", 1:30),
     player_name     = paste0("SS_Player", 1:30),
     pos_eligibility = c(rep("SS", 20), rep("SP", 5), rep("RP", 5)),
@@ -612,7 +612,7 @@ test_that("TS-28: pool too small → error", {
     AB              = c(rep(400, 20), rep(NA, 10)),
     IP              = c(rep(NA, 20), rep(170, 5), rep(60, 5)),
     stringsAsFactors = FALSE
-  )
+  ))
   expect_error(
     replacement_level(thin_proj, config = cfg_deep_ss),
     class = "rotostats_error_pool_too_small"

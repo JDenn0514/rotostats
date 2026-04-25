@@ -359,7 +359,8 @@ test_that("print.league_config returns x invisibly and renders a summary", {
   expect_true(any(grepl("League configuration", out, fixed = TRUE)))
   expect_true(any(grepl("Teams", out)))
   expect_true(any(grepl("Pitchers", out)))
-  expect_true(any(grepl("Categories", out)))
+  expect_true(any(grepl("Batting", out)))
+  expect_true(any(grepl("Pitching", out)))
 })
 
 # ---------------------------------------------------------------------------
