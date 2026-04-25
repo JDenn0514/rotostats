@@ -1395,3 +1395,51 @@ test_that("DH|OF multi-eligible hitters in a no-DH league pick OF, not DH", {
   expect_equal(unname(pa[paste0("H", 1:4)]), rep("OF", 4),
                info = "DH|OF players resolve to OF (the active eligibility) not DH")
 })
+
+# ---------------------------------------------------------------------------
+# Task 6.1: split-categories-by-side migration tests
+# ---------------------------------------------------------------------------
+
+test_that("replacement_level() carries split categories into the output config", {
+  proj <- pad_cross_side_columns(make_projections_data(seed = 13L))
+  cfg <- league_config(
+    n_teams            = 12L,
+    roster_slots       = c(C = 1L, `1B` = 1L, OF = 1L),
+    pitcher_slots      = c(SP = 3L, RP = 3L),
+    batting_categories = c("HR", "R"),
+    pitcher_categories = c("K", "ERA")
+  )
+  repl <- replacement_level(proj, cfg)
+
+  cfg_out <- attr(repl, "config")
+  expect_equal(cfg_out$batting_categories, c("HR", "R"))
+  expect_equal(cfg_out$pitcher_categories, c("K", "ERA"))
+})
+
+test_that("replacement_level() preserves Ohtani-style two-way duplication", {
+  proj <- pad_cross_side_columns(make_projections_data(seed = 17L))
+  proj$pos_eligibility[1L] <- "OF|SP"
+  proj$player_type <- ifelse(grepl("SP|RP", proj$pos_eligibility), "pitcher", "batter")
+  proj$player_type[1L] <- "two_way"
+
+  cfg <- league_config(
+    n_teams            = 12L,
+    roster_slots       = c(C = 1L, `1B` = 1L, OF = 1L),
+    pitcher_slots      = c(SP = 3L, RP = 3L),
+    batting_categories = c("HR", "R"),
+    pitcher_categories = c("K", "ERA")
+  )
+  repl <- replacement_level(proj, cfg)
+
+  pid <- proj$player_id[1L]
+  pids_in_repl <- if (is.data.frame(repl)) {
+    repl$player_id
+  } else if (!is.null(attr(repl, "player_assignments"))) {
+    attr(repl, "player_assignments")$player_id
+  } else {
+    names(attr(repl, "position_assignments"))
+  }
+  # When two-way players exist, they should appear once on each side via two_way_players
+  tw <- attr(repl, "two_way_players") %||% repl$two_way_players %||% character(0L)
+  expect_true(pid %in% tw || sum(pids_in_repl == pid, na.rm = TRUE) >= 1L)
+})

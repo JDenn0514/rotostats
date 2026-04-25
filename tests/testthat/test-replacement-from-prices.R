@@ -66,7 +66,8 @@ test_that("TS-40: basic return structure for replacement_from_prices()", {
     n_teams      = 12L,
     roster_slots = c(C = 1L, `1B` = 1L, `2B` = 1L, `3B` = 1L, SS = 1L,
                      OF = 3L),
-    categories   = c("HR", "R", "RBI", "SB")
+    batting_categories = c("HR", "R", "RBI", "SB"),
+    pitcher_categories = character(0L)
   )
   expect_named(
     result_prices,
@@ -87,7 +88,8 @@ test_that("TS-41: is_keeper = TRUE rows excluded exactly", {
     n_teams      = 12L,
     roster_slots = c(C = 1L, `1B` = 1L, `2B` = 1L, `3B` = 1L, SS = 1L,
                      OF = 3L),
-    categories   = c("HR", "R", "RBI", "SB")
+    batting_categories = c("HR", "R", "RBI", "SB"),
+    pitcher_categories = character(0L)
   )
   # Either valid result or NULL if pool too small
   if (!is.null(result_k)) {
@@ -115,7 +117,8 @@ test_that("TS-42: trim_method=iqr runs without error when is_keeper absent", {
     n_teams       = 12L,
     roster_slots  = c(C = 1L, `1B` = 1L, `2B` = 1L, `3B` = 1L, SS = 1L,
                       OF = 3L),
-    categories    = c("HR", "R", "RBI", "SB"),
+    batting_categories = c("HR", "R", "RBI", "SB"),
+    pitcher_categories = character(0L),
     trim_method   = "iqr"
   )
   if (!is.null(result_trim)) {
@@ -143,7 +146,8 @@ test_that("TS-43: returns NULL + warning when < calibration_min_n players", {
       prices            = prices_sparse,
       n_teams           = 12L,
       roster_slots      = c(OF = 3L),
-      categories        = c("HR", "R", "RBI", "SB"),
+      batting_categories = c("HR", "R", "RBI", "SB"),
+      pitcher_categories = character(0L),
       calibration_min_n = 15L
     ),
     class = "rotostats_warning_calibration_suppressed"
@@ -157,7 +161,8 @@ test_that("TS-44: method = prices in returned params", {
     n_teams      = 12L,
     roster_slots = c(C = 1L, `1B` = 1L, `2B` = 1L, `3B` = 1L, SS = 1L,
                      OF = 3L),
-    categories   = c("HR", "R", "RBI", "SB")
+    batting_categories = c("HR", "R", "RBI", "SB"),
+    pitcher_categories = character(0L)
   )
   if (!is.null(result_p)) {
     expect_equal(result_p$params$method, "prices")
@@ -245,7 +250,8 @@ test_that("TS-49: replacement_from_prices emits rotostats_warning_name_match_fai
       prices        = prices_collision,
       n_teams       = 12L,
       roster_slots  = c(OF = 3L),
-      categories    = c("HR", "R", "RBI", "SB"),
+      batting_categories = c("HR", "R", "RBI", "SB"),
+      pitcher_categories = character(0L),
       verbose       = TRUE
     ),
     class = "rotostats_warning_name_match_failure"
@@ -288,7 +294,8 @@ test_that("T-NMF-1b: collision warning does not alter replacement_stats", {
       prices        = prices_collision,
       n_teams       = 12L,
       roster_slots  = c(OF = 3L),
-      categories    = c("HR", "R", "RBI", "SB"),
+      batting_categories = c("HR", "R", "RBI", "SB"),
+      pitcher_categories = character(0L),
       verbose       = TRUE
     )
   )
@@ -297,7 +304,8 @@ test_that("T-NMF-1b: collision warning does not alter replacement_stats", {
     prices        = prices_clean_equiv,
     n_teams       = 12L,
     roster_slots  = c(OF = 3L),
-    categories    = c("HR", "R", "RBI", "SB"),
+    batting_categories = c("HR", "R", "RBI", "SB"),
+    pitcher_categories = character(0L),
     verbose       = FALSE
   )
 
@@ -334,7 +342,8 @@ test_that("T-NMF-3: rotostats_warning_name_match_failure is suppressed when verb
       prices        = prices_collision,
       n_teams       = 12L,
       roster_slots  = c(OF = 3L),
-      categories    = c("HR", "R", "RBI", "SB"),
+      batting_categories = c("HR", "R", "RBI", "SB"),
+      pitcher_categories = character(0L),
       verbose       = FALSE
     ),
     class = "rotostats_warning_name_match_failure"
@@ -360,7 +369,8 @@ test_that("T-NMF-4: no rotostats_warning_name_match_failure when all names disti
       prices        = prices_clean,
       n_teams       = 12L,
       roster_slots  = c(OF = 3L),
-      categories    = c("HR", "R", "RBI", "SB"),
+      batting_categories = c("HR", "R", "RBI", "SB"),
+      pitcher_categories = character(0L),
       verbose       = TRUE
     ),
     class = "rotostats_warning_name_match_failure"
