@@ -191,6 +191,22 @@ make_concentration_replacement <- function(dominant_cat = "SV", dominant_pct = 0
 }
 
 # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# make_pvm_fixture()
+# Returns a list(replacement, dollar_values) suitable for Task 5.3 test.
+# Uses HR on the batting side and ERA on the pitcher side so the cross-side
+# NA gating is directly observable.
+# ---------------------------------------------------------------------------
+make_pvm_fixture <- function() {
+  cfg  <- make_pvm_config(
+    categories = c("HR", "R", "RBI", "SB", "AVG", "W", "K", "SV", "ERA", "WHIP")
+  )
+  proj <- make_pvm_projections()
+  repl <- replacement_level(proj, cfg, multi_pos = "highest_par")
+  list(replacement = repl)
+}
+
+# ---------------------------------------------------------------------------
 # Pre-built base fixture. Uses delayedAssign so the expression forces only on
 # first access — testthat sources helpers alphabetically, and the body relies
 # on make_projections_data() from helper-test-data.R which loads later.
