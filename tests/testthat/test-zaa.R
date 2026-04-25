@@ -1306,3 +1306,27 @@ test_that("zaa() output has NA for cross-side categories", {
   expect_true(any(is.finite(pitcher_rows$zaa_K)))
   expect_true(any(is.finite(batter_rows$zaa_HR)))
 })
+
+# ===========================================================================
+# Zero-playing-time warning throttling (Task 4.3)
+# ===========================================================================
+test_that("zaa() emits at most one zero-playing-time warning per side per cat", {
+  proj <- make_projections_data(seed = 11L)
+  # Force half the SP pool to have 0 IP — pre-fix would warn N times.
+  sp_idx <- which(proj$pos_eligibility == "SP")
+  proj$IP[sp_idx[1:5]] <- 0
+
+  cfg <- league_config(
+    n_teams            = 4L,
+    roster_slots       = c(C = 1L, `1B` = 1L, OF = 1L),
+    pitcher_slots      = c(SP = 3L, RP = 2L),
+    batting_categories = c("HR", "R"),
+    pitcher_categories = c("ERA")
+  )
+  repl <- replacement_level(proj, cfg)
+
+  warnings_emitted <- testthat::capture_warnings(zaa(replacement = repl))
+  zero_pt <- grep("zero.*playing.*time|0 IP|0 AB", warnings_emitted,
+                  ignore.case = TRUE, value = TRUE)
+  expect_lte(length(zero_pt), 2L)  # one summary per affected cat-side, not per player
+})

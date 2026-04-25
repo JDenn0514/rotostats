@@ -598,7 +598,6 @@ zaa <- function(
   # Per-category rate-stat flag for the union; the side loops select their
   # own slice via match() into this vector.
   is_rate_cat_all <- toupper(categories) %in% c(INVERSE_CATEGORIES, "AVG")
-  rate_warned_denom <- character(0) # track warned denominator columns
 
   # Get unique pool labels
   unique_pools <- unique(pool_labels)
@@ -659,26 +658,25 @@ zaa <- function(
         denom_col <- upper_col_map[denom_col_upper]
         denom_values <- pool_data[[denom_col]]
 
-        # Zero/NA volume check — warn once per denominator column
+        # Zero/NA volume check — accumulate IDs, emit one summary per (side, cat)
         zero_vol <- is.na(denom_values) | denom_values == 0
-        if (any(zero_vol) && !denom_col_upper %in% rate_warned_denom) {
-          affected_ids <- if ("PLAYER_ID" %in% toupper(names(pool_data))) {
-            pool_data[[upper_col_map["PLAYER_ID"]]][zero_vol]
+        if (any(zero_vol)) {
+          zero_pt_ids <- if ("PLAYER_ID" %in% toupper(names(pool_data))) {
+            as.character(pool_data[[upper_col_map["PLAYER_ID"]]][zero_vol])
           } else {
-            pool_rows[zero_vol]
+            as.character(pool_rows[zero_vol])
           }
+          n_zero <- length(zero_pt_ids)
+          sample_ids <- head(zero_pt_ids, 5L)
           cli::cli_warn(
-            paste0(
-              "Player(s) with 0 or NA projected ",
-              denom_col_upper,
-              " in category {.val {cat}}: ",
-              paste(affected_ids, collapse = ", "),
-              ". Rate-stat z-score set to {.code NA}."
+            c(
+              "{n_zero} {side_key} player{cli::qty(n_zero)}{?s} {?has/have} zero \\
+               playing time for {.val {cat}}; their {.val {cat}} z-score is NA.",
+              i = "Sample IDs: {.val {sample_ids}}{cli::qty(n_zero)}{?./...}"
             ),
             class = "rotostats_warning_zero_playing_time",
             call = rlang::caller_env()
           )
-          rate_warned_denom <- c(rate_warned_denom, denom_col_upper)
         }
 
         # Set z_raw to NA for zero-volume players (NA propagates through z_vol)
