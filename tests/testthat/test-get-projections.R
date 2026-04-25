@@ -820,8 +820,9 @@ test_that("get_projections() returns a tibble (API path)", {
 
 test_that("get_projections() returns a tibble (custom path)", {
   custom <- data.frame(
-    name = c("X", "Y"),
-    HR   = c(20, 25),
+    name            = c("X", "Y"),
+    pos_eligibility = c("OF", "1B"),
+    HR              = c(20, 25),
     stringsAsFactors = FALSE
   )
   out <- get_projections(source = "custom", data = custom)
@@ -869,4 +870,44 @@ test_that("get_projections() surfaces invalid mlb_only error class", {
     get_projections(source = "steamer", mlb_only = "yes"),
     class = "rotostats_error_invalid_mlb_only"
   )
+})
+
+test_that("custom source without player_type is auto-classified via pos_eligibility", {
+  custom_df <- data.frame(
+    name            = c("Hitter Bob", "Pitcher Sue"),
+    pos_eligibility = c("OF", "SP"),
+    HR  = c(25L, NA_integer_),
+    R   = c(80L, NA_integer_),
+    K   = c(NA_integer_, 220L),
+    ERA = c(NA_real_, 3.20),
+    stringsAsFactors = FALSE
+  )
+  out <- get_projections(source = "custom", data = custom_df)
+  expect_setequal(out$player_type, c("batter", "pitcher"))
+  expect_equal(out$player_type[out$name == "Hitter Bob"], "batter")
+  expect_equal(out$player_type[out$name == "Pitcher Sue"], "pitcher")
+})
+
+test_that("custom source with player_type column is honored", {
+  custom_df <- data.frame(
+    name        = "Two-Way",
+    player_type = "two_way",
+    HR          = 30L,
+    K           = 200L,
+    stringsAsFactors = FALSE
+  )
+  out <- get_projections(source = "custom", data = custom_df)
+  expect_equal(out$player_type, "two_way")
+})
+
+test_that("custom source without player_type falls back to IP heuristic", {
+  custom_df <- data.frame(
+    name = c("Hitter", "Pitcher"),
+    HR   = c(20L, NA_integer_),
+    IP   = c(NA_real_, 180),
+    stringsAsFactors = FALSE
+  )
+  out <- get_projections(source = "custom", data = custom_df)
+  expect_equal(out$player_type[out$name == "Pitcher"], "pitcher")
+  expect_equal(out$player_type[out$name == "Hitter"], "batter")
 })
