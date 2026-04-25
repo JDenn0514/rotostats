@@ -2,6 +2,13 @@
 
 ## Breaking changes
 
+* `league_config(league_type = "AL")` and `league_type = "NL"` now actually
+  filter the player pool inside `replacement_level()`. Previously the setting
+  only affected DH-slot dropping; the projections were used in full regardless.
+  Downstream `zaa()` / `zar()` / `par()` / `pvm()` results shift accordingly.
+  Use `league_type = "mixed"` to keep the prior behavior. An empty filtered
+  pool aborts with `rotostats_error_empty_league_pool`.
+
 * `league_config()`: the singular `categories` argument is replaced by two
   required arguments, `batting_categories` and `pitcher_categories`. Calls
   using the old single-argument form will fail with
