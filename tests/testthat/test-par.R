@@ -128,7 +128,7 @@ test_that("include_raw = FALSE: only par_[cat] and total_par columns", {
 
   expect_equal(
     sort(names(result)),
-    sort(c(paste0("par_", scored_cats), "total_par"))
+    sort(c("player_type", paste0("par_", scored_cats), "total_par"))
   )
   expect_false(any(grepl("^sgp_", names(result))))
 })
@@ -510,4 +510,31 @@ test_that("R-1b: Delegation identity holds for 10-player toy fixture", {
 
   # total_par == par_HR
   expect_equal(result10$total_par, result10$par_HR, tolerance = 1e-6)
+})
+
+# ---------------------------------------------------------------------------
+# Per-side category scoping (Task 5.2)
+# ---------------------------------------------------------------------------
+
+test_that("par() output respects per-side category scoping", {
+  fx  <- make_par_counting_fixture()
+  out <- par(fx$replacement, fx$denominators, league_history = fx$league_history)
+
+  expect_true("player_type" %in% names(out))
+
+  pitcher_rows <- subset(out, player_type == "pitcher")
+  batter_rows  <- subset(out, player_type == "batter")
+
+  # Hitter cats in pitcher rows: NA, not 0, not non-zero.
+  expect_true(all(is.na(pitcher_rows$par_HR)))
+  expect_true(all(is.na(pitcher_rows$par_R)))
+  expect_true(all(is.na(pitcher_rows$par_SB)))
+
+  # Pitcher cats in hitter rows: NA.
+  expect_true(all(is.na(batter_rows$par_K)))
+  expect_true(all(is.na(batter_rows$par_SV)))
+
+  # total_par uses na.rm = TRUE, so each side has finite within-side total.
+  expect_true(all(is.finite(pitcher_rows$total_par)))
+  expect_true(all(is.finite(batter_rows$total_par)))
 })
