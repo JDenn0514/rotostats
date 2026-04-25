@@ -1545,3 +1545,30 @@ test_that("legacy ERA/WHIP default behavior is preserved (back-compat)", {
   expect_true(all(is.finite(d$denominators)))
   expect_true(all(d$denominators > 0))
 })
+
+test_that("sgp_denominators() derives scoring_categories from split config fields", {
+  cfg <- league_config(
+    n_teams            = 12L,
+    roster_slots       = c(C = 1L, `1B` = 1L, OF = 1L),
+    pitcher_slots      = c(SP = 3L, RP = 3L),
+    batting_categories = c("HR", "R"),
+    pitcher_categories = c("K", "ERA")
+  )
+  # Build a minimal league_history with a team_season frame containing the cats
+  lh <- list(
+    team_season = data.frame(
+      YEAR    = rep(2022:2023, each = 4),
+      TEAM_ID = paste0("T", 1:8),
+      HR      = c(180, 200, 175, 190, 195, 205, 185, 198),
+      R       = c(700, 720, 690, 710, 715, 725, 705, 712),
+      K       = c(1300, 1320, 1280, 1310, 1305, 1325, 1295, 1315),
+      ERA     = c(3.80, 3.95, 4.05, 3.90, 3.85, 4.00, 4.10, 3.92),
+      WHIP    = c(1.25, 1.30, 1.32, 1.27, 1.26, 1.31, 1.33, 1.28),
+      IP      = c(1400, 1420, 1410, 1390, 1405, 1418, 1395, 1412),
+      AB      = c(5500, 5520, 5480, 5510, 5505, 5525, 5495, 5515),
+      stringsAsFactors = FALSE
+    )
+  )
+  denoms <- sgp_denominators(league_history = lh, config = cfg)
+  expect_setequal(names(denoms), c("HR", "R", "K", "ERA"))
+})
