@@ -533,8 +533,10 @@ test_that("TS-10: missing scored category column produces NA and warning", {
   expect_equal(result$sgp_HR, c(25/12, 15/12, 35/12), tolerance = 1e-12)
   expect_true(all(is.na(result$sgp_SB)),
               label = "sgp_SB should be NA for all players when SB column absent")
-  expect_true(all(is.na(result$total_sgp)),
-              label = "total_sgp should be NA when any category is NA")
+  # Updated by split-categories-by-side commit: sgp() now uses
+  # rowSums(na.rm = TRUE) for total_sgp, so an absent category drops out
+  # of the row sum rather than poisoning total_sgp to NA.
+  expect_equal(result$total_sgp, result$sgp_HR, tolerance = 1e-12)
 })
 
 # ---------------------------------------------------------------------------
@@ -945,7 +947,10 @@ test_that("EC-7: single player projections returns exactly 1 row", {
 # ---------------------------------------------------------------------------
 # EC-8: All players have NA values in a scoring category
 # ---------------------------------------------------------------------------
-test_that("EC-8: all-NA scoring category produces all-NA sgp_ column and all-NA total_sgp", {
+test_that("EC-8: all-NA scoring category produces all-NA sgp_ column; total_sgp is 0", {
+  # Updated by split-categories-by-side commit: sgp() now uses
+  # rowSums(na.rm = TRUE) for total_sgp, so an all-NA category column drops
+  # out of the row sum and total_sgp = 0 (the empty sum) rather than NA.
   projections <- data.frame(
     HR = c(NA_real_, NA_real_, NA_real_),
     IP = rep(0L, 3),
@@ -961,8 +966,8 @@ test_that("EC-8: all-NA scoring category produces all-NA sgp_ column and all-NA 
 
   expect_true(all(is.na(result$sgp_HR)),
               label = "All-NA HR projections should yield all-NA sgp_HR")
-  expect_true(all(is.na(result$total_sgp)),
-              label = "total_sgp should be all-NA when sgp_HR is all-NA")
+  expect_equal(result$total_sgp, rep(0, 3),
+               label = "total_sgp = 0 when the only sgp_ column is all-NA (na.rm = TRUE)")
 })
 
 # ---------------------------------------------------------------------------

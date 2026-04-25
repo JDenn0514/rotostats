@@ -189,17 +189,16 @@ test_that("Invariant 3: total_par equals rowSums of par_[cat] columns", {
 })
 
 test_that("Invariant 4: total_sgp equals rowSums of sgp_[cat] when include_raw = TRUE", {
-  # sgp() uses na.rm = FALSE for total_sgp (NA propagates intentionally).
-  # In mixed hitter/pitcher pools, total_sgp will be NA for all players
-  # because every player is missing at least one stat column.
-  # The invariant: total_sgp == rowSums(sgp_[cat], na.rm = FALSE) holds.
-  # Both sides are NA — expect_equal handles NA equality correctly.
+  # Updated by split-categories-by-side commit: sgp() now uses
+  # rowSums(na.rm = TRUE) for total_sgp (matching zaa/zar/par/pvm) so
+  # cross-side NAs do not poison the total. The invariant becomes:
+  # total_sgp == rowSums(sgp_[cat], na.rm = TRUE).
   fx     <- make_par_counting_fixture()
   result <- par(fx$replacement, fx$denominators,
                 league_history = fx$league_history, include_raw = TRUE)
   scored_cats   <- c("HR", "R", "SB", "K", "SV")
   sgp_col_names <- paste0("sgp_", scored_cats)
-  expected_total <- rowSums(result[, sgp_col_names, drop = FALSE], na.rm = FALSE)
+  expected_total <- rowSums(result[, sgp_col_names, drop = FALSE], na.rm = TRUE)
   expect_equal(result$total_sgp, unname(expected_total), tolerance = 1e-10)
 })
 

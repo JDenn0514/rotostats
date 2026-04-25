@@ -406,6 +406,20 @@ sgp <- function(
     .validate_rate_stat_formulas(rate_stat_formulas)
   }
 
+  # Per-category side: "pitcher" or "hitter".
+  # Rate stats: read pool_type from the registry entry.
+  # Counting stats: fall back to .classify_category_side() (which returns
+  # "batter"/"pitcher"); normalize "batter" -> "hitter" for parity with the
+  # registry vocabulary used here.
+  .cat_side <- function(cat) {
+    entry <- effective_registry[[cat]]
+    if (!is.null(entry) && !is.null(entry$pool_type)) {
+      return(entry$pool_type)
+    }
+    s <- .classify_category_side(cat)
+    if (identical(s, "batter")) "hitter" else s
+  }
+
   # Detect rate stats as those scored categories that have a registry entry.
   # (Counting stats are the complement.) Known non-linear rate stats (OPS,
   # wOBA, etc.) that aren't in the registry fall through to the counting
@@ -607,6 +621,29 @@ sgp <- function(
 
   n_players <- nrow(projections)
 
+  # Side classification per row: "hitter", "pitcher", "two_way", or NA.
+  # Used to NA-fill cross-side sgp cells. Rows with NA classification (e.g.,
+  # synthesized replacement rows that lack player_type / pos_eligibility) are
+  # skipped by the cross-side mask so their SGP values are preserved.
+  row_side <- if ("player_type" %in% names(projections)) {
+    pt <- as.character(projections$player_type)
+    # Normalize "batter" -> "hitter" for parity with registry pool_type
+    pt[pt == "batter"] <- "hitter"
+    pt
+  } else if ("POS_ELIGIBILITY" %in% names(projections)) {
+    elig <- projections$POS_ELIGIBILITY
+    rs <- ifelse(grepl(PITCHER_ELIG_REGEX, elig), "pitcher", "hitter")
+    rs[is.na(elig)] <- NA_character_
+    rs
+  } else if ("pos_eligibility" %in% names(projections)) {
+    elig <- projections$pos_eligibility
+    rs <- ifelse(grepl(PITCHER_ELIG_REGEX, elig), "pitcher", "hitter")
+    rs[is.na(elig)] <- NA_character_
+    rs
+  } else {
+    rep(NA_character_, n_players) # cannot classify; skip NA-fill
+  }
+
   # Pre-allocate named list of SGP vectors keyed by sanitized column name.
   sgp_col_names <- .sgp_col_name(scored_cats)
   sgp_cols <- stats::setNames(
@@ -621,6 +658,12 @@ sgp <- function(
       sgp_cols[[col_sgp]] <- rep(NA_real_, n_players)
     } else {
       sgp_cols[[col_sgp]] <- projections[[cat]] / denominators[cat]
+    }
+    # NA-fill rows whose side disagrees with the category's side.
+    side <- .cat_side(cat)
+    if (!is.na(side) && !all(is.na(row_side))) {
+      cross <- !is.na(row_side) & row_side != "two_way" & row_side != side
+      sgp_cols[[col_sgp]][cross] <- NA_real_
     }
   }
 
@@ -681,6 +724,13 @@ sgp <- function(
     sgp_vec[zero_denom] <- NA_real_
 
     sgp_cols[[col_sgp]] <- unname(sgp_vec)
+
+    # NA-fill rows whose side disagrees with the category's side.
+    side <- .cat_side(cat)
+    if (!is.na(side) && !all(is.na(row_side))) {
+      cross <- !is.na(row_side) & row_side != "two_way" & row_side != side
+      sgp_cols[[col_sgp]][cross] <- NA_real_
+    }
   }
 
   # -------------------------------------------------------------------------
@@ -692,10 +742,11 @@ sgp <- function(
     check.names = FALSE
   )
 
-  # total_sgp: rowSums with na.rm = FALSE so NA propagates
+  # total_sgp: rowSums with na.rm = TRUE so cross-side NAs (and absent-stat
+  # NAs) do not poison the total. Matches zaa()/zar()/par()/pvm() design.
   result$total_sgp <- rowSums(
     result[, sgp_col_names, drop = FALSE],
-    na.rm = FALSE
+    na.rm = TRUE
   )
 
   result

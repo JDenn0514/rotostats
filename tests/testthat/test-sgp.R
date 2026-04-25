@@ -326,13 +326,17 @@ test_that("AVG SGP is negative when player AVG is below baseline", {
 # Section 4: total_sgp additivity and NA propagation (AC-1, AC-3)
 # ---------------------------------------------------------------------------
 
-test_that("total_sgp is NA when any sgp_ column is NA (na.rm = FALSE)", {
+test_that("total_sgp ignores all-NA sgp_ columns (na.rm = TRUE)", {
+  # Updated by split-categories-by-side commit: sgp() now uses
+  # rowSums(na.rm = TRUE) for total_sgp, matching zaa/zar/par/pvm so
+  # cross-side NAs (and absent-stat NAs) do not poison the total.
   cats <- c("HR", "R")
   denoms <- make_denominators(cats, values = c(HR = 12.0, R = 15.0))
   lh <- make_league_history()
   lc <- make_league_config()
 
-  # Projections missing R column → sgp_R = NA → total_sgp = NA
+  # Projections missing R column → sgp_R = NA. Under na.rm = TRUE,
+  # total_sgp = sgp_HR (sgp_R is dropped from the row sum).
   proj <- data.frame(HR = c(20, 30))
 
   result <- suppressWarnings(
@@ -340,7 +344,7 @@ test_that("total_sgp is NA when any sgp_ column is NA (na.rm = FALSE)", {
   )
 
   expect_true(all(is.na(result$sgp_R)))
-  expect_true(all(is.na(result$total_sgp)))
+  expect_equal(result$total_sgp, result$sgp_HR, tolerance = 1e-12)
 })
 
 test_that("total_sgp is invariant to column permutation of projections", {
@@ -1370,4 +1374,48 @@ test_that("refactored sgp() matches legacy ERA/WHIP/AVG output exactly (parity)"
   expect_equal(result$sgp_ERA, rep(0, n), tolerance = 1e-10)
   expect_equal(result$sgp_WHIP, rep(0, n), tolerance = 1e-10)
   expect_equal(result$sgp_AVG, rep(0, n), tolerance = 1e-10)
+})
+
+# ---------------------------------------------------------------------------
+# Section: split-categories-by-side cross-side NA-fill
+# ---------------------------------------------------------------------------
+
+test_that("sgp() NA-fills cross-side cells using formula$pool_type", {
+  cats_all <- c("HR", "AVG", "ERA")
+  denoms <- make_denominators(
+    cats_all,
+    values = c(HR = 12.0, AVG = 0.005, ERA = 0.10)
+  )
+  lh <- make_league_history()
+  cfg <- league_config(
+    n_teams            = 12L,
+    roster_slots       = c(C = 1L, `1B` = 1L, OF = 1L),
+    pitcher_slots      = c(SP = 3L, RP = 3L),
+    batting_categories = c("HR", "AVG"),
+    pitcher_categories = c("ERA")
+  )
+
+  # Mixed-side projections
+  proj <- data.frame(
+    player_type = c("batter", "batter", "pitcher", "pitcher"),
+    HR  = c(25, 30, NA, NA),
+    AVG = c(0.270, 0.290, NA, NA),
+    AB  = c(550, 600, NA, NA),
+    ERA = c(NA, NA, 3.50, 4.10),
+    WHIP = c(NA, NA, 1.20, 1.30),
+    IP  = c(NA, NA, 180, 60),
+    stringsAsFactors = FALSE
+  )
+
+  out <- sgp(proj, denoms, league_history = lh, league_config = cfg)
+
+  pit <- which(proj$player_type == "pitcher")
+  bat <- which(proj$player_type == "batter")
+
+  expect_true(all(is.na(out$sgp_HR[pit])))
+  expect_true(all(is.na(out$sgp_AVG[pit])))
+  expect_true(all(is.na(out$sgp_ERA[bat])))
+  # Same-side cells should be non-NA
+  expect_true(all(!is.na(out$sgp_HR[bat])))
+  expect_true(all(!is.na(out$sgp_ERA[pit])))
 })
