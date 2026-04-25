@@ -5,7 +5,6 @@
 # pitchers received a non-NA hitter z-score.
 
 test_that("pitcher rows get NA for hitter categories in zar() output", {
-  skip("Re-enabled in Task 10.1 once split-by-side architecture lands.")
   skip_if_not_installed("withr")
 
   proj <- make_projections_data(seed = 7L)
