@@ -136,6 +136,16 @@ league_config <- function(
   # Convenience union — canonical order is batting first, then pitcher.
   categories <- c(batting_categories, pitcher_categories)
 
+  if (length(categories) == 0L) {
+    cli::cli_abort(
+      c(
+        "At least one scored category is required.",
+        i = "Supply categories via {.arg batting_categories}, {.arg pitcher_categories}, or both."
+      ),
+      class = "rotostats_error_invalid_categories"
+    )
+  }
+
   inverse_categories <- validate_inverse_categories(
     inverse_categories,
     categories
@@ -299,10 +309,10 @@ validate_side_categories <- function(
   canonical_for_side,
   canonical_for_other_side
 ) {
-  if (!is.character(cats) || length(cats) == 0L || any(is.na(cats))) {
+  if (!is.character(cats) || any(is.na(cats))) {
     cli::cli_abort(
       c(
-        "{.arg {arg_name}} must be a non-empty character vector.",
+        "{.arg {arg_name}} must be a character vector (may be empty).",
         i = "Received: {.val {cats}}."
       ),
       class = "rotostats_error_invalid_categories"

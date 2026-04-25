@@ -215,24 +215,37 @@ test_that("league_config() requires batting_categories and pitcher_categories", 
   )
 })
 
-test_that("league_config() rejects empty character vectors for either side", {
-  expect_error(
-    league_config(
-      n_teams            = 12L,
-      roster_slots       = c(C = 1L),
-      pitcher_slots      = 9L,
-      batting_categories = character(0),
-      pitcher_categories = c("W", "K")
-    ),
-    class = "rotostats_error_invalid_categories"
+test_that("league_config() allows empty vector for one side (hitter-only or pitcher-only leagues)", {
+  # hitter-only
+  cfg_hit <- league_config(
+    n_teams            = 12L,
+    roster_slots       = c(C = 1L),
+    pitcher_slots      = 9L,
+    batting_categories = c("HR", "R"),
+    pitcher_categories = character(0L)
   )
+  expect_equal(cfg_hit$batting_categories, c("HR", "R"))
+  expect_equal(cfg_hit$pitcher_categories, character(0L))
+
+  # pitcher-only
+  cfg_pit <- league_config(
+    n_teams            = 12L,
+    roster_slots       = c(C = 1L),
+    pitcher_slots      = 9L,
+    batting_categories = character(0L),
+    pitcher_categories = c("K", "ERA")
+  )
+  expect_equal(cfg_pit$pitcher_categories, c("K", "ERA"))
+})
+
+test_that("league_config() rejects both sides empty", {
   expect_error(
     league_config(
       n_teams            = 12L,
       roster_slots       = c(C = 1L),
       pitcher_slots      = 9L,
-      batting_categories = c("HR", "R"),
-      pitcher_categories = character(0)
+      batting_categories = character(0L),
+      pitcher_categories = character(0L)
     ),
     class = "rotostats_error_invalid_categories"
   )
