@@ -590,12 +590,15 @@ test_that("BENCH-1: sum-to-1 holds for a 2-player hitter-only fixture", {
   # 1 team, 2 1B slots (both rostered); hitter cats only
   cfg <- tryCatch(
     league_config(
-      n_teams      = 1L,
-      roster_slots = c(`1B` = 2L),
-      pitcher_slots = 0L,
-      categories   = c("HR", "R", "RBI", "SB", "AVG"),
-      budget       = 260L,
-      budget_split = 0.67
+      n_teams            = 1L,
+      roster_slots       = c(`1B` = 2L),
+      pitcher_slots      = 0L,
+      batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
+      # pitcher_categories supplied as a placeholder; this fixture only exercises
+      # hitter cats. The placeholder ensures league_config() accepts the call.
+      pitcher_categories = c("K"),
+      budget             = 260L,
+      budget_split       = 0.67
     ),
     error = function(e) NULL
   )
@@ -622,4 +625,18 @@ test_that("BENCH-1: sum-to-1 holds for a 2-player hitter-only fixture", {
               label = paste0("BENCH-1 sum-to-1 for ", col, ": dev=", dev))
   }
   expect_equal(nrow(result), 2L, info = "BENCH-1 must return exactly 2 rows")
+})
+
+# ---------------------------------------------------------------------------
+# TS-PVM-SIDE-1 — cat_pct = "auto" uses config batting/pitcher_categories
+# ---------------------------------------------------------------------------
+test_that("pvm() splits cat_pct correctly using config$batting/pitcher_categories", {
+  fx  <- make_pvm_fixture()
+  out <- pvm(fx$replacement, cat_pct = "auto")
+
+  pitcher_rows <- subset(out, player_type == "pitcher")
+  batter_rows  <- subset(out, player_type == "batter")
+
+  expect_true(all(is.na(pitcher_rows$pvm_HR)))
+  expect_true(all(is.na(batter_rows$pvm_ERA)))
 })

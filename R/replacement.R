@@ -135,7 +135,8 @@ utils::globalVariables(c("PRIMARY_HITTER_SLOTS", "pool_sizes", "sgp"))
 #'   n_teams       = 2L,
 #'   roster_slots  = c(C = 1L, `1B` = 1L),
 #'   pitcher_slots = c(SP = 1L, RP = 1L),
-#'   categories    = c("HR", "RBI"),
+#'   batting_categories = c("HR", "RBI"),
+#'   pitcher_categories = character(0L),
 #'   budget        = 260L
 #' )
 #'
@@ -309,11 +310,13 @@ replacement_level <- function(
   }
 
   # Determine required columns
-  cats_upper <- toupper(config$categories)
+  batting_cats_upper <- toupper(config$batting_categories)
+  pitcher_cats_upper <- toupper(config$pitcher_categories)
+  cats_upper         <- c(batting_cats_upper, pitcher_cats_upper)
   needs_ab <- any(
-    cats_upper %in% c("AVG", "OBP", "SLG", "OPS", "WOBA", "K%", "BB%")
+    c("AVG", "OBP", "SLG", "OPS", "WOBA", "K%", "BB%") %in% batting_cats_upper
   )
-  needs_ip <- TRUE # always need IP for pitcher pool determination
+  needs_ip <- length(pitcher_cats_upper) > 0L
 
   stats_required <- union(
     cats_upper,
@@ -533,7 +536,7 @@ replacement_level <- function(
       z_hitters <- compute_pool_zscores(
         projections[hitter_rows, , drop = FALSE],
         pool_size_h,
-        cats_upper,
+        batting_cats_upper,
         K,
         order_col_h,
         is_pitcher = FALSE
@@ -541,7 +544,7 @@ replacement_level <- function(
       z_pitchers <- compute_pool_zscores(
         projections[pitcher_rows_idx, , drop = FALSE],
         pool_size_p,
-        cats_upper,
+        pitcher_cats_upper,
         K,
         order_col_p,
         is_pitcher = TRUE
@@ -658,12 +661,14 @@ replacement_level <- function(
 
       # Cliff detection on B_lower for a primary stat
       # Use the primary scoring stat for cliff detection
-      primary_cliff_cat <- if (is_pitcher_pos && "ERA" %in% cats_upper) {
+      primary_cliff_cat <- if (is_pitcher_pos && "ERA" %in% pitcher_cats_upper) {
         "ERA"
-      } else if (!is_pitcher_pos && "HR" %in% cats_upper) {
+      } else if (!is_pitcher_pos && "HR" %in% batting_cats_upper) {
         "HR"
+      } else if (is_pitcher_pos) {
+        pitcher_cats_upper[1L]
       } else {
-        cats_upper[1L]
+        batting_cats_upper[1L]
       }
 
       B_lower_vals <- if (
@@ -744,7 +749,7 @@ replacement_level <- function(
       band_df <- projections[B_final, , drop = FALSE]
       repl_line <- compute_replacement_stat_line(
         band_df = band_df,
-        scored_cats = cats_upper,
+        scored_cats = if (is_pitcher_pos) pitcher_cats_upper else batting_cats_upper,
         rate_cats = rate_cats_scored,
         include_ip = include_ip,
         include_ab = include_ab
@@ -897,7 +902,7 @@ replacement_level <- function(
             if (nrow(repl_row) == 0L) {
               return(-Inf)
             }
-            compute_par_at_pos(player_row, repl_row, cats_upper)
+            compute_par_at_pos(player_row, repl_row, batting_cats_upper)
           },
           numeric(1L)
         )
@@ -1030,7 +1035,8 @@ replacement_level <- function(
     projections = projections,
     repl_stats_df = repl_stats_df,
     current_assignments = new_assignments,
-    cats_upper = cats_upper,
+    batting_cats_upper = batting_cats_upper,
+    pitcher_cats_upper = pitcher_cats_upper,
     role = role
   )
 
@@ -1115,7 +1121,10 @@ replacement_level <- function(
 #'   name matching.
 #' @param n_teams Positive integer.  Number of teams in the league.
 #' @param roster_slots Named integer vector.  Roster slots per position.
-#' @param categories Character vector of scored categories.
+#' @param batting_categories Character vector of scored hitter categories.
+#'   May be empty (`character(0L)`) for pitcher-only leagues.
+#' @param pitcher_categories Character vector of scored pitcher categories.
+#'   May be empty (`character(0L)`) for hitter-only leagues.
 #' @param trim_method Character scalar.  `"iqr"` (default) — remove above
 #'   Q3 + 1.5×IQR; `"mad"` — remove above median + 3×MAD; `"kde"` — detect
 #'   trough via kernel density estimation (errors if no trough found).
@@ -1146,10 +1155,11 @@ replacement_level <- function(
 #'
 #' \dontrun{
 #' result <- replacement_from_prices(
-#'   prices        = prices_df,
-#'   n_teams       = 12L,
-#'   roster_slots  = c(C = 1L, `1B` = 1L, SS = 1L, OF = 3L),
-#'   categories    = c("HR", "RBI")
+#'   prices             = prices_df,
+#'   n_teams            = 12L,
+#'   roster_slots       = c(C = 1L, `1B` = 1L, SS = 1L, OF = 3L),
+#'   batting_categories = c("HR", "RBI"),
+#'   pitcher_categories = character(0L)
 #' )
 #' result$replacement_stats
 #' }
@@ -1160,7 +1170,8 @@ replacement_from_prices <- function(
   prices,
   n_teams,
   roster_slots,
-  categories,
+  batting_categories,
+  pitcher_categories,
   trim_method = "iqr",
   calibration_min_n = 15L,
   verbose = FALSE
@@ -1173,7 +1184,10 @@ replacement_from_prices <- function(
   checkmate::assert_data_frame(prices, min.rows = 1L)
   checkmate::assert_int(n_teams, lower = 1L)
   checkmate::assert_integer(roster_slots, names = "named", lower = 0L)
-  checkmate::assert_character(categories, min.len = 1L)
+  checkmate::assert_character(batting_categories, min.len = 0L)
+  checkmate::assert_character(pitcher_categories, min.len = 0L)
+  stopifnot(length(batting_categories) + length(pitcher_categories) >= 1L)
+  categories <- c(batting_categories, pitcher_categories)
 
   required_price_cols <- c("year", "player_name", "price", "pos_eligibility")
   missing_price_cols <- setdiff(required_price_cols, names(prices))
@@ -1368,7 +1382,8 @@ replacement_from_prices <- function(
     pitcher_slots = integer(0L),
     budget = 260L,
     budget_split = 0.67,
-    categories = categories
+    batting_categories = batting_categories,
+    pitcher_categories = pitcher_categories
   )
   class(fake_config) <- c("league_config", "list")
 
@@ -1590,7 +1605,8 @@ replacement_from_prices <- function(
   projections,
   repl_stats_df,
   current_assignments,
-  cats_upper,
+  batting_cats_upper,
+  pitcher_cats_upper,
   role
 ) {
   # Two-way players: those with PAR > 0 in both hitter and pitcher roles
@@ -1630,7 +1646,7 @@ replacement_from_prices <- function(
     par_hit <- compute_par_at_pos(
       projections[i, , drop = FALSE],
       repl_row_hit,
-      cats_upper
+      batting_cats_upper
     )
 
     # Compute PAR as pitcher
@@ -1651,7 +1667,7 @@ replacement_from_prices <- function(
     par_pit <- compute_par_at_pos(
       projections[i, , drop = FALSE],
       repl_row_pit,
-      cats_upper
+      pitcher_cats_upper
     )
 
     if (par_hit > 0 && par_pit > 0) {

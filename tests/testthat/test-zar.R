@@ -409,7 +409,7 @@ test_that("TS-ZAR-11: zar() result carries units='zscore' and anchor='replacemen
 # ===========================================================================
 # TS-ZAR-12 — include_raw = FALSE (default) contains no zaa_* columns
 # ===========================================================================
-test_that("TS-ZAR-12: default call produces only zar_*, total_zar, player_id columns", {
+test_that("TS-ZAR-12: default call produces only zar_*, total_zar, player_id, player_type columns", {
   fixture <- .fixture
   result  <- zar(fixture$replacement)
 
@@ -418,8 +418,8 @@ test_that("TS-ZAR-12: default call produces only zar_*, total_zar, player_id col
     label = "no zaa_* or total_zaa columns in default output"
   )
   expect_true(
-    all(grepl("^zar_|^total_zar$|^player_id$", names(result))),
-    label = "all column names are zar_*, total_zar, or player_id"
+    all(grepl("^zar_|^total_zar$|^player_id$|^player_type$", names(result))),
+    label = "all column names are zar_*, total_zar, player_id, or player_type"
   )
 })
 
@@ -611,4 +611,26 @@ test_that("TS-ZAR-13: two-way player (duplicate player_id) keeps side-specific p
   na_pattern_2 <- is.na(unlist(result[dup_rows[2], zar_cols]))
   expect_false(identical(na_pattern_1, na_pattern_2),
                label = "two-way player rows must have distinct category NA patterns")
+})
+
+# ===========================================================================
+# Per-side category scoping (Task 5.1)
+# ===========================================================================
+test_that("zar() output respects per-side category scoping", {
+  fx <- make_zar_fixture()
+  out <- zar(fx$replacement)
+
+  pitcher_rows <- subset(out, player_type == "pitcher")
+  batter_rows  <- subset(out, player_type == "batter")
+
+  # Pitcher rows: NA for batting cats; finite (or NA-with-reason) for pitcher cats.
+  expect_true(all(is.na(pitcher_rows$zar_HR)))
+  expect_true(all(is.na(pitcher_rows$zar_R)))
+  expect_true(all(is.na(pitcher_rows$zar_SB)))
+  expect_true(all(is.na(batter_rows$zar_K)))
+  expect_true(all(is.na(batter_rows$zar_SV)))
+
+  # total_zar uses na.rm = TRUE so each side's intra-side total is well defined.
+  expect_true(all(is.finite(pitcher_rows$total_zar)))
+  expect_true(all(is.finite(batter_rows$total_zar)))
 })

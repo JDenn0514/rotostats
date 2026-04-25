@@ -176,7 +176,8 @@ cfg <- league_config(
   n_teams       = 2L,
   roster_slots  = c(C = 1L, `1B` = 1L),
   pitcher_slots = c(SP = 1L, RP = 1L),
-  categories    = c("HR", "RBI"),
+  batting_categories = c("HR", "RBI"),
+  pitcher_categories = character(0L),
   budget        = 260L
 )
 

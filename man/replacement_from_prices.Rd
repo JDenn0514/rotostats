@@ -8,7 +8,8 @@ replacement_from_prices(
   prices,
   n_teams,
   roster_slots,
-  categories,
+  batting_categories,
+  pitcher_categories,
   trim_method = "iqr",
   calibration_min_n = 15L,
   verbose = FALSE
@@ -25,7 +26,11 @@ name matching.}
 
 \item{roster_slots}{Named integer vector.  Roster slots per position.}
 
-\item{categories}{Character vector of scored categories.}
+\item{batting_categories}{Character vector of scored hitter categories.
+May be empty (\code{character(0L)}) for pitcher-only leagues.}
+
+\item{pitcher_categories}{Character vector of scored pitcher categories.
+May be empty (\code{character(0L)}) for hitter-only leagues.}
 
 \item{trim_method}{Character scalar.  \code{"iqr"} (default) — remove above
 Q3 + 1.5×IQR; \code{"mad"} — remove above median + 3×MAD; \code{"kde"} — detect
@@ -73,10 +78,11 @@ prices_df <- data.frame(
 
 \dontrun{
 result <- replacement_from_prices(
-  prices        = prices_df,
-  n_teams       = 12L,
-  roster_slots  = c(C = 1L, `1B` = 1L, SS = 1L, OF = 3L),
-  categories    = c("HR", "RBI")
+  prices             = prices_df,
+  n_teams            = 12L,
+  roster_slots       = c(C = 1L, `1B` = 1L, SS = 1L, OF = 3L),
+  batting_categories = c("HR", "RBI"),
+  pitcher_categories = character(0L)
 )
 result$replacement_stats
 }

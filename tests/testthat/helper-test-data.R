@@ -137,3 +137,53 @@ make_projections_data <- function(n_hitters = 120L, n_sp = 80L, n_rp = 40L,
     stringsAsFactors = FALSE
   )
 }
+
+# ---------------------------------------------------------------------------
+# load_projections_fixture()
+#
+# Returns a tibble of recorded steamer projections (25 batters + 25 pitchers)
+# captured from a real `get_projections(source = "steamer", "both")` call.
+# Use in integration tests that want realistic two-sided data — including
+# the FanGraphs cross-side column collision (pitcher rows have non-NA `hr`
+# = HR-allowed, `r` = R-allowed, `avg` = BAA), which is the canonical shape
+# `zaa()` / `replacement_level()` see in production.
+# ---------------------------------------------------------------------------
+
+#' @keywords internal
+load_projections_fixture <- function() {
+  readRDS(testthat::test_path("fixtures", "projections-steamer-both.rds"))
+}
+
+# ---------------------------------------------------------------------------
+# pad_cross_side_columns()
+#
+# Decorates a one-sided test fixture (hitter-only or pitcher-only rows) with
+# NA columns for the absent-side categories. This matches the realistic
+# shape produced by `get_projections()` after `bind_rows()` of batter +
+# pitcher fetches: every union column is present on every row; cells that
+# do not apply to a row's side are NA.
+#
+# Tests after the split-categories-by-side refactor pass this realistic
+# shape so `zaa()` / `replacement_level()` validators see the union of
+# scored-category columns even when only one side has rows.
+#
+# Adds (uppercased): the canonical batting categories + AB if any are
+# missing, and the canonical pitcher categories + IP if any are missing.
+# Existing columns are left untouched.
+# ---------------------------------------------------------------------------
+
+#' @keywords internal
+pad_cross_side_columns <- function(df) {
+  stopifnot(is.data.frame(df))
+  needed <- c(
+    rotostats:::CANONICAL_BATTING_CATEGORIES, "AB",
+    rotostats:::CANONICAL_PITCHER_CATEGORIES, "IP"
+  )
+  have <- toupper(names(df))
+  for (col in needed) {
+    if (!(toupper(col) %in% have)) {
+      df[[col]] <- NA_real_
+    }
+  }
+  df
+}

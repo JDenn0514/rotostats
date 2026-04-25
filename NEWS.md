@@ -1,5 +1,39 @@
 # rotostats (development version)
 
+## Breaking changes
+
+* `league_config()`: the singular `categories` argument is replaced by two
+  required arguments, `batting_categories` and `pitcher_categories`. Calls
+  using the old single-argument form will fail with
+  `rotostats_error_invalid_categories`. The convenience field
+  `config$categories` is preserved as the derived union of both sides.
+
+* `zaa()`, `zar()`, `par()`, `pvm()`: cross-side category cells in the
+  output frame are now `NA` instead of `0` or a contaminated value. For
+  example, a pitcher row's `zar_hr`, `zar_r`, `zar_sb` are `NA`; a hitter
+  row's `zar_k`, `zar_era` are `NA`. The `total_zar` / `total_par` /
+  `total_pvm` columns continue to use `na.rm = TRUE` so each side's
+  intra-side total is unchanged.
+
+* `attr(zaa_out, "distribution")` is now keyed by side first:
+  `attr(zaa_out, "distribution")$batter[[cat]][[pos]]` and similarly for
+  `$pitcher`.
+
+* `replacement_from_prices()`: argument `categories` is replaced by
+  `batting_categories` + `pitcher_categories`.
+
+* The verbose `rotostats_warning_zero_playing_time` warning, which
+  previously fired once per offending player, now emits at most one
+  summary per (side, category) and lists a sample of affected IDs.
+
+## Bug fixes
+
+* `zar()` / `zaa()`: fix cross-side z-score contamination caused by the
+  FanGraphs pitcher endpoint returning columns named `hr` / `r` / `avg`
+  (HR allowed, R allowed, opponent BAA) that collided with hitter columns
+  of the same name. Hitter z-scores are now computed against the hitter
+  pool only; pitcher z-scores against the pitcher pool only.
+
 ## New features
 
 * `get_projections()` fetches current-season projections directly from

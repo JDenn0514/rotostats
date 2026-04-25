@@ -423,19 +423,40 @@ sgp_denominators <- function(
   # ----- 5.4 Category Inference ----------------------------------------------
 
   if (is.null(scoring_categories)) {
-    # Candidate columns: numeric, not in METADATA_COLS, not roto_pts_col, not _PTS
-    pts_cols <- grep(pts_pattern, names(ts), value = TRUE)
-    exclude_from_inference <- c(METADATA_COLS, roto_pts_col_upper, pts_cols)
-    candidate_cols <- names(ts)[
-      vapply(ts, is.numeric, logical(1L)) &
-        !names(ts) %in% exclude_from_inference
-    ]
-    cli::cli_inform(c(
-      "Inferring scoring categories from {.code league_history$team_season} columns:",
-      " " = paste(candidate_cols, collapse = " "),
-      "i" = "Provide {.arg scoring_categories} explicitly to suppress this message."
-    ))
-    scoring_categories <- candidate_cols
+    # Prefer config-derived categories when available: union of
+    # config$batting_categories and config$pitcher_categories. This avoids
+    # the column-name inference fallback in the common case where the user
+    # has already declared their scored categories via league_config().
+    if (!is.null(config) && inherits(config, "league_config") &&
+        (!is.null(config$batting_categories) ||
+           !is.null(config$pitcher_categories))) {
+      scoring_categories <- toupper(c(
+        config$batting_categories,
+        config$pitcher_categories
+      ))
+      missing_cats <- setdiff(scoring_categories, names(ts))
+      if (length(missing_cats) > 0L) {
+        cli::cli_abort(
+          "Scoring category column(s) missing from {.code league_history$team_season}: {.val {missing_cats}}.",
+          class = "rotostats_error_missing_category_column"
+        )
+      }
+    } else {
+      # Existing inference fallback: numeric columns that aren't metadata,
+      # roto_pts_col, or _PTS.
+      pts_cols <- grep(pts_pattern, names(ts), value = TRUE)
+      exclude_from_inference <- c(METADATA_COLS, roto_pts_col_upper, pts_cols)
+      candidate_cols <- names(ts)[
+        vapply(ts, is.numeric, logical(1L)) &
+          !names(ts) %in% exclude_from_inference
+      ]
+      cli::cli_inform(c(
+        "Inferring scoring categories from {.code league_history$team_season} columns:",
+        " " = paste(candidate_cols, collapse = " "),
+        "i" = "Provide {.arg scoring_categories} explicitly to suppress this message."
+      ))
+      scoring_categories <- candidate_cols
+    }
   } else {
     # Normalize to uppercase and validate.
     scoring_categories <- toupper(scoring_categories)

@@ -8,13 +8,6 @@
 # Internal constants
 # ---------------------------------------------------------------------------
 
-#' @noRd
-PVM_PITCHER_CATEGORIES <- c(
-  "W", "K", "SV", "HLD", "SVHD", "QS",
-  "ERA", "WHIP", "FIP", "XFIP", "SIERA", "XERA",
-  "K/9", "BB/9", "HR/9"
-)
-
 # ---------------------------------------------------------------------------
 # Exported function: pvm()
 # ---------------------------------------------------------------------------
@@ -234,8 +227,8 @@ PVM_PITCHER_CATEGORIES <- c(
 #'   pitcher_slots = c(SP = 5L, RP = 3L),
 #'   budget        = 260L,
 #'   budget_split  = 0.67,
-#'   categories    = c("HR", "R", "RBI", "SB", "AVG",
-#'                     "W", "K", "SV", "ERA", "WHIP")
+#'   batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
+#'   pitcher_categories = c("W", "K", "SV", "ERA", "WHIP")
 #' )
 #' # proj   <- <data frame with player projections and PLAYER_ID column>
 #' # repl   <- replacement_level(proj, cfg)
@@ -387,8 +380,10 @@ pvm <- function(
   # ---------------------------------------------------------------------------
   # Step 1 — Extract inputs from replacement object
   # ---------------------------------------------------------------------------
-  repl_stats  <- replacement$replacement_stats
-  scored_cats <- toupper(config$categories)
+  repl_stats         <- replacement$replacement_stats
+  batting_categories <- toupper(config$batting_categories)
+  pitcher_categories <- toupper(config$pitcher_categories)
+  scored_cats        <- c(batting_categories, pitcher_categories)
 
   # Identify rate stats from the RATE_STAT_FORMULAS registry
   rate_stat_registry <- RATE_STAT_FORMULAS
@@ -467,8 +462,8 @@ pvm <- function(
   # ---------------------------------------------------------------------------
   if (is.character(cat_pct) && length(cat_pct) == 1L && !is.na(cat_pct)) {
     if (cat_pct == "auto") {
-      hitter_cats  <- scored_cats[!(scored_cats %in% PVM_PITCHER_CATEGORIES)]
-      pitcher_cats <- scored_cats[scored_cats %in% PVM_PITCHER_CATEGORIES]
+      hitter_cats  <- batting_categories
+      pitcher_cats <- pitcher_categories
       bsplit       <- config$budget_split
       if (is.null(bsplit) || !is.numeric(bsplit) || length(bsplit) != 1L) {
         bsplit <- 0.60
@@ -572,6 +567,22 @@ pvm <- function(
   rostered_proj    <- projections[rostered_mask, , drop = FALSE]
   n_rostered       <- nrow(rostered_proj)
 
+  # Per-row side classification (mirrors par() / zar() convention).
+  # Derives side from assigned valuation position; falls back to POS_ELIGIBILITY.
+  rostered_positions <- player_positions[rostered_mask]
+  is_pitcher_row     <- rostered_positions %in% c("SP", "RP", "P")
+  if (any(is.na(rostered_positions))) {
+    pos_elig_col <- names(rostered_proj)[toupper(names(rostered_proj)) == "POS_ELIGIBILITY"]
+    if (length(pos_elig_col) >= 1L) {
+      na_idx <- which(is.na(rostered_positions))
+      is_pitcher_row[na_idx] <- grepl(
+        PITCHER_ELIG_REGEX,
+        rostered_proj[[pos_elig_col[1L]]][na_idx]
+      )
+    }
+  }
+  is_batter_row <- !is_pitcher_row
+
   # ---------------------------------------------------------------------------
   # Compute position-weighted replacement stat line RS[c]
   # ---------------------------------------------------------------------------
@@ -593,7 +604,7 @@ pvm <- function(
     }
 
     # Determine if this is a hitter or pitcher category to pick slot weights
-    is_pitcher_cat <- cat %in% PVM_PITCHER_CATEGORIES
+    is_pitcher_cat <- cat %in% pitcher_categories
     if (is_pitcher_cat) {
       relevant_pos <- intersect(repl_stats$position, pitcher_pos_names)
       slot_weights <- vapply(relevant_pos, function(p) {
@@ -830,6 +841,15 @@ pvm <- function(
     pvm_mat[, cat] <- contrib_vol[, cat] / Pool[cat]
   }
 
+  # Gate cross-side cells to NA: batting cats → NA for pitchers; pitcher cats →
+  # NA for batters. Mirrors par() / zar() side-scoped gating.
+  for (cat in batting_categories) {
+    if (cat %in% colnames(pvm_mat)) pvm_mat[is_pitcher_row, cat] <- NA_real_
+  }
+  for (cat in pitcher_categories) {
+    if (cat %in% colnames(pvm_mat)) pvm_mat[is_batter_row, cat] <- NA_real_
+  }
+
   # ---------------------------------------------------------------------------
   # Step 7 — Sum invariant check (mode-aware warning)
   # ---------------------------------------------------------------------------
@@ -898,6 +918,15 @@ pvm <- function(
   } else {
     result <- pvm_cols
   }
+
+  # Prepend player_type column (mirrors par() / zar() convention).
+  result <- cbind(
+    data.frame(
+      player_type = ifelse(is_pitcher_row, "pitcher", "batter"),
+      stringsAsFactors = FALSE
+    ),
+    result
+  )
 
   # Preserve row identity from rostered projection rows
   rownames(result) <- rownames(rostered_proj)

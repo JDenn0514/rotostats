@@ -15,14 +15,14 @@ library(testthat)
 # ---------------------------------------------------------------------------
 
 cfg_mixed_12 <- league_config(
-  n_teams       = 12L,
-  roster_slots  = c(C = 1L, `1B` = 1L, `2B` = 1L, `3B` = 1L, SS = 1L,
-                    OF = 3L, UTIL = 1L),
-  pitcher_slots = c(SP = 6L, RP = 3L),
-  categories    = c("HR", "R", "RBI", "SB", "AVG",
-                    "W", "K", "SV", "ERA", "WHIP"),
-  league_type   = "mixed",
-  budget        = 260L
+  n_teams            = 12L,
+  roster_slots       = c(C = 1L, `1B` = 1L, `2B` = 1L, `3B` = 1L, SS = 1L,
+                         OF = 3L, UTIL = 1L),
+  pitcher_slots      = c(SP = 6L, RP = 3L),
+  batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
+  pitcher_categories = c("W", "K", "SV", "ERA", "WHIP"),
+  league_type        = "mixed",
+  budget             = 260L
 )
 
 # ---------------------------------------------------------------------------
@@ -239,14 +239,14 @@ test_that("replacement_level() classifies pitchers when pos_eligibility = 'P'", 
   proj <- rbind(hitters, pitchers)
 
   config <- league_config(
-    n_teams      = 10L,
-    roster_slots = c(C = 2L, `1B` = 1L, `2B` = 1L, SS = 1L, `3B` = 1L,
-                     OF = 5L, UT = 2L, CI = 1L, MI = 1L),
-    pitcher_slots = 11L,
-    categories   = c("AVG", "HR", "R", "RBI", "SB",
-                     "W", "ERA", "WHIP", "SV", "K"),
-    league_type  = "AL",
-    budget_split = 0.5
+    n_teams            = 10L,
+    roster_slots       = c(C = 2L, `1B` = 1L, `2B` = 1L, SS = 1L, `3B` = 1L,
+                           OF = 5L, UT = 2L, CI = 1L, MI = 1L),
+    pitcher_slots      = 11L,
+    batting_categories = c("AVG", "HR", "R", "RBI", "SB"),
+    pitcher_categories = c("W", "ERA", "WHIP", "SV", "K"),
+    league_type        = "AL",
+    budget_split       = 0.5
   )
 
   repl <- replacement_level(proj, config = config)
@@ -322,14 +322,14 @@ test_that("replacement_level() + zar() pipeline produces finite pitcher zar", {
   )
   proj <- rbind(hitters, pitchers)
   config <- league_config(
-    n_teams      = 10L,
-    roster_slots = c(C = 2L, `1B` = 1L, `2B` = 1L, SS = 1L, `3B` = 1L,
-                     OF = 5L, UT = 2L, CI = 1L, MI = 1L),
-    pitcher_slots = 11L,
-    categories   = c("AVG", "HR", "R", "RBI", "SB",
-                     "W", "ERA", "WHIP", "SV", "K"),
-    league_type  = "AL",
-    budget_split = 0.5
+    n_teams            = 10L,
+    roster_slots       = c(C = 2L, `1B` = 1L, `2B` = 1L, SS = 1L, `3B` = 1L,
+                           OF = 5L, UT = 2L, CI = 1L, MI = 1L),
+    pitcher_slots      = 11L,
+    batting_categories = c("AVG", "HR", "R", "RBI", "SB"),
+    pitcher_categories = c("W", "ERA", "WHIP", "SV", "K"),
+    league_type        = "AL",
+    budget_split       = 0.5
   )
 
   result <- zar(replacement_level(proj, config = config))

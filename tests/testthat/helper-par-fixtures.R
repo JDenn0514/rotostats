@@ -25,12 +25,13 @@ make_par_counting_fixture <- function(n_teams = 3L, seed = 99L) {
   projections <- make_projections_data(seed = seed)
 
   config <- league_config(
-    n_teams       = n_teams,
-    roster_slots  = c(C = 1L, `1B` = 1L, OF = 1L),
-    pitcher_slots = c(SP = 1L, RP = 1L),
-    categories    = c("HR", "R", "SB", "K", "SV"),
-    league_type   = "mixed",
-    budget        = 260L
+    n_teams            = n_teams,
+    roster_slots       = c(C = 1L, `1B` = 1L, OF = 1L),
+    pitcher_slots      = c(SP = 1L, RP = 1L),
+    batting_categories = c("HR", "R", "SB"),
+    pitcher_categories = c("K", "SV"),
+    league_type        = "mixed",
+    budget             = 260L
   )
 
   denominators <- c(HR = 30, R = 50, SB = 15, K = 80, SV = 12)
@@ -72,13 +73,14 @@ make_par_rate_fixture <- function(seed = 42L) {
   projections$IP[sp_rows[length(sp_rows)]]  <- 200.0
 
   config <- league_config(
-    n_teams       = 12L,
-    roster_slots  = c(C = 1L, `1B` = 1L, `2B` = 1L, `3B` = 1L, SS = 1L,
-                      OF = 3L, UTIL = 1L),
-    pitcher_slots = c(SP = 6L, RP = 3L),
-    categories    = c("HR", "R", "ERA", "WHIP", "AVG"),
-    league_type   = "mixed",
-    budget        = 260L
+    n_teams            = 12L,
+    roster_slots       = c(C = 1L, `1B` = 1L, `2B` = 1L, `3B` = 1L, SS = 1L,
+                           OF = 3L, UTIL = 1L),
+    pitcher_slots      = c(SP = 6L, RP = 3L),
+    batting_categories = c("HR", "R", "AVG"),
+    pitcher_categories = c("ERA", "WHIP"),
+    league_type        = "mixed",
+    budget             = 260L
   )
 
   # team_season must include all scoring categories for sgp_denominators().

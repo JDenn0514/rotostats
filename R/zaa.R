@@ -74,17 +74,27 @@
 #'
 #' @return A data frame with one row per player in the selected pool, columns
 #'   `zaa_<CAT>` for each scored category in `config$categories` order, and
-#'   `total_zaa`. If `player_id` is present in the working stats, it is
-#'   prepended as the first column. Three attributes are set:
+#'   `total_zaa`. Pitcher rows carry `NA` (not 0) in `zaa_<batting_cat>`
+#'   columns; batter rows carry `NA` in `zaa_<pitcher_cat>` columns; this
+#'   matches the per-side z-score scoping (each side is normalized only
+#'   against same-side projection pools). `total_zaa` is `rowSums(...,
+#'   na.rm = TRUE)` so cross-side `NA`s contribute 0 rather than
+#'   propagating. If `player_id` is present in the working stats it is
+#'   prepended as the first column, followed by a `player_type` column
+#'   (`"batter"` / `"pitcher"`) used by downstream consumers and tests to
+#'   subset rows by side. Three attributes are set:
 #'   \describe{
 #'     \item{`attr(result, "units")`}{`"zscore"`}
 #'     \item{`attr(result, "anchor")`}{`"average"`}
-#'     \item{`attr(result, "distribution")`}{Nested or flat list of per-pool,
-#'       per-category distribution parameters. For counting stats: `list(mean,
-#'       sd)`. For rate stats: `list(mean, sd, sd_vol)` where `sd_vol` is the
-#'       population SD of the volume-weighted z-scores (Step 2b denominator),
-#'       used by `zar()` to score replacement lines without re-running `zaa()`.
-#'       Schema: nested (position-keyed -> category-keyed) when
+#'     \item{`attr(result, "distribution")`}{List keyed by side
+#'       (`batter`, `pitcher`); each side maps either category -> entry
+#'       (flat schema, used for combined pools) or pool-label ->
+#'       category -> entry (nested schema, used for positional/split
+#'       pools). Each entry is `list(mean, sd)` for counting stats; rate
+#'       stats add `sd_vol` (the population SD of volume-weighted
+#'       z-scores; Step 2b denominator) used by `zar()` to score
+#'       replacement lines without re-running `zaa()`. Inner schema:
+#'       nested (pool-keyed -> category-keyed) when
 #'       `hitter_pool = "positional"`; flat (category-keyed) when
 #'       `hitter_pool = "combined"`. Pitchers: nested when
 #'       `pitcher_pool = "split"`, flat otherwise.}
@@ -118,7 +128,8 @@
 #'   pitcher_slots = 9,
 #'   budget = 260L,
 #'   budget_split = 0.67,
-#'   categories = c("HR", "R")
+#'   batting_categories = c("HR", "R"),
+#'   pitcher_categories = character(0L)
 #' )
 #' # proj <- <data frame of projections>
 #' # result <- zaa(stats = proj, config = cfg)
@@ -276,6 +287,13 @@ zaa <- function(
     )
   }
 
+  # Side-scoped category vectors (Phase 2). The union (`categories`) is kept
+  # for whole-frame validations (column presence, type checks) and for output
+  # column emission; per-side z-score computation in Step 2 below uses
+  # `batting_categories` against hitter pools and `pitcher_categories`
+  # against pitcher pools so cross-side cells stay NA.
+  batting_categories <- working_config$batting_categories
+  pitcher_categories <- working_config$pitcher_categories
   categories <- working_config$categories
   stats_cols <- toupper(names(working_stats))
   cat_upper <- toupper(categories)
@@ -455,6 +473,7 @@ zaa <- function(
       if ("PLAYER_ID" %in% toupper(names(working_stats))) {
         upper_col_map["PLAYER_ID"]
       },
+      "player_type",
       zaa_cols_empty,
       "total_zaa"
     )
@@ -464,7 +483,9 @@ zaa <- function(
     )
     attr(result, "units") <- "zscore"
     attr(result, "anchor") <- "average"
-    attr(result, "distribution") <- list()
+    # Distribution attribute keeps the new side-keyed schema even when the
+    # frame is empty so consumers can rely on a stable shape.
+    attr(result, "distribution") <- list(batter = list(), pitcher = list())
     return(result)
   }
 
@@ -555,7 +576,9 @@ zaa <- function(
   # Step 2 — Within-pool z-scores
   # ---------------------------------------------------------------------------
 
-  # Initialize z-score matrix (players x categories)
+  # Initialize z-score matrix (players x categories). Cells stay NA when
+  # a row's side does not score that category (e.g. hitter rows are NA for
+  # zaa_K / zaa_SV / zaa_ERA; pitcher rows are NA for zaa_HR / zaa_R / zaa_SB).
   zaa_col_names <- .zaa_col_name(categories)
   zaa_matrix <- matrix(
     NA_real_,
@@ -564,12 +587,18 @@ zaa <- function(
     dimnames = list(NULL, zaa_col_names)
   )
 
-  # Distribution attribute storage
-  distribution <- list()
+  # Distribution attribute storage. Keyed by side first
+  # (`distribution$batter`, `distribution$pitcher`); inner shape preserves
+  # the legacy nested-vs-flat schema described in the function's @return.
+  distribution <- list(batter = list(), pitcher = list())
 
-  # Identify rate stats: INVERSE_CATEGORIES or AVG
-  is_rate_cat <- toupper(categories) %in% c(INVERSE_CATEGORIES, "AVG")
-  rate_warned_denom <- character(0) # track warned denominator columns
+  # Position-aligned column-name lookup keyed by category-upper.
+  # Same shape as zaa_col_names so we can index by category index.
+  zaa_col_by_cat <- stats::setNames(zaa_col_names, categories)
+
+  # Per-category rate-stat flag for the union; the side loops select their
+  # own slice via match() into this vector.
+  is_rate_cat_all <- toupper(categories) %in% c(INVERSE_CATEGORIES, "AVG")
 
   # Get unique pool labels
   unique_pools <- unique(pool_labels)
@@ -583,14 +612,27 @@ zaa <- function(
       next
     }
 
-    for (ci in seq_along(categories)) {
-      cat <- categories[ci]
+    # Side scoping: a pool is either a batter pool or a pitcher pool, and
+    # only the side's own categories get z-scores against this pool. Cells
+    # for cross-side cats stay NA (initial fill of zaa_matrix).
+    is_pitcher_pool <- pool_lbl %in% c("ALL_PITCHERS", "SP", "RP", "P")
+    side_key <- if (is_pitcher_pool) "pitcher" else "batter"
+    side_categories <- if (is_pitcher_pool) {
+      pitcher_categories
+    } else {
+      batting_categories
+    }
+
+    for (ci in seq_along(side_categories)) {
+      cat <- side_categories[ci]
       cat_upper_i <- toupper(cat)
       col_name <- upper_col_map[cat_upper_i]
-      zaa_col <- zaa_col_names[ci]
+      zaa_col <- zaa_col_by_cat[[cat]]
+      # Rate-stat flag for this category, taken from the union slice.
+      is_rate_cat_i <- is_rate_cat_all[match(cat, categories)]
       cat_values <- pool_data[[col_name]]
 
-      if (is_rate_cat[ci]) {
+      if (isTRUE(is_rate_cat_i)) {
         # ------------------------------------------------------------------
         # Step 2a — Rate stat: raw z-score (unweighted)
         # ------------------------------------------------------------------
@@ -617,26 +659,25 @@ zaa <- function(
         denom_col <- upper_col_map[denom_col_upper]
         denom_values <- pool_data[[denom_col]]
 
-        # Zero/NA volume check — warn once per denominator column
+        # Zero/NA volume check — accumulate IDs, emit one summary per (side, cat)
         zero_vol <- is.na(denom_values) | denom_values == 0
-        if (any(zero_vol) && !denom_col_upper %in% rate_warned_denom) {
-          affected_ids <- if ("PLAYER_ID" %in% toupper(names(pool_data))) {
-            pool_data[[upper_col_map["PLAYER_ID"]]][zero_vol]
+        if (any(zero_vol)) {
+          zero_pt_ids <- if ("PLAYER_ID" %in% toupper(names(pool_data))) {
+            as.character(pool_data[[upper_col_map["PLAYER_ID"]]][zero_vol])
           } else {
-            pool_rows[zero_vol]
+            as.character(pool_rows[zero_vol])
           }
+          n_zero <- length(zero_pt_ids)
+          sample_ids <- head(zero_pt_ids, 5L)
           cli::cli_warn(
-            paste0(
-              "Player(s) with 0 or NA projected ",
-              denom_col_upper,
-              " in category {.val {cat}}: ",
-              paste(affected_ids, collapse = ", "),
-              ". Rate-stat z-score set to {.code NA}."
+            c(
+              "{n_zero} {side_key} player{cli::qty(n_zero)}{?s} {?has/have} zero \\
+               playing time for {.val {cat}}; their {.val {cat}} z-score is NA.",
+              i = "Sample IDs: {.val {sample_ids}}{cli::qty(n_zero)}{?./...}"
             ),
             class = "rotostats_warning_zero_playing_time",
             call = rlang::caller_env()
           )
-          rate_warned_denom <- c(rate_warned_denom, denom_col_upper)
         }
 
         # Set z_raw to NA for zero-volume players (NA propagates through z_vol)
@@ -682,10 +723,12 @@ zaa <- function(
         dist_entry <- list(mean = mean_c, sd = sd_c)
       }
 
-      # Store in distribution with correct schema:
-      # - Nested (position-keyed -> category-keyed) when pool uses positional schema
-      # - Flat (category-keyed) when pool uses combined schema
-      is_pitcher_pool <- pool_lbl %in% c("ALL_PITCHERS", "SP", "RP")
+      # Store in distribution with correct schema. Outer key is the side
+      # (`batter` / `pitcher`); inner shape preserves the legacy
+      # nested-vs-flat schema:
+      #   - Nested (position-keyed -> category-keyed) under
+      #     positional/split pool settings.
+      #   - Flat (category-keyed) under combined pool settings.
       use_nested <- if (is_pitcher_pool) {
         pitcher_pool == "split"
       } else {
@@ -693,12 +736,12 @@ zaa <- function(
       }
 
       if (use_nested) {
-        if (is.null(distribution[[pool_lbl]])) {
-          distribution[[pool_lbl]] <- list()
+        if (is.null(distribution[[side_key]][[pool_lbl]])) {
+          distribution[[side_key]][[pool_lbl]] <- list()
         }
-        distribution[[pool_lbl]][[cat]] <- dist_entry
+        distribution[[side_key]][[pool_lbl]][[cat]] <- dist_entry
       } else {
-        distribution[[cat]] <- dist_entry
+        distribution[[side_key]][[cat]] <- dist_entry
       }
     }
   }
@@ -707,8 +750,13 @@ zaa <- function(
   # Step 3 — Sum across all scored categories (total_zaa)
   # ---------------------------------------------------------------------------
 
-  # na.rm = FALSE: any NA per-category z-score propagates to total_zaa
-  total_zaa <- rowSums(zaa_matrix, na.rm = FALSE)
+  # na.rm = TRUE: cross-side NAs (e.g. zaa_HR for a pitcher row, zaa_K for a
+  # hitter row) contribute 0 instead of propagating to total_zaa, so each
+  # side's intra-side total stays well-defined. NAs from same-side reasons
+  # (e.g. zero playing time on a rate stat) still fall under na.rm = TRUE
+  # here; consumers that want strict propagation can recompute from the
+  # per-cat columns.
+  total_zaa <- rowSums(zaa_matrix, na.rm = TRUE)
 
   # ---------------------------------------------------------------------------
   # Step 4 — Apply weight_method or category_weight to total_zaa
@@ -745,7 +793,7 @@ zaa <- function(
       }
       total_zaa[pos_rows] <- rowSums(
         zaa_matrix[pos_rows, , drop = FALSE],
-        na.rm = FALSE
+        na.rm = TRUE
       ) *
         category_weight[[pos_label]]
     }
@@ -782,7 +830,7 @@ zaa <- function(
         )
         total_zaa[pos_rows] <- rowSums(
           zaa_matrix[pos_rows, , drop = FALSE],
-          na.rm = FALSE
+          na.rm = TRUE
         ) *
           multiplier
       }
@@ -815,7 +863,7 @@ zaa <- function(
       )
       total_zaa[pos_rows] <- rowSums(
         zaa_matrix[pos_rows, , drop = FALSE],
-        na.rm = FALSE
+        na.rm = TRUE
       ) *
         multiplier
     }
@@ -826,12 +874,20 @@ zaa <- function(
   # Step 5 — Output construction
   # ---------------------------------------------------------------------------
 
-  # Column order: player_id (if present), zaa_<cat> in config$categories order, total_zaa
+  # Column order: player_id (if present), player_type, zaa_<cat> in
+  # config$categories order, total_zaa.
   result_list <- list()
 
   if ("PLAYER_ID" %in% toupper(names(working_stats))) {
     result_list[["player_id"]] <- working_stats[[upper_col_map["PLAYER_ID"]]]
   }
+
+  # Per-row side classification used by downstream consumers and tests to
+  # filter pitcher rows from batter rows. Aligned positionally with the
+  # zaa_matrix rows. We reuse `is_pitcher` (computed during pool labeling)
+  # rather than re-deriving from row_pools, so two-way players keep
+  # whichever side this row's pool label assigned.
+  result_list[["player_type"]] <- ifelse(is_pitcher, "pitcher", "batter")
 
   for (ci in seq_along(zaa_col_names)) {
     result_list[[zaa_col_names[ci]]] <- unname(zaa_matrix[, zaa_col_names[ci]])

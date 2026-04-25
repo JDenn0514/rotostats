@@ -60,7 +60,10 @@ get_projections <- function(source      = "steamer",
   data        <- .validate_custom_data(source, data)
   mlb_only    <- .validate_mlb_only(mlb_only)
 
-  if (source == "custom") return(tibble::as_tibble(data))
+  if (source == "custom") {
+    data <- .classify_custom_player_type(data)
+    return(tibble::as_tibble(data))
+  }
 
   tibble::as_tibble(
     .fetch_and_assemble_projections(source, player_type, mlb_only)

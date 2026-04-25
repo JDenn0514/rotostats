@@ -32,19 +32,44 @@ make_repl <- function(projections, config,
 }
 
 # ---------------------------------------------------------------------------
+# Canonical batting / pitcher category lists used to bucket a flat `categories`
+# vector into the new league_config() split signature.
+# ---------------------------------------------------------------------------
+.zaa_batting_cats <- c("HR", "R", "RBI", "SB", "AVG", "OPS")
+.zaa_pitcher_cats <- c("W", "K", "SV", "HLD", "QS", "SVHD",
+                       "ERA", "WHIP", "FIP", "XFIP", "SIERA", "XERA",
+                       "K/9", "BB/9", "HR/9")
+
+# ---------------------------------------------------------------------------
 # make_zaa_cfg() — thin wrapper around league_config()
+#
+# Accepts a flat `categories` vector for backwards-compatible call sites and
+# partitions it into the new batting_categories / pitcher_categories split
+# required by league_config(). If a side ends up empty, supplies a placeholder
+# canonical category so league_config() accepts the call (the fixture only
+# exercises the populated side).
 # ---------------------------------------------------------------------------
 make_zaa_cfg <- function(categories,
                           n_teams       = 12L,
                           roster_slots  = c(C = 2L, "1B" = 2L, OF = 3L),
                           pitcher_slots = c(SP = 3L, RP = 2L),
                           league_type   = "mixed") {
+  batting <- intersect(categories, .zaa_batting_cats)
+  pitcher <- intersect(categories, .zaa_pitcher_cats)
+
+  # Placeholder fill-ins for hitter-only or pitcher-only fixtures. The
+  # placeholder ensures league_config() accepts the call; the fixture only
+  # exercises the populated side.
+  if (length(batting) == 0L) batting <- "HR"
+  if (length(pitcher) == 0L) pitcher <- "K"
+
   league_config(
-    n_teams       = n_teams,
-    roster_slots  = roster_slots,
-    pitcher_slots = pitcher_slots,
-    categories    = categories,
-    league_type   = league_type
+    n_teams            = n_teams,
+    roster_slots       = roster_slots,
+    pitcher_slots      = pitcher_slots,
+    batting_categories = batting,
+    pitcher_categories = pitcher,
+    league_type        = league_type
   )
 }
 

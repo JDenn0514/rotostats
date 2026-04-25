@@ -112,7 +112,8 @@
 #'   pitcher_slots = 9,
 #'   budget = 260L,
 #'   budget_split = 0.67,
-#'   categories = c("HR", "R")
+#'   batting_categories = c("HR", "R"),
+#'   pitcher_categories = character(0L)
 #' )
 #' # proj   <- <data frame of projections>
 #' # repl   <- replacement_level(proj, cfg)
@@ -220,26 +221,41 @@ zar <- function(
   # ---------------------------------------------------------------------------
 
   distribution <- attr(zaa_result, "distribution")
+  batting_categories <- config$batting_categories
+  pitcher_categories <- config$pitcher_categories
   categories <- config$categories
 
   # Identify which positions are in replacement_stats
   repl_positions <- unique(replacement_stats$position)
 
   # Build zar_repl: named list keyed by position, each entry a named numeric
-  # vector keyed by category.
+  # vector keyed by category. Cross-side categories (e.g. K for a hitter
+  # position) stay NA — they are never overwritten — so the per-row
+  # subtraction propagates NA into the cross-side cells of zar_matrix.
   zar_repl <- vector("list", length(repl_positions))
   names(zar_repl) <- repl_positions
 
   for (pos in repl_positions) {
-    # Determine the distribution extraction path for this position
-    # Pitchers: split -> nested under pos; combined/none -> flat
-    # Hitters:  positional -> nested under pos; combined -> flat
+    # Determine the distribution extraction path for this position.
+    # Phase 4 schema: distribution is keyed by side first (batter/pitcher),
+    # then either flat (cat) for combined pools or nested (pool -> cat) for
+    # positional/split pools.
     is_pitcher_pos <- pos %in% c("SP", "RP", "P")
+    side_key <- if (is_pitcher_pos) "pitcher" else "batter"
+    side_dist <- distribution[[side_key]]
 
     if (is_pitcher_pos) {
       use_nested <- identical(pitcher_pool, "split")
     } else {
       use_nested <- identical(hitter_pool, "positional")
+    }
+
+    # Per-side categories: only iterate the side's own scored categories so
+    # cross-side cells (e.g. zar_K for a hitter row) stay NA.
+    side_categories <- if (is_pitcher_pos) {
+      pitcher_categories
+    } else {
+      batting_categories
     }
 
     # Get the replacement stat row for this position (use toupper for safety)
@@ -254,14 +270,15 @@ zar <- function(
       categories
     )
 
-    for (cat in categories) {
+    for (cat in side_categories) {
       cat_upper <- toupper(cat)
 
-      # Extract distribution entry for this category / pool
+      # Extract distribution entry for this category / pool from the
+      # side-keyed schema established by zaa() in Phase 4.
       if (use_nested) {
-        dist_entry <- distribution[[pos]][[cat]]
+        dist_entry <- side_dist[[pos]][[cat]]
       } else {
-        dist_entry <- distribution[[cat]]
+        dist_entry <- side_dist[[cat]]
       }
 
       # Get the replacement-band stat value (use toupper for column lookup)
@@ -430,6 +447,13 @@ zar <- function(
 
   if ("player_id" %in% names(zaa_result)) {
     result_list[["player_id"]] <- zaa_result[["player_id"]]
+  }
+
+  # Carry per-row player_type ("batter" / "pitcher") through from zaa() so
+  # downstream consumers can subset rows by side without re-deriving from
+  # position labels. Aligned positionally with zar_matrix rows.
+  if ("player_type" %in% names(zaa_result)) {
+    result_list[["player_type"]] <- zaa_result[["player_type"]]
   }
 
   if (include_raw) {

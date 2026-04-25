@@ -1160,3 +1160,45 @@ kde_trough <- function(x) {
 
   min(trough_x)
 }
+
+# ---------------------------------------------------------------------------
+# §  Projection pool partitioning
+# ---------------------------------------------------------------------------
+
+#' Split a projections data frame into batter and pitcher subsets
+#'
+#' @param df A data frame of projections.  Must contain either a
+#'   `player_type` column (values `"batter"`, `"pitcher"`, `"two_way"`) or a
+#'   `pos_eligibility` column matched against [PITCHER_ELIG_REGEX].
+#'
+#' @return A named list with elements `batter` and `pitcher`, each a subset
+#'   of `df`.  Two-way players (when identified via `player_type`) appear in
+#'   both subsets.
+#'
+#' @noRd
+.partition_projections_by_side <- function(df) {
+  stopifnot(is.data.frame(df))
+
+  if ("player_type" %in% names(df)) {
+    pt <- df$player_type
+    bat_idx <- which(pt %in% c("batter", "two_way"))
+    pit_idx <- which(pt %in% c("pitcher", "two_way"))
+  } else if ("pos_eligibility" %in% names(df)) {
+    is_pit <- grepl(PITCHER_ELIG_REGEX, df$pos_eligibility)
+    bat_idx <- which(!is_pit)
+    pit_idx <- which(is_pit)
+  } else {
+    cli::cli_abort(
+      c(
+        "Cannot partition projections by side.",
+        i = "Need either {.field player_type} or {.field pos_eligibility} column.",
+        i = "Columns present: {.val {names(df)}}."
+      ),
+      class = "rotostats_error_missing_column"
+    )
+  }
+  list(
+    batter  = df[bat_idx, , drop = FALSE],
+    pitcher = df[pit_idx, , drop = FALSE]
+  )
+}

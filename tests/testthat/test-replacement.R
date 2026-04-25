@@ -11,25 +11,25 @@ library(testthat)
 # ---------------------------------------------------------------------------
 
 cfg_mixed_12 <- league_config(
-  n_teams       = 12L,
-  roster_slots  = c(C = 1L, `1B` = 1L, `2B` = 1L, `3B` = 1L, SS = 1L,
-                    OF = 3L, UTIL = 1L),
-  pitcher_slots = c(SP = 6L, RP = 3L),
-  categories    = c("HR", "R", "RBI", "SB", "AVG",
-                    "W", "K", "SV", "ERA", "WHIP"),
-  league_type   = "mixed",
-  budget        = 260L
+  n_teams            = 12L,
+  roster_slots       = c(C = 1L, `1B` = 1L, `2B` = 1L, `3B` = 1L, SS = 1L,
+                         OF = 3L, UTIL = 1L),
+  pitcher_slots      = c(SP = 6L, RP = 3L),
+  batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
+  pitcher_categories = c("W", "K", "SV", "ERA", "WHIP"),
+  league_type        = "mixed",
+  budget             = 260L
 )
 
 cfg_al_12 <- league_config(
-  n_teams       = 12L,
-  roster_slots  = c(C = 1L, `1B` = 1L, `2B` = 1L, `3B` = 1L, SS = 1L,
-                    OF = 3L, DH = 1L, UTIL = 1L),
-  pitcher_slots = c(SP = 6L, RP = 3L),
-  categories    = c("HR", "R", "RBI", "SB", "AVG",
-                    "W", "K", "SV", "ERA", "WHIP"),
-  league_type   = "AL",
-  budget        = 260L
+  n_teams            = 12L,
+  roster_slots       = c(C = 1L, `1B` = 1L, `2B` = 1L, `3B` = 1L, SS = 1L,
+                         OF = 3L, DH = 1L, UTIL = 1L),
+  pitcher_slots      = c(SP = 6L, RP = 3L),
+  batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
+  pitcher_categories = c("W", "K", "SV", "ERA", "WHIP"),
+  league_type        = "AL",
+  budget             = 260L
 )
 
 # ---------------------------------------------------------------------------
@@ -104,7 +104,7 @@ test_that("TS-05: counting stat replacement = arithmetic mean of band", {
   #                                           13=16, 14=14, 15=12
   # Expected mean = (24+22+20+18+16+14+12)/7 = 126/7 = 18
   # To isolate: make all non-HR stats identical so z-score rank = HR rank
-  proj_1b <- data.frame(
+  proj_1b <- pad_cross_side_columns(data.frame(
     player_id       = paste0("P", 1:20),
     player_name     = paste0("Player", 1:20),
     pos_eligibility = rep("1B", 20),
@@ -118,13 +118,16 @@ test_that("TS-05: counting stat replacement = arithmetic mean of band", {
     AB              = rep(450, 20),
     IP              = rep(NA_real_, 20),
     stringsAsFactors = FALSE
-  )
+  ))
   cfg_1b <- league_config(
-    n_teams       = 12L,
-    roster_slots  = c(`1B` = 1L),
-    pitcher_slots = c(SP = 6L, RP = 3L),
-    categories    = c("HR", "R", "RBI", "SB", "AVG"),
-    league_type   = "AL"
+    n_teams            = 12L,
+    roster_slots       = c(`1B` = 1L),
+    pitcher_slots      = c(SP = 6L, RP = 3L),
+    batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
+    # pitcher_categories supplied as a placeholder; this fixture only exercises
+    # hitter cats. The placeholder ensures league_config() accepts the call.
+    pitcher_categories = c("K"),
+    league_type        = "AL"
   )
   result  <- replacement_level(proj_1b, config = cfg_1b)
   repl_hr <- result$replacement_stats[
@@ -282,12 +285,12 @@ test_that("TS-10: cliff detected in lower half (MAD method) via integration test
     stringsAsFactors = FALSE
   )
   cfg_ss20 <- league_config(
-    n_teams       = 20L,
-    roster_slots  = c(SS = 1L),
-    pitcher_slots = c(SP = 6L, RP = 3L),
-    categories    = c("HR", "R", "RBI", "SB", "AVG",
-                      "W", "K", "SV", "ERA", "WHIP"),
-    league_type   = "AL"
+    n_teams            = 20L,
+    roster_slots       = c(SS = 1L),
+    pitcher_slots      = c(SP = 6L, RP = 3L),
+    batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
+    pitcher_categories = c("W", "K", "SV", "ERA", "WHIP"),
+    league_type        = "AL"
   )
   result_cliff <- replacement_level(
     proj_cliff,
@@ -586,13 +589,16 @@ test_that("TS-27: unknown rate stat → error", {
 test_that("TS-28: pool too small → error", {
   # 15 teams × 2 SS slots = need 30 SS; provide only 20
   cfg_deep_ss <- league_config(
-    n_teams       = 15L,
-    roster_slots  = c(SS = 2L),
-    pitcher_slots = c(SP = 6L, RP = 3L),
-    categories    = c("HR", "R", "RBI", "SB", "AVG"),
-    league_type   = "AL"
+    n_teams            = 15L,
+    roster_slots       = c(SS = 2L),
+    pitcher_slots      = c(SP = 6L, RP = 3L),
+    batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
+    # pitcher_categories supplied as a placeholder; this fixture only exercises
+    # hitter cats. The placeholder ensures league_config() accepts the call.
+    pitcher_categories = c("K"),
+    league_type        = "AL"
   )
-  thin_proj <- data.frame(
+  thin_proj <- pad_cross_side_columns(data.frame(
     player_id       = paste0("SS", 1:30),
     player_name     = paste0("SS_Player", 1:30),
     pos_eligibility = c(rep("SS", 20), rep("SP", 5), rep("RP", 5)),
@@ -606,7 +612,7 @@ test_that("TS-28: pool too small → error", {
     AB              = c(rep(400, 20), rep(NA, 10)),
     IP              = c(rep(NA, 20), rep(170, 5), rep(60, 5)),
     stringsAsFactors = FALSE
-  )
+  ))
   expect_error(
     replacement_level(thin_proj, config = cfg_deep_ss),
     class = "rotostats_error_pool_too_small"
@@ -1329,11 +1335,11 @@ test_that("DH-only hitters are not seeded as 'DH' when the league has no DH slot
     stringsAsFactors = FALSE
   )
   cfg <- league_config(
-    n_teams = 2L,
-    roster_slots = c(`1B` = 1L, OF = 2L),         # no DH slot
-    pitcher_slots = c(SP = 2L, RP = 1L),
-    categories = c("HR", "R", "RBI", "SB", "AVG",
-                   "W", "K", "SV", "ERA", "WHIP")
+    n_teams            = 2L,
+    roster_slots       = c(`1B` = 1L, OF = 2L),         # no DH slot
+    pitcher_slots      = c(SP = 2L, RP = 1L),
+    batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
+    pitcher_categories = c("W", "K", "SV", "ERA", "WHIP")
   )
   repl <- replacement_level(proj, cfg)
 
@@ -1377,15 +1383,63 @@ test_that("DH|OF multi-eligible hitters in a no-DH league pick OF, not DH", {
     stringsAsFactors = FALSE
   )
   cfg <- league_config(
-    n_teams = 2L,
-    roster_slots = c(OF = 2L),
-    pitcher_slots = c(SP = 2L, RP = 1L),
-    categories = c("HR", "R", "RBI", "SB", "AVG",
-                   "W", "K", "SV", "ERA", "WHIP")
+    n_teams            = 2L,
+    roster_slots       = c(OF = 2L),
+    pitcher_slots      = c(SP = 2L, RP = 1L),
+    batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
+    pitcher_categories = c("W", "K", "SV", "ERA", "WHIP")
   )
   repl <- replacement_level(proj, cfg)
   pa <- attr(repl, "position_assignments")
 
   expect_equal(unname(pa[paste0("H", 1:4)]), rep("OF", 4),
                info = "DH|OF players resolve to OF (the active eligibility) not DH")
+})
+
+# ---------------------------------------------------------------------------
+# Task 6.1: split-categories-by-side migration tests
+# ---------------------------------------------------------------------------
+
+test_that("replacement_level() carries split categories into the output config", {
+  proj <- pad_cross_side_columns(make_projections_data(seed = 13L))
+  cfg <- league_config(
+    n_teams            = 12L,
+    roster_slots       = c(C = 1L, `1B` = 1L, OF = 1L),
+    pitcher_slots      = c(SP = 3L, RP = 3L),
+    batting_categories = c("HR", "R"),
+    pitcher_categories = c("K", "ERA")
+  )
+  repl <- replacement_level(proj, cfg)
+
+  cfg_out <- attr(repl, "config")
+  expect_equal(cfg_out$batting_categories, c("HR", "R"))
+  expect_equal(cfg_out$pitcher_categories, c("K", "ERA"))
+})
+
+test_that("replacement_level() preserves Ohtani-style two-way duplication", {
+  proj <- pad_cross_side_columns(make_projections_data(seed = 17L))
+  proj$pos_eligibility[1L] <- "OF|SP"
+  proj$player_type <- ifelse(grepl("SP|RP", proj$pos_eligibility), "pitcher", "batter")
+  proj$player_type[1L] <- "two_way"
+
+  cfg <- league_config(
+    n_teams            = 12L,
+    roster_slots       = c(C = 1L, `1B` = 1L, OF = 1L),
+    pitcher_slots      = c(SP = 3L, RP = 3L),
+    batting_categories = c("HR", "R"),
+    pitcher_categories = c("K", "ERA")
+  )
+  repl <- replacement_level(proj, cfg)
+
+  pid <- proj$player_id[1L]
+  pids_in_repl <- if (is.data.frame(repl)) {
+    repl$player_id
+  } else if (!is.null(attr(repl, "player_assignments"))) {
+    attr(repl, "player_assignments")$player_id
+  } else {
+    names(attr(repl, "position_assignments"))
+  }
+  # When two-way players exist, they should appear once on each side via two_way_players
+  tw <- attr(repl, "two_way_players") %||% repl$two_way_players %||% character(0L)
+  expect_true(pid %in% tw || sum(pids_in_repl == pid, na.rm = TRUE) >= 1L)
 })

@@ -10,20 +10,8 @@
 
 #' @noRd
 CANONICAL_CATEGORIES <- c(
-  "HR",
-  "R",
-  "RBI",
-  "SB",
-  "AVG",
-  "OPS",
-  "W",
-  "K",
-  "SV",
-  "HLD",
-  "QS",
-  "SVHD",
-  "ERA",
-  "WHIP"
+  CANONICAL_BATTING_CATEGORIES,
+  CANONICAL_PITCHER_CATEGORIES
 )
 
 #' @noRd
@@ -62,9 +50,14 @@ VALID_KEEPER_METHODS <- c("pool_shrink", "salary_adjust", "none")
 #' @param pitcher_slots Either a single integer (total pitcher slots per team;
 #'   SP/RP split inferred downstream) or a named integer vector with names
 #'   from `c("SP", "RP")`. Default `9L`.
-#' @param categories Character vector of scored category names. Normalized to
-#'   uppercase at construction; a one-time `cli_inform()` lists any changes.
-#'   Unrecognized names are accepted with a `cli_warn()`.
+#' @param batting_categories Character vector of scored batting categories.
+#'   Normalized to uppercase. Required. Validates against
+#'   `CANONICAL_BATTING_CATEGORIES`; categories belonging to the canonical
+#'   pitcher list emit `rotostats_warning_category_side_mismatch`.
+#' @param pitcher_categories Character vector of scored pitcher categories.
+#'   Normalized to uppercase. Required. Validates against
+#'   `CANONICAL_PITCHER_CATEGORIES`; categories belonging to the canonical
+#'   batting list emit `rotostats_warning_category_side_mismatch`.
 #' @param inverse_categories Optional character vector of scoring category
 #'   names where a lower value is better (lower-is-better categories, e.g.,
 #'   ERA, WHIP, FIP). Normalized to uppercase at construction. Every element
@@ -94,50 +87,85 @@ VALID_KEEPER_METHODS <- c("pool_shrink", "salary_adjust", "none")
 #' @export
 #' @examples
 #' lg <- league_config(
-#'   n_teams       = 12L,
-#'   roster_slots  = c(C = 1, "1B" = 1, "2B" = 1, "3B" = 1,
-#'                     SS = 1, OF = 5, UTIL = 1),
-#'   pitcher_slots = c(SP = 6L, RP = 3L),
-#'   categories    = c("R", "HR", "RBI", "SB", "AVG",
-#'                     "W", "K", "SV", "ERA", "WHIP")
+#'   n_teams            = 12L,
+#'   roster_slots       = c(C = 1, "1B" = 1, "2B" = 1, "3B" = 1,
+#'                          SS = 1, OF = 5, UTIL = 1),
+#'   pitcher_slots      = c(SP = 6L, RP = 3L),
+#'   batting_categories = c("R", "HR", "RBI", "SB", "AVG"),
+#'   pitcher_categories = c("W", "K", "SV", "ERA", "WHIP")
 #' )
 #' print(lg)
 league_config <- function(
   n_teams = 12L,
   roster_slots,
   pitcher_slots = 9L,
-  categories,
+  batting_categories,
+  pitcher_categories,
   inverse_categories = NULL,
   league_type = "mixed",
   budget = 260L,
   budget_split = 0.60,
   keeper = FALSE
 ) {
-  n_teams <- validate_n_teams(n_teams)
-  league_type <- validate_league_type(league_type)
-  roster_slots <- validate_roster_slots(roster_slots)
+  n_teams       <- validate_n_teams(n_teams)
+  league_type   <- validate_league_type(league_type)
+  roster_slots  <- validate_roster_slots(roster_slots)
   pitcher_slots <- validate_pitcher_slots(pitcher_slots)
-  budget <- validate_budget(budget)
-  budget_split <- validate_budget_split(budget_split)
-  categories <- validate_categories(categories)
+  budget        <- validate_budget(budget)
+  budget_split  <- validate_budget_split(budget_split)
+
+  # Required args: surface a classed error rather than R's generic
+  # "missing, with no default" so callers can catch it like other category
+  # validation failures.
+  if (missing(batting_categories)) {
+    cli::cli_abort(
+      "{.arg batting_categories} is required.",
+      class = "rotostats_error_invalid_categories"
+    )
+  }
+  if (missing(pitcher_categories)) {
+    cli::cli_abort(
+      "{.arg pitcher_categories} is required.",
+      class = "rotostats_error_invalid_categories"
+    )
+  }
+
+  batting_categories <- validate_batting_categories(batting_categories)
+  pitcher_categories <- validate_pitcher_categories(pitcher_categories)
+
+  # Convenience union — canonical order is batting first, then pitcher.
+  categories <- c(batting_categories, pitcher_categories)
+
+  if (length(categories) == 0L) {
+    cli::cli_abort(
+      c(
+        "At least one scored category is required.",
+        i = "Supply categories via {.arg batting_categories}, {.arg pitcher_categories}, or both."
+      ),
+      class = "rotostats_error_invalid_categories"
+    )
+  }
+
   inverse_categories <- validate_inverse_categories(
     inverse_categories,
     categories
   )
   roster_slots <- drop_dh_for_nl(roster_slots, league_type)
-  keeper <- resolve_keeper(keeper)
+  keeper       <- resolve_keeper(keeper)
 
   structure(
     list(
-      n_teams = n_teams,
-      roster_slots = roster_slots,
-      pitcher_slots = pitcher_slots,
-      categories = categories,
+      n_teams            = n_teams,
+      roster_slots       = roster_slots,
+      pitcher_slots      = pitcher_slots,
+      batting_categories = batting_categories,
+      pitcher_categories = pitcher_categories,
+      categories         = categories,
       inverse_categories = inverse_categories,
-      league_type = league_type,
-      budget = budget,
-      budget_split = budget_split,
-      keeper = keeper
+      league_type        = league_type,
+      budget             = budget,
+      budget_split       = budget_split,
+      keeper             = keeper
     ),
     class = c("league_config", "list")
   )
@@ -275,36 +303,74 @@ validate_budget_split <- function(budget_split) {
 }
 
 #' @noRd
-validate_categories <- function(categories) {
-  if (!is.character(categories) || length(categories) == 0L) {
+validate_side_categories <- function(
+  cats,
+  arg_name,
+  canonical_for_side,
+  canonical_for_other_side
+) {
+  if (!is.character(cats) || any(is.na(cats))) {
     cli::cli_abort(
-      "{.arg categories} must be a non-empty character vector.",
+      c(
+        "{.arg {arg_name}} must be a character vector (may be empty).",
+        i = "Received: {.val {cats}}."
+      ),
       class = "rotostats_error_invalid_categories"
     )
   }
-  upper <- toupper(categories)
-  changed <- categories != upper
-  if (any(changed)) {
-    n_changed <- sum(changed)
-    cli::cli_inform(
-      c(
-        "{n_changed} category name{?s} normalized to uppercase.",
-        "i" = "{.val {categories[changed]}} -> {.val {upper[changed]}}"
-      ),
-      class = "rotostats_info_category_normalized"
-    )
-  }
-  unknown <- setdiff(upper, CANONICAL_CATEGORIES)
-  if (length(unknown) > 0L) {
+  cats_upper <- toupper(cats)
+
+  # Side-mismatch warning: a category present here that the canonical lists
+  # assign to the other side. Doesn't block — leagues can score odd combos —
+  # but loudly surfaces typos like batting_categories = c("HR", "ERA").
+  misplaced <- intersect(cats_upper, canonical_for_other_side)
+  if (length(misplaced)) {
     cli::cli_warn(
       c(
-        "Unrecognized scoring categor{?y/ies}: {.val {unknown}}.",
-        "i" = "Accepted; the package does not refuse non-canonical categories."
+        "{.val {misplaced}} {?is/are} normally scored on the other side; \\
+         appearing in {.arg {arg_name}}.",
+        i = "If this is intentional, ignore this warning."
+      ),
+      class = "rotostats_warning_category_side_mismatch"
+    )
+  }
+
+  # Unknown-category warning: not in either canonical list.
+  unknown <- setdiff(
+    cats_upper,
+    union(canonical_for_side, canonical_for_other_side)
+  )
+  if (length(unknown)) {
+    cli::cli_warn(
+      c(
+        "Unrecognized {.arg {arg_name}}: {.val {unknown}}.",
+        i = "Accepted but unvalidated against canonical lists."
       ),
       class = "rotostats_warning_unknown_category"
     )
   }
-  upper
+
+  cats_upper
+}
+
+#' @noRd
+validate_batting_categories <- function(cats) {
+  validate_side_categories(
+    cats,
+    arg_name                 = "batting_categories",
+    canonical_for_side       = CANONICAL_BATTING_CATEGORIES,
+    canonical_for_other_side = CANONICAL_PITCHER_CATEGORIES
+  )
+}
+
+#' @noRd
+validate_pitcher_categories <- function(cats) {
+  validate_side_categories(
+    cats,
+    arg_name                 = "pitcher_categories",
+    canonical_for_side       = CANONICAL_PITCHER_CATEGORIES,
+    canonical_for_other_side = CANONICAL_BATTING_CATEGORIES
+  )
 }
 
 #' @noRd
@@ -471,9 +537,14 @@ print.league_config <- function(x, ...) {
   }
   cat(sprintf("  Pitchers:   %s (%d slots)\n", pitcher_txt, p_total))
   cat(sprintf(
-    "  Categories: %s  (%d)\n",
-    paste(x$categories, collapse = " "),
-    length(x$categories)
+    "  Batting:    %s  (%d)\n",
+    paste(x$batting_categories, collapse = " "),
+    length(x$batting_categories)
+  ))
+  cat(sprintf(
+    "  Pitching:   %s  (%d)\n",
+    paste(x$pitcher_categories, collapse = " "),
+    length(x$pitcher_categories)
   ))
   inv_txt <- if (is.null(x$inverse_categories)) {
     "(none declared)"

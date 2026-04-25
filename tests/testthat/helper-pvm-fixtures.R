@@ -15,22 +15,46 @@
 # ---------------------------------------------------------------------------
 
 # ---------------------------------------------------------------------------
+# Canonical batting / pitcher category lists used to bucket a flat `categories`
+# vector into the new league_config() split signature.
+# ---------------------------------------------------------------------------
+.pvm_batting_cats <- c("HR", "R", "RBI", "SB", "AVG", "OPS")
+.pvm_pitcher_cats <- c("W", "K", "SV", "HLD", "QS", "SVHD",
+                       "ERA", "WHIP", "FIP", "XFIP", "SIERA", "XERA",
+                       "K/9", "BB/9", "HR/9")
+
+# ---------------------------------------------------------------------------
 # make_pvm_config()
 # Standard 5x5 league config: 10 teams, hitter + pitcher slots per spec.
+#
+# Accepts a flat `categories` vector for backwards-compatible call sites and
+# partitions it into the new batting_categories / pitcher_categories split
+# required by league_config(). If a side ends up empty, supplies a placeholder
+# canonical category so league_config() accepts the call.
 # ---------------------------------------------------------------------------
 make_pvm_config <- function(
   n_teams       = 10L,
   budget_split  = 0.67,
   categories    = c("HR", "R", "RBI", "SB", "AVG", "W", "K", "SV", "ERA", "WHIP")
 ) {
+  batting <- intersect(categories, .pvm_batting_cats)
+  pitcher <- intersect(categories, .pvm_pitcher_cats)
+
+  # Placeholder fill-ins for hitter-only or pitcher-only fixtures. The
+  # placeholder ensures league_config() accepts the call; the fixture only
+  # exercises the populated side.
+  if (length(batting) == 0L) batting <- "HR"
+  if (length(pitcher) == 0L) pitcher <- "K"
+
   league_config(
-    n_teams       = n_teams,
-    roster_slots  = c(C = 1L, `1B` = 1L, `2B` = 1L, `3B` = 1L,
-                      SS = 1L, OF = 3L, UTIL = 1L),
-    pitcher_slots = c(SP = 5L, RP = 3L),
-    categories    = categories,
-    budget        = 260L,
-    budget_split  = budget_split
+    n_teams            = n_teams,
+    roster_slots       = c(C = 1L, `1B` = 1L, `2B` = 1L, `3B` = 1L,
+                           SS = 1L, OF = 3L, UTIL = 1L),
+    pitcher_slots      = c(SP = 5L, RP = 3L),
+    batting_categories = batting,
+    pitcher_categories = pitcher,
+    budget             = 260L,
+    budget_split       = budget_split
   )
 }
 
@@ -73,12 +97,13 @@ make_pvm_replacement <- function(
 make_boundary_replacement <- function() {
   # Use a simple 3-hitter, 2-pitcher config so n_teams=2, 1 slot each
   cfg <- league_config(
-    n_teams       = 2L,
-    roster_slots  = c(C = 1L, `1B` = 1L, `2B` = 1L),
-    pitcher_slots = c(SP = 1L, RP = 1L),
-    categories    = c("HR", "R", "RBI", "SB", "AVG", "W", "K", "SV", "ERA", "WHIP"),
-    budget        = 260L,
-    budget_split  = 0.67
+    n_teams            = 2L,
+    roster_slots       = c(C = 1L, `1B` = 1L, `2B` = 1L),
+    pitcher_slots      = c(SP = 1L, RP = 1L),
+    batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
+    pitcher_categories = c("W", "K", "SV", "ERA", "WHIP"),
+    budget             = 260L,
+    budget_split       = 0.67
   )
 
   # Exactly 2 C, 2 1B, 2 2B, 2 SP, 2 RP = 10 players
@@ -163,6 +188,22 @@ make_concentration_replacement <- function(dominant_cat = "SV", dominant_pct = 0
   }
 
   replacement_level(proj, cfg, multi_pos = "highest_par")
+}
+
+# ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# make_pvm_fixture()
+# Returns a list(replacement, dollar_values) suitable for Task 5.3 test.
+# Uses HR on the batting side and ERA on the pitcher side so the cross-side
+# NA gating is directly observable.
+# ---------------------------------------------------------------------------
+make_pvm_fixture <- function() {
+  cfg  <- make_pvm_config(
+    categories = c("HR", "R", "RBI", "SB", "AVG", "W", "K", "SV", "ERA", "WHIP")
+  )
+  proj <- make_pvm_projections()
+  repl <- replacement_level(proj, cfg, multi_pos = "highest_par")
+  list(replacement = repl)
 }
 
 # ---------------------------------------------------------------------------

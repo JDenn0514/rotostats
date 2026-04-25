@@ -128,7 +128,7 @@ test_that("include_raw = FALSE: only par_[cat] and total_par columns", {
 
   expect_equal(
     sort(names(result)),
-    sort(c(paste0("par_", scored_cats), "total_par"))
+    sort(c("player_type", paste0("par_", scored_cats), "total_par"))
   )
   expect_false(any(grepl("^sgp_", names(result))))
 })
@@ -189,17 +189,16 @@ test_that("Invariant 3: total_par equals rowSums of par_[cat] columns", {
 })
 
 test_that("Invariant 4: total_sgp equals rowSums of sgp_[cat] when include_raw = TRUE", {
-  # sgp() uses na.rm = FALSE for total_sgp (NA propagates intentionally).
-  # In mixed hitter/pitcher pools, total_sgp will be NA for all players
-  # because every player is missing at least one stat column.
-  # The invariant: total_sgp == rowSums(sgp_[cat], na.rm = FALSE) holds.
-  # Both sides are NA — expect_equal handles NA equality correctly.
+  # Updated by split-categories-by-side commit: sgp() now uses
+  # rowSums(na.rm = TRUE) for total_sgp (matching zaa/zar/par/pvm) so
+  # cross-side NAs do not poison the total. The invariant becomes:
+  # total_sgp == rowSums(sgp_[cat], na.rm = TRUE).
   fx     <- make_par_counting_fixture()
   result <- par(fx$replacement, fx$denominators,
                 league_history = fx$league_history, include_raw = TRUE)
   scored_cats   <- c("HR", "R", "SB", "K", "SV")
   sgp_col_names <- paste0("sgp_", scored_cats)
-  expected_total <- rowSums(result[, sgp_col_names, drop = FALSE], na.rm = FALSE)
+  expected_total <- rowSums(result[, sgp_col_names, drop = FALSE], na.rm = TRUE)
   expect_equal(result$total_sgp, unname(expected_total), tolerance = 1e-10)
 })
 
@@ -391,7 +390,7 @@ test_that("R-1: Manual calculation verification with 3-player toy fixture", {
   # Replacement HR = HR of rank-1 player (by band average of 1 player).
   # The delegation identity par_HR + repl_sgp[1B, HR] == sgp_HR must hold.
 
-  toy_proj <- data.frame(
+  toy_proj <- pad_cross_side_columns(data.frame(
     player_id       = c("P1", "P2", "P3"),
     player_name     = c("Alice", "Bob", "Carol"),
     pos_eligibility = rep("1B", 3),
@@ -400,14 +399,17 @@ test_that("R-1: Manual calculation verification with 3-player toy fixture", {
     HR              = c(40, 25, 10),
     IP              = rep(NA_real_, 3),
     stringsAsFactors = FALSE
-  )
+  ))
 
   toy_cfg <- league_config(
-    n_teams       = 1L,
-    roster_slots  = c(`1B` = 1L),
-    pitcher_slots = c(SP = 0L, RP = 0L),
-    categories    = c("HR"),
-    league_type   = "AL"
+    n_teams            = 1L,
+    roster_slots       = c(`1B` = 1L),
+    pitcher_slots      = c(SP = 0L, RP = 0L),
+    batting_categories = c("HR"),
+    # pitcher_categories supplied as a placeholder; this fixture only exercises
+    # hitter HR. The placeholder ensures league_config() accepts the call.
+    pitcher_categories = c("K"),
+    league_type        = "AL"
   )
 
   toy_denoms <- c(HR = 30)
@@ -454,7 +456,7 @@ test_that("R-1b: Delegation identity holds for 10-player toy fixture", {
   n <- 10
   hr_vals <- c(100, 50, 40, 30, 20, 15, 10, 8, 5, 2)
 
-  toy10_proj <- data.frame(
+  toy10_proj <- pad_cross_side_columns(data.frame(
     player_id       = paste0("P", seq_len(n)),
     player_name     = paste0("Player", seq_len(n)),
     pos_eligibility = rep("1B", n),
@@ -463,14 +465,17 @@ test_that("R-1b: Delegation identity holds for 10-player toy fixture", {
     HR              = hr_vals,
     IP              = rep(NA_real_, n),
     stringsAsFactors = FALSE
-  )
+  ))
 
   toy10_cfg <- league_config(
-    n_teams       = 1L,
-    roster_slots  = c(`1B` = 1L),
-    pitcher_slots = c(SP = 0L, RP = 0L),
-    categories    = "HR",
-    league_type   = "AL"
+    n_teams            = 1L,
+    roster_slots       = c(`1B` = 1L),
+    pitcher_slots      = c(SP = 0L, RP = 0L),
+    batting_categories = "HR",
+    # pitcher_categories supplied as a placeholder; this fixture only exercises
+    # hitter HR. The placeholder ensures league_config() accepts the call.
+    pitcher_categories = "K",
+    league_type        = "AL"
   )
 
   toy10_denoms <- c(HR = 30)
@@ -504,4 +509,31 @@ test_that("R-1b: Delegation identity holds for 10-player toy fixture", {
 
   # total_par == par_HR
   expect_equal(result10$total_par, result10$par_HR, tolerance = 1e-6)
+})
+
+# ---------------------------------------------------------------------------
+# Per-side category scoping (Task 5.2)
+# ---------------------------------------------------------------------------
+
+test_that("par() output respects per-side category scoping", {
+  fx  <- make_par_counting_fixture()
+  out <- par(fx$replacement, fx$denominators, league_history = fx$league_history)
+
+  expect_true("player_type" %in% names(out))
+
+  pitcher_rows <- subset(out, player_type == "pitcher")
+  batter_rows  <- subset(out, player_type == "batter")
+
+  # Hitter cats in pitcher rows: NA, not 0, not non-zero.
+  expect_true(all(is.na(pitcher_rows$par_HR)))
+  expect_true(all(is.na(pitcher_rows$par_R)))
+  expect_true(all(is.na(pitcher_rows$par_SB)))
+
+  # Pitcher cats in hitter rows: NA.
+  expect_true(all(is.na(batter_rows$par_K)))
+  expect_true(all(is.na(batter_rows$par_SV)))
+
+  # total_par uses na.rm = TRUE, so each side has finite within-side total.
+  expect_true(all(is.finite(pitcher_rows$total_par)))
+  expect_true(all(is.finite(batter_rows$total_par)))
 })

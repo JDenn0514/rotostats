@@ -329,6 +329,32 @@ PROJECTION_COLUMN_RENAME <- c(
 }
 
 #' @noRd
+.classify_custom_player_type <- function(df) {
+  if ("player_type" %in% names(df)) return(df)
+
+  if ("pos_eligibility" %in% names(df)) {
+    is_pit <- grepl(PITCHER_ELIG_REGEX, df$pos_eligibility)
+    df$player_type <- ifelse(is_pit, "pitcher", "batter")
+    return(df)
+  }
+
+  ip_col <- grep("^ip$", names(df), ignore.case = TRUE, value = TRUE)[1L]
+  if (!is.na(ip_col)) {
+    df$player_type <- ifelse(!is.na(df[[ip_col]]) & df[[ip_col]] > 0,
+                             "pitcher", "batter")
+    return(df)
+  }
+
+  cli::cli_abort(
+    c(
+      "Cannot infer {.field player_type} for custom projections.",
+      i = "Add a {.field player_type} column with values {.val batter}, {.val pitcher}, or {.val two_way}, or include {.field pos_eligibility} or {.field IP}."
+    ),
+    class = "rotostats_error_missing_player_type"
+  )
+}
+
+#' @noRd
 .fetch_one_side <- function(source, player_type) {
   stopifnot(player_type %in% c("batters", "pitchers"))
   url <- .build_projections_url(source, player_type)

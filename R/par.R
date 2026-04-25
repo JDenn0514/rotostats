@@ -335,9 +335,46 @@ par <- function(
   # O(n) position lookup via match()
   pos_idx <- match(player_positions, repl_sgp_mat$position)
 
+  # Per-row side classification (used to gate cross-side category cells to NA
+  # so a hitter never receives a non-NA par_K and a pitcher never receives a
+  # non-NA par_HR even if upstream sgp() would return finite values for the
+  # opposite side). Derives side from the assigned valuation position when
+  # available, falling back to POS_ELIGIBILITY parsing.
+  is_pitcher_row <- player_positions %in% c("SP", "RP", "P")
+  if (any(is.na(player_positions))) {
+    pos_elig_col <- names(projections)[
+      toupper(names(projections)) == "POS_ELIGIBILITY"
+    ]
+    if (length(pos_elig_col) >= 1L) {
+      na_idx <- which(is.na(player_positions))
+      is_pitcher_row[na_idx] <- grepl(
+        PITCHER_ELIG_REGEX,
+        projections[[pos_elig_col[1L]]][na_idx]
+      )
+    }
+  }
+  is_batter_row <- !is_pitcher_row
+
+  # Side-scoped category lists for cross-side gating below.
+  batting_categories <- toupper(config$batting_categories)
+  pitcher_categories <- toupper(config$pitcher_categories)
+
   par_cols <- lapply(scored_cats, function(cat) {
     col <- paste0("sgp_", cat)
-    sgp_out[[col]] - repl_sgp_mat[[col]][pos_idx]
+    vals <- sgp_out[[col]] - repl_sgp_mat[[col]][pos_idx]
+    cat_upper <- toupper(cat)
+    # Defense-in-depth: explicitly NA cross-side cells. In practice these
+    # are already NA because per-side stats are NA in projections (e.g. K
+    # is NA for hitters, HR is NA for pitchers), but explicit gating keeps
+    # par() correct if upstream sgp() ever propagates a non-NA value into
+    # the opposite side.
+    if (cat_upper %in% batting_categories) {
+      vals[is_pitcher_row] <- NA_real_
+    }
+    if (cat_upper %in% pitcher_categories) {
+      vals[is_batter_row] <- NA_real_
+    }
+    vals
   })
   names(par_cols) <- paste0("par_", scored_cats)
 
@@ -420,6 +457,18 @@ par <- function(
     ]
     result <- cbind(sgp_part, result)
   }
+
+  # Per-row side classification ("batter" / "pitcher"), aligned positionally
+  # with the par_<cat> rows. Carried through so downstream consumers can
+  # subset by side without re-deriving from POS_ELIGIBILITY. Mirrors the
+  # convention used by zaa() / zar().
+  result <- cbind(
+    data.frame(
+      player_type = ifelse(is_pitcher_row, "pitcher", "batter"),
+      stringsAsFactors = FALSE
+    ),
+    result
+  )
 
   # ---------------------------------------------------------------------------
   # Step 13 — Attach output attributes
