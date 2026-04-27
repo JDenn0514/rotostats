@@ -44,6 +44,28 @@ Three vocabularies coexist in the codebase:
 
 ---
 
+## 3. Cross-year owner-identity drift in `tout_wars_auctions`
+
+**Surfaced:** 2026-04-27, during the final review of `feature/auction-csv-normalization`.
+
+`tout_wars_auctions` contains both first-name-last-name and last-name-only spellings of the same owner across years. Examples:
+
+- `"PODHORZER"` (2014–2019) vs `"MIKE PODHORZER"` (2020–2026)
+- `"MELCHIOR"` (early years) vs `"AL MELCHIOR"` (later)
+- COLTON/WOLF partnership: `"COLTON/WOLF"`, `"COLTON WOLF"`, `"COLTON AND THE WOLFMAN"`, `"COLTON AND WOLF"`, `"GLENN COLTON/RICK WOLF"` (5 distinct spellings)
+
+`R/utils-tout-wars.R:9-14` (`.tw_owner_aliases`) only normalizes the COLTON/WOLF partnership patterns; it doesn't strip first names from individual owners. Multi-token names like `"Mike Podhorzer"` upcase to `"MIKE PODHORZER"` rather than canonicalizing to `"PODHORZER"`.
+
+**Why it matters:** any year-over-year `group_by(team_owner)` summary will silently miscount owners with first-name drift. Joins against an external owner master will fragment.
+
+**Decision needed:** pick a canonicalization strategy. Either:
+- (a) Extend `.tw_owner_aliases` with explicit per-owner mappings (~30+ entries; safest but high-touch), or
+- (b) Add a "last-token-of-the-string" rule in `.canonicalize_tw_owner()` (covers most cases but breaks compound surnames like `"VAN RIPER"`).
+
+**Suggested:** option (a). Build the alias table by inspecting `unique(tout_wars_auctions$team_owner)` once; map each first-name-last-name variant to its last-name canonical form. Add tests for the new aliases. The current `.tw_owner_aliases` already has the right shape for this.
+
+---
+
 ## Adding new follow-ups
 
 Append to this file. Each entry: short title (H2), surfaced-during context,
