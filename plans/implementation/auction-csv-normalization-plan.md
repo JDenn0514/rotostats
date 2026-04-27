@@ -1,0 +1,1698 @@
+# Tout Wars Auction CSV Normalization Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Normalize 45 irregular Tout Wars auction CSVs into a uniform `tout_wars_auctions` package data object via a two-stage R pipeline.
+
+**Architecture:** Stage 1 (`data-raw/normalize-tout-wars-auctions.R`) reads each raw CSV, dispatches to a per-layout parser (standard or year-specific), and writes a long-tidy cleaned CSV per file. Stage 2 (`data-raw/tout-wars-auctions.R`) reads all cleaned CSVs, adds `year`/`league` from filename, binds them, and calls `usethis::use_data()`. All parser internals live in `R/utils-tout-wars.R` so they are testable from `testthat`.
+
+**Tech Stack:** R, `readr`, `dplyr`, `tibble`, `purrr`, `fs`, `glue`, `cli`, `usethis`, `testthat`, `devtools`.
+
+**Spec:** [plans/specs/2026-04-27-auction-csv-normalization-design.md](../specs/2026-04-27-auction-csv-normalization-design.md)
+
+---
+
+## File structure
+
+**Created by this plan:**
+
+| Path                                                         | Responsibility                                             |
+| ------------------------------------------------------------ | ---------------------------------------------------------- |
+| `R/utils-tout-wars.R`                                        | Internal helpers: `.canonicalize_tw_owner()`, all parsers, dispatcher, golden tables. |
+| `R/data-tout-wars-auctions.R`                                | Roxygen docs for the `tout_wars_auctions` dataset.         |
+| `data-raw/normalize-tout-wars-auctions.R`                    | Stage 1 driver — runs dispatcher across raw files.          |
+| `data-raw/tout-wars-auctions.R`                              | Stage 2 driver — binds cleaned CSVs, writes `.rda`.         |
+| `tests/testthat/test-canonicalize-tw-owner.R`                | Unit tests for owner canonicalization.                     |
+| `tests/testthat/test-normalize-tout-wars-auctions.R`         | Branch-parser tests against synthetic fixtures.            |
+| `tests/testthat/test-tout-wars-auctions.R`                   | Schema/domain checks on the committed `.rda`.              |
+| `tests/testthat/fixtures/tout-wars-auctions/standard-mini.csv` | Synthetic standard-layout fixture (3 teams × 3 slots).      |
+| `tests/testthat/fixtures/tout-wars-auctions/2012-al-mini.csv`  | Synthetic 2012-al-layout fixture.                           |
+| `tests/testthat/fixtures/tout-wars-auctions/2012-nl-mini.csv`  | Synthetic 2012-nl-layout fixture.                           |
+| `tests/testthat/fixtures/tout-wars-auctions/2012-mixed-mini.csv`| Synthetic 2012-mixed-layout fixture.                       |
+| `tests/testthat/fixtures/tout-wars-auctions/2015-nl-mini.csv`  | Synthetic 2015-nl-layout fixture (embedded newline).        |
+| `data-raw/sources/tout-wars/auctions-clean/auction-{league}-{year}.csv` × 45 | Stage 1 outputs (generated; committed).        |
+| `data/tout_wars_auctions.rda`                                | Stage 2 output (generated; committed).                     |
+
+**Modified:** none. (The plan does not touch the existing scrapers or any other R code.)
+
+---
+
+## Task 1: Owner canonicalization helper
+
+**Files:**
+- Create: `R/utils-tout-wars.R`
+- Create: `tests/testthat/test-canonicalize-tw-owner.R`
+
+- [ ] **Step 1: Write the failing test**
+
+Create `tests/testthat/test-canonicalize-tw-owner.R`:
+
+```r
+test_that(".canonicalize_tw_owner trims whitespace", {
+  expect_identical(.canonicalize_tw_owner("  PODHORZER  "), "PODHORZER")
+})
+
+test_that(".canonicalize_tw_owner uppercases simple last names", {
+  expect_identical(.canonicalize_tw_owner("Podhorzer"), "PODHORZER")
+})
+
+test_that(".canonicalize_tw_owner alphabetizes partnership tokens", {
+  expect_identical(.canonicalize_tw_owner("WOLF/COLTON"), "COLTON/WOLF")
+  expect_identical(.canonicalize_tw_owner("COLTON/WOLF"), "COLTON/WOLF")
+})
+
+test_that(".canonicalize_tw_owner alphabetizes 3-way partnerships", {
+  expect_identical(
+    .canonicalize_tw_owner("WOLF/COLTON/SMITH"),
+    "COLTON/SMITH/WOLF"
+  )
+})
+
+test_that(".canonicalize_tw_owner applies aliases before tokenizing", {
+  expect_identical(.canonicalize_tw_owner("Wolf and Colton"), "COLTON/WOLF")
+  expect_identical(.canonicalize_tw_owner("Van RIPER"), "VANRIPER")
+  expect_identical(.canonicalize_tw_owner("VAN RIPER"), "VANRIPER")
+  expect_identical(.canonicalize_tw_owner("VanRiper"), "VANRIPER")
+})
+
+test_that(".canonicalize_tw_owner is idempotent", {
+  inputs <- c("PODHORZER", "COLTON/WOLF", "VANRIPER", "WOLF/COLTON/SMITH")
+  for (x in inputs) {
+    expect_identical(.canonicalize_tw_owner(.canonicalize_tw_owner(x)), .canonicalize_tw_owner(x))
+  }
+})
+
+test_that(".canonicalize_tw_owner errors on NA or empty", {
+  expect_error(.canonicalize_tw_owner(NA_character_), class = "rotostats_error_owner_blank")
+  expect_error(.canonicalize_tw_owner(""), class = "rotostats_error_owner_blank")
+})
+```
+
+- [ ] **Step 2: Run test to verify it fails**
+
+Run: `Rscript -e 'devtools::test(filter = "canonicalize-tw-owner")'`
+Expected: FAIL — function `.canonicalize_tw_owner` not found.
+
+- [ ] **Step 3: Write minimal implementation**
+
+Create `R/utils-tout-wars.R`:
+
+```r
+# Internal helpers for the tout_wars_auctions dataset.
+# See plans/specs/2026-04-27-auction-csv-normalization-design.md.
+
+# Aliases applied BEFORE tokenization. Map raw input → canonical output.
+.tw_owner_aliases <- c(
+  "Wolf and Colton" = "COLTON/WOLF",
+  "Van RIPER"       = "VANRIPER",
+  "VAN RIPER"       = "VANRIPER",
+  "VanRiper"        = "VANRIPER"
+)
+
+#' Canonicalize a Tout Wars team-owner string.
+#'
+#' Trim whitespace, apply aliases, then split on `/`, uppercase tokens,
+#' alphabetize, rejoin. Deterministic — `WOLF/COLTON` and `COLTON/WOLF` both
+#' collapse to `COLTON/WOLF`.
+#'
+#' @param x A length-1 character vector.
+#' @return Length-1 canonicalized character vector.
+#' @keywords internal
+#' @noRd
+.canonicalize_tw_owner <- function(x) {
+  if (is.na(x) || !nzchar(trimws(x))) {
+    cli::cli_abort(
+      "Owner string is blank or NA.",
+      class = "rotostats_error_owner_blank"
+    )
+  }
+  x <- trimws(x)
+  if (x %in% names(.tw_owner_aliases)) {
+    return(unname(.tw_owner_aliases[x]))
+  }
+  tokens <- strsplit(x, "/", fixed = TRUE)[[1]]
+  tokens <- toupper(trimws(tokens))
+  paste(sort(tokens), collapse = "/")
+}
+```
+
+- [ ] **Step 4: Run test to verify it passes**
+
+Run: `Rscript -e 'devtools::test(filter = "canonicalize-tw-owner")'`
+Expected: PASS — all 7 tests.
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add R/utils-tout-wars.R tests/testthat/test-canonicalize-tw-owner.R
+git commit -m "feat(auctions): add owner canonicalization helper"
+```
+
+---
+
+## Task 2: Standard-layout parser (TDD against synthetic fixture)
+
+**Files:**
+- Create: `tests/testthat/fixtures/tout-wars-auctions/standard-mini.csv`
+- Modify: `R/utils-tout-wars.R`
+- Create: `tests/testthat/test-normalize-tout-wars-auctions.R`
+
+The standard layout (verified on `2018-al.csv`):
+- Row 1: owners in even columns (col 2, 4, 6, …); odd columns blank.
+- Rows 2–4: meta rows starting with `Left to Spend` / `Players Needed` / `Max Bid` in col 2.
+- Row 5+: col 1 = `position_slot`; even cols = player name; odd cols = price.
+- Trailing all-empty columns may exist.
+- **Footer rows:** several files (e.g., `2018-al.csv` rows 36–37) have summary
+  stats with stray non-NA values in trailing columns — these defeat a naive
+  `all(is.na(col))` trim. The parser must filter them out before column-count
+  validation.
+- **Reserve (`R`) rows:** at the bottom of each team's roster, files include
+  reserve picks with player names but **no price**. The spec excludes reserves
+  from the dataset; the parser must filter them out before price coercion.
+
+Both pathologies are handled by a single up-front filter: keep rows 1–4
+unconditionally, then keep only data rows whose col 1 (trimmed, uppercased) is
+in the canonical priced-slot set
+`C, 1B, 3B, CI, 2B, SS, MI, OF, UT, SW, P, SP, RP`.
+
+- [ ] **Step 1: Create the synthetic fixture**
+
+Create `tests/testthat/fixtures/tout-wars-auctions/standard-mini.csv` — 3 teams × 2 slots, with one reserve (`R`) row per team and a footer summary row that has stray non-NA values in trailing columns (mimics the `2018-al.csv` pathology):
+
+```csv
+,SMITH,,JONES,,WOLF/COLTON,
+,Left to Spend,0,Left to Spend,2,Left to Spend,0
+,Players Needed,0,Players Needed,0,Players Needed,0
+,Max Bid,1,Max Bid,3,Max Bid,1
+C,Player A,10,Player B,12,Player C,8
+SP,Pitcher A,20,Pitcher B,18,Pitcher C,15
+R,Reserve A,,Reserve B,,Reserve C,
+,,30,,30,,23,0
+```
+
+Notes:
+- Trailing comma on row 1 represents one trailing all-empty column.
+- `R` rows have player names but blank prices — must be excluded from output.
+- Final summary row has a stray `0` in the trailing column — must NOT defeat trailing-column trim.
+
+- [ ] **Step 2: Write the failing test**
+
+Create `tests/testthat/test-normalize-tout-wars-auctions.R`:
+
+```r
+fixture_path <- function(name) {
+  testthat::test_path("fixtures", "tout-wars-auctions", name)
+}
+
+test_that(".parse_tw_auction_standard returns long-tidy rows", {
+  result <- .parse_tw_auction_standard(
+    fixture_path("standard-mini.csv"),
+    expected_teams = 3
+  )
+  expect_named(
+    result,
+    c("team_owner", "position_slot", "player_type", "player_name", "price", "is_keeper")
+  )
+  expect_equal(nrow(result), 6)  # 3 teams × 2 priced slots (R rows excluded)
+  expect_setequal(unique(result$team_owner), c("SMITH", "JONES", "COLTON/WOLF"))
+  expect_setequal(unique(result$position_slot), c("C", "SP"))
+  expect_setequal(unique(result$player_type), c("batter", "pitcher"))
+  expect_true(all(!result$is_keeper))
+  expect_type(result$price, "integer")
+  expect_true(all(result$price > 0))
+})
+
+test_that(".parse_tw_auction_standard excludes reserve and footer rows", {
+  result <- .parse_tw_auction_standard(
+    fixture_path("standard-mini.csv"),
+    expected_teams = 3
+  )
+  # Reserve player names from the fixture must not appear in the output.
+  expect_false(any(grepl("^Reserve ", result$player_name)))
+  # Position_slot column must contain no "R" entries.
+  expect_false("R" %in% result$position_slot)
+})
+
+test_that(".parse_tw_auction_standard errors on wrong column count", {
+  # write a fixture inline with 5 cols instead of 7
+  tf <- tempfile(fileext = ".csv")
+  writeLines(c(",SMITH,,JONES,", ",Left to Spend,0,Left to Spend,0",
+               ",Players Needed,0,Players Needed,0", ",Max Bid,1,Max Bid,1",
+               "C,Player A,10,Player B,12"), tf)
+  expect_error(
+    .parse_tw_auction_standard(tf, expected_teams = 3),
+    class = "rotostats_error_auction_col_count"
+  )
+})
+
+test_that(".parse_tw_auction_standard errors on missing meta rows", {
+  tf <- tempfile(fileext = ".csv")
+  writeLines(c(",SMITH,,JONES,,WOLF,",
+               ",Wrong Label,0,Wrong Label,0,Wrong Label,0",
+               ",Players Needed,0,Players Needed,0,Players Needed,0",
+               ",Max Bid,1,Max Bid,1,Max Bid,1",
+               "C,A,1,B,2,C,3"), tf)
+  expect_error(
+    .parse_tw_auction_standard(tf, expected_teams = 3),
+    class = "rotostats_error_auction_meta_rows"
+  )
+})
+
+test_that(".parse_tw_auction_standard derives player_type correctly", {
+  result <- .parse_tw_auction_standard(
+    fixture_path("standard-mini.csv"),
+    expected_teams = 3
+  )
+  expect_equal(result$player_type[result$position_slot == "C"], rep("batter", 3))
+  expect_equal(result$player_type[result$position_slot == "SP"], rep("pitcher", 3))
+})
+```
+
+- [ ] **Step 3: Run test to verify it fails**
+
+Run: `Rscript -e 'devtools::test(filter = "normalize-tout-wars-auctions")'`
+Expected: FAIL — `.parse_tw_auction_standard` not found.
+
+- [ ] **Step 4: Add the parser to `R/utils-tout-wars.R`**
+
+Append to `R/utils-tout-wars.R`:
+
+```r
+.tw_pitcher_slots <- c("SP", "RP", "P")
+
+# Canonical priced slots used to identify roster rows during parsing.
+# Reserve ("R") rows have no auction price and are excluded from the dataset
+# (see spec non-goal #6).
+.tw_canonical_slots <- c(
+  "C", "1B", "3B", "CI", "2B", "SS", "MI", "OF", "UT", "SW",
+  "P", "SP", "RP"
+)
+
+#' Derive player_type from position_slot vector.
+#' @keywords internal
+#' @noRd
+.derive_player_type <- function(position_slot) {
+  ifelse(position_slot %in% .tw_pitcher_slots, "pitcher", "batter")
+}
+
+#' Parse a standard-layout Tout Wars auction CSV.
+#'
+#' @param path Path to the raw CSV.
+#' @param expected_teams Integer team count (12 for AL/NL, 15 for Mixed).
+#' @return Tibble with columns team_owner, position_slot, player_type,
+#'   player_name, price, is_keeper.
+#' @keywords internal
+#' @noRd
+.parse_tw_auction_standard <- function(path, expected_teams) {
+  raw <- readr::read_csv(
+    path,
+    col_types = readr::cols(.default = "c"),
+    col_names = FALSE,
+    progress = FALSE
+  )
+
+  if (nrow(raw) < 4L) {
+    cli::cli_abort(
+      "Too few rows in {.file {path}}; expected header + 3 meta rows + roster.",
+      class = "rotostats_error_auction_meta_rows"
+    )
+  }
+
+  # Filter rows: keep header (row 1) + meta rows (2-4) unconditionally.
+  # For the rest, keep only rows whose col 1 (trimmed, uppercased) is a
+  # canonical priced slot. This drops footer/summary rows AND reserve (R) rows.
+  slot_col <- toupper(trimws(as.character(raw[[1]])))
+  is_priced_roster <- !is.na(slot_col) & nzchar(slot_col) & slot_col %in% .tw_canonical_slots
+  is_priced_roster[1:4] <- FALSE  # Don't double-count rows 1-4.
+  keep_rows <- c(1L, 2L, 3L, 4L, which(is_priced_roster))
+  raw <- raw[keep_rows, , drop = FALSE]
+
+  # Trim trailing all-NA columns (now safe — footer/reserve rows excluded).
+  is_trailing_na <- vapply(raw, function(col) all(is.na(col)), logical(1))
+  last_keep <- max(which(!is_trailing_na))
+  raw <- raw[, seq_len(last_keep), drop = FALSE]
+
+  expected_cols <- 1L + 2L * expected_teams
+  if (ncol(raw) != expected_cols) {
+    cli::cli_abort(
+      c("Wrong column count in {.file {path}}.",
+        "i" = "Expected {expected_cols} columns ({expected_teams} teams), got {ncol(raw)}."),
+      class = "rotostats_error_auction_col_count"
+    )
+  }
+
+  # Validate meta rows (rows 2-4): col 2 of each must start with the labels.
+  meta_labels <- c("Left to Spend", "Players Needed", "Max Bid")
+  meta_actual <- vapply(2:4, function(i) as.character(raw[i, 2, drop = TRUE]), character(1))
+  if (!identical(meta_actual, meta_labels)) {
+    cli::cli_abort(
+      c("Meta rows 2-4 do not match expected labels in {.file {path}}.",
+        "i" = "Expected {.val {meta_labels}}, got {.val {meta_actual}}."),
+      class = "rotostats_error_auction_meta_rows"
+    )
+  }
+
+  # Extract owners from row 1, even cols (2, 4, 6, ...).
+  owner_cols <- seq(2L, by = 2L, length.out = expected_teams)
+  owners_raw <- as.character(raw[1, owner_cols, drop = TRUE])
+  owners <- vapply(owners_raw, .canonicalize_tw_owner, character(1))
+
+  # Data rows: row 5 onward (already filtered to priced-roster rows above).
+  data_rows <- raw[-(1:4), , drop = FALSE]
+
+  # For each team k (1..expected_teams): cols 2k = name, 2k+1 = price.
+  per_team <- lapply(seq_len(expected_teams), function(k) {
+    name_col <- 2L * k
+    price_col <- 2L * k + 1L
+    tibble::tibble(
+      team_owner    = owners[k],
+      position_slot = as.character(data_rows[[1]]),
+      player_name   = as.character(data_rows[[name_col]]),
+      price_chr     = as.character(data_rows[[price_col]])
+    )
+  })
+  long <- dplyr::bind_rows(per_team)
+
+  # Drop empty rows.
+  long <- dplyr::filter(long, !is.na(.data$player_name) & nzchar(trimws(.data$player_name)))
+  long$player_name <- trimws(long$player_name)
+
+  # Coerce price to non-negative integer.
+  price_int <- suppressWarnings(as.integer(long$price_chr))
+  if (any(is.na(price_int)) || any(price_int < 0)) {
+    bad <- long$price_chr[is.na(price_int) | (price_int < 0)]
+    cli::cli_abort(
+      c("Non-integer or negative prices in {.file {path}}.",
+        "i" = "Offending values: {.val {bad}}."),
+      class = "rotostats_error_auction_price"
+    )
+  }
+  long$price <- price_int
+  long$price_chr <- NULL
+
+  long$position_slot <- trimws(long$position_slot)
+  long$player_type <- .derive_player_type(long$position_slot)
+  long$is_keeper <- FALSE
+
+  long <- dplyr::arrange(
+    long,
+    .data$team_owner, .data$position_slot, dplyr::desc(.data$price)
+  )
+
+  long[, c("team_owner", "position_slot", "player_type", "player_name", "price", "is_keeper")]
+}
+```
+
+- [ ] **Step 5: Run test to verify it passes**
+
+Run: `Rscript -e 'devtools::test(filter = "normalize-tout-wars-auctions")'`
+Expected: PASS — 4 tests.
+
+- [ ] **Step 6: Spot-check against a real standard file**
+
+Run interactively:
+
+```r
+devtools::load_all()
+res <- .parse_tw_auction_standard(
+  "data-raw/sources/tout-wars/auctions/2018-al.csv",
+  expected_teams = 12
+)
+print(res, n = 5)
+nrow(res)
+unique(res$team_owner)
+```
+
+Expected: ~276 rows (12 teams × 23 priced slots — reserves excluded), 12 distinct canonical owners including `COLTON/WOLF`. No `R` slot in `unique(res$position_slot)`.
+
+- [ ] **Step 7: Commit**
+
+```bash
+git add R/utils-tout-wars.R \
+        tests/testthat/test-normalize-tout-wars-auctions.R \
+        tests/testthat/fixtures/tout-wars-auctions/standard-mini.csv
+git commit -m "feat(auctions): standard-layout parser for tout-wars auction CSVs"
+```
+
+---
+
+## Task 3: 2012-al / 2012-nl bespoke parser
+
+**Files:**
+- Create: `tests/testthat/fixtures/tout-wars-auctions/2012-al-mini.csv`
+- Create: `tests/testthat/fixtures/tout-wars-auctions/2012-nl-mini.csv`
+- Modify: `R/utils-tout-wars.R`
+- Modify: `tests/testthat/test-normalize-tout-wars-auctions.R`
+
+The 2012-al / 2012-nl deviation (verified on both `2012-al.csv` and `2012-nl.csv`):
+- **Owner row is row 1, owners in odd columns** (1, 3, 5, …, `2k - 1`).
+- **Position slot column is col 2** (not col 1).
+- **Meta rows 2–4:** col 1 blank, col 2 blank, then `Left to Spend`/`Players Needed`/`Max Bid` starting in col 3 (paired with values in col 4, 6, …).
+- **Data rows:** col 1 blank, col 2 = `position_slot`, cols 3, 5, 7, … = player names, cols 4, 6, 8, … = prices.
+- **Owner-to-data mapping:** owner at col `2k - 1`, player name at col `2k + 1`, price at col `2k + 2` for team `k`.
+- **Total cols:** `2 + 2 * expected_teams` (one *more* than standard, since col 1 is owner-only and col 2 is slot-only).
+- **Same row-filter / footer / reserve pathology** as the standard layout — both files have reserve (`R`) rows and trailing notes/check rows. Filter must be applied before col-count check, but using col 2 (not col 1) as the slot column.
+
+**Team counts:**
+- `2012-al`: **12 teams** → expected_cols = 26.
+- `2012-nl`: **13 teams** → expected_cols = 28. (Confirmed by reading row 1 of `2012-nl.csv`. The Task 6 dispatcher must override the default `nl = 12` for the 2012 NL file.)
+
+The 2012-nl is structurally identical to 2012-al — same parser handles both, but the dispatcher passes a different `expected_teams`.
+
+- [ ] **Step 1: Inspect both raw files and confirm the layout**
+
+Run:
+
+```bash
+head -5 data-raw/sources/tout-wars/auctions/2012-al.csv
+head -5 data-raw/sources/tout-wars/auctions/2012-nl.csv
+```
+
+Verify both follow the layout described above. If 2012-nl deviates, document the deviation in this plan (edit before continuing) and split into a separate parser.
+
+- [ ] **Step 2: Create synthetic fixtures**
+
+Both fixtures use 3 teams. Each row has `2 + 2 * 3 = 8` cells, so expected_cols = 8. Each fixture includes a reserve (`R`) row with blank prices and a footer notes row with a stray non-NA value to confirm the row-filter strips them before the col-count and price checks.
+
+Create `tests/testthat/fixtures/tout-wars-auctions/2012-al-mini.csv`:
+
+```csv
+SMITH,,JONES,,WOLF/COLTON,,,
+,,Left to Spend,0,Left to Spend,2,Left to Spend,0
+,,Players Needed,0,Players Needed,0,Players Needed,0
+,,Max Bid,1,Max Bid,3,Max Bid,1
+,C,Player A,10,Player B,12,Player C,8
+,SP,Pitcher A,20,Pitcher B,18,Pitcher C,15
+,R,Reserve A,,Reserve B,,Reserve C,
+,,checked,,,,,
+```
+
+Create `tests/testthat/fixtures/tout-wars-auctions/2012-nl-mini.csv`:
+
+```csv
+ALPHA,,BETA,,GAMMA,,,
+,,Left to Spend,0,Left to Spend,0,Left to Spend,0
+,,Players Needed,0,Players Needed,0,Players Needed,0
+,,Max Bid,1,Max Bid,1,Max Bid,1
+,C,X1,5,X2,6,X3,7
+,RP,Y1,10,Y2,11,Y3,12
+,R,Res1,,Res2,,Res3,
+,,checked,,,,,
+```
+
+Notes:
+- Row 1 has trailing comma so all rows have a consistent 8 cells (avoids readr ragged-row warning).
+- Row 7 (`R`) has player names but blank prices — must be filtered out by the row-filter.
+- Row 8 (footer note) has a stray `"checked"` in col 3 — must be filtered out by the row-filter so the col-count check sees only priced-roster rows.
+
+- [ ] **Step 3: Write the failing test**
+
+Append to `tests/testthat/test-normalize-tout-wars-auctions.R`:
+
+```r
+test_that(".parse_tw_auction_2012_alnl handles 2012-al layout", {
+  result <- .parse_tw_auction_2012_alnl(
+    fixture_path("2012-al-mini.csv"),
+    expected_teams = 3
+  )
+  expect_named(
+    result,
+    c("team_owner", "position_slot", "player_type", "player_name", "price", "is_keeper")
+  )
+  expect_equal(nrow(result), 6L)
+  expect_setequal(unique(result$team_owner), c("SMITH", "JONES", "COLTON/WOLF"))
+  expect_setequal(unique(result$position_slot), c("C", "SP"))
+  # Row-filter must drop reserves and footer notes.
+  expect_false(any(grepl("^Reserve ", result$player_name)))
+  expect_false("R" %in% result$position_slot)
+})
+
+test_that(".parse_tw_auction_2012_alnl handles 2012-nl layout", {
+  result <- .parse_tw_auction_2012_alnl(
+    fixture_path("2012-nl-mini.csv"),
+    expected_teams = 3
+  )
+  expect_equal(nrow(result), 6L)
+  expect_setequal(unique(result$team_owner), c("ALPHA", "BETA", "GAMMA"))
+  expect_setequal(unique(result$player_type), c("batter", "pitcher"))
+})
+```
+
+- [ ] **Step 4: Run test to verify it fails**
+
+Run: `Rscript -e 'devtools::test(filter = "normalize-tout-wars-auctions")'`
+Expected: FAIL — `.parse_tw_auction_2012_alnl` not found.
+
+- [ ] **Step 5: Add the parser to `R/utils-tout-wars.R`**
+
+Append to `R/utils-tout-wars.R`:
+
+```r
+#' Parse a 2012 AL or NL Tout Wars auction CSV.
+#'
+#' Layout deviation from standard:
+#' - Owner row 1: owners in odd columns (1, 3, 5, ..., 23).
+#' - Position slot in column 2 (not column 1).
+#' - For team k: name at col 2k+1, price at col 2k+2.
+#'
+#' @keywords internal
+#' @noRd
+.parse_tw_auction_2012_alnl <- function(path, expected_teams) {
+  raw <- readr::read_csv(
+    path,
+    col_types = readr::cols(.default = "c"),
+    col_names = FALSE,
+    progress = FALSE
+  )
+
+  if (nrow(raw) < 4L) {
+    cli::cli_abort(
+      "Too few rows in {.file {path}}; expected header + 3 meta rows + roster.",
+      class = "rotostats_error_auction_meta_rows"
+    )
+  }
+
+  # Filter rows: keep header (row 1) + meta rows (2-4) + priced-roster rows
+  # only. Slot label lives in col 2 in the 2012-al/nl layout (not col 1).
+  # Drops footer/notes rows AND reserve (R) rows.
+  slot_col <- toupper(trimws(as.character(raw[[2]])))
+  is_priced_roster <- !is.na(slot_col) & nzchar(slot_col) & slot_col %in% .tw_canonical_slots
+  is_priced_roster[seq_len(4)] <- FALSE
+  keep_rows <- c(seq_len(4), which(is_priced_roster))
+  raw <- raw[keep_rows, , drop = FALSE]
+
+  is_trailing_na <- vapply(raw, function(col) all(is.na(col)), logical(1))
+  last_keep <- max(which(!is_trailing_na))
+  raw <- raw[, seq_len(last_keep), drop = FALSE]
+
+  # In the 2012-al/nl layout, owner is in col 1 and slot is in col 2 — both
+  # are dedicated columns above and beyond the per-team (name, price) pairs.
+  expected_cols <- 2L + 2L * expected_teams
+  if (ncol(raw) != expected_cols) {
+    cli::cli_abort(
+      c("Wrong column count in {.file {path}}.",
+        "i" = "Expected {expected_cols} columns ({expected_teams} teams in 2012 layout), got {ncol(raw)}."),
+      class = "rotostats_error_auction_col_count"
+    )
+  }
+
+  # Validate meta rows: col 3 of rows 2-4 must match the meta labels.
+  meta_labels <- c("Left to Spend", "Players Needed", "Max Bid")
+  meta_actual <- vapply(2:4, function(i) as.character(raw[i, 3, drop = TRUE]), character(1))
+  if (!identical(meta_actual, meta_labels)) {
+    cli::cli_abort(
+      c("Meta rows 2-4 do not match expected labels in {.file {path}}.",
+        "i" = "Expected {.val {meta_labels}}, got {.val {meta_actual}}."),
+      class = "rotostats_error_auction_meta_rows"
+    )
+  }
+
+  # Owners are in row 1, odd columns: 1, 3, 5, ..., 2*expected_teams - 1.
+  owner_cols <- seq(1L, by = 2L, length.out = expected_teams)
+  owners_raw <- as.character(raw[1, owner_cols, drop = TRUE])
+  owners <- vapply(owners_raw, .canonicalize_tw_owner, character(1))
+
+  # Data rows: row 5 onward (already filtered to priced-roster rows).
+  # Position slot in col 2.
+  data_rows <- raw[-(1:4), , drop = FALSE]
+
+  per_team <- lapply(seq_len(expected_teams), function(k) {
+    name_col <- 2L * k + 1L
+    price_col <- 2L * k + 2L
+    tibble::tibble(
+      team_owner    = owners[k],
+      position_slot = as.character(data_rows[[2]]),
+      player_name   = as.character(data_rows[[name_col]]),
+      price_chr     = as.character(data_rows[[price_col]])
+    )
+  })
+  long <- dplyr::bind_rows(per_team)
+
+  long <- dplyr::filter(long, !is.na(.data$player_name) & nzchar(trimws(.data$player_name)))
+  long$player_name <- trimws(long$player_name)
+
+  price_int <- suppressWarnings(as.integer(long$price_chr))
+  if (any(is.na(price_int)) || any(price_int < 0)) {
+    bad <- long$price_chr[is.na(price_int) | (price_int < 0)]
+    cli::cli_abort(
+      c("Non-integer or negative prices in {.file {path}}.",
+        "i" = "Offending values: {.val {bad}}."),
+      class = "rotostats_error_auction_price"
+    )
+  }
+  long$price <- price_int
+  long$price_chr <- NULL
+
+  long$position_slot <- trimws(long$position_slot)
+  long$player_type <- .derive_player_type(long$position_slot)
+  long$is_keeper <- FALSE
+
+  long <- dplyr::arrange(
+    long,
+    .data$team_owner, .data$position_slot, dplyr::desc(.data$price)
+  )
+
+  long[, c("team_owner", "position_slot", "player_type", "player_name", "price", "is_keeper")]
+}
+```
+
+- [ ] **Step 6: Run test to verify it passes**
+
+Run: `Rscript -e 'devtools::test(filter = "normalize-tout-wars-auctions")'`
+Expected: PASS — 2 new tests.
+
+- [ ] **Step 7: Spot-check against real 2012-al and 2012-nl files**
+
+Run interactively:
+
+```r
+devtools::load_all()
+al <- rotostats:::.parse_tw_auction_2012_alnl(
+  "data-raw/sources/tout-wars/auctions/2012-al.csv", expected_teams = 12)
+nl <- rotostats:::.parse_tw_auction_2012_alnl(
+  "data-raw/sources/tout-wars/auctions/2012-nl.csv", expected_teams = 13)
+nrow(al); length(unique(al$team_owner)); unique(al$position_slot)
+nrow(nl); length(unique(nl$team_owner)); unique(nl$position_slot)
+```
+
+Expected:
+- `al`: ~276 rows (12 × 23 priced slots), 12 distinct owners (including `COLTON/WOLF`), no `R` in `unique(position_slot)`.
+- `nl`: ~299 rows (13 × 23 priced slots), 13 distinct owners, no `R` in `unique(position_slot)`.
+
+If either fails, characterize the deviation, document it in the parser's roxygen, and fix before continuing.
+
+- [ ] **Step 8: Commit**
+
+```bash
+git add R/utils-tout-wars.R \
+        tests/testthat/test-normalize-tout-wars-auctions.R \
+        tests/testthat/fixtures/tout-wars-auctions/2012-al-mini.csv \
+        tests/testthat/fixtures/tout-wars-auctions/2012-nl-mini.csv
+git commit -m "feat(auctions): bespoke parser for 2012 AL/NL auction layout"
+```
+
+---
+
+## Task 4: 2012-mixed bespoke parser
+
+**Files:**
+- Create: `tests/testthat/fixtures/tout-wars-auctions/2012-mixed-mini.csv`
+- Modify: `R/utils-tout-wars.R`
+- Modify: `tests/testthat/test-normalize-tout-wars-auctions.R`
+
+The 2012-mixed deviation (verified on `2012-mixed.csv`):
+- **Row 1 is entirely empty.**
+- **Owner row is row 2** (not row 1), owners in odd columns (3, 5, 7, …, 31).
+- **Meta rows 3–5** (not 2–4): `Left to Spend` / `Players Needed` / `Max Bid` in col 3.
+- **Data rows: row 6 onward.**
+- **Position slot in col 2** but **sparse** — verified on `2012-mixed.csv` row 6 (Montero / Wieters / Votto rows): the slot label appears on the **last** row of each slot group, with prior rows in the same group having an empty slot cell. The parser must **backward-fill** col 2 (inherit from the next non-empty cell, not the previous one).
+- **For team k:** name at col `2k + 1`, price at col `2k + 2` for k = 1..15. Col 1 is an empty placeholder; col 2 holds the slot. Total cols: **32** (= `2 + 2 * 15`).
+- **Trailing junk:** rows 33–34 of `2012-mixed.csv` are notes (col 2 empty, scattered text in player-name cols), then rows 35+ are empty. These would defeat backward-fill (no slot label below them) and must be dropped before fill.
+- **Reserve rows (slot `R`)** appear between the priced roster and the notes rows; they have player names but empty prices. Per non-goal #6 they are excluded from the dataset.
+
+- [ ] **Step 1: Inspect raw file and confirm sparse-slot semantics**
+
+Run:
+
+```bash
+awk -F, 'NR==1 || NR==2 || NR==6 || NR==7 || NR>=29 && NR<=36 {print NR": "$0}' \
+  data-raw/sources/tout-wars/auctions/2012-mixed.csv | head -20
+```
+
+Verify:
+- Row 1 entirely empty.
+- Row 2 has 15 owners in odd cols 3, 5, …, 31.
+- Row 6 has empty col 2 (Montero/Martin/Soto row).
+- Row 7 has `C` in col 2 (Wieters/Ruiz row) — backward-fill source for row 6.
+- Rows 29–32 have `R` in col 2 (reserve rows).
+- Rows 33–34 have empty col 2 and scattered notes/labels in name cols (notes rows).
+- Rows 35+ are entirely empty.
+
+If the actual semantics differ (e.g., forward-fill, or the missing slot represents a distinct un-labelled slot), update Step 5's fill-loop direction before continuing.
+
+- [ ] **Step 2: Create synthetic fixture**
+
+Create `tests/testthat/fixtures/tout-wars-auctions/2012-mixed-mini.csv` (3 teams × 3 priced data rows, plus a reserve row and trailing junk that must be dropped):
+
+```csv
+,,,,,,,
+,,SMITH,,JONES,,WOLF/COLTON,
+,,Left to Spend,0,Left to Spend,0,Left to Spend,0
+,,Players Needed,0,Players Needed,0,Players Needed,0
+,,Max Bid,1,Max Bid,1,Max Bid,1
+,,A1,5,A2,6,A3,7
+,C,B1,10,B2,11,B3,12
+,SP,D1,20,D2,21,D3,22
+,R,Reserve A,,Reserve B,,Reserve C,
+,,checked,,checked,,,
+,,,,,,,
+```
+
+Layout notes:
+- Every row has 8 cells (7 commas) so `readr::read_csv` does not warn about ragged rows.
+- Row 6 has empty col 2 — its slot is `C` backward-inherited from row 7.
+- Rows 7–8 carry their own slot labels (`C`, `SP`).
+- Row 9 is a reserve row (`R`) with names but no prices — must be dropped by the canonical-slot post-filter.
+- Row 10 is a notes row (col 2 empty, "checked" tokens in name cols, no prices) — must be dropped by the trailing-row pre-filter.
+- Row 11 is fully empty — also dropped by the trailing-row pre-filter.
+
+- [ ] **Step 3: Write the failing test**
+
+Append to `tests/testthat/test-normalize-tout-wars-auctions.R`:
+
+```r
+test_that(".parse_tw_auction_2012_mixed handles empty row 1 and sparse slots", {
+  result <- .parse_tw_auction_2012_mixed(
+    fixture_path("2012-mixed-mini.csv"),
+    expected_teams = 3
+  )
+  # 3 teams * 3 priced data rows = 9. Reserve row, "checked" notes row, and
+  # the trailing empty row must all be excluded.
+  expect_equal(nrow(result), 9L)
+  expect_setequal(unique(result$team_owner), c("SMITH", "JONES", "COLTON/WOLF"))
+  expect_setequal(unique(result$position_slot), c("C", "SP"))
+  expect_false(any(result$player_name %in% c("Reserve A", "Reserve B", "Reserve C")))
+  expect_false(any(result$player_name == "checked"))
+
+  # Sparse-slot row (row 6 of fixture: A1/A2/A3) should backward-inherit `C`.
+  smith_rows <- dplyr::filter(result, .data$team_owner == "SMITH")
+  expect_equal(sum(smith_rows$position_slot == "C"), 2L)
+  expect_equal(sum(smith_rows$position_slot == "SP"), 1L)
+})
+```
+
+- [ ] **Step 4: Run test to verify it fails**
+
+Run: `Rscript -e 'devtools::test(filter = "normalize-tout-wars-auctions")'`
+Expected: FAIL.
+
+- [ ] **Step 5: Add the parser**
+
+Append to `R/utils-tout-wars.R`:
+
+```r
+#' Parse a 2012 Mixed Tout Wars auction CSV.
+#'
+#' Layout deviation from standard:
+#' - Row 1 is entirely empty.
+#' - Owner row is row 2; owners in odd columns (3, 5, ..., 2k+1, ..., 31).
+#' - Meta rows are rows 3-5 (not 2-4).
+#' - Data rows start at row 6.
+#' - Position slot in col 2; sparse - the label appears on the LAST row of each
+#'   slot group, so preceding rows must backward-fill from below.
+#' - For team k: name at col 2k+1, price at col 2k+2. Total cols 2 + 2 * teams.
+#'
+#' Trailing junk rows (notes, "checked" labels, blank rows after the last
+#' priced row) are dropped before backward-fill so they cannot poison the
+#' inheritance chain. Reserve rows (slot `R`) survive backward-fill but are
+#' dropped by the canonical-slot post-filter (see spec non-goal #6).
+#'
+#' @keywords internal
+#' @noRd
+.parse_tw_auction_2012_mixed <- function(path, expected_teams) {
+  raw <- readr::read_csv(
+    path,
+    col_types = readr::cols(.default = "c"),
+    col_names = FALSE,
+    progress = FALSE
+  )
+
+  if (nrow(raw) < 5L) {
+    cli::cli_abort(
+      "Too few rows in {.file {path}}; expected empty row + owner row + 3 meta rows + roster.",
+      class = "rotostats_error_auction_meta_rows"
+    )
+  }
+
+  # Drop trailing rows after the last row whose col 2 (slot) is non-empty.
+  # The 2012-mixed file has notes rows (col 2 empty, scattered text in name
+  # cols) and blank rows after the last priced/reserve roster row. These
+  # would defeat backward-fill (no label below to inherit from), so we cut
+  # them off first. This works because the slot label always appears on the
+  # LAST row of each group, including the last group overall.
+  slot_col_raw <- as.character(raw[[2]])
+  nonempty_slot <- !is.na(slot_col_raw) & nzchar(trimws(slot_col_raw))
+  if (!any(nonempty_slot[-(1:5)])) {
+    cli::cli_abort(
+      "No slot labels found in col 2 of {.file {path}}.",
+      class = "rotostats_error_auction_slot_orphan"
+    )
+  }
+  last_data_row <- max(which(nonempty_slot))
+  raw <- raw[seq_len(last_data_row), , drop = FALSE]
+
+  is_trailing_na <- vapply(raw, function(col) all(is.na(col)), logical(1))
+  last_keep <- max(which(!is_trailing_na))
+  raw <- raw[, seq_len(last_keep), drop = FALSE]
+
+  # In the 2012-mixed layout col 1 is an empty placeholder and col 2 holds
+  # the slot - both above and beyond the per-team (name, price) pairs.
+  expected_cols <- 2L + 2L * expected_teams
+  if (ncol(raw) != expected_cols) {
+    cli::cli_abort(
+      c("Wrong column count in {.file {path}}.",
+        "i" = "Expected {expected_cols} columns ({expected_teams} teams in 2012-mixed layout), got {ncol(raw)}."),
+      class = "rotostats_error_auction_col_count"
+    )
+  }
+
+  # Validate row 1 is empty.
+  row1_nonempty <- sum(!is.na(raw[1, ]) & nzchar(trimws(as.character(raw[1, ]))))
+  if (row1_nonempty > 0) {
+    cli::cli_abort(
+      "2012-mixed parser expects row 1 empty in {.file {path}}, found {row1_nonempty} non-empty cells.",
+      class = "rotostats_error_auction_row1_nonempty"
+    )
+  }
+
+  # Validate meta rows: col 3 of rows 3-5 must match the meta labels.
+  meta_labels <- c("Left to Spend", "Players Needed", "Max Bid")
+  meta_actual <- vapply(3:5, function(i) as.character(raw[i, 3, drop = TRUE]), character(1))
+  if (!identical(meta_actual, meta_labels)) {
+    cli::cli_abort(
+      c("Meta rows 3-5 do not match expected labels in {.file {path}}.",
+        "i" = "Expected {.val {meta_labels}}, got {.val {meta_actual}}."),
+      class = "rotostats_error_auction_meta_rows"
+    )
+  }
+
+  # Owners are in row 2, odd columns 3, 5, ..., 2*expected_teams + 1.
+  owner_cols <- seq(3L, by = 2L, length.out = expected_teams)
+  owners_raw <- as.character(raw[2, owner_cols, drop = TRUE])
+  owners <- vapply(owners_raw, .canonicalize_tw_owner, character(1))
+
+  data_rows <- raw[-(1:5), , drop = FALSE]
+
+  # Backward-fill position slot column (col 2). Trailing junk has already been
+  # trimmed, so the last data row is guaranteed to have a non-empty slot.
+  slot_raw <- as.character(data_rows[[2]])
+  slot_filled <- slot_raw
+  n <- length(slot_filled)
+  if (n == 0L || is.na(slot_filled[n]) || !nzchar(trimws(slot_filled[n]))) {
+    cli::cli_abort(
+      "Last data row in {.file {path}} has empty position slot \u2014 cannot backward-fill.",
+      class = "rotostats_error_auction_slot_orphan"
+    )
+  }
+  for (i in rev(seq_len(n - 1L))) {
+    if (is.na(slot_filled[i]) || !nzchar(trimws(slot_filled[i]))) {
+      slot_filled[i] <- slot_filled[i + 1L]
+    }
+  }
+  slot_filled <- trimws(slot_filled)
+
+  # Drop reserve rows (and any other non-canonical slot) before price coercion;
+  # reserve rows have empty price cells that would otherwise trip the integer
+  # check.
+  is_canonical <- slot_filled %in% .tw_canonical_slots
+  data_rows <- data_rows[is_canonical, , drop = FALSE]
+  slot_filled <- slot_filled[is_canonical]
+
+  per_team <- lapply(seq_len(expected_teams), function(k) {
+    name_col <- 2L * k + 1L
+    price_col <- 2L * k + 2L
+    tibble::tibble(
+      team_owner    = owners[k],
+      position_slot = slot_filled,
+      player_name   = as.character(data_rows[[name_col]]),
+      price_chr     = as.character(data_rows[[price_col]])
+    )
+  })
+  long <- dplyr::bind_rows(per_team)
+
+  long <- dplyr::filter(long, !is.na(.data$player_name) & nzchar(trimws(.data$player_name)))
+  long$player_name <- trimws(long$player_name)
+
+  price_int <- suppressWarnings(as.integer(long$price_chr))
+  if (any(is.na(price_int)) || any(price_int < 0)) {
+    bad <- long$price_chr[is.na(price_int) | (price_int < 0)]
+    cli::cli_abort(
+      c("Non-integer or negative prices in {.file {path}}.",
+        "i" = "Offending values: {.val {bad}}."),
+      class = "rotostats_error_auction_price"
+    )
+  }
+  long$price <- price_int
+  long$price_chr <- NULL
+
+  long$player_type <- .derive_player_type(long$position_slot)
+  long$is_keeper <- FALSE
+
+  long <- dplyr::arrange(
+    long,
+    .data$team_owner, .data$position_slot, dplyr::desc(.data$price)
+  )
+
+  long[, c("team_owner", "position_slot", "player_type", "player_name", "price", "is_keeper")]
+}
+```
+
+- [ ] **Step 6: Run test to verify it passes**
+
+Run: `Rscript -e 'devtools::test(filter = "normalize-tout-wars-auctions")'`
+Expected: PASS.
+
+- [ ] **Step 7: Spot-check against real 2012-mixed file**
+
+```r
+devtools::load_all()
+m <- .parse_tw_auction_2012_mixed(
+  "data-raw/sources/tout-wars/auctions/2012-mixed.csv", expected_teams = 15)
+nrow(m)
+length(unique(m$team_owner))
+sort(unique(m$position_slot))
+table(m$position_slot)
+```
+
+Expected:
+- `nrow(m) == 345L` (15 teams × 23 priced rows: 1 C-sparse + C + 1B + 3B + CI + 2B + SS + MI + 5×OF + UT + 9×P).
+- 15 distinct owners, all canonical (uppercased and `/`-joined where applicable).
+- `position_slot` values are a subset of `.tw_canonical_slots`. **No `R`** (reserve rows excluded).
+- No `NA` in `position_slot` (backward-fill resolved every sparse cell).
+
+If row count is wildly off, the sparse-slot or trailing-row trim logic likely needs revision.
+
+- [ ] **Step 8: Commit**
+
+```bash
+git add R/utils-tout-wars.R \
+        tests/testthat/test-normalize-tout-wars-auctions.R \
+        tests/testthat/fixtures/tout-wars-auctions/2012-mixed-mini.csv
+git commit -m "feat(auctions): bespoke parser for 2012-mixed auction layout"
+```
+
+---
+
+## Task 5: 2015-nl smoke test against the standard parser
+
+**Files:**
+- Modify: `tests/testthat/test-normalize-tout-wars-auctions.R`
+
+The 2015-nl file has literal newlines inside quoted owner / player-name
+fields (e.g., row 1 of the raw CSV: `,COCKCROFT,,"GARDNER\n",,"HERTZ\n",...`).
+The original plan and spec assumed `readr::read_csv` would break on these and
+required a bespoke preprocessor. Empirical testing shows readr handles
+RFC-4180 quoted-multiline fields natively:
+
+```
+$ Rscript -e 'd <- readr::read_csv("data-raw/sources/tout-wars/auctions/2015-nl.csv", col_types = readr::cols(.default = "c"), col_names = FALSE, progress = FALSE); cat("rows:", nrow(d), "cols:", ncol(d), "\n")'
+rows: 38  cols: 25
+```
+
+The standard parser already trims the trailing newline characters via
+`canonicalize_owner()` (for owners) and `trimws()` (for player names), so
+`.parse_tw_auction_standard("…/2015-nl.csv", expected_teams = 12)` returns
+276 long-tidy rows with all 12 canonical owners and zero warnings — verified
+empirically before this plan amendment.
+
+This task therefore needs no parser, no fixture, and no preprocessor. It
+adds a single regression test pinned to the real 2015-nl file so a future
+readr regression that re-introduces the embedded-newline pathology cannot
+slip through silently.
+
+- [ ] **Step 1: Confirm the standard parser handles 2015-nl natively**
+
+Run:
+
+```bash
+Rscript -e '
+suppressMessages(devtools::load_all())
+warns <- character()
+withCallingHandlers(
+  {
+    result <- rotostats:::.parse_tw_auction_standard(
+      "data-raw/sources/tout-wars/auctions/2015-nl.csv",
+      expected_teams = 12)
+  },
+  warning = function(w) {
+    warns <<- c(warns, conditionMessage(w))
+    invokeRestart("muffleWarning")
+  }
+)
+cat("warnings:", length(warns), "\n")
+cat("nrow:", nrow(result), "\n")
+cat("owners:", paste(sort(unique(result$team_owner)), collapse=", "), "\n")
+cat("any embedded newline in player_name:", any(grepl("\n", result$player_name)), "\n")
+cat("any embedded newline in team_owner:", any(grepl("\n", result$team_owner)), "\n")
+'
+```
+
+Expected:
+- `warnings: 0`
+- `nrow: 276`
+- `owners: CARTY, COCKCROFT, GARDNER, GIANELLA, GUILFOYLE, HERTZ, KREUTZER, MCCAFFREY, MELNICK, WALTON, WILDERMAN, ZOLA`
+- Both newline checks: `FALSE`.
+
+If any of these expectations fail, **stop and escalate** — readr's behavior
+on multiline-quoted fields has changed and Task 5 needs to revert to a
+preprocessor approach.
+
+- [ ] **Step 2: Add the regression test**
+
+Append to `tests/testthat/test-normalize-tout-wars-auctions.R`:
+
+```r
+test_that("standard parser handles 2015-nl quoted-multiline fields natively", {
+  # The raw 2015-nl.csv has literal newlines inside quoted owner names
+  # (e.g., "GARDNER\n", "HERTZ\n") and inside several player names. readr's
+  # CSV parser handles RFC-4180 multiline-quoted fields natively, and the
+  # standard parser already trims surrounding whitespace. This test pins
+  # the round-trip so a future readr regression cannot reintroduce the
+  # embedded-newline pathology silently.
+  path <- testthat::test_path(
+    "..", "..", "data-raw", "sources", "tout-wars", "auctions", "2015-nl.csv"
+  )
+  testthat::skip_if_not(file.exists(path), "2015-nl.csv not present in source tree")
+
+  result <- expect_no_warning(
+    .parse_tw_auction_standard(path, expected_teams = 12)
+  )
+
+  expect_equal(nrow(result), 276L)
+  expect_setequal(
+    unique(result$team_owner),
+    c("CARTY", "COCKCROFT", "GARDNER", "GIANELLA", "GUILFOYLE", "HERTZ",
+      "KREUTZER", "MCCAFFREY", "MELNICK", "WALTON", "WILDERMAN", "ZOLA")
+  )
+  expect_false(any(grepl("\n", result$team_owner)))
+  expect_false(any(grepl("\n", result$player_name)))
+})
+```
+
+`expect_no_warning` is part of testthat 3e (the version this project uses).
+
+- [ ] **Step 3: Run the test to confirm it passes**
+
+Run: `Rscript -e 'devtools::test(filter = "normalize-tout-wars-auctions")'`
+
+Expected: all prior tests pass plus the new test, total 32 tests, 0 fail / 0 warn / 0 skip.
+
+If the file path skip fires (test reports SKIP=1 instead of PASS+1), the
+relative path is wrong for the current working directory — adjust until the
+test runs.
+
+- [ ] **Step 4: Commit**
+
+```bash
+git add tests/testthat/test-normalize-tout-wars-auctions.R
+git commit -m "test(auctions): pin 2015-nl quoted-multiline regression test"
+```
+
+---
+
+## Task 6: Dispatcher + canonical position_slot validation
+
+**Files:**
+- Modify: `R/utils-tout-wars.R`
+
+- [ ] **Step 1: Add the dispatcher to `R/utils-tout-wars.R`**
+
+Append:
+
+```r
+# Maps (year, league) -> override parser. Default is .parse_tw_auction_standard.
+# 2015-nl was originally listed here, but readr handles its quoted-multiline
+# fields natively (Task 5 verifies); so it is intentionally absent and routes
+# to the standard parser by default.
+.tw_auction_overrides <- list(
+  "2012-al"    = ".parse_tw_auction_2012_alnl",
+  "2012-nl"    = ".parse_tw_auction_2012_alnl",
+  "2012-mixed" = ".parse_tw_auction_2012_mixed"
+)
+
+# Default team count by league.
+.tw_team_counts <- c(al = 12L, nl = 12L, mixed = 15L)
+
+# Per-(year, league) team-count overrides for files that deviate from the
+# default. 2012 NL ran with 13 teams instead of the usual 12.
+.tw_team_count_overrides <- list("2012-nl" = 13L)
+
+#' Normalize a single Tout Wars auction CSV via dispatch on (year, league).
+#'
+#' @param path Path to raw CSV.
+#' @param year Integer.
+#' @param league One of "al", "nl", "mixed".
+#' @return Long-tidy tibble (Stage 1 schema).
+#' @keywords internal
+#' @noRd
+.normalize_tw_auction <- function(path, year, league) {
+  if (!league %in% names(.tw_team_counts)) {
+    cli::cli_abort(
+      "Unknown league {.val {league}} (expected one of {.val {names(.tw_team_counts)}}).",
+      class = "rotostats_error_auction_unknown_league"
+    )
+  }
+  key <- paste0(year, "-", league)
+  expected_teams <- .tw_team_count_overrides[[key]]
+  if (is.null(expected_teams)) expected_teams <- .tw_team_counts[[league]]
+  parser_name <- .tw_auction_overrides[[key]]
+  if (is.null(parser_name)) parser_name <- ".parse_tw_auction_standard"
+  parser <- get(parser_name, mode = "function")
+  parser(path, expected_teams = expected_teams)
+}
+```
+
+- [ ] **Step 2: Add dispatcher tests**
+
+Append to `tests/testthat/test-normalize-tout-wars-auctions.R`:
+
+```r
+test_that(".normalize_tw_auction dispatches to the standard parser by default", {
+  result <- .normalize_tw_auction(
+    fixture_path("standard-mini.csv"),
+    year = 2018, league = "al"
+  )
+  expect_equal(nrow(result), 6)
+})
+
+test_that(".normalize_tw_auction routes 2012-al to the bespoke parser", {
+  result <- .normalize_tw_auction(
+    fixture_path("2012-al-mini.csv"),
+    year = 2012, league = "al"
+  )
+  expect_equal(nrow(result), 6)
+})
+
+test_that(".normalize_tw_auction errors on unknown league", {
+  expect_error(
+    .normalize_tw_auction(fixture_path("standard-mini.csv"), year = 2018, league = "xyz"),
+    class = "rotostats_error_auction_unknown_league"
+  )
+})
+
+test_that(".tw_team_count_overrides is consulted before the per-league default", {
+  # Whitebox check on the override constant — the 2012-nl key must override
+  # the default nl = 12 with 13.
+  expect_equal(.tw_team_count_overrides[["2012-nl"]], 13L)
+  expect_null(.tw_team_count_overrides[["2018-nl"]])  # No override -> default applies.
+})
+```
+
+- [ ] **Step 3: Run all tests**
+
+Run: `Rscript -e 'devtools::test(filter = "normalize-tout-wars-auctions")'`
+Expected: PASS — all branch parsers + dispatcher tests.
+
+- [ ] **Step 4: Commit**
+
+```bash
+git add R/utils-tout-wars.R tests/testthat/test-normalize-tout-wars-auctions.R
+git commit -m "feat(auctions): dispatcher routing year-league to parser"
+```
+
+---
+
+## Task 7: Stage 1 driver — run dispatcher across all 45 raw files
+
+**Files:**
+- Create: `data-raw/normalize-tout-wars-auctions.R`
+
+- [ ] **Step 1: Write the Stage 1 script**
+
+Create `data-raw/normalize-tout-wars-auctions.R`:
+
+```r
+# Stage 1: Normalize raw Tout Wars auction CSVs into per-pick long-tidy CSVs.
+# Reads from data-raw/sources/tout-wars/auctions/{year}-{league}.csv
+# Writes to data-raw/sources/tout-wars/auctions-clean/auction-{league}-{year}.csv
+#
+# Spec: plans/specs/2026-04-27-auction-csv-normalization-design.md
+
+devtools::load_all()
+
+raw_dir   <- "data-raw/sources/tout-wars/auctions"
+clean_dir <- "data-raw/sources/tout-wars/auctions-clean"
+fs::dir_create(clean_dir)
+
+raw_files <- list.files(raw_dir, pattern = "\\.csv$", full.names = TRUE)
+stopifnot(length(raw_files) == 45L)
+
+per_file_rows <- integer(0)
+
+for (f in raw_files) {
+  stem <- fs::path_ext_remove(fs::path_file(f))
+  parts <- strsplit(stem, "-", fixed = TRUE)[[1]]
+  stopifnot(length(parts) == 2L)
+  year   <- as.integer(parts[1])
+  league <- parts[2]
+
+  tidy <- .normalize_tw_auction(f, year = year, league = league)
+
+  out_path <- fs::path(clean_dir, glue::glue("auction-{league}-{year}.csv"))
+  readr::write_csv(tidy, out_path)
+
+  per_file_rows[stem] <- nrow(tidy)
+  cli::cli_inform("normalized {.file {basename(f)}} → {.file {basename(out_path)}} ({nrow(tidy)} rows)")
+}
+
+cli::cli_inform("--- per-file row counts (paste into .tw_auction_row_counts) ---")
+print(per_file_rows)
+```
+
+- [ ] **Step 2: Run the script**
+
+Run: `Rscript data-raw/normalize-tout-wars-auctions.R`
+
+Expected: 45 lines of `normalized ...` output, plus a printed named integer vector at the end. No errors.
+
+If a file fails: read the error message, identify which assertion failed, characterize the deviation, either patch the relevant parser or add a new alias to `.tw_owner_aliases`. Do not relax assertions to silence errors.
+
+- [ ] **Step 3: Inspect cleaned outputs**
+
+Run:
+
+```bash
+ls data-raw/sources/tout-wars/auctions-clean | wc -l
+head -5 data-raw/sources/tout-wars/auctions-clean/auction-al-2018.csv
+```
+
+Expected: 45 cleaned files; first cleaned file has the 6-column header `team_owner,position_slot,player_type,player_name,price,is_keeper` and sensible rows.
+
+- [ ] **Step 4: Capture the canonical position_slot set**
+
+Run interactively:
+
+```r
+clean_files <- list.files("data-raw/sources/tout-wars/auctions-clean", full.names = TRUE)
+all_slots <- unique(unlist(lapply(clean_files, function(f) {
+  readr::read_csv(f, col_types = "ccccil", progress = FALSE)$position_slot
+})))
+sort(all_slots)
+```
+
+Inspect the printed list. Add expected slots (e.g., `C, 1B, 2B, 3B, SS, MI, CI, OF, UT, SP, RP, P, BN, DH, SW`) to a named constant `.tw_canonical_slots` in `R/utils-tout-wars.R`. Investigate any unexpected entries (typos, whitespace, mis-parsed cells).
+
+- [ ] **Step 5: Add slot validation back into all parsers**
+
+Add to `R/utils-tout-wars.R` near the top:
+
+```r
+.tw_canonical_slots <- c(
+  # populate from Step 4 output, e.g.:
+  "C", "1B", "2B", "3B", "SS", "MI", "CI", "OF", "UT", "DH",
+  "SP", "RP", "P", "BN", "SW"
+)
+
+.validate_tw_position_slots <- function(slots, path) {
+  bad <- setdiff(unique(slots), .tw_canonical_slots)
+  if (length(bad) > 0) {
+    cli::cli_abort(
+      c("Unknown position_slot value(s) in {.file {path}}.",
+        "i" = "Offending: {.val {bad}}.",
+        "i" = "If valid, add to .tw_canonical_slots in R/utils-tout-wars.R."),
+      class = "rotostats_error_auction_unknown_slot"
+    )
+  }
+  invisible(slots)
+}
+```
+
+In each parser (`standard`, `2012_alnl`, `2012_mixed`), add a single line right after `long$position_slot <- trimws(long$position_slot)` (or its equivalent for `2012_mixed`):
+
+```r
+.validate_tw_position_slots(long$position_slot, path)
+```
+
+- [ ] **Step 6: Re-run Stage 1 and tests**
+
+```bash
+Rscript data-raw/normalize-tout-wars-auctions.R
+Rscript -e 'devtools::test(filter = "normalize-tout-wars-auctions")'
+```
+
+Both expected to pass without changes (since the canonical set was derived from the actual outputs).
+
+- [ ] **Step 7: Commit**
+
+```bash
+git add data-raw/normalize-tout-wars-auctions.R \
+        data-raw/sources/tout-wars/auctions-clean \
+        R/utils-tout-wars.R
+git commit -m "feat(auctions): Stage 1 driver + canonical position_slot validation"
+```
+
+---
+
+## Task 8: Golden row-count table
+
+**Files:**
+- Modify: `R/utils-tout-wars.R`
+
+- [ ] **Step 1: Capture the golden row counts**
+
+Take the named integer vector printed at the end of Task 7 Step 2. Add it to `R/utils-tout-wars.R`:
+
+```r
+# Golden per-file row counts. Populated empirically after Stage 1's first
+# clean run. Used by Stage 1 (in-script assertion) and Stage 2 (combined
+# row-count assertion). Update when raw files change.
+.tw_auction_row_counts <- c(
+  "2012-al"    = 999L,  # replace with actual values from Task 7 Step 2
+  "2012-nl"    = 999L,
+  "2012-mixed" = 999L,
+  "2013-al"    = 999L
+  # ... all 45 entries
+)
+```
+
+Replace each `999L` with the actual integer printed by the Stage 1 driver.
+
+- [ ] **Step 2: Wire the assertion into the Stage 1 driver**
+
+Edit `data-raw/normalize-tout-wars-auctions.R` — replace the existing `for` loop with:
+
+```r
+for (f in raw_files) {
+  stem <- fs::path_ext_remove(fs::path_file(f))
+  parts <- strsplit(stem, "-", fixed = TRUE)[[1]]
+  year   <- as.integer(parts[1])
+  league <- parts[2]
+
+  tidy <- .normalize_tw_auction(f, year = year, league = league)
+
+  expected_rows <- .tw_auction_row_counts[[stem]]
+  if (nrow(tidy) != expected_rows) {
+    cli::cli_abort(
+      c("Row count drift in {.file {basename(f)}}.",
+        "i" = "Expected {expected_rows}, got {nrow(tidy)}.",
+        "i" = "If intentional, update .tw_auction_row_counts in R/utils-tout-wars.R."),
+      class = "rotostats_error_auction_row_count_drift"
+    )
+  }
+
+  out_path <- fs::path(clean_dir, glue::glue("auction-{league}-{year}.csv"))
+  readr::write_csv(tidy, out_path)
+  cli::cli_inform("normalized {.file {basename(f)}} → {.file {basename(out_path)}} ({nrow(tidy)} rows)")
+}
+```
+
+(Remove the `per_file_rows` accumulator and the trailing print — they were scaffolding for capturing the table.)
+
+- [ ] **Step 3: Run Stage 1 again**
+
+Run: `Rscript data-raw/normalize-tout-wars-auctions.R`
+Expected: PASS — no drift errors.
+
+- [ ] **Step 4: Sanity-bound checks (per-team and per-league totals)**
+
+Add to `data-raw/normalize-tout-wars-auctions.R`, just before the `cli::cli_inform` line:
+
+```r
+team_totals <- aggregate(price ~ team_owner, data = tidy, FUN = sum)
+if (any(team_totals$price < 0) || any(team_totals$price > 400)) {
+  bad <- team_totals[team_totals$price < 0 | team_totals$price > 400, ]
+  cli::cli_abort(
+    c("Per-team total price out of sanity bounds [0, 400] in {.file {basename(f)}}.",
+      "i" = "Offending: {paste(bad$team_owner, bad$price, sep = '=', collapse = ', ')}."),
+    class = "rotostats_error_auction_team_total_oob"
+  )
+}
+file_total <- sum(tidy$price)
+if (file_total < 2000 || file_total > 5000) {
+  cli::cli_abort(
+    c("League-year total price out of sanity bounds [2000, 5000] in {.file {basename(f)}}.",
+      "i" = "Got {file_total}."),
+    class = "rotostats_error_auction_file_total_oob"
+  )
+}
+```
+
+- [ ] **Step 5: Run Stage 1 once more**
+
+Run: `Rscript data-raw/normalize-tout-wars-auctions.R`
+Expected: PASS — no sanity-bound errors. If any file fails, the bounds may be too tight; widen them or investigate the file.
+
+- [ ] **Step 6: Commit**
+
+```bash
+git add R/utils-tout-wars.R data-raw/normalize-tout-wars-auctions.R
+git commit -m "feat(auctions): golden row counts + sanity-bound checks"
+```
+
+---
+
+## Task 9: Stage 2 — bind cleaned CSVs into `tout_wars_auctions`
+
+**Files:**
+- Create: `data-raw/tout-wars-auctions.R`
+
+- [ ] **Step 1: Write the Stage 2 script**
+
+Create `data-raw/tout-wars-auctions.R`:
+
+```r
+# Stage 2: Bind all cleaned per-pick CSVs into the tout_wars_auctions package
+# data object.
+#
+# Spec: plans/specs/2026-04-27-auction-csv-normalization-design.md
+
+devtools::load_all()
+
+clean_dir <- "data-raw/sources/tout-wars/auctions-clean"
+clean_files <- list.files(clean_dir, pattern = "\\.csv$", full.names = TRUE)
+
+if (length(clean_files) != 45L) {
+  cli::cli_abort(
+    "Expected 45 cleaned auction CSVs, found {length(clean_files)}.",
+    class = "rotostats_error_auction_missing_clean_files"
+  )
+}
+
+read_one <- function(path) {
+  stem <- fs::path_ext_remove(fs::path_file(path))  # auction-{league}-{year}
+  parts <- strsplit(stem, "-", fixed = TRUE)[[1]]
+  stopifnot(length(parts) == 3L && parts[1] == "auction")
+  league <- parts[2]
+  year   <- as.integer(parts[3])
+
+  readr::read_csv(path, col_types = "ccccil", progress = FALSE) |>
+    tibble::add_column(year = year, league = league, .before = 1)
+}
+
+tout_wars_auctions <- purrr::map_dfr(clean_files, read_one)
+
+# Combined row-count assertion.
+expected_total <- sum(.tw_auction_row_counts)
+if (nrow(tout_wars_auctions) != expected_total) {
+  cli::cli_abort(
+    c("Combined row count mismatch.",
+      "i" = "Expected {expected_total} (sum of golden table), got {nrow(tout_wars_auctions)}."),
+    class = "rotostats_error_auction_combined_row_count"
+  )
+}
+
+tout_wars_auctions <- dplyr::arrange(
+  tout_wars_auctions,
+  year, league, team_owner, position_slot, dplyr::desc(price)
+)
+
+usethis::use_data(tout_wars_auctions, overwrite = TRUE)
+cli::cli_inform("Wrote tout_wars_auctions: {nrow(tout_wars_auctions)} rows.")
+```
+
+- [ ] **Step 2: Run the script**
+
+Run: `Rscript data-raw/tout-wars-auctions.R`
+Expected: `Wrote tout_wars_auctions: <N> rows.` where N = sum of golden row counts. `data/tout_wars_auctions.rda` exists.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add data-raw/tout-wars-auctions.R data/tout_wars_auctions.rda
+git commit -m "feat(auctions): Stage 2 bind + tout_wars_auctions package data"
+```
+
+---
+
+## Task 10: Roxygen documentation for the dataset
+
+**Files:**
+- Create: `R/data-tout-wars-auctions.R`
+
+- [ ] **Step 1: Write the dataset doc**
+
+Create `R/data-tout-wars-auctions.R`:
+
+```r
+#' Tout Wars Auction Results, 2012–most recent year
+#'
+#' Long-tidy auction results for all three Tout Wars expert leagues
+#' (American League, National League, Mixed). One row per auctioned player.
+#'
+#' @format A tibble with 8 columns:
+#' \describe{
+#'   \item{year}{Integer. Auction year.}
+#'   \item{league}{Character. One of `"al"`, `"nl"`, or `"mixed"`.}
+#'   \item{team_owner}{Character. Canonicalized owner name. Last name uppercase;
+#'     partnerships joined with `/` and alphabetized (e.g., `"COLTON/WOLF"`).}
+#'   \item{position_slot}{Character. Roster slot the player occupied (`"C"`,
+#'     `"1B"`, `"OF"`, `"SP"`, `"RP"`, etc.). Not multi-position eligibility.}
+#'   \item{player_type}{Character. `"batter"` or `"pitcher"`. Derived from
+#'     `position_slot`: `c("SP", "RP", "P")` → `"pitcher"`; else `"batter"`.}
+#'   \item{player_name}{Character. Player name as recorded in the source CSV,
+#'     whitespace-trimmed. Not normalized to any external player-ID source.}
+#'   \item{price}{Integer. Auction price in dollars. Non-negative.}
+#'   \item{is_keeper}{Logical. Always `FALSE` — Tout Wars is not a keeper league.}
+#' }
+#'
+#' @source Tout Wars auction CSVs at
+#'   <https://www.toutwars.com>, normalized via
+#'   `data-raw/normalize-tout-wars-auctions.R` and
+#'   `data-raw/tout-wars-auctions.R`.
+"tout_wars_auctions"
+```
+
+- [ ] **Step 2: Generate the .Rd file**
+
+Run: `Rscript -e 'devtools::document()'`
+Expected: `man/tout_wars_auctions.Rd` created.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add R/data-tout-wars-auctions.R man/tout_wars_auctions.Rd NAMESPACE
+git commit -m "docs(auctions): roxygen for tout_wars_auctions dataset"
+```
+
+---
+
+## Task 11: testthat tests on the committed `.rda`
+
+**Files:**
+- Create: `tests/testthat/test-tout-wars-auctions.R`
+
+- [ ] **Step 1: Write the test file**
+
+Create `tests/testthat/test-tout-wars-auctions.R`:
+
+```r
+test_that("tout_wars_auctions has the expected schema", {
+  expect_named(
+    tout_wars_auctions,
+    c("year", "league", "team_owner", "position_slot",
+      "player_type", "player_name", "price", "is_keeper")
+  )
+  expect_type(tout_wars_auctions$year, "integer")
+  expect_type(tout_wars_auctions$league, "character")
+  expect_type(tout_wars_auctions$team_owner, "character")
+  expect_type(tout_wars_auctions$position_slot, "character")
+  expect_type(tout_wars_auctions$player_type, "character")
+  expect_type(tout_wars_auctions$player_name, "character")
+  expect_type(tout_wars_auctions$price, "integer")
+  expect_type(tout_wars_auctions$is_keeper, "logical")
+})
+
+test_that("tout_wars_auctions domain values are valid", {
+  expect_setequal(unique(tout_wars_auctions$league), c("al", "nl", "mixed"))
+  expect_setequal(unique(tout_wars_auctions$player_type), c("batter", "pitcher"))
+  expect_true(all(!tout_wars_auctions$is_keeper))
+})
+
+test_that("tout_wars_auctions has no NA values", {
+  for (col in names(tout_wars_auctions)) {
+    expect_false(any(is.na(tout_wars_auctions[[col]])), info = paste("column:", col))
+  }
+})
+
+test_that("tout_wars_auctions has expected row count by year-league", {
+  observed <- dplyr::count(tout_wars_auctions, year, league, name = "n")
+  expected <- tibble::tibble(
+    key = names(rotostats:::.tw_auction_row_counts),
+    n   = unname(rotostats:::.tw_auction_row_counts)
+  )
+  expected$year   <- as.integer(sub("-.*", "", expected$key))
+  expected$league <- sub("^[^-]+-", "", expected$key)
+  expected$key    <- NULL
+  joined <- dplyr::left_join(observed, expected, by = c("year", "league"),
+                             suffix = c("_obs", "_exp"))
+  expect_equal(joined$n_obs, joined$n_exp)
+})
+
+test_that("per-(year, league) total price is in sanity bounds", {
+  totals <- dplyr::summarise(
+    dplyr::group_by(tout_wars_auctions, year, league),
+    total = sum(price), .groups = "drop"
+  )
+  expect_true(all(totals$total >= 2000 & totals$total <= 5000))
+})
+
+test_that("price values are non-negative integers", {
+  expect_true(all(tout_wars_auctions$price >= 0))
+  expect_type(tout_wars_auctions$price, "integer")
+})
+```
+
+- [ ] **Step 2: Run the tests**
+
+Run: `Rscript -e 'devtools::test(filter = "tout-wars-auctions")'`
+Expected: PASS — all 6 tests.
+
+- [ ] **Step 3: Commit**
+
+```bash
+git add tests/testthat/test-tout-wars-auctions.R
+git commit -m "test(auctions): schema and domain checks on tout_wars_auctions"
+```
+
+---
+
+## Task 12: Full check + final commit
+
+- [ ] **Step 1: Run the full test suite**
+
+Run: `Rscript -e 'devtools::test()'`
+Expected: PASS — all tests in the package, including pre-existing ones.
+
+- [ ] **Step 2: Run R CMD check**
+
+Run: `Rscript -e 'devtools::check()'`
+Expected: 0 errors, 0 warnings. Notes are acceptable if they relate to the new dataset size.
+
+If `devtools::check()` flags new NOTEs/WARNINGs:
+- "no visible binding for global variable" — add `utils::globalVariables()` for the affected names in `R/utils-tout-wars.R` or `R/data-tout-wars-auctions.R`.
+- "Data with usage in documentation object 'tout_wars_auctions' but not in code" — ignore, expected for dataset doc.
+- Any other warning — fix before continuing.
+
+- [ ] **Step 3: Verify `git status` is clean except for any check artifacts**
+
+Run: `git status --short`
+Expected: clean tree on the feature branch (or only check-output artifacts that should be gitignored).
+
+- [ ] **Step 4: Push and open PR against develop**
+
+Run:
+
+```bash
+git push -u origin feature/auction-csv-normalization
+gh pr create --base develop --title "feat(auctions): tout_wars_auctions package data" --body "$(cat <<'EOF'
+## Summary
+- Two-stage R pipeline normalizing 45 irregular Tout Wars auction CSVs into a uniform `tout_wars_auctions` package data object.
+- Stage 1: per-file dispatch to standard parser or one of four bespoke parsers (2012-al, 2012-nl, 2012-mixed, 2015-nl); writes cleaned per-pick CSVs.
+- Stage 2: binds cleaned CSVs, adds year/league from filename, writes `data/tout_wars_auctions.rda`.
+
+## Spec
+- [plans/specs/2026-04-27-auction-csv-normalization-design.md](../blob/feature/auction-csv-normalization/plans/specs/2026-04-27-auction-csv-normalization-design.md)
+
+## Test plan
+- [ ] `devtools::test()` passes
+- [ ] `devtools::check()` returns 0 errors / 0 warnings
+- [ ] Spot-check `tout_wars_auctions |> dplyr::filter(year == 2018, league == "al")` matches the raw 2018-al.csv content
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+EOF
+)"
+```
+
+Expected: PR URL printed.
+
+---
+
+## Self-review checklist (for plan author)
+
+- [x] Every spec section has a corresponding task (canonicalization → Task 1; standard parser → Task 2; year-specific → Tasks 3–5; dispatcher → Task 6; Stage 1 → Tasks 7–8; Stage 2 → Task 9; docs → Task 10; CI tests → Task 11; full check → Task 12).
+- [x] No "TBD" / "TODO" / "implement later" placeholders in code blocks. The two intentional discovery steps (Task 7 Step 4 — canonical slot set; Task 8 Step 1 — golden row counts) are explicit empirical-capture steps, not placeholders.
+- [x] All function names consistent across tasks (`.canonicalize_tw_owner`, `.derive_player_type`, `.parse_tw_auction_standard`, `.parse_tw_auction_2012_alnl`, `.parse_tw_auction_2012_mixed`, `.parse_tw_auction_2015_nl`, `.normalize_tw_auction`, `.validate_tw_position_slots`, `.tw_owner_aliases`, `.tw_canonical_slots`, `.tw_team_counts`, `.tw_auction_overrides`, `.tw_auction_row_counts`, `.tw_pitcher_slots`).
+- [x] Schema consistent with spec across all tasks (8 cols in combined; 6 cols in per-file CSV; types specified explicitly).
+- [x] Error classes follow `rotostats_error_*` convention from `plans/error-messages.md`.
+- [x] Each task ends with a commit step.
+- [x] Synthetic fixtures cover every parser branch (standard, 2012-alnl, 2012-mixed, 2015-nl).

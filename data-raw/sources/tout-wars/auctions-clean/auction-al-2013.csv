@@ -1,0 +1,277 @@
+team_owner,position_slot,player_type,player_name,price,is_keeper
+BEHRENS,1B,batter,Wallace,5,FALSE
+BEHRENS,2B,batter,Pedroia,29,FALSE
+BEHRENS,3B,batter,Longoria,28,FALSE
+BEHRENS,C,batter,Napoli,18,FALSE
+BEHRENS,C,batter,Flowers,8,FALSE
+BEHRENS,CI,batter,Moustakas,18,FALSE
+BEHRENS,MI,batter,Ackley,14,FALSE
+BEHRENS,OF,batter,Gardner,19,FALSE
+BEHRENS,OF,batter,Parmelee,11,FALSE
+BEHRENS,OF,batter,Reimold,4,FALSE
+BEHRENS,OF,batter,McLouth,3,FALSE
+BEHRENS,P,pitcher,M Rivera,19,FALSE
+BEHRENS,P,pitcher,Kuroda,15,FALSE
+BEHRENS,P,pitcher,B Anderson,14,FALSE
+BEHRENS,P,pitcher,A Sanchez,14,FALSE
+BEHRENS,P,pitcher,J Veras,8,FALSE
+BEHRENS,P,pitcher,Hammel,7,FALSE
+BEHRENS,P,pitcher,Kazmir,1,FALSE
+BEHRENS,P,pitcher,U Jimenez,1,FALSE
+BEHRENS,P,pitcher,Humber,1,FALSE
+BEHRENS,SS,batter,A Cabrera,20,FALSE
+BEHRENS,SW,batter,L Scott,1,FALSE
+BEHRENS,UT,batter,Getz,2,FALSE
+BERRY,1B,batter,Trumbo,21,FALSE
+BERRY,2B,batter,Zobrist,25,FALSE
+BERRY,3B,batter,Mi Cabrera,43,FALSE
+BERRY,C,batter,Iannetta,6,FALSE
+BERRY,C,batter,Norris,3,FALSE
+BERRY,CI,batter,Chisenhall,8,FALSE
+BERRY,MI,batter,Aviles,5,FALSE
+BERRY,OF,batter,J Bautista,32,FALSE
+BERRY,OF,batter,Bonifacio,14,FALSE
+BERRY,OF,batter,F Martinez,6,FALSE
+BERRY,OF,batter,Wise,3,FALSE
+BERRY,P,pitcher,Darvish,24,FALSE
+BERRY,P,pitcher,Dickey,20,FALSE
+BERRY,P,pitcher,Jim Johnson,16,FALSE
+BERRY,P,pitcher,E Santana,4,FALSE
+BERRY,P,pitcher,Strop,3,FALSE
+BERRY,P,pitcher,B Colon,2,FALSE
+BERRY,P,pitcher,Bedard,2,FALSE
+BERRY,P,pitcher,Lohse,1,FALSE
+BERRY,P,pitcher,Bailey,1,FALSE
+BERRY,SS,batter,Jeter,14,FALSE
+BERRY,SW,batter,Q Berry,1,FALSE
+BERRY,UT,batter,R Davis,6,FALSE
+COLLETTE,1B,batter,Pujols,35,FALSE
+COLLETTE,2B,batter,Keppinger,11,FALSE
+COLLETTE,3B,batter,Donaldson,10,FALSE
+COLLETTE,C,batter,J Montero,18,FALSE
+COLLETTE,C,batter,Corporan,1,FALSE
+COLLETTE,CI,batter,Carter,12,FALSE
+COLLETTE,MI,batter,J Weeks,4,FALSE
+COLLETTE,OF,batter,Hamilton,25,FALSE
+COLLETTE,OF,batter,Bourn,25,FALSE
+COLLETTE,OF,batter,Maxwell,13,FALSE
+COLLETTE,OF,batter,Gutierrez,6,FALSE
+COLLETTE,P,pitcher,Moore,19,FALSE
+COLLETTE,P,pitcher,Perkins,16,FALSE
+COLLETTE,P,pitcher,Balfour,14,FALSE
+COLLETTE,P,pitcher,Josh Johnson,12,FALSE
+COLLETTE,P,pitcher,Iwakuma,8,FALSE
+COLLETTE,P,pitcher,E Ramirez,4,FALSE
+COLLETTE,P,pitcher,McAllister,3,FALSE
+COLLETTE,P,pitcher,Harrell,2,FALSE
+COLLETTE,P,pitcher,Delabar,1,FALSE
+COLLETTE,SS,batter,Nakajima,8,FALSE
+COLLETTE,SW,batter,Boesch,1,FALSE
+COLLETTE,UT,batter,Joyce,12,FALSE
+COLTON/WOLF,1B,batter,Loney,7,FALSE
+COLTON/WOLF,2B,batter,Cano,35,FALSE
+COLTON/WOLF,3B,batter,Plouffe,15,FALSE
+COLTON/WOLF,C,batter,V Martinez,20,FALSE
+COLTON/WOLF,C,batter,Cervelli,1,FALSE
+COLTON/WOLF,CI,batter,A Rodriguez,2,FALSE
+COLTON/WOLF,MI,batter,B Roberts,5,FALSE
+COLTON/WOLF,OF,batter,D Jennings,25,FALSE
+COLTON/WOLF,OF,batter,Victorino,24,FALSE
+COLTON/WOLF,OF,batter,C Davis,20,FALSE
+COLTON/WOLF,OF,batter,Viciedo,13,FALSE
+COLTON/WOLF,P,pitcher,Scherzer,21,FALSE
+COLTON/WOLF,P,pitcher,Lester,20,FALSE
+COLTON/WOLF,P,pitcher,Rondon,6,FALSE
+COLTON/WOLF,P,pitcher,Nova,4,FALSE
+COLTON/WOLF,P,pitcher,D Robertson,4,FALSE
+COLTON/WOLF,P,pitcher,Niemann,3,FALSE
+COLTON/WOLF,P,pitcher,Benoit,3,FALSE
+COLTON/WOLF,P,pitcher,McGee,3,FALSE
+COLTON/WOLF,P,pitcher,Guthrie,3,FALSE
+COLTON/WOLF,SS,batter,Andrus,22,FALSE
+COLTON/WOLF,SW,batter,Hafner,1,FALSE
+COLTON/WOLF,UT,batter,JD Martinez,3,FALSE
+ERICKSON,1B,batter,Morneau,19,FALSE
+ERICKSON,2B,batter,Greene,7,FALSE
+ERICKSON,3B,batter,Seager,21,FALSE
+ERICKSON,C,batter,Mauer,21,FALSE
+ERICKSON,C,batter,Wieters,19,FALSE
+ERICKSON,CI,batter,Lind,9,FALSE
+ERICKSON,MI,batter,R Roberts,1,FALSE
+ERICKSON,OF,batter,A Jones,29,FALSE
+ERICKSON,OF,batter,Crisp,19,FALSE
+ERICKSON,OF,batter,Moss,12,FALSE
+ERICKSON,OF,batter,Francoeur,9,FALSE
+ERICKSON,P,pitcher,Rodney,19,FALSE
+ERICKSON,P,pitcher,Nathan,19,FALSE
+ERICKSON,P,pitcher,Fister,15,FALSE
+ERICKSON,P,pitcher,CJ Wilson,13,FALSE
+ERICKSON,P,pitcher,Pettitte,5,FALSE
+ERICKSON,P,pitcher,B Myers,3,FALSE
+ERICKSON,P,pitcher,Smyly,2,FALSE
+ERICKSON,P,pitcher,Uehara,1,FALSE
+ERICKSON,P,pitcher,Romero,1,FALSE
+ERICKSON,SS,batter,Profar,7,FALSE
+ERICKSON,SW,batter,A Casilla,2,FALSE
+ERICKSON,UT,batter,Smoak,7,FALSE
+LEIBOWITZ,1B,batter,Konerko,24,FALSE
+LEIBOWITZ,2B,batter,Infante,12,FALSE
+LEIBOWITZ,3B,batter,Middlebrooks,19,FALSE
+LEIBOWITZ,C,batter,Pierzynski,15,FALSE
+LEIBOWITZ,C,batter,J Castro,7,FALSE
+LEIBOWITZ,CI,batter,Berkman,11,FALSE
+LEIBOWITZ,MI,batter,Bogaerts,2,FALSE
+LEIBOWITZ,OF,batter,Rios,23,FALSE
+LEIBOWITZ,OF,batter,David Murphy,13,FALSE
+LEIBOWITZ,OF,batter,L Martin,9,FALSE
+LEIBOWITZ,OF,batter,Hicks,6,FALSE
+LEIBOWITZ,P,pitcher,J Shields,18,FALSE
+LEIBOWITZ,P,pitcher,A Reed,14,FALSE
+LEIBOWITZ,P,pitcher,Harrison,11,FALSE
+LEIBOWITZ,P,pitcher,Buchholz,8,FALSE
+LEIBOWITZ,P,pitcher,Thornton,2,FALSE
+LEIBOWITZ,P,pitcher,C Lewis,2,FALSE
+LEIBOWITZ,P,pitcher,Bauer,2,FALSE
+LEIBOWITZ,P,pitcher,Blanton,1,FALSE
+LEIBOWITZ,P,pitcher,Lackey,1,FALSE
+LEIBOWITZ,SS,batter,J Reyes,31,FALSE
+LEIBOWITZ,SW,batter,N Cruz,16,FALSE
+LEIBOWITZ,UT,batter,Reddick,13,FALSE
+MICHAELS,1B,batter,Moreland,13,FALSE
+MICHAELS,2B,batter,Kendrick,17,FALSE
+MICHAELS,3B,batter,Youkilis,13,FALSE
+MICHAELS,C,batter,Jaso,7,FALSE
+MICHAELS,C,batter,Kottaras,1,FALSE
+MICHAELS,CI,batter,S Sizemore,4,FALSE
+MICHAELS,MI,batter,Lowrie,7,FALSE
+MICHAELS,OF,batter,Willingham,23,FALSE
+MICHAELS,OF,batter,Morse,17,FALSE
+MICHAELS,OF,batter,Stubbs,12,FALSE
+MICHAELS,OF,batter,C Young,10,FALSE
+MICHAELS,P,pitcher,Verlander,31,FALSE
+MICHAELS,P,pitcher,C Perez,14,FALSE
+MICHAELS,P,pitcher,Peavy,14,FALSE
+MICHAELS,P,pitcher,Cobb,12,FALSE
+MICHAELS,P,pitcher,Janssen,9,FALSE
+MICHAELS,P,pitcher,Buehrle,6,FALSE
+MICHAELS,P,pitcher,D Phelps,5,FALSE
+MICHAELS,P,pitcher,Tillman,5,FALSE
+MICHAELS,P,pitcher,Crow,4,FALSE
+MICHAELS,SS,batter,Aybar,19,FALSE
+MICHAELS,SW,batter,Gentry,1,FALSE
+MICHAELS,UT,batter,Rasmus,13,FALSE
+MOYER,1B,batter,Encarnacion,29,FALSE
+MOYER,2B,batter,Altuve,20,FALSE
+MOYER,3B,batter,Dominguez,7,FALSE
+MOYER,C,batter,D Ross,5,FALSE
+MOYER,C,batter,Shoppach,1,FALSE
+MOYER,CI,batter,Butler,29,FALSE
+MOYER,MI,batter,Peralta,13,FALSE
+MOYER,OF,batter,Me Cabrera,22,FALSE
+MOYER,OF,batter,Markakis,16,FALSE
+MOYER,OF,batter,Dirks,9,FALSE
+MOYER,OF,batter,V Wells,3,FALSE
+MOYER,P,pitcher,Sabathia,20,FALSE
+MOYER,P,pitcher,Wilhelmsen,17,FALSE
+MOYER,P,pitcher,Hellickson,12,FALSE
+MOYER,P,pitcher,Ogando,12,FALSE
+MOYER,P,pitcher,Madson,5,FALSE
+MOYER,P,pitcher,K Herrera,4,FALSE
+MOYER,P,pitcher,Doubront,3,FALSE
+MOYER,P,pitcher,M Gonzalez,2,FALSE
+MOYER,P,pitcher,Quintana,1,FALSE
+MOYER,SS,batter,Al Ramirez,17,FALSE
+MOYER,SW,batter,Mustelier,1,FALSE
+MOYER,UT,batter,D Ortiz,12,FALSE
+SCHECHTER,1B,batter,C Pena,4,FALSE
+SCHECHTER,2B,batter,Beckham,9,FALSE
+SCHECHTER,3B,batter,Callaspo,8,FALSE
+SCHECHTER,C,batter,Arencibia,12,FALSE
+SCHECHTER,C,batter,Avila,11,FALSE
+SCHECHTER,CI,batter,Teixeira,6,FALSE
+SCHECHTER,MI,batter,M Izturis,6,FALSE
+SCHECHTER,OF,batter,Trout,40,FALSE
+SCHECHTER,OF,batter,Granderson,20,FALSE
+SCHECHTER,OF,batter,de Aza,18,FALSE
+SCHECHTER,OF,batter,T Hunter,16,FALSE
+SCHECHTER,P,pitcher,Weaver,24,FALSE
+SCHECHTER,P,pitcher,G Holland,18,FALSE
+SCHECHTER,P,pitcher,Dempster,9,FALSE
+SCHECHTER,P,pitcher,Pestano,8,FALSE
+SCHECHTER,P,pitcher,W Chen,6,FALSE
+SCHECHTER,P,pitcher,Griffin,5,FALSE
+SCHECHTER,P,pitcher,P Hughes,4,FALSE
+SCHECHTER,P,pitcher,Masterson,3,FALSE
+SCHECHTER,P,pitcher,J Vargas,2,FALSE
+SCHECHTER,SS,batter,Hardy,11,FALSE
+SCHECHTER,SW,batter,S Drew,4,FALSE
+SCHECHTER,UT,batter,I Suzuki,16,FALSE
+SHANDLER,1B,batter,Dunn,14,FALSE
+SHANDLER,2B,batter,Kinsler,28,FALSE
+SHANDLER,3B,batter,Beltre,30,FALSE
+SHANDLER,C,batter,Doumit,15,FALSE
+SHANDLER,C,batter,Zunino,3,FALSE
+SHANDLER,CI,batter,Reynolds,13,FALSE
+SHANDLER,MI,batter,E Nunez,8,FALSE
+SHANDLER,OF,batter,Cespedes,29,FALSE
+SHANDLER,OF,batter,A Jackson,25,FALSE
+SHANDLER,OF,batter,Gomes,7,FALSE
+SHANDLER,OF,batter,Mastroianni,3,FALSE
+SHANDLER,P,pitcher,Sale,21,FALSE
+SHANDLER,P,pitcher,Milone,10,FALSE
+SHANDLER,P,pitcher,Frieri,9,FALSE
+SHANDLER,P,pitcher,Cook,6,FALSE
+SHANDLER,P,pitcher,W Davis,5,FALSE
+SHANDLER,P,pitcher,Floyd,4,FALSE
+SHANDLER,P,pitcher,Bundy,3,FALSE
+SHANDLER,P,pitcher,Tazawa,2,FALSE
+SHANDLER,P,pitcher,Arrieta,2,FALSE
+SHANDLER,SS,batter,A Escobar,19,FALSE
+SHANDLER,SW,batter,E Thames,1,FALSE
+SHANDLER,UT,batter,S Smith,3,FALSE
+SHEEHAN,1B,batter,Fielder,35,FALSE
+SHEEHAN,2B,batter,J Carroll,1,FALSE
+SHEEHAN,3B,batter,Machado,14,FALSE
+SHEEHAN,C,batter,C Santana,22,FALSE
+SHEEHAN,C,batter,Saltalamacchia,11,FALSE
+SHEEHAN,CI,batter,Hosmer,25,FALSE
+SHEEHAN,MI,batter,Dozier,1,FALSE
+SHEEHAN,OF,batter,Gordon,26,FALSE
+SHEEHAN,OF,batter,Bourjos,12,FALSE
+SHEEHAN,OF,batter,Brantley,10,FALSE
+SHEEHAN,OF,batter,W Myers,6,FALSE
+SHEEHAN,P,pitcher,Price,28,FALSE
+SHEEHAN,P,pitcher,F Hernandez,24,FALSE
+SHEEHAN,P,pitcher,Santos,8,FALSE
+SHEEHAN,P,pitcher,Alburquerque,7,FALSE
+SHEEHAN,P,pitcher,Norris,6,FALSE
+SHEEHAN,P,pitcher,Porcello,5,FALSE
+SHEEHAN,P,pitcher,Doolittle,4,FALSE
+SHEEHAN,P,pitcher,T Collins,1,FALSE
+SHEEHAN,P,pitcher,Soria,1,FALSE
+SHEEHAN,SS,batter,Y Escobar,10,FALSE
+SHEEHAN,SW,batter,Sogard,1,FALSE
+SHEEHAN,UT,batter,Dyson,2,FALSE
+SIANO,1B,batter,Morales,19,FALSE
+SIANO,2B,batter,Kipnis,28,FALSE
+SIANO,3B,batter,Lawrie,22,FALSE
+SIANO,C,batter,S Perez,19,FALSE
+SIANO,C,batter,Au Romine,1,FALSE
+SIANO,CI,batter,Olt,3,FALSE
+SIANO,MI,batter,K Johnson,10,FALSE
+SIANO,OF,batter,Ellsbury,29,FALSE
+SIANO,OF,batter,Swisher,21,FALSE
+SIANO,OF,batter,L Cain,17,FALSE
+SIANO,OF,batter,M Saunders,13,FALSE
+SIANO,P,pitcher,Morrow,19,FALSE
+SIANO,P,pitcher,Hanrahan,15,FALSE
+SIANO,P,pitcher,Parker,14,FALSE
+SIANO,P,pitcher,D Holland,11,FALSE
+SIANO,P,pitcher,Straily,7,FALSE
+SIANO,P,pitcher,Worley,3,FALSE
+SIANO,P,pitcher,Coke,2,FALSE
+SIANO,P,pitcher,T Hanson,1,FALSE
+SIANO,P,pitcher,Hultzen,1,FALSE
+SIANO,SS,batter,S Rodriguez,1,FALSE
+SIANO,SW,batter,Ciriaco,2,FALSE
+SIANO,UT,batter,Giavotella,2,FALSE

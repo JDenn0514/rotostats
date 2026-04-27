@@ -15,15 +15,21 @@ Depends:
 Imports:
     checkmate,
     cli (>= 3.6.0),
+    dplyr (>= 1.0.0),
     httr2 (>= 1.0.0),
+    readr (>= 2.0.0),
     rlang (>= 1.0.0),
     stringi,
     tibble (>= 3.0.0)
 Suggests:
     classInt,
+    fs,
+    glue,
     jsonlite (>= 1.8.0),
     mixtools,
+    purrr,
     testthat (>= 3.0.0),
+    usethis,
     withr (>= 2.5.0),
     covr,
     knitr,
@@ -34,3 +40,4 @@ URL: https://github.com/JDenn0514/rotostats, https://jdenn0514.github.io/rotosta
 BugReports: https://github.com/JDenn0514/rotostats/issues
 X-schema.org-keywords: baseball, rotisserie, fantasy, statistics, auction, sports
 RoxygenNote: 7.3.3
+LazyData: true

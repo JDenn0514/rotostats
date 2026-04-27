@@ -1,0 +1,277 @@
+team_owner,position_slot,player_type,player_name,price,is_keeper
+BRIAN WALTON,1B,batter,Rhys Hoskins,23,FALSE
+BRIAN WALTON,2B,batter,Jonathan India,17,FALSE
+BRIAN WALTON,3B,batter,Jordan Walker,20,FALSE
+BRIAN WALTON,C,batter,Carson Kelly,4,FALSE
+BRIAN WALTON,C,batter,Tucker Barnhart,1,FALSE
+BRIAN WALTON,CI,batter,J.D. Davis,7,FALSE
+BRIAN WALTON,MI,batter,Kevin Newman,3,FALSE
+BRIAN WALTON,OF,batter,Starling Marte,22,FALSE
+BRIAN WALTON,OF,batter,Brandon Nimmo,19,FALSE
+BRIAN WALTON,OF,batter,Seiya Suzuki,15,FALSE
+BRIAN WALTON,OF,batter,Lourdes Gurriel Jr.,9,FALSE
+BRIAN WALTON,P,pitcher,Corbin Burnes,34,FALSE
+BRIAN WALTON,P,pitcher,Freddy Peralta,13,FALSE
+BRIAN WALTON,P,pitcher,Steven Matz,7,FALSE
+BRIAN WALTON,P,pitcher,Craig Kimbrel,6,FALSE
+BRIAN WALTON,P,pitcher,Dylan Floro,6,FALSE
+BRIAN WALTON,P,pitcher,Roansy Contreras,5,FALSE
+BRIAN WALTON,P,pitcher,Braxton Garrett,5,FALSE
+BRIAN WALTON,P,pitcher,Jose Alvarado,4,FALSE
+BRIAN WALTON,P,pitcher,Bailey Falter,4,FALSE
+BRIAN WALTON,SS,batter,Thairo Estrada,16,FALSE
+BRIAN WALTON,SW,batter,Dylan Carlson,8,FALSE
+BRIAN WALTON,UT,batter,Mike Yastrzemski,12,FALSE
+DAVE ADLER/PHIL HERTZ,1B,batter,Pete Alonso,35,FALSE
+DAVE ADLER/PHIL HERTZ,2B,batter,Bryson Stott,11,FALSE
+DAVE ADLER/PHIL HERTZ,3B,batter,Ryan McMahon,18,FALSE
+DAVE ADLER/PHIL HERTZ,C,batter,Joey Bart,6,FALSE
+DAVE ADLER/PHIL HERTZ,C,batter,Omar Narvaez,4,FALSE
+DAVE ADLER/PHIL HERTZ,CI,batter,Eduardo Escobar,4,FALSE
+DAVE ADLER/PHIL HERTZ,MI,batter,CJ Abrams,16,FALSE
+DAVE ADLER/PHIL HERTZ,OF,batter,Kris Bryant,21,FALSE
+DAVE ADLER/PHIL HERTZ,OF,batter,Ian Happ,19,FALSE
+DAVE ADLER/PHIL HERTZ,OF,batter,Michael Conforto,15,FALSE
+DAVE ADLER/PHIL HERTZ,OF,batter,Jack Suwinski,4,FALSE
+DAVE ADLER/PHIL HERTZ,P,pitcher,Devin Williams,23,FALSE
+DAVE ADLER/PHIL HERTZ,P,pitcher,Hunter Greene,18,FALSE
+DAVE ADLER/PHIL HERTZ,P,pitcher,Nick Lodolo,14,FALSE
+DAVE ADLER/PHIL HERTZ,P,pitcher,Trevor Rogers,9,FALSE
+DAVE ADLER/PHIL HERTZ,P,pitcher,Giovanny Gallegos,6,FALSE
+DAVE ADLER/PHIL HERTZ,P,pitcher,Seth Lugo,5,FALSE
+DAVE ADLER/PHIL HERTZ,P,pitcher,Mitch Keller,4,FALSE
+DAVE ADLER/PHIL HERTZ,P,pitcher,Robert Suarez,2,FALSE
+DAVE ADLER/PHIL HERTZ,P,pitcher,Alex Vesia,1,FALSE
+DAVE ADLER/PHIL HERTZ,SS,batter,Ha-seong Kim,14,FALSE
+DAVE ADLER/PHIL HERTZ,SW,batter,Victor Robles,4,FALSE
+DAVE ADLER/PHIL HERTZ,UT,batter,Randal Grichuk,7,FALSE
+DEREK CARTY,1B,batter,Carlos Santana,8,FALSE
+DEREK CARTY,2B,batter,Ketel Marte,13,FALSE
+DEREK CARTY,3B,batter,Evan Longoria,3,FALSE
+DEREK CARTY,C,batter,Willson Contreras,20,FALSE
+DEREK CARTY,C,batter,Elias Diaz,7,FALSE
+DEREK CARTY,CI,batter,Ji-Man Choi,4,FALSE
+DEREK CARTY,MI,batter,Brandon Crawford,4,FALSE
+DEREK CARTY,OF,batter,Ronald Acuna Jr.,43,FALSE
+DEREK CARTY,OF,batter,Jake McCarthy,23,FALSE
+DEREK CARTY,OF,batter,Mitch Haniger,13,FALSE
+DEREK CARTY,OF,batter,Lane Thomas,9,FALSE
+DEREK CARTY,P,pitcher,Justin Verlander,26,FALSE
+DEREK CARTY,P,pitcher,Joe Musgrove,18,FALSE
+DEREK CARTY,P,pitcher,Alex Cobb,12,FALSE
+DEREK CARTY,P,pitcher,Kyle Finnegan,9,FALSE
+DEREK CARTY,P,pitcher,Alex Wood,8,FALSE
+DEREK CARTY,P,pitcher,David Peterson,7,FALSE
+DEREK CARTY,P,pitcher,Mike Soroka,1,FALSE
+DEREK CARTY,P,pitcher,Sixto Sanchez,1,FALSE
+DEREK CARTY,P,pitcher,Andrew Painter,1,FALSE
+DEREK CARTY,SS,batter,Willy Adames,24,FALSE
+DEREK CARTY,SW,batter,Tyrone Taylor,1,FALSE
+DEREK CARTY,UT,batter,Bryan De La Cruz,5,FALSE
+ERIK HALTERMAN,1B,batter,Paul Goldschmidt,32,FALSE
+ERIK HALTERMAN,2B,batter,Tommy Edman,22,FALSE
+ERIK HALTERMAN,3B,batter,Jeimer Candelario,8,FALSE
+ERIK HALTERMAN,C,batter,Victor Caratini,2,FALSE
+ERIK HALTERMAN,C,batter,Luis Campusano,2,FALSE
+ERIK HALTERMAN,CI,batter,Rowdy Tellez,17,FALSE
+ERIK HALTERMAN,MI,batter,Christopher Morel,9,FALSE
+ERIK HALTERMAN,OF,batter,Bryan Reynolds,25,FALSE
+ERIK HALTERMAN,OF,batter,Tyler O'Neill,25,FALSE
+ERIK HALTERMAN,OF,batter,Lars Nootbaar,19,FALSE
+ERIK HALTERMAN,OF,batter,Jesus Sanchez,7,FALSE
+ERIK HALTERMAN,P,pitcher,Josh Hader,24,FALSE
+ERIK HALTERMAN,P,pitcher,Zac Gallen,22,FALSE
+ERIK HALTERMAN,P,pitcher,Blake Snell,15,FALSE
+ERIK HALTERMAN,P,pitcher,Eric Lauer,8,FALSE
+ERIK HALTERMAN,P,pitcher,Tylor Megill,5,FALSE
+ERIK HALTERMAN,P,pitcher,Taylor Rogers,4,FALSE
+ERIK HALTERMAN,P,pitcher,JT Brubaker,4,FALSE
+ERIK HALTERMAN,P,pitcher,Hunter Harvey,2,FALSE
+ERIK HALTERMAN,P,pitcher,Vince Velasquez,1,FALSE
+ERIK HALTERMAN,SS,batter,Nick Ahmed,2,FALSE
+ERIK HALTERMAN,SW,batter,Geraldo Perdomo,1,FALSE
+ERIK HALTERMAN,UT,batter,Francisco Alvarez,4,FALSE
+GREY ALBRIGHT,1B,batter,Matt Olson,31,FALSE
+GREY ALBRIGHT,2B,batter,Jazz Chisholm Jr.,30,FALSE
+GREY ALBRIGHT,3B,batter,Brett Baty,4,FALSE
+GREY ALBRIGHT,C,batter,Blake Sabol,3,FALSE
+GREY ALBRIGHT,C,batter,Endy Rodriguez,3,FALSE
+GREY ALBRIGHT,CI,batter,C.J. Cron,22,FALSE
+GREY ALBRIGHT,MI,batter,Max Muncy,25,FALSE
+GREY ALBRIGHT,OF,batter,Corbin Carroll,24,FALSE
+GREY ALBRIGHT,OF,batter,Trayce Thompson,4,FALSE
+GREY ALBRIGHT,OF,batter,LaMonte Wade Jr.,3,FALSE
+GREY ALBRIGHT,OF,batter,David Peralta,3,FALSE
+GREY ALBRIGHT,P,pitcher,David Bednar,19,FALSE
+GREY ALBRIGHT,P,pitcher,Charlie Morton,16,FALSE
+GREY ALBRIGHT,P,pitcher,Kodai Senga,15,FALSE
+GREY ALBRIGHT,P,pitcher,Miles Mikolas,11,FALSE
+GREY ALBRIGHT,P,pitcher,Sean Manaea,11,FALSE
+GREY ALBRIGHT,P,pitcher,Michael Wacha,4,FALSE
+GREY ALBRIGHT,P,pitcher,Johnny Cueto,1,FALSE
+GREY ALBRIGHT,P,pitcher,Drey Jameson,1,FALSE
+GREY ALBRIGHT,P,pitcher,Gavin Stone,1,FALSE
+GREY ALBRIGHT,SS,batter,Oneil Cruz,25,FALSE
+GREY ALBRIGHT,SW,batter,Yonathan Daza,2,FALSE
+GREY ALBRIGHT,UT,batter,Juan Yepez,2,FALSE
+IAN KAHN,1B,batter,Freddie Freeman,37,FALSE
+IAN KAHN,2B,batter,Jon Berti,9,FALSE
+IAN KAHN,3B,batter,Alec Bohm,17,FALSE
+IAN KAHN,C,batter,Nick Fortes,6,FALSE
+IAN KAHN,C,batter,Austin Nola,5,FALSE
+IAN KAHN,CI,batter,Eric Hosmer,3,FALSE
+IAN KAHN,MI,batter,Luis Garcia,8,FALSE
+IAN KAHN,OF,batter,Cody Bellinger,12,FALSE
+IAN KAHN,OF,batter,TJ Friedl,9,FALSE
+IAN KAHN,OF,batter,Jorge Soler,8,FALSE
+IAN KAHN,OF,batter,Marcell Ozuna,5,FALSE
+IAN KAHN,P,pitcher,Raisel Iglesias,23,FALSE
+IAN KAHN,P,pitcher,Julio Urias,23,FALSE
+IAN KAHN,P,pitcher,Clayton Kershaw,19,FALSE
+IAN KAHN,P,pitcher,Tony Gonsolin,10,FALSE
+IAN KAHN,P,pitcher,Jameson Taillon,10,FALSE
+IAN KAHN,P,pitcher,Marcus Stroman,8,FALSE
+IAN KAHN,P,pitcher,Jared Shuster,7,FALSE
+IAN KAHN,P,pitcher,Michael Fulmer,4,FALSE
+IAN KAHN,P,pitcher,Drew Smyly,2,FALSE
+IAN KAHN,SS,batter,Francisco Lindor,26,FALSE
+IAN KAHN,SW,batter,Garrett Cooper,5,FALSE
+IAN KAHN,UT,batter,Kyle Lewis,4,FALSE
+PETER KREUTZER,1B,batter,Patrick Wisdom,6,FALSE
+PETER KREUTZER,2B,batter,Josh Harrison,3,FALSE
+PETER KREUTZER,3B,batter,Manny Machado,35,FALSE
+PETER KREUTZER,C,batter,Will Smith,24,FALSE
+PETER KREUTZER,C,batter,William Contreras,16,FALSE
+PETER KREUTZER,CI,batter,Ke'Bryan Hayes,17,FALSE
+PETER KREUTZER,MI,batter,Nico Hoerner,18,FALSE
+PETER KREUTZER,OF,batter,Michael Harris II,28,FALSE
+PETER KREUTZER,OF,batter,Brandon Marsh,4,FALSE
+PETER KREUTZER,OF,batter,Jurickson Profar,3,FALSE
+PETER KREUTZER,OF,batter,Tommy Pham,3,FALSE
+PETER KREUTZER,P,pitcher,Sandy Alcantara,29,FALSE
+PETER KREUTZER,P,pitcher,Alexis Diaz,15,FALSE
+PETER KREUTZER,P,pitcher,Carlos Carrasco,7,FALSE
+PETER KREUTZER,P,pitcher,Edward Cabrera,6,FALSE
+PETER KREUTZER,P,pitcher,Daniel Hudson,4,FALSE
+PETER KREUTZER,P,pitcher,Josiah Gray,4,FALSE
+PETER KREUTZER,P,pitcher,MacKenzie Gore,4,FALSE
+PETER KREUTZER,P,pitcher,Brandon Hughes,3,FALSE
+PETER KREUTZER,P,pitcher,Gregory Soto,1,FALSE
+PETER KREUTZER,SS,batter,Dansby Swanson,24,FALSE
+PETER KREUTZER,SW,batter,Luis Ortiz,1,FALSE
+PETER KREUTZER,UT,batter,Brice Turang,5,FALSE
+RICK GRAHAM,1B,batter,Joey Votto,9,FALSE
+RICK GRAHAM,2B,batter,Chris Taylor,13,FALSE
+RICK GRAHAM,3B,batter,Mike Moustakas,3,FALSE
+RICK GRAHAM,C,batter,Tyler Stephenson,14,FALSE
+RICK GRAHAM,C,batter,Keibert Ruiz,12,FALSE
+RICK GRAHAM,CI,batter,Miguel Vargas,12,FALSE
+RICK GRAHAM,MI,batter,Brendan Donovan,9,FALSE
+RICK GRAHAM,OF,batter,Christian Yelich,26,FALSE
+RICK GRAHAM,OF,batter,Nick Castellanos,19,FALSE
+RICK GRAHAM,OF,batter,Jesse Winker,16,FALSE
+RICK GRAHAM,OF,batter,Trent Grisham,11,FALSE
+RICK GRAHAM,P,pitcher,Max Fried,23,FALSE
+RICK GRAHAM,P,pitcher,Jesus Luzardo,13,FALSE
+RICK GRAHAM,P,pitcher,Dustin May,12,FALSE
+RICK GRAHAM,P,pitcher,Jack Flaherty,9,FALSE
+RICK GRAHAM,P,pitcher,A.J. Minter,8,FALSE
+RICK GRAHAM,P,pitcher,Hayden Wesneski,6,FALSE
+RICK GRAHAM,P,pitcher,Adam Ottavino,5,FALSE
+RICK GRAHAM,P,pitcher,A.J. Puk,5,FALSE
+RICK GRAHAM,P,pitcher,Noah Syndergaard,5,FALSE
+RICK GRAHAM,SS,batter,Luis Urias,15,FALSE
+RICK GRAHAM,SW,batter,Daniel Vogelbach,3,FALSE
+RICK GRAHAM,UT,batter,Andrew McCutchen,12,FALSE
+SCOTT WILDERMAN/TIM PRIOR,1B,batter,Christian Walker,22,FALSE
+SCOTT WILDERMAN/TIM PRIOR,2B,batter,Jean Segura,12,FALSE
+SCOTT WILDERMAN/TIM PRIOR,3B,batter,Austin Riley,31,FALSE
+SCOTT WILDERMAN/TIM PRIOR,C,batter,Gabriel Moreno,11,FALSE
+SCOTT WILDERMAN/TIM PRIOR,C,batter,Yan Gomes,3,FALSE
+SCOTT WILDERMAN/TIM PRIOR,CI,batter,Dominic Smith,3,FALSE
+SCOTT WILDERMAN/TIM PRIOR,MI,batter,Nolan Gorman,4,FALSE
+SCOTT WILDERMAN/TIM PRIOR,OF,batter,Kyle Schwarber,33,FALSE
+SCOTT WILDERMAN/TIM PRIOR,OF,batter,Trey Mancini,11,FALSE
+SCOTT WILDERMAN/TIM PRIOR,OF,batter,Garrett Mitchell,7,FALSE
+SCOTT WILDERMAN/TIM PRIOR,OF,batter,Alek Thomas,3,FALSE
+SCOTT WILDERMAN/TIM PRIOR,P,pitcher,Spencer Strider,28,FALSE
+SCOTT WILDERMAN/TIM PRIOR,P,pitcher,Ryan Helsley,23,FALSE
+SCOTT WILDERMAN/TIM PRIOR,P,pitcher,Daniel Bard,10,FALSE
+SCOTT WILDERMAN/TIM PRIOR,P,pitcher,Merrill Kelly,9,FALSE
+SCOTT WILDERMAN/TIM PRIOR,P,pitcher,Taijuan Walker,5,FALSE
+SCOTT WILDERMAN/TIM PRIOR,P,pitcher,Ranger Suarez,5,FALSE
+SCOTT WILDERMAN/TIM PRIOR,P,pitcher,Ryan Pepiot,3,FALSE
+SCOTT WILDERMAN/TIM PRIOR,P,pitcher,Graham Ashcraft,3,FALSE
+SCOTT WILDERMAN/TIM PRIOR,P,pitcher,Anthony DeSclafani,2,FALSE
+SCOTT WILDERMAN/TIM PRIOR,SS,batter,Ezequiel Tovar,10,FALSE
+SCOTT WILDERMAN/TIM PRIOR,SW,batter,Eddie Rosario,3,FALSE
+SCOTT WILDERMAN/TIM PRIOR,UT,batter,Sal Frelick,5,FALSE
+STEVE GARDNER,1B,batter,Joey Meneses,14,FALSE
+STEVE GARDNER,2B,batter,Jeff McNeil,13,FALSE
+STEVE GARDNER,3B,batter,David Villar,3,FALSE
+STEVE GARDNER,C,batter,Travis d'Arnaud,12,FALSE
+STEVE GARDNER,C,batter,Austin Barnes,3,FALSE
+STEVE GARDNER,CI,batter,Rodolfo Castro,4,FALSE
+STEVE GARDNER,MI,batter,Miguel Rojas,3,FALSE
+STEVE GARDNER,OF,batter,Mookie Betts,35,FALSE
+STEVE GARDNER,OF,batter,Joc Pederson,12,FALSE
+STEVE GARDNER,OF,batter,Charlie Blackmon,8,FALSE
+STEVE GARDNER,OF,batter,Austin Slater,2,FALSE
+STEVE GARDNER,P,pitcher,Zack Wheeler,23,FALSE
+STEVE GARDNER,P,pitcher,Yu Darvish,20,FALSE
+STEVE GARDNER,P,pitcher,Camilo Doval,18,FALSE
+STEVE GARDNER,P,pitcher,David Robertson,14,FALSE
+STEVE GARDNER,P,pitcher,Kyle Wright,11,FALSE
+STEVE GARDNER,P,pitcher,Nick Martinez,4,FALSE
+STEVE GARDNER,P,pitcher,Adam Wainwright,2,FALSE
+STEVE GARDNER,P,pitcher,Ryne Nelson,2,FALSE
+STEVE GARDNER,P,pitcher,Kevin Ginkel,1,FALSE
+STEVE GARDNER,SS,batter,Trea Turner,37,FALSE
+STEVE GARDNER,SW,batter,Darick Hall,4,FALSE
+STEVE GARDNER,UT,batter,Bryce Harper,15,FALSE
+TODD ZOLA,1B,batter,Jake Cronenworth,17,FALSE
+TODD ZOLA,2B,batter,Vaughn Grissom,17,FALSE
+TODD ZOLA,3B,batter,Spencer Steer,4,FALSE
+TODD ZOLA,C,batter,J.T. Realmuto,25,FALSE
+TODD ZOLA,C,batter,Jacob Stallings,2,FALSE
+TODD ZOLA,CI,batter,Brian Anderson,5,FALSE
+TODD ZOLA,MI,batter,Josh Rojas,13,FALSE
+TODD ZOLA,OF,batter,Juan Soto,45,FALSE
+TODD ZOLA,OF,batter,Wil Myers,15,FALSE
+TODD ZOLA,OF,batter,Mark Canha,9,FALSE
+TODD ZOLA,OF,batter,Nick Senzel,1,FALSE
+TODD ZOLA,P,pitcher,Aaron Nola,28,FALSE
+TODD ZOLA,P,pitcher,Logan Webb,16,FALSE
+TODD ZOLA,P,pitcher,Jordan Montgomery,12,FALSE
+TODD ZOLA,P,pitcher,Evan Phillips,11,FALSE
+TODD ZOLA,P,pitcher,Justin Steele,9,FALSE
+TODD ZOLA,P,pitcher,Brad Boxberger,4,FALSE
+TODD ZOLA,P,pitcher,Brusdar Graterol,2,FALSE
+TODD ZOLA,P,pitcher,Brooks Raley,2,FALSE
+TODD ZOLA,P,pitcher,Dylan Dodd,2,FALSE
+TODD ZOLA,SS,batter,Joey Wendle,6,FALSE
+TODD ZOLA,SW,batter,Nelson Cruz,1,FALSE
+TODD ZOLA,UT,batter,J.D. Martinez,14,FALSE
+TRISTAN H. COCKCROFT,1B,batter,Matt Mervis,1,FALSE
+TRISTAN H. COCKCROFT,2B,batter,Ozzie Albies,22,FALSE
+TRISTAN H. COCKCROFT,3B,batter,Nolan Arenado,26,FALSE
+TRISTAN H. COCKCROFT,C,batter,Sean Murphy,18,FALSE
+TRISTAN H. COCKCROFT,C,batter,Curt Casali,1,FALSE
+TRISTAN H. COCKCROFT,CI,batter,Wilmer Flores,8,FALSE
+TRISTAN H. COCKCROFT,MI,batter,Luis Arraez,14,FALSE
+TRISTAN H. COCKCROFT,OF,batter,Fernando Tatis Jr.,34,FALSE
+TRISTAN H. COCKCROFT,OF,batter,Jake Fraley,13,FALSE
+TRISTAN H. COCKCROFT,OF,batter,Avisail Garcia,9,FALSE
+TRISTAN H. COCKCROFT,OF,batter,Matt Carpenter,2,FALSE
+TRISTAN H. COCKCROFT,P,pitcher,Max Scherzer,30,FALSE
+TRISTAN H. COCKCROFT,P,pitcher,Brandon Woodruff,26,FALSE
+TRISTAN H. COCKCROFT,P,pitcher,Seranthony Dominguez,7,FALSE
+TRISTAN H. COCKCROFT,P,pitcher,Ross Stripling,6,FALSE
+TRISTAN H. COCKCROFT,P,pitcher,Aaron Ashby,5,FALSE
+TRISTAN H. COCKCROFT,P,pitcher,Brandon Pfaadt,5,FALSE
+TRISTAN H. COCKCROFT,P,pitcher,Scott McGough,3,FALSE
+TRISTAN H. COCKCROFT,P,pitcher,Andrew Chafin,3,FALSE
+TRISTAN H. COCKCROFT,P,pitcher,Adbert Alzolay,1,FALSE
+TRISTAN H. COCKCROFT,SS,batter,Xander Bogaerts,23,FALSE
+TRISTAN H. COCKCROFT,SW,batter,James Outman,1,FALSE
+TRISTAN H. COCKCROFT,UT,batter,Nolan Jones,2,FALSE
