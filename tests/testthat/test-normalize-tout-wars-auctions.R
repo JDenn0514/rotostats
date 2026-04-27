@@ -111,3 +111,29 @@ test_that(".parse_tw_auction_2012_mixed handles empty row 1 and sparse slots", {
   expect_equal(sum(smith_rows$position_slot == "C"), 2L)
   expect_equal(sum(smith_rows$position_slot == "SP"), 1L)
 })
+
+test_that("standard parser handles 2015-nl quoted-multiline fields natively", {
+  # The raw 2015-nl.csv has literal newlines inside quoted owner names
+  # (e.g., "GARDNER\n", "HERTZ\n") and inside several player names. readr's
+  # CSV parser handles RFC-4180 multiline-quoted fields natively, and the
+  # standard parser already trims surrounding whitespace. This test pins
+  # the round-trip so a future readr regression cannot reintroduce the
+  # embedded-newline pathology silently.
+  path <- testthat::test_path(
+    "..", "..", "data-raw", "sources", "tout-wars", "auctions", "2015-nl.csv"
+  )
+  testthat::skip_if_not(file.exists(path), "2015-nl.csv not present in source tree")
+
+  result <- expect_no_warning(
+    .parse_tw_auction_standard(path, expected_teams = 12)
+  )
+
+  expect_equal(nrow(result), 276L)
+  expect_setequal(
+    unique(result$team_owner),
+    c("CARTY", "COCKCROFT", "GARDNER", "GIANELLA", "GUILFOYLE", "HERTZ",
+      "KREUTZER", "MCCAFFREY", "MELNICK", "WALTON", "WILDERMAN", "ZOLA")
+  )
+  expect_false(any(grepl("\n", result$team_owner)))
+  expect_false(any(grepl("\n", result$player_name)))
+})
