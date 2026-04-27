@@ -1,0 +1,345 @@
+year,league,team,player_name,player_id,mlb_team,position,salary,status,eligibility,roster_section
+2015,nl,Tristan H. Cockcroft,Anthony Rizzo,3156,FA,1B,31,act,"1B,CI,SW",active
+2015,nl,Tristan H. Cockcroft,Jedd Gyorko,3700,Mil,2B,14,act,"SW,MI,2B",active
+2015,nl,Tristan H. Cockcroft,Brandon Crawford,3051,FA,SS,5,act,"SS,SW,MI",active
+2015,nl,Tristan H. Cockcroft,Matt Duffy,4893,Tex,3B,4,act,"UT,SW,MI,2B",active
+2015,nl,Tristan H. Cockcroft,Jarrett Parker,3715,NYM,OF,1,act,OF,active
+2015,nl,Tristan H. Cockcroft,Travis Jankowski,4479,NYM,OF,1,act,OF,active
+2015,nl,Tristan H. Cockcroft,Jason Bourgeois,249,CWS,OF,2,act,"OF,SW",active
+2015,nl,Tristan H. Cockcroft,Curtis Granderson,517,Mia,OF,19,act,"OF,SW",active
+2015,nl,Tristan H. Cockcroft,Kyle Schwarber,4901,Phi,C,1,act,"OF,C,SW",active
+2015,nl,Tristan H. Cockcroft,Francisco Cervelli,1004,FA,C,3,act,"C,SW",active
+2015,nl,Tristan H. Cockcroft,Trea Turner,4555,Phi,UT,1,act,"SS,SW,INF",active
+2015,nl,Tristan H. Cockcroft,Chase Utley,1132,LAD,SW,15,act,"2B,MI,SW",active
+2015,nl,Tristan H. Cockcroft,Robbie Ray,3685,SF,P,0,act,P,active
+2015,nl,Tristan H. Cockcroft,Anthony DeSclafani,4732,Ari,P,2,act,P,active
+2015,nl,Tristan H. Cockcroft,Jeurys Familia,3269,FA,P,3,act,P,active
+2015,nl,Tristan H. Cockcroft,Max Scherzer,19,Tor,P,30,act,P,active
+2015,nl,Tristan H. Cockcroft,Trevor Rosenthal,3933,FA,P,16,act,P,active
+2015,nl,Tristan H. Cockcroft,Jorge Lopez,5434,Was,P,13,act,P,active
+2015,nl,Tristan H. Cockcroft,Charlie Morton,61,FA,P,27,act,P,active
+2015,nl,Tristan H. Cockcroft,Matt Wisler,4486,Tor,P,1,act,P,active
+2015,nl,Tristan H. Cockcroft,Johnny Cueto,354,LAA,P,21,act,P,active
+2015,nl,Tristan H. Cockcroft,Alexi Amarista,3084,Phi,CI,7,act,"OF,SW,MI,3B,SS,2B,CI",active
+2015,nl,Tristan H. Cockcroft,Scooter Gennett,3277,FA,MI,11,act,"2B,SW,MI",active
+2015,nl,Tristan H. Cockcroft,Wil Myers,3153,FA,OF,2,res,"OF,SW",reserved
+2015,nl,Tristan H. Cockcroft,Yasiel Puig,4153,FA,OF,29,dis,"OF,SW",reserved
+2015,nl,Tristan H. Cockcroft,Juan Lagares,3868,FA,OF,9,res,"OF,SW",reserved
+2015,nl,Tristan H. Cockcroft,Rafael Montero,4316,NYY,P,0,dis,P,reserved
+2015,nl,Tristan H. Cockcroft,Jimmy Nelson,4556,FA,P,7,dis,P,reserved
+2015,nl,Tristan H. Cockcroft,Joakim Soria,671,Tor,P,12,res,P,reserved
+2015,nl,Tristan H. Cockcroft,Ryan Howard,1129,Col,CI,13,res,"1B,CI,SW",reserved
+2015,nl,Mike Gianella,Paul Goldschmidt,3159,NYY,1B,37,act,"1B,SW,CI,INF",active
+2015,nl,Mike Gianella,Yangervis Solarte,3899,FA,2B,3,act,"2B,MI,SW,CI,3B",active
+2015,nl,Mike Gianella,Jhonny Peralta,404,FA,SS,15,act,"MI,SW,SS",active
+2015,nl,Mike Gianella,David Wright,953,FA,3B,1,act,"3B,SW,CI",active
+2015,nl,Mike Gianella,Carlos Gonzalez,1077,FA,OF,27,act,"OF,SW",active
+2015,nl,Mike Gianella,Ben Revere,2085,FA,OF,18,act,"OF,SW",active
+2015,nl,Mike Gianella,Michael A. Taylor,4060,FA,OF,4,act,"OF,SW",active
+2015,nl,Mike Gianella,Stephen Piscotty,4095,FA,OF,1,act,OF,active
+2015,nl,Mike Gianella,Jarrod Saltalamacchia,1516,Det,C,1,act,"C,SW",active
+2015,nl,Mike Gianella,Wilin Rosario,2499,Min,C,12,act,"SW,C",active
+2015,nl,Mike Gianella,Yasmany Tomas,4952,Was,UT,12,act,"OF,SW",active
+2015,nl,Mike Gianella,Freddy Galvis,3005,FA,SW,1,act,"SS,MI,SW",active
+2015,nl,Mike Gianella,Shelby Miller,2839,ChC,P,10,act,P,active
+2015,nl,Mike Gianella,Clayton Kershaw,1961,FA,P,37,act,P,active
+2015,nl,Mike Gianella,Andrew Cashner,2429,FA,P,11,act,P,active
+2015,nl,Mike Gianella,A.J. Ramos,3941,LAA,P,1,act,P,active
+2015,nl,Mike Gianella,Mark Melancon,1022,FA,P,18,act,P,active
+2015,nl,Mike Gianella,Brad Ziegler,1090,Ari,P,2,act,P,active
+2015,nl,Mike Gianella,Tanner Roark,4325,FA,P,5,act,P,active
+2015,nl,Mike Gianella,David Buchanan,4861,Tex,P,5,act,P,active
+2015,nl,Mike Gianella,Francisco Rodriguez,724,FA,P,9,act,P,active
+2015,nl,Mike Gianella,Lucas Duda,3305,FA,CI,21,act,"1B,SW,CI",active
+2015,nl,Mike Gianella,Kelly Johnson,78,FA,MI,1,act,"CI,1B,3B,SW",active
+2015,nl,Mike Gianella,Chris Heisey,2809,FA,UT,1,res,"OF,SW",reserved
+2015,nl,Mike Gianella,Tim Lincecum,1285,FA,P,1,dis,P,reserved
+2015,nl,Mike Gianella,Tim Hudson,57,SF,P,5,res,P,reserved
+2015,nl,Mike Gianella,Jorge De La Rosa,658,Col,P,7,res,P,reserved
+2015,nl,Mike Gianella,Jose Reyes,952,NYM,MI,78,res,"UT,SS,MI,SW",reserved
+2015,nl,Phil Hertz,Darin Ruf,4191,FA,1B,1,act,"1B,CI,SW,OF",active
+2015,nl,Phil Hertz,Odubel Herrera,5084,FA,2B,2,act,"OF,2B,INF,SW",active
+2015,nl,Phil Hertz,Eugenio Suarez,4330,Cin,SS,17,act,"3B,SW,SS,MI,INF",active
+2015,nl,Phil Hertz,Alex Guerrero,4622,FA,3B,1,act,"OF,SW",active
+2015,nl,Phil Hertz,Dexter Fowler,484,Tor,OF,16,act,"OF,SW",active
+2015,nl,Phil Hertz,Justin Upton,39,FA,OF,28,act,"OF,SW",active
+2015,nl,Phil Hertz,Andre Ethier,797,LAD,OF,6,act,"OF,SW",active
+2015,nl,Phil Hertz,Jason Heyward,1968,SD,OF,26,act,"OF,SW",active
+2015,nl,Phil Hertz,Tony Cruz,2471,FA,C,1,act,"C,SW",active
+2015,nl,Phil Hertz,Tom Murphy,4629,FA,C,1,act,C,active
+2015,nl,Phil Hertz,Yoenis Cespedes,3837,FA,UT,78,act,"OF,SW",active
+2015,nl,Phil Hertz,Jordy Mercer,3871,Was,SW,5,act,"UT,SS,MI,SW",active
+2015,nl,Phil Hertz,Jhoulys Chacin,2123,FA,P,1,act,P,active
+2015,nl,Phil Hertz,Steven Matz,4541,TB,P,1,act,P,active
+2015,nl,Phil Hertz,Ariel Pena,3861,Mil,P,1,act,P,active
+2015,nl,Phil Hertz,Addison Reed,3793,FA,P,1,act,P,active
+2015,nl,Phil Hertz,Jeremy Hellickson,2071,Was,P,1,act,P,active
+2015,nl,Phil Hertz,Daniel Hudson,2764,LAD,P,1,act,P,active
+2015,nl,Phil Hertz,Tyler Lyons,4356,NYY,P,0,act,P,active
+2015,nl,Phil Hertz,Robbie Erlin,3681,FA,P,0,act,P,active
+2015,nl,Phil Hertz,Josh Smith,5343,FA,P,1,act,P,active
+2015,nl,Phil Hertz,Adam Duvall,4413,Atl,CI,1,act,"1B,CI,SW",active
+2015,nl,Phil Hertz,Addison Russell,4162,FA,MI,0,act,2B,active
+2015,nl,Phil Hertz,Kirk Nieuwenhuis,3095,Sea,SW,3,res,"OF,SW",reserved
+2015,nl,Phil Hertz,Eric Young Jr.,2059,FA,SW,1,res,"OF,SW",reserved
+2015,nl,Phil Hertz,Joaquin Benoit,1493,FA,P,17,res,P,reserved
+2015,nl,Phil Hertz,Hunter Strickland,2873,LAA,P,1,res,P,reserved
+2015,nl,Phil Hertz,Cory Luebke,3127,CWS,P,1,dis,P,reserved
+2015,nl,Phil Hertz,Aaron Barrett,4704,Phi,P,1,dis,P,reserved
+2015,nl,Peter Kreutzer,Chris Johnson,2101,Bal,1B,7,act,"SW,CI,3B",active
+2015,nl,Peter Kreutzer,Martin Prado,80,Mia,2B,15,act,"3B,CI,SW,2B,MI",active
+2015,nl,Peter Kreutzer,Ruben Tejada,2638,CWS,SS,0,act,"SS,SW,MI",active
+2015,nl,Peter Kreutzer,Aaron Hill,1578,FA,3B,1,act,"SW,2B,MI",active
+2015,nl,Peter Kreutzer,Will Venable,1278,LAD,OF,3,act,"OF,SW",active
+2015,nl,Peter Kreutzer,Gerardo Parra,2000,Was,OF,3,act,"OF,SW",active
+2015,nl,Peter Kreutzer,Brian Bogusevic,2259,Bos,OF,1,act,OF,active
+2015,nl,Peter Kreutzer,Andrew McCutchen,1222,Tex,OF,39,act,"OF,SW",active
+2015,nl,Peter Kreutzer,Buster Posey,2187,SF,C,27,act,"C,SW,CI,1B",active
+2015,nl,Peter Kreutzer,Yasmani Grandal,3311,Bos,C,13,act,"C,1B,CI,SW",active
+2015,nl,Peter Kreutzer,Justin Ruggiano,1475,SF,UT,6,act,"OF,SW",active
+2015,nl,Peter Kreutzer,Melvin Upton,1476,FA,SW,4,act,"OF,SW",active
+2015,nl,Peter Kreutzer,Tom Koehler,3497,Pit,P,2,act,P,active
+2015,nl,Peter Kreutzer,Logan Verrett,4825,FA,P,1,act,P,active
+2015,nl,Peter Kreutzer,Michael Bolsinger,4719,FA,P,1,act,P,active
+2015,nl,Peter Kreutzer,Zack Godley,5283,Oak,P,1,act,P,active
+2015,nl,Peter Kreutzer,Jose Fernandez,3802,Mia,P,9,act,P,active
+2015,nl,Peter Kreutzer,Zach Davies,4919,Was,P,1,act,P,active
+2015,nl,Peter Kreutzer,John Axford,2909,FA,P,7,act,P,active
+2015,nl,Peter Kreutzer,Craig Kimbrel,2633,NYM,P,21,act,P,active
+2015,nl,Peter Kreutzer,Kevin Siegrist,3934,FA,P,0,act,P,active
+2015,nl,Peter Kreutzer,Adonis Garcia,4052,FA,CI,1,act,3B,active
+2015,nl,Peter Kreutzer,Anthony Rendon,3205,LAA,MI,27,act,"3B,SW,2B,MI,CI",active
+2015,nl,Peter Kreutzer,Sean Rodriguez,743,FA,1B,1,res,"1B,MI,SW,CI,2B,OF",reserved
+2015,nl,Peter Kreutzer,Troy Tulowitzki,461,NYY,SS,29,res,"SS,MI,SW",reserved
+2015,nl,Peter Kreutzer,Nate McLouth,1193,Was,SW,1,dis,"OF,SW",reserved
+2015,nl,Peter Kreutzer,Yimi Garcia,4688,Tor,P,0,res,P,reserved
+2015,nl,Peter Kreutzer,Tsuyoshi Wada,3838,ChC,P,1,res,P,reserved
+2015,nl,Lenny Melnick,Mark Reynolds,34,Col,1B,4,act,"1B,CI,3B,SW",active
+2015,nl,Lenny Melnick,Neil Walker,1221,Phi,2B,19,act,"SW,2B,MI",active
+2015,nl,Lenny Melnick,Nick Ahmed,3807,Tex,SS,0,act,"SS,MI,SW",active
+2015,nl,Lenny Melnick,Todd Frazier,1979,Pit,3B,27,act,"1B,SW,3B,CI",active
+2015,nl,Lenny Melnick,Michael Morse,1362,FA,OF,15,act,"1B,OF,SW,CI",active
+2015,nl,Lenny Melnick,A.J. Pollock,2837,FA,OF,19,act,"OF,SW",active
+2015,nl,Lenny Melnick,Alejandro De Aza,570,Min,OF,1,act,"OF,SW",active
+2015,nl,Lenny Melnick,Cameron Maybin,573,FA,OF,2,act,"OF,SW",active
+2015,nl,Lenny Melnick,J.T. Realmuto,4028,Phi,C,0,act,"C,SW",active
+2015,nl,Lenny Melnick,A.J. Pierzynski,230,FA,C,2,act,"C,SW",active
+2015,nl,Lenny Melnick,Christian Yelich,3314,Mil,UT,23,act,"OF,SW",active
+2015,nl,Lenny Melnick,Carl Crawford,1472,FA,SW,1,act,"OF,SW",active
+2015,nl,Lenny Melnick,Williams Perez,5056,StL,P,4,act,P,active
+2015,nl,Lenny Melnick,Gerrit Cole,2660,NYY,P,20,act,P,active
+2015,nl,Lenny Melnick,Aaron Harang,322,FA,P,1,act,P,active
+2015,nl,Lenny Melnick,Justin Nicolino,4009,FA,P,1,act,P,active
+2015,nl,Lenny Melnick,Madison Bumgarner,2053,FA,P,25,act,P,active
+2015,nl,Lenny Melnick,A.J. Burnett,1554,FA,P,9,act,P,active
+2015,nl,Lenny Melnick,Lance Lynn,2919,FA,P,16,act,P,active
+2015,nl,Lenny Melnick,Alex Wood,4113,Oak,P,16,act,P,active
+2015,nl,Lenny Melnick,Jarred Cosart,3605,FA,P,2,act,P,active
+2015,nl,Lenny Melnick,Pedro Alvarez,2050,FA,CI,19,act,"3B,CI,SW",active
+2015,nl,Lenny Melnick,Jace Peterson,4427,FA,MI,6,act,"SW,2B,MI",active
+2015,nl,Lenny Melnick,Drew Stubbs,1989,FA,OF,11,res,"OF,SW",reserved
+2015,nl,Lenny Melnick,A.J. Ellis,817,SD,C,2,res,"C,SW",reserved
+2015,nl,Lenny Melnick,Jason Motte,1393,FA,P,1,dis,P,reserved
+2015,nl,Lenny Melnick,Odrisamer Despaigne,4526,FA,P,3,res,P,reserved
+2015,nl,Lenny Melnick,Brandon Morrow,1342,FA,P,1,dis,P,reserved
+2015,nl,Lenny Melnick,Carter Capps,4150,FA,P,2,dis,P,reserved
+2015,nl,Steve Gardner,Freddie Freeman,2466,LAD,1B,28,act,"1B,SW,CI,INF",active
+2015,nl,Steve Gardner,Brandon Phillips,344,FA,2B,12,act,"2B,SW,MI",active
+2015,nl,Steve Gardner,Jean Segura,3177,Bal,SS,20,act,"SS,SW,MI",active
+2015,nl,Steve Gardner,Aramis Ramirez,286,Pit,3B,17,act,"3B,CI,SW",active
+2015,nl,Steve Gardner,Starling Marte,2908,KC,OF,29,act,"OF,SW",active
+2015,nl,Steve Gardner,Marlon Byrd,1527,FA,OF,15,act,"OF,SW",active
+2015,nl,Steve Gardner,Jayson Werth,1139,Sea,OF,20,act,"OF,SW",active
+2015,nl,Steve Gardner,Domingo Santana,3213,Cle,OF,27,act,"OF,SW",active
+2015,nl,Steve Gardner,Wilson Ramos,2170,FA,C,12,act,"C,SW",active
+2015,nl,Steve Gardner,Peter O'Brien,4794,FA,C,2,act,OF,active
+2015,nl,Steve Gardner,Justin Turner,2415,FA,UT,2,act,"UT,CI,3B,SS,MI,SW",active
+2015,nl,Steve Gardner,Brandon Barnes,3890,FA,SW,10,act,"OF,SW",active
+2015,nl,Steve Gardner,Tony Cingrani,4054,FA,P,0,act,P,active
+2015,nl,Steve Gardner,Joe Blanton,1042,FA,P,1,act,P,active
+2015,nl,Steve Gardner,Shawn Kelley,2407,FA,P,0,act,P,active
+2015,nl,Steve Gardner,Matt Harvey,2672,Bal,P,19,act,P,active
+2015,nl,Steve Gardner,Jon Lester,160,StL,P,19,act,P,active
+2015,nl,Steve Gardner,Chase Anderson,4253,Tex,P,0,act,P,active
+2015,nl,Steve Gardner,Jeremy Jeffress,2063,FA,P,1,act,P,active
+2015,nl,Steve Gardner,Santiago Casilla,1047,Col,P,7,act,P,active
+2015,nl,Steve Gardner,Chad Bettis,3961,NYY,P,1,act,P,active
+2015,nl,Steve Gardner,Yunel Escobar,76,FA,CI,5,act,"UT,SS,MI,SW",active
+2015,nl,Steve Gardner,Josh Harrison,3747,Cin,MI,18,act,"3B,2B,MI,SW,OF,CI",active
+2015,nl,Steve Gardner,Hunter Pence,639,SF,OF,18,dis,"OF,SW",reserved
+2015,nl,Steve Gardner,Jose Lobaton,2296,FA,C,1,res,"C,SW",reserved
+2015,nl,Steve Gardner,Drew Storen,2834,FA,P,15,res,P,reserved
+2015,nl,Steve Gardner,Brad Hand,3496,FA,P,9,res,P,reserved
+2015,nl,Steve Gardner,Cesar Hernandez,3413,FA,CI,9,dis,"SW,CI,3B",reserved
+2015,nl,Derek Carty,Justin Morneau,898,Min,1B,18,act,"1B,CI,SW",active
+2015,nl,Derek Carty,D.J. LeMahieu,3275,NYY,2B,9,act,"2B,SW,MI",active
+2015,nl,Derek Carty,Javier Baez,3804,Det,SS,10,act,"SS,SW,2B,OF,MI,INF",active
+2015,nl,Derek Carty,Cody Asche,4188,Min,3B,8,act,"3B,CI,SW",active
+2015,nl,Derek Carty,Grady Sizemore,410,FA,OF,2,act,"OF,SW",active
+2015,nl,Derek Carty,Ender Inciarte,4264,FA,OF,6,act,"OF,SW",active
+2015,nl,Derek Carty,Skip Schumaker,1420,SD,OF,0,act,"OF,2B,MI,SW",active
+2015,nl,Derek Carty,Bryce Harper,2628,Phi,OF,28,act,"1B,SW,OF,INF",active
+2015,nl,Derek Carty,Kevin Plawecki,4517,SD,C,32,act,C,active
+2015,nl,Derek Carty,Travis D'Arnaud,2621,LAA,C,13,act,"C,SW",active
+2015,nl,Derek Carty,Brayan Pena,74,Det,UT,2,act,"C,SW,CI,1B",active
+2015,nl,Derek Carty,Pedro Baez,2054,FA,P,0,act,P,active
+2015,nl,Derek Carty,Jake Arrieta,2080,SD,P,19,act,P,active
+2015,nl,Derek Carty,Zack Greinke,660,FA,P,25,act,P,active
+2015,nl,Derek Carty,Patrick Corbin,3339,Tor,P,0,act,P,active
+2015,nl,Derek Carty,John Lackey,721,FA,P,10,act,P,active
+2015,nl,Derek Carty,Will Smith,3082,KC,P,0,act,P,active
+2015,nl,Derek Carty,Rubby De La Rosa,3524,FA,P,0,act,P,active
+2015,nl,Derek Carty,Mike Fiers,3833,FA,P,10,act,P,active
+2015,nl,Derek Carty,Jeff Locke,2594,Mia,P,1,act,P,active
+2015,nl,Derek Carty,Blake Treinen,4790,LAD,P,0,act,P,active
+2015,nl,Derek Carty,Brandon Moss,187,FA,CI,75,act,"1B,OF,SW,CI",active
+2015,nl,Derek Carty,Miguel Rojas,4814,LAD,MI,0,act,"2B,SW,SS,INF,MI,3B,CI",active
+2015,nl,Derek Carty,Giancarlo Stanton,2378,NYY,OF,38,dis,"OF,SW",reserved
+2015,nl,Derek Carty,Billy Hamilton,3576,FA,UT,25,dis,"OF,SW",reserved
+2015,nl,Derek Carty,Norichika Aoki,2041,FA,SW,14,res,"OF,SW",reserved
+2015,nl,Derek Carty,Josh Johnson,544,SF,P,1,dis,P,reserved
+2015,nl,Derek Carty,David Phelps,3561,Tor,P,1,dis,P,reserved
+2015,nl,Derek Carty,Ryan Vogelsong,1934,SF,P,0,res,P,reserved
+2015,nl,Derek Carty,Tommy La Stella,4099,FA,MI,0,res,"MI,2B,SW",reserved
+2015,nl,Brian Walton,Mark Trumbo,2262,FA,1B,23,act,"OF,SW,CI,1B",active
+2015,nl,Brian Walton,Kelby Tomlinson,5196,Col,2B,0,act,2B,active
+2015,nl,Brian Walton,Jimmy Rollins,1131,FA,SS,19,act,"SS,SW,MI",active
+2015,nl,Brian Walton,Brandon Drury,4055,KC,3B,0,act,2B,active
+2015,nl,Brian Walton,Michael Bourn,636,FA,OF,46,act,"OF,SW",active
+2015,nl,Brian Walton,Matt Holliday,464,FA,OF,22,act,"OF,SW",active
+2015,nl,Brian Walton,Aaron Altherr,3660,FA,OF,25,act,"OF,SW",active
+2015,nl,Brian Walton,Gregory Polanco,4166,Tor,OF,19,act,"OF,SW",active
+2015,nl,Brian Walton,Welington Castillo,2434,Was,C,2,act,"C,SW",active
+2015,nl,Brian Walton,Derek Norris,2623,FA,C,11,act,"C,SW",active
+2015,nl,Brian Walton,Michael Conforto,4911,ChC,UT,2,act,"OF,SW",active
+2015,nl,Brian Walton,Brett Wallace,2188,FA,SW,0,act,3B,active
+2015,nl,Brian Walton,Pedro Strop,446,FA,P,0,act,P,active
+2015,nl,Brian Walton,Arquimedes Caminero,3390,FA,P,0,act,P,active
+2015,nl,Brian Walton,Steve Cishek,3368,Was,P,0,act,P,active
+2015,nl,Brian Walton,Joe Ross,4023,Ari,P,0,act,P,active
+2015,nl,Brian Walton,Francisco Liriano,880,Tor,P,13,act,P,active
+2015,nl,Brian Walton,Randall Delgado,2725,NYY,P,0,act,P,active
+2015,nl,Brian Walton,Gio Gonzalez,1084,Mia,P,16,act,P,active
+2015,nl,Brian Walton,Jaime Garcia,1423,ChC,P,4,act,P,active
+2015,nl,Brian Walton,Julio Teheran,2098,ChC,P,16,act,P,active
+2015,nl,Brian Walton,Adam Lind,1587,FA,CI,17,act,"1B,CI,SW",active
+2015,nl,Brian Walton,Howie Kendrick,739,Was,MI,19,act,"SW,2B,MI",active
+2015,nl,Brian Walton,Brandon Belt,3336,FA,1B,23,res,"1B,CI,SW",reserved
+2015,nl,Brian Walton,Daniel Castro,5205,Sea,SS,0,res,2B,reserved
+2015,nl,Brian Walton,Jake Lamb,4537,SF,3B,6,res,"UT,CI,3B,SW",reserved
+2015,nl,Brian Walton,Matt Adams,3755,Was,SW,1,res,"1B,CI,SW",reserved
+2015,nl,Brian Walton,Jordan Walden,2051,Atl,P,1,dis,P,reserved
+2015,nl,Brian Walton,Adam Wainwright,1400,StL,P,1,dis,P,reserved
+2015,nl,Scott Wilderman,Joey Votto,345,Tor,1B,29,act,"1B,SW,CI",active
+2015,nl,Scott Wilderman,Dee Gordon,2693,FA,2B,25,act,"SW,MI,2B",active
+2015,nl,Scott Wilderman,Wilmer Flores,2527,FA,SS,9,act,"UT,SS,MI,2B,SW",active
+2015,nl,Scott Wilderman,Kris Bryant,4434,Col,3B,18,act,OF,active
+2015,nl,Scott Wilderman,David Peralta,4980,SD,OF,4,act,"OF,SW",active
+2015,nl,Scott Wilderman,Tommy Pham,5041,NYM,OF,1,act,"OF,SW",active
+2015,nl,Scott Wilderman,Jorge Soler,3918,LAA,OF,20,act,"OF,SW",active
+2015,nl,Scott Wilderman,Chris Coghlan,599,ChC,OF,7,act,"OF,SW",active
+2015,nl,Scott Wilderman,Cameron Rupp,4651,Cle,C,2,act,"C,SW",active
+2015,nl,Scott Wilderman,Yadier Molina,1404,StL,C,14,act,"C,SW",active
+2015,nl,Scott Wilderman,Clint Robinson,3397,Was,UT,1,act,"1B,CI,SW",active
+2015,nl,Scott Wilderman,Austin Jackson,1039,FA,SW,24,act,"OF,SW",active
+2015,nl,Scott Wilderman,Jake Peavy,1237,FA,P,7,act,P,active
+2015,nl,Scott Wilderman,Kyle Barraclough,5426,FA,P,0,act,P,active
+2015,nl,Scott Wilderman,Tony Watson,3418,SF,P,1,act,P,active
+2015,nl,Scott Wilderman,Kevin Quackenbush,4282,FA,P,0,act,P,active
+2015,nl,Scott Wilderman,Stephen Strasburg,2528,Was,P,27,act,P,active
+2015,nl,Scott Wilderman,Jerad Eickhoff,5075,FA,P,4,act,P,active
+2015,nl,Scott Wilderman,Noah Syndergaard,4002,CWS,P,2,act,P,active
+2015,nl,Scott Wilderman,James Shields,1457,FA,P,18,act,P,active
+2015,nl,Scott Wilderman,Adam Conley,4351,FA,P,1,act,P,active
+2015,nl,Scott Wilderman,Michael Cuddyer,901,NYM,CI,13,act,"OF,SW",active
+2015,nl,Scott Wilderman,Cory Spangenberg,3756,StL,MI,1,act,"3B,CI,SW",active
+2015,nl,Scott Wilderman,Andres Blanco,303,Mil,3B,2,res,"3B,SW,CI",reserved
+2015,nl,Scott Wilderman,Christian Bethancourt,3224,ChC,C,5,res,"C,SW",reserved
+2015,nl,Scott Wilderman,Domonic Brown,2066,FA,UT,5,res,"OF,SW",reserved
+2015,nl,Scott Wilderman,Kike Hernandez,4992,LAD,SW,0,dis,"SW,OF",reserved
+2015,nl,Scott Wilderman,Andrew Lambo,2065,FA,SW,0,dis,"OF,SW",reserved
+2015,nl,Scott Wilderman,Clayton Richard,2141,CWS,P,1,res,P,reserved
+2015,nl,Todd Zola,Jason Rogers,4669,Pit,1B,4,act,"1B,CI,SW",active
+2015,nl,Todd Zola,Kolten Wong,3771,Ari,2B,21,act,"2B,SW,MI",active
+2015,nl,Todd Zola,Ian Desmond,1671,Col,SS,26,act,"MI,SW,SS",active
+2015,nl,Todd Zola,Matt Carpenter,3510,StL,3B,21,act,"UT,CI,3B,SW",active
+2015,nl,Todd Zola,Jonny Gomes,1477,FA,OF,1,act,"OF,SW",active
+2015,nl,Todd Zola,Angel Pagan,959,FA,OF,10,act,"OF,SW",active
+2015,nl,Todd Zola,Matt Kemp,799,FA,OF,29,act,"OF,SW",active
+2015,nl,Todd Zola,Scott Van Slyke,2804,Mia,OF,6,act,"OF,SW,CI,1B",active
+2015,nl,Todd Zola,Dustin Garneau,4808,Det,C,1,act,C,active
+2015,nl,Todd Zola,Carlos Ruiz,1123,FA,C,11,act,"C,SW",active
+2015,nl,Todd Zola,Chris Denorfia,1075,FA,UT,1,act,"OF,SW",active
+2015,nl,Todd Zola,Logan Schafer,3038,Bal,SW,1,act,"OF,SW",active
+2015,nl,Todd Zola,Chris Rusin,3955,Col,P,1,act,P,active
+2015,nl,Todd Zola,Hector Rondon,2244,Bos,P,15,act,P,active
+2015,nl,Todd Zola,Chris Heston,4238,SF,P,13,act,P,active
+2015,nl,Todd Zola,J.A. Happ,1109,StL,P,16,act,P,active
+2015,nl,Todd Zola,Cole Hamels,1108,SD,P,19,act,P,active
+2015,nl,Todd Zola,Ken Giles,4717,Atl,P,6,act,P,active
+2015,nl,Todd Zola,Kyle Hendricks,4620,FA,P,6,act,P,active
+2015,nl,Todd Zola,Adam Morgan,4337,Hou,P,1,act,P,active
+2015,nl,Todd Zola,Wily Peralta,3181,Pit,P,9,act,P,active
+2015,nl,Todd Zola,Justin Bour,4965,SF,CI,1,act,"1B,CI,SW",active
+2015,nl,Todd Zola,Daniel Murphy,2100,LAA,MI,16,act,"MI,2B,SW,CI,3B",active
+2015,nl,Todd Zola,Carlos Gomez,902,FA,OF,37,res,"OF,SW",reserved
+2015,nl,Todd Zola,Mike McKenry,2104,TB,C,4,dis,"C,SW",reserved
+2015,nl,Todd Zola,Sergio Romo,2061,SF,P,3,res,P,reserved
+2015,nl,Todd Zola,Maikel Franco,4021,FA,CI,6,dis,"3B,CI,SW",reserved
+2015,nl,Todd Zola,Jose Peraza,4468,NYM,MI,3,res,2B,reserved
+2015,nl,Todd Zola,Clint Barmes,454,FA,MI,1,res,"SS,SW,MI",reserved
+2015,nl,Gene McCaffrey,Nick Swisher,243,NYY,1B,46,act,"SW,1B,CI",active
+2015,nl,Gene McCaffrey,Chris Owings,3271,FA,2B,12,act,"SS,MI,2B,SW",active
+2015,nl,Gene McCaffrey,Cristhian Adames,4128,SF,SS,1,act,"UT,SS,MI,SW",active
+2015,nl,Gene McCaffrey,Juan Uribe,238,FA,3B,7,act,"3B,SW,CI",active
+2015,nl,Gene McCaffrey,Randal Grichuk,2843,NYY,OF,0,act,"OF,SW",active
+2015,nl,Gene McCaffrey,Nick Markakis,134,Atl,OF,6,act,"OF,SW",active
+2015,nl,Gene McCaffrey,Joc Pederson,4090,Tex,OF,17,act,"SW,OF",active
+2015,nl,Gene McCaffrey,Jon Jay,2475,LAA,OF,8,act,"OF,SW",active
+2015,nl,Gene McCaffrey,Miguel Montero,25,Was,C,13,act,"C,SW",active
+2015,nl,Gene McCaffrey,Jonathan Lucroy,2346,Atl,C,20,act,"C,CI,1B,SW",active
+2015,nl,Gene McCaffrey,Ivan DeJesus,2147,FA,UT,12,act,SS,active
+2015,nl,Gene McCaffrey,Casey McGehee,306,FA,SW,13,act,"3B,CI,SW",active
+2015,nl,Gene McCaffrey,Aroldis Chapman,2894,Bos,P,25,act,P,active
+2015,nl,Gene McCaffrey,Brett Anderson,2011,FA,P,4,act,P,active
+2015,nl,Gene McCaffrey,Taylor Jungmann,3204,Tex,P,5,act,P,active
+2015,nl,Gene McCaffrey,Tyson Ross,2330,FA,P,14,act,P,active
+2015,nl,Gene McCaffrey,Michael Wacha,4080,KC,P,14,act,P,active
+2015,nl,Gene McCaffrey,Jacob DeGrom,4563,Tex,P,17,act,P,active
+2015,nl,Gene McCaffrey,Ian Kennedy,990,Tex,P,11,act,P,active
+2015,nl,Gene McCaffrey,Brandon Finnegan,4971,FA,P,4,act,P,active
+2015,nl,Gene McCaffrey,Carlos Martinez,3606,FA,P,8,act,P,active
+2015,nl,Gene McCaffrey,Derek Dietrich,3699,FA,CI,18,act,"2B,SW,MI",active
+2015,nl,Gene McCaffrey,Andrelton Simmons,3717,FA,MI,10,act,"SS,SW,MI",active
+2015,nl,Gene McCaffrey,Xavier Scruggs,4566,Mia,1B,3,res,"1B,SW,CI",reserved
+2015,nl,Gene McCaffrey,Corey Hart,862,FA,1B,2,dis,"UT,SW",reserved
+2015,nl,Gene McCaffrey,Joe Panik,3800,Mia,2B,5,dis,"UT,2B,MI,SW",reserved
+2015,nl,Gene McCaffrey,Todd Cunningham,3241,FA,OF,7,res,OF,reserved
+2015,nl,Gene McCaffrey,Hector Sanchez,3050,Det,C,1,res,"C,SW",reserved
+2015,nl,Ray Guilfoyle,Adrian Gonzalez,1250,NYM,1B,26,act,"1B,CI,SW",active
+2015,nl,Ray Guilfoyle,Greg Garcia,4360,FA,2B,3,act,"2B,MI,SW",active
+2015,nl,Ray Guilfoyle,Starlin Castro,2724,FA,SS,22,act,"SS,SW,MI",active
+2015,nl,Ray Guilfoyle,Nolan Arenado,3214,Ari,3B,25,act,"3B,SW,INF,CI",active
+2015,nl,Ray Guilfoyle,Jay Bruce,371,NYY,OF,24,act,"UT,SW,OF",active
+2015,nl,Ray Guilfoyle,Charlie Blackmon,2620,Col,OF,23,act,"OF,SW",active
+2015,nl,Ray Guilfoyle,Khris Davis,4217,FA,OF,15,act,"OF,SW",active
+2015,nl,Ray Guilfoyle,Marcell Ozuna,3280,Pit,OF,22,act,"OF,SW",active
+2015,nl,Ray Guilfoyle,Martin Maldonado,2347,FA,C,1,act,"C,SW",active
+2015,nl,Ray Guilfoyle,Tucker Barnhart,3911,Tex,C,1,act,"C,SW",active
+2015,nl,Ray Guilfoyle,Corey Dickerson,3661,FA,UT,25,act,"OF,SW",active
+2015,nl,Ray Guilfoyle,Corey Seager,4154,Tex,SW,0,act,"SS,INF,SW",active
+2015,nl,Ray Guilfoyle,Arodys Vizcaino,3150,KC,P,7,act,P,active
+2015,nl,Ray Guilfoyle,Tyler Clippard,1612,Was,P,25,act,P,active
+2015,nl,Ray Guilfoyle,Jonathan Papelbon,165,FA,P,13,act,P,active
+2015,nl,Ray Guilfoyle,Mike Leake,2714,FA,P,5,act,P,active
+2015,nl,Ray Guilfoyle,Jordan Zimmermann,2067,Mil,P,21,act,P,active
+2015,nl,Ray Guilfoyle,Dan Haren,7,ChC,P,4,act,P,active
+2015,nl,Ray Guilfoyle,Kenley Jansen,2963,Det,P,15,act,P,active
+2015,nl,Ray Guilfoyle,Casey Janssen,1559,FA,P,2,act,P,active
+2015,nl,Ray Guilfoyle,Bartolo Colon,192,FA,P,3,act,P,active
+2015,nl,Ray Guilfoyle,Hector Olivera,5202,FA,CI,0,act,OF,active
+2015,nl,Ray Guilfoyle,Adeiny Hechavarria,3146,FA,MI,2,act,"SS,SW,MI",active
+2015,nl,Ray Guilfoyle,Danny Espinosa,2765,NYM,SS,1,res,"2B,MI,SW",reserved
+2015,nl,Ray Guilfoyle,Ichiro Suzuki,1368,Sea,OF,1,res,"OF,SW",reserved
+2015,nl,Ray Guilfoyle,Kyle Parker,3319,Cin,UT,1,res,"OF,SW",reserved
+2015,nl,Ray Guilfoyle,Ben Paulsen,3560,FA,CI,16,res,"1B,SW,CI",reserved

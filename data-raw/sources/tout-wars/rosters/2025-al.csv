@@ -1,0 +1,351 @@
+year,league,team,player_name,player_id,mlb_team,position,salary,status,eligibility,roster_section
+2025,al,Larry Schechter,Kyle Manzardo,8116,Cle,1B,12,act,"1B,SW",active
+2025,al,Larry Schechter,Romy Gonzalez,7828,Bos,2B,58,act,"1B,2B,INF,SS,SW",active
+2025,al,Larry Schechter,Gunnar Henderson,7317,Bal,SS,36,act,"SS,SW,INF",active
+2025,al,Larry Schechter,Maikel Garcia,7884,KC,3B,14,act,"3B,2B,INF,SS,OF,SW",active
+2025,al,Larry Schechter,Jeremiah Jackson,6633,Bal,OF,28,act,"OF,3B",active
+2025,al,Larry Schechter,Wenceel Perez,6917,Det,OF,5,act,"OF,SW",active
+2025,al,Larry Schechter,Adolis Garcia,5465,Phi,OF,0,act,"OF,SW",active
+2025,al,Larry Schechter,Trent Grisham,5285,NYY,OF,21,act,"OF,SW",active
+2025,al,Larry Schechter,David Fry,8470,Cle,C,1,act,"C,INF,OF,1B,SW",active
+2025,al,Larry Schechter,Shea Langeliers,6913,Oak,C,15,act,"C,SW",active
+2025,al,Larry Schechter,Joc Pederson,4090,Tex,UT,16,act,"UT,SW",active
+2025,al,Larry Schechter,Luke Raley,6663,Sea,INF,12,act,"OF,1B,SW,INF",active
+2025,al,Larry Schechter,Isiah Kiner-Falefa,6317,FA,SW,25,act,"SS,2B,3B,SW,INF",active
+2025,al,Larry Schechter,Victor Robles,5309,Sea,SW,2,act,"OF,SW",active
+2025,al,Larry Schechter,Brayan Bello,7865,Bos,P,4,act,P,active
+2025,al,Larry Schechter,Dean Kremer,6817,Bal,P,1,act,P,active
+2025,al,Larry Schechter,Cam Schlittler,9301,NYY,P,48,act,P,active
+2025,al,Larry Schechter,Seth Lugo,5417,KC,P,14,act,P,active
+2025,al,Larry Schechter,Bryan Abreu,6708,Hou,P,4,act,P,active
+2025,al,Larry Schechter,Chris Bassitt,4773,FA,P,6,act,P,active
+2025,al,Larry Schechter,Kevin Gausman,4053,Tor,P,15,act,P,active
+2025,al,Larry Schechter,Bryce Miller,8118,Sea,P,18,act,P,active
+2025,al,Larry Schechter,Camilo Doval,7431,NYY,P,99,act,P,active
+2025,al,Larry Schechter,Anthony Santander,5903,Tor,OF,19,dis,"OF,SW",reserved
+2025,al,Larry Schechter,Gary Sanchez,3259,FA,C,2,dis,"C,SW",reserved
+2025,al,Larry Schechter,Edouard Julien,8320,Min,INF,24,res,"1B,2B,INF,SW",reserved
+2025,al,Larry Schechter,Dominic Canzone,8467,Sea,SW,14,res,"OF,SW",reserved
+2025,al,Larry Schechter,Myles Straw,6413,Tor,SW,6,res,"OF,SW",reserved
+2025,al,Larry Schechter,Heston Kjerstad,7362,Bal,SW,7,res,"OF,SW",reserved
+2025,al,Jeff Erickson,Bob Seymour,9284,TB,1B,33,act,1B,active
+2025,al,Jeff Erickson,Tyler Freeman,6840,Col,2B,0,act,"OF,2B,SW",active
+2025,al,Jeff Erickson,Darell Hernaiz,8599,Oak,SS,7,act,"SS,3B,INF,SW,2B",active
+2025,al,Jeff Erickson,Junior Caminero,8518,TB,3B,19,act,"3B,SW,INF",active
+2025,al,Jeff Erickson,Jarren Duran,6946,Bos,OF,31,act,"OF,SW",active
+2025,al,Jeff Erickson,Harrison Bader,5366,FA,OF,1,act,"OF,SW",active
+2025,al,Jeff Erickson,Jake Mangum,8403,Pit,OF,1,act,OF,active
+2025,al,Jeff Erickson,Miguel Andujar,5142,FA,OF,5,act,"OF,3B,SW",active
+2025,al,Jeff Erickson,Yainer Diaz,8277,Hou,C,17,act,"C,SW",active
+2025,al,Jeff Erickson,Tyler Heineman,4756,Tor,C,3,act,"C,SW",active
+2025,al,Jeff Erickson,Jackson Holliday,8228,Bal,UT,9,act,"2B,SW,SS,INF",active
+2025,al,Jeff Erickson,Davis Schneider,8712,Tor,INF,5,act,"OF,2B,INF,SW",active
+2025,al,Jeff Erickson,Carlos Santana,2181,FA,SW,10,act,"1B,SW,INF",active
+2025,al,Jeff Erickson,Kerry Carpenter,8216,Det,SW,15,act,"OF,SW",active
+2025,al,Jeff Erickson,Eric Lauer,5798,Tor,P,7,act,P,active
+2025,al,Jeff Erickson,Cade Povich,8454,Bal,P,0,act,P,active
+2025,al,Jeff Erickson,Ian Seymour,8109,TB,P,23,act,P,active
+2025,al,Jeff Erickson,Shane Baz,6189,Bal,P,11,act,P,active
+2025,al,Jeff Erickson,Merrill Kelly,4802,Ari,P,576,act,P,active
+2025,al,Jeff Erickson,Jeff Hoffman,4795,Tor,P,18,act,P,active
+2025,al,Jeff Erickson,Noah Cameron,8647,KC,P,95,act,P,active
+2025,al,Jeff Erickson,Kyle Harrison,7706,Bos,P,81,act,P,active
+2025,al,Jeff Erickson,Bailey Ober,7533,Min,P,17,act,P,active
+2025,al,Jeff Erickson,Jonathan Aranda,7905,TB,1B,13,dis,"1B,INF,SW",reserved
+2025,al,Jeff Erickson,Corey Seager,4154,Tex,SS,29,dis,"SS,SW,INF",reserved
+2025,al,Jeff Erickson,David Hamilton,7909,Bos,SW,5,res,"2B,SS,SW,INF",reserved
+2025,al,Jeff Erickson,Troy Melton,9028,Det,P,13,res,P,reserved
+2025,al,Jeff Erickson,Jacob Lopez,8669,Oak,P,57,res,P,reserved
+2025,al,Jeff Erickson,David Festa,8634,Min,P,57,dis,P,reserved
+2025,al,Jeff Erickson,Jack Perkins,8775,Oak,P,5,dis,P,reserved
+2025,al,Chris Blessing,Curtis Mead,7919,CWS,1B,132,act,"1B,2B,INF,3B,SW",active
+2025,al,Chris Blessing,Brooks Lee,8086,Min,2B,2,act,"SS,SW,2B,3B,INF",active
+2025,al,Chris Blessing,Carson Williams,7792,TB,SS,357,act,SS,active
+2025,al,Chris Blessing,Willi Castro,6289,FA,3B,14,act,"OF,3B,SS,2B,INF,SW",active
+2025,al,Chris Blessing,Wyatt Langford,8539,Tex,OF,27,act,"OF,SW",active
+2025,al,Chris Blessing,Colton Cowser,7749,Bal,OF,24,act,"OF,SW",active
+2025,al,Chris Blessing,Mike Yastrzemski,5314,Atl,OF,109,act,"OF,SW",active
+2025,al,Chris Blessing,Jasson Dominguez,6875,NYY,OF,18,act,"OF,SW",active
+2025,al,Chris Blessing,Hunter Feduccia,7637,TB,C,1,act,"C,SW",active
+2025,al,Chris Blessing,Dillon Dingler,7393,Det,C,1,act,"C,SW",active
+2025,al,Chris Blessing,Giancarlo Stanton,2378,NYY,UT,2,act,"OF,SW",active
+2025,al,Chris Blessing,Cody Freeman,8428,Tex,INF,30,act,"2B,3B,OF",active
+2025,al,Chris Blessing,Michael A. Taylor,4060,FA,SW,7,act,"OF,SW",active
+2025,al,Chris Blessing,Tyler Mahle,5916,FA,P,0,act,P,active
+2025,al,Chris Blessing,Taj Bradley,7918,Min,P,11,act,P,active
+2025,al,Chris Blessing,Jhoan Duran,6643,Phi,P,22,act,P,active
+2025,al,Chris Blessing,Andres Munoz,6749,Sea,P,21,act,P,active
+2025,al,Chris Blessing,Tyler Holton,8201,Det,P,3,act,P,active
+2025,al,Chris Blessing,Joe Ryan,7276,Min,P,17,act,P,active
+2025,al,Chris Blessing,Framber Valdez,6407,FA,P,23,act,P,active
+2025,al,Chris Blessing,Keegan Akin,6550,Bal,P,3,act,P,active
+2025,al,Chris Blessing,Shane Bieber,6086,Tor,P,1,act,P,active
+2025,al,Chris Blessing,Trevor Rogers,6201,Bal,P,51,act,P,active
+2025,al,Chris Blessing,Sam Haggerty,6912,Tex,2B,3,dis,"OF,2B,SW",reserved
+2025,al,Chris Blessing,Connor Wong,7229,Bos,C,11,res,"C,SW",reserved
+2025,al,Chris Blessing,Brett Harris,8777,Oak,INF,5,res,"3B,SW,1B,INF",reserved
+2025,al,Chris Blessing,Kyle Isbel,6916,KC,SW,6,dis,"OF,SW",reserved
+2025,al,Chris Blessing,Denzel Clarke,8349,Oak,SW,139,dis,OF,reserved
+2025,al,Chris Blessing,Tomoyuki Sugano,6990,FA,P,1,res,P,reserved
+2025,al,Chris Blessing,Lucas Erceg,5818,KC,P,5,res,P,reserved
+2025,al,Ian Kahn,Josh Naylor,5389,Sea,1B,863,act,"1B,SW,INF",active
+2025,al,Ian Kahn,Brandon Lowe,6565,Pit,2B,13,act,"2B,INF,SW",active
+2025,al,Ian Kahn,Bobby Witt,6904,KC,SS,42,act,"SS,SW,INF",active
+2025,al,Ian Kahn,Josh Jung,6979,Tex,3B,9,act,"3B,SW,INF",active
+2025,al,Ian Kahn,Mike Trout,2844,LAA,OF,24,act,"OF,SW",active
+2025,al,Ian Kahn,George Valera,6547,Cle,OF,49,act,OF,active
+2025,al,Ian Kahn,Jo Adell,6143,LAA,OF,11,act,"OF,SW",active
+2025,al,Ian Kahn,Miguel Vargas,6973,CWS,OF,7,act,"3B,SW,1B,OF,INF",active
+2025,al,Ian Kahn,Ben Rice,8886,NYY,C,2,act,"1B,SW,C,INF",active
+2025,al,Ian Kahn,Mitch Garver,5025,FA,C,7,act,"C,SW",active
+2025,al,Ian Kahn,Paul Goldschmidt,3159,FA,UT,18,act,"1B,INF,SW",active
+2025,al,Ian Kahn,Ha-Seong Kim,7554,Atl,INF,7,act,"SS,INF,2B,SW",active
+2025,al,Ian Kahn,Gabriel Arias,6513,Cle,SW,0,act,"SS,3B,INF,2B,SW",active
+2025,al,Ian Kahn,J.J. Bleday,6951,Cin,SW,54,act,"OF,SW",active
+2025,al,Ian Kahn,Peter Fairbanks,7030,Mia,P,11,act,P,active
+2025,al,Ian Kahn,Jack Leiter,6947,Tex,P,3,act,P,active
+2025,al,Ian Kahn,Kenley Jansen,2963,Det,P,13,act,P,active
+2025,al,Ian Kahn,Luis Gil,7074,NYY,P,4,act,P,active
+2025,al,Ian Kahn,Max Scherzer,19,FA,P,8,act,P,active
+2025,al,Ian Kahn,Tanner Bibee,8166,Cle,P,18,act,P,active
+2025,al,Ian Kahn,Adrian Houser,5231,SF,P,5,act,P,active
+2025,al,Ian Kahn,Devin Williams,4885,NYM,P,24,act,P,active
+2025,al,Ian Kahn,Jordan Leasure,8703,CWS,P,4,act,P,active
+2025,al,Ian Kahn,Luis Rengifo,6622,FA,OF,12,res,"3B,2B,SW,OF,INF",reserved
+2025,al,Ian Kahn,Yordan Alvarez,6185,Hou,OF,40,dis,"OF,SW",reserved
+2025,al,Ian Kahn,Javier Baez,3804,Det,OF,0,res,"SS,3B,OF,INF,SW,2B",reserved
+2025,al,Ian Kahn,Lance McCullers,3814,Hou,P,88,dis,P,reserved
+2025,al,Doug Dennis,Kody Clemens,7016,Min,1B,11,act,"1B,OF,INF,SW,2B",active
+2025,al,Doug Dennis,Adam Frazier,5555,FA,2B,13,act,"2B,OF,INF,3B,SW",active
+2025,al,Doug Dennis,Carlos Correa,4010,Hou,SS,17,act,"SS,SW,INF,3B",active
+2025,al,Doug Dennis,Royce Lewis,6094,Min,3B,18,act,"3B,INF,SW",active
+2025,al,Doug Dennis,Jose Altuve,3776,Hou,OF,25,act,"2B,SW,INF,OF",active
+2025,al,Doug Dennis,Taylor Ward,5398,Bal,OF,18,act,"OF,SW",active
+2025,al,Doug Dennis,Cedric Mullins,6128,TB,OF,20,act,"OF,SW",active
+2025,al,Doug Dennis,Richie Palacios,7876,TB,OF,9,act,"OF,2B,SW,INF",active
+2025,al,Doug Dennis,Austin Wells,7379,NYY,C,16,act,"C,SW",active
+2025,al,Doug Dennis,Kyle Higashioka,3107,Tex,C,2,act,"C,SW",active
+2025,al,Doug Dennis,Colson Montgomery,7791,CWS,UT,146,act,"SS,3B",active
+2025,al,Doug Dennis,Trevor Story,4020,Bos,INF,10,act,"SS,INF,SW",active
+2025,al,Doug Dennis,Cole Young,8520,Sea,SW,157,act,2B,active
+2025,al,Doug Dennis,Tyler O'Neill,5423,Bal,SW,15,act,"OF,SW",active
+2025,al,Doug Dennis,Drew Rasmussen,7251,TB,P,8,act,P,active
+2025,al,Doug Dennis,Yariel Rodriguez,8918,Tor,P,2,act,P,active
+2025,al,Doug Dennis,Jeffrey Springs,6429,Oak,P,7,act,P,active
+2025,al,Doug Dennis,Kyle Bradish,7482,Bal,P,0,act,P,active
+2025,al,Doug Dennis,Bryan Baker,6671,TB,P,0,act,P,active
+2025,al,Doug Dennis,Bryan Woo,8437,Sea,P,17,act,P,active
+2025,al,Doug Dennis,Max Fried,4194,NYY,P,20,act,P,active
+2025,al,Doug Dennis,Garrett Whitlock,7546,Bos,P,1,act,P,active
+2025,al,Doug Dennis,Jake Latz,7504,Tex,P,0,act,P,active
+2025,al,Doug Dennis,Josh Smith,7845,Tex,1B,1,dis,"SS,3B,OF,INF,1B,SW",reserved
+2025,al,Doug Dennis,Luke Keaschall,9013,Min,2B,312,dis,2B,reserved
+2025,al,Doug Dennis,Ramon Urias,6726,FA,3B,0,res,"3B,2B,SW,INF",reserved
+2025,al,Doug Dennis,Mike Tauchman,5642,FA,OF,8,dis,"OF,SW",reserved
+2025,al,Doug Dennis,Dustin May,6466,StL,P,47,dis,P,reserved
+2025,al,Jason Collette,Vinnie Pasquantino,7939,KC,1B,19,act,"1B,INF,SW",active
+2025,al,Jason Collette,Mauricio Dubon,5380,Atl,2B,0,act,"OF,2B,SW,1B,SS,INF,3B",active
+2025,al,Jason Collette,J.P. Crawford,4534,Sea,SS,11,act,"SS,SW,INF",active
+2025,al,Jason Collette,Ryan McMahon,4613,NYY,3B,270,act,"3B,INF,SW",active
+2025,al,Jason Collette,Steven Kwan,7878,Cle,OF,23,act,"OF,SW",active
+2025,al,Jason Collette,Ramon Laureano,5858,SD,OF,4,act,"OF,SW",active
+2025,al,Jason Collette,Parker Meadows,6915,Det,OF,11,act,"OF,SW",active
+2025,al,Jason Collette,Colby Thomas,8575,Oak,OF,0,act,OF,active
+2025,al,Jason Collette,Victor Caratini,4876,FA,C,3,act,"C,1B,SW",active
+2025,al,Jason Collette,Logan O'Hoppe,7442,LAA,C,19,act,"C,SW",active
+2025,al,Jason Collette,Nate Lowe,6652,FA,UT,140,act,"1B,SW,INF",active
+2025,al,Jason Collette,Nate Eaton,8002,Bos,INF,10,act,"OF,3B",active
+2025,al,Jason Collette,Spencer Torkelson,7073,Det,SW,7,act,"1B,SW,INF",active
+2025,al,Jason Collette,Cam Smith,9118,Hou,SW,5,act,OF,active
+2025,al,Jason Collette,Garrett Crochet,7365,Bos,P,27,act,P,active
+2025,al,Jason Collette,Chris Martin,4806,Tex,P,9,act,P,active
+2025,al,Jason Collette,Slade Cecconi,7511,Cle,P,61,act,P,active
+2025,al,Jason Collette,Davis Martin,8208,CWS,P,25,act,P,active
+2025,al,Jason Collette,Michael Lorenzen,4553,FA,P,4,act,P,active
+2025,al,Jason Collette,Justin Sterner,8838,Oak,P,2,act,P,active
+2025,al,Jason Collette,Jason Alexander,7911,Hou,P,39,act,P,active
+2025,al,Jason Collette,Casey Mize,6499,Det,P,6,act,P,active
+2025,al,Jason Collette,George Kirby,7041,Sea,P,14,act,P,active
+2025,al,Jason Collette,Zack Gelof,7964,Oak,2B,18,dis,"2B,SW,INF",reserved
+2025,al,Jason Collette,Matt Wallner,7058,Min,OF,16,dis,"OF,SW",reserved
+2025,al,Jason Collette,Jorge Soler,3918,LAA,SW,22,dis,"OF,SW",reserved
+2025,al,Jason Collette,Ty France,6723,FA,SW,5,dis,"1B,INF,SW",reserved
+2025,al,Jason Collette,Bailey Falter,6940,KC,P,11,res,P,reserved
+2025,al,Jason Collette,Brock Burke,6728,LAA,P,2,res,P,reserved
+2025,al,Rick Wolf/Glenn Colton,Nick Kurtz,8832,Oak,1B,0,act,1B,active
+2025,al,Rick Wolf/Glenn Colton,Gleyber Torres,4619,Det,2B,15,act,"2B,SW,INF",active
+2025,al,Rick Wolf/Glenn Colton,Jacob Wilson,8700,Oak,SS,9,act,"SS,SW,INF",active
+2025,al,Rick Wolf/Glenn Colton,Ernie Clement,6888,Tor,3B,3,act,"3B,SS,SW,2B,1B,INF",active
+2025,al,Rick Wolf/Glenn Colton,Jazz Chisholm,6130,NYY,OF,37,act,"2B,3B,SW,INF,OF",active
+2025,al,Rick Wolf/Glenn Colton,Lawrence Butler,8124,Oak,OF,26,act,"OF,SW",active
+2025,al,Rick Wolf/Glenn Colton,Zach Cole,9042,Hou,OF,9,act,OF,active
+2025,al,Rick Wolf/Glenn Colton,Cody Bellinger,4954,FA,OF,27,act,"OF,1B,INF,SW",active
+2025,al,Rick Wolf/Glenn Colton,Bo Naylor,6848,Cle,C,11,act,"C,SW",active
+2025,al,Rick Wolf/Glenn Colton,Nick Fortes,6902,TB,C,3,act,"C,SW",active
+2025,al,Rick Wolf/Glenn Colton,Jorge Mateo,5119,FA,UT,9,act,"SS,2B,INF,OF,SW",active
+2025,al,Rick Wolf/Glenn Colton,Yandy Diaz,5735,TB,INF,20,act,"1B,SW,INF",active
+2025,al,Rick Wolf/Glenn Colton,Tyler Tolbert,8353,KC,SW,2,act,"OF,2B,SS",active
+2025,al,Rick Wolf/Glenn Colton,Simeon Woods-Richardson,6958,Min,P,20,act,P,active
+2025,al,Rick Wolf/Glenn Colton,Kyle Finnegan,6364,Det,P,201,act,P,active
+2025,al,Rick Wolf/Glenn Colton,Will Warren,8184,NYY,P,0,act,P,active
+2025,al,Rick Wolf/Glenn Colton,Gavin Williams,7824,Cle,P,10,act,P,active
+2025,al,Rick Wolf/Glenn Colton,Tyler Wells,7545,Bal,P,9,act,P,active
+2025,al,Rick Wolf/Glenn Colton,Hunter Brown,7592,Hou,P,20,act,P,active
+2025,al,Rick Wolf/Glenn Colton,Shawn Armstrong,5059,Cle,P,13,act,P,active
+2025,al,Rick Wolf/Glenn Colton,Trey Yesavage,9124,Tor,P,9,act,P,active
+2025,al,Rick Wolf/Glenn Colton,Aroldis Chapman,2894,Bos,P,5,act,P,active
+2025,al,Rick Wolf/Glenn Colton,Yoendrys Gomez,7535,TB,P,20,act,P,active
+2025,al,Rick Wolf/Glenn Colton,Bo Bichette,6070,FA,SS,17,dis,"SS,INF,SW",reserved
+2025,al,Rick Wolf/Glenn Colton,Daniel Schneemann,8806,Cle,OF,5,res,"2B,SS,3B,OF,SW,INF",reserved
+2025,al,Rick Wolf/Glenn Colton,Angel Martinez,7770,Cle,INF,52,res,"OF,SW,2B",reserved
+2025,al,Rick Wolf/Glenn Colton,James Outman,7638,Min,SW,10,res,"OF,SW",reserved
+2025,al,Rick Wolf/Glenn Colton,Reid Detmers,7335,LAA,P,1,dis,P,reserved
+2025,al,Rick Wolf/Glenn Colton,Phil Maton,6036,ChC,P,36,res,P,reserved
+2025,al,Rick Wolf/Glenn Colton,Jose Soriano,7549,LAA,P,5,dis,P,reserved
+2025,al,Rob Leibowitz,Christian Walker,4521,Hou,1B,21,act,"1B,SW,INF",active
+2025,al,Rob Leibowitz,Carlos Cortes,6971,Oak,2B,85,act,OF,active
+2025,al,Rob Leibowitz,Zach Neto,8259,LAA,SS,17,act,"SS,SW,INF",active
+2025,al,Rob Leibowitz,Alex Bregman,4907,FA,3B,24,act,"3B,INF,SW",active
+2025,al,Rob Leibowitz,Christopher Morel,7389,Mia,OF,11,act,"OF,2B,SW,INF,3B",active
+2025,al,Rob Leibowitz,Josh Lowe,6072,TB,OF,20,act,"OF,SW",active
+2025,al,Rob Leibowitz,Andrew Benintendi,5386,CWS,OF,2,act,"OF,SW",active
+2025,al,Rob Leibowitz,Julio Rodriguez,6579,Sea,OF,41,act,"OF,SW",active
+2025,al,Rob Leibowitz,Edgar Quero,8510,CWS,C,0,act,C,active
+2025,al,Rob Leibowitz,Freddy Fermin,7171,SD,C,2,act,"C,SW",active
+2025,al,Rob Leibowitz,Jake Burger,6156,Tex,UT,78,act,"1B,SW,INF,3B",active
+2025,al,Rob Leibowitz,Christian Moore,9115,LAA,INF,178,act,2B,active
+2025,al,Rob Leibowitz,Jake Meyers,7399,Hou,SW,5,act,"OF,SW",active
+2025,al,Rob Leibowitz,Trevor Larnach,6611,Min,SW,11,act,"OF,SW",active
+2025,al,Rob Leibowitz,Ryan Pepiot,7438,TB,P,11,act,P,active
+2025,al,Rob Leibowitz,Sean Burke,8406,CWS,P,73,act,P,active
+2025,al,Rob Leibowitz,Kyle Hendricks,4620,FA,P,31,act,P,active
+2025,al,Rob Leibowitz,Logan Allen,7705,Cle,P,14,act,P,active
+2025,al,Rob Leibowitz,Will Vest,7551,Det,P,11,act,P,active
+2025,al,Rob Leibowitz,Pablo Lopez,6227,Min,P,2,act,P,active
+2025,al,Rob Leibowitz,Shane Smith,9205,CWS,P,43,act,P,active
+2025,al,Rob Leibowitz,Jose Berrios,4464,Tor,P,12,act,P,active
+2025,al,Rob Leibowitz,Justin Topa,7470,Min,P,1,act,P,active
+2025,al,Rob Leibowitz,Marcus Semien,4300,NYM,2B,21,dis,"2B,INF,SW",reserved
+2025,al,Rob Leibowitz,Max Muncy,7823,Oak,3B,41,dis,"3B,2B,SS",reserved
+2025,al,Rob Leibowitz,Adley Rutschman,6876,Bal,C,22,dis,"C,SW",reserved
+2025,al,Rob Leibowitz,Chas McCormick,7201,Hou,SW,17,res,"OF,SW",reserved
+2025,al,Rob Leibowitz,Jonny DeLuca,8312,TB,SW,5,dis,"OF,SW",reserved
+2025,al,Andy Andres,Isaac Paredes,6242,Hou,1B,11,act,"3B,1B,SW,INF",active
+2025,al,Andy Andres,Lenyn Sosa,8227,CWS,2B,0,act,"2B,1B,INF,3B,SW",active
+2025,al,Andy Andres,Anthony Volpe,7050,NYY,SS,17,act,"SS,SW,INF",active
+2025,al,Andy Andres,Yoan Moncada,5023,FA,3B,1,act,"3B,SW,INF",active
+2025,al,Andy Andres,Aaron Judge,4601,NYY,OF,50,act,"OF,SW",active
+2025,al,Andy Andres,Brent Rooker,6204,Oak,OF,27,act,"OF,SW",active
+2025,al,Andy Andres,Jac Caglianone,8543,KC,OF,0,act,"OF,1B",active
+2025,al,Andy Andres,Austin Martin,7072,Min,OF,12,act,"OF,SW",active
+2025,al,Andy Andres,Alejandro Kirk,6935,Tor,C,13,act,"C,SW",active
+2025,al,Andy Andres,Cal Raleigh,6814,Sea,C,23,act,"C,SW",active
+2025,al,Andy Andres,Jose Caballero,6982,NYY,UT,9,act,"OF,SS,2B,3B,SW,INF",active
+2025,al,Andy Andres,Chase Meidroth,8821,CWS,INF,0,act,"SS,2B",active
+2025,al,Andy Andres,Joey Cantillo,7414,Cle,P,0,act,P,active
+2025,al,Andy Andres,Parker Messick,9158,Cle,P,31,act,P,active
+2025,al,Andy Andres,Stephen Kolek,8765,KC,P,0,act,P,active
+2025,al,Andy Andres,David Bednar,6796,NYY,P,45,act,P,active
+2025,al,Andy Andres,Tarik Skubal,7077,Det,P,34,act,P,active
+2025,al,Andy Andres,Jacob DeGrom,4563,Tex,P,22,act,P,active
+2025,al,Andy Andres,A.J. Blubaugh,8807,Hou,P,9,act,P,active
+2025,al,Andy Andres,Luis Morales,8542,Oak,P,94,act,P,active
+2025,al,Andy Andres,Cade Smith,8469,Cle,P,7,act,P,active
+2025,al,Andy Andres,Logan Gilbert,6531,Sea,P,28,act,P,active
+2025,al,Andy Andres,Cristian Javier,7089,Hou,P,15,act,P,active
+2025,al,Andy Andres,Michael Helman,8059,Tex,OF,11,res,"OF,SW",reserved
+2025,al,Andy Andres,Zach McKinstry,7128,Det,UT,17,res,"3B,OF,SS,2B,INF,SW",reserved
+2025,al,Andy Andres,Michael Massey,8221,KC,INF,7,res,"2B,INF,OF,SW",reserved
+2025,al,Andy Andres,Ezequiel Duran,7343,Tex,INF,37,res,"SS,3B,OF,INF,1B,2B,SW",reserved
+2025,al,Andy Andres,Taylor Walls,7321,TB,INF,24,dis,"SS,2B,SW,INF",reserved
+2025,al,Andy Andres,Ryan Bergert,8823,KC,P,37,dis,P,reserved
+2025,al,Andy Andres,Luis Garcia,7302,FA,P,0,dis,P,reserved
+2025,al,Raphael Rabe,Vladimir Guerrero Jr.,5275,Tor,1B,40,act,"1B,SW,INF",active
+2025,al,Raphael Rabe,Colt Keith,8114,Det,2B,11,act,"3B,2B,SW,1B,INF",active
+2025,al,Raphael Rabe,Ceddanne Rafaela,8194,Bos,SS,6,act,"OF,INF,SS,SW,2B",active
+2025,al,Raphael Rabe,Rafael Devers,4903,SF,3B,28,act,"1B,3B,INF,SW",active
+2025,al,Raphael Rabe,Johnathan Rodriguez,6216,Cle,OF,27,act,"OF,SW",active
+2025,al,Raphael Rabe,Roman Anthony,8576,Bos,OF,6,act,OF,active
+2025,al,Raphael Rabe,Jonatan Clase,7678,Tor,OF,36,act,"OF,SW",active
+2025,al,Raphael Rabe,Ryan O'Hearn,5940,FA,OF,6,act,"1B,OF,INF,SW",active
+2025,al,Raphael Rabe,Salvador Perez,3457,KC,C,19,act,"C,1B,SW,INF",active
+2025,al,Raphael Rabe,Jonah Heim,5632,FA,C,9,act,"C,SW",active
+2025,al,Raphael Rabe,Coby Mayo,7723,Bal,UT,0,act,"1B,SW,INF,3B",active
+2025,al,Raphael Rabe,Jace Jung,7951,Det,INF,0,act,"3B,SW,INF",active
+2025,al,Raphael Rabe,Nathan Lukes,7612,Tor,SW,51,act,"OF,SW",active
+2025,al,Raphael Rabe,Masataka Yoshida,8120,Bos,SW,103,act,"OF,SW",active
+2025,al,Raphael Rabe,Luis Severino,4997,Oak,P,4,act,P,active
+2025,al,Raphael Rabe,Emerson Hancock,7333,Sea,P,36,act,P,active
+2025,al,Raphael Rabe,Luis M. Castillo,5137,Sea,P,19,act,P,active
+2025,al,Raphael Rabe,Michael Wacha,4080,KC,P,7,act,P,active
+2025,al,Raphael Rabe,Zack Littell,6301,FA,P,5,act,P,active
+2025,al,Raphael Rabe,Gregory Soto,6294,Pit,P,101,act,P,active
+2025,al,Raphael Rabe,Mason Miller,8123,SD,P,22,act,P,active
+2025,al,Raphael Rabe,Patrick Corbin,3339,FA,P,36,act,P,active
+2025,al,Raphael Rabe,Cole Ragans,5800,KC,P,22,act,P,active
+2025,al,Raphael Rabe,Leody Taveras,5412,Bal,OF,5,res,"OF,SW",reserved
+2025,al,Raphael Rabe,Kameron Misner,6942,KC,OF,51,res,"OF,SW",reserved
+2025,al,Raphael Rabe,Marcelo Mayer,7688,Bos,INF,0,dis,"3B,2B",reserved
+2025,al,Raphael Rabe,Hunter Dobbins,9191,StL,P,56,dis,P,reserved
+2025,al,Raphael Rabe,Marcus Stroman,4137,NYY,P,0,res,P,reserved
+2025,al,Raphael Rabe,Tanner Houck,6198,Bos,P,8,dis,P,reserved
+2025,al,Raphael Rabe,Jonathan Cannon,7700,CWS,P,26,res,P,reserved
+2025,al,Raphael Rabe,Jon Gray,4445,FA,P,36,dis,P,reserved
+2025,al,Mike Podhorzer,Nolan Schanuel,8687,LAA,1B,13,act,"1B,SW,INF",active
+2025,al,Mike Podhorzer,Jorge Polanco,4695,NYM,2B,7,act,"2B,SW,3B,INF",active
+2025,al,Mike Podhorzer,Brayan Rocchio,6846,Cle,SS,1,act,"SS,INF,SW,2B",active
+2025,al,Mike Podhorzer,Eugenio Suarez,4330,FA,3B,745,act,"3B,INF,SW",active
+2025,al,Mike Podhorzer,Randy Arozarena,6129,Sea,OF,24,act,"OF,SW",active
+2025,al,Mike Podhorzer,Bryce Teodosio,8511,LAA,OF,18,act,"OF,SW",active
+2025,al,Mike Podhorzer,George Springer,3575,Tor,OF,16,act,"OF,SW",active
+2025,al,Mike Podhorzer,Riley Greene,6953,Det,OF,23,act,"OF,SW",active
+2025,al,Mike Podhorzer,Kyle Teel,8676,CWS,C,2,act,C,active
+2025,al,Mike Podhorzer,Samuel Basallo,8583,Bal,C,3,act,C,active
+2025,al,Mike Podhorzer,Chandler Simpson,8898,TB,UT,7,act,OF,active
+2025,al,Mike Podhorzer,Addison Barger,8260,Tor,INF,19,act,"3B,OF,SW,INF",active
+2025,al,Mike Podhorzer,Jonathan India,6595,KC,SW,17,act,"2B,3B,OF,INF,SW",active
+2025,al,Mike Podhorzer,Alejandro Osuna,9268,Tex,SW,0,act,OF,active
+2025,al,Mike Podhorzer,Zebby Matthews,9091,Min,P,3,act,P,active
+2025,al,Mike Podhorzer,Jack Flaherty,5103,Det,P,13,act,P,active
+2025,al,Mike Podhorzer,Yusei Kikuchi,6454,LAA,P,12,act,P,active
+2025,al,Mike Podhorzer,J.T. Ginn,7701,Oak,P,34,act,P,active
+2025,al,Mike Podhorzer,Carlos Estevez,5488,KC,P,11,act,P,active
+2025,al,Mike Podhorzer,Joe Boyle,8226,TB,P,0,act,P,active
+2025,al,Mike Podhorzer,Lucas Giolito,4040,FA,P,2,act,P,active
+2025,al,Mike Podhorzer,Connelly Early,9423,Bos,P,72,act,P,active
+2025,al,Mike Podhorzer,Carlos Rodon,4437,NYY,P,13,act,P,active
+2025,al,Mike Podhorzer,Nolan Jones,6075,Cle,SW,104,dis,"OF,SW",reserved
+2025,al,Mike Podhorzer,Carlos Narvaez,8496,Bos,SW,0,res,"C,SW",reserved
+2025,al,Mike Podhorzer,Payton Tolle,9433,Bos,P,3,res,P,reserved
+2025,al,Mike Podhorzer,Grant Taylor,9259,CWS,P,19,res,P,reserved
+2025,al,Mike Podhorzer,Alex Cobb,3431,FA,P,0,dis,P,reserved
+2025,al,Mike Podhorzer,Gabe Speier,5517,Sea,P,1,res,P,reserved
+2025,al,Patrick Davitt,Tyler Soderstrom,7377,Oak,1B,11,act,"OF,1B,INF,SW",active
+2025,al,Patrick Davitt,Andres Gimenez,5824,Tor,2B,17,act,"2B,SS,SW,INF",active
+2025,al,Patrick Davitt,Jeremy Pena,7200,Hou,SS,17,act,"SS,INF,SW",active
+2025,al,Patrick Davitt,Jose Ramirez,4602,Cle,3B,42,act,"3B,SW,INF",active
+2025,al,Patrick Davitt,Jesus Sanchez,6068,Hou,OF,500,act,"OF,SW",active
+2025,al,Patrick Davitt,Dylan Beavers,8519,Bal,OF,19,act,OF,active
+2025,al,Patrick Davitt,Daulton Varsho,6326,Tor,OF,13,act,"OF,SW",active
+2025,al,Patrick Davitt,Byron Buxton,4014,Min,OF,14,act,"OF,SW",active
+2025,al,Patrick Davitt,Carter Jensen,8593,KC,C,1,act,C,active
+2025,al,Patrick Davitt,Danny Jansen,5332,FA,C,13,act,"C,SW",active
+2025,al,Patrick Davitt,C.J. Kayfus,9105,Cle,UT,4,act,"OF,1B",active
+2025,al,Patrick Davitt,Ryan Mountcastle,5676,Bal,INF,11,act,"1B,INF,SW",active
+2025,al,Patrick Davitt,Jordan Westburg,7381,Bal,SW,19,act,"3B,2B,SW,INF",active
+2025,al,Patrick Davitt,Brooks Baldwin,9111,CWS,SW,65,act,"OF,2B,INF,3B,SS,SW",active
+2025,al,Patrick Davitt,Hoby Milner,5906,ChC,P,0,act,P,active
+2025,al,Patrick Davitt,Hunter Gaddis,8255,Cle,P,21,act,P,active
+2025,al,Patrick Davitt,Matt Brash,7524,Sea,P,6,act,P,active
+2025,al,Patrick Davitt,Luke Weaver,4987,NYM,P,71,act,P,active
+2025,al,Patrick Davitt,Griffin Jax,4039,TB,P,8,act,P,active
+2025,al,Patrick Davitt,Edwin Uceta,7228,TB,P,5,act,P,active
+2025,al,Patrick Davitt,Luis Curvelo,9184,Tex,P,0,act,P,active
+2025,al,Patrick Davitt,Garrett Cleavinger,6239,TB,P,0,act,P,active
+2025,al,Patrick Davitt,Robert Garcia,8398,Tex,P,3,act,P,active
+2025,al,Patrick Davitt,Lane Thomas,6727,KC,OF,16,dis,"OF,SW",reserved
+2025,al,Patrick Davitt,Nick Loftin,7666,KC,OF,14,res,"OF,3B,2B,INF,1B,SW",reserved
+2025,al,Patrick Davitt,Ryan Jeffers,7271,Min,C,15,dis,"C,SW",reserved
+2025,al,Patrick Davitt,Juan Brito,8306,Cle,SW,39,res,SS,reserved
+2025,al,Patrick Davitt,Wilyer Abreu,8303,Bos,SW,10,res,"OF,SW",reserved
+2025,al,Patrick Davitt,John Schreiber,7093,KC,P,0,res,P,reserved

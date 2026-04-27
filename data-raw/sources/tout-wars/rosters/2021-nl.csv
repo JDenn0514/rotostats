@@ -1,0 +1,371 @@
+year,league,team,player_name,player_id,mlb_team,position,salary,status,eligibility,roster_section
+2021,nl,Tristan H. Cockcroft,Ryan McMahon,4613,NYY,1B,13,act,"3B,2B,1B,SW,MI,CI",active
+2021,nl,Tristan H. Cockcroft,Gavin Lux,6141,TB,2B,15,act,"OF,2B,MI,SW,SS",active
+2021,nl,Tristan H. Cockcroft,Corey Seager,4154,Tex,SS,26,act,"SS,MI,SW",active
+2021,nl,Tristan H. Cockcroft,Josh Harrison,3747,Cin,3B,0,act,"3B,2B,OF,CI,MI,SW,SS",active
+2021,nl,Tristan H. Cockcroft,Wil Myers,3153,FA,OF,21,act,"OF,SW",active
+2021,nl,Tristan H. Cockcroft,Sam Hilliard,6107,Col,OF,1,act,"OF,SW",active
+2021,nl,Tristan H. Cockcroft,Delino DeShields,3357,FA,OF,0,act,"OF,SW",active
+2021,nl,Tristan H. Cockcroft,Jesus Sanchez,6068,Tor,OF,1,act,"OF,SW",active
+2021,nl,Tristan H. Cockcroft,Curt Casali,3905,FA,C,1,act,"C,SW",active
+2021,nl,Tristan H. Cockcroft,William Contreras,6423,Mil,C,0,act,"C,SW",active
+2021,nl,Tristan H. Cockcroft,Alex Dickerson,4061,FA,UT,10,act,"OF,SW",active
+2021,nl,Tristan H. Cockcroft,German Marquez,5513,SD,P,6,act,P,active
+2021,nl,Tristan H. Cockcroft,Josh Hader,4656,Hou,P,22,act,P,active
+2021,nl,Tristan H. Cockcroft,Brandon Woodruff,5857,Mil,P,24,act,P,active
+2021,nl,Tristan H. Cockcroft,J.B. Wendelken,5485,SD,P,0,act,P,active
+2021,nl,Tristan H. Cockcroft,Trevor Williams,4867,Was,P,0,act,P,active
+2021,nl,Tristan H. Cockcroft,Kyle Freeland,4950,Col,P,0,act,P,active
+2021,nl,Tristan H. Cockcroft,Jon Gray,4445,FA,P,1,act,P,active
+2021,nl,Tristan H. Cockcroft,Kyle Gibson,2705,TB,P,715,act,P,active
+2021,nl,Tristan H. Cockcroft,Jack Flaherty,5103,Det,P,26,act,P,active
+2021,nl,Tristan H. Cockcroft,Lucas Sims,4510,CWS,P,2,act,P,active
+2021,nl,Tristan H. Cockcroft,Colton Welker,6106,SF,CI,20,act,3B,active
+2021,nl,Tristan H. Cockcroft,Didi Gregorius,3599,FA,MI,16,act,"SS,SW,MI",active
+2021,nl,Tristan H. Cockcroft,Jon Berti,5574,ChC,3B,13,dis,"3B,OF,2B,MI,CI,SW",reserved
+2021,nl,Tristan H. Cockcroft,Victor Robles,5309,Sea,OF,24,res,"OF,SW",reserved
+2021,nl,Tristan H. Cockcroft,Robinson Chirinos,3011,Bal,C,0,dis,"C,SW",reserved
+2021,nl,Tristan H. Cockcroft,Jorge Alfaro,4004,KC,C,4,dis,"C,OF,SW",reserved
+2021,nl,Tristan H. Cockcroft,Rodolfo Castro,7383,Tor,SW,79,res,3B,reserved
+2021,nl,Tristan H. Cockcroft,Devin Williams,4885,NYM,P,7,res,P,reserved
+2021,nl,Tristan H. Cockcroft,J.P. Feyereisen,6007,LAD,P,0,res,P,reserved
+2021,nl,Tristan H. Cockcroft,Rhys Hoskins,5321,Cle,CI,24,dis,"1B,CI,SW",reserved
+2021,nl,Craig Mish,C.J. Cron,3696,FA,1B,17,act,"1B,CI,SW",active
+2021,nl,Craig Mish,Luis Garcia Jr.,6213,Was,2B,0,act,"2B,SS,MI,SW",active
+2021,nl,Craig Mish,Kevin Newman,5393,KC,SS,7,act,"UT,SS,2B,MI,SW",active
+2021,nl,Craig Mish,Sergio Alcantara,4665,Phi,3B,1,act,"3B,2B,SS,SW,MI,CI",active
+2021,nl,Craig Mish,Rafael Ortega,3646,NYM,OF,7,act,OF,active
+2021,nl,Craig Mish,Bryce Harper,2628,Phi,OF,39,act,"OF,SW",active
+2021,nl,Craig Mish,Guillermo Heredia,5329,FA,OF,67,act,"OF,SW",active
+2021,nl,Craig Mish,Darin Ruf,4191,FA,OF,1,act,"1B,OF,SW",active
+2021,nl,Craig Mish,Alex Jackson,4472,Min,C,77,act,"C,SW",active
+2021,nl,Craig Mish,J.T. Realmuto,4028,Phi,C,19,act,"C,1B,CI,SW",active
+2021,nl,Craig Mish,Josh VanMeter,5912,NYY,UT,15,act,"2B,MI,SW,3B",active
+2021,nl,Craig Mish,Alex Reyes,4797,LAD,P,5,act,P,active
+2021,nl,Craig Mish,Trevor Rogers,6201,Bal,P,6,act,P,active
+2021,nl,Craig Mish,Ian Kennedy,990,Tex,P,301,act,P,active
+2021,nl,Craig Mish,Drew Smyly,3904,FA,P,14,act,P,active
+2021,nl,Craig Mish,Johnny Cueto,354,LAA,P,1,act,P,active
+2021,nl,Craig Mish,Jon Lester,160,StL,P,0,act,P,active
+2021,nl,Craig Mish,Adbert Alzolay,6285,NYM,P,2,act,P,active
+2021,nl,Craig Mish,Anthony Bass,3754,FA,P,8,act,P,active
+2021,nl,Craig Mish,Sandy Alcantara,5706,Mia,P,11,act,P,active
+2021,nl,Craig Mish,Edward Cabrera,6960,ChC,P,1,act,P,active
+2021,nl,Craig Mish,Nico Hoerner,6691,ChC,CI,8,act,"2B,SS,SW,OF,MI,3B,CI",active
+2021,nl,Craig Mish,Wilmer Flores,2527,FA,MI,7,act,"1B,2B,SW,CI,3B,MI",active
+2021,nl,Craig Mish,Alec Bohm,6542,Phi,3B,24,res,"3B,1B,CI,SW",reserved
+2021,nl,Craig Mish,Gerardo Parra,2000,Was,OF,1,dis,OF,reserved
+2021,nl,Craig Mish,Ronald Acuna,5737,Atl,OF,42,dis,"OF,SW",reserved
+2021,nl,Craig Mish,Blake Snell,4366,LAD,P,21,dis,P,reserved
+2021,nl,Craig Mish,J.B. Bukauskas,6114,Mil,P,0,res,P,reserved
+2021,nl,Phil Hertz,Peter Alonso,6132,Bal,1B,27,act,"1B,SW,CI",active
+2021,nl,Phil Hertz,Jeff McNeil,6617,Oak,2B,22,act,"2B,OF,MI,3B,CI,SW",active
+2021,nl,Phil Hertz,Chris Taylor,4604,LAA,SS,18,act,"OF,SS,2B,SW,MI,3B",active
+2021,nl,Phil Hertz,Justin Turner,2415,FA,3B,17,act,"UT,3B,CI,SW",active
+2021,nl,Phil Hertz,Starling Marte,2908,KC,OF,26,act,"OF,SW",active
+2021,nl,Phil Hertz,Lane Thomas,6727,KC,OF,77,act,"OF,SW",active
+2021,nl,Phil Hertz,Lorenzo Cain,2002,Mil,OF,138,act,"OF,SW",active
+2021,nl,Phil Hertz,David Peralta,4980,SD,OF,11,act,"OF,SW",active
+2021,nl,Phil Hertz,Buster Posey,2187,SF,C,8,act,C,active
+2021,nl,Phil Hertz,Carson Kelly,4512,ChC,C,8,act,"C,SW",active
+2021,nl,Phil Hertz,Willy Adames,5094,SF,UT,795,act,"SS,SW,MI",active
+2021,nl,Phil Hertz,Brandon Nimmo,3778,Tex,SW,19,act,"OF,SW",active
+2021,nl,Phil Hertz,Aaron Loup,4158,LAA,P,0,act,P,active
+2021,nl,Phil Hertz,Joe Kelly,3506,LAD,P,3,act,P,active
+2021,nl,Phil Hertz,Richard Rodriguez,5954,Mia,P,8,act,P,active
+2021,nl,Phil Hertz,David Bednar,6796,NYY,P,42,act,P,active
+2021,nl,Phil Hertz,Alex Vesia,7204,LAD,P,3,act,P,active
+2021,nl,Phil Hertz,Genesis Cabrera,6545,Phi,P,6,act,P,active
+2021,nl,Phil Hertz,Hector Neris,5009,FA,P,4,act,P,active
+2021,nl,Phil Hertz,Trevor May,3192,FA,P,3,act,P,active
+2021,nl,Phil Hertz,Edwin Diaz,4840,LAD,P,18,act,P,active
+2021,nl,Phil Hertz,Ryan Zimmerman,1638,FA,CI,6,act,1B,active
+2021,nl,Phil Hertz,Tommy La Stella,4099,FA,MI,12,act,"3B,2B,SW,1B,CI,MI",active
+2021,nl,Phil Hertz,Ha-Seong Kim,7554,Atl,UT,33,res,"SS,2B,3B",reserved
+2021,nl,Phil Hertz,Emilio Pagan,6169,Cin,P,7,res,P,reserved
+2021,nl,Phil Hertz,Daniel Hudson,2764,LAD,P,4,res,P,reserved
+2021,nl,Phil Hertz,Jimmy Nelson,4556,FA,P,7,dis,P,reserved
+2021,nl,Phil Hertz,Archie Bradley,3684,FA,P,51,dis,P,reserved
+2021,nl,Phil Hertz,Will Harris,4186,FA,P,2,dis,P,reserved
+2021,nl,Phil Hertz,Matt Duffy,4893,Tex,MI,24,res,"3B,SS,2B",reserved
+2021,nl,Lenny Melnick,Josh Bell,3669,Min,1B,22,act,"1B,OF,CI,SW",active
+2021,nl,Lenny Melnick,Jonathan Villar,3345,Sea,2B,10,act,"2B,SS,MI,3B,SW",active
+2021,nl,Lenny Melnick,Javier Baez,3804,Det,SS,20,act,"SS,MI,2B,SW",active
+2021,nl,Lenny Melnick,Manny Machado,3216,SD,3B,30,act,"3B,CI,SW",active
+2021,nl,Lenny Melnick,Magneuris Sierra,5233,FA,OF,12,act,"OF,SW",active
+2021,nl,Lenny Melnick,Odubel Herrera,5084,FA,OF,2,act,OF,active
+2021,nl,Lenny Melnick,Michael Conforto,4911,ChC,OF,25,act,"OF,SW",active
+2021,nl,Lenny Melnick,LaMonte Wade,5773,CWS,OF,21,act,"1B,OF,SW",active
+2021,nl,Lenny Melnick,Tyler Stephenson,5388,Cin,C,4,act,"C,1B,SW",active
+2021,nl,Lenny Melnick,Victor Caratini,4876,Min,C,11,act,"C,1B,SW",active
+2021,nl,Lenny Melnick,Lewis Brinson,4446,FA,UT,7,act,"OF,SW",active
+2021,nl,Lenny Melnick,Nicholas Castellanos,3217,SD,SW,24,act,"OF,SW",active
+2021,nl,Lenny Melnick,David Price,1453,FA,P,7,act,P,active
+2021,nl,Lenny Melnick,Codi Heuer,7194,Cle,P,35,act,P,active
+2021,nl,Lenny Melnick,Max Fried,4194,NYY,P,16,act,P,active
+2021,nl,Lenny Melnick,Amir Garrett,4991,LAA,P,7,act,P,active
+2021,nl,Lenny Melnick,Heath Hembree,3706,Sea,P,50,act,P,active
+2021,nl,Lenny Melnick,Zack Wheeler,2831,Phi,P,15,act,P,active
+2021,nl,Lenny Melnick,Jake McGee,1481,Was,P,3,act,P,active
+2021,nl,Lenny Melnick,Tyler Rogers,6176,Tor,P,0,act,P,active
+2021,nl,Lenny Melnick,Corbin Burnes,6208,Ari,P,17,act,P,active
+2021,nl,Lenny Melnick,Austin Riley,5688,Atl,CI,17,act,"3B,CI,SW,1B",active
+2021,nl,Lenny Melnick,Garrett Hampson,6277,Cin,MI,17,act,"OF,2B,SS,MI,SW",active
+2021,nl,Lenny Melnick,Andrew Stevenson,5723,TB,OF,1,res,"OF,SW",reserved
+2021,nl,Lenny Melnick,Stephen Vogt,3569,Oak,C,1,dis,"C,SW",reserved
+2021,nl,Lenny Melnick,Joe Ross,4023,Ari,P,7,dis,P,reserved
+2021,nl,Lenny Melnick,Jake Arrieta,2080,SD,P,1,res,P,reserved
+2021,nl,Lenny Melnick,Chase Anderson,4253,Tex,P,0,res,P,reserved
+2021,nl,Lenny Melnick,Zach Davies,4919,Was,P,5,res,P,reserved
+2021,nl,Steve Gardner,Eric Hosmer,2563,FA,1B,17,act,"1B,SW,CI",active
+2021,nl,Steve Gardner,Jonathan India,6595,KC,2B,2,act,"2B,3B",active
+2021,nl,Steve Gardner,Trea Turner,4555,Phi,SS,37,act,"SS,2B,SW,MI",active
+2021,nl,Steve Gardner,Ke'Bryan Hayes,5397,Cin,3B,18,act,"3B,CI,SW",active
+2021,nl,Steve Gardner,Eddie Rosario,3889,Mil,OF,600,act,"OF,SW",active
+2021,nl,Steve Gardner,Matt Beaty,6433,FA,OF,78,act,"1B,SW,CI,3B,OF",active
+2021,nl,Steve Gardner,Yoshitomo Tsutsugo,6952,FA,OF,9,act,"1B,OF,SW,CI,3B",active
+2021,nl,Steve Gardner,Adam Frazier,5555,LAA,OF,5,act,"2B,OF,SW,MI",active
+2021,nl,Steve Gardner,Daulton Varsho,6326,Tor,C,9,act,"OF,C,SW",active
+2021,nl,Steve Gardner,Austin Barnes,4739,FA,C,1,act,"C,SW,2B",active
+2021,nl,Steve Gardner,Manny Pina,2391,FA,UT,27,act,"C,SW",active
+2021,nl,Steve Gardner,A.J. Pollock,2837,FA,SW,17,act,"OF,SW",active
+2021,nl,Steve Gardner,Michael Lorenzen,4553,Col,P,20,act,P,active
+2021,nl,Steve Gardner,Tony Gonsolin,6845,LAD,P,6,act,P,active
+2021,nl,Steve Gardner,Julio Urias,4638,FA,P,15,act,P,active
+2021,nl,Steve Gardner,Antonio Senzatela,5237,Col,P,2,act,P,active
+2021,nl,Steve Gardner,Alec Mills,5493,FA,P,1,act,P,active
+2021,nl,Steve Gardner,Patrick Corbin,3339,Tor,P,13,act,P,active
+2021,nl,Steve Gardner,Seth Lugo,5417,KC,P,2,act,P,active
+2021,nl,Steve Gardner,Ryan Tepera,3944,FA,P,11,act,P,active
+2021,nl,Steve Gardner,Marcus Stroman,4137,FA,P,10,act,P,active
+2021,nl,Steve Gardner,Asdrubal Cabrera,400,Cin,CI,7,act,"3B,1B,CI,SW",active
+2021,nl,Steve Gardner,Ronald Torreyes,4056,FA,MI,8,act,"3B,SS,2B,SW,MI",active
+2021,nl,Steve Gardner,Zach McKinstry,7128,Det,OF,30,res,"3B,OF,2B,SW",reserved
+2021,nl,Steve Gardner,Jesse Winker,4483,FA,OF,17,dis,"OF,SW",reserved
+2021,nl,Steve Gardner,Alfonso Rivas,7591,StL,SW,35,dis,"1B,OF",reserved
+2021,nl,Steve Gardner,Tyler Gilbert,6760,CWS,P,57,dis,P,reserved
+2021,nl,Steve Gardner,Noah Syndergaard,4002,CWS,P,25,res,P,reserved
+2021,nl,Steve Gardner,Wade Miley,2622,FA,P,37,dis,P,reserved
+2021,nl,Steve Gardner,Ryan Weathers,6927,NYY,P,33,res,P,reserved
+2021,nl,Steve Gardner,Rowdy Tellez,4892,Atl,CI,57,dis,"1B,CI,SW",reserved
+2021,nl,Steve Gardner,Mike Moustakas,2004,FA,MI,23,dis,"3B,1B,SW,CI,2B,MI",reserved
+2021,nl,Derek Carty,Joey Votto,345,Tor,1B,16,act,"1B,CI,SW",active
+2021,nl,Derek Carty,Ketel Marte,4847,Ari,2B,23,act,"2B,OF,MI,SW",active
+2021,nl,Derek Carty,Miguel Rojas,4814,LAD,SS,9,act,"SS,MI,SW",active
+2021,nl,Derek Carty,Eddy Alvarez,7205,Atl,3B,0,act,"2B,MI,3B,SW",active
+2021,nl,Derek Carty,Bryan Reynolds,6096,Pit,OF,11,act,"OF,SW",active
+2021,nl,Derek Carty,Avisail Garcia,3485,FA,OF,11,act,"OF,SW",active
+2021,nl,Derek Carty,Tyler O'Neill,5423,Bal,OF,7,act,"OF,SW",active
+2021,nl,Derek Carty,Tommy Pham,5041,NYM,OF,24,act,"OF,SW",active
+2021,nl,Derek Carty,Yan Gomes,3945,FA,C,3,act,"C,SW",active
+2021,nl,Derek Carty,Tucker Barnhart,3911,Tex,C,2,act,"C,SW",active
+2021,nl,Derek Carty,Jorge Soler,3918,LAA,UT,787,act,"OF,SW",active
+2021,nl,Derek Carty,Kole Calhoun,3983,FA,SW,11,act,"OF,SW",active
+2021,nl,Derek Carty,Mychal Givens,3256,FA,P,1,act,P,active
+2021,nl,Derek Carty,Ranger Suarez,6308,Bos,P,0,act,P,active
+2021,nl,Derek Carty,Kevin Gausman,4053,Tor,P,13,act,P,active
+2021,nl,Derek Carty,Rowan Wick,5896,SF,P,3,act,P,active
+2021,nl,Derek Carty,Alex Wood,4113,Oak,P,0,act,P,active
+2021,nl,Derek Carty,Elieser Hernandez,6333,Atl,P,7,act,P,active
+2021,nl,Derek Carty,Carlos Carrasco,1141,Atl,P,7,act,P,active
+2021,nl,Derek Carty,Kyle Hendricks,4620,FA,P,18,act,P,active
+2021,nl,Derek Carty,Andrew Chafin,4142,Cin,P,0,act,P,active
+2021,nl,Derek Carty,Lewin Diaz,5694,Was,CI,31,act,"1B,CI,SW",active
+2021,nl,Derek Carty,Jean Segura,3177,Bal,MI,20,act,"3B,2B,CI,MI,SW",active
+2021,nl,Derek Carty,Travis Shaw,4819,Bos,3B,1,res,"1B,3B,SW,CI",reserved
+2021,nl,Derek Carty,Aristides Aquino,5046,FA,UT,1,res,"OF,SW",reserved
+2021,nl,Derek Carty,Travis Jankowski,4479,NYM,SW,13,res,"OF,SW",reserved
+2021,nl,Derek Carty,Ben Gamel,5506,Atl,SW,12,res,"OF,SW",reserved
+2021,nl,Derek Carty,Keone Kela,4940,CWS,P,0,dis,P,reserved
+2021,nl,Derek Carty,Mike Soroka,5400,Ari,P,10,dis,P,reserved
+2021,nl,Derek Carty,Jacob DeGrom,4563,Tex,P,40,dis,P,reserved
+2021,nl,Derek Carty,Jesus Aguilar,4118,FA,CI,7,dis,"1B,CI,SW",reserved
+2021,nl,Derek Carty,Nick Ahmed,3807,Tex,MI,10,dis,"SS,MI,SW",reserved
+2021,nl,Brian Walton,Paul Goldschmidt,3159,NYY,1B,25,act,"1B,CI,SW",active
+2021,nl,Brian Walton,Jake Cronenworth,6463,SD,2B,12,act,"2B,SS,1B,SW,MI,CI",active
+2021,nl,Brian Walton,Paul DeJong,5714,NYY,SS,15,act,"UT,SS,SW,MI",active
+2021,nl,Brian Walton,Kris Bryant,4434,Col,3B,23,act,"OF,3B,SW,1B,CI",active
+2021,nl,Brian Walton,Trent Grisham,5285,NYY,OF,25,act,"OF,SW",active
+2021,nl,Brian Walton,Yadiel Hernandez,5664,FA,OF,85,act,"OF,SW",active
+2021,nl,Brian Walton,Kyle Schwarber,4901,Phi,OF,19,act,"OF,SW,1B",active
+2021,nl,Brian Walton,Charlie Blackmon,2620,Col,OF,21,act,"OF,SW",active
+2021,nl,Brian Walton,Yadier Molina,1404,StL,C,5,act,"C,SW",active
+2021,nl,Brian Walton,James McCann,3906,Ari,C,11,act,"C,1B,SW",active
+2021,nl,Brian Walton,Daniel Vogelbach,4058,FA,UT,1,act,"1B,SW",active
+2021,nl,Brian Walton,Paolo Espino,5649,Tor,P,22,act,P,active
+2021,nl,Brian Walton,Max Scherzer,19,Tor,P,27,act,P,active
+2021,nl,Brian Walton,Craig Kimbrel,2633,NYM,P,10,act,P,active
+2021,nl,Brian Walton,Yimi Garcia,4688,Tor,P,1,act,P,active
+2021,nl,Brian Walton,Zack Littell,6301,Was,P,12,act,P,active
+2021,nl,Brian Walton,Sonny Gray,3633,Bos,P,14,act,P,active
+2021,nl,Brian Walton,Madison Bumgarner,2053,FA,P,10,act,P,active
+2021,nl,Brian Walton,Miles Mikolas,3895,Was,P,10,act,P,active
+2021,nl,Brian Walton,Joe Musgrove,5406,SD,P,17,act,P,active
+2021,nl,Brian Walton,Luke Weaver,4987,NYM,P,2,act,P,active
+2021,nl,Brian Walton,Jurickson Profar,3198,Atl,CI,10,act,"OF,2B,MI,SW,1B",active
+2021,nl,Brian Walton,Edmundo Sosa,5463,Phi,MI,25,act,"2B,SS,3B",active
+2021,nl,Brian Walton,Lars Nootbaar,7582,StL,OF,13,res,OF,reserved
+2021,nl,Brian Walton,Brad Wieck,6038,ChC,P,3,dis,P,reserved
+2021,nl,Brian Walton,Austin Gomber,5593,Tex,P,0,dis,P,reserved
+2021,nl,Brian Walton,Drew Pomeranz,3272,LAA,P,11,dis,P,reserved
+2021,nl,Brian Walton,Luis Guillorme,5961,Hou,CI,1,res,"2B,3B,SW,SS,MI",reserved
+2021,nl,Brian Walton,J.D. Davis,5453,LAA,CI,8,dis,"3B,CI,SW,OF",reserved
+2021,nl,Brian Walton,Ehire Adrianza,2645,FA,MI,5,res,"3B,SS,2B,SW,CI,MI,OF",reserved
+2021,nl,Scott Wilderman,Christian Walker,4521,Hou,1B,16,act,"1B,SW,CI",active
+2021,nl,Scott Wilderman,Jazz Chisholm,6130,NYY,2B,4,act,"2B,SS,SW,MI",active
+2021,nl,Scott Wilderman,Eugenio Suarez,4330,Cin,SS,27,act,"3B,SW,CI,SS",active
+2021,nl,Scott Wilderman,Brad Miller,4310,SD,3B,1,act,"1B,3B,OF,CI,2B,SW",active
+2021,nl,Scott Wilderman,Christian Yelich,3314,Mil,OF,38,act,"OF,SW",active
+2021,nl,Scott Wilderman,Steven Duggar,6013,FA,OF,47,act,"OF,SW",active
+2021,nl,Scott Wilderman,Bryan De La Cruz,7602,Phi,OF,112,act,OF,active
+2021,nl,Scott Wilderman,Dylan Carlson,6519,ChC,OF,18,act,"OF,SW",active
+2021,nl,Scott Wilderman,Willson Contreras,5435,Bos,C,17,act,"C,SW",active
+2021,nl,Scott Wilderman,Austin Nola,4740,Col,C,10,act,"C,SW",active
+2021,nl,Scott Wilderman,Matt Vierling,7774,Det,UT,7,act,"OF,1B",active
+2021,nl,Scott Wilderman,Brent Suter,5835,LAA,P,1,act,P,active
+2021,nl,Scott Wilderman,Dinelson Lamet,6035,KC,P,14,act,P,active
+2021,nl,Scott Wilderman,Keegan Thompson,7449,Col,P,19,act,P,active
+2021,nl,Scott Wilderman,Tylor Megill,7621,NYM,P,1,act,P,active
+2021,nl,Scott Wilderman,Corey Knebel,4845,LAA,P,0,act,P,active
+2021,nl,Scott Wilderman,Max Kranick,7411,FA,P,1,act,P,active
+2021,nl,Scott Wilderman,Clayton Kershaw,1961,FA,P,27,act,P,active
+2021,nl,Scott Wilderman,Vladimir Gutierrez,5277,Bos,P,23,act,P,active
+2021,nl,Scott Wilderman,Craig Stammen,2813,SD,P,7,act,P,active
+2021,nl,Scott Wilderman,Charlie Morton,61,FA,P,14,act,P,active
+2021,nl,Scott Wilderman,Eduardo Escobar,3138,Tor,CI,16,act,"3B,CI,2B,1B,SW",active
+2021,nl,Scott Wilderman,Jace Peterson,4427,FA,MI,18,act,"UT,OF,3B,SW,2B,1B",active
+2021,nl,Scott Wilderman,Stuart Fairchild,6341,Cle,OF,0,res,OF,reserved
+2021,nl,Scott Wilderman,Jason Heyward,1968,SD,OF,12,dis,"OF,SW",reserved
+2021,nl,Scott Wilderman,Tim Locastro,6280,SD,OF,2,dis,"OF,SW",reserved
+2021,nl,Scott Wilderman,Shogo Akiyama,5766,FA,SW,2,dis,"OF,SW",reserved
+2021,nl,Scott Wilderman,Justin Steele,6703,ChC,P,23,res,P,reserved
+2021,nl,Scott Wilderman,Caleb Smith,5905,FA,P,4,res,P,reserved
+2021,nl,Scott Wilderman,Garrett Cleavinger,6239,TB,P,0,dis,P,reserved
+2021,nl,Scott Wilderman,Dellin Betances,2043,FA,P,1,dis,P,reserved
+2021,nl,Scott Wilderman,Chris Owings,3271,FA,MI,1,dis,"UT,OF,SW,2B,MI",reserved
+2021,nl,Todd Zola,Pavin Smith,6109,Ari,1B,1,act,"1B,OF,CI,SW",active
+2021,nl,Todd Zola,Ian Happ,5352,ChC,2B,23,act,"OF,2B,SW",active
+2021,nl,Todd Zola,Luis Urias,5831,Mil,SS,2,act,"2B,SS,3B,SW,CI,MI",active
+2021,nl,Todd Zola,Kyle Farmer,4111,Atl,3B,17,act,"2B,SS,SW,1B,3B,MI",active
+2021,nl,Todd Zola,Joc Pederson,4090,Tex,OF,14,act,"UT,OF,SW",active
+2021,nl,Todd Zola,Harrison Bader,5366,SF,OF,10,act,"OF,SW",active
+2021,nl,Todd Zola,Andrew McCutchen,1222,Tex,OF,20,act,"OF,SW",active
+2021,nl,Todd Zola,Jackie Bradley,3595,NYM,OF,14,act,"OF,SW",active
+2021,nl,Todd Zola,Travis D'Arnaud,2621,LAA,C,15,act,"C,SW",active
+2021,nl,Todd Zola,Michael Perez,4511,Ari,C,6,act,"C,SW",active
+2021,nl,Todd Zola,Tyrone Taylor,4506,NYM,UT,0,act,"OF,SW",active
+2021,nl,Todd Zola,Kolten Wong,3771,Ari,SW,16,act,"2B,SW,MI",active
+2021,nl,Todd Zola,Josh Rogers,6586,Col,P,23,act,P,active
+2021,nl,Todd Zola,Tyler Clippard,1612,Was,P,162,act,P,active
+2021,nl,Todd Zola,Jake Woodford,5718,Mil,P,17,act,P,active
+2021,nl,Todd Zola,Merrill Kelly,4802,Ari,P,2,act,P,active
+2021,nl,Todd Zola,Zac Gallen,6448,Ari,P,20,act,P,active
+2021,nl,Todd Zola,Brett Anderson,2011,FA,P,0,act,P,active
+2021,nl,Todd Zola,Will Smith,3082,KC,P,11,act,P,active
+2021,nl,Todd Zola,Aaron Nola,4916,Phi,P,26,act,P,active
+2021,nl,Todd Zola,Kyle Finnegan,6364,Det,P,451,act,P,active
+2021,nl,Todd Zola,Brandon Belt,3336,FA,CI,17,act,"1B,SW,CI",active
+2021,nl,Todd Zola,Cole Tucker,5101,LAA,MI,33,act,"UT,OF,SS,SW,2B",active
+2021,nl,Todd Zola,Thairo Estrada,6305,FA,3B,3,res,"2B,SW,SS,3B,CI,MI,OF",reserved
+2021,nl,Todd Zola,Brian Anderson,5326,Atl,3B,16,dis,"3B,SW,CI",reserved
+2021,nl,Todd Zola,Jacob Stallings,5554,Bal,C,2,dis,"C,SW",reserved
+2021,nl,Todd Zola,Gregory Polanco,4166,Tor,UT,5,res,"OF,SW",reserved
+2021,nl,Todd Zola,Jake McCarthy,6977,Col,UT,57,res,OF,reserved
+2021,nl,Todd Zola,Seth Beer,5767,Phi,UT,17,dis,1B,reserved
+2021,nl,Todd Zola,Danny Duffy,2662,Tex,P,7,dis,P,reserved
+2021,nl,Todd Zola,Chris Paddack,5809,Mia,P,17,dis,P,reserved
+2021,nl,Todd Zola,Zach Eflin,4105,Bal,P,10,dis,P,reserved
+2021,nl,Todd Zola,J.T. Brubaker,6720,SF,P,1,dis,P,reserved
+2021,nl,Todd Zola,Dillon Peters,5965,FA,P,33,dis,P,reserved
+2021,nl,Todd Zola,Michael Chavis,5112,Cin,CI,117,dis,"2B,1B,MI,OF,CI,SW",reserved
+2021,nl,Todd Zola,Max Schrock,5731,FA,MI,7,res,"OF,2B,3B,MI,SW,1B",reserved
+2021,nl,Fred Zinkie,Max Muncy,4851,LAD,1B,25,act,"3B,1B,2B,SW,CI,MI",active
+2021,nl,Fred Zinkie,Freddy Galvis,3005,FA,2B,150,act,"SS,3B,SW,2B,MI",active
+2021,nl,Fred Zinkie,Brandon Crawford,3051,FA,SS,4,act,"SS,MI,SW",active
+2021,nl,Fred Zinkie,Evan Longoria,1489,FA,3B,7,act,"3B,CI,SW",active
+2021,nl,Fred Zinkie,Adam Duvall,4413,Atl,OF,5,act,"OF,SW",active
+2021,nl,Fred Zinkie,Fernando Tatis Jr.,5793,SD,OF,38,act,"OF,SS,SW,MI",active
+2021,nl,Fred Zinkie,Mike Yastrzemski,5314,Atl,OF,20,act,"OF,SW",active
+2021,nl,Fred Zinkie,Tommy Edman,6447,LAD,OF,18,act,"2B,OF,SW,SS,3B,CI,MI",active
+2021,nl,Fred Zinkie,Keibert Ruiz,6179,Was,C,60,act,"C,SW",active
+2021,nl,Fred Zinkie,Omar Narvaez,5605,Tex,C,3,act,"C,SW",active
+2021,nl,Fred Zinkie,David Bote,6286,LAD,UT,3,act,"3B,2B,SW,MI,CI",active
+2021,nl,Fred Zinkie,Adrian Houser,5231,SF,P,2,act,P,active
+2021,nl,Fred Zinkie,Luis M. Castillo,5137,Sea,P,25,act,P,active
+2021,nl,Fred Zinkie,Dylan Floro,5198,Oak,P,0,act,P,active
+2021,nl,Fred Zinkie,Huascar Ynoa,6229,LAA,P,12,act,P,active
+2021,nl,Fred Zinkie,Tyler Anderson,3678,FA,P,40,act,P,active
+2021,nl,Fred Zinkie,Jarlin Garcia,5342,Pit,P,0,act,P,active
+2021,nl,Fred Zinkie,Kenley Jansen,2963,Det,P,13,act,P,active
+2021,nl,Fred Zinkie,Adam Wainwright,1400,StL,P,2,act,P,active
+2021,nl,Fred Zinkie,Anthony Bender,7552,Mia,P,28,act,P,active
+2021,nl,Fred Zinkie,Walker Buehler,5327,SD,P,26,act,P,active
+2021,nl,Fred Zinkie,Frank Schwindel,6357,FA,CI,150,act,1B,active
+2021,nl,Fred Zinkie,Francisco Lindor,3668,NYM,MI,33,act,"SS,MI,SW",active
+2021,nl,Fred Zinkie,Wilmer Difo,5044,CWS,3B,10,res,"SS,2B,OF,MI,3B,SW",reserved
+2021,nl,Fred Zinkie,Austin Slater,6014,Mia,OF,2,res,"OF,SW",reserved
+2021,nl,Fred Zinkie,Riley Adams,7290,Was,C,22,res,C,reserved
+2021,nl,Fred Zinkie,Dominic Leone,4769,CWS,P,0,res,P,reserved
+2021,nl,Peter Kreutzer,Freddie Freeman,2466,LAD,1B,36,act,"1B,CI,SW",active
+2021,nl,Peter Kreutzer,Alcides Escobar,850,FA,2B,31,act,"SS,2B",active
+2021,nl,Peter Kreutzer,Dansby Swanson,5276,ChC,SS,23,act,"SS,MI,SW",active
+2021,nl,Peter Kreutzer,Nolan Arenado,3214,Ari,3B,25,act,"3B,SW,CI",active
+2021,nl,Peter Kreutzer,Hoy Jun Park,7643,Oak,OF,33,act,"2B,OF,SS,3B",active
+2021,nl,Peter Kreutzer,Mookie Betts,4670,LAD,OF,40,act,"UT,OF,2B,SW",active
+2021,nl,Peter Kreutzer,Henry Ramos,5356,FA,OF,8,act,OF,active
+2021,nl,Peter Kreutzer,TJ Friedl,6751,Cin,OF,22,act,OF,active
+2021,nl,Peter Kreutzer,Nick Fortes,6902,TB,C,2,act,C,active
+2021,nl,Peter Kreutzer,Will Smith,5805,LAD,C,17,act,"C,SW",active
+2021,nl,Peter Kreutzer,Jordy Mercer,3871,Was,UT,2,act,"2B,SS,MI,3B,SW",active
+2021,nl,Peter Kreutzer,Ozzie Albies,5099,Atl,SW,27,act,"2B,MI,SW",active
+2021,nl,Peter Kreutzer,Chris Stratton,4489,LAD,P,0,act,P,active
+2021,nl,Peter Kreutzer,Giovanny Gallegos,5884,LAD,P,14,act,P,active
+2021,nl,Peter Kreutzer,Blake Treinen,4790,LAD,P,0,act,P,active
+2021,nl,Peter Kreutzer,Logan Webb,6725,SF,P,1,act,P,active
+2021,nl,Peter Kreutzer,Eric Lauer,5798,Tor,P,104,act,P,active
+2021,nl,Peter Kreutzer,Brad Boxberger,3185,ChC,P,14,act,P,active
+2021,nl,Peter Kreutzer,Ian Anderson,6078,Atl,P,13,act,P,active
+2021,nl,Peter Kreutzer,Rich Hill,264,FA,P,243,act,P,active
+2021,nl,Peter Kreutzer,Touki Toussaint,4904,LAA,P,2,act,P,active
+2021,nl,Peter Kreutzer,Albert Pujols,1411,StL,CI,0,act,"1B,SW,CI",active
+2021,nl,Peter Kreutzer,Brendan Rodgers,5254,Bos,MI,3,act,"2B,MI,SS,SW",active
+2021,nl,Peter Kreutzer,Luke Williams,7180,Atl,OF,0,res,"SS,3B,2B,OF,1B",reserved
+2021,nl,Peter Kreutzer,Connor Joe,5311,Sea,OF,8,dis,"OF,1B",reserved
+2021,nl,Peter Kreutzer,Tyler Naquin,4363,Cle,OF,13,dis,"OF,SW",reserved
+2021,nl,Peter Kreutzer,Erick Fedde,5121,CWS,P,77,res,P,reserved
+2021,nl,Peter Kreutzer,David Peterson,6196,NYM,P,2,dis,P,reserved
+2021,nl,Peter Kreutzer,Trevor Cahill,2094,FA,P,23,dis,P,reserved
+2021,nl,Peter Kreutzer,Dominic Smith,4549,Atl,CI,17,res,"1B,OF,SW,CI",reserved
+2021,nl,Peter Kreutzer,Donovan Solano,3063,FA,CI,2,res,"UT,2B,SW,MI,3B,CI",reserved
+2021,nl,Grey Albright,Anthony Rizzo,3156,FA,1B,25,act,"1B,CI,SW",active
+2021,nl,Grey Albright,Joe Panik,3800,Mia,2B,62,act,"3B,2B,MI,CI,1B,SS,SW",active
+2021,nl,Grey Albright,Trevor Story,4020,Bos,SS,35,act,"SS,MI,SW",active
+2021,nl,Grey Albright,Carter Kieboom,5799,Cle,3B,6,act,"3B,CI,SW",active
+2021,nl,Grey Albright,Yonathan Daza,6290,FA,OF,0,act,OF,active
+2021,nl,Grey Albright,Trayce Thompson,3257,Bos,OF,51,act,OF,active
+2021,nl,Grey Albright,Juan Soto,6043,NYM,OF,44,act,"OF,SW",active
+2021,nl,Grey Albright,Raimel Tapia,4798,FA,OF,16,act,"OF,SW",active
+2021,nl,Grey Albright,Andrew Knizner,6049,Col,C,1,act,"C,SW",active
+2021,nl,Grey Albright,Elias Diaz,5078,FA,C,1,act,"C,SW",active
+2021,nl,Grey Albright,Colin Moran,4435,Sea,UT,10,act,"1B,SW,CI",active
+2021,nl,Grey Albright,Anthony Alford,4658,FA,SW,7,act,"OF,SW",active
+2021,nl,Grey Albright,Mark Melancon,1022,FA,P,4,act,P,active
+2021,nl,Grey Albright,Jesus Luzardo,6224,Phi,P,101,act,P,active
+2021,nl,Grey Albright,Yu Darvish,2044,SD,P,27,act,P,active
+2021,nl,Grey Albright,Tyler Mahle,5916,SF,P,9,act,P,active
+2021,nl,Grey Albright,Aaron Ashby,7004,Mil,P,7,act,P,active
+2021,nl,Grey Albright,Freddy Peralta,5521,NYM,P,8,act,P,active
+2021,nl,Grey Albright,J.A. Happ,1109,StL,P,64,act,P,active
+2021,nl,Grey Albright,Carlos Estevez,5488,KC,P,12,act,P,active
+2021,nl,Grey Albright,Anthony DeSclafani,4732,Ari,P,2,act,P,active
+2021,nl,Grey Albright,Patrick Wisdom,4570,Sea,CI,62,act,"1B,CI,3B,OF,SW",active
+2021,nl,Grey Albright,Josh Rojas,6789,KC,MI,4,act,"3B,2B,SS,SW,MI,OF",active
+2021,nl,Grey Albright,Isan Diaz,5464,KC,2B,11,res,"2B,MI,3B,SW",reserved
+2021,nl,Grey Albright,Michael Hermosillo,6029,FA,OF,6,dis,"OF,SW",reserved
+2021,nl,Grey Albright,Cody Bellinger,4954,NYY,OF,36,dis,"OF,1B,CI,SW",reserved
+2021,nl,Grey Albright,Josh Fuentes,6707,FA,UT,4,res,"3B,1B,CI,SW",reserved
+2021,nl,Grey Albright,Cody Poteet,7486,Bal,P,3,dis,P,reserved
+2021,nl,Grey Albright,Spencer Howard,6560,Cle,P,2,res,P,reserved
+2021,nl,Grey Albright,Pablo Lopez,6227,Min,P,13,dis,P,reserved
+2021,nl,Grey Albright,Josiah Gray,7056,Was,P,12,res,P,reserved
+2021,nl,Grey Albright,Jose Devers,6323,Atl,MI,12,dis,"2B,SS",reserved
