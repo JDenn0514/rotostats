@@ -65,3 +65,30 @@ test_that(".parse_tw_auction_standard derives player_type correctly", {
   expect_equal(result$player_type[result$position_slot == "C"], rep("batter", 3))
   expect_equal(result$player_type[result$position_slot == "SP"], rep("pitcher", 3))
 })
+
+test_that(".parse_tw_auction_2012_alnl handles 2012-al layout", {
+  result <- .parse_tw_auction_2012_alnl(
+    fixture_path("2012-al-mini.csv"),
+    expected_teams = 3
+  )
+  expect_named(
+    result,
+    c("team_owner", "position_slot", "player_type", "player_name", "price", "is_keeper")
+  )
+  expect_equal(nrow(result), 6L)
+  expect_setequal(unique(result$team_owner), c("SMITH", "JONES", "COLTON/WOLF"))
+  expect_setequal(unique(result$position_slot), c("C", "SP"))
+  # Row-filter must drop reserves and footer notes.
+  expect_false(any(grepl("^Reserve ", result$player_name)))
+  expect_false("R" %in% result$position_slot)
+})
+
+test_that(".parse_tw_auction_2012_alnl handles 2012-nl layout", {
+  result <- .parse_tw_auction_2012_alnl(
+    fixture_path("2012-nl-mini.csv"),
+    expected_teams = 3
+  )
+  expect_equal(nrow(result), 6L)
+  expect_setequal(unique(result$team_owner), c("ALPHA", "BETA", "GAMMA"))
+  expect_setequal(unique(result$player_type), c("batter", "pitcher"))
+})

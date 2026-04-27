@@ -158,3 +158,110 @@
 
   long[, c("team_owner", "position_slot", "player_type", "player_name", "price", "is_keeper")]
 }
+
+#' Parse a 2012 AL or NL Tout Wars auction CSV.
+#'
+#' Layout deviation from standard:
+#' - Owner row 1: owners in odd columns (1, 3, 5, ..., 23).
+#' - Position slot in column 2 (not column 1).
+#' - For team k: name at col 2k+1, price at col 2k+2.
+#'
+#' @keywords internal
+#' @noRd
+.parse_tw_auction_2012_alnl <- function(path, expected_teams) {
+  raw <- readr::read_csv(
+    path,
+    col_types = readr::cols(.default = "c"),
+    col_names = FALSE,
+    progress = FALSE
+  )
+
+  if (nrow(raw) < 4L) {
+    cli::cli_abort(
+      "Too few rows in {.file {path}}; expected header + 3 meta rows + roster.",
+      class = "rotostats_error_auction_meta_rows"
+    )
+  }
+
+  # Filter rows: keep header (row 1) + meta rows (2-4) + priced-roster rows
+  # only. Slot label lives in col 2 in the 2012-al/nl layout (not col 1).
+  # Drops footer/notes rows AND reserve (R) rows.
+  slot_col <- toupper(trimws(as.character(raw[[2]])))
+  is_priced_roster <- !is.na(slot_col) & nzchar(slot_col) & slot_col %in% .tw_canonical_slots
+  is_priced_roster[seq_len(4)] <- FALSE
+  keep_rows <- c(seq_len(4), which(is_priced_roster))
+  raw <- raw[keep_rows, , drop = FALSE]
+
+  is_trailing_na <- vapply(raw, function(col) all(is.na(col)), logical(1))
+  last_keep <- max(which(!is_trailing_na))
+  raw <- raw[, seq_len(last_keep), drop = FALSE]
+
+  # In the 2012-al/nl layout, owner is in col 1 and slot is in col 2 — both
+  # are dedicated columns above and beyond the per-team (name, price) pairs.
+  expected_cols <- 2L + 2L * expected_teams
+  if (ncol(raw) != expected_cols) {
+    cli::cli_abort(
+      c("Wrong column count in {.file {path}}.",
+        "i" = "Expected {expected_cols} columns ({expected_teams} teams in 2012 layout), got {ncol(raw)}."),
+      class = "rotostats_error_auction_col_count"
+    )
+  }
+
+  # Validate meta rows: col 3 of rows 2-4 must match the meta labels.
+  meta_labels <- c("Left to Spend", "Players Needed", "Max Bid")
+  meta_actual <- vapply(2:4, function(i) as.character(raw[i, 3, drop = TRUE]), character(1))
+  if (!identical(meta_actual, meta_labels)) {
+    cli::cli_abort(
+      c("Meta rows 2-4 do not match expected labels in {.file {path}}.",
+        "i" = "Expected {.val {meta_labels}}, got {.val {meta_actual}}."),
+      class = "rotostats_error_auction_meta_rows"
+    )
+  }
+
+  # Owners are in row 1, odd columns: 1, 3, 5, ..., 2*expected_teams - 1.
+  owner_cols <- seq(1L, by = 2L, length.out = expected_teams)
+  owners_raw <- as.character(raw[1, owner_cols, drop = TRUE])
+  owners <- vapply(owners_raw, .canonicalize_tw_owner, character(1))
+
+  # Data rows: row 5 onward (already filtered to priced-roster rows).
+  # Position slot in col 2.
+  data_rows <- raw[-(1:4), , drop = FALSE]
+
+  per_team <- lapply(seq_len(expected_teams), function(k) {
+    name_col <- 2L * k + 1L
+    price_col <- 2L * k + 2L
+    tibble::tibble(
+      team_owner    = owners[k],
+      position_slot = as.character(data_rows[[2]]),
+      player_name   = as.character(data_rows[[name_col]]),
+      price_chr     = as.character(data_rows[[price_col]])
+    )
+  })
+  long <- dplyr::bind_rows(per_team)
+
+  long <- dplyr::filter(long, !is.na(.data$player_name) & nzchar(trimws(.data$player_name)))
+  long$player_name <- trimws(long$player_name)
+
+  price_int <- suppressWarnings(as.integer(long$price_chr))
+  if (any(is.na(price_int)) || any(price_int < 0)) {
+    bad <- long$price_chr[is.na(price_int) | (price_int < 0)]
+    cli::cli_abort(
+      c("Non-integer or negative prices in {.file {path}}.",
+        "i" = "Offending values: {.val {bad}}."),
+      class = "rotostats_error_auction_price"
+    )
+  }
+  long$price <- price_int
+  long$price_chr <- NULL
+
+  long$position_slot <- trimws(long$position_slot)
+  long$player_type <- .derive_player_type(long$position_slot)
+  long$is_keeper <- FALSE
+
+  long <- dplyr::arrange(
+    long,
+    .data$team_owner, .data$position_slot, dplyr::desc(.data$price)
+  )
+
+  long[, c("team_owner", "position_slot", "player_type", "player_name", "price", "is_keeper")]
+}
