@@ -37,6 +37,14 @@
 
 .tw_pitcher_slots <- c("SP", "RP", "P")
 
+# Canonical priced slots used to identify roster rows during parsing.
+# Reserve ("R") rows have no auction price and are excluded from the dataset
+# (see spec non-goal #6).
+.tw_canonical_slots <- c(
+  "C", "1B", "3B", "CI", "2B", "SS", "MI", "OF", "UT", "SW",
+  "P", "SP", "RP"
+)
+
 #' Derive player_type from position_slot vector.
 #' @keywords internal
 #' @noRd
@@ -60,7 +68,23 @@
     progress = FALSE
   )
 
-  # Trim trailing all-NA columns.
+  if (nrow(raw) < 4L) {
+    cli::cli_abort(
+      "Too few rows in {.file {path}}; expected header + 3 meta rows + roster.",
+      class = "rotostats_error_auction_meta_rows"
+    )
+  }
+
+  # Filter rows: keep header (row 1) + meta rows (2-4) unconditionally.
+  # For the rest, keep only rows whose col 1 (trimmed, uppercased) is a
+  # canonical priced slot. This drops footer/summary rows AND reserve (R) rows.
+  slot_col <- toupper(trimws(as.character(raw[[1]])))
+  is_priced_roster <- !is.na(slot_col) & nzchar(slot_col) & slot_col %in% .tw_canonical_slots
+  is_priced_roster[1:4] <- FALSE  # Don't double-count rows 1-4.
+  keep_rows <- c(1L, 2L, 3L, 4L, which(is_priced_roster))
+  raw <- raw[keep_rows, , drop = FALSE]
+
+  # Trim trailing all-NA columns (now safe — footer/reserve rows excluded).
   is_trailing_na <- vapply(raw, function(col) all(is.na(col)), logical(1))
   last_keep <- max(which(!is_trailing_na))
   raw <- raw[, seq_len(last_keep), drop = FALSE]

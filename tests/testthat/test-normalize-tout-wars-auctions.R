@@ -11,13 +11,24 @@ test_that(".parse_tw_auction_standard returns long-tidy rows", {
     result,
     c("team_owner", "position_slot", "player_type", "player_name", "price", "is_keeper")
   )
-  expect_equal(nrow(result), 6)  # 3 teams x 2 slots
+  expect_equal(nrow(result), 6)  # 3 teams × 2 priced slots (R rows excluded)
   expect_setequal(unique(result$team_owner), c("SMITH", "JONES", "COLTON/WOLF"))
   expect_setequal(unique(result$position_slot), c("C", "SP"))
   expect_setequal(unique(result$player_type), c("batter", "pitcher"))
   expect_true(all(!result$is_keeper))
   expect_type(result$price, "integer")
   expect_true(all(result$price > 0))
+})
+
+test_that(".parse_tw_auction_standard excludes reserve and footer rows", {
+  result <- .parse_tw_auction_standard(
+    fixture_path("standard-mini.csv"),
+    expected_teams = 3
+  )
+  # Reserve player names from the fixture must not appear in the output.
+  expect_false(any(grepl("^Reserve ", result$player_name)))
+  # Position_slot column must contain no "R" entries.
+  expect_false("R" %in% result$position_slot)
 })
 
 test_that(".parse_tw_auction_standard errors on wrong column count", {
