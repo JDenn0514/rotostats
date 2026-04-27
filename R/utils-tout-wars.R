@@ -129,6 +129,9 @@
   # are off by exactly one column AND the trailing column on data rows is
   # mostly canonical slots (i.e., it's clearly a duplicate slot column, with
   # tolerance for a single typo cell), drop it.
+  # The single-cell tolerance is justified by 2017-mixed.csv row 19, where the
+  # trailing duplicate slot cell reads "f" instead of "P" (lowercase typo on the
+  # pitcher row). All other files have fully canonical trailing columns.
   if (ncol(raw) == expected_cols + 1L && nrow(raw) > min_rows) {
     coln_data <- toupper(trimws(as.character(raw[-seq_len(min_rows), ncol(raw), drop = TRUE])))
     coln_slot_match <- coln_data %in% .tw_canonical_slots
