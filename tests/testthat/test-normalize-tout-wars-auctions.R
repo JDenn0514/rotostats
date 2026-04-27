@@ -161,9 +161,22 @@ test_that(".normalize_tw_auction errors on unknown league", {
   )
 })
 
-test_that(".tw_team_count_overrides is consulted before the per-league default", {
-  # Whitebox check on the override constant — the 2012-nl key must override
-  # the default nl = 12 with 13.
-  expect_equal(.tw_team_count_overrides[["2012-nl"]], 13L)
-  expect_null(.tw_team_count_overrides[["2018-nl"]])  # No override -> default applies.
+test_that(".normalize_tw_auction consults .tw_team_count_overrides for 2012-nl=13", {
+  result <- .normalize_tw_auction(
+    fixture_path("2012-nl-13.csv"),
+    year = 2012, league = "nl"
+  )
+  # 13 teams * 2 priced rows = 26 picks
+  expect_equal(nrow(result), 26L)
+})
+
+test_that(".normalize_tw_auction routes 2012-mixed to the bespoke parser", {
+  result <- .normalize_tw_auction(
+    fixture_path("2012-mixed-15.csv"),
+    year = 2012, league = "mixed"
+  )
+  # 15 teams * 3 priced rows (sparse backward-filled to C, C, SP) = 45 picks
+  expect_equal(nrow(result), 45L)
+  # Confirm position_slot has only canonical values (parser-specific backward-fill)
+  expect_setequal(unique(result$position_slot), c("C", "SP"))
 })

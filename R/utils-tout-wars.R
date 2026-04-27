@@ -421,14 +421,16 @@
   long[, c("team_owner", "position_slot", "player_type", "player_name", "price", "is_keeper")]
 }
 
-# Maps (year, league) -> override parser. Default is .parse_tw_auction_standard.
+# Maps (year, league) -> override parser function. Default is
+# .parse_tw_auction_standard. Defined AFTER the parser functions so R can
+# resolve the function objects at source time.
 # 2015-nl was originally listed here, but readr handles its quoted-multiline
 # fields natively (Task 5 verifies); so it is intentionally absent and routes
 # to the standard parser by default.
 .tw_auction_overrides <- list(
-  "2012-al"    = ".parse_tw_auction_2012_alnl",
-  "2012-nl"    = ".parse_tw_auction_2012_alnl",
-  "2012-mixed" = ".parse_tw_auction_2012_mixed"
+  "2012-al"    = .parse_tw_auction_2012_alnl,
+  "2012-nl"    = .parse_tw_auction_2012_alnl,
+  "2012-mixed" = .parse_tw_auction_2012_mixed
 )
 
 # Default team count by league.
@@ -456,8 +458,7 @@
   key <- paste0(year, "-", league)
   expected_teams <- .tw_team_count_overrides[[key]]
   if (is.null(expected_teams)) expected_teams <- .tw_team_counts[[league]]
-  parser_name <- .tw_auction_overrides[[key]]
-  if (is.null(parser_name)) parser_name <- ".parse_tw_auction_standard"
-  parser <- get(parser_name, mode = "function")
+  parser <- .tw_auction_overrides[[key]]
+  if (is.null(parser)) parser <- .parse_tw_auction_standard
   parser(path, expected_teams = expected_teams)
 }
