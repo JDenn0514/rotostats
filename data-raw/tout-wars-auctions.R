@@ -43,5 +43,10 @@ tout_wars_auctions <- dplyr::arrange(
   year, league, team_owner, position_slot, dplyr::desc(price)
 )
 
+# Strip readr's spec/problems attributes that propagate through map_dfr.
+attr(tout_wars_auctions, "spec") <- NULL
+attr(tout_wars_auctions, "problems") <- NULL
+class(tout_wars_auctions) <- c("tbl_df", "tbl", "data.frame")
+
 usethis::use_data(tout_wars_auctions, overwrite = TRUE)
 cli::cli_inform("Wrote tout_wars_auctions: {nrow(tout_wars_auctions)} rows.")
