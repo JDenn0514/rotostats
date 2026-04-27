@@ -444,15 +444,20 @@ git commit -m "feat(auctions): standard-layout parser for tout-wars auction CSVs
 - Modify: `R/utils-tout-wars.R`
 - Modify: `tests/testthat/test-normalize-tout-wars-auctions.R`
 
-The 2012-al / 2012-nl deviation (verified on `2012-al.csv`):
-- **Owner row is row 1, owners in odd columns** (1, 3, 5, …, 23) — not even columns.
+The 2012-al / 2012-nl deviation (verified on both `2012-al.csv` and `2012-nl.csv`):
+- **Owner row is row 1, owners in odd columns** (1, 3, 5, …, `2k - 1`).
 - **Position slot column is col 2** (not col 1).
 - **Meta rows 2–4:** col 1 blank, col 2 blank, then `Left to Spend`/`Players Needed`/`Max Bid` starting in col 3 (paired with values in col 4, 6, …).
 - **Data rows:** col 1 blank, col 2 = `position_slot`, cols 3, 5, 7, … = player names, cols 4, 6, 8, … = prices.
-- **Owner-to-data mapping:** owner at col `2k - 1` corresponds to player name at col `2k + 1` and price at col `2k + 2` for team k = 1..12.
-- Total cols: 25 (same as standard).
+- **Owner-to-data mapping:** owner at col `2k - 1`, player name at col `2k + 1`, price at col `2k + 2` for team `k`.
+- **Total cols:** `2 + 2 * expected_teams` (one *more* than standard, since col 1 is owner-only and col 2 is slot-only).
+- **Same row-filter / footer / reserve pathology** as the standard layout — both files have reserve (`R`) rows and trailing notes/check rows. Filter must be applied before col-count check, but using col 2 (not col 1) as the slot column.
 
-The 2012-nl is structurally identical — same parser handles both. Confirm during implementation by reading `data-raw/sources/tout-wars/auctions/2012-nl.csv`.
+**Team counts:**
+- `2012-al`: **12 teams** → expected_cols = 26.
+- `2012-nl`: **13 teams** → expected_cols = 28. (Confirmed by reading row 1 of `2012-nl.csv`. The Task 6 dispatcher must override the default `nl = 12` for the 2012 NL file.)
+
+The 2012-nl is structurally identical to 2012-al — same parser handles both, but the dispatcher passes a different `expected_teams`.
 
 - [ ] **Step 1: Inspect both raw files and confirm the layout**
 
@@ -467,27 +472,38 @@ Verify both follow the layout described above. If 2012-nl deviates, document the
 
 - [ ] **Step 2: Create synthetic fixtures**
 
-Create `tests/testthat/fixtures/tout-wars-auctions/2012-al-mini.csv` (3 teams × 2 slots):
+Both fixtures use 3 teams. Each row has `2 + 2 * 3 = 8` cells, so expected_cols = 8. Each fixture includes a reserve (`R`) row with blank prices and a footer notes row with a stray non-NA value to confirm the row-filter strips them before the col-count and price checks.
+
+Create `tests/testthat/fixtures/tout-wars-auctions/2012-al-mini.csv`:
 
 ```csv
-SMITH,,JONES,,WOLF/COLTON,,
+SMITH,,JONES,,WOLF/COLTON,,,
 ,,Left to Spend,0,Left to Spend,2,Left to Spend,0
 ,,Players Needed,0,Players Needed,0,Players Needed,0
 ,,Max Bid,1,Max Bid,3,Max Bid,1
 ,C,Player A,10,Player B,12,Player C,8
 ,SP,Pitcher A,20,Pitcher B,18,Pitcher C,15
+,R,Reserve A,,Reserve B,,Reserve C,
+,,checked,,,,,
 ```
 
-Create `tests/testthat/fixtures/tout-wars-auctions/2012-nl-mini.csv` — copy with different owner names:
+Create `tests/testthat/fixtures/tout-wars-auctions/2012-nl-mini.csv`:
 
 ```csv
-ALPHA,,BETA,,GAMMA,,
+ALPHA,,BETA,,GAMMA,,,
 ,,Left to Spend,0,Left to Spend,0,Left to Spend,0
 ,,Players Needed,0,Players Needed,0,Players Needed,0
 ,,Max Bid,1,Max Bid,1,Max Bid,1
 ,C,X1,5,X2,6,X3,7
 ,RP,Y1,10,Y2,11,Y3,12
+,R,Res1,,Res2,,Res3,
+,,checked,,,,,
 ```
+
+Notes:
+- Row 1 has trailing comma so all rows have a consistent 8 cells (avoids readr ragged-row warning).
+- Row 7 (`R`) has player names but blank prices — must be filtered out by the row-filter.
+- Row 8 (footer note) has a stray `"checked"` in col 3 — must be filtered out by the row-filter so the col-count check sees only priced-roster rows.
 
 - [ ] **Step 3: Write the failing test**
 
@@ -503,9 +519,12 @@ test_that(".parse_tw_auction_2012_alnl handles 2012-al layout", {
     result,
     c("team_owner", "position_slot", "player_type", "player_name", "price", "is_keeper")
   )
-  expect_equal(nrow(result), 6)
+  expect_equal(nrow(result), 6L)
   expect_setequal(unique(result$team_owner), c("SMITH", "JONES", "COLTON/WOLF"))
   expect_setequal(unique(result$position_slot), c("C", "SP"))
+  # Row-filter must drop reserves and footer notes.
+  expect_false(any(grepl("^Reserve ", result$player_name)))
+  expect_false("R" %in% result$position_slot)
 })
 
 test_that(".parse_tw_auction_2012_alnl handles 2012-nl layout", {
@@ -513,7 +532,7 @@ test_that(".parse_tw_auction_2012_alnl handles 2012-nl layout", {
     fixture_path("2012-nl-mini.csv"),
     expected_teams = 3
   )
-  expect_equal(nrow(result), 6)
+  expect_equal(nrow(result), 6L)
   expect_setequal(unique(result$team_owner), c("ALPHA", "BETA", "GAMMA"))
   expect_setequal(unique(result$player_type), c("batter", "pitcher"))
 })
@@ -546,15 +565,33 @@ Append to `R/utils-tout-wars.R`:
     progress = FALSE
   )
 
+  if (nrow(raw) < 4L) {
+    cli::cli_abort(
+      "Too few rows in {.file {path}}; expected header + 3 meta rows + roster.",
+      class = "rotostats_error_auction_meta_rows"
+    )
+  }
+
+  # Filter rows: keep header (row 1) + meta rows (2-4) + priced-roster rows
+  # only. Slot label lives in col 2 in the 2012-al/nl layout (not col 1).
+  # Drops footer/notes rows AND reserve (R) rows.
+  slot_col <- toupper(trimws(as.character(raw[[2]])))
+  is_priced_roster <- !is.na(slot_col) & nzchar(slot_col) & slot_col %in% .tw_canonical_slots
+  is_priced_roster[seq_len(4)] <- FALSE
+  keep_rows <- c(seq_len(4), which(is_priced_roster))
+  raw <- raw[keep_rows, , drop = FALSE]
+
   is_trailing_na <- vapply(raw, function(col) all(is.na(col)), logical(1))
   last_keep <- max(which(!is_trailing_na))
   raw <- raw[, seq_len(last_keep), drop = FALSE]
 
-  expected_cols <- 1L + 2L * expected_teams
+  # In the 2012-al/nl layout, owner is in col 1 and slot is in col 2 — both
+  # are dedicated columns above and beyond the per-team (name, price) pairs.
+  expected_cols <- 2L + 2L * expected_teams
   if (ncol(raw) != expected_cols) {
     cli::cli_abort(
       c("Wrong column count in {.file {path}}.",
-        "i" = "Expected {expected_cols} columns, got {ncol(raw)}."),
+        "i" = "Expected {expected_cols} columns ({expected_teams} teams in 2012 layout), got {ncol(raw)}."),
       class = "rotostats_error_auction_col_count"
     )
   }
@@ -575,7 +612,8 @@ Append to `R/utils-tout-wars.R`:
   owners_raw <- as.character(raw[1, owner_cols, drop = TRUE])
   owners <- vapply(owners_raw, .canonicalize_tw_owner, character(1))
 
-  # Data rows: row 5 onward. Position slot in col 2.
+  # Data rows: row 5 onward (already filtered to priced-roster rows).
+  # Position slot in col 2.
   data_rows <- raw[-(1:4), , drop = FALSE]
 
   per_team <- lapply(seq_len(expected_teams), function(k) {
@@ -629,15 +667,19 @@ Run interactively:
 
 ```r
 devtools::load_all()
-al <- .parse_tw_auction_2012_alnl(
+al <- rotostats:::.parse_tw_auction_2012_alnl(
   "data-raw/sources/tout-wars/auctions/2012-al.csv", expected_teams = 12)
-nl <- .parse_tw_auction_2012_alnl(
-  "data-raw/sources/tout-wars/auctions/2012-nl.csv", expected_teams = 12)
-nrow(al); nrow(nl)
-head(al); head(nl)
+nl <- rotostats:::.parse_tw_auction_2012_alnl(
+  "data-raw/sources/tout-wars/auctions/2012-nl.csv", expected_teams = 13)
+nrow(al); length(unique(al$team_owner)); unique(al$position_slot)
+nrow(nl); length(unique(nl$team_owner)); unique(nl$position_slot)
 ```
 
-Expected: both ~276 rows (12 × 23). All distinct owners canonicalized. If either fails, characterize the deviation, document it in the parser's roxygen, and fix before continuing.
+Expected:
+- `al`: ~276 rows (12 × 23 priced slots), 12 distinct owners (including `COLTON/WOLF`), no `R` in `unique(position_slot)`.
+- `nl`: ~299 rows (13 × 23 priced slots), 13 distinct owners, no `R` in `unique(position_slot)`.
+
+If either fails, characterize the deviation, document it in the parser's roxygen, and fix before continuing.
 
 - [ ] **Step 8: Commit**
 
@@ -1013,8 +1055,12 @@ Append:
   "2015-nl"    = ".parse_tw_auction_2015_nl"
 )
 
-# Team count by league.
+# Default team count by league.
 .tw_team_counts <- c(al = 12L, nl = 12L, mixed = 15L)
+
+# Per-(year, league) team-count overrides for files that deviate from the
+# default. 2012 NL ran with 13 teams instead of the usual 12.
+.tw_team_count_overrides <- list("2012-nl" = 13L)
 
 #' Normalize a single Tout Wars auction CSV via dispatch on (year, league).
 #'
@@ -1031,8 +1077,9 @@ Append:
       class = "rotostats_error_auction_unknown_league"
     )
   }
-  expected_teams <- .tw_team_counts[[league]]
   key <- paste0(year, "-", league)
+  expected_teams <- .tw_team_count_overrides[[key]]
+  if (is.null(expected_teams)) expected_teams <- .tw_team_counts[[league]]
   parser_name <- .tw_auction_overrides[[key]]
   if (is.null(parser_name)) parser_name <- ".parse_tw_auction_standard"
   parser <- get(parser_name, mode = "function")
@@ -1066,6 +1113,13 @@ test_that(".normalize_tw_auction errors on unknown league", {
     .normalize_tw_auction(fixture_path("standard-mini.csv"), year = 2018, league = "xyz"),
     class = "rotostats_error_auction_unknown_league"
   )
+})
+
+test_that(".tw_team_count_overrides is consulted before the per-league default", {
+  # Whitebox check on the override constant — the 2012-nl key must override
+  # the default nl = 12 with 13.
+  expect_equal(.tw_team_count_overrides[["2012-nl"]], 13L)
+  expect_null(.tw_team_count_overrides[["2018-nl"]])  # No override -> default applies.
 })
 ```
 
