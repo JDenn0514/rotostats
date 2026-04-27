@@ -1,6 +1,10 @@
 # Internal helpers for the tout_wars_auctions dataset.
 # See plans/specs/2026-04-27-auction-csv-normalization-design.md.
 
+# Suppress R CMD check "no visible binding" notes for .data pronoun from
+# rlang/tidyselect used inside dplyr verbs.
+utils::globalVariables(".data")
+
 # Aliases applied BEFORE tokenization. Map raw input -> canonical output.
 .tw_owner_aliases <- c(
   "Wolf and Colton" = "COLTON/WOLF",

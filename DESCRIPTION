@@ -15,7 +15,9 @@ Depends:
 Imports:
     checkmate,
     cli (>= 3.6.0),
+    dplyr (>= 1.0.0),
     httr2 (>= 1.0.0),
+    readr (>= 2.0.0),
     rlang (>= 1.0.0),
     stringi,
     tibble (>= 3.0.0)
