@@ -706,24 +706,33 @@ The 2012-mixed deviation (verified on `2012-mixed.csv`):
 - **Meta rows 3–5** (not 2–4): `Left to Spend` / `Players Needed` / `Max Bid` in col 3.
 - **Data rows: row 6 onward.**
 - **Position slot in col 2** but **sparse** — verified on `2012-mixed.csv` row 6 (Montero / Wieters / Votto rows): the slot label appears on the **last** row of each slot group, with prior rows in the same group having an empty slot cell. The parser must **backward-fill** col 2 (inherit from the next non-empty cell, not the previous one).
-- **For team k:** name at col `2k + 1`, price at col `2k + 2` for k = 1..15.
-- Total cols: 31 (same as standard mixed).
+- **For team k:** name at col `2k + 1`, price at col `2k + 2` for k = 1..15. Col 1 is an empty placeholder; col 2 holds the slot. Total cols: **32** (= `2 + 2 * 15`).
+- **Trailing junk:** rows 33–34 of `2012-mixed.csv` are notes (col 2 empty, scattered text in player-name cols), then rows 35+ are empty. These would defeat backward-fill (no slot label below them) and must be dropped before fill.
+- **Reserve rows (slot `R`)** appear between the priced roster and the notes rows; they have player names but empty prices. Per non-goal #6 they are excluded from the dataset.
 
 - [ ] **Step 1: Inspect raw file and confirm sparse-slot semantics**
 
 Run:
 
 ```bash
-head -10 data-raw/sources/tout-wars/auctions/2012-mixed.csv
+awk -F, 'NR==1 || NR==2 || NR==6 || NR==7 || NR>=29 && NR<=36 {print NR": "$0}' \
+  data-raw/sources/tout-wars/auctions/2012-mixed.csv | head -20
 ```
 
-Verify: row 1 empty; row 2 has owners; row 6 has empty col 2 (Montero/Martin/Soto row); row 7 has `C` in col 2 (Wieters/Ruiz row). I.e. the slot label appears on the *last* row of each slot group, and the parser must **backward-fill** col 2.
+Verify:
+- Row 1 entirely empty.
+- Row 2 has 15 owners in odd cols 3, 5, …, 31.
+- Row 6 has empty col 2 (Montero/Martin/Soto row).
+- Row 7 has `C` in col 2 (Wieters/Ruiz row) — backward-fill source for row 6.
+- Rows 29–32 have `R` in col 2 (reserve rows).
+- Rows 33–34 have empty col 2 and scattered notes/labels in name cols (notes rows).
+- Rows 35+ are entirely empty.
 
 If the actual semantics differ (e.g., forward-fill, or the missing slot represents a distinct un-labelled slot), update Step 5's fill-loop direction before continuing.
 
 - [ ] **Step 2: Create synthetic fixture**
 
-Create `tests/testthat/fixtures/tout-wars-auctions/2012-mixed-mini.csv` (3 teams × 3 data rows, with sparse slot inheritance — slot label is on the *last* row of each group):
+Create `tests/testthat/fixtures/tout-wars-auctions/2012-mixed-mini.csv` (3 teams × 3 priced data rows, plus a reserve row and trailing junk that must be dropped):
 
 ```csv
 ,,,,,,,
@@ -734,9 +743,18 @@ Create `tests/testthat/fixtures/tout-wars-auctions/2012-mixed-mini.csv` (3 teams
 ,,A1,5,A2,6,A3,7
 ,C,B1,10,B2,11,B3,12
 ,SP,D1,20,D2,21,D3,22
+,R,Reserve A,,Reserve B,,Reserve C,
+,,checked,,checked,,,
+,,,,,,,
 ```
 
-(Row 6 has empty col 2 — its slot is `C` backward-inherited from row 7. Row 7 has `C`. Row 8 has `SP`.)
+Layout notes:
+- Every row has 8 cells (7 commas) so `readr::read_csv` does not warn about ragged rows.
+- Row 6 has empty col 2 — its slot is `C` backward-inherited from row 7.
+- Rows 7–8 carry their own slot labels (`C`, `SP`).
+- Row 9 is a reserve row (`R`) with names but no prices — must be dropped by the canonical-slot post-filter.
+- Row 10 is a notes row (col 2 empty, "checked" tokens in name cols, no prices) — must be dropped by the trailing-row pre-filter.
+- Row 11 is fully empty — also dropped by the trailing-row pre-filter.
 
 - [ ] **Step 3: Write the failing test**
 
@@ -748,12 +766,18 @@ test_that(".parse_tw_auction_2012_mixed handles empty row 1 and sparse slots", {
     fixture_path("2012-mixed-mini.csv"),
     expected_teams = 3
   )
-  expect_equal(nrow(result), 9)  # 3 teams × 3 data rows
+  # 3 teams * 3 priced data rows = 9. Reserve row, "checked" notes row, and
+  # the trailing empty row must all be excluded.
+  expect_equal(nrow(result), 9L)
   expect_setequal(unique(result$team_owner), c("SMITH", "JONES", "COLTON/WOLF"))
-  # Both row-6 and row-7 entries should have position_slot = "C"
+  expect_setequal(unique(result$position_slot), c("C", "SP"))
+  expect_false(any(result$player_name %in% c("Reserve A", "Reserve B", "Reserve C")))
+  expect_false(any(result$player_name == "checked"))
+
+  # Sparse-slot row (row 6 of fixture: A1/A2/A3) should backward-inherit `C`.
   smith_rows <- dplyr::filter(result, .data$team_owner == "SMITH")
-  expect_equal(sum(smith_rows$position_slot == "C"), 2)
-  expect_equal(sum(smith_rows$position_slot == "SP"), 1)
+  expect_equal(sum(smith_rows$position_slot == "C"), 2L)
+  expect_equal(sum(smith_rows$position_slot == "SP"), 1L)
 })
 ```
 
@@ -774,8 +798,14 @@ Append to `R/utils-tout-wars.R`:
 #' - Owner row is row 2; owners in odd columns (3, 5, ..., 2k+1, ..., 31).
 #' - Meta rows are rows 3-5 (not 2-4).
 #' - Data rows start at row 6.
-#' - Position slot in col 2; may be sparse (forward-fill from preceding row).
-#' - For team k: name at col 2k+1, price at col 2k+2.
+#' - Position slot in col 2; sparse - the label appears on the LAST row of each
+#'   slot group, so preceding rows must backward-fill from below.
+#' - For team k: name at col 2k+1, price at col 2k+2. Total cols 2 + 2 * teams.
+#'
+#' Trailing junk rows (notes, "checked" labels, blank rows after the last
+#' priced row) are dropped before backward-fill so they cannot poison the
+#' inheritance chain. Reserve rows (slot `R`) survive backward-fill but are
+#' dropped by the canonical-slot post-filter (see spec non-goal #6).
 #'
 #' @keywords internal
 #' @noRd
@@ -787,20 +817,46 @@ Append to `R/utils-tout-wars.R`:
     progress = FALSE
   )
 
+  if (nrow(raw) < 5L) {
+    cli::cli_abort(
+      "Too few rows in {.file {path}}; expected empty row + owner row + 3 meta rows + roster.",
+      class = "rotostats_error_auction_meta_rows"
+    )
+  }
+
+  # Drop trailing rows after the last row whose col 2 (slot) is non-empty.
+  # The 2012-mixed file has notes rows (col 2 empty, scattered text in name
+  # cols) and blank rows after the last priced/reserve roster row. These
+  # would defeat backward-fill (no label below to inherit from), so we cut
+  # them off first. This works because the slot label always appears on the
+  # LAST row of each group, including the last group overall.
+  slot_col_raw <- as.character(raw[[2]])
+  nonempty_slot <- !is.na(slot_col_raw) & nzchar(trimws(slot_col_raw))
+  if (!any(nonempty_slot[-(1:5)])) {
+    cli::cli_abort(
+      "No slot labels found in col 2 of {.file {path}}.",
+      class = "rotostats_error_auction_slot_orphan"
+    )
+  }
+  last_data_row <- max(which(nonempty_slot))
+  raw <- raw[seq_len(last_data_row), , drop = FALSE]
+
   is_trailing_na <- vapply(raw, function(col) all(is.na(col)), logical(1))
   last_keep <- max(which(!is_trailing_na))
   raw <- raw[, seq_len(last_keep), drop = FALSE]
 
-  expected_cols <- 1L + 2L * expected_teams
+  # In the 2012-mixed layout col 1 is an empty placeholder and col 2 holds
+  # the slot - both above and beyond the per-team (name, price) pairs.
+  expected_cols <- 2L + 2L * expected_teams
   if (ncol(raw) != expected_cols) {
     cli::cli_abort(
       c("Wrong column count in {.file {path}}.",
-        "i" = "Expected {expected_cols} columns, got {ncol(raw)}."),
+        "i" = "Expected {expected_cols} columns ({expected_teams} teams in 2012-mixed layout), got {ncol(raw)}."),
       class = "rotostats_error_auction_col_count"
     )
   }
 
-  # Validate row 1 is empty, meta rows 3-5 match labels.
+  # Validate row 1 is empty.
   row1_nonempty <- sum(!is.na(raw[1, ]) & nzchar(trimws(as.character(raw[1, ]))))
   if (row1_nonempty > 0) {
     cli::cli_abort(
@@ -808,6 +864,8 @@ Append to `R/utils-tout-wars.R`:
       class = "rotostats_error_auction_row1_nonempty"
     )
   }
+
+  # Validate meta rows: col 3 of rows 3-5 must match the meta labels.
   meta_labels <- c("Left to Spend", "Players Needed", "Max Bid")
   meta_actual <- vapply(3:5, function(i) as.character(raw[i, 3, drop = TRUE]), character(1))
   if (!identical(meta_actual, meta_labels)) {
@@ -818,30 +876,37 @@ Append to `R/utils-tout-wars.R`:
     )
   }
 
+  # Owners are in row 2, odd columns 3, 5, ..., 2*expected_teams + 1.
   owner_cols <- seq(3L, by = 2L, length.out = expected_teams)
   owners_raw <- as.character(raw[2, owner_cols, drop = TRUE])
   owners <- vapply(owners_raw, .canonicalize_tw_owner, character(1))
 
   data_rows <- raw[-(1:5), , drop = FALSE]
 
-  # Backward-fill position slot column (col 2). The slot label appears on the
-  # last row of each slot group; preceding empty cells inherit from below.
+  # Backward-fill position slot column (col 2). Trailing junk has already been
+  # trimmed, so the last data row is guaranteed to have a non-empty slot.
   slot_raw <- as.character(data_rows[[2]])
   slot_filled <- slot_raw
   n <- length(slot_filled)
-  for (i in rev(seq_along(slot_filled))) {
-    if (i == n) {
-      if (is.na(slot_filled[i]) || !nzchar(trimws(slot_filled[i]))) {
-        cli::cli_abort(
-          "Last data row in {.file {path}} has empty position slot \u2014 cannot backward-fill.",
-          class = "rotostats_error_auction_slot_orphan"
-        )
-      }
-    } else if (is.na(slot_filled[i]) || !nzchar(trimws(slot_filled[i]))) {
+  if (n == 0L || is.na(slot_filled[n]) || !nzchar(trimws(slot_filled[n]))) {
+    cli::cli_abort(
+      "Last data row in {.file {path}} has empty position slot \u2014 cannot backward-fill.",
+      class = "rotostats_error_auction_slot_orphan"
+    )
+  }
+  for (i in rev(seq_len(n - 1L))) {
+    if (is.na(slot_filled[i]) || !nzchar(trimws(slot_filled[i]))) {
       slot_filled[i] <- slot_filled[i + 1L]
     }
   }
   slot_filled <- trimws(slot_filled)
+
+  # Drop reserve rows (and any other non-canonical slot) before price coercion;
+  # reserve rows have empty price cells that would otherwise trip the integer
+  # check.
+  is_canonical <- slot_filled %in% .tw_canonical_slots
+  data_rows <- data_rows[is_canonical, , drop = FALSE]
+  slot_filled <- slot_filled[is_canonical]
 
   per_team <- lapply(seq_len(expected_teams), function(k) {
     name_col <- 2L * k + 1L
@@ -894,11 +959,18 @@ devtools::load_all()
 m <- .parse_tw_auction_2012_mixed(
   "data-raw/sources/tout-wars/auctions/2012-mixed.csv", expected_teams = 15)
 nrow(m)
-unique(m$team_owner)
-unique(m$position_slot)
+length(unique(m$team_owner))
+sort(unique(m$position_slot))
+table(m$position_slot)
 ```
 
-Expected: ~345 rows (15 × 23). All canonical owners. No NA in position_slot (forward-fill worked). If row count is wildly off, the sparse-slot logic likely needs revision.
+Expected:
+- `nrow(m) == 345L` (15 teams × 23 priced rows: 1 C-sparse + C + 1B + 3B + CI + 2B + SS + MI + 5×OF + UT + 9×P).
+- 15 distinct owners, all canonical (uppercased and `/`-joined where applicable).
+- `position_slot` values are a subset of `.tw_canonical_slots`. **No `R`** (reserve rows excluded).
+- No `NA` in `position_slot` (backward-fill resolved every sparse cell).
+
+If row count is wildly off, the sparse-slot or trailing-row trim logic likely needs revision.
 
 - [ ] **Step 8: Commit**
 
