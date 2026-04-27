@@ -420,3 +420,44 @@
 
   long[, c("team_owner", "position_slot", "player_type", "player_name", "price", "is_keeper")]
 }
+
+# Maps (year, league) -> override parser. Default is .parse_tw_auction_standard.
+# 2015-nl was originally listed here, but readr handles its quoted-multiline
+# fields natively (Task 5 verifies); so it is intentionally absent and routes
+# to the standard parser by default.
+.tw_auction_overrides <- list(
+  "2012-al"    = ".parse_tw_auction_2012_alnl",
+  "2012-nl"    = ".parse_tw_auction_2012_alnl",
+  "2012-mixed" = ".parse_tw_auction_2012_mixed"
+)
+
+# Default team count by league.
+.tw_team_counts <- c(al = 12L, nl = 12L, mixed = 15L)
+
+# Per-(year, league) team-count overrides for files that deviate from the
+# default. 2012 NL ran with 13 teams instead of the usual 12.
+.tw_team_count_overrides <- list("2012-nl" = 13L)
+
+#' Normalize a single Tout Wars auction CSV via dispatch on (year, league).
+#'
+#' @param path Path to raw CSV.
+#' @param year Integer.
+#' @param league One of "al", "nl", "mixed".
+#' @return Long-tidy tibble (Stage 1 schema).
+#' @keywords internal
+#' @noRd
+.normalize_tw_auction <- function(path, year, league) {
+  if (!league %in% names(.tw_team_counts)) {
+    cli::cli_abort(
+      "Unknown league {.val {league}} (expected one of {.val {names(.tw_team_counts)}}).",
+      class = "rotostats_error_auction_unknown_league"
+    )
+  }
+  key <- paste0(year, "-", league)
+  expected_teams <- .tw_team_count_overrides[[key]]
+  if (is.null(expected_teams)) expected_teams <- .tw_team_counts[[league]]
+  parser_name <- .tw_auction_overrides[[key]]
+  if (is.null(parser_name)) parser_name <- ".parse_tw_auction_standard"
+  parser <- get(parser_name, mode = "function")
+  parser(path, expected_teams = expected_teams)
+}

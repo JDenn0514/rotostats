@@ -137,3 +137,33 @@ test_that("standard parser handles 2015-nl quoted-multiline fields natively", {
   expect_false(any(grepl("\n", result$team_owner)))
   expect_false(any(grepl("\n", result$player_name)))
 })
+
+test_that(".normalize_tw_auction dispatches to the standard parser by default", {
+  result <- .normalize_tw_auction(
+    fixture_path("standard-al-12.csv"),
+    year = 2018, league = "al"
+  )
+  expect_equal(nrow(result), 24)
+})
+
+test_that(".normalize_tw_auction routes 2012-al to the bespoke parser", {
+  result <- .normalize_tw_auction(
+    fixture_path("2012-al-12.csv"),
+    year = 2012, league = "al"
+  )
+  expect_equal(nrow(result), 24)
+})
+
+test_that(".normalize_tw_auction errors on unknown league", {
+  expect_error(
+    .normalize_tw_auction(fixture_path("standard-mini.csv"), year = 2018, league = "xyz"),
+    class = "rotostats_error_auction_unknown_league"
+  )
+})
+
+test_that(".tw_team_count_overrides is consulted before the per-league default", {
+  # Whitebox check on the override constant — the 2012-nl key must override
+  # the default nl = 12 with 13.
+  expect_equal(.tw_team_count_overrides[["2012-nl"]], 13L)
+  expect_null(.tw_team_count_overrides[["2018-nl"]])  # No override -> default applies.
+})
