@@ -40,10 +40,34 @@
 # Canonical priced slots used to identify roster rows during parsing.
 # Reserve ("R") rows have no auction price and are excluded from the dataset
 # (see spec non-goal #6).
+# INF was introduced in the 2024 AL/NL roster format as a combined-infield
+# slot (replaces the historical CI/MI split).
 .tw_canonical_slots <- c(
-  "C", "1B", "3B", "CI", "2B", "SS", "MI", "OF", "UT", "SW",
+  "C", "1B", "3B", "CI", "2B", "SS", "MI", "INF", "OF", "UT", "SW",
   "P", "SP", "RP"
 )
+
+#' Validate parsed `position_slot` values against `.tw_canonical_slots`.
+#'
+#' Defense-in-depth check that runs after each parser builds its long tibble.
+#' Earlier filtering keeps only canonical slots, but this guards against a
+#' future code change introducing a non-canonical slot. Aborts when an
+#' unknown value is found.
+#'
+#' @keywords internal
+#' @noRd
+.validate_tw_position_slots <- function(slots, path) {
+  bad <- setdiff(unique(slots), .tw_canonical_slots)
+  if (length(bad) > 0) {
+    cli::cli_abort(
+      c("Unknown position_slot value(s) in {.file {path}}.",
+        "i" = "Offending: {.val {bad}}.",
+        "i" = "If valid, add to .tw_canonical_slots in R/utils-tout-wars.R."),
+      class = "rotostats_error_auction_unknown_slot"
+    )
+  }
+  invisible(slots)
+}
 
 #' Derive player_type from position_slot vector.
 #' @keywords internal
@@ -60,7 +84,7 @@
 #'   player_name, price, is_keeper.
 #' @keywords internal
 #' @noRd
-.parse_tw_auction_standard <- function(path, expected_teams) {
+.parse_tw_auction_standard <- function(path, expected_teams, has_meta_rows = TRUE) {
   raw <- readr::read_csv(
     path,
     col_types = readr::cols(.default = "c"),
@@ -68,20 +92,29 @@
     progress = FALSE
   )
 
-  if (nrow(raw) < 4L) {
+  # When meta rows are absent (2021 files), the header is row 1 only and
+  # roster rows start at row 2. Otherwise: row 1 + meta rows 2-4 + roster.
+  header_rows <- if (has_meta_rows) 1:4 else 1L
+  min_rows <- length(header_rows)
+  if (nrow(raw) < min_rows) {
     cli::cli_abort(
-      "Too few rows in {.file {path}}; expected header + 3 meta rows + roster.",
+      "Too few rows in {.file {path}}; expected header + roster.",
       class = "rotostats_error_auction_meta_rows"
     )
   }
 
-  # Filter rows: keep header (row 1) + meta rows (2-4) unconditionally.
+  # Some 2021/2022 files abbreviate "OF" as "O" in the slot column. Rewrite
+  # before canonical-slot filtering so those rows are recognised as outfield.
+  slot_col <- toupper(trimws(as.character(raw[[1]])))
+  slot_col[!is.na(slot_col) & slot_col == "O"] <- "OF"
+  raw[[1]] <- slot_col
+
+  # Filter rows: keep header (and meta rows when present) unconditionally.
   # For the rest, keep only rows whose col 1 (trimmed, uppercased) is a
   # canonical priced slot. This drops footer/summary rows AND reserve (R) rows.
-  slot_col <- toupper(trimws(as.character(raw[[1]])))
   is_priced_roster <- !is.na(slot_col) & nzchar(slot_col) & slot_col %in% .tw_canonical_slots
-  is_priced_roster[1:4] <- FALSE  # Don't double-count rows 1-4.
-  keep_rows <- c(1L, 2L, 3L, 4L, which(is_priced_roster))
+  is_priced_roster[seq_len(min_rows)] <- FALSE  # Don't double-count header rows.
+  keep_rows <- c(header_rows, which(is_priced_roster))
   raw <- raw[keep_rows, , drop = FALSE]
 
   # Trim trailing all-NA columns (now safe — footer/reserve rows excluded).
@@ -90,6 +123,36 @@
   raw <- raw[, seq_len(last_keep), drop = FALSE]
 
   expected_cols <- 1L + 2L * expected_teams
+
+  # Some files (e.g., 2014/2015/2016/2017/2024/2026 mixed) carry a trailing
+  # duplicate slot column that mirrors col 1 on the priced-roster rows. If we
+  # are off by exactly one column AND the trailing column on data rows is
+  # mostly canonical slots (i.e., it's clearly a duplicate slot column, with
+  # tolerance for a single typo cell), drop it.
+  if (ncol(raw) == expected_cols + 1L && nrow(raw) > min_rows) {
+    coln_data <- toupper(trimws(as.character(raw[-seq_len(min_rows), ncol(raw), drop = TRUE])))
+    coln_slot_match <- coln_data %in% .tw_canonical_slots
+    if (length(coln_slot_match) > 0 &&
+        sum(coln_slot_match) >= length(coln_slot_match) - 1L) {
+      raw <- raw[, -ncol(raw), drop = FALSE]
+    }
+  }
+
+  # Some files (e.g., 2024-nl) have stray comment cells in columns past the
+  # expected layout (a single non-NA cell in an otherwise all-NA column).
+  # If we're over the expected width AND every column past `expected_cols`
+  # has at most one non-NA cell, drop them.
+  if (ncol(raw) > expected_cols) {
+    extra_cols <- (expected_cols + 1L):ncol(raw)
+    nonna_per_extra <- vapply(extra_cols, function(j) {
+      v <- as.character(raw[[j]])
+      sum(!is.na(v) & nzchar(trimws(v)))
+    }, integer(1))
+    if (all(nonna_per_extra <= 1L)) {
+      raw <- raw[, seq_len(expected_cols), drop = FALSE]
+    }
+  }
+
   if (ncol(raw) != expected_cols) {
     cli::cli_abort(
       c("Wrong column count in {.file {path}}.",
@@ -98,15 +161,23 @@
     )
   }
 
-  # Validate meta rows (rows 2-4): col 2 of each must start with the labels.
-  meta_labels <- c("Left to Spend", "Players Needed", "Max Bid")
-  meta_actual <- vapply(2:4, function(i) as.character(raw[i, 2, drop = TRUE]), character(1))
-  if (!identical(meta_actual, meta_labels)) {
-    cli::cli_abort(
-      c("Meta rows 2-4 do not match expected labels in {.file {path}}.",
-        "i" = "Expected {.val {meta_labels}}, got {.val {meta_actual}}."),
-      class = "rotostats_error_auction_meta_rows"
-    )
+  # Validate meta rows (rows 2-4): col 2 of each must match a recognized
+  # label set. Two variants seen in the wild:
+  #   - canonical: "Left to Spend" / "Players Needed" / "Max Bid"
+  #   - shorthand: "$ To Spend"   / "# Needed"        / "Max Bid"
+  #   (used in 2023-mixed and 2024-mixed)
+  if (has_meta_rows) {
+    meta_actual <- vapply(2:4, function(i) as.character(raw[i, 2, drop = TRUE]), character(1))
+    meta_canonical <- c("Left to Spend", "Players Needed", "Max Bid")
+    meta_shorthand <- c("$ To Spend",    "# Needed",        "Max Bid")
+    if (!identical(meta_actual, meta_canonical) &&
+        !identical(meta_actual, meta_shorthand)) {
+      cli::cli_abort(
+        c("Meta rows 2-4 do not match expected labels in {.file {path}}.",
+          "i" = "Expected {.val {meta_canonical}} or {.val {meta_shorthand}}, got {.val {meta_actual}}."),
+        class = "rotostats_error_auction_meta_rows"
+      )
+    }
   }
 
   # Extract owners from row 1, even cols (2, 4, 6, ...).
@@ -114,8 +185,8 @@
   owners_raw <- as.character(raw[1, owner_cols, drop = TRUE])
   owners <- vapply(owners_raw, .canonicalize_tw_owner, character(1))
 
-  # Data rows: row 5 onward.
-  data_rows <- raw[-(1:4), , drop = FALSE]
+  # Data rows: rows after the header block.
+  data_rows <- raw[-seq_len(min_rows), , drop = FALSE]
 
   # For each team k (1..expected_teams): cols 2k = name, 2k+1 = price.
   per_team <- lapply(seq_len(expected_teams), function(k) {
@@ -134,6 +205,23 @@
   long <- dplyr::filter(long, !is.na(.data$player_name) & nzchar(trimws(.data$player_name)))
   long$player_name <- trimws(long$player_name)
 
+  # Drop picks with a player name but a missing price cell. These are source
+  # data-entry omissions (e.g., 2017-mixed has 2 such cells). They are not a
+  # layout deviation; we don't fabricate a price, but we also shouldn't abort
+  # the whole file. Emit an informational notice naming the dropped picks.
+  empty_price <- is.na(long$price_chr) | !nzchar(trimws(long$price_chr))
+  if (any(empty_price)) {
+    dropped <- long$player_name[empty_price]
+    cli::cli_inform(c(
+      "Dropping {sum(empty_price)} pick(s) with missing price in {.file {path}}.",
+      "i" = "Affected player(s): {.val {dropped}}."
+    ))
+    long <- long[!empty_price, , drop = FALSE]
+  }
+
+  # Strip leading "$" on prices (2025-mixed formats prices as "$9").
+  long$price_chr <- sub("^\\$", "", trimws(long$price_chr))
+
   # Coerce price to non-negative integer.
   price_int <- suppressWarnings(as.integer(long$price_chr))
   if (any(is.na(price_int)) || any(price_int < 0)) {
@@ -148,6 +236,7 @@
   long$price_chr <- NULL
 
   long$position_slot <- trimws(long$position_slot)
+  .validate_tw_position_slots(long$position_slot, path)
   long$player_type <- .derive_player_type(long$position_slot)
   long$is_keeper <- FALSE
 
@@ -303,6 +392,7 @@
   long$price <- price_int
   long$price_chr <- NULL
 
+  .validate_tw_position_slots(long$position_slot, path)
   long$player_type <- .derive_player_type(long$position_slot)
   long$is_keeper <- FALSE
 
@@ -410,6 +500,116 @@
   long$price_chr <- NULL
 
   long$position_slot <- trimws(long$position_slot)
+  .validate_tw_position_slots(long$position_slot, path)
+  long$player_type <- .derive_player_type(long$position_slot)
+  long$is_keeper <- FALSE
+
+  long <- dplyr::arrange(
+    long,
+    .data$team_owner, .data$position_slot, dplyr::desc(.data$price)
+  )
+
+  long[, c("team_owner", "position_slot", "player_type", "player_name", "price", "is_keeper")]
+}
+
+#' Parse a 2021-al Tout Wars auction CSV.
+#'
+#' Layout:
+#' - 2 leading structural columns: col 1 sparse "team owner ID" (mostly empty),
+#'   col 2 = position slot.
+#' - 12 × (player_name, price) pairs at cols 3..26.
+#' - Owner row is row 1; owners at odd cols 3, 5, ..., 25.
+#' - No meta rows (rows 2+ are immediately roster data).
+#' - "O" abbreviation for "OF" appears in some slot cells (e.g., 4 outfield
+#'   rows). Normalized to "OF" before canonical-slot filtering.
+#'
+#' @keywords internal
+#' @noRd
+.parse_tw_auction_2021_al <- function(path, expected_teams) {
+  raw <- readr::read_csv(
+    path,
+    col_types = readr::cols(.default = "c"),
+    col_names = FALSE,
+    progress = FALSE
+  )
+
+  if (nrow(raw) < 1L) {
+    cli::cli_abort(
+      "Too few rows in {.file {path}}; expected owner row + roster.",
+      class = "rotostats_error_auction_meta_rows"
+    )
+  }
+
+  # Normalize "O" -> "OF" in col 2 before canonical-slot filtering.
+  slot_raw <- toupper(trimws(as.character(raw[[2]])))
+  slot_raw[!is.na(slot_raw) & slot_raw == "O"] <- "OF"
+  raw[[2]] <- slot_raw
+
+  # Filter rows: keep header row 1 + priced-roster rows from rows 2+.
+  is_priced_roster <- !is.na(slot_raw) & nzchar(slot_raw) & slot_raw %in% .tw_canonical_slots
+  is_priced_roster[1L] <- FALSE
+  keep_rows <- c(1L, which(is_priced_roster))
+  raw <- raw[keep_rows, , drop = FALSE]
+
+  is_trailing_na <- vapply(raw, function(col) all(is.na(col)), logical(1))
+  last_keep <- max(which(!is_trailing_na))
+  raw <- raw[, seq_len(last_keep), drop = FALSE]
+
+  expected_cols <- 2L + 2L * expected_teams
+  if (ncol(raw) != expected_cols) {
+    cli::cli_abort(
+      c("Wrong column count in {.file {path}}.",
+        "i" = "Expected {expected_cols} columns ({expected_teams} teams in 2021-al layout), got {ncol(raw)}."),
+      class = "rotostats_error_auction_col_count"
+    )
+  }
+
+  # Owners are in row 1, odd columns 3, 5, ..., 2*expected_teams + 1.
+  owner_cols <- seq(3L, by = 2L, length.out = expected_teams)
+  owners_raw <- as.character(raw[1, owner_cols, drop = TRUE])
+  owners <- vapply(owners_raw, .canonicalize_tw_owner, character(1))
+
+  data_rows <- raw[-1L, , drop = FALSE]
+
+  per_team <- lapply(seq_len(expected_teams), function(k) {
+    name_col <- 2L * k + 1L
+    price_col <- 2L * k + 2L
+    tibble::tibble(
+      team_owner    = owners[k],
+      position_slot = as.character(data_rows[[2]]),
+      player_name   = as.character(data_rows[[name_col]]),
+      price_chr     = as.character(data_rows[[price_col]])
+    )
+  })
+  long <- dplyr::bind_rows(per_team)
+
+  long <- dplyr::filter(long, !is.na(.data$player_name) & nzchar(trimws(.data$player_name)))
+  long$player_name <- trimws(long$player_name)
+
+  empty_price <- is.na(long$price_chr) | !nzchar(trimws(long$price_chr))
+  if (any(empty_price)) {
+    dropped <- long$player_name[empty_price]
+    cli::cli_inform(c(
+      "Dropping {sum(empty_price)} pick(s) with missing price in {.file {path}}.",
+      "i" = "Affected player(s): {.val {dropped}}."
+    ))
+    long <- long[!empty_price, , drop = FALSE]
+  }
+
+  price_int <- suppressWarnings(as.integer(long$price_chr))
+  if (any(is.na(price_int)) || any(price_int < 0)) {
+    bad <- long$price_chr[is.na(price_int) | (price_int < 0)]
+    cli::cli_abort(
+      c("Non-integer or negative prices in {.file {path}}.",
+        "i" = "Offending values: {.val {bad}}."),
+      class = "rotostats_error_auction_price"
+    )
+  }
+  long$price <- price_int
+  long$price_chr <- NULL
+
+  long$position_slot <- trimws(long$position_slot)
+  .validate_tw_position_slots(long$position_slot, path)
   long$player_type <- .derive_player_type(long$position_slot)
   long$is_keeper <- FALSE
 
@@ -430,7 +630,30 @@
 .tw_auction_overrides <- list(
   "2012-al"    = .parse_tw_auction_2012_alnl,
   "2012-nl"    = .parse_tw_auction_2012_alnl,
-  "2012-mixed" = .parse_tw_auction_2012_mixed
+  "2012-mixed" = .parse_tw_auction_2012_mixed,
+  # 2021-nl, 2021-mixed and all three 2022 files use the standard layout but
+  # omit the meta rows 2-4 (the file jumps directly from owners to roster
+  # data).
+  "2021-nl"    = function(path, expected_teams) {
+    .parse_tw_auction_standard(path, expected_teams, has_meta_rows = FALSE)
+  },
+  "2021-mixed" = function(path, expected_teams) {
+    .parse_tw_auction_standard(path, expected_teams, has_meta_rows = FALSE)
+  },
+  "2022-al"    = function(path, expected_teams) {
+    .parse_tw_auction_standard(path, expected_teams, has_meta_rows = FALSE)
+  },
+  "2022-nl"    = function(path, expected_teams) {
+    .parse_tw_auction_standard(path, expected_teams, has_meta_rows = FALSE)
+  },
+  "2022-mixed" = function(path, expected_teams) {
+    .parse_tw_auction_standard(path, expected_teams, has_meta_rows = FALSE)
+  },
+  # 2021-al uses the 2012-alnl-style layout (slot in col 2, owners on odd
+  # cols starting from col 3) but also omits meta rows.
+  "2021-al"    = function(path, expected_teams) {
+    .parse_tw_auction_2021_al(path, expected_teams)
+  }
 )
 
 # Default team count by league.

@@ -1,0 +1,277 @@
+team_owner,position_slot,player_type,player_name,price,is_keeper
+BEHRENS,1B,batter,Jose Abreu 36,36,FALSE
+BEHRENS,2B,batter,Xander Bogaerts 18,18,FALSE
+BEHRENS,3B,batter,Jonathan Schoop 4,4,FALSE
+BEHRENS,C,batter,Jason Castro 13,13,FALSE
+BEHRENS,C,batter,Geovany Soto 2,2,FALSE
+BEHRENS,CI,batter,Elvis Andrus 21,21,FALSE
+BEHRENS,MI,batter,Albert Pujols 26,26,FALSE
+BEHRENS,OF,batter,Lorenzo Cain 16,16,FALSE
+BEHRENS,OF,batter,Dalton Pompey 11,11,FALSE
+BEHRENS,OF,batter,Seth Smith 5,5,FALSE
+BEHRENS,OF,batter,Mitch Moreland 2,2,FALSE
+BEHRENS,P,pitcher,David Robertson 20,20,FALSE
+BEHRENS,P,pitcher,Hisashi Iwakuma 19,19,FALSE
+BEHRENS,P,pitcher,Phil Hughes 14,14,FALSE
+BEHRENS,P,pitcher,Anibal Sanchez 13,13,FALSE
+BEHRENS,P,pitcher,Neftali Feliz 11,11,FALSE
+BEHRENS,P,pitcher,Danny Duffy 8,8,FALSE
+BEHRENS,P,pitcher,Carlos Rodon 2,2,FALSE
+BEHRENS,P,pitcher,Ryan Cook 1,1,FALSE
+BEHRENS,P,pitcher,Tommy Milone 1,1,FALSE
+BEHRENS,SS,batter,Asdrubal Cabrera 15,15,FALSE
+BEHRENS,SW,batter,Mike Aviles 1,1,FALSE
+BEHRENS,UT,batter,Aaron Hicks 1,1,FALSE
+COLLETTE,1B,batter,Mike Napoli 17,17,FALSE
+COLLETTE,2B,batter,Josh Donaldson 30,30,FALSE
+COLLETTE,3B,batter,Luis Valbuena 12,12,FALSE
+COLLETTE,C,batter,John Jaso 14,14,FALSE
+COLLETTE,C,batter,Robinson Chirinos 4,4,FALSE
+COLLETTE,CI,batter,Jed Lowrie 8,8,FALSE
+COLLETTE,MI,batter,Garrett Jones 8,8,FALSE
+COLLETTE,OF,batter,Brett Gardner 22,22,FALSE
+COLLETTE,OF,batter,J.D. Martinez 17,17,FALSE
+COLLETTE,OF,batter,Jarrod Dyson 11,11,FALSE
+COLLETTE,OF,batter,Jesus Montero 1,1,FALSE
+COLLETTE,P,pitcher,Alex Cobb 14,14,FALSE
+COLLETTE,P,pitcher,Drew Hutchison 12,12,FALSE
+COLLETTE,P,pitcher,Danny Salazar 11,11,FALSE
+COLLETTE,P,pitcher,Brett Cecil 10,10,FALSE
+COLLETTE,P,pitcher,Luke Gregerson 10,10,FALSE
+COLLETTE,P,pitcher,Derek Holland 10,10,FALSE
+COLLETTE,P,pitcher,Clay Buchholz 7,7,FALSE
+COLLETTE,P,pitcher,Andrew Miller 7,7,FALSE
+COLLETTE,P,pitcher,Shane Greene 5,5,FALSE
+COLLETTE,SS,batter,Francisco Lindor 3,3,FALSE
+COLLETTE,SW,batter,Brandon Moss 17,17,FALSE
+COLLETTE,UT,batter,Michael Saunders 10,10,FALSE
+COLTON WOLF,1B,batter,Kendrys Morales 10,10,FALSE
+COLTON WOLF,2B,batter,David Freese 10,10,FALSE
+COLTON WOLF,3B,batter,Robinson Cano 30,30,FALSE
+COLTON WOLF,C,batter,Kurt Suzuki 2,2,FALSE
+COLTON WOLF,C,batter,Hank Conger 1,1,FALSE
+COLTON WOLF,CI,batter,Alcides Escobar 17,17,FALSE
+COLTON WOLF,MI,batter,Mike Moustakas 10,10,FALSE
+COLTON WOLF,OF,batter,Mike Trout 46,46,FALSE
+COLTON WOLF,OF,batter,Alex Rios 20,20,FALSE
+COLTON WOLF,OF,batter,Colby Rasmus 7,7,FALSE
+COLTON WOLF,OF,batter,C.J. Cron 4,4,FALSE
+COLTON WOLF,P,pitcher,Jeff Samardzija 22,22,FALSE
+COLTON WOLF,P,pitcher,Huston Street 17,17,FALSE
+COLTON WOLF,P,pitcher,Kevin Gausman 10,10,FALSE
+COLTON WOLF,P,pitcher,Justin Verlander 10,10,FALSE
+COLTON WOLF,P,pitcher,Rick Porcello 9,9,FALSE
+COLTON WOLF,P,pitcher,Kyle Gibson 2,2,FALSE
+COLTON WOLF,P,pitcher,Jesse Chavez 1,1,FALSE
+COLTON WOLF,P,pitcher,Casey Fien 1,1,FALSE
+COLTON WOLF,P,pitcher,Edward Mujica 1,1,FALSE
+COLTON WOLF,SS,batter,Christian Colon 1,1,FALSE
+COLTON WOLF,SW,batter,Carlos Santana 27,27,FALSE
+COLTON WOLF,UT,batter,Craig Gentry 2,2,FALSE
+ERICKSON,1B,batter,Eric Hosmer 18,18,FALSE
+ERICKSON,2B,batter,Alex Rodriguez 8,8,FALSE
+ERICKSON,3B,batter,Rougned Odor 16,16,FALSE
+ERICKSON,C,batter,Yan Gomes 18,18,FALSE
+ERICKSON,C,batter,James McCann 2,2,FALSE
+ERICKSON,CI,batter,Jose Ramirez 11,11,FALSE
+ERICKSON,MI,batter,Joe Mauer 15,15,FALSE
+ERICKSON,OF,batter,Adam Jones 26,26,FALSE
+ERICKSON,OF,batter,Adam Eaton 19,19,FALSE
+ERICKSON,OF,batter,Mark Teixeira 12,12,FALSE
+ERICKSON,OF,batter,Michael Bourn 9,9,FALSE
+ERICKSON,P,pitcher,Chris Sale 27,27,FALSE
+ERICKSON,P,pitcher,Dellin Betances 19,19,FALSE
+ERICKSON,P,pitcher,Collin McHugh 13,13,FALSE
+ERICKSON,P,pitcher,Michael Pineda 13,13,FALSE
+ERICKSON,P,pitcher,Chad Qualls 5,5,FALSE
+ERICKSON,P,pitcher,Roenis Elias 2,2,FALSE
+ERICKSON,P,pitcher,Pat Neshek 1,1,FALSE
+ERICKSON,P,pitcher,Jarrod Parker 1,1,FALSE
+ERICKSON,P,pitcher,Edinson Volquez 1,1,FALSE
+ERICKSON,SS,batter,Nick Swisher,6,FALSE
+ERICKSON,SW,batter,Danny Santana 15,15,FALSE
+ERICKSON,UT,batter,Shane Victorino 3,3,FALSE
+LAWR MICHAELS,1B,batter,Billy Butler 15,15,FALSE
+LAWR MICHAELS,2B,batter,Nick Castellanos 16,16,FALSE
+LAWR MICHAELS,3B,batter,Micah Johnson 9,9,FALSE
+LAWR MICHAELS,C,batter,Mike Zunino 9,9,FALSE
+LAWR MICHAELS,C,batter,Josh Phegley 3,3,FALSE
+LAWR MICHAELS,CI,batter,Alexei Ramirez 22,22,FALSE
+LAWR MICHAELS,MI,batter,Allen Craig 7,7,FALSE
+LAWR MICHAELS,OF,batter,Kole Calhoun 23,23,FALSE
+LAWR MICHAELS,OF,batter,Yoenis Cespedes 21,21,FALSE
+LAWR MICHAELS,OF,batter,Dustin Ackley 8,8,FALSE
+LAWR MICHAELS,OF,batter,Eduardo Escobar 1,1,FALSE
+LAWR MICHAELS,P,pitcher,Cody Allen 20,20,FALSE
+LAWR MICHAELS,P,pitcher,Chris Archer 17,17,FALSE
+LAWR MICHAELS,P,pitcher,Yordano Ventura 16,16,FALSE
+LAWR MICHAELS,P,pitcher,Chris Tillman 14,14,FALSE
+LAWR MICHAELS,P,pitcher,Tyler Clippard 10,10,FALSE
+LAWR MICHAELS,P,pitcher,Ervin Santana 10,10,FALSE
+LAWR MICHAELS,P,pitcher,Joe Nathan 9,9,FALSE
+LAWR MICHAELS,P,pitcher,Jesse Hahn 7,7,FALSE
+LAWR MICHAELS,P,pitcher,Kendall Graveman 4,4,FALSE
+LAWR MICHAELS,SS,batter,Brett Lawrie 15,15,FALSE
+LAWR MICHAELS,SW,batter,Marco Estrada 2,2,FALSE
+LAWR MICHAELS,UT,batter,Collin Cowgill 2,2,FALSE
+LEIBOWITZ,1B,batter,Adam LaRoche 21,21,FALSE
+LEIBOWITZ,2B,batter,Kyle Seager 24,24,FALSE
+LEIBOWITZ,3B,batter,Ben Zobrist 20,20,FALSE
+LEIBOWITZ,C,batter,Salvador Perez 15,15,FALSE
+LEIBOWITZ,C,batter,Blake Swihart 1,1,FALSE
+LEIBOWITZ,CI,batter,Erick Aybar 15,15,FALSE
+LEIBOWITZ,MI,batter,Jonathan Singleton 4,4,FALSE
+LEIBOWITZ,OF,batter,Jacoby Ellsbury 29,29,FALSE
+LEIBOWITZ,OF,batter,Melky Cabrera 18,18,FALSE
+LEIBOWITZ,OF,batter,Matt Joyce 10,10,FALSE
+LEIBOWITZ,OF,batter,Kennys Vargas 5,5,FALSE
+LEIBOWITZ,P,pitcher,Sonny Gray 19,19,FALSE
+LEIBOWITZ,P,pitcher,Glen Perkins 16,16,FALSE
+LEIBOWITZ,P,pitcher,Jose Quintana 13,13,FALSE
+LEIBOWITZ,P,pitcher,Drew Smyly 11,11,FALSE
+LEIBOWITZ,P,pitcher,Yovani Gallardo 6,6,FALSE
+LEIBOWITZ,P,pitcher,Aaron Sanchez 5,5,FALSE
+LEIBOWITZ,P,pitcher,Jeremy Guthrie 1,1,FALSE
+LEIBOWITZ,P,pitcher,Darren O'Day 1,1,FALSE
+LEIBOWITZ,P,pitcher,Daniel Straily 1,1,FALSE
+LEIBOWITZ,SS,batter,Marcus Semien 15,15,FALSE
+LEIBOWITZ,SW,batter,Kevin Pillar 1,1,FALSE
+LEIBOWITZ,UT,batter,Josh Reddick 9,9,FALSE
+LISS,1B,batter,Miguel Cabrera 36,36,FALSE
+LISS,2B,batter,Evan Longoria 22,22,FALSE
+LISS,3B,batter,Johnny Giavotella 3,3,FALSE
+LISS,C,batter,Rene Rivera 6,6,FALSE
+LISS,C,batter,Tyler Flowers 5,5,FALSE
+LISS,CI,batter,Nick Franklin 5,5,FALSE
+LISS,MI,batter,Manny Machado 19,19,FALSE
+LISS,OF,batter,Chris Davis 28,28,FALSE
+LISS,OF,batter,George Springer 28,28,FALSE
+LISS,OF,batter,Rusney Castillo 16,16,FALSE
+LISS,OF,batter,Byron Buxton 4,4,FALSE
+LISS,P,pitcher,Carlos Carrasco 17,17,FALSE
+LISS,P,pitcher,Jake Odorizzi 12,12,FALSE
+LISS,P,pitcher,Taijuan Walker 10,10,FALSE
+LISS,P,pitcher,James Paxton 9,9,FALSE
+LISS,P,pitcher,Jake McGee 8,8,FALSE
+LISS,P,pitcher,Drew Pomeranz 8,8,FALSE
+LISS,P,pitcher,Wade Davis 6,6,FALSE
+LISS,P,pitcher,Joakim Soria 6,6,FALSE
+LISS,P,pitcher,Daniel Norris 2,2,FALSE
+LISS,SS,batter,Stephen Drew 2,2,FALSE
+LISS,SW,batter,Josh Hamilton 4,4,FALSE
+LISS,UT,batter,Anthony Gose 4,4,FALSE
+MOYER,1B,batter,Victor Martinez 23,23,FALSE
+MOYER,2B,batter,Adrian Beltre 28,28,FALSE
+MOYER,3B,batter,Dustin Pedroia 19,19,FALSE
+MOYER,C,batter,Dioner Navarro 7,7,FALSE
+MOYER,C,batter,Stephen Vogt 7,7,FALSE
+MOYER,CI,batter,Jose Reyes 23,23,FALSE
+MOYER,MI,batter,Pablo Sandoval 19,19,FALSE
+MOYER,OF,batter,David Ortiz 23,23,FALSE
+MOYER,OF,batter,Coco Crisp 17,17,FALSE
+MOYER,OF,batter,Torii Hunter 13,13,FALSE
+MOYER,OF,batter,James Jones 1,1,FALSE
+MOYER,P,pitcher,Garrett Richards 14,14,FALSE
+MOYER,P,pitcher,Bud Norris 10,10,FALSE
+MOYER,P,pitcher,Brad Boxberger 9,9,FALSE
+MOYER,P,pitcher,Nathan Eovaldi 9,9,FALSE
+MOYER,P,pitcher,Trevor Bauer 8,8,FALSE
+MOYER,P,pitcher,Wei-Yin Chen 8,8,FALSE
+MOYER,P,pitcher,Josh Fields 2,2,FALSE
+MOYER,P,pitcher,Alfredo Simon 2,2,FALSE
+MOYER,P,pitcher,Bruce Rondon 1,1,FALSE
+MOYER,SS,batter,Didi Gregorius 7,7,FALSE
+MOYER,SW,batter,Joey Gallo 1,1,FALSE
+MOYER,UT,batter,Emilio Bonifacio 9,9,FALSE
+PODHORZER,1B,batter,Prince Fielder 28,28,FALSE
+PODHORZER,2B,batter,Jose Iglesias 1,1,FALSE
+PODHORZER,3B,batter,Devon Travis 1,1,FALSE
+PODHORZER,C,batter,Russell Martin 19,19,FALSE
+PODHORZER,C,batter,Alex Avila 8,8,FALSE
+PODHORZER,CI,batter,Hanley Ramirez 28,28,FALSE
+PODHORZER,MI,batter,Ike Davis 5,5,FALSE
+PODHORZER,OF,batter,Jose Bautista 37,37,FALSE
+PODHORZER,OF,batter,Mookie Betts 24,24,FALSE
+PODHORZER,OF,batter,Desmond Jennings 16,16,FALSE
+PODHORZER,OF,batter,David DeJesus 1,1,FALSE
+PODHORZER,P,pitcher,Koji Uehara 15,13,FALSE
+PODHORZER,P,pitcher,R.A. Dickey 10,10,FALSE
+PODHORZER,P,pitcher,Scott Kazmir 9,9,FALSE
+PODHORZER,P,pitcher,Sean Doolittle 8,8,FALSE
+PODHORZER,P,pitcher,Wade Miley 7,7,FALSE
+PODHORZER,P,pitcher,CC Sabathia 5,5,FALSE
+PODHORZER,P,pitcher,Kevin Jepsen 1,1,FALSE
+PODHORZER,P,pitcher,Nathan Karns 1,1,FALSE
+PODHORZER,P,pitcher,Adam Warren 1,1,FALSE
+PODHORZER,SS,batter,Josh Rutledge 5,5,FALSE
+PODHORZER,SW,batter,Steve Pearce 13,13,FALSE
+PODHORZER,UT,batter,Steven Souza 16,16,FALSE
+SCHECHTER,1B,batter,James Loney 8,8,FALSE
+SCHECHTER,2B,batter,Lonnie Chisenhall 11,11,FALSE
+SCHECHTER,3B,batter,Brian Dozier 27,27,FALSE
+SCHECHTER,C,batter,Evan Gattis 18,18,FALSE
+SCHECHTER,C,batter,Josmil Pinto 3,3,FALSE
+SCHECHTER,CI,batter,Eduardo Nunez 3,3,FALSE
+SCHECHTER,MI,batter,Logan Morrison 4,4,FALSE
+SCHECHTER,OF,batter,Michael Brantley 28,28,FALSE
+SCHECHTER,OF,batter,Nelson Cruz 20,20,FALSE
+SCHECHTER,OF,batter,Austin Jackson 15,15,FALSE
+SCHECHTER,OF,batter,Carlos Beltran 13,13,FALSE
+SCHECHTER,P,pitcher,Corey Kluber 24,24,FALSE
+SCHECHTER,P,pitcher,Greg Holland 22,22,FALSE
+SCHECHTER,P,pitcher,Jered Weaver 14,14,FALSE
+SCHECHTER,P,pitcher,Matt Shoemaker 11,11,FALSE
+SCHECHTER,P,pitcher,C.J. Wilson 6,6,FALSE
+SCHECHTER,P,pitcher,Joe Smith 3,3,FALSE
+SCHECHTER,P,pitcher,Jason Vargas 3,3,FALSE
+SCHECHTER,P,pitcher,Scott Feldman 2,2,FALSE
+SCHECHTER,P,pitcher,Miguel Gonzalez 2,2,FALSE
+SCHECHTER,SS,batter,Omar Infante 6,6,FALSE
+SCHECHTER,SW,batter,Jordan Schafer 3,3,FALSE
+SCHECHTER,UT,batter,Avisail Garcia 14,14,FALSE
+SHANDLER,1B,batter,Edwin Encarnacion 35,35,FALSE
+SHANDLER,2B,batter,Trevor Plouffe 13,13,FALSE
+SHANDLER,3B,batter,Jason Kipnis 24,24,FALSE
+SHANDLER,C,batter,Chris Iannetta 14,14,FALSE
+SHANDLER,C,batter,Ryan Hanigan 1,1,FALSE
+SHANDLER,CI,batter,Brad Miller 10,10,FALSE
+SHANDLER,MI,batter,Justin Smoak 5,6,FALSE
+SHANDLER,OF,batter,Chris Carter 25,25,FALSE
+SHANDLER,OF,batter,Shin-Soo Choo 24,24,FALSE
+SHANDLER,OF,batter,Rajai Davis 12,12,FALSE
+SHANDLER,OF,batter,Kevin Kiermaier 7,7,FALSE
+SHANDLER,P,pitcher,Felix Hernandez 32,32,FALSE
+SHANDLER,P,pitcher,Fernando Rodney 16,16,FALSE
+SHANDLER,P,pitcher,Masahiro Tanaka 14,14,FALSE
+SHANDLER,P,pitcher,Dallas Keuchel 9,9,FALSE
+SHANDLER,P,pitcher,Andrew Heaney 3,3,FALSE
+SHANDLER,P,pitcher,Kelvin Herrera 2,2,FALSE
+SHANDLER,P,pitcher,Justin Masterson 2,2,FALSE
+SHANDLER,P,pitcher,Danny Farquhar 1,1,FALSE
+SHANDLER,P,pitcher,Brandon Finnegan 1,1,FALSE
+SHANDLER,SS,batter,Everth Cabrera 7,7,FALSE
+SHANDLER,SW,batter,Dayan Viciedo 1,1,FALSE
+SHANDLER,UT,batter,Jake Marisnick 2,2,FALSE
+TRACHTMAN,1B,batter,Daric Barton 1,1,FALSE
+TRACHTMAN,2B,batter,Chase Headley 18,18,FALSE
+TRACHTMAN,3B,batter,Jose Altuve 30,30,FALSE
+TRACHTMAN,C,batter,Brian McCann 17,17,FALSE
+TRACHTMAN,C,batter,Matt Wieters 16,16,FALSE
+TRACHTMAN,CI,batter,J.J. Hardy 11,11,FALSE
+TRACHTMAN,MI,batter,Conor Gillaspie 6,6,FALSE
+TRACHTMAN,OF,batter,Leonys Martin 24,24,FALSE
+TRACHTMAN,OF,batter,Alex Gordon 21,21,FALSE
+TRACHTMAN,OF,batter,Oswaldo Arcia 17,17,FALSE
+TRACHTMAN,OF,batter,Christian Vazquez 1,1,FALSE
+TRACHTMAN,P,pitcher,David Price 28,28,FALSE
+TRACHTMAN,P,pitcher,Zach Britton 19,19,FALSE
+TRACHTMAN,P,pitcher,T.J. House 6,6,FALSE
+TRACHTMAN,P,pitcher,Mark Buehrle 3,3,FALSE
+TRACHTMAN,P,pitcher,J.A. Happ 2,2,FALSE
+TRACHTMAN,P,pitcher,Alex Meyer 2,2,FALSE
+TRACHTMAN,P,pitcher,Joe Kelly 1,1,FALSE
+TRACHTMAN,P,pitcher,Kris Medlen 1,1,FALSE
+TRACHTMAN,P,pitcher,Hector Santiago 1,1,FALSE
+TRACHTMAN,SS,batter,Ian Kinsler 20,20,FALSE
+TRACHTMAN,SW,batter,Travis Snider 3,3,FALSE
+TRACHTMAN,UT,batter,Alejandro De Aza 12,12,FALSE

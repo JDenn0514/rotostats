@@ -87,6 +87,7 @@ All `cli_abort()` and `cli_warn()` calls must use a class from this table.
 | `rotostats_error_auction_slot_orphan` | `.parse_tw_auction_2012_mixed()` | No slot labels found in col 2 of the data region, or the last data row has an empty slot after trailing-row trim (backward-fill cannot proceed) | Inspect the source file; trailing junk rows may extend past the last roster row, or the slot column is in a different position |
 | `rotostats_error_auction_row1_nonempty` | `.parse_tw_auction_2012_mixed()` | Row 1 of the CSV is expected to be entirely empty (per the 2012-mixed layout) but contains non-empty cells | Verify the file uses the 2012-mixed layout; if not, use a different parser |
 | `rotostats_error_auction_unknown_league` | `.normalize_tw_auction()` | `league` is not one of `"al"`, `"nl"`, or `"mixed"` | Pass a valid league code |
+| `rotostats_error_auction_unknown_slot` | `.validate_tw_position_slots()` (called by every `.parse_tw_auction_*()` parser) | A parsed `position_slot` value is not in `.tw_canonical_slots` | Inspect the source file; if the slot is genuinely valid, add it to `.tw_canonical_slots` in `R/utils-tout-wars.R` |
 
 ## Warnings
 
