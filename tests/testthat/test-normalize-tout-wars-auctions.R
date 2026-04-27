@@ -92,3 +92,22 @@ test_that(".parse_tw_auction_2012_alnl handles 2012-nl layout", {
   expect_setequal(unique(result$team_owner), c("ALPHA", "BETA", "GAMMA"))
   expect_setequal(unique(result$player_type), c("batter", "pitcher"))
 })
+
+test_that(".parse_tw_auction_2012_mixed handles empty row 1 and sparse slots", {
+  result <- .parse_tw_auction_2012_mixed(
+    fixture_path("2012-mixed-mini.csv"),
+    expected_teams = 3
+  )
+  # 3 teams * 3 priced data rows = 9. Reserve row, "checked" notes row, and
+  # the trailing empty row must all be excluded.
+  expect_equal(nrow(result), 9L)
+  expect_setequal(unique(result$team_owner), c("SMITH", "JONES", "COLTON/WOLF"))
+  expect_setequal(unique(result$position_slot), c("C", "SP"))
+  expect_false(any(result$player_name %in% c("Reserve A", "Reserve B", "Reserve C")))
+  expect_false(any(result$player_name == "checked"))
+
+  # Sparse-slot row (row 6 of fixture: A1/A2/A3) should backward-inherit `C`.
+  smith_rows <- dplyr::filter(result, .data$team_owner == "SMITH")
+  expect_equal(sum(smith_rows$position_slot == "C"), 2L)
+  expect_equal(sum(smith_rows$position_slot == "SP"), 1L)
+})

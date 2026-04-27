@@ -84,6 +84,8 @@ All `cli_abort()` and `cli_warn()` calls must use a class from this table.
 | `rotostats_error_auction_col_count` | `.parse_tw_auction_*()` parsers | Raw CSV column count does not match `1 + 2 * expected_teams` after trimming trailing all-NA columns | Inspect the file; add or fix a year-specific parser branch |
 | `rotostats_error_auction_meta_rows` | `.parse_tw_auction_*()` parsers | Meta rows 2-4 do not begin with `Left to Spend` / `Players Needed` / `Max Bid` | Inspect the file; the layout may have shifted and need a year-specific branch |
 | `rotostats_error_auction_price` | `.parse_tw_auction_*()` parsers | A price cell is not coercible to a non-negative integer | Inspect the offending cell; fix typo in source or extend parser to handle the format |
+| `rotostats_error_auction_slot_orphan` | `.parse_tw_auction_2012_mixed()` | No slot labels found in col 2 of the data region, or the last data row has an empty slot after trailing-row trim (backward-fill cannot proceed) | Inspect the source file; trailing junk rows may extend past the last roster row, or the slot column is in a different position |
+| `rotostats_error_auction_row1_nonempty` | `.parse_tw_auction_2012_mixed()` | Row 1 of the CSV is expected to be entirely empty (per the 2012-mixed layout) but contains non-empty cells | Verify the file uses the 2012-mixed layout; if not, use a different parser |
 
 ## Warnings
 

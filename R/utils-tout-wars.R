@@ -159,6 +159,161 @@
   long[, c("team_owner", "position_slot", "player_type", "player_name", "price", "is_keeper")]
 }
 
+#' Parse a 2012 Mixed Tout Wars auction CSV.
+#'
+#' Layout deviation from standard:
+#' - Row 1 is entirely empty.
+#' - Owner row is row 2; owners in odd columns (3, 5, ..., 2k+1, ..., 31).
+#' - Meta rows are rows 3-5 (not 2-4).
+#' - Data rows start at row 6.
+#' - Position slot in col 2; sparse - the label appears on the LAST row of each
+#'   slot group, so preceding rows must backward-fill from below.
+#' - For team k: name at col 2k+1, price at col 2k+2. Total cols 2 + 2 * teams.
+#'
+#' Trailing junk rows (notes, "checked" labels, blank rows after the last
+#' priced row) are dropped before backward-fill so they cannot poison the
+#' inheritance chain. Reserve rows (slot `R`) survive backward-fill but are
+#' dropped by the canonical-slot post-filter (see spec non-goal #6).
+#'
+#' @keywords internal
+#' @noRd
+.parse_tw_auction_2012_mixed <- function(path, expected_teams) {
+  raw <- readr::read_csv(
+    path,
+    col_types = readr::cols(.default = "c"),
+    col_names = FALSE,
+    progress = FALSE
+  )
+
+  if (nrow(raw) < 5L) {
+    cli::cli_abort(
+      "Too few rows in {.file {path}}; expected empty row + owner row + 3 meta rows + roster.",
+      class = "rotostats_error_auction_meta_rows"
+    )
+  }
+
+  # Drop trailing rows after the last row whose col 2 (slot) is non-empty.
+  # The 2012-mixed file has notes rows (col 2 empty, scattered text in name
+  # cols) and blank rows after the last priced/reserve roster row. These
+  # would defeat backward-fill (no label below to inherit from), so we cut
+  # them off first. This works because the slot label always appears on the
+  # LAST row of each group, including the last group overall.
+  slot_col_raw <- as.character(raw[[2]])
+  nonempty_slot <- !is.na(slot_col_raw) & nzchar(trimws(slot_col_raw))
+  if (!any(nonempty_slot[-(1:5)])) {
+    cli::cli_abort(
+      "No slot labels found in col 2 of {.file {path}}.",
+      class = "rotostats_error_auction_slot_orphan"
+    )
+  }
+  last_data_row <- max(which(nonempty_slot))
+  raw <- raw[seq_len(last_data_row), , drop = FALSE]
+
+  is_trailing_na <- vapply(raw, function(col) all(is.na(col)), logical(1))
+  last_keep <- max(which(!is_trailing_na))
+  raw <- raw[, seq_len(last_keep), drop = FALSE]
+
+  # In the 2012-mixed layout col 1 is an empty placeholder and col 2 holds
+  # the slot - both above and beyond the per-team (name, price) pairs.
+  expected_cols <- 2L + 2L * expected_teams
+  if (ncol(raw) != expected_cols) {
+    cli::cli_abort(
+      c("Wrong column count in {.file {path}}.",
+        "i" = "Expected {expected_cols} columns ({expected_teams} teams in 2012-mixed layout), got {ncol(raw)}."),
+      class = "rotostats_error_auction_col_count"
+    )
+  }
+
+  # Validate row 1 is empty.
+  row1_nonempty <- sum(!is.na(raw[1, ]) & nzchar(trimws(as.character(raw[1, ]))))
+  if (row1_nonempty > 0) {
+    cli::cli_abort(
+      "2012-mixed parser expects row 1 empty in {.file {path}}, found {row1_nonempty} non-empty cells.",
+      class = "rotostats_error_auction_row1_nonempty"
+    )
+  }
+
+  # Validate meta rows: col 3 of rows 3-5 must match the meta labels.
+  meta_labels <- c("Left to Spend", "Players Needed", "Max Bid")
+  meta_actual <- vapply(3:5, function(i) as.character(raw[i, 3, drop = TRUE]), character(1))
+  if (!identical(meta_actual, meta_labels)) {
+    cli::cli_abort(
+      c("Meta rows 3-5 do not match expected labels in {.file {path}}.",
+        "i" = "Expected {.val {meta_labels}}, got {.val {meta_actual}}."),
+      class = "rotostats_error_auction_meta_rows"
+    )
+  }
+
+  # Owners are in row 2, odd columns 3, 5, ..., 2*expected_teams + 1.
+  owner_cols <- seq(3L, by = 2L, length.out = expected_teams)
+  owners_raw <- as.character(raw[2, owner_cols, drop = TRUE])
+  owners <- vapply(owners_raw, .canonicalize_tw_owner, character(1))
+
+  data_rows <- raw[-(1:5), , drop = FALSE]
+
+  # Backward-fill position slot column (col 2). Trailing junk has already been
+  # trimmed, so the last data row is guaranteed to have a non-empty slot.
+  slot_raw <- as.character(data_rows[[2]])
+  slot_filled <- slot_raw
+  n <- length(slot_filled)
+  if (n == 0L || is.na(slot_filled[n]) || !nzchar(trimws(slot_filled[n]))) {
+    cli::cli_abort(
+      "Last data row in {.file {path}} has empty position slot \u2014 cannot backward-fill.",
+      class = "rotostats_error_auction_slot_orphan"
+    )
+  }
+  for (i in rev(seq_len(n - 1L))) {
+    if (is.na(slot_filled[i]) || !nzchar(trimws(slot_filled[i]))) {
+      slot_filled[i] <- slot_filled[i + 1L]
+    }
+  }
+  slot_filled <- trimws(slot_filled)
+
+  # Drop reserve rows (and any other non-canonical slot) before price coercion;
+  # reserve rows have empty price cells that would otherwise trip the integer
+  # check.
+  is_canonical <- slot_filled %in% .tw_canonical_slots
+  data_rows <- data_rows[is_canonical, , drop = FALSE]
+  slot_filled <- slot_filled[is_canonical]
+
+  per_team <- lapply(seq_len(expected_teams), function(k) {
+    name_col <- 2L * k + 1L
+    price_col <- 2L * k + 2L
+    tibble::tibble(
+      team_owner    = owners[k],
+      position_slot = slot_filled,
+      player_name   = as.character(data_rows[[name_col]]),
+      price_chr     = as.character(data_rows[[price_col]])
+    )
+  })
+  long <- dplyr::bind_rows(per_team)
+
+  long <- dplyr::filter(long, !is.na(.data$player_name) & nzchar(trimws(.data$player_name)))
+  long$player_name <- trimws(long$player_name)
+
+  price_int <- suppressWarnings(as.integer(long$price_chr))
+  if (any(is.na(price_int)) || any(price_int < 0)) {
+    bad <- long$price_chr[is.na(price_int) | (price_int < 0)]
+    cli::cli_abort(
+      c("Non-integer or negative prices in {.file {path}}.",
+        "i" = "Offending values: {.val {bad}}."),
+      class = "rotostats_error_auction_price"
+    )
+  }
+  long$price <- price_int
+  long$price_chr <- NULL
+
+  long$player_type <- .derive_player_type(long$position_slot)
+  long$is_keeper <- FALSE
+
+  long <- dplyr::arrange(
+    long,
+    .data$team_owner, .data$position_slot, dplyr::desc(.data$price)
+  )
+
+  long[, c("team_owner", "position_slot", "player_type", "player_name", "price", "is_keeper")]
+}
+
 #' Parse a 2012 AL or NL Tout Wars auction CSV.
 #'
 #' Layout deviation from standard:
