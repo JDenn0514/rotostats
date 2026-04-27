@@ -23,9 +23,13 @@ Imports:
     tibble (>= 3.0.0)
 Suggests:
     classInt,
+    fs,
+    glue,
     jsonlite (>= 1.8.0),
     mixtools,
+    purrr,
     testthat (>= 3.0.0),
+    usethis,
     withr (>= 2.5.0),
     covr,
     knitr,
