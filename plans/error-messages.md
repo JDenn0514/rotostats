@@ -91,6 +91,8 @@ All `cli_abort()` and `cli_warn()` calls must use a class from this table.
 | `rotostats_error_auction_row_count_drift` | `data-raw/normalize-tout-wars-auctions.R` (Stage 1 driver) | Normalized row count for a file does not match the golden value in `.tw_auction_row_counts` | Investigate the parser output; if the change is intentional, update `.tw_auction_row_counts` in `R/utils-tout-wars.R` |
 | `rotostats_error_auction_team_total_oob` | `data-raw/normalize-tout-wars-auctions.R` (Stage 1 driver) | A team's total auction spend is outside [0, 400] | Investigate the source file or parser; a team's draft-day budget cannot exceed \$400 |
 | `rotostats_error_auction_file_total_oob` | `data-raw/normalize-tout-wars-auctions.R` (Stage 1 driver) | League-year total auction spend is outside [2000, 5000] | Investigate the source file or parser; verify total spend is consistent with a standard 12- or 15-team auction format |
+| `rotostats_error_auction_missing_clean_files` | `data-raw/tout-wars-auctions.R` (Stage 2 driver) | Expected 45 cleaned auction CSVs but a different count was found in `data-raw/sources/tout-wars/auctions-clean/` | Verify Stage 1 completed successfully and all 45 cleaned CSVs are present |
+| `rotostats_error_auction_combined_row_count` | `data-raw/tout-wars-auctions.R` (Stage 2 driver) | Combined row count of bound data frame does not match the sum of `.tw_auction_row_counts` (13,474) | Investigate which cleaned CSV has a row count drift; re-run Stage 1 if needed |
 
 ## Warnings
 

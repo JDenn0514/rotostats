@@ -34,3 +34,4 @@ URL: https://github.com/JDenn0514/rotostats, https://jdenn0514.github.io/rotosta
 BugReports: https://github.com/JDenn0514/rotostats/issues
 X-schema.org-keywords: baseball, rotisserie, fantasy, statistics, auction, sports
 RoxygenNote: 7.3.3
+LazyData: true
