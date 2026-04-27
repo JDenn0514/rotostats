@@ -81,6 +81,9 @@ All `cli_abort()` and `cli_warn()` calls must use a class from this table.
 | `rotostats_error_empty_projection_response` | `get_projections()` | API returned a well-formed response with zero projection rows | Verify the source is still publishing projections for the current season |
 | `rotostats_error_invalid_mlb_only` | `get_projections()` | `mlb_only` is not a length-1 non-NA logical | Pass `TRUE` or `FALSE` |
 | `rotostats_error_owner_blank` | `.canonicalize_tw_owner()` | Owner string is `NA` or contains only whitespace | Provide a non-blank owner string; check the source CSV's owner header row |
+| `rotostats_error_auction_col_count` | `.parse_tw_auction_*()` parsers | Raw CSV column count does not match `1 + 2 * expected_teams` after trimming trailing all-NA columns | Inspect the file; add or fix a year-specific parser branch |
+| `rotostats_error_auction_meta_rows` | `.parse_tw_auction_*()` parsers | Meta rows 2-4 do not begin with `Left to Spend` / `Players Needed` / `Max Bid` | Inspect the file; the layout may have shifted and need a year-specific branch |
+| `rotostats_error_auction_price` | `.parse_tw_auction_*()` parsers | A price cell is not coercible to a non-negative integer | Inspect the offending cell; fix typo in source or extend parser to handle the format |
 
 ## Warnings
 
