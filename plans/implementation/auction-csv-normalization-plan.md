@@ -162,10 +162,22 @@ The standard layout (verified on `2018-al.csv`):
 - Rows 2–4: meta rows starting with `Left to Spend` / `Players Needed` / `Max Bid` in col 2.
 - Row 5+: col 1 = `position_slot`; even cols = player name; odd cols = price.
 - Trailing all-empty columns may exist.
+- **Footer rows:** several files (e.g., `2018-al.csv` rows 36–37) have summary
+  stats with stray non-NA values in trailing columns — these defeat a naive
+  `all(is.na(col))` trim. The parser must filter them out before column-count
+  validation.
+- **Reserve (`R`) rows:** at the bottom of each team's roster, files include
+  reserve picks with player names but **no price**. The spec excludes reserves
+  from the dataset; the parser must filter them out before price coercion.
+
+Both pathologies are handled by a single up-front filter: keep rows 1–4
+unconditionally, then keep only data rows whose col 1 (trimmed, uppercased) is
+in the canonical priced-slot set
+`C, 1B, 3B, CI, 2B, SS, MI, OF, UT, SW, P, SP, RP`.
 
 - [ ] **Step 1: Create the synthetic fixture**
 
-Create `tests/testthat/fixtures/tout-wars-auctions/standard-mini.csv` — 3 teams × 2 slots, mimicking the standard layout:
+Create `tests/testthat/fixtures/tout-wars-auctions/standard-mini.csv` — 3 teams × 2 slots, with one reserve (`R`) row per team and a footer summary row that has stray non-NA values in trailing columns (mimics the `2018-al.csv` pathology):
 
 ```csv
 ,SMITH,,JONES,,WOLF/COLTON,
@@ -174,9 +186,14 @@ Create `tests/testthat/fixtures/tout-wars-auctions/standard-mini.csv` — 3 team
 ,Max Bid,1,Max Bid,3,Max Bid,1
 C,Player A,10,Player B,12,Player C,8
 SP,Pitcher A,20,Pitcher B,18,Pitcher C,15
+R,Reserve A,,Reserve B,,Reserve C,
+,,30,,30,,23,0
 ```
 
-(Note the trailing comma on row 1 — represents one trailing all-empty column to be trimmed.)
+Notes:
+- Trailing comma on row 1 represents one trailing all-empty column.
+- `R` rows have player names but blank prices — must be excluded from output.
+- Final summary row has a stray `0` in the trailing column — must NOT defeat trailing-column trim.
 
 - [ ] **Step 2: Write the failing test**
 
@@ -196,13 +213,24 @@ test_that(".parse_tw_auction_standard returns long-tidy rows", {
     result,
     c("team_owner", "position_slot", "player_type", "player_name", "price", "is_keeper")
   )
-  expect_equal(nrow(result), 6)  # 3 teams × 2 slots
+  expect_equal(nrow(result), 6)  # 3 teams × 2 priced slots (R rows excluded)
   expect_setequal(unique(result$team_owner), c("SMITH", "JONES", "COLTON/WOLF"))
   expect_setequal(unique(result$position_slot), c("C", "SP"))
   expect_setequal(unique(result$player_type), c("batter", "pitcher"))
   expect_true(all(!result$is_keeper))
   expect_type(result$price, "integer")
   expect_true(all(result$price > 0))
+})
+
+test_that(".parse_tw_auction_standard excludes reserve and footer rows", {
+  result <- .parse_tw_auction_standard(
+    fixture_path("standard-mini.csv"),
+    expected_teams = 3
+  )
+  # Reserve player names from the fixture must not appear in the output.
+  expect_false(any(grepl("^Reserve ", result$player_name)))
+  # Position_slot column must contain no "R" entries.
+  expect_false("R" %in% result$position_slot)
 })
 
 test_that(".parse_tw_auction_standard errors on wrong column count", {
@@ -252,6 +280,14 @@ Append to `R/utils-tout-wars.R`:
 ```r
 .tw_pitcher_slots <- c("SP", "RP", "P")
 
+# Canonical priced slots used to identify roster rows during parsing.
+# Reserve ("R") rows have no auction price and are excluded from the dataset
+# (see spec non-goal #6).
+.tw_canonical_slots <- c(
+  "C", "1B", "3B", "CI", "2B", "SS", "MI", "OF", "UT", "SW",
+  "P", "SP", "RP"
+)
+
 #' Derive player_type from position_slot vector.
 #' @keywords internal
 #' @noRd
@@ -275,7 +311,23 @@ Append to `R/utils-tout-wars.R`:
     progress = FALSE
   )
 
-  # Trim trailing all-NA columns.
+  if (nrow(raw) < 4L) {
+    cli::cli_abort(
+      "Too few rows in {.file {path}}; expected header + 3 meta rows + roster.",
+      class = "rotostats_error_auction_meta_rows"
+    )
+  }
+
+  # Filter rows: keep header (row 1) + meta rows (2-4) unconditionally.
+  # For the rest, keep only rows whose col 1 (trimmed, uppercased) is a
+  # canonical priced slot. This drops footer/summary rows AND reserve (R) rows.
+  slot_col <- toupper(trimws(as.character(raw[[1]])))
+  is_priced_roster <- !is.na(slot_col) & nzchar(slot_col) & slot_col %in% .tw_canonical_slots
+  is_priced_roster[1:4] <- FALSE  # Don't double-count rows 1-4.
+  keep_rows <- c(1L, 2L, 3L, 4L, which(is_priced_roster))
+  raw <- raw[keep_rows, , drop = FALSE]
+
+  # Trim trailing all-NA columns (now safe — footer/reserve rows excluded).
   is_trailing_na <- vapply(raw, function(col) all(is.na(col)), logical(1))
   last_keep <- max(which(!is_trailing_na))
   raw <- raw[, seq_len(last_keep), drop = FALSE]
@@ -305,7 +357,7 @@ Append to `R/utils-tout-wars.R`:
   owners_raw <- as.character(raw[1, owner_cols, drop = TRUE])
   owners <- vapply(owners_raw, .canonicalize_tw_owner, character(1))
 
-  # Data rows: row 5 onward.
+  # Data rows: row 5 onward (already filtered to priced-roster rows above).
   data_rows <- raw[-(1:4), , drop = FALSE]
 
   # For each team k (1..expected_teams): cols 2k = name, 2k+1 = price.
@@ -371,7 +423,7 @@ nrow(res)
 unique(res$team_owner)
 ```
 
-Expected: ~276 rows (12 teams × 23 slots), 12 distinct canonical owners including `COLTON/WOLF`.
+Expected: ~276 rows (12 teams × 23 priced slots — reserves excluded), 12 distinct canonical owners including `COLTON/WOLF`. No `R` slot in `unique(res$position_slot)`.
 
 - [ ] **Step 7: Commit**
 

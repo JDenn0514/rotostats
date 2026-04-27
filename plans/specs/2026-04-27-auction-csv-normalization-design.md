@@ -31,7 +31,10 @@ This spec deliberately excludes the following:
    `data-raw/sources/tout-wars/auctions/`. NFBC, LABR, etc. are out of scope.
 5. **Scraping new auction data.** This spec normalizes already-downloaded raw
    CSVs. A live auction-results scraper is out of scope.
-6. **The two pre-existing follow-ups in
+6. **Reserve picks.** Rows with `position_slot = "R"` (reserve / farm) have no
+   auction price and are excluded from the normalized dataset. The dataset is
+   "auction-priced picks only." Reserves remain in the raw CSVs if ever needed.
+7. **The two pre-existing follow-ups in
    [plans/follow-ups.md](../follow-ups.md)** (`pos_eligibility` delimiter
    mismatch, `player_type` vocabulary drift). This spec does not resolve them.
 
@@ -112,28 +115,39 @@ Verified shape on `2018-al.csv`:
 - **Rows 5+:** col 1 = `position_slot`; even cols = player name; odd cols = price.
 - **Trailing empty columns:** all-NA columns at the right edge — dropped.
 - **Column counts:** AL/NL = `1 + 2 × 12 = 25`; Mixed = `1 + 2 × 15 = 31`.
+- **Footer / reserve rows:** several files have summary-stat rows below the
+  rosters (e.g., row 36–37 of `2018-al.csv`) with stray non-NA values in
+  trailing columns; reserve picks (`R` slot) appear at the bottom of each
+  team's roster with no price. Both are filtered out before column-count
+  validation by restricting to rows whose first cell is a canonical priced
+  slot.
 
 Steps:
 
 1. **Read raw bytes.** Apply year-specific preprocessing if applicable, then
    `readr::read_csv(col_types = cols(.default = "c"), col_names = FALSE)`.
-2. **Trim trailing all-NA columns.**
-3. **Validate column count** matches `1 + 2 * expected_teams` for the league.
+2. **Filter to header + meta + priced-roster rows.** Keep rows 1–4
+   unconditionally (header + 3 meta rows). For the rest, keep only rows whose
+   col-1 value (trimmed, uppercased) is in the canonical priced-slot set:
+   `C, 1B, 3B, CI, 2B, SS, MI, OF, UT, SW, P, SP, RP`. This drops footer /
+   summary rows and reserve (`R`) rows in one pass.
+3. **Trim trailing all-NA columns** on the filtered matrix.
+4. **Validate column count** matches `1 + 2 * expected_teams` for the league.
    Strict — `cli::cli_abort()` if not.
-4. **Extract team owners** from row 1, even columns. Apply `canonicalize_owner()`.
-5. **Validate and drop rows 2–4.** Their first non-NA value must match
+5. **Extract team owners** from row 1, even columns. Apply `canonicalize_owner()`.
+6. **Validate and drop rows 2–4.** Their first non-NA value must match
    `Left to Spend` / `Players Needed` / `Max Bid` — abort otherwise.
-6. **Pivot wide → long.** For each team owner *i* (cols `2i` and `2i+1`):
-   - Slice rows 5+, cols `[1, 2i, 2i+1]` → `(position_slot, player_name, price)`.
+7. **Pivot wide → long.** For each team owner *i* (cols `2i` and `2i+1`):
+   - Slice priced-roster rows, cols `[1, 2i, 2i+1]` → `(position_slot, player_name, price)`.
    - Tag with `team_owner = owners[i]`.
    - Bind across all teams.
-7. **Drop empty rows** where `player_name` is `NA` or empty.
-8. **Coerce `price`** to non-negative integer. Abort on failure.
-9. **Derive `player_type`** from `position_slot` (rule above).
-10. **Validate `position_slot`** against a per-league-year canonical set.
-11. **Add `is_keeper = FALSE`.**
-12. **Sort** by `team_owner, position_slot, -price`.
-13. **Write** to `data-raw/sources/tout-wars/auctions-clean/auction-{league}-{year}.csv`.
+8. **Drop empty rows** where `player_name` is `NA` or empty.
+9. **Coerce `price`** to non-negative integer. Abort on failure.
+10. **Derive `player_type`** from `position_slot` (rule above).
+11. **Validate `position_slot`** against a per-league-year canonical set.
+12. **Add `is_keeper = FALSE`.**
+13. **Sort** by `team_owner, position_slot, -price`.
+14. **Write** to `data-raw/sources/tout-wars/auctions-clean/auction-{league}-{year}.csv`.
 
 ### Year-specific branches
 
