@@ -659,6 +659,57 @@
   }
 )
 
+# Golden per-file row counts. Populated empirically after Stage 1's first
+# clean run. Used by Stage 1 (in-script assertion) and Stage 2 (combined
+# row-count assertion). Update when raw files change.
+.tw_auction_row_counts <- c(
+  "2012-al"    = 276L,
+  "2012-mixed" = 345L,
+  "2012-nl"    = 299L,
+  "2013-al"    = 276L,
+  "2013-mixed" = 345L,
+  "2013-nl"    = 276L,
+  "2014-al"    = 276L,
+  "2014-mixed" = 345L,
+  "2014-nl"    = 276L,
+  "2015-al"    = 276L,
+  "2015-mixed" = 345L,
+  "2015-nl"    = 276L,
+  "2016-al"    = 276L,
+  "2016-mixed" = 345L,
+  "2016-nl"    = 276L,
+  "2017-al"    = 276L,
+  "2017-mixed" = 343L,
+  "2017-nl"    = 276L,
+  "2018-al"    = 276L,
+  "2018-mixed" = 345L,
+  "2018-nl"    = 275L,
+  "2019-al"    = 275L,
+  "2019-mixed" = 345L,
+  "2019-nl"    = 276L,
+  "2020-al"    = 276L,
+  "2020-mixed" = 345L,
+  "2020-nl"    = 276L,
+  "2021-al"    = 276L,
+  "2021-mixed" = 345L,
+  "2021-nl"    = 276L,
+  "2022-al"    = 276L,
+  "2022-mixed" = 345L,
+  "2022-nl"    = 276L,
+  "2023-al"    = 276L,
+  "2023-mixed" = 345L,
+  "2023-nl"    = 276L,
+  "2024-al"    = 276L,
+  "2024-mixed" = 345L,
+  "2024-nl"    = 276L,
+  "2025-al"    = 276L,
+  "2025-mixed" = 345L,
+  "2025-nl"    = 276L,
+  "2026-al"    = 276L,
+  "2026-mixed" = 345L,
+  "2026-nl"    = 276L
+)
+
 # Default team count by league.
 .tw_team_counts <- c(al = 12L, nl = 12L, mixed = 15L)
 

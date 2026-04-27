@@ -88,6 +88,9 @@ All `cli_abort()` and `cli_warn()` calls must use a class from this table.
 | `rotostats_error_auction_row1_nonempty` | `.parse_tw_auction_2012_mixed()` | Row 1 of the CSV is expected to be entirely empty (per the 2012-mixed layout) but contains non-empty cells | Verify the file uses the 2012-mixed layout; if not, use a different parser |
 | `rotostats_error_auction_unknown_league` | `.normalize_tw_auction()` | `league` is not one of `"al"`, `"nl"`, or `"mixed"` | Pass a valid league code |
 | `rotostats_error_auction_unknown_slot` | `.validate_tw_position_slots()` (called by every `.parse_tw_auction_*()` parser) | A parsed `position_slot` value is not in `.tw_canonical_slots` | Inspect the source file; if the slot is genuinely valid, add it to `.tw_canonical_slots` in `R/utils-tout-wars.R` |
+| `rotostats_error_auction_row_count_drift` | `data-raw/normalize-tout-wars-auctions.R` (Stage 1 driver) | Normalized row count for a file does not match the golden value in `.tw_auction_row_counts` | Investigate the parser output; if the change is intentional, update `.tw_auction_row_counts` in `R/utils-tout-wars.R` |
+| `rotostats_error_auction_team_total_oob` | `data-raw/normalize-tout-wars-auctions.R` (Stage 1 driver) | A team's total auction spend is outside [0, 400] | Investigate the source file or parser; a team's draft-day budget cannot exceed \$400 |
+| `rotostats_error_auction_file_total_oob` | `data-raw/normalize-tout-wars-auctions.R` (Stage 1 driver) | League-year total auction spend is outside [2000, 5000] | Investigate the source file or parser; verify total spend is consistent with a standard 12- or 15-team auction format |
 
 ## Warnings
 
