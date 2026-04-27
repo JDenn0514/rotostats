@@ -407,3 +407,53 @@ test_that(".parse_tw_auction_2021_al parses 2021-al layout correctly", {
   expect_true(all(result$player_type == "batter"))
   expect_true(all(!result$is_keeper))
 })
+
+# ── Tests for previously-uncovered error classes ──────────────────────────────
+
+# Test 11: rotostats_error_auction_price
+# A 12-team standard fixture with one price cell set to a non-numeric string.
+# The standard parser strips "$" then calls as.integer(); "abc" survives that
+# strip and produces NA, triggering the price-coercion abort.
+test_that(".parse_tw_auction_standard errors on non-integer price (rotostats_error_auction_price)", {
+  tf <- withr::local_tempfile(fileext = ".csv")
+  writeLines(.std_lines(12L, p1 = "abc", p2 = "20"), tf)
+
+  expect_error(
+    .parse_tw_auction_standard(tf, expected_teams = 12L),
+    class = "rotostats_error_auction_price"
+  )
+})
+
+# Test 12: rotostats_error_auction_unknown_slot
+# Direct unit test of the validator with a slot vector containing an unknown
+# value ("XYZ").
+test_that(".validate_tw_position_slots errors on unknown slot (rotostats_error_auction_unknown_slot)", {
+  expect_error(
+    .validate_tw_position_slots(c("C", "XYZ", "1B"), "fake.csv"),
+    class = "rotostats_error_auction_unknown_slot"
+  )
+})
+
+# Test 13: rotostats_error_auction_slot_orphan
+# A 2012-mixed-style fixture where col 2 has NO non-empty values in any row
+# after the 5-row header block (rows 1-5). The parser checks
+# `!any(nonempty_slot[-(1:5)])` and aborts with slot_orphan.
+test_that(".parse_tw_auction_2012_mixed errors when no slot labels present (rotostats_error_auction_slot_orphan)", {
+  # 3-team 2012-mixed layout: 2 + 2*3 = 8 cols per row.
+  # Col 2 is empty for ALL data rows — no slot labels anywhere after the header.
+  tf <- withr::local_tempfile(fileext = ".csv")
+  writeLines(c(
+    ",,,,,,,",                                          # row 1: empty
+    ",,SMITH,,JONES,,WOLF/COLTON,",                    # row 2: owners
+    ",,Left to Spend,0,Left to Spend,0,Left to Spend,0", # row 3: meta
+    ",,Players Needed,0,Players Needed,0,Players Needed,0",
+    ",,Max Bid,1,Max Bid,1,Max Bid,1",
+    ",,PA1,10,PA2,11,PA3,12",                          # data rows: col 2 empty
+    ",,PB1,20,PB2,21,PB3,22"
+  ), tf)
+
+  expect_error(
+    .parse_tw_auction_2012_mixed(tf, expected_teams = 3L),
+    class = "rotostats_error_auction_slot_orphan"
+  )
+})
