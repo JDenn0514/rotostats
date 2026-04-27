@@ -983,128 +983,119 @@ git commit -m "feat(auctions): bespoke parser for 2012-mixed auction layout"
 
 ---
 
-## Task 5: 2015-nl preprocessor + standard parser
+## Task 5: 2015-nl smoke test against the standard parser
 
 **Files:**
-- Create: `tests/testthat/fixtures/tout-wars-auctions/2015-nl-mini.csv`
-- Modify: `R/utils-tout-wars.R`
 - Modify: `tests/testthat/test-normalize-tout-wars-auctions.R`
 
-The 2015-nl deviation: an embedded literal newline inside a quoted field breaks `readr::read_csv`. The fix: read raw bytes, repair the malformed quote/newline, write to a tempfile, then delegate to the standard parser.
+The 2015-nl file has literal newlines inside quoted owner / player-name
+fields (e.g., row 1 of the raw CSV: `,COCKCROFT,,"GARDNER\n",,"HERTZ\n",...`).
+The original plan and spec assumed `readr::read_csv` would break on these and
+required a bespoke preprocessor. Empirical testing shows readr handles
+RFC-4180 quoted-multiline fields natively:
 
-- [ ] **Step 1: Inspect 2015-nl.csv to characterize the embedded newline**
+```
+$ Rscript -e 'd <- readr::read_csv("data-raw/sources/tout-wars/auctions/2015-nl.csv", col_types = readr::cols(.default = "c"), col_names = FALSE, progress = FALSE); cat("rows:", nrow(d), "cols:", ncol(d), "\n")'
+rows: 38  cols: 25
+```
+
+The standard parser already trims the trailing newline characters via
+`canonicalize_owner()` (for owners) and `trimws()` (for player names), so
+`.parse_tw_auction_standard("…/2015-nl.csv", expected_teams = 12)` returns
+276 long-tidy rows with all 12 canonical owners and zero warnings — verified
+empirically before this plan amendment.
+
+This task therefore needs no parser, no fixture, and no preprocessor. It
+adds a single regression test pinned to the real 2015-nl file so a future
+readr regression that re-introduces the embedded-newline pathology cannot
+slip through silently.
+
+- [ ] **Step 1: Confirm the standard parser handles 2015-nl natively**
 
 Run:
 
 ```bash
-awk -F, 'NR<=10 {print NR": "NF" cols"}' data-raw/sources/tout-wars/auctions/2015-nl.csv
-head -10 data-raw/sources/tout-wars/auctions/2015-nl.csv
-```
-
-Identify the line(s) where field counts are anomalously low — those are the lines with the embedded newline. Document the exact byte sequence of the malformed quote so the preprocessor can target it precisely. Update Step 2 below if your fix differs from "remove embedded newline within quoted field".
-
-- [ ] **Step 2: Create synthetic fixture**
-
-Create `tests/testthat/fixtures/tout-wars-auctions/2015-nl-mini.csv`. The fixture must reproduce the embedded-newline pathology — write it via R rather than as a literal CSV to control the bytes:
-
-```r
-# Run this once to generate the fixture:
-fixture_lines <- c(
-  ',SMITH,,JONES,,WOLF/COLTON,',
-  ',Left to Spend,0,Left to Spend,0,Left to Spend,0',
-  ',Players Needed,0,Players Needed,0,Players Needed,0',
-  ',Max Bid,1,Max Bid,1,Max Bid,1',
-  'C,Player A,10,"Player',     # <-- embedded newline starts here
-  ' B with embedded newline",12,Player C,8',
-  'SP,Pitcher A,20,Pitcher B,18,Pitcher C,15'
+Rscript -e '
+suppressMessages(devtools::load_all())
+warns <- character()
+withCallingHandlers(
+  {
+    result <- rotostats:::.parse_tw_auction_standard(
+      "data-raw/sources/tout-wars/auctions/2015-nl.csv",
+      expected_teams = 12)
+  },
+  warning = function(w) {
+    warns <<- c(warns, conditionMessage(w))
+    invokeRestart("muffleWarning")
+  }
 )
-writeLines(fixture_lines, "tests/testthat/fixtures/tout-wars-auctions/2015-nl-mini.csv")
+cat("warnings:", length(warns), "\n")
+cat("nrow:", nrow(result), "\n")
+cat("owners:", paste(sort(unique(result$team_owner)), collapse=", "), "\n")
+cat("any embedded newline in player_name:", any(grepl("\n", result$player_name)), "\n")
+cat("any embedded newline in team_owner:", any(grepl("\n", result$team_owner)), "\n")
+'
 ```
 
-The pathology: row 5 starts a quoted field that does not close until row 6.
+Expected:
+- `warnings: 0`
+- `nrow: 276`
+- `owners: CARTY, COCKCROFT, GARDNER, GIANELLA, GUILFOYLE, HERTZ, KREUTZER, MCCAFFREY, MELNICK, WALTON, WILDERMAN, ZOLA`
+- Both newline checks: `FALSE`.
 
-- [ ] **Step 3: Write the failing test**
+If any of these expectations fail, **stop and escalate** — readr's behavior
+on multiline-quoted fields has changed and Task 5 needs to revert to a
+preprocessor approach.
+
+- [ ] **Step 2: Add the regression test**
 
 Append to `tests/testthat/test-normalize-tout-wars-auctions.R`:
 
 ```r
-test_that(".parse_tw_auction_2015_nl repairs embedded newline and parses", {
-  result <- .parse_tw_auction_2015_nl(
-    fixture_path("2015-nl-mini.csv"),
-    expected_teams = 3
+test_that("standard parser handles 2015-nl quoted-multiline fields natively", {
+  # The raw 2015-nl.csv has literal newlines inside quoted owner names
+  # (e.g., "GARDNER\n", "HERTZ\n") and inside several player names. readr's
+  # CSV parser handles RFC-4180 multiline-quoted fields natively, and the
+  # standard parser already trims surrounding whitespace. This test pins
+  # the round-trip so a future readr regression cannot reintroduce the
+  # embedded-newline pathology silently.
+  path <- testthat::test_path(
+    "..", "..", "data-raw", "sources", "tout-wars", "auctions", "2015-nl.csv"
   )
-  expect_equal(nrow(result), 6)
-  expect_true(any(grepl("embedded newline", result$player_name)))
+  testthat::skip_if_not(file.exists(path), "2015-nl.csv not present in source tree")
+
+  result <- expect_no_warning(
+    .parse_tw_auction_standard(path, expected_teams = 12)
+  )
+
+  expect_equal(nrow(result), 276L)
+  expect_setequal(
+    unique(result$team_owner),
+    c("CARTY", "COCKCROFT", "GARDNER", "GIANELLA", "GUILFOYLE", "HERTZ",
+      "KREUTZER", "MCCAFFREY", "MELNICK", "WALTON", "WILDERMAN", "ZOLA")
+  )
+  expect_false(any(grepl("\n", result$team_owner)))
+  expect_false(any(grepl("\n", result$player_name)))
 })
 ```
 
-- [ ] **Step 4: Run test to verify it fails**
+`expect_no_warning` is part of testthat 3e (the version this project uses).
+
+- [ ] **Step 3: Run the test to confirm it passes**
 
 Run: `Rscript -e 'devtools::test(filter = "normalize-tout-wars-auctions")'`
-Expected: FAIL.
 
-- [ ] **Step 5: Add the preprocessor + parser**
+Expected: all prior tests pass plus the new test, total 32 tests, 0 fail / 0 warn / 0 skip.
 
-Append to `R/utils-tout-wars.R`:
+If the file path skip fires (test reports SKIP=1 instead of PASS+1), the
+relative path is wrong for the current working directory — adjust until the
+test runs.
 
-```r
-#' Parse the 2015 NL Tout Wars auction CSV (with embedded-newline preprocessing).
-#'
-#' The raw 2015-nl.csv has a literal newline inside a quoted field, which
-#' breaks readr::read_csv. We read the raw bytes, collapse newlines that
-#' fall inside an unmatched quote, then delegate to the standard parser.
-#'
-#' @keywords internal
-#' @noRd
-.parse_tw_auction_2015_nl <- function(path, expected_teams) {
-  raw_bytes <- readLines(path, warn = FALSE)
-  text <- paste(raw_bytes, collapse = "\n")
-
-  # Walk the text; flip an "in-quote" flag at each unescaped `"`. When in-quote,
-  # replace any `\n` with a single space.
-  chars <- strsplit(text, "", fixed = TRUE)[[1]]
-  in_quote <- FALSE
-  for (i in seq_along(chars)) {
-    if (chars[i] == '"') {
-      in_quote <- !in_quote
-    } else if (in_quote && chars[i] == "\n") {
-      chars[i] <- " "
-    }
-  }
-  repaired <- paste(chars, collapse = "")
-
-  tf <- tempfile(fileext = ".csv")
-  on.exit(unlink(tf), add = TRUE)
-  writeLines(repaired, tf)
-
-  .parse_tw_auction_standard(tf, expected_teams = expected_teams)
-}
-```
-
-- [ ] **Step 6: Run test to verify it passes**
-
-Run: `Rscript -e 'devtools::test(filter = "normalize-tout-wars-auctions")'`
-Expected: PASS.
-
-- [ ] **Step 7: Spot-check against real 2015-nl file**
-
-```r
-devtools::load_all()
-nl15 <- .parse_tw_auction_2015_nl(
-  "data-raw/sources/tout-wars/auctions/2015-nl.csv", expected_teams = 12)
-nrow(nl15)
-nl15[grepl("\\s", nl15$player_name) & nchar(nl15$player_name) > 25, ]  # find rows that absorbed the newline
-```
-
-Expected: ~276 rows. The repaired row should appear with a single-space-joined player name.
-
-- [ ] **Step 8: Commit**
+- [ ] **Step 4: Commit**
 
 ```bash
-git add R/utils-tout-wars.R \
-        tests/testthat/test-normalize-tout-wars-auctions.R \
-        tests/testthat/fixtures/tout-wars-auctions/2015-nl-mini.csv
-git commit -m "feat(auctions): preprocessor + parser for 2015-nl embedded-newline file"
+git add tests/testthat/test-normalize-tout-wars-auctions.R
+git commit -m "test(auctions): pin 2015-nl quoted-multiline regression test"
 ```
 
 ---
@@ -1120,11 +1111,13 @@ Append:
 
 ```r
 # Maps (year, league) -> override parser. Default is .parse_tw_auction_standard.
+# 2015-nl was originally listed here, but readr handles its quoted-multiline
+# fields natively (Task 5 verifies); so it is intentionally absent and routes
+# to the standard parser by default.
 .tw_auction_overrides <- list(
   "2012-al"    = ".parse_tw_auction_2012_alnl",
   "2012-nl"    = ".parse_tw_auction_2012_alnl",
-  "2012-mixed" = ".parse_tw_auction_2012_mixed",
-  "2015-nl"    = ".parse_tw_auction_2015_nl"
+  "2012-mixed" = ".parse_tw_auction_2012_mixed"
 )
 
 # Default team count by league.

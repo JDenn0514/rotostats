@@ -152,14 +152,20 @@ Steps:
 ### Year-specific branches
 
 A dispatch table maps `(year, league)` to a parser function. Default is the
-standard parser; four files override:
+standard parser; three files override:
 
 | File           | Reason                                                            |
 | -------------- | ----------------------------------------------------------------- |
 | `2012-al`      | Layout deviates from standard — bespoke parser.                    |
 | `2012-nl`      | Layout deviates from standard — bespoke parser.                    |
 | `2012-mixed`   | Layout deviates from standard — bespoke parser.                    |
-| `2015-nl`      | Embedded literal newline inside a quoted field — preprocessor repairs raw bytes, then standard parser runs. |
+
+The 2015-nl file contains literal newlines inside quoted owner / player-name
+fields. `readr::read_csv` handles RFC-4180-style quoted-multiline fields
+natively, and the standard parser already trims whitespace from owners (via
+`canonicalize_owner()`) and player names (via `trimws()`). The file therefore
+needs no override — the dispatcher routes it to the standard parser and a
+smoke test asserts the round-trip works.
 
 Each non-default parser emits the same long-tidy schema as the standard parser
 and runs the same validations from step 8 onward. The exact 2012 deviations are
