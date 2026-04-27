@@ -127,18 +127,34 @@ def _team_name(team_p: Tag) -> str:
     return team_p.get_text(strip=True).split(",")[0].strip()
 
 
-def _team_tables(team_p: Tag) -> list[tuple[Tag, str]]:
+def _team_class(team_p: Tag) -> str:
+    """Return the 'team_NNNN' CSS class from a team <p> tag, or empty string."""
+    for c in team_p.get("class", []):
+        if c.startswith("team_"):
+            return c
+    return ""
+
+
+def _team_tables(team_p: Tag, team_p_class: str) -> list[tuple[Tag, str]]:
     """Walk forward from a team's <p> tag, collecting (table, section) pairs
-    until the next team's <p> tag."""
+    until a <p> with a *different* team_NNNN class is encountered.
+
+    Onroto emits validation messages as <p class='team_NNNN'> siblings that
+    share the same class as the real team header. Those are skipped; only a
+    different team_NNNN class signals the start of the next team.
+    """
     out: list[tuple[Tag, str]] = []
     sib = team_p.next_sibling
     while sib is not None:
         if isinstance(sib, Tag):
-            if sib.name == "p" and sib.get("class") and any(
-                c.startswith("team_") for c in sib.get("class", [])
-            ):
-                break
-            if sib.name == "table":
+            if sib.name == "p":
+                cls = next(
+                    (c for c in sib.get("class", []) if c.startswith("team_")), None
+                )
+                if cls is not None and cls != team_p_class:
+                    break
+                # same team_NNNN — it's a validation message; skip and continue
+            elif sib.name == "table":
                 classes = " ".join(sib.get("class", []))
                 if "Active_table" in classes:
                     out.append((sib, "active"))
@@ -151,13 +167,26 @@ def _team_tables(team_p: Tag) -> list[tuple[Tag, str]]:
 def parse_roster_page(html: str, year: int, league_short: str) -> list[dict]:
     soup = BeautifulSoup(html, "lxml")
     records: list[dict] = []
-    team_ps = soup.find_all("p", class_=re.compile(r"^team_"))
+
+    # Onroto emits validation messages as <p class='team_NNNN'> siblings
+    # inside each team block, sharing the same numeric class as the real team
+    # header. Dedupe by class id so only the first <p> per team (the header
+    # with the <b>name</b>) is kept.
+    seen: set[str] = set()
+    team_ps: list[Tag] = []
+    for p in soup.find_all("p", class_=re.compile(r"^team_\d+$")):
+        cls = next((c for c in p.get("class", []) if c.startswith("team_")), None)
+        if cls is None or cls in seen:
+            continue
+        seen.add(cls)
+        team_ps.append(p)
+
     if not team_ps:
         return records
 
     for team_p in team_ps:
         team_name = _team_name(team_p)
-        for table, section in _team_tables(team_p):
+        for table, section in _team_tables(team_p, team_p_class=_team_class(team_p)):
             for player in _parse_player_table(table, section):
                 records.append({
                     "year": year,

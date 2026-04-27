@@ -36,3 +36,13 @@ def test_parse_category_tables_2025_al(soup_2025_al):
     for team, stats in raw.items():
         missing = expected_cats - stats.keys()
         assert not missing, f"{team} missing {missing}"
+
+
+def test_parse_category_tables_value_correctness(soup_2025_al):
+    raw = parse_category_tables(soup_2025_al)
+    # Cross-checked against data-raw/sources/tout-wars/standings/2025-al.csv:
+    # Andy Andres: R=893, HR=281, RBI=856, SB=144, OBP=.334, W=78, SV=35, ERA=3.34, WHIP=1.127, SO=1304
+    assert raw["Andy Andres"]["R"] == 893
+    assert raw["Andy Andres"]["HR"] == 281
+    assert raw["Andy Andres"]["OBP"] == 0.334
+    assert raw["Andy Andres"]["ERA"] == 3.34
