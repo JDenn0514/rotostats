@@ -29,6 +29,7 @@ test_that(".parse_tw_auction_standard excludes reserve and footer rows", {
   expect_false(any(grepl("^Reserve ", result$player_name)))
   # Position_slot column must contain no "R" entries.
   expect_false("R" %in% result$position_slot)
+  expect_equal(nrow(result), 6L)
 })
 
 test_that(".parse_tw_auction_standard errors on wrong column count", {
