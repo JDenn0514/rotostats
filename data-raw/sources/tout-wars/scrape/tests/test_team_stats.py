@@ -143,3 +143,32 @@ def test_parse_team_page_skips_total_rows_from_player_rows(html_2025_al_team1):
     result = team_stats.parse_team_page(html_2025_al_team1, year=2025, league_short="al")
     for r in result.batter_rows + result.pitcher_rows:
         assert not r["player_name"].upper().startswith("TOTAL")
+
+
+def test_total_row_check_passes_on_real_fixture(html_2025_al_team1):
+    result = team_stats.parse_team_page(html_2025_al_team1, year=2025, league_short="al")
+    warnings = team_stats.check_section_totals(result)
+    # Real Onroto data should reconcile cleanly. Any failure here means our
+    # parser disagrees with Onroto's TOTAL row — a parsing bug.
+    assert warnings == [], f"unexpected total mismatches: {warnings}"
+
+
+def test_total_row_check_detects_synthetic_mismatch():
+    result = team_stats.TeamPageResult(team_name="Test")
+    result.batter_rows.append(
+        {"player_type": "batter", "roster_section": "active",
+         "ab": 100, "g": 30, "r": 10, "hr": 5, "rbi": 20,
+         "sb": 1, "so": 25, "bb": 8,
+         **{k: 0 for k in ("avg","obp","slg",
+                            "gp_dh","gp_c","gp_1b","gp_2b","gp_3b","gp_ss","gp_of",
+                            "year","league","team","player_name","player_id",
+                            "mlb_team","position","salary","status")}}
+    )
+    result.totals.append({
+        "player_type": "batter", "section": "active",
+        "ab": 999,  # mismatch
+        "g": 30, "r": 10, "hr": 5, "rbi": 20, "sb": 1, "so": 25, "bb": 8,
+        "avg": 0.0, "obp": 0.0, "slg": 0.0,
+    })
+    warnings = team_stats.check_section_totals(result)
+    assert any("ab" in w.lower() for w in warnings), warnings

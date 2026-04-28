@@ -512,3 +512,38 @@ def parse_team_page(html: str, year: int, league_short: str) -> TeamPageResult:
             pending_section = None  # consume; next div will set a new one
 
     return result
+
+
+_BATTER_INT_STATS = ("ab", "g", "r", "hr", "rbi", "sb", "so", "bb")
+_PITCHER_INT_STATS = ("g", "w", "l", "sv", "bb", "hr", "so")
+
+
+def check_section_totals(result: TeamPageResult) -> list[str]:
+    """Return warning strings for any section where summed player rows
+    disagree with the captured TOTAL row.
+
+    Only integer counting stats are checked exactly. Rate stats and IP
+    derive from compound denominators that don't reconstruct cleanly from
+    per-row sums; those are skipped here.
+    """
+    warnings: list[str] = []
+
+    by_kind_section: dict[tuple[str, str], list[dict]] = {}
+    for r in result.batter_rows:
+        by_kind_section.setdefault(("batter", r["roster_section"]), []).append(r)
+    for r in result.pitcher_rows:
+        by_kind_section.setdefault(("pitcher", r["roster_section"]), []).append(r)
+
+    for total in result.totals:
+        kind = total["player_type"]
+        section = total["section"]
+        rows = by_kind_section.get((kind, section), [])
+        stats = _BATTER_INT_STATS if kind == "batter" else _PITCHER_INT_STATS
+        for stat in stats:
+            summed = sum(r[stat] for r in rows)
+            if summed != total[stat]:
+                warnings.append(
+                    f"{result.team_name} {kind} {section} {stat}: "
+                    f"rows summed to {summed}, TOTAL row says {total[stat]}"
+                )
+    return warnings
