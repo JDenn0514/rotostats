@@ -62,8 +62,8 @@ BATTER_COLUMNS = [
     "year", "league", "team",
     "player_name", "player_id", "mlb_team",
     "position", "salary", "status", "roster_section", "eligibility",
-    "ab", "g", "r", "hr", "rbi", "sb", "so", "bb",
-    "avg", "obp", "slg",
+    "ab", "h", "g", "r", "hr", "rbi", "sb", "so", "bb",
+    "obp", "slg",
     "gp_dh", "gp_c", "gp_1b", "gp_2b", "gp_3b", "gp_ss", "gp_of",
 ]
 
@@ -150,9 +150,15 @@ class TeamPageResult:
 
 
 # Headers required to classify a table as batter or pitcher.
-# NOTE: The fixture uses "OBP" as the header for the column that actually
-# displays both AVG (main text) and OBP (red sub-text), so "AVG" never
-# appears as a standalone header.  "SLG" likewise doubles as SLG/OPS.
+# Each stat cell stacks the season-cumulative value (main, black) over the
+# current-week value (red <font>); only the season value is captured.  OBP
+# and SLG are the only rate columns Onroto exposes — AVG can be derived
+# downstream from H/AB.
+#
+# H is optional: it is present on team-stats pages from 2017 onward but absent
+# in 2010-2016, so we extract it when the column exists and default to 0
+# otherwise.  Years missing H also can't reconstruct AVG from counts; for
+# those years downstream consumers must rely on OBP/SLG only.
 _BATTER_REQUIRED = {"Pos", "Name", "Tm", "Sal", "Sta",
                     "AB", "G", "R", "HR", "RBI", "SB", "SO", "BB",
                     "OBP", "SLG"}
@@ -160,6 +166,17 @@ _PITCHER_REQUIRED = {"Pos", "Name", "Tm", "Sal", "Sta",
                      "G", "W", "L", "SV", "IP", "BB", "HR", "SO", "ERA", "WHIP"}
 
 _GP_HEADERS = ["DH", "C", "1B", "2B", "3B", "SS", "OF"]
+
+
+def _maybe_int(cells: list[Tag], idx: dict[str, int], header: str) -> int:
+    """Parse an int from cells[idx[header]] when the header exists, else 0.
+
+    Older team-stats pages omit certain columns (e.g. H before 2017); callers
+    use this for any column that's optional across the year range.
+    """
+    if header not in idx or idx[header] >= len(cells):
+        return 0
+    return parse_int(_cell_main_value(cells[idx[header]]))
 
 
 def _cell_main_value(cell: Tag) -> str:
@@ -184,10 +201,6 @@ def _build_header_indices(table: Tag) -> dict[str, int]:
     occupies physical columns 5-11.  Row 1 (when it exists) contains the
     individual GP position sub-headers (DH, C, 1B, …) which are mapped to
     those same physical column positions.
-
-    The AVG/OBP and SLG/OPS columns are labelled "OBP" and "SLG" in row 0
-    but we also expose "AVG" at the same index as "OBP" to keep callers
-    consistent.
     """
     rows = table.find_all("tr", recursive=False)
     if not rows:
@@ -203,9 +216,6 @@ def _build_header_indices(table: Tag) -> dict[str, int]:
             col += colspan
             continue
         idx[text] = col
-        # "OBP" column actually holds AVG (main) + OBP (red); expose both names
-        if text == "OBP":
-            idx["AVG"] = col
         col += colspan
 
     # Row 1: GP sub-headers (DH, C, 1B, 2B, 3B, SS, OF) start at column 5
@@ -262,17 +272,6 @@ def _parse_batter_row(
     if not name:
         return None
 
-    # The "OBP" column header is reused for both AVG (main text) and OBP (red).
-    # Extract OBP from the <font> sub-element of that cell.
-    avg_obp_cell = cells[idx["OBP"]]
-    avg_val = _cell_main_value(avg_obp_cell)
-    font = avg_obp_cell.find("font")
-    obp_val = font.get_text(strip=True) if font else ""
-
-    # Similarly, "SLG" column holds SLG (main) + OPS (red).
-    slg_cell = cells[idx["SLG"]]
-    slg_val = _cell_main_value(slg_cell)
-
     row: dict = {
         "year": year,
         "league": league_short,
@@ -285,6 +284,7 @@ def _parse_batter_row(
         "status": _cell_main_value(cells[idx["Sta"]]),
         "roster_section": section,
         "ab":  parse_int(_cell_main_value(cells[idx["AB"]])),
+        "h":   _maybe_int(cells, idx, "H"),
         "g":   parse_int(_cell_main_value(cells[idx["G"]])),
         "r":   parse_int(_cell_main_value(cells[idx["R"]])),
         "hr":  parse_int(_cell_main_value(cells[idx["HR"]])),
@@ -292,9 +292,8 @@ def _parse_batter_row(
         "sb":  parse_int(_cell_main_value(cells[idx["SB"]])),
         "so":  parse_int(_cell_main_value(cells[idx["SO"]])),
         "bb":  parse_int(_cell_main_value(cells[idx["BB"]])),
-        "avg": parse_float(avg_val),
-        "obp": parse_float(obp_val),
-        "slg": parse_float(slg_val),
+        "obp": parse_float(_cell_main_value(cells[idx["OBP"]])),
+        "slg": parse_float(_cell_main_value(cells[idx["SLG"]])),
     }
     for h in _GP_HEADERS:
         col_key = f"gp_{h.lower()}"
@@ -354,15 +353,11 @@ def _is_total_row(cells: list[Tag], idx: dict[str, int]) -> bool:
 def _parse_total_row_batter(cells: list[Tag], idx: dict[str, int], section: str) -> dict | None:
     if not _is_total_row(cells, idx):
         return None
-    avg_obp_cell = cells[idx["OBP"]]
-    avg_val = _cell_main_value(avg_obp_cell)
-    font = avg_obp_cell.find("font")
-    obp_val = font.get_text(strip=True) if font else ""
-    slg_val = _cell_main_value(cells[idx["SLG"]])
     return {
         "player_type": "batter",
         "section": section,
         "ab":  parse_int(_cell_main_value(cells[idx["AB"]])),
+        "h":   _maybe_int(cells, idx, "H"),
         "g":   parse_int(_cell_main_value(cells[idx["G"]])),
         "r":   parse_int(_cell_main_value(cells[idx["R"]])),
         "hr":  parse_int(_cell_main_value(cells[idx["HR"]])),
@@ -370,9 +365,8 @@ def _parse_total_row_batter(cells: list[Tag], idx: dict[str, int], section: str)
         "sb":  parse_int(_cell_main_value(cells[idx["SB"]])),
         "so":  parse_int(_cell_main_value(cells[idx["SO"]])),
         "bb":  parse_int(_cell_main_value(cells[idx["BB"]])),
-        "avg": parse_float(avg_val),
-        "obp": parse_float(obp_val),
-        "slg": parse_float(slg_val),
+        "obp": parse_float(_cell_main_value(cells[idx["OBP"]])),
+        "slg": parse_float(_cell_main_value(cells[idx["SLG"]])),
     }
 
 
@@ -470,8 +464,8 @@ def parse_team_page(html: str, year: int, league_short: str) -> TeamPageResult:
       - Stat cells may contain two stacked values separated by ``<br/>``; the
         first (black) text is the accumulated season total, the second (red,
         inside a ``<font>`` tag) is the current-week value.  Only the
-        accumulated value is captured.
-      - The "OBP" header column actually holds AVG (main text) and OBP (red).
+        accumulated value is captured — this applies uniformly to every stat
+        column, including OBP, SLG, ERA, and WHIP.
     """
     soup = BeautifulSoup(html, "lxml")
     team_name = _team_name(soup)
@@ -515,7 +509,7 @@ def parse_team_page(html: str, year: int, league_short: str) -> TeamPageResult:
     return result
 
 
-_BATTER_INT_STATS = ("ab", "g", "r", "hr", "rbi", "sb", "so", "bb")
+_BATTER_INT_STATS = ("ab", "h", "g", "r", "hr", "rbi", "sb", "so", "bb")
 _PITCHER_INT_STATS = ("g", "w", "l", "sv", "bb", "hr", "so")
 
 

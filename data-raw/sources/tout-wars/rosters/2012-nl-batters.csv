@@ -1,569 +1,569 @@
-year,league,team,player_name,player_id,mlb_team,position,salary,status,roster_section,eligibility,ab,g,r,hr,rbi,sb,so,bb,avg,obp,slg,gp_dh,gp_c,gp_1b,gp_2b,gp_3b,gp_ss,gp_of
-2012,nl,Tristan H. Cockcroft,D.J. LeMahieu,3275,Col,MI,0,act,active,"2B,SW,MI,3B",186,60,23,2,19,0,34,10,0.343,0.5,0.441,0,0,1,67,9,2,0
-2012,nl,Tristan H. Cockcroft,Matt Dominguez,1981,Bos,CI,8,act,active,"3B,SW,CI",86,23,11,4,15,0,11,3,0.315,0.25,0.465,0,0,0,0,31,0,0
-2012,nl,Tristan H. Cockcroft,Anthony Rizzo,3156,ChC,1B,1,act,active,"1B,SW,CI",337,87,44,15,48,3,62,27,0.342,0.125,0.463,0,0,85,0,0,0,0
-2012,nl,Tristan H. Cockcroft,Martin Prado,80,Mia,2B,18,act,active,"UT,3B,OF,SW,2B,CI,SS",617,156,81,10,70,17,69,58,0.359,0.333,0.438,0,0,4,10,25,13,119
-2012,nl,Tristan H. Cockcroft,Starlin Castro,2724,Mia,SS,27,act,active,"SS,MI,SW",646,162,78,14,78,25,100,36,0.323,0.25,0.43,0,0,0,0,0,162,0
-2012,nl,Tristan H. Cockcroft,Todd Frazier,1979,NYM,3B,1,act,active,"1B,3B,OF,CI,SW",407,119,54,18,64,3,102,34,0.324,0.0,0.477,1,0,39,0,73,0,7
-2012,nl,Tristan H. Cockcroft,Juan Pierre,801,FA,OF,6,act,active,"OF,SW",203,72,35,1,13,23,15,12,0.339,0.0,0.369,0,0,0,0,0,0,107
-2012,nl,Tristan H. Cockcroft,Andrew McCutchen,1222,NYY,OF,34,act,active,"OF,SW",593,157,107,31,96,20,132,70,0.4,0.273,0.553,0,0,0,0,0,0,156
-2012,nl,Tristan H. Cockcroft,Ryan Braun,858,Mil,OF,39,act,active,"OF,SW",598,154,108,41,112,30,128,63,0.391,0.333,0.595,2,0,0,0,0,0,151
-2012,nl,Tristan H. Cockcroft,Shane Victorino,1138,ChC,OF,29,act,active,"OF,SW",191,49,25,2,15,14,29,18,0.332,0.364,0.366,0,0,0,0,0,0,154
-2012,nl,Tristan H. Cockcroft,David Ross,335,ChC,C,2,act,active,"C,SW",176,62,18,9,23,1,60,18,0.321,0.333,0.449,0,54,0,0,0,0,0
-2012,nl,Tristan H. Cockcroft,Erik Kratz,2460,Mil,C,6,act,active,"C,SW",112,35,8,5,17,0,27,8,0.272,0.5,0.393,0,41,0,0,0,0,0
-2012,nl,Tristan H. Cockcroft,Jean Segura,3177,Sea,UT,10,act,active,SS,121,36,17,0,11,6,16,12,0.321,0.091,0.331,0,0,0,0,0,44,0
-2012,nl,Tristan H. Cockcroft,Andrelton Simmons,3717,LAA,SW,21,act,active,SS,159,47,17,3,19,1,21,12,0.343,0.1,0.421,0,0,0,0,0,49,0
-2012,nl,Tristan H. Cockcroft,Ronny Cedeno,282,SF,MI,0,rel,previously_active,,8,4,1,1,1,0,2,0,0.25,0.0,0.75,0,0,0,28,3,27,0
-2012,nl,Tristan H. Cockcroft,Matt Hague,2729,Was,CI,0,rel,previously_active,,5,3,0,0,1,0,2,0,0.0,0.0,0.0,4,0,16,0,0,0,0
-2012,nl,Tristan H. Cockcroft,Ike Davis,2618,LAD,1B,19,trd,previously_active,,358,104,43,20,61,0,101,32,0.277,0.0,0.43,0,0,148,0,0,0,0
-2012,nl,Tristan H. Cockcroft,Alex Gonzalez,340,FA,MI,6,rel,previously_active,,81,24,8,4,15,1,15,6,0.326,0.0,0.457,0,0,0,0,0,24,0
-2012,nl,Tristan H. Cockcroft,Jack Wilson,1189,FA,MI,0,rel,previously_active,,2,1,0,0,0,0,1,0,0.0,0.0,0.0,0,0,0,2,0,29,0
-2012,nl,Tristan H. Cockcroft,Matt Downs,2387,Mia,2B,1,rel,previously_active,,151,75,13,7,13,2,26,6,0.256,0.0,0.384,0,0,25,3,18,1,13
-2012,nl,Tristan H. Cockcroft,Freddy Galvis,3005,SD,2B,0,dis,previously_active,"SS,2B",190,58,14,3,24,0,29,7,0.254,0.0,0.363,0,0,0,55,0,5,0
-2012,nl,Tristan H. Cockcroft,Ian Stewart,460,FA,3B,11,rel,previously_active,,179,55,16,5,17,0,46,21,0.292,0.0,0.335,0,0,0,0,52,0,0
-2012,nl,Tristan H. Cockcroft,Jeremy Hermida,572,Mil,OF,0,rel,previously_active,,20,9,0,0,2,1,6,3,0.304,0.0,0.35,0,0,0,0,0,0,7
-2012,nl,Tristan H. Cockcroft,George Kottaras,173,Atl,C,2,rel,previously_active,,105,64,12,4,15,0,30,32,0.394,0.0,0.362,1,54,6,0,0,0,0
-2012,nl,Tristan H. Cockcroft,Tyler Moore,3632,Mia,UT,8,res,previously_active,"1B,OF",7,5,1,1,3,0,1,0,0.429,0.0,1.14,0,0,14,0,0,0,41
-2012,nl,Tristan H. Cockcroft,Emmanuel Burriss,1324,LAA,UT,0,rel,previously_active,,1,2,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,37,6,6,1
-2012,nl,Tristan H. Cockcroft,Xavier Nady,1195,FA,UT,2,rel,previously_active,,7,3,0,0,0,0,3,1,0.333,0.0,0.143,0,0,0,0,0,0,51
-2012,nl,Tristan H. Cockcroft,Rick Ankiel,1413,NYM,UT,1,rel,previously_active,,150,66,14,5,15,1,58,12,0.29,0.0,0.42,0,0,0,0,0,0,62
-2012,nl,Tristan H. Cockcroft,Matt Diaz,85,Mia,SW,2,dis,previously_active,"OF,SW",70,33,3,0,8,0,16,2,0.222,0.0,0.257,2,0,0,0,0,0,24
-2012,nl,Tristan H. Cockcroft,Freddy Galvis,3005,SD,2B,0,dis,reserved,"SS,2B",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,55,0,5,0
-2012,nl,Tristan H. Cockcroft,Tyler Moore,3632,Mia,UT,8,res,reserved,"1B,OF",25,14,3,3,7,0,9,2,0.222,0.25,0.56,0,0,14,0,0,0,41
-2012,nl,Tristan H. Cockcroft,Matt Diaz,85,Mia,SW,2,dis,reserved,"OF,SW",8,4,1,0,0,0,1,1,0.222,0.0,0.25,2,0,0,0,0,0,24
-2012,nl,Tristan H. Cockcroft,Matt Hague,2729,Was,CI,0,rel,previously_reserved,,4,2,0,0,1,0,0,0,0.25,0.0,0.25,4,0,16,0,0,0,0
-2012,nl,Tristan H. Cockcroft,Matt Downs,2387,Mia,2B,1,rel,previously_reserved,,3,1,0,0,0,0,1,0,0.0,0.0,0.0,0,0,25,3,18,1,13
-2012,nl,Tristan H. Cockcroft,Todd Frazier,1979,NYM,3B,1,act,previously_reserved,"1B,3B,OF,CI,SW",15,9,1,1,3,0,1,2,0.529,0.0,1.07,1,0,39,0,73,0,7
-2012,nl,Tristan H. Cockcroft,George Kottaras,173,Atl,C,2,rel,previously_reserved,,16,4,4,2,8,0,3,1,0.294,0.0,0.687,1,54,6,0,0,0,0
-2012,nl,Tristan H. Cockcroft,Jean Segura,3177,Sea,UT,10,act,previously_reserved,SS,27,8,2,0,3,1,5,1,0.321,0.0,0.333,0,0,0,0,0,44,0
-2012,nl,Tristan H. Cockcroft,Rick Ankiel,1413,NYM,UT,1,rel,previously_reserved,,8,2,1,0,0,0,1,0,0.125,0.0,0.25,0,0,0,0,0,0,62
-2012,nl,Phil Hertz,Ike Davis,2618,LAD,CI,19,act,active,"1B,CI,SW",161,52,23,12,29,0,40,29,0.372,0.429,0.534,0,0,148,0,0,0,0
-2012,nl,Phil Hertz,Steve Lombardozzi,3718,Oak,MI,0,act,active,"2B,3B,CI,OF,MI,SW",308,96,35,2,22,5,37,15,0.315,0.143,0.357,0,0,0,51,13,1,41
-2012,nl,Phil Hertz,Adrian Gonzalez,1250,FA,1B,41,act,active,"1B,SW,CI,OF",136,34,11,2,18,1,27,10,0.34,0.364,0.426,1,0,151,0,0,0,18
-2012,nl,Phil Hertz,Luis Valbuena,2200,FA,2B,1,act,active,"3B,2B,SW,MI",227,76,23,3,23,0,46,29,0.306,0.143,0.335,0,0,0,5,82,0,0
-2012,nl,Phil Hertz,Stephen Drew,30,Was,SS,9,act,active,"SS,MI,SW",259,70,35,7,25,1,69,35,0.318,0.231,0.363,0,0,0,0,0,75,0
-2012,nl,Phil Hertz,Chase Headley,1252,FA,3B,20,act,active,"3B,CI,SW",604,161,95,31,115,17,157,86,0.376,0.571,0.498,0,0,1,0,159,0,0
-2012,nl,Phil Hertz,Norichika Aoki,2041,FA,OF,0,act,active,OF,487,133,78,9,46,30,51,40,0.349,0.462,0.425,0,0,0,0,0,0,133
-2012,nl,Phil Hertz,Jay Bruce,371,NYM,OF,34,act,active,"OF,SW",560,155,89,34,99,9,155,62,0.327,0.333,0.514,0,0,0,0,0,0,154
-2012,nl,Phil Hertz,Andre Ethier,797,LAD,OF,23,act,active,"OF,SW",556,149,79,20,89,2,124,50,0.351,0.545,0.46,2,0,0,0,0,0,147
-2012,nl,Phil Hertz,Starling Marte,2908,Pit,OF,3,act,active,OF,154,43,17,4,15,12,46,6,0.305,0.385,0.442,0,0,0,0,0,0,45
-2012,nl,Phil Hertz,Yadier Molina,1404,StL,C,15,act,active,"C,SW",505,138,65,22,76,12,55,45,0.373,0.125,0.501,0,136,3,0,0,0,0
-2012,nl,Phil Hertz,Rob Brantly,3480,Cle,C,10,act,active,C,100,31,14,3,8,1,16,13,0.372,0.222,0.46,0,28,0,0,0,0,0
-2012,nl,Phil Hertz,Scott Moore,128,FA,UT,10,act,active,"3B,1B,2B,OF",25,8,1,0,2,0,7,1,0.308,0.2,0.32,0,0,19,6,28,0,17
-2012,nl,Phil Hertz,Gerardo Parra,2000,Col,SW,7,act,active,"OF,SW",370,125,56,7,35,15,76,30,0.326,0.333,0.389,0,0,0,0,0,0,109
-2012,nl,Phil Hertz,Chris Nelson,482,KC,MI,4,rel,previously_active,,54,17,3,0,4,1,15,6,0.3,0.0,0.296,0,0,0,21,92,1,0
-2012,nl,Phil Hertz,Michael Cuddyer,901,NYM,CI,28,trd,previously_active,,180,52,31,7,37,7,36,20,0.35,0.0,0.511,0,0,26,0,0,0,74
-2012,nl,Phil Hertz,James Loney,795,FA,CI,17,res,previously_active,"1B,SW,CI",403,135,31,3,36,0,49,27,0.292,0.0,0.318,0,0,133,0,0,0,0
-2012,nl,Phil Hertz,Jordany Valdespin,3407,Det,MI,3,rel,previously_active,,91,38,10,4,12,3,22,5,0.271,0.0,0.396,2,0,0,16,0,4,39
-2012,nl,Phil Hertz,Jeff Bianchi,2156,Col,MI,6,rel,previously_active,,25,10,4,1,3,0,6,2,0.185,0.0,0.24,0,0,0,4,6,14,0
-2012,nl,Phil Hertz,Darwin Barney,2055,FA,2B,5,trd,previously_active,,293,82,36,3,23,5,28,18,0.304,0.0,0.362,0,0,0,155,0,3,0
-2012,nl,Phil Hertz,Everth Cabrera,2297,FA,SS,2,trd,previously_active,,141,42,17,2,11,15,44,16,0.346,0.0,0.39,0,0,0,6,1,111,0
-2012,nl,Phil Hertz,Shane Victorino,1138,ChC,OF,29,trd,previously_active,,404,105,47,9,40,25,51,35,0.316,0.0,0.391,0,0,0,0,0,0,154
-2012,nl,Phil Hertz,Steve Clevenger,2435,Sea,C,4,rel,previously_active,,99,32,9,0,9,0,20,3,0.216,0.0,0.242,0,51,9,0,1,0,0
-2012,nl,Phil Hertz,Chris Snyder,26,Tex,C,4,trd,previously_active,,59,18,5,3,10,0,20,8,0.284,0.0,0.39,0,72,1,0,0,0,0
-2012,nl,Phil Hertz,John Baker,591,FA,C,0,rel,previously_active,,45,13,5,0,1,0,9,3,0.292,0.0,0.267,0,56,0,0,0,0,0
-2012,nl,Phil Hertz,Juan Francisco,1995,FA,UT,0,rel,previously_active,,9,8,0,0,4,0,3,2,0.545,0.0,0.556,0,0,0,0,49,0,0
-2012,nl,Phil Hertz,Fernando Martinez,978,NYY,UT,6,res,previously_active,"OF,SW",48,19,5,1,5,0,9,4,0.345,0.0,0.437,0,0,0,0,0,0,37
-2012,nl,Phil Hertz,Travis Ishikawa,1306,SF,UT,0,rel,previously_active,,8,6,2,0,0,0,3,0,0.375,0.0,0.625,0,0,43,0,0,0,3
-2012,nl,Phil Hertz,Kirk Nieuwenhuis,3095,FA,UT,12,rel,previously_active,,239,73,39,7,25,4,78,22,0.333,0.0,0.414,0,0,0,0,0,0,83
-2012,nl,Phil Hertz,Brandon Crawford,3051,SF,SW,1,rel,previously_active,,168,51,11,1,15,1,36,9,0.27,0.0,0.315,0,0,0,0,0,139,0
-2012,nl,Phil Hertz,Matt McBride,2682,Phi,SW,5,rel,previously_active,,12,5,0,0,0,0,3,0,0.083,0.0,0.083,0,0,8,0,0,0,12
-2012,nl,Phil Hertz,James Loney,795,FA,CI,17,res,reserved,"1B,SW,CI",31,9,6,3,5,0,2,1,0.312,0.222,0.581,0,0,133,0,0,0,0
-2012,nl,Phil Hertz,Fernando Martinez,978,NYY,UT,6,res,reserved,"OF,SW",45,15,7,5,7,0,15,2,0.34,0.333,0.667,0,0,0,0,0,0,37
-2012,nl,Phil Hertz,Jeff Bianchi,2156,Col,MI,6,rel,previously_reserved,,4,3,1,0,0,0,1,0,0.25,0.0,0.25,0,0,0,4,6,14,0
-2012,nl,Phil Hertz,Steve Lombardozzi,3718,Oak,MI,0,act,previously_reserved,"2B,3B,CI,OF,MI,SW",76,30,5,1,5,0,9,4,0.325,0.0,0.342,0,0,0,51,13,1,41
-2012,nl,Phil Hertz,Jordany Valdespin,3407,Det,MI,3,rel,previously_reserved,,26,17,2,0,0,3,6,3,0.31,0.0,0.231,2,0,0,16,0,4,39
-2012,nl,Phil Hertz,Chris Nelson,482,KC,MI,4,rel,previously_reserved,,19,7,1,0,3,0,4,4,0.348,0.0,0.263,0,0,0,21,92,1,0
-2012,nl,Phil Hertz,Luis Valbuena,2200,FA,2B,1,act,previously_reserved,"3B,2B,SW,MI",26,10,2,0,1,0,6,6,0.375,0.0,0.346,0,0,0,5,82,0,0
-2012,nl,Phil Hertz,Everth Cabrera,2297,FA,SS,2,trd,previously_reserved,,14,4,0,0,0,0,4,1,0.067,0.0,0.0,0,0,0,6,1,111,0
-2012,nl,Phil Hertz,Norichika Aoki,2041,FA,OF,0,act,previously_reserved,OF,33,18,3,1,4,0,4,3,0.432,0.0,0.545,0,0,0,0,0,0,133
-2012,nl,Phil Hertz,Starling Marte,2908,Pit,OF,3,act,previously_reserved,OF,13,4,1,1,2,0,4,2,0.25,0.0,0.385,0,0,0,0,0,0,45
-2012,nl,Phil Hertz,John Baker,591,FA,C,0,rel,previously_reserved,,35,11,4,0,4,0,9,3,0.316,0.0,0.257,0,56,0,0,0,0,0
-2012,nl,Phil Hertz,Chris Snyder,26,Tex,C,4,trd,previously_reserved,,19,6,1,0,2,0,6,3,0.304,0.0,0.158,0,72,1,0,0,0,0
-2012,nl,Phil Hertz,Steve Clevenger,2435,Sea,C,4,rel,previously_reserved,,19,6,3,1,4,0,1,1,0.35,0.0,0.526,0,51,9,0,1,0,0
-2012,nl,Phil Hertz,Kirk Nieuwenhuis,3095,FA,UT,12,rel,previously_reserved,,38,16,1,0,3,0,18,3,0.19,0.0,0.132,0,0,0,0,0,0,83
-2012,nl,Phil Hertz,Juan Francisco,1995,FA,UT,0,rel,previously_reserved,,26,12,2,1,3,0,8,3,0.31,0.0,0.462,0,0,0,0,49,0,0
-2012,nl,Phil Hertz,Gerardo Parra,2000,Col,SW,7,act,previously_reserved,"OF,SW",15,8,2,0,1,0,1,3,0.526,0.0,0.467,0,0,0,0,0,0,109
-2012,nl,Phil Hertz,Brandon Crawford,3051,SF,SW,1,rel,previously_reserved,,94,29,9,0,6,0,21,6,0.301,0.0,0.34,0,0,0,0,0,139,0
-2012,nl,Derek Carty,Adam LaRoche,1187,CWS,CI,9,act,active,"1B,SW,CI",248,66,37,17,45,0,45,25,0.356,0.375,0.552,0,0,153,0,0,0,0
-2012,nl,Derek Carty,Mark Ellis,1067,FA,MI,3,act,active,"2B,MI,SW",237,61,29,4,20,1,40,16,0.307,0.182,0.367,0,0,0,110,0,0,0
-2012,nl,Derek Carty,Michael Morse,1362,FA,1B,24,act,active,"1B,OF,SW,CI",398,100,53,18,62,0,94,16,0.327,0.5,0.48,9,0,1,0,0,0,92
-2012,nl,Derek Carty,Rickie Weeks,857,FA,2B,23,act,active,"UT,2B,SW,MI",259,67,47,12,30,10,57,25,0.354,0.375,0.475,2,0,0,152,0,0,0
-2012,nl,Derek Carty,Tyler Greene,2310,Phi,SS,10,act,active,"SS,2B,SW,MI",284,106,30,10,27,10,87,19,0.271,0.375,0.384,0,0,0,59,0,43,3
-2012,nl,Derek Carty,Chipper Jones,79,Atl,3B,8,act,active,"3B,SW,CI",380,110,57,13,60,1,51,56,0.377,0.4,0.45,1,0,0,0,103,0,0
-2012,nl,Derek Carty,Nate Schierholtz,1315,FA,OF,7,act,active,"OF,SW",142,64,11,3,13,3,24,12,0.301,1.0,0.394,2,0,0,0,0,0,85
-2012,nl,Derek Carty,Ryan Ludwick,1418,Tex,OF,6,act,active,"OF,SW",422,125,53,26,80,0,97,42,0.346,0.1,0.531,2,0,0,0,0,0,108
-2012,nl,Derek Carty,Xavier Nady,1195,FA,OF,0,act,active,"OF,1B,SW,CI",9,3,0,0,0,0,2,1,0.1,0.1,0.0,0,0,0,0,0,0,51
-2012,nl,Derek Carty,Justin Upton,39,LAA,OF,38,act,active,"OF,SW",554,150,107,17,67,18,121,63,0.355,0.429,0.43,0,0,0,0,0,0,149
-2012,nl,Derek Carty,Rod Barajas,1572,FA,C,7,act,active,"C,SW",321,104,29,11,31,0,69,29,0.283,0.0,0.343,0,99,1,0,0,0,0
-2012,nl,Derek Carty,Welington Castillo,2434,CWS,C,15,act,active,"C,SW",124,40,11,2,15,0,40,14,0.355,0.0,0.395,0,49,1,0,0,0,0
-2012,nl,Derek Carty,Jon Jay,2475,Ari,UT,11,act,active,"OF,SW",433,114,67,4,39,19,68,34,0.373,0.25,0.402,0,0,0,0,0,0,116
-2012,nl,Derek Carty,Carlos Ruiz,1123,FA,SW,9,act,active,"C,SW",44,13,5,2,8,0,7,5,0.347,0.222,0.477,0,106,0,0,0,0,0
-2012,nl,Derek Carty,Cesar Izturis,1408,FA,MI,4,rel,previously_active,,90,27,4,1,5,1,7,2,0.272,0.0,0.356,0,0,1,2,4,46,0
-2012,nl,Derek Carty,Yamaico Navarro,2669,NYY,CI,0,rel,previously_active,,22,14,3,1,4,0,5,2,0.28,0.0,0.364,0,0,0,1,2,3,10
-2012,nl,Derek Carty,Marwin Gonzalez,3884,Hou,MI,3,rel,previously_active,,29,13,5,0,1,0,3,1,0.3,0.0,0.345,0,0,0,6,14,47,0
-2012,nl,Derek Carty,Jason Bartlett,1465,FA,MI,10,rel,previously_active,,81,28,8,0,4,0,26,11,0.237,0.0,0.198,0,0,0,0,0,27,0
-2012,nl,Derek Carty,Adrian Cardenas,1997,ChC,2B,3,rel,previously_active,,29,19,2,0,1,0,5,2,0.226,0.0,0.345,0,0,0,12,1,0,3
-2012,nl,Derek Carty,Elian Herrera,4136,LAD,2B,4,trd,previously_active,,169,51,21,1,16,4,45,20,0.326,0.0,0.331,0,0,0,13,20,2,32
-2012,nl,Derek Carty,Paul Janish,342,Bal,SS,1,rel,previously_active,,89,26,13,0,4,0,16,9,0.283,0.0,0.247,0,0,0,0,0,55,0
-2012,nl,Derek Carty,Dexter Fowler,484,StL,OF,19,res,previously_active,"OF,SW",454,140,72,13,53,12,128,68,0.389,0.0,0.474,0,0,0,0,0,0,131
-2012,nl,Derek Carty,Justin Ruggiano,1475,SF,OF,4,res,previously_active,"OF,SW",280,87,37,12,34,14,82,29,0.374,0.0,0.525,0,0,0,0,0,0,85
-2012,nl,Derek Carty,Wil Nieves,1668,FA,C,0,rel,previously_active,,35,13,1,1,4,0,6,3,0.359,0.0,0.429,0,24,2,0,0,0,0
-2012,nl,Derek Carty,Shane Robinson,2792,NYY,UT,2,rel,previously_active,,58,26,6,1,5,0,10,3,0.274,0.0,0.345,0,0,0,0,0,0,60
-2012,nl,Derek Carty,Todd Helton,455,Col,SW,11,rel,previously_active,,234,67,31,7,36,1,43,38,0.339,0.0,0.402,0,0,67,0,0,0,0
-2012,nl,Derek Carty,Ramon Hernandez,122,FA,SW,12,rel,previously_active,,156,45,14,5,26,0,26,6,0.259,0.0,0.378,0,46,2,0,0,0,0
-2012,nl,Derek Carty,Brian Bixler,1185,Tor,SW,0,rel,previously_active,,1,1,0,0,0,0,1,0,0.0,0.0,0.0,0,0,0,5,4,6,12
-2012,nl,Derek Carty,Omar Quintanilla,459,Col,SW,0,rel,previously_active,,54,23,8,1,4,0,13,5,0.317,0.0,0.352,0,0,0,34,0,30,0
-2012,nl,Derek Carty,Juan Uribe,238,FA,SW,4,trd,previously_active,,123,44,12,2,16,0,27,10,0.252,0.0,0.285,0,0,0,0,46,1,0
-2012,nl,Derek Carty,Dexter Fowler,484,StL,OF,19,res,reserved,"OF,SW",0,3,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,0,0,0,131
-2012,nl,Derek Carty,Justin Ruggiano,1475,SF,OF,4,res,reserved,"OF,SW",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,0,0,0,85
-2012,nl,Derek Carty,Jason Bartlett,1465,FA,MI,10,rel,previously_reserved,,2,1,0,0,0,0,1,1,0.333,0.0,0.0,0,0,0,0,0,27,0
-2012,nl,Derek Carty,Marwin Gonzalez,3884,Hou,MI,3,rel,previously_reserved,,2,3,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,6,14,47,0
-2012,nl,Derek Carty,Cesar Izturis,1408,FA,MI,4,rel,previously_reserved,,32,11,0,0,2,0,4,0,0.094,0.0,0.125,0,0,1,2,4,46,0
-2012,nl,Derek Carty,Yamaico Navarro,2669,NYY,CI,0,rel,previously_reserved,,17,8,0,0,0,0,4,2,0.211,0.0,0.118,0,0,0,1,2,3,10
-2012,nl,Derek Carty,Michael Morse,1362,FA,1B,24,act,previously_reserved,"1B,OF,SW,CI",8,2,0,0,0,0,3,0,0.0,0.0,0.0,9,0,1,0,0,0,92
-2012,nl,Derek Carty,Adrian Cardenas,1997,ChC,2B,3,rel,previously_reserved,,4,4,0,0,0,0,2,0,0.0,0.0,0.0,0,0,0,12,1,0,3
-2012,nl,Derek Carty,Michael Martinez,3414,Cle,3B,0,rel,previously_reserved,,45,16,3,1,4,0,11,3,0.187,0.0,0.2,0,0,0,16,10,8,9
-2012,nl,Derek Carty,Chipper Jones,79,Atl,3B,8,act,previously_reserved,"3B,SW,CI",7,2,1,1,2,0,0,1,0.375,0.0,0.714,1,0,0,0,103,0,0
-2012,nl,Derek Carty,Nate Schierholtz,1315,FA,OF,7,act,previously_reserved,"OF,SW",99,50,9,3,8,0,22,11,0.348,0.0,0.424,2,0,0,0,0,0,85
-2012,nl,Derek Carty,Wil Nieves,1668,FA,C,0,rel,previously_reserved,,10,5,2,1,2,0,2,0,0.4,0.0,0.7,0,24,2,0,0,0,0
-2012,nl,Derek Carty,Shane Robinson,2792,NYY,UT,2,rel,previously_reserved,,8,8,0,0,1,0,1,2,0.4,0.0,0.25,0,0,0,0,0,0,60
-2012,nl,Derek Carty,Jon Jay,2475,Ari,UT,11,act,previously_reserved,"OF,SW",10,3,3,0,1,0,3,0,0.364,0.0,0.3,0,0,0,0,0,0,116
-2012,nl,Derek Carty,Carlos Ruiz,1123,FA,SW,9,act,previously_reserved,"C,SW",15,6,4,0,2,1,2,2,0.421,0.0,0.333,0,106,0,0,0,0,0
-2012,nl,Derek Carty,Juan Uribe,238,FA,SW,4,trd,previously_reserved,,24,8,1,0,1,0,5,0,0.24,0.0,0.333,0,0,0,0,46,1,0
-2012,nl,Derek Carty,Ramon Hernandez,122,FA,SW,12,rel,previously_reserved,,28,7,2,0,2,0,6,0,0.179,0.0,0.214,0,46,2,0,0,0,0
-2012,nl,Derek Carty,Todd Helton,455,Col,SW,11,rel,previously_reserved,,6,2,0,0,1,0,1,1,0.444,0.0,0.333,0,0,67,0,0,0,0
-2012,nl,Peter Kreutzer,Tyler Colvin,308,LAD,CI,0,act,active,"OF,SW,1B",420,136,62,18,72,7,117,21,0.327,0.286,0.531,0,0,31,0,0,0,94
-2012,nl,Peter Kreutzer,Gaby Sanchez,600,FA,1B,19,act,active,"1B,SW,CI",242,82,22,6,23,1,46,17,0.249,0.0,0.326,0,0,95,0,0,0,0
-2012,nl,Peter Kreutzer,Josh Rutledge,4084,FA,MI,8,act,active,"UT,2B,SS",269,70,36,8,35,6,53,7,0.304,0.118,0.472,0,0,0,7,0,57,0
-2012,nl,Peter Kreutzer,Chris Nelson,482,KC,2B,6,act,active,"3B,2B,CI,SW,MI",254,78,39,8,43,1,62,14,0.363,0.5,0.504,0,0,0,21,92,1,0
-2012,nl,Peter Kreutzer,Daniel Descalso,2899,Ari,SS,4,act,active,"2B,3B,1B,MI,SW,CI,SS",54,20,6,0,5,0,11,7,0.317,0.286,0.333,0,0,5,96,22,26,0
-2012,nl,Peter Kreutzer,Aramis Ramirez,286,Pit,3B,23,act,active,"3B,SW,CI",570,149,92,27,105,9,82,44,0.36,0.4,0.54,3,0,0,0,143,0,0
-2012,nl,Peter Kreutzer,Drew Stubbs,1989,FA,OF,26,act,active,"OF,SW",493,136,75,14,40,30,166,42,0.277,0.222,0.333,0,0,0,0,0,0,135
-2012,nl,Peter Kreutzer,Jason Heyward,1968,ChC,OF,22,act,active,"OF,SW",587,158,93,27,82,21,152,58,0.335,0.429,0.479,0,0,0,0,0,0,156
-2012,nl,Peter Kreutzer,Chris Heisey,2809,FA,OF,15,act,active,"OF,SW",309,106,36,5,22,4,75,18,0.306,0.0,0.375,0,0,0,0,0,0,101
-2012,nl,Peter Kreutzer,Bryce Harper,2628,Was,OF,4,act,active,"UT,OF",273,73,54,14,34,7,63,28,0.336,0.429,0.498,0,0,0,0,0,0,138
-2012,nl,Peter Kreutzer,John Baker,591,FA,C,0,act,active,"C,SW",6,4,0,0,0,0,1,0,0.167,0.0,0.333,0,56,0,0,0,0,0
-2012,nl,Peter Kreutzer,Buster Posey,2187,SF,C,19,act,active,"C,SW,1B",530,148,78,24,103,1,96,69,0.408,0.3,0.549,3,114,29,0,0,0,0
-2012,nl,Peter Kreutzer,Carlos Quentin,242,Min,UT,9,act,active,"OF,SW",160,50,27,8,25,0,19,18,0.36,0.5,0.494,5,0,0,0,0,0,72
-2012,nl,Peter Kreutzer,Francisco Peguero,2979,Bal,SW,0,act,active,OF,2,1,0,0,0,0,1,0,0.0,0.0,0.0,0,0,0,0,0,0,10
-2012,nl,Peter Kreutzer,Lyle Overbay,1581,FA,1B,2,rel,previously_active,,82,38,11,2,10,0,19,12,0.4,0.0,0.5,1,0,23,0,0,0,0
-2012,nl,Peter Kreutzer,Josh Vitters,1977,Col,CI,2,rel,previously_active,,15,5,1,0,2,0,5,0,0.133,0.0,0.2,0,0,0,0,29,0,0
-2012,nl,Peter Kreutzer,Juan Rivera,751,Ari,1B,9,res,previously_active,"1B,OF,SW,CI",293,100,28,7,42,1,31,18,0.285,0.0,0.362,1,0,54,0,0,0,46
-2012,nl,Peter Kreutzer,Donovan Solano,3063,LAD,MI,0,rel,previously_active,,30,11,2,0,3,1,8,3,0.286,0.0,0.3,0,0,0,58,10,5,10
-2012,nl,Peter Kreutzer,Emilio Bonifacio,27,Mil,MI,17,trd,previously_active,,158,42,20,0,6,21,36,21,0.356,0.0,0.316,0,0,0,15,0,0,51
-2012,nl,Peter Kreutzer,Charlie Culberson,3504,Atl,MI,4,rel,previously_active,,18,5,0,0,1,0,6,0,0.111,0.0,0.111,0,0,0,6,0,0,0
-2012,nl,Peter Kreutzer,Nick Green,1032,Mia,2B,3,rel,previously_active,,22,6,1,0,1,0,6,0,0.217,0.0,0.318,0,0,0,2,3,1,0
-2012,nl,Peter Kreutzer,Ivan DeJesus,2147,Bos,2B,4,rel,previously_active,,14,8,2,0,0,0,3,1,0.333,0.0,0.429,2,0,0,12,6,1,0
-2012,nl,Peter Kreutzer,Brandon Crawford,3051,SF,SS,2,rel,previously_active,,30,10,0,0,3,0,9,5,0.286,0.0,0.167,0,0,0,0,0,139,0
-2012,nl,Peter Kreutzer,Justin Sellers,3525,SD,SS,2,dis,previously_active,"UT,SS,SW,MI,3B",5,2,1,0,1,0,1,0,0.4,0.0,0.8,0,0,0,3,7,9,0
-2012,nl,Peter Kreutzer,Mike Fontenot,284,TB,SS,4,rel,previously_active,,23,14,3,0,2,0,4,2,0.462,0.0,0.435,1,0,0,17,12,0,0
-2012,nl,Peter Kreutzer,Ryan Theriot,287,FA,SS,0,res,previously_active,"2B,MI,SW,SS",332,93,44,0,27,12,44,24,0.314,0.0,0.313,0,0,0,91,0,0,2
-2012,nl,Peter Kreutzer,Vinny Rottino,856,CWS,OF,0,rel,previously_active,,3,2,1,0,0,0,1,2,0.4,0.0,0.0,3,2,7,0,2,0,20
-2012,nl,Peter Kreutzer,Juan Pierre,801,FA,OF,6,trd,previously_active,,191,58,24,0,12,14,12,11,0.363,0.0,0.372,0,0,0,0,0,0,107
-2012,nl,Peter Kreutzer,Dioner Navarro,1462,FA,C,1,rel,previously_active,,31,10,2,0,3,0,7,2,0.303,0.0,0.323,0,21,0,0,0,0,0
-2012,nl,Peter Kreutzer,Brett Hayes,594,Tex,C,1,rel,previously_active,,14,4,1,0,0,0,3,0,0.214,0.0,0.286,0,33,0,0,0,0,0
-2012,nl,Peter Kreutzer,Devin Mesoraco,1987,NYM,C,8,rel,previously_active,,162,52,16,5,14,1,31,17,0.287,0.0,0.352,0,53,0,0,0,0,0
-2012,nl,Peter Kreutzer,Wil Nieves,1668,FA,C,2,rel,previously_active,,3,1,0,0,0,0,1,1,0.5,0.0,0.333,0,24,2,0,0,0,0
-2012,nl,Peter Kreutzer,Mark Ellis,1067,FA,UT,3,trd,previously_active,,155,43,31,3,11,4,24,22,0.372,0.0,0.374,0,0,0,110,0,0,0
-2012,nl,Peter Kreutzer,Ben Francisco,407,FA,SW,5,res,previously_active,"OF,SW",125,46,8,3,10,0,35,8,0.293,0.0,0.392,16,0,0,0,0,0,53
-2012,nl,Peter Kreutzer,Jose Constanza,3448,TB,SW,0,rel,previously_active,,26,9,3,0,0,1,8,3,0.207,0.0,0.115,0,0,0,0,0,0,25
-2012,nl,Peter Kreutzer,Bryan Petersen,3101,Mil,SW,4,rel,previously_active,,33,10,6,0,1,1,10,2,0.306,0.0,0.303,0,0,0,0,0,0,72
-2012,nl,Peter Kreutzer,Juan Rivera,751,Ari,1B,9,res,reserved,"1B,OF,SW,CI",19,9,2,2,5,0,4,0,0.3,0.667,0.579,1,0,54,0,0,0,46
-2012,nl,Peter Kreutzer,Justin Sellers,3525,SD,SS,2,dis,reserved,"UT,SS,SW,MI,3B",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,3,7,9,0
-2012,nl,Peter Kreutzer,Ryan Theriot,287,FA,SS,0,res,reserved,"2B,MI,SW,SS",20,11,1,0,1,1,3,0,0.35,0.0,0.45,0,0,0,91,0,0,2
-2012,nl,Peter Kreutzer,Ben Francisco,407,FA,SW,5,res,reserved,"OF,SW",11,6,1,1,3,0,4,1,0.214,0.2,0.455,16,0,0,0,0,0,53
-2012,nl,Peter Kreutzer,Gaby Sanchez,600,FA,1B,19,act,previously_reserved,"1B,SW,CI",57,23,8,1,7,0,10,8,0.4,0.0,0.404,0,0,95,0,0,0,0
-2012,nl,Peter Kreutzer,Josh Vitters,1977,Col,CI,2,rel,previously_reserved,,56,19,5,2,3,1,19,4,0.131,0.0,0.196,0,0,0,0,29,0,0
-2012,nl,Peter Kreutzer,Chris Nelson,482,KC,2B,6,act,previously_reserved,"3B,2B,CI,SW,MI",13,6,1,0,2,0,3,2,0.375,0.0,0.385,0,0,0,21,92,1,0
-2012,nl,Peter Kreutzer,Chris Heisey,2809,FA,OF,15,act,previously_reserved,"OF,SW",38,14,8,2,9,2,6,0,0.385,0.0,0.605,0,0,0,0,0,0,101
-2012,nl,Peter Kreutzer,Devin Mesoraco,1987,NYM,C,8,rel,previously_reserved,,3,2,1,0,0,0,2,0,0.333,0.0,0.333,0,53,0,0,0,0,0
-2012,nl,Peter Kreutzer,Mark Ellis,1067,FA,UT,3,trd,previously_reserved,,0,1,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,110,0,0,0
-2012,nl,Todd Zola,Brett Wallace,2188,FA,CI,2,act,active,"3B,1B,SW,CI",204,59,17,7,20,0,65,15,0.299,0.333,0.382,0,0,58,0,8,0,0
-2012,nl,Todd Zola,Marco Scutaro,1584,SF,MI,14,act,active,"2B,SS,3B,SW,MI",620,156,87,7,74,9,49,40,0.348,0.455,0.405,0,0,0,118,15,27,0
-2012,nl,Todd Zola,Allen Craig,2108,SD,1B,17,act,active,"OF,1B,SW",469,119,76,22,92,2,89,37,0.354,0.125,0.522,1,0,91,0,0,0,30
-2012,nl,Todd Zola,Jose Altuve,3776,Hou,2B,17,act,active,"2B,SW,MI",576,147,80,7,37,33,74,40,0.34,0.286,0.399,0,0,0,147,0,0,0
-2012,nl,Todd Zola,Zack Cozart,3043,LAA,SS,13,act,active,"UT,SS,MI,SW",561,138,72,15,35,4,113,31,0.288,0.1,0.399,0,0,0,0,0,138,0
-2012,nl,Todd Zola,Jimmy Paredes,3350,FA,3B,0,act,active,"OF,2B,CI,SW,3B",74,24,7,0,3,2,21,6,0.244,0.5,0.23,0,0,0,5,0,0,16
-2012,nl,Todd Zola,Carlos Lee,638,FA,OF,21,act,active,"1B,OF,CI,SW",546,146,53,9,75,3,48,58,0.331,0.462,0.364,1,0,145,0,0,0,0
-2012,nl,Todd Zola,J.D. Martinez,3567,Bos,OF,13,act,active,"OF,SW",391,112,34,11,55,0,95,40,0.311,0.0,0.376,5,0,0,0,0,0,100
-2012,nl,Todd Zola,Alfonso Soriano,294,FA,OF,13,act,active,"OF,SW",169,46,26,12,39,1,48,18,0.333,0.286,0.533,6,0,0,0,0,0,145
-2012,nl,Todd Zola,Jason Kubel,904,FA,OF,16,act,active,"OF,SW",506,141,75,30,90,1,151,57,0.327,0.4,0.506,6,0,0,0,0,0,125
-2012,nl,Todd Zola,Miguel Montero,25,Was,C,18,act,active,"C,SW",486,141,65,15,88,0,130,73,0.391,0.25,0.438,0,139,0,0,0,0,0
-2012,nl,Todd Zola,Brian McCann,73,Hou,C,21,act,active,"C,SW",439,121,44,20,67,3,76,44,0.3,0.333,0.399,3,114,0,0,0,0,0
-2012,nl,Todd Zola,Travis Ishikawa,1306,SF,UT,4,act,active,1B,50,26,8,2,12,0,12,7,0.383,0.5,0.5,0,0,43,0,0,0,3
-2012,nl,Todd Zola,Eric Hinske,1488,FA,OF,10,rel,previously_active,,104,72,5,0,8,0,35,14,0.227,0.0,0.183,4,0,15,0,0,0,10
-2012,nl,Todd Zola,Angel Pagan,959,FA,OF,17,trd,previously_active,,418,108,57,7,43,19,70,35,0.33,0.0,0.411,1,0,0,0,0,0,151
-2012,nl,Todd Zola,Wilson Ramos,2170,Phi,C,13,rel,previously_active,,83,24,11,3,10,0,19,12,0.354,0.0,0.398,0,24,0,0,0,0,0
-2012,nl,Todd Zola,Jerry Hairston Jr.,369,LAD,UT,2,dis,previously_active,"3B,OF,2B,CI,SW,MI",234,76,19,4,25,1,27,22,0.337,0.0,0.385,1,0,1,30,32,2,18
-2012,nl,Todd Zola,Adam Kennedy,1409,FA,UT,12,dis,previously_active,"3B,2B,MI,SW,1B,CI",114,55,14,2,10,1,20,13,0.336,0.0,0.36,0,0,3,16,39,0,1
-2012,nl,Todd Zola,Josh Bell,2016,SD,UT,3,rel,previously_active,,33,13,2,1,3,0,8,4,0.27,0.0,0.303,0,0,0,0,12,0,0
-2012,nl,Todd Zola,Chad Tracy,35,LAA,UT,0,rel,previously_active,,37,23,5,3,7,0,6,4,0.31,0.0,0.486,0,0,14,0,10,0,0
-2012,nl,Todd Zola,Miguel Cairo,1358,FA,UT,0,rel,previously_active,,9,4,0,0,0,0,2,1,0.2,0.0,0.111,1,0,24,8,13,0,0
-2012,nl,Todd Zola,D.J. LeMahieu,3275,Col,SW,7,rel,previously_active,,19,10,1,0,0,0,5,2,0.238,0.0,0.158,0,0,1,67,9,2,0
-2012,nl,Todd Zola,Andrew M. Brown,3753,LAA,SW,6,rel,previously_active,,9,4,0,0,0,0,4,1,0.2,0.0,0.111,0,0,0,0,0,0,33
-2012,nl,Todd Zola,Adam Kennedy,1409,FA,UT,12,dis,reserved,"3B,2B,MI,SW,1B,CI",1,1,0,0,0,0,0,0,1.0,0.0,1.0,0,0,3,16,39,0,1
-2012,nl,Todd Zola,Jerry Hairston Jr.,369,LAD,UT,2,dis,reserved,"3B,OF,2B,CI,SW,MI",4,2,0,0,1,0,0,1,0.6,0.0,0.5,1,0,1,30,32,2,18
-2012,nl,Todd Zola,Brett Wallace,2188,FA,CI,2,act,previously_reserved,"3B,1B,SW,CI",25,7,7,2,4,0,8,3,0.5,0.0,0.76,0,0,58,0,8,0,0
-2012,nl,Todd Zola,Carlos Lee,638,FA,OF,21,act,previously_reserved,"1B,OF,CI,SW",4,1,0,0,2,0,1,0,0.5,0.0,0.5,1,0,145,0,0,0,0
-2012,nl,Todd Zola,J.D. Martinez,3567,Bos,OF,13,act,previously_reserved,"OF,SW",4,1,0,0,0,0,1,0,0.25,0.0,0.25,5,0,0,0,0,0,100
-2012,nl,Todd Zola,Eric Hinske,1488,FA,OF,10,rel,previously_reserved,,16,6,3,1,4,0,2,0,0.625,0.0,0.937,4,0,15,0,0,0,10
-2012,nl,Todd Zola,Josh Bell,2016,SD,UT,3,rel,previously_reserved,,18,7,1,0,1,0,6,0,0.167,0.0,0.222,0,0,0,0,12,0,0
-2012,nl,Todd Zola,Chad Tracy,35,LAA,UT,0,rel,previously_reserved,,13,10,1,0,3,0,3,1,0.333,0.0,0.385,0,0,14,0,10,0,0
-2012,nl,Todd Zola,Andrew M. Brown,3753,LAA,SW,6,rel,previously_reserved,,5,2,1,0,0,0,1,0,0.2,0.0,0.4,0,0,0,0,0,0,33
-2012,nl,Scott Wilderman,Chase Utley,1132,LAD,MI,10,act,active,"2B,SW,MI",296,82,47,10,44,11,43,43,0.361,0.083,0.416,0,0,0,81,0,0,0
-2012,nl,Scott Wilderman,Brandon Belt,3336,SF,1B,12,act,active,"1B,SW,CI,OF",411,145,47,7,56,12,106,54,0.36,0.429,0.421,0,0,139,0,0,0,4
-2012,nl,Scott Wilderman,John Mayberry,1550,FA,CI,14,act,active,"OF,1B,SW,CI",441,149,53,14,46,1,111,34,0.301,0.111,0.395,1,0,27,0,0,0,128
-2012,nl,Scott Wilderman,Aaron Hill,1578,FA,2B,15,act,active,"UT,2B,MI,SW",609,156,93,26,85,14,86,52,0.36,0.25,0.522,0,0,0,153,0,0,0
-2012,nl,Scott Wilderman,Luis Cruz,1216,NYY,SS,6,act,active,"3B,SS",261,71,22,6,36,1,30,6,0.316,0.182,0.425,0,0,0,2,51,24,0
-2012,nl,Scott Wilderman,Chris Johnson,2101,Bal,3B,5,act,active,"1B,3B,CI,SW",488,136,48,15,76,5,132,31,0.326,0.214,0.451,0,0,6,0,127,0,1
-2012,nl,Scott Wilderman,Angel Pagan,959,FA,OF,17,act,active,"OF,SW",187,46,38,1,13,10,27,13,0.355,0.4,0.503,1,0,0,0,0,0,151
-2012,nl,Scott Wilderman,Corey Hart,862,FA,OF,22,act,active,"1B,OF,SW",562,149,91,30,83,5,151,44,0.334,0.0,0.507,0,0,103,0,0,0,53
-2012,nl,Scott Wilderman,Giancarlo Stanton,2378,NYY,OF,32,act,active,"OF,SW",446,122,75,37,85,6,141,46,0.364,0.385,0.612,1,0,0,0,0,0,117
-2012,nl,Scott Wilderman,Tony Campana,3739,CWS,OF,7,act,active,"OF,SW",171,87,26,0,5,30,41,11,0.308,0.4,0.298,0,0,0,0,0,0,69
-2012,nl,Scott Wilderman,Mike McKenry,2104,TB,C,0,act,active,"C,SW",233,84,23,11,38,0,70,25,0.311,0.143,0.433,0,81,0,0,0,0,0
-2012,nl,Scott Wilderman,Jesus Flores,1627,Mia,C,2,act,active,"C,SW",277,83,22,6,26,1,59,13,0.248,0.0,0.329,0,80,0,0,0,0,0
-2012,nl,Scott Wilderman,Brandon Crawford,3051,SF,UT,3,act,active,"SS,MI,SW",103,40,17,1,12,0,22,9,0.325,0.25,0.388,0,0,0,0,0,139,0
-2012,nl,Scott Wilderman,Brandon Barnes,3890,Cle,SW,10,act,active,OF,52,22,4,0,3,0,16,4,0.263,0.2,0.231,0,0,0,0,0,0,37
-2012,nl,Scott Wilderman,Blake DeWitt,1965,FA,MI,0,rel,previously_active,,19,13,1,0,1,0,1,0,0.1,0.0,0.158,0,0,0,4,0,0,1
-2012,nl,Scott Wilderman,Dee Gordon,2693,Sea,SS,22,res,previously_active,"SS,MI,SW",301,78,36,1,17,30,62,19,0.28,0.0,0.282,0,0,0,0,0,79,0
-2012,nl,Scott Wilderman,Alfonso Soriano,294,FA,OF,13,trd,previously_active,,392,105,42,20,69,5,105,26,0.317,0.0,0.485,6,0,0,0,0,0,145
-2012,nl,Scott Wilderman,Logan Morrison,2111,Min,OF,18,rel,previously_active,,296,93,30,11,36,1,58,31,0.308,0.0,0.399,3,0,21,0,0,0,59
-2012,nl,Scott Wilderman,Scott Moore,128,FA,OF,10,rel,previously_active,,119,42,14,4,17,0,33,10,0.29,0.0,0.345,0,0,19,6,28,0,17
-2012,nl,Scott Wilderman,Brett Hayes,594,Tex,C,1,rel,previously_active,,7,3,2,0,0,0,3,0,0.143,0.0,0.143,0,33,0,0,0,0,0
-2012,nl,Scott Wilderman,Geoff Blum,630,FA,SW,0,rel,previously_active,,15,9,0,0,1,0,5,2,0.167,0.0,0.067,0,0,0,0,6,0,0
-2012,nl,Scott Wilderman,John McDonald,1580,LAA,SW,0,rel,previously_active,,61,24,5,3,9,0,7,4,0.308,0.0,0.475,0,0,0,4,5,54,0
-2012,nl,Scott Wilderman,A.J. Pollock,2837,Ari,SW,10,rel,previously_active,,25,12,3,1,2,0,2,3,0.393,0.0,0.52,0,0,0,0,0,0,25
-2012,nl,Scott Wilderman,Adron Chambers,3228,Phi,SW,0,rel,previously_active,,8,6,1,0,0,0,2,1,0.444,0.0,0.375,0,0,0,0,0,0,26
-2012,nl,Scott Wilderman,Mike Baxter,3363,Sea,SW,0,res,previously_active,"OF,SW",87,34,13,0,4,2,25,12,0.33,0.0,0.287,1,0,0,0,0,0,63
-2012,nl,Scott Wilderman,Dee Gordon,2693,Sea,SS,22,res,reserved,"SS,MI,SW",2,9,2,0,0,2,0,1,0.333,0.0,0.0,0,0,0,0,0,79,0
-2012,nl,Scott Wilderman,Mike Baxter,3363,Sea,SW,0,res,reserved,"OF,SW",74,36,9,3,9,2,12,10,0.391,0.667,0.541,1,0,0,0,0,0,63
-2012,nl,Scott Wilderman,Chase Utley,1132,LAD,MI,10,act,previously_reserved,"2B,SW,MI",5,1,1,1,1,0,0,0,0.6,0.0,1.2,0,0,0,81,0,0,0
-2012,nl,Scott Wilderman,Scott Moore,128,FA,OF,10,rel,previously_reserved,,7,7,1,1,2,0,1,2,0.7,0.0,1.0,0,0,19,6,28,0,17
-2012,nl,Scott Wilderman,Tony Campana,3739,CWS,OF,7,act,previously_reserved,"OF,SW",3,2,0,0,0,0,2,0,0.333,0.0,0.333,0,0,0,0,0,0,69
-2012,nl,Scott Wilderman,Willie Harris,1642,Cin,OF,0,rel,previously_reserved,,17,9,1,0,0,0,2,1,0.111,0.0,0.118,1,0,0,7,1,0,1
-2012,nl,Scott Wilderman,Giancarlo Stanton,2378,NYY,OF,32,act,previously_reserved,"OF,SW",3,1,0,0,1,0,2,0,0.0,0.0,0.0,1,0,0,0,0,0,117
-2012,nl,Scott Wilderman,Jerry Sands,3249,SF,SW,3,rel,previously_reserved,,23,9,2,0,1,0,9,1,0.208,0.0,0.261,0,0,1,0,0,0,7
-2012,nl,Scott Wilderman,A.J. Pollock,2837,Ari,SW,10,rel,previously_reserved,,16,4,2,0,2,1,3,0,0.294,0.0,0.312,0,0,0,0,0,0,25
-2012,nl,Scott Wilderman,John McDonald,1580,LAA,SW,0,rel,previously_reserved,,14,8,0,0,0,0,3,0,0.143,0.0,0.143,0,0,0,4,5,54,0
-2012,nl,Scott Wilderman,Brandon Barnes,3890,Cle,SW,10,act,previously_reserved,OF,19,12,1,0,1,1,8,0,0.263,0.0,0.316,0,0,0,0,0,0,37
-2012,nl,Scott Wilderman,Geoff Blum,630,FA,SW,0,rel,previously_reserved,,11,6,1,0,0,0,1,0,0.273,0.0,0.273,0,0,0,0,6,0,0
-2012,nl,Brian Walton,Daniel Murphy,2100,ChC,1B,15,act,active,"1B,2B,CI,SW,MI,3B",571,156,62,6,65,10,82,36,0.332,0.2,0.403,0,0,12,138,0,0,0
-2012,nl,Brian Walton,Kevin Frandsen,1305,FA,CI,1,act,active,3B,169,48,21,1,12,0,17,9,0.396,0.462,0.462,0,0,0,0,52,0,0
-2012,nl,Brian Walton,Nick Punto,899,Ari,MI,0,act,active,"2B,SS,3B,MI,SW,1B",3,2,0,0,0,0,1,0,0.0,0.0,0.0,2,0,5,26,31,6,0
-2012,nl,Brian Walton,Ryan Roberts,1547,Oak,2B,16,act,active,"3B,2B,CI,MI,SW",439,143,51,12,52,10,92,40,0.296,0.111,0.36,1,0,0,54,78,0,1
-2012,nl,Brian Walton,Ian Desmond,1671,Col,SS,18,act,active,"SS,SW,MI",502,127,72,25,73,21,110,30,0.341,0.333,0.522,0,0,0,0,0,128,0
-2012,nl,Brian Walton,Pedro Alvarez,2050,Bal,3B,0,act,active,"3B,CI,SW",525,149,64,30,85,1,180,57,0.317,0.2,0.467,1,0,0,0,145,0,0
-2012,nl,Brian Walton,Gorkys Hernandez,1970,SF,OF,0,act,active,OF,65,21,6,1,4,1,18,5,0.286,0.538,0.354,0,0,0,0,0,0,56
-2012,nl,Brian Walton,Carlos Beltran,956,Hou,OF,19,act,active,"OF,SW",547,151,83,32,97,13,124,65,0.346,0.375,0.495,3,0,0,0,0,0,133
-2012,nl,Brian Walton,Jayson Werth,1139,Sea,OF,25,act,active,"OF,SW",300,81,42,5,31,8,57,42,0.387,0.375,0.44,0,0,0,0,0,0,79
-2012,nl,Brian Walton,Justin Maxwell,1646,FA,OF,1,act,active,OF,291,114,42,17,50,9,105,30,0.302,0.444,0.457,0,0,0,0,0,0,95
-2012,nl,Brian Walton,Yasmani Grandal,3311,LAD,C,10,act,active,C,177,55,26,6,33,0,37,29,0.407,0.5,0.463,0,55,0,0,0,0,0
-2012,nl,Brian Walton,John Buck,674,Atl,C,10,act,active,"C,SW",327,101,25,10,34,0,100,47,0.29,0.0,0.321,0,105,0,0,0,0,0
-2012,nl,Brian Walton,A.J. Pollock,2837,Ari,UT,0,act,active,OF,8,2,2,1,1,0,2,3,0.364,0.364,0.5,0,0,0,0,0,0,25
-2012,nl,Brian Walton,Ryan Howard,1129,Col,1B,15,trd,previously_active,,48,15,5,4,9,0,21,7,0.333,0.0,0.479,0,0,67,0,0,0,0
-2012,nl,Brian Walton,Drew Sutton,2258,Bos,CI,1,rel,previously_active,,56,17,6,1,4,0,20,2,0.237,0.0,0.393,0,0,3,8,11,0,19
-2012,nl,Brian Walton,Brock Holt,4192,Bos,MI,3,rel,previously_active,,35,15,1,0,0,0,7,3,0.263,0.0,0.229,0,0,0,14,0,0,0
-2012,nl,Brian Walton,Daniel Descalso,2899,Ari,CI,4,rel,previously_active,,242,89,26,2,13,3,51,21,0.276,0.0,0.289,0,0,5,96,22,26,0
-2012,nl,Brian Walton,Marwin Gonzalez,3884,Hou,SS,7,rel,previously_active,,82,24,6,1,7,1,12,8,0.256,0.0,0.28,0,0,0,6,14,47,0
-2012,nl,Brian Walton,David Wright,953,NYM,3B,22,trd,previously_active,,277,76,53,9,50,8,42,48,0.447,0.0,0.56,0,0,0,0,155,1,0
-2012,nl,Brian Walton,Andres Torres,310,FA,OF,7,trd,previously_active,,161,57,25,1,20,9,37,29,0.332,0.0,0.292,1,0,0,0,0,0,124
-2012,nl,Brian Walton,Mark Kotsay,88,SD,OF,0,rel,previously_active,,8,4,0,0,0,0,1,2,0.5,0.0,0.375,0,0,5,0,0,0,27
-2012,nl,Brian Walton,Andrew M. Brown,3753,LAA,OF,1,rel,previously_active,,17,11,3,1,2,1,7,4,0.429,0.0,0.529,0,0,0,0,0,0,33
-2012,nl,Brian Walton,Matt Diaz,85,Mia,OF,0,rel,previously_active,,18,8,4,1,4,0,2,3,0.364,0.0,0.5,2,0,0,0,0,0,24
-2012,nl,Brian Walton,Jason Bay,1191,FA,OF,2,rel,previously_active,,17,7,1,1,2,0,6,0,0.059,0.0,0.235,0,0,0,0,0,0,65
-2012,nl,Brian Walton,Melky Cabrera,1014,Cle,OF,18,trd,previously_active,,221,54,40,4,27,9,29,17,0.413,0.0,0.548,0,0,0,0,0,0,112
-2012,nl,Brian Walton,Scott Cousins,2376,Tex,OF,0,rel,previously_active,,33,19,3,1,2,0,10,0,0.152,0.0,0.303,0,0,0,0,0,0,36
-2012,nl,Brian Walton,Bobby Abreu,1013,FA,OF,3,rel,previously_active,,179,70,26,2,17,5,46,30,0.359,0.0,0.341,4,0,0,0,0,0,54
-2012,nl,Brian Walton,Scott Van Slyke,2804,Mia,OF,0,rel,previously_active,,14,6,1,1,1,0,2,1,0.2,0.0,0.357,0,0,5,0,0,0,21
-2012,nl,Brian Walton,Jason Castro,2343,Min,C,3,res,previously_active,C,225,76,20,3,25,0,53,26,0.332,0.0,0.378,0,79,0,0,0,0,0
-2012,nl,Brian Walton,Eddy Rodriguez,1890,Min,C,0,rel,previously_active,,2,1,0,0,0,0,2,1,0.333,0.0,0.0,0,2,0,0,0,0,0
-2012,nl,Brian Walton,Steve Pearce,1196,Bos,UT,1,rel,previously_active,,75,28,7,1,9,1,22,10,0.322,0.0,0.307,2,0,19,0,0,0,36
-2012,nl,Brian Walton,Xavier Paul,800,Tex,UT,0,rel,previously_active,,8,3,1,1,1,0,2,0,0.375,0.0,0.75,0,0,0,0,0,0,18
-2012,nl,Brian Walton,Reed Johnson,1586,FA,UT,0,rel,previously_active,,49,20,7,0,3,0,6,0,0.333,0.0,0.347,0,0,0,0,0,0,86
-2012,nl,Brian Walton,Tyler Moore,3632,Mia,UT,1,rel,previously_active,,7,5,0,0,0,0,2,0,0.286,0.0,0.286,0,0,14,0,0,0,41
-2012,nl,Brian Walton,Mike Costanzo,147,Cin,SW,0,rel,previously_active,,7,5,0,0,1,0,3,0,0.125,0.0,0.143,1,0,2,0,0,0,0
-2012,nl,Brian Walton,Lance Berkman,629,Tex,SW,20,rel,previously_active,,38,18,4,1,3,1,9,8,0.34,0.0,0.316,0,0,23,0,0,0,0
-2012,nl,Brian Walton,Emmanuel Burriss,1324,LAA,SW,2,rel,previously_active,,104,36,13,0,5,3,18,9,0.278,0.0,0.221,0,0,0,37,6,6,1
-2012,nl,Brian Walton,Matt Hague,2729,Was,SW,10,rel,previously_active,,51,21,4,0,4,1,11,1,0.25,0.0,0.275,4,0,16,0,0,0,0
-2012,nl,Brian Walton,Jason Castro,2343,Min,C,3,res,reserved,C,32,11,9,3,4,0,8,5,0.351,0.125,0.562,0,79,0,0,0,0,0
-2012,nl,Brian Walton,Drew Sutton,2258,Bos,CI,1,rel,previously_reserved,,1,1,0,0,0,0,1,0,0.0,0.0,0.0,0,0,3,8,11,0,19
-2012,nl,Brian Walton,Ryan Howard,1129,Col,1B,15,trd,previously_reserved,,8,2,0,0,0,0,2,0,0.25,0.0,0.375,0,0,67,0,0,0,0
-2012,nl,Brian Walton,Daniel Descalso,2899,Ari,CI,4,rel,previously_reserved,,41,21,5,1,4,1,10,7,0.417,0.0,0.488,0,0,5,96,22,26,0
-2012,nl,Brian Walton,Ian Desmond,1671,Col,SS,18,act,previously_reserved,"SS,SW,MI",11,3,0,0,0,0,3,0,0.0,0.0,0.0,0,0,0,0,0,128,0
-2012,nl,Brian Walton,Mark Kotsay,88,SD,OF,0,rel,previously_reserved,,17,10,0,0,1,0,0,3,0.4,0.0,0.294,0,0,5,0,0,0,27
-2012,nl,Brian Walton,Justin Maxwell,1646,FA,OF,1,act,previously_reserved,OF,24,10,4,1,3,0,9,2,0.333,0.0,0.5,0,0,0,0,0,0,95
-2012,nl,Brian Walton,Jason Bay,1191,FA,OF,2,rel,previously_reserved,,3,2,0,0,0,0,0,0,0.333,0.0,0.333,0,0,0,0,0,0,65
-2012,nl,Brian Walton,Matt Diaz,85,Mia,OF,0,rel,previously_reserved,,2,1,0,0,0,0,0,1,0.333,0.0,0.0,2,0,0,0,0,0,24
-2012,nl,Brian Walton,Scott Cousins,2376,Tex,OF,0,rel,previously_reserved,,2,3,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,0,0,0,36
-2012,nl,Brian Walton,Yasmani Grandal,3311,LAD,C,10,act,previously_reserved,C,14,4,2,2,3,0,2,2,0.25,0.0,0.571,0,55,0,0,0,0,0
-2012,nl,Brian Walton,John Buck,674,Atl,C,10,act,previously_reserved,"C,SW",16,5,4,2,7,0,3,2,0.444,0.0,0.875,0,105,0,0,0,0,0
-2012,nl,Brian Walton,Reed Johnson,1586,FA,UT,0,rel,previously_reserved,,29,10,1,0,1,0,4,1,0.267,0.0,0.31,0,0,0,0,0,0,86
-2012,nl,Brian Walton,Mike Costanzo,147,Cin,SW,0,rel,previously_reserved,,5,5,0,0,0,0,5,0,0.0,0.0,0.0,1,0,2,0,0,0,0
-2012,nl,Brian Walton,Matt Hague,2729,Was,SW,10,rel,previously_reserved,,1,1,0,0,0,0,0,0,0.0,0.0,0.0,4,0,16,0,0,0,0
-2012,nl,Brian Walton,Emmanuel Burriss,1324,LAA,SW,2,rel,previously_reserved,,9,6,0,0,0,1,3,0,0.222,0.0,0.222,0,0,0,37,6,6,1
-2012,nl,Scott Pianowski,Jimmy Rollins,1131,FA,MI,22,act,active,"SS,MI,SW",632,156,102,23,68,30,96,62,0.316,0.0,0.427,0,0,0,0,0,156,0
-2012,nl,Scott Pianowski,David Freese,1432,LAD,CI,15,act,active,"UT,3B,SW,CI",501,144,70,20,79,3,122,57,0.372,0.25,0.467,0,0,0,0,134,0,0
-2012,nl,Scott Pianowski,Freddie Freeman,2466,Atl,1B,22,act,active,"1B,SW,CI",540,147,91,23,94,2,129,64,0.34,0.111,0.456,0,0,146,0,0,0,0
-2012,nl,Scott Pianowski,Brandon Phillips,344,Bos,2B,27,act,active,"2B,SW,MI",580,147,86,18,77,15,79,28,0.321,0.182,0.429,0,0,0,146,0,0,0
-2012,nl,Scott Pianowski,Jose Reyes,952,NYM,SS,30,act,active,"SS,SW,MI",642,160,86,11,57,40,56,63,0.347,0.385,0.433,0,0,0,0,0,160,0
-2012,nl,Scott Pianowski,David Wright,953,NYM,3B,22,act,active,"3B,CI,SW",304,80,38,12,43,7,70,33,0.337,0.417,0.431,0,0,0,0,155,1,0
-2012,nl,Scott Pianowski,Brian Bogusevic,2259,Bos,OF,6,act,active,"OF,SW",355,146,39,7,28,15,96,41,0.297,0.5,0.299,0,0,0,0,0,0,121
-2012,nl,Scott Pianowski,Nyjer Morgan,1194,FA,OF,11,act,active,"OF,SW",289,122,44,3,16,12,63,20,0.302,0.0,0.308,1,0,0,0,0,0,86
-2012,nl,Scott Pianowski,Skip Schumaker,1420,SD,OF,0,act,active,"OF,2B,MI,SW",193,75,25,1,16,1,38,15,0.295,0.25,0.321,0,0,0,61,0,0,24
-2012,nl,Scott Pianowski,Andres Torres,310,FA,OF,7,act,active,"OF,SW",213,75,22,2,15,4,53,23,0.324,0.385,0.371,1,0,0,0,0,0,124
-2012,nl,Scott Pianowski,Jonathan Lucroy,2346,Oak,C,10,act,active,"C,SW",313,95,46,12,58,4,44,22,0.368,0.25,0.514,0,88,0,0,0,0,0
-2012,nl,Scott Pianowski,Ryan Hanigan,334,FA,C,8,act,active,"C,SW",317,112,25,2,24,0,37,44,0.365,0.333,0.338,0,110,0,0,0,0,0
-2012,nl,Scott Pianowski,Ty Wigginton,634,FA,UT,13,act,active,"1B,OF,3B,CI,SW",287,106,36,10,37,1,76,31,0.305,0.444,0.369,0,0,71,0,22,0,7
-2012,nl,Scott Pianowski,Donovan Solano,3063,LAD,SW,3,act,active,"UT,3B,SS,OF,2B",165,44,16,2,18,2,36,8,0.307,0.308,0.364,0,0,0,58,10,5,10
-2012,nl,Scott Pianowski,Juan Francisco,1995,FA,CI,2,rel,previously_active,,66,35,6,3,12,0,24,3,0.229,0.0,0.379,0,0,0,0,49,0,0
-2012,nl,Scott Pianowski,Miguel Cairo,1358,FA,CI,1,rel,previously_active,,1,1,0,0,0,0,0,0,0.0,0.0,0.0,1,0,24,8,13,0,0
-2012,nl,Scott Pianowski,Carlos Gomez,902,TB,OF,3,trd,previously_active,,138,55,21,4,15,9,28,8,0.289,0.0,0.428,0,0,0,0,0,0,128
-2012,nl,Scott Pianowski,Matt Treanor,561,Cle,C,0,rel,previously_active,,33,12,1,0,3,0,13,4,0.189,0.0,0.121,0,35,0,0,0,0,0
-2012,nl,Scott Pianowski,Casey McGehee,306,FA,UT,7,res,previously_active,"3B,CI,1B,SW",301,100,33,9,40,1,67,26,0.286,0.0,0.369,2,0,85,1,21,0,0
-2012,nl,Scott Pianowski,Donnie Murphy,1071,Mil,UT,5,rel,previously_active,,5,3,0,0,0,0,2,1,0.167,0.0,0.0,0,0,0,13,22,2,0
-2012,nl,Scott Pianowski,Xavier Nady,1195,FA,SW,0,rel,previously_active,,29,11,0,0,1,0,4,1,0.167,0.0,0.172,0,0,0,0,0,0,51
-2012,nl,Scott Pianowski,Brian Bixler,1185,Tor,SW,6,rel,previously_active,,42,16,4,1,2,0,15,2,0.182,0.0,0.262,0,0,0,5,4,6,12
-2012,nl,Scott Pianowski,Shane Robinson,2792,NYY,SW,5,rel,previously_active,,7,4,1,0,1,0,1,0,0.143,0.0,0.143,0,0,0,0,0,0,60
-2012,nl,Scott Pianowski,Cesar Izturis,1408,FA,SW,0,rel,previously_active,,2,2,0,0,0,0,0,0,0.0,0.0,0.0,0,0,1,2,4,46,0
-2012,nl,Scott Pianowski,Willie Harris,1642,Cin,SW,0,rel,previously_active,,4,3,1,0,0,0,0,0,0.25,0.0,0.25,1,0,0,7,1,0,1
-2012,nl,Scott Pianowski,Mike Fontenot,284,TB,SW,10,res,previously_active,"2B,SW,SS,MI,3B",21,10,3,0,0,0,6,2,0.348,0.0,0.286,1,0,0,17,12,0,0
-2012,nl,Scott Pianowski,Mark DeRosa,283,Tor,SW,2,rel,previously_active,,7,2,0,0,0,0,1,0,0.0,0.0,0.0,0,0,3,1,11,1,16
-2012,nl,Scott Pianowski,Casey McGehee,306,FA,UT,7,res,reserved,"3B,CI,1B,SW",17,14,3,0,1,0,3,3,0.25,0.0,0.176,2,0,85,1,21,0,0
-2012,nl,Scott Pianowski,Mike Fontenot,284,TB,SW,10,res,reserved,"2B,SW,SS,MI,3B",37,17,5,0,0,0,11,1,0.263,0.0,0.27,1,0,0,17,12,0,0
-2012,nl,Scott Pianowski,Juan Francisco,1995,FA,CI,2,rel,previously_reserved,,54,23,5,3,6,1,18,3,0.293,0.0,0.463,0,0,0,0,49,0,0
-2012,nl,Scott Pianowski,Jonathan Herrera,456,ChC,2B,0,rel,previously_reserved,,8,5,1,0,0,0,1,0,0.375,0.0,0.375,0,0,0,19,13,42,0
-2012,nl,Scott Pianowski,Carlos Gomez,902,TB,OF,3,trd,previously_reserved,,2,1,1,0,0,0,1,0,0.5,0.0,0.5,0,0,0,0,0,0,128
-2012,nl,Scott Pianowski,Skip Schumaker,1420,SD,OF,0,act,previously_reserved,"OF,2B,MI,SW",79,32,12,0,12,0,12,12,0.44,0.0,0.481,0,0,0,61,0,0,24
-2012,nl,Scott Pianowski,Scott Hairston,1261,FA,OF,0,rel,previously_reserved,,21,11,2,1,2,0,7,0,0.19,0.0,0.381,0,0,0,0,0,0,108
-2012,nl,Scott Pianowski,Jonathan Lucroy,2346,Oak,C,10,act,previously_reserved,"C,SW",3,1,0,0,0,0,0,0,0.333,0.0,0.333,0,88,0,0,0,0,0
-2012,nl,Scott Pianowski,Ty Wigginton,634,FA,UT,13,act,previously_reserved,"1B,OF,3B,CI,SW",28,19,4,1,6,0,5,6,0.4,0.0,0.429,0,0,71,0,22,0,7
-2012,nl,Scott Pianowski,Xavier Nady,1195,FA,SW,0,rel,previously_reserved,,73,29,6,3,5,1,20,6,0.228,0.0,0.315,0,0,0,0,0,0,51
-2012,nl,Scott Pianowski,Brian Bixler,1185,Tor,SW,6,rel,previously_reserved,,7,3,0,0,0,0,6,1,0.125,0.0,0.0,0,0,0,5,4,6,12
-2012,nl,Scott Pianowski,Shane Robinson,2792,NYY,SW,5,rel,previously_reserved,,32,17,3,0,0,1,9,3,0.343,0.0,0.344,0,0,0,0,0,0,60
-2012,nl,Scott Pianowski,Willie Harris,1642,Cin,SW,0,rel,previously_reserved,,5,3,1,0,0,0,2,1,0.167,0.0,0.0,1,0,0,7,1,0,1
-2012,nl,Scott Pianowski,Donovan Solano,3063,LAD,SW,3,act,previously_reserved,"UT,3B,SS,OF,2B",49,14,7,0,4,1,6,5,0.429,0.0,0.408,0,0,0,58,10,5,10
-2012,nl,Scott Pianowski,Mark DeRosa,283,Tor,SW,2,rel,previously_reserved,,33,14,4,0,3,0,5,10,0.318,0.0,0.152,0,0,3,1,11,1,16
-2012,nl,Lenny Melnick & Paul Greco,Alexi Amarista,3084,Phi,MI,17,act,active,"OF,2B,SS,SW,MI",245,93,31,5,30,7,38,16,0.289,1.0,0.392,1,0,0,52,1,12,34
-2012,nl,Lenny Melnick & Paul Greco,Garrett Jones,903,FA,1B,11,act,active,"OF,1B,CI,SW",475,145,68,27,86,2,103,33,0.317,0.143,0.516,4,0,72,0,0,0,66
-2012,nl,Lenny Melnick & Paul Greco,Hanley Ramirez,566,FA,CI,39,act,active,"UT,SS,MI,SW,3B",604,157,79,24,92,21,132,54,0.322,0.364,0.437,2,0,0,0,98,57,0
-2012,nl,Lenny Melnick & Paul Greco,Neil Walker,1221,NYY,2B,19,act,active,"UT,2B,MI,SW",472,129,62,14,69,7,104,47,0.342,0.0,0.426,1,0,0,125,0,0,0
-2012,nl,Lenny Melnick & Paul Greco,Clint Barmes,454,FA,SS,1,act,active,"SS,SW,MI",439,138,33,8,44,0,103,19,0.272,0.5,0.323,0,0,1,0,0,142,0
-2012,nl,Lenny Melnick & Paul Greco,Cody Ransom,1034,FA,3B,5,act,active,"3B,SS,MI,SW,2B",202,77,23,9,34,0,88,24,0.303,0.0,0.396,1,0,1,6,35,48,0
-2012,nl,Lenny Melnick & Paul Greco,Will Venable,1278,LAD,OF,14,act,active,"OF,SW",408,146,60,8,43,24,94,40,0.332,0.538,0.417,0,0,0,0,0,0,135
-2012,nl,Lenny Melnick & Paul Greco,Matt Holliday,464,Col,OF,32,act,active,"OF,SW",599,157,95,27,102,4,132,75,0.379,0.625,0.497,2,0,0,0,0,0,152
-2012,nl,Lenny Melnick & Paul Greco,Hunter Pence,639,SF,OF,33,act,active,"OF,SW",617,160,87,24,104,5,145,56,0.319,0.1,0.425,0,0,0,0,0,0,159
-2012,nl,Lenny Melnick & Paul Greco,Cameron Maybin,573,Sea,OF,28,act,active,"OF,SW",499,144,65,8,43,26,109,44,0.305,0.143,0.345,0,0,0,0,0,0,145
-2012,nl,Lenny Melnick & Paul Greco,A.J. Ellis,817,SD,C,2,act,active,"C,SW",423,133,44,13,52,0,107,65,0.373,0.625,0.414,0,131,0,0,0,0,0
-2012,nl,Lenny Melnick & Paul Greco,Hector Sanchez,3050,FA,C,3,act,active,"C,SW",218,74,22,3,34,0,52,5,0.295,0.333,0.39,1,56,0,0,0,0,0
-2012,nl,Lenny Melnick & Paul Greco,Scott Podsednik,485,FA,UT,0,act,active,OF,164,49,11,0,9,6,27,5,0.302,0.0,0.317,3,0,0,0,0,0,57
-2012,nl,Lenny Melnick & Paul Greco,Gregor Blanco,84,SF,SW,1,act,active,OF,377,136,53,5,33,26,101,48,0.329,0.75,0.34,1,0,0,0,0,0,125
-2012,nl,Lenny Melnick & Paul Greco,Mat Gamel,1986,FA,3B,17,rel,previously_active,,69,21,10,1,6,3,15,4,0.293,0.0,0.348,0,0,20,0,1,0,0
-2012,nl,Lenny Melnick & Paul Greco,Conor Gillaspie,2208,SF,3B,13,rel,previously_active,,4,2,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,0,5,0,0
-2012,nl,Lenny Melnick & Paul Greco,Austin Kearns,1643,Mia,UT,2,rel,previously_active,,17,12,3,1,4,0,4,2,0.333,0.0,0.353,2,0,2,0,0,0,34
-2012,nl,Lenny Melnick & Paul Greco,Brett Pill,2582,Det,UT,6,res,previously_active,"1B,OF,CI,SW",60,25,6,2,7,1,13,2,0.226,0.0,0.317,0,0,24,0,1,0,7
-2012,nl,Lenny Melnick & Paul Greco,Chris Coghlan,599,ChC,UT,10,res,previously_active,"UT,OF,SW",55,19,7,1,7,0,6,8,0.262,0.0,0.218,0,0,0,0,0,0,32
-2012,nl,Lenny Melnick & Paul Greco,Laynce Nix,868,FA,UT,1,res,previously_active,"OF,SW,1B",59,30,7,2,12,0,18,5,0.344,0.0,0.492,0,0,10,0,0,0,29
-2012,nl,Lenny Melnick & Paul Greco,Josh Harrison,3747,Pit,SW,1,rel,previously_active,,18,10,1,0,1,0,3,0,0.158,0.0,0.278,1,0,0,28,14,25,13
-2012,nl,Lenny Melnick & Paul Greco,Brett Pill,2582,Det,UT,6,res,reserved,"1B,OF,CI,SW",31,18,3,1,3,0,3,3,0.361,0.0,0.419,0,0,24,0,1,0,7
-2012,nl,Lenny Melnick & Paul Greco,Chris Coghlan,599,ChC,UT,10,res,reserved,"UT,OF,SW",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,0,0,0,32
-2012,nl,Lenny Melnick & Paul Greco,Laynce Nix,868,FA,UT,1,res,reserved,"OF,SW,1B",55,39,6,1,4,0,24,7,0.286,0.0,0.327,0,0,10,0,0,0,29
-2012,nl,Lenny Melnick & Paul Greco,Alexi Amarista,3084,Phi,MI,17,act,previously_reserved,"OF,2B,SS,SW,MI",16,8,2,0,0,0,3,0,0.125,0.0,0.25,1,0,0,52,1,12,34
-2012,nl,Lenny Melnick & Paul Greco,Clint Barmes,454,FA,SS,1,act,previously_reserved,"SS,SW,MI",16,6,1,0,1,0,3,1,0.278,0.0,0.25,0,0,1,0,0,142,0
-2012,nl,Lenny Melnick & Paul Greco,Cody Ransom,1034,FA,3B,5,act,previously_reserved,"3B,SS,MI,SW,2B",26,8,4,1,3,0,16,4,0.3,0.0,0.346,1,0,1,6,35,48,0
-2012,nl,Lenny Melnick & Paul Greco,Will Venable,1278,LAD,OF,14,act,previously_reserved,"OF,SW",9,2,2,1,2,0,0,1,0.5,0.0,1.0,0,0,0,0,0,0,135
-2012,nl,Lenny Melnick & Paul Greco,Cameron Maybin,573,Sea,OF,28,act,previously_reserved,"OF,SW",8,3,2,0,2,0,1,0,0.375,0.0,0.625,0,0,0,0,0,0,145
-2012,nl,Lenny Melnick & Paul Greco,Scott Podsednik,485,FA,UT,0,act,previously_reserved,OF,35,14,8,1,3,2,8,1,0.417,0.0,0.514,3,0,0,0,0,0,57
-2012,nl,Lenny Melnick & Paul Greco,Austin Kearns,1643,Mia,UT,2,rel,previously_reserved,,17,9,3,0,0,0,5,5,0.318,0.0,0.118,2,0,2,0,0,0,34
-2012,nl,Lenny Melnick & Paul Greco,Gregor Blanco,84,SF,SW,1,act,previously_reserved,OF,16,5,3,0,1,0,3,3,0.421,0.0,0.437,1,0,0,0,0,0,125
-2012,nl,Mike Gianella,Yonder Alonso,2142,Cle,1B,11,act,active,"1B,OF,SW",549,155,47,9,62,3,101,62,0.348,0.25,0.393,0,0,149,0,0,0,0
-2012,nl,Mike Gianella,Everth Cabrera,2297,FA,MI,2,act,active,"SS,2B,MI,SW",243,69,32,0,13,29,62,26,0.326,0.429,0.305,0,0,0,6,1,111,0
-2012,nl,Mike Gianella,Matt Carpenter,3510,StL,CI,4,act,active,"1B,3B,SW,OF,2B,CI",225,88,36,5,36,0,51,27,0.36,0.25,0.453,0,0,44,5,33,0,21
-2012,nl,Mike Gianella,Darwin Barney,2055,FA,2B,5,act,active,"2B,MI,SW",255,74,37,4,21,1,30,15,0.293,0.0,0.345,0,0,0,155,0,3,0
-2012,nl,Mike Gianella,John McDonald,1580,LAA,SS,0,act,active,"3B,SS,CI,2B,MI,SW",61,17,5,1,5,0,11,2,0.312,0.5,0.361,0,0,0,4,5,54,0
-2012,nl,Mike Gianella,Scott Rolen,1582,FA,3B,12,act,active,"3B,SW,CI",272,85,23,7,34,2,57,28,0.311,0.3,0.39,0,0,0,0,87,0,0
-2012,nl,Mike Gianella,David DeJesus,689,FA,OF,9,act,active,"OF,SW",506,148,76,9,50,7,89,61,0.35,0.25,0.403,0,0,0,0,0,0,143
-2012,nl,Mike Gianella,Michael Bourn,636,FA,OF,29,act,active,"OF,SW",624,155,96,9,57,42,155,70,0.348,0.333,0.391,0,0,0,0,0,0,153
-2012,nl,Mike Gianella,Alex Presley,3365,FA,OF,54,act,active,"OF,SW",192,61,30,7,14,3,35,13,0.29,0.25,0.448,0,0,0,0,0,0,90
-2012,nl,Mike Gianella,Brett Jackson,2849,SF,OF,0,act,active,OF,116,43,13,4,9,0,58,21,0.292,0.375,0.336,0,0,0,0,0,0,39
-2012,nl,Mike Gianella,Kelly Shoppach,395,Cle,C,7,act,active,"C,SW",69,25,4,2,8,0,23,3,0.253,0.25,0.304,1,73,0,0,0,0,0
-2012,nl,Mike Gianella,Steve Clevenger,2435,Sea,C,1,act,active,"C,1B,SW",63,23,2,0,2,0,16,11,0.257,0.0,0.175,0,51,9,0,1,0,0
-2012,nl,Mike Gianella,Dave Sappelt,3532,Phi,UT,0,act,active,"OF,SW",40,15,4,2,5,0,5,4,0.333,0.111,0.45,0,0,0,0,0,0,21
-2012,nl,Mike Gianella,Darin Ruf,4191,FA,SW,1,act,active,OF,33,11,4,3,9,0,12,2,0.361,0.455,0.727,0,0,3,0,0,0,6
-2012,nl,Mike Gianella,Wilson Valdez,1930,Mia,CI,0,rel,previously_active,,5,2,1,0,1,0,1,0,0.4,0.0,0.4,0,0,0,22,14,33,5
-2012,nl,Mike Gianella,Stephen Drew,30,Was,MI,9,trd,previously_active,,20,7,3,0,3,0,6,2,0.261,0.0,0.25,0,0,0,0,0,75,0
-2012,nl,Mike Gianella,Aubrey Huff,126,SF,CI,10,rel,previously_active,,57,31,7,1,5,0,8,12,0.3,0.0,0.263,0,0,15,1,0,0,5
-2012,nl,Mike Gianella,Tyler Moore,3632,Mia,CI,4,rel,previously_active,,64,31,5,2,7,0,20,2,0.269,0.0,0.375,0,0,14,0,0,0,41
-2012,nl,Mike Gianella,Jordy Mercer,3871,Pit,MI,0,rel,previously_active,,0,1,0,0,0,0,0,1,1.0,0.0,0.0,0,0,0,7,1,28,0
-2012,nl,Mike Gianella,Brooks Conrad,1094,KC,MI,2,rel,previously_active,,3,3,0,0,0,0,2,0,0.0,0.0,0.0,1,0,7,13,16,1,0
-2012,nl,Mike Gianella,Andy Parrino,3471,CWS,2B,0,rel,previously_active,,23,11,2,0,2,0,9,3,0.333,0.0,0.304,0,0,0,15,2,26,1
-2012,nl,Mike Gianella,Orlando Hudson,31,FA,2B,6,rel,previously_active,,206,61,16,2,21,4,38,17,0.251,0.0,0.301,4,0,0,44,29,0,0
-2012,nl,Mike Gianella,Emmanuel Burriss,1324,LAA,2B,0,rel,previously_active,,6,3,1,0,0,0,1,1,0.286,0.0,0.167,0,0,0,37,6,6,1
-2012,nl,Mike Gianella,Jordany Valdespin,3407,Det,2B,1,rel,previously_active,,47,20,10,1,9,3,9,0,0.292,0.0,0.489,2,0,0,16,0,4,39
-2012,nl,Mike Gianella,Jake Elmore,4160,CWS,SS,0,rel,previously_active,,7,3,0,0,2,0,1,0,0.286,0.0,0.429,0,0,0,5,0,17,0
-2012,nl,Mike Gianella,Rafael Furcal,790,KC,SS,10,dis,previously_active,"SS,SW,MI",477,121,69,5,49,12,57,44,0.325,0.0,0.346,0,0,0,0,0,120,0
-2012,nl,Mike Gianella,Bryce Harper,2628,Was,OF,4,trd,previously_active,,260,66,44,8,25,11,57,28,0.345,0.0,0.454,0,0,0,0,0,0,138
-2012,nl,Mike Gianella,Reed Johnson,1586,FA,OF,3,rel,previously_active,,43,22,6,1,4,0,9,3,0.277,0.0,0.395,0,0,0,0,0,0,86
-2012,nl,Mike Gianella,Carlos Quentin,242,Min,OF,9,trd,previously_active,,124,36,17,8,21,0,22,18,0.391,0.0,0.516,5,0,0,0,0,0,72
-2012,nl,Mike Gianella,Carlos Ruiz,1123,FA,C,9,trd,previously_active,,313,95,47,14,58,3,41,22,0.399,0.0,0.559,0,106,0,0,0,0,0
-2012,nl,Mike Gianella,Brett Hayes,594,Tex,C,0,rel,previously_active,,22,7,0,0,0,0,14,0,0.091,0.0,0.091,0,33,0,0,0,0,0
-2012,nl,Mike Gianella,Nick Hundley,1268,SF,C,10,rel,previously_active,,201,57,14,3,22,0,55,14,0.218,0.0,0.249,0,56,0,0,0,0,0
-2012,nl,Mike Gianella,Sandy Leon,3901,Bos,C,0,rel,previously_active,,7,2,0,0,0,0,5,0,0.286,0.0,0.429,0,12,0,0,0,0,0
-2012,nl,Mike Gianella,Nick Punto,899,Ari,UT,0,rel,previously_active,,3,3,0,0,0,0,0,0,0.0,0.0,0.0,2,0,5,26,31,6,0
-2012,nl,Mike Gianella,Mark Ellis,1067,FA,UT,3,trd,previously_active,,23,5,2,0,0,0,6,2,0.32,0.0,0.261,0,0,0,110,0,0,0
-2012,nl,Mike Gianella,Placido Polanco,513,Mia,UT,12,rel,previously_active,,302,89,28,2,19,0,24,18,0.303,0.0,0.328,0,0,0,0,80,0,0
-2012,nl,Mike Gianella,Bryan Petersen,3101,Mil,UT,0,rel,previously_active,,36,11,4,0,5,1,7,2,0.263,0.0,0.333,0,0,0,0,0,0,72
-2012,nl,Mike Gianella,Ronny Cedeno,282,SF,UT,0,rel,previously_active,,78,30,5,1,6,0,15,10,0.337,0.0,0.333,0,0,0,28,3,27,0
-2012,nl,Mike Gianella,Jason Bay,1191,FA,SW,13,rel,previously_active,,140,44,17,5,12,4,44,16,0.228,0.0,0.264,0,0,0,0,0,0,65
-2012,nl,Mike Gianella,Vinny Rottino,856,CWS,SW,0,rel,previously_active,,3,2,0,0,0,0,0,1,0.25,0.0,0.0,3,2,7,0,2,0,20
-2012,nl,Mike Gianella,Juan Uribe,238,FA,SW,4,rel,previously_active,,3,4,0,0,0,0,1,0,0.667,0.0,0.667,0,0,0,0,46,1,0
-2012,nl,Mike Gianella,James Darnell,2709,TB,SW,2,dis,previously_active,"3B,SW,CI",9,4,1,1,1,0,1,2,0.364,0.0,0.667,0,0,0,0,1,0,4
-2012,nl,Mike Gianella,Xavier Paul,800,Tex,SW,1,rel,previously_active,,6,5,2,1,2,0,0,2,0.5,0.0,1.17,0,0,0,0,0,0,18
-2012,nl,Mike Gianella,Emilio Bonifacio,27,Mil,SW,17,dis,previously_active,"OF,2B,CI,MI,SW,SS,3B",81,21,9,1,5,9,15,4,0.282,0.0,0.321,0,0,0,15,0,0,51
-2012,nl,Mike Gianella,Rafael Furcal,790,KC,SS,10,dis,reserved,"SS,SW,MI",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,0,0,120,0
-2012,nl,Mike Gianella,James Darnell,2709,TB,SW,2,dis,reserved,"3B,SW,CI",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,0,1,0,4
-2012,nl,Mike Gianella,Emilio Bonifacio,27,Mil,SW,17,dis,reserved,"OF,2B,CI,MI,SW,SS,3B",5,1,1,0,0,0,1,0,0.2,0.0,0.2,0,0,0,15,0,0,51
-2012,nl,Mike Gianella,Stephen Drew,30,Was,MI,9,trd,previously_reserved,,8,2,0,0,0,0,1,0,0.125,0.0,0.125,0,0,0,0,0,75,0
-2012,nl,Mike Gianella,Tyler Moore,3632,Mia,CI,4,rel,previously_reserved,,41,14,10,4,12,3,9,8,0.51,0.0,0.78,0,0,14,0,0,0,41
-2012,nl,Mike Gianella,Aubrey Huff,126,SF,CI,10,rel,previously_reserved,,1,1,0,0,0,0,0,0,0.0,0.0,0.0,0,0,15,1,0,0,5
-2012,nl,Mike Gianella,Matt Carpenter,3510,StL,CI,4,act,previously_reserved,"1B,3B,SW,OF,2B,CI",65,23,6,1,8,1,10,6,0.389,0.0,0.508,0,0,44,5,33,0,21
-2012,nl,Mike Gianella,Orlando Hudson,31,FA,2B,6,rel,previously_reserved,,5,2,1,0,1,0,2,0,0.4,0.0,0.4,4,0,0,44,29,0,0
-2012,nl,Mike Gianella,Emmanuel Burriss,1324,LAA,2B,0,rel,previously_reserved,,4,1,1,0,0,0,0,0,0.25,0.0,0.25,0,0,0,37,6,6,1
-2012,nl,Mike Gianella,Jordany Valdespin,3407,Det,2B,1,rel,previously_reserved,,10,7,2,1,3,0,2,1,0.182,0.0,0.4,2,0,0,16,0,4,39
-2012,nl,Mike Gianella,Scott Rolen,1582,FA,3B,12,act,previously_reserved,"3B,SW,CI",22,7,3,1,5,0,5,2,0.4,0.0,0.5,0,0,0,0,87,0,0
-2012,nl,Mike Gianella,Alex Presley,3365,FA,OF,54,act,previously_reserved,"OF,SW",9,3,0,0,2,0,4,1,0.4,0.0,0.444,0,0,0,0,0,0,90
-2012,nl,Mike Gianella,Brett Jackson,2849,SF,OF,0,act,previously_reserved,OF,4,1,1,0,0,0,1,1,0.6,0.0,0.5,0,0,0,0,0,0,39
-2012,nl,Mike Gianella,Nick Hundley,1268,SF,C,10,rel,previously_reserved,,3,1,0,0,0,0,1,1,0.25,0.0,0.0,0,56,0,0,0,0,0
-2012,nl,Mike Gianella,Ronny Cedeno,282,SF,UT,0,rel,previously_reserved,,14,4,4,0,1,0,4,2,0.437,0.0,0.357,0,0,0,28,3,27,0
-2012,nl,Mike Gianella,Juan Uribe,238,FA,SW,4,rel,previously_reserved,,11,9,2,0,0,0,4,3,0.214,0.0,0.0,0,0,0,0,46,1,0
-2012,nl,Mike Gianella,Darin Ruf,4191,FA,SW,1,act,previously_reserved,OF,0,1,0,0,1,0,0,0,0.0,0.0,0.0,0,0,3,0,0,0,6
-2012,nl,Mike Gianella,Jason Bay,1191,FA,SW,13,rel,previously_reserved,,22,11,3,2,6,0,5,2,0.333,0.0,0.545,0,0,0,0,0,0,65
-2012,nl,Nate Ravitz,Ruben Tejada,2638,Bal,MI,3,act,active,"SS,2B,MI,SW",460,113,53,1,23,4,72,27,0.333,0.2,0.35,0,0,0,0,0,112,0
-2012,nl,Nate Ravitz,Jesus Guzman,2388,FA,CI,9,act,active,"1B,OF,2B,CI,SW",287,120,32,9,48,3,71,29,0.319,0.333,0.418,1,0,19,4,0,0,58
-2012,nl,Nate Ravitz,Ryan Howard,1129,Col,1B,15,act,active,"1B,CI,SW",204,54,23,10,47,0,76,18,0.286,0.0,0.412,0,0,67,0,0,0,0
-2012,nl,Nate Ravitz,Dan Uggla,567,FA,2B,28,act,active,"2B,MI,SW",523,154,86,19,78,4,168,94,0.348,0.5,0.384,0,0,0,152,0,0,0
-2012,nl,Nate Ravitz,Willie Bloomquist,1357,Sea,SS,6,act,active,"UT,SS,SW,MI,3B,OF",324,80,47,0,23,7,55,12,0.325,0.0,0.398,0,0,0,1,11,64,2
-2012,nl,Nate Ravitz,Justin Turner,2415,LAD,3B,0,act,active,"1B,2B,3B,MI,SW,CI,SS",160,89,19,2,18,1,18,9,0.333,0.5,0.412,0,0,11,14,11,10,0
-2012,nl,Nate Ravitz,Matt Kemp,799,LAD,OF,42,act,active,"OF,SW",403,106,74,23,69,9,103,40,0.367,0.0,0.538,0,0,0,0,0,0,105
-2012,nl,Nate Ravitz,Charlie Blackmon,2620,Col,OF,3,act,active,"OF,SW",108,40,15,2,9,1,16,4,0.339,0.4,0.426,0,0,0,0,0,0,33
-2012,nl,Nate Ravitz,Domonic Brown,2066,FA,OF,1,act,active,"OF,SW",169,50,20,5,25,0,33,19,0.312,0.25,0.402,0,0,0,0,0,0,51
-2012,nl,Nate Ravitz,Austin Kearns,1643,Mia,OF,0,act,active,"OF,SW",42,34,6,0,5,2,12,10,0.491,1.0,0.452,2,0,2,0,0,0,34
-2012,nl,Nate Ravitz,Chris Snyder,26,Tex,C,4,act,active,"C,SW",143,52,17,4,12,0,44,22,0.298,0.0,0.294,0,72,1,0,0,0,0
-2012,nl,Nate Ravitz,Kurt Suzuki,1063,Atl,C,16,act,active,"C,SW",143,42,17,5,25,1,19,11,0.327,0.5,0.413,0,117,0,0,0,0,0
-2012,nl,Nate Ravitz,Joey Votto,345,Cin,UT,41,act,active,"1B,SW,CI",374,111,59,14,56,5,85,94,0.474,0.333,0.567,0,0,109,0,0,0,0
-2012,nl,Nate Ravitz,Edwin Maysonet,2195,ChC,MI,0,rel,previously_active,,24,13,0,0,0,0,5,0,0.16,0.0,0.125,0,0,0,3,1,18,0
-2012,nl,Nate Ravitz,Alex Castellanos,3864,Bal,MI,1,rel,previously_active,,18,9,1,0,0,0,6,0,0.056,0.0,0.056,0,0,0,0,0,0,13
-2012,nl,Nate Ravitz,Adam Kennedy,1409,FA,MI,1,rel,previously_active,,33,23,4,0,3,0,7,7,0.317,0.0,0.212,0,0,3,16,39,0,1
-2012,nl,Nate Ravitz,Tony Gwynn Jr.,861,Was,OF,3,rel,previously_active,,259,103,29,0,17,13,52,16,0.276,0.0,0.293,0,0,0,0,0,0,90
-2012,nl,Nate Ravitz,Lance Berkman,629,Tex,OF,20,trd,previously_active,,37,12,8,1,4,1,7,6,0.455,0.0,0.622,0,0,23,0,0,0,0
-2012,nl,Nate Ravitz,Melky Cabrera,1014,Cle,OF,18,rel,previously_active,,238,59,44,7,33,4,34,19,0.369,0.0,0.487,0,0,0,0,0,0,112
-2012,nl,Nate Ravitz,Reed Johnson,1586,FA,OF,0,trd,previously_active,,109,46,14,2,9,2,26,7,0.407,0.0,0.486,0,0,0,0,0,0,86
-2012,nl,Nate Ravitz,Michael Cuddyer,901,NYM,OF,28,dis,previously_active,"OF,1B,CI,2B,MI,SW",170,46,21,8,19,1,39,11,0.28,0.0,0.459,0,0,26,0,0,0,74
-2012,nl,Nate Ravitz,Travis Buck,1074,SD,OF,0,rel,previously_active,,52,22,3,0,2,0,10,5,0.276,0.0,0.231,0,0,0,0,0,0,21
-2012,nl,Nate Ravitz,John Baker,591,FA,C,1,trd,previously_active,,54,18,2,0,5,2,12,7,0.328,0.0,0.333,0,56,0,0,0,0,0
-2012,nl,Nate Ravitz,Welington Castillo,2434,CWS,C,1,rel,previously_active,,34,9,3,1,4,0,9,3,0.27,0.0,0.353,0,49,1,0,0,0,0
-2012,nl,Nate Ravitz,Matt Adams,3755,StL,UT,57,res,previously_active,1B,82,26,7,2,13,0,24,5,0.276,0.0,0.378,0,0,24,0,0,0,0
-2012,nl,Nate Ravitz,Jim Thome,244,Cle,UT,2,dis,previously_active,"UT,SW",93,37,7,3,7,0,40,14,0.327,0.0,0.355,36,0,4,0,0,0,0
-2012,nl,Nate Ravitz,Carlos Corporan,2345,ChC,SW,3,rel,previously_active,,37,12,2,2,5,0,8,3,0.31,0.0,0.405,0,24,0,0,0,0,0
-2012,nl,Nate Ravitz,Alex Presley,3365,FA,SW,14,rel,previously_active,,118,34,11,2,7,3,30,4,0.246,0.0,0.305,0,0,0,0,0,0,90
-2012,nl,Nate Ravitz,Fernando Martinez,978,NYY,SW,1,rel,previously_active,,15,4,0,0,2,0,9,0,0.067,0.0,0.133,0,0,0,0,0,0,37
-2012,nl,Nate Ravitz,Michael Cuddyer,901,NYM,OF,28,dis,reserved,"OF,1B,CI,2B,MI,SW",8,3,1,1,2,0,3,1,0.333,0.0,0.625,0,0,26,0,0,0,74
-2012,nl,Nate Ravitz,Matt Adams,3755,StL,UT,57,res,reserved,1B,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,24,0,0,0,0
-2012,nl,Nate Ravitz,Jim Thome,244,Cle,UT,2,dis,reserved,"UT,SW",70,21,10,5,18,0,21,8,0.367,0.091,0.557,36,0,4,0,0,0,0
-2012,nl,Nate Ravitz,Billy Hamilton,3576,Cin,UT,3,res,reserved,OF,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,0,0,0,0
-2012,nl,Nate Ravitz,Ruben Tejada,2638,Bal,MI,3,act,previously_reserved,"SS,2B,MI,SW",4,1,0,0,2,0,1,0,0.4,0.0,0.5,0,0,0,0,0,112,0
-2012,nl,Nate Ravitz,Alex Castellanos,3864,Bal,MI,1,rel,previously_reserved,,3,2,0,0,2,0,1,0,0.6,0.0,1.33,0,0,0,0,0,0,13
-2012,nl,Nate Ravitz,Justin Turner,2415,LAD,3B,0,act,previously_reserved,"1B,2B,3B,MI,SW,CI,SS",11,5,1,0,1,0,6,0,0.091,0.0,0.091,0,0,11,14,11,10,0
-2012,nl,Nate Ravitz,Domonic Brown,2066,FA,OF,1,act,previously_reserved,"OF,SW",18,6,1,0,1,0,1,2,0.35,0.0,0.333,0,0,0,0,0,0,51
-2012,nl,Nate Ravitz,Austin Kearns,1643,Mia,OF,0,act,previously_reserved,"OF,SW",8,2,0,0,0,0,3,0,0.125,0.0,0.125,2,0,2,0,0,0,34
-2012,nl,Nate Ravitz,Lance Berkman,629,Tex,OF,20,trd,previously_reserved,,5,1,0,0,0,0,3,0,0.2,0.0,0.2,0,0,23,0,0,0,0
-2012,nl,Steve Gardner,Logan Forsythe,2920,Min,MI,0,act,active,"UT,2B,3B,SS,CI,MI,SW",312,90,45,6,26,8,57,28,0.34,0.0,0.378,2,0,0,81,4,5,0
-2012,nl,Steve Gardner,Greg Dobbs,1125,FA,1B,0,act,active,"1B,3B,SW,CI,OF",285,102,24,5,35,3,47,12,0.311,0.333,0.389,1,0,18,0,36,0,37
-2012,nl,Steve Gardner,Lucas Duda,3305,Atl,CI,20,act,active,"1B,OF,CI,SW",399,120,43,15,57,1,120,50,0.329,0.333,0.391,5,0,6,0,0,0,105
-2012,nl,Steve Gardner,Omar Infante,77,Det,2B,11,act,active,"2B,3B,MI,SW",554,149,69,12,53,17,65,21,0.3,0.2,0.419,0,0,0,144,6,0,0
-2012,nl,Steve Gardner,Jed Lowrie,201,Oak,SS,11,act,active,"SS,CI,SW,MI,3B",325,93,42,16,41,1,61,38,0.327,0.111,0.449,0,0,0,0,0,93,0
-2012,nl,Steve Gardner,Pablo Sandoval,2182,SF,3B,27,act,active,"3B,CI,SW",389,106,58,12,62,1,59,38,0.345,0.182,0.452,2,0,3,0,102,0,0
-2012,nl,Steve Gardner,Scott Hairston,1261,FA,OF,7,act,active,"OF,SW",333,115,47,18,50,8,69,17,0.301,0.417,0.508,0,0,0,0,0,0,108
-2012,nl,Steve Gardner,Carlos Gonzalez,1077,Col,OF,39,act,active,"OF,SW",518,135,89,22,85,20,115,56,0.371,0.0,0.51,0,0,0,0,0,0,131
-2012,nl,Steve Gardner,Carlos Gomez,902,TB,OF,3,act,active,"OF,SW",275,81,50,15,36,28,69,12,0.312,0.333,0.48,0,0,0,0,0,0,128
-2012,nl,Steve Gardner,Travis Snider,1606,NYM,OF,83,act,active,"OF,SW",113,45,14,1,8,1,31,12,0.331,1.0,0.345,0,0,0,0,0,0,46
-2012,nl,Steve Gardner,Wilin Rosario,2499,FA,C,4,act,active,"UT,C,SW",396,117,67,28,71,4,99,25,0.312,0.214,0.53,0,105,1,0,3,0,0
-2012,nl,Steve Gardner,Josh Thole,2441,Det,C,8,act,active,"C,SW",313,102,23,1,21,0,48,27,0.295,0.0,0.291,0,100,0,0,0,0,0
-2012,nl,Steve Gardner,Jose Tabata,1041,Tor,UT,19,act,active,"OF,SW",305,96,39,3,15,8,54,26,0.312,0.25,0.344,0,0,0,0,0,0,96
-2012,nl,Steve Gardner,Chris Denorfia,1075,FA,SW,0,act,active,"OF,SW",289,110,42,6,26,10,43,23,0.339,0.222,0.446,0,0,0,0,0,0,118
-2012,nl,Steve Gardner,Aubrey Huff,126,SF,CI,1,rel,previously_active,,1,1,0,0,1,0,0,0,0.0,0.0,0.0,0,0,15,1,0,0,5
-2012,nl,Steve Gardner,Jeff Baker,462,FA,CI,0,res,previously_active,"1B,2B,SW,MI,OF,CI",72,30,5,1,10,4,18,6,0.291,0.0,0.347,0,0,20,9,4,0,31
-2012,nl,Steve Gardner,Tyler Pastornicky,3333,Phi,SS,4,rel,previously_active,,155,61,20,2,13,2,30,9,0.301,0.0,0.348,0,0,0,3,0,47,0
-2012,nl,Steve Gardner,Paul Janish,342,Bal,SS,3,rel,previously_active,,51,20,2,0,3,0,10,6,0.193,0.0,0.157,0,0,0,0,0,55,0
-2012,nl,Steve Gardner,Marlon Byrd,1527,FA,OF,12,rel,previously_active,,143,48,10,1,9,0,31,5,0.243,0.0,0.245,0,0,0,0,0,0,48
-2012,nl,Steve Gardner,Mike Nickeas,971,Tor,C,0,rel,previously_active,,30,11,2,1,6,0,11,2,0.125,0.0,0.167,0,45,0,0,0,0,0
-2012,nl,Steve Gardner,Kyle Blanks,1270,FA,UT,3,rel,previously_active,,1,2,0,0,0,0,1,1,0.5,0.0,0.0,0,0,1,0,0,0,1
-2012,nl,Steve Gardner,Chris Coghlan,599,ChC,SW,0,rel,previously_active,,14,10,1,0,1,0,3,1,0.133,0.0,0.071,0,0,0,0,0,0,32
-2012,nl,Steve Gardner,Nate McLouth,1193,Was,SW,4,rel,previously_active,,13,12,2,0,1,0,3,2,0.267,0.0,0.231,0,0,0,0,0,0,71
-2012,nl,Steve Gardner,Joe Mather,1419,Cin,SW,6,res,previously_active,"OF,SW,3B",3,2,0,0,0,0,1,1,0.25,0.0,0.0,0,0,2,0,18,0,56
-2012,nl,Steve Gardner,Bryan LaHair,1360,FA,SW,11,res,previously_active,"1B,OF,SW",321,115,41,15,34,4,117,39,0.338,0.0,0.449,0,0,58,0,0,0,36
-2012,nl,Steve Gardner,Jeff Baker,462,FA,CI,0,res,reserved,"1B,2B,SW,MI,OF,CI",116,53,13,3,15,0,30,5,0.27,0.111,0.397,0,0,20,9,4,0,31
-2012,nl,Steve Gardner,Joe Mather,1419,Cin,SW,6,res,reserved,"OF,SW,3B",8,4,1,0,0,0,2,1,0.333,0.0,0.5,0,0,2,0,18,0,56
-2012,nl,Steve Gardner,Bryan LaHair,1360,FA,SW,11,res,reserved,"1B,OF,SW",19,15,1,1,6,0,7,0,0.263,0.4,0.474,0,0,58,0,0,0,36
-2012,nl,Steve Gardner,Lucas Duda,3305,Atl,CI,20,act,previously_reserved,"1B,OF,CI,SW",2,1,0,0,0,0,0,1,0.333,0.0,0.0,5,0,6,0,0,0,105
-2012,nl,Steve Gardner,Aubrey Huff,126,SF,CI,1,rel,previously_reserved,,8,8,0,0,0,0,2,1,0.444,0.0,0.375,0,0,15,1,0,0,5
-2012,nl,Steve Gardner,Jed Lowrie,201,Oak,SS,11,act,previously_reserved,"SS,CI,SW,MI,3B",15,4,1,0,1,1,4,5,0.4,0.0,0.2,0,0,0,0,0,93,0
-2012,nl,Steve Gardner,Tyler Pastornicky,3333,Phi,SS,4,rel,previously_reserved,,1,1,0,0,0,0,1,0,0.0,0.0,0.0,0,0,0,3,0,47,0
-2012,nl,Steve Gardner,Pablo Sandoval,2182,SF,3B,27,act,previously_reserved,"3B,CI,SW",7,2,1,0,1,0,0,0,0.143,0.0,0.143,2,0,3,0,102,0,0
-2012,nl,Steve Gardner,Josh Thole,2441,Det,C,8,act,previously_reserved,"C,SW",8,2,1,0,0,0,2,0,0.25,0.0,0.25,0,100,0,0,0,0,0
-2012,nl,Steve Gardner,Jose Tabata,1041,Tor,UT,19,act,previously_reserved,"OF,SW",28,7,4,0,1,0,4,3,0.355,0.0,0.393,0,0,0,0,0,0,96
-2012,nl,Steve Gardner,Kyle Blanks,1270,FA,UT,3,rel,previously_reserved,,4,2,0,0,0,0,1,0,0.25,0.0,0.25,0,0,1,0,0,0,1
-2012,nl,Steve Gardner,Nate McLouth,1193,Was,SW,4,rel,previously_reserved,,44,22,2,0,1,0,15,3,0.191,0.0,0.159,0,0,0,0,0,0,71
-2012,nl,Steve Gardner,Chris Coghlan,599,ChC,SW,0,rel,previously_reserved,,20,9,2,0,1,0,2,0,0.15,0.0,0.2,0,0,0,0,0,0,32
-2012,nl,Steve Gardner,Chris Denorfia,1075,FA,SW,0,act,previously_reserved,"OF,SW",59,20,14,2,10,3,9,4,0.375,0.0,0.475,0,0,0,0,0,0,118
-2012,nl,Dean Peterson,Paul Goldschmidt,3159,Ari,1B,18,act,active,"1B,SW,CI",514,145,82,20,82,18,130,60,0.359,0.214,0.49,0,0,139,0,0,0,0
-2012,nl,Dean Peterson,Matt McBride,2682,Phi,CI,0,act,active,"UT,OF,1B",25,8,3,1,4,0,6,1,0.185,0.143,0.32,0,0,8,0,0,0,12
-2012,nl,Dean Peterson,Pete Kozma,2112,Det,MI,0,act,active,"SS,2B,SW,MI",7,3,0,0,0,0,3,2,0.444,0.444,0.286,0,0,0,1,0,25,0
-2012,nl,Dean Peterson,Danny Espinosa,2765,Phi,2B,18,act,active,"2B,MI,SW,SS",594,160,82,17,56,20,189,46,0.315,0.111,0.402,0,0,0,126,0,36,0
-2012,nl,Dean Peterson,Joaquin Arias,1517,Ari,SS,1,act,active,"3B,SS",255,95,24,4,29,3,36,8,0.293,0.143,0.373,0,0,0,4,74,50,0
-2012,nl,Dean Peterson,Ryan Zimmerman,1638,Was,3B,29,act,active,"UT,3B,CI,SW",574,144,92,25,95,5,116,57,0.347,0.25,0.479,0,0,0,0,145,0,0
-2012,nl,Dean Peterson,Bryan Petersen,3101,Mil,OF,0,act,active,"OF,SW",107,33,14,0,7,3,27,12,0.267,0.364,0.262,0,0,0,0,0,0,72
-2012,nl,Dean Peterson,Andrew M. Brown,3753,LAA,OF,0,act,active,"OF,SW",31,9,4,2,3,1,12,4,0.343,0.167,0.484,0,0,0,0,0,0,33
-2012,nl,Dean Peterson,Adam Eaton,3588,Was,OF,20,act,active,OF,60,17,13,2,5,1,12,13,0.368,0.0,0.383,0,0,0,0,0,0,21
-2012,nl,Dean Peterson,Chris B. Young,40,LAA,OF,22,act,active,"OF,SW",317,99,36,14,39,8,78,36,0.313,0.5,0.435,2,0,0,0,0,0,87
-2012,nl,Dean Peterson,Jordan Pacheco,3116,Min,C,4,act,active,"3B,1B,C,SW,CI",475,132,51,5,54,7,61,22,0.341,0.556,0.421,0,5,43,0,82,0,0
-2012,nl,Dean Peterson,Geovany Soto,281,FA,C,13,act,active,"C,SW",292,90,40,9,36,1,70,26,0.269,0.167,0.336,1,96,0,0,0,0,0
-2012,nl,Dean Peterson,Ryan Wheeler,3187,Ari,UT,30,act,active,3B,99,46,9,1,10,1,20,9,0.294,0.5,0.343,0,0,4,0,23,0,0
-2012,nl,Dean Peterson,Rickie Weeks,857,FA,MI,23,trd,previously_active,,306,84,37,8,32,6,100,48,0.318,0.0,0.346,2,0,0,152,0,0,0
-2012,nl,Dean Peterson,Jonathan Herrera,456,ChC,MI,2,rel,previously_active,,149,60,21,2,7,1,32,13,0.299,0.0,0.315,0,0,0,19,13,42,0
-2012,nl,Dean Peterson,Adam LaRoche,1187,CWS,CI,9,trd,previously_active,,323,88,39,16,55,1,93,42,0.333,0.0,0.477,0,0,153,0,0,0,0
-2012,nl,Dean Peterson,Josh Vitters,1977,Col,CI,7,rel,previously_active,,6,3,0,0,0,0,3,0,0.167,0.0,0.167,0,0,0,0,29,0,0
-2012,nl,Dean Peterson,Troy Tulowitzki,461,Tor,SS,37,dis,previously_active,"SS,SW,MI",181,47,33,8,27,2,19,19,0.36,0.0,0.486,0,0,0,0,0,47,0
-2012,nl,Dean Peterson,Scott Van Slyke,2804,Mia,OF,6,rel,previously_active,,7,6,1,1,3,0,2,0,0.143,0.0,0.571,0,0,5,0,0,0,21
-2012,nl,Dean Peterson,Jordan Schafer,97,SF,OF,14,rel,previously_active,,305,96,40,4,23,26,101,36,0.304,0.0,0.302,0,0,0,0,0,0,87
-2012,nl,Dean Peterson,Josh Harrison,3747,Pit,OF,0,res,previously_active,"3B,CI,2B,MI,SW,OF,SS",170,68,25,3,9,5,24,8,0.296,0.0,0.382,1,0,0,28,14,25,13
-2012,nl,Dean Peterson,Justin Christian,1037,TB,OF,3,rel,previously_active,,14,6,1,0,1,1,1,0,0.071,0.0,0.071,3,0,0,0,0,0,18
-2012,nl,Dean Peterson,Roger Bernadina,1639,NYM,OF,1,rel,previously_active,,163,78,16,4,14,8,44,18,0.326,0.0,0.362,0,0,0,0,0,0,94
-2012,nl,Dean Peterson,Blake Tekotte,2578,Bos,OF,0,rel,previously_active,,3,5,0,0,0,1,1,0,0.0,0.0,0.0,0,0,0,0,0,0,4
-2012,nl,Dean Peterson,Joe Mather,1419,Cin,OF,3,rel,previously_active,,73,29,5,2,7,1,19,5,0.278,0.0,0.342,0,0,2,0,18,0,56
-2012,nl,Dean Peterson,Eric Young Jr.,2059,LAA,OF,7,dis,previously_active,"OF,SW",169,97,35,4,15,13,30,13,0.376,0.0,0.45,1,0,0,0,0,0,34
-2012,nl,Dean Peterson,Martin Maldonado,2347,Hou,C,0,rel,previously_active,,183,60,17,4,16,1,45,11,0.328,0.0,0.399,0,69,4,0,0,0,0
-2012,nl,Dean Peterson,Brian Schneider,946,FA,C,0,rel,previously_active,,7,3,0,0,0,0,1,0,0.0,0.0,0.0,0,29,0,0,0,0,0
-2012,nl,Dean Peterson,Koyie Hill,302,Phi,C,0,rel,previously_active,,22,6,2,0,0,0,4,0,0.136,0.0,0.136,0,11,0,0,0,0,0
-2012,nl,Dean Peterson,Matt Treanor,561,Cle,C,0,rel,previously_active,,12,4,1,0,2,0,2,0,0.214,0.0,0.417,0,35,0,0,0,0,0
-2012,nl,Dean Peterson,Taylor Green,2697,Mil,UT,2,rel,previously_active,,74,39,7,2,10,0,20,7,0.282,0.0,0.365,1,0,18,4,13,0,0
-2012,nl,Dean Peterson,Andy Parrino,3471,CWS,SW,1,rel,previously_active,,46,16,3,0,0,1,11,6,0.269,0.0,0.217,0,0,0,15,2,26,1
-2012,nl,Dean Peterson,Jose Constanza,3448,TB,SW,0,rel,previously_active,,3,3,0,0,0,0,2,0,0.0,0.0,0.0,0,0,0,0,0,0,25
-2012,nl,Dean Peterson,Troy Tulowitzki,461,Tor,SS,37,dis,reserved,"SS,SW,MI",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,0,0,47,0
-2012,nl,Dean Peterson,Eric Young Jr.,2059,LAA,OF,7,dis,reserved,"OF,SW",5,1,1,0,0,1,1,0,0.4,0.0,0.4,1,0,0,0,0,0,34
-2012,nl,Dean Peterson,Josh Harrison,3747,Pit,OF,0,res,reserved,"3B,CI,2B,MI,SW,OF,SS",47,19,8,0,2,2,7,2,0.26,0.25,0.255,1,0,0,28,14,25,13
-2012,nl,Dean Peterson,Rickie Weeks,857,FA,MI,23,trd,previously_reserved,,23,6,1,1,1,0,12,1,0.167,0.0,0.261,2,0,0,152,0,0,0
-2012,nl,Dean Peterson,Tyler Greene,2310,Phi,MI,5,rel,previously_reserved,,8,6,0,0,2,1,2,0,0.333,0.0,0.5,0,0,0,59,0,43,3
-2012,nl,Dean Peterson,Jonathan Herrera,456,ChC,MI,2,rel,previously_reserved,,49,16,6,0,2,2,4,1,0.28,0.0,0.306,0,0,0,19,13,42,0
-2012,nl,Dean Peterson,Joaquin Arias,1517,Ari,SS,1,act,previously_reserved,"3B,SS",53,13,4,1,3,2,6,4,0.333,0.0,0.415,0,0,0,4,74,50,0
-2012,nl,Dean Peterson,Ryan Zimmerman,1638,Was,3B,29,act,previously_reserved,"UT,3B,CI,SW",4,1,1,0,0,0,0,0,0.25,0.0,0.25,0,0,0,0,145,0,0
-2012,nl,Dean Peterson,Roger Bernadina,1639,NYM,OF,1,rel,previously_reserved,,55,42,5,0,9,7,9,8,0.492,0.0,0.509,0,0,0,0,0,0,94
-2012,nl,Dean Peterson,Justin Christian,1037,TB,OF,3,rel,previously_reserved,,4,4,0,0,0,0,1,0,0.0,0.0,0.0,3,0,0,0,0,0,18
-2012,nl,Dean Peterson,Joe Mather,1419,Cin,OF,3,rel,previously_reserved,,73,33,4,2,7,1,10,4,0.256,0.0,0.37,0,0,2,0,18,0,56
-2012,nl,Dean Peterson,Chris B. Young,40,LAA,OF,22,act,previously_reserved,"OF,SW",8,2,0,0,2,0,1,0,0.25,0.0,0.375,2,0,0,0,0,0,87
-2012,nl,Dean Peterson,Scott Van Slyke,2804,Mia,OF,6,rel,previously_reserved,,22,9,1,0,0,0,6,0,0.136,0.0,0.182,0,0,5,0,0,0,21
-2012,nl,Dean Peterson,Jordan Schafer,97,SF,OF,14,rel,previously_reserved,,8,7,0,0,0,0,5,0,0.0,0.0,0.0,0,0,0,0,0,0,87
-2012,nl,Dean Peterson,Matt Treanor,561,Cle,C,0,rel,previously_reserved,,4,1,1,0,0,0,0,0,0.5,0.0,0.5,0,35,0,0,0,0,0
-2012,nl,Dean Peterson,Geovany Soto,281,FA,C,13,act,previously_reserved,"C,SW",32,9,5,2,3,0,6,4,0.278,0.0,0.406,1,96,0,0,0,0,0
-2012,nl,Dean Peterson,Taylor Green,2697,Mil,UT,2,rel,previously_reserved,,7,5,0,0,0,0,1,2,0.333,0.0,0.286,1,0,18,4,13,0,0
-2012,nl,Dean Peterson,Ryan Wheeler,3187,Ari,UT,30,act,previously_reserved,3B,1,1,0,0,0,0,0,0,1.0,0.0,1.0,0,0,4,0,23,0,0
+year,league,team,player_name,player_id,mlb_team,position,salary,status,roster_section,eligibility,ab,h,g,r,hr,rbi,sb,so,bb,obp,slg,gp_dh,gp_c,gp_1b,gp_2b,gp_3b,gp_ss,gp_of
+2012,nl,Tristan H. Cockcroft,D.J. LeMahieu,3275,Col,MI,0,act,active,"2B,MI,3B,SW",186,0,60,23,2,19,0,34,10,0.343,0.441,0,0,1,67,9,2,0
+2012,nl,Tristan H. Cockcroft,Matt Dominguez,1981,Bos,CI,8,act,active,"3B,SW,CI",86,0,23,11,4,15,0,11,3,0.315,0.465,0,0,0,0,31,0,0
+2012,nl,Tristan H. Cockcroft,Anthony Rizzo,3156,ChC,1B,1,act,active,"1B,CI,SW",337,0,87,44,15,48,3,62,27,0.342,0.463,0,0,85,0,0,0,0
+2012,nl,Tristan H. Cockcroft,Martin Prado,80,Mia,2B,18,act,active,"UT,OF,3B,SS,CI,2B,SW",617,0,156,81,10,70,17,69,58,0.359,0.438,0,0,4,10,25,13,119
+2012,nl,Tristan H. Cockcroft,Starlin Castro,2724,Mia,SS,27,act,active,"UT,SS,SW,MI",646,0,162,78,14,78,25,100,36,0.323,0.43,0,0,0,0,0,162,0
+2012,nl,Tristan H. Cockcroft,Todd Frazier,1979,NYM,3B,1,act,active,"1B,3B,CI,OF,SW",407,0,119,54,18,64,3,102,34,0.324,0.477,1,0,39,0,73,0,7
+2012,nl,Tristan H. Cockcroft,Shane Victorino,1138,ChC,OF,29,act,active,"OF,SW",191,0,49,25,2,15,14,29,18,0.332,0.366,0,0,0,0,0,0,154
+2012,nl,Tristan H. Cockcroft,Ryan Braun,858,Mil,OF,39,act,active,"OF,SW",598,0,154,108,41,112,30,128,63,0.391,0.595,2,0,0,0,0,0,151
+2012,nl,Tristan H. Cockcroft,Juan Pierre,801,FA,OF,6,act,active,"OF,SW",203,0,72,35,1,13,23,15,12,0.339,0.369,0,0,0,0,0,0,107
+2012,nl,Tristan H. Cockcroft,Andrew McCutchen,1222,NYY,OF,34,act,active,"OF,SW",593,0,157,107,31,96,20,132,70,0.4,0.553,0,0,0,0,0,0,156
+2012,nl,Tristan H. Cockcroft,Erik Kratz,2460,Mil,C,6,act,active,"C,SW",112,0,35,8,5,17,0,27,8,0.272,0.393,0,41,0,0,0,0,0
+2012,nl,Tristan H. Cockcroft,David Ross,335,ChC,C,2,act,active,"C,SW",176,0,62,18,9,23,1,60,18,0.321,0.449,0,54,0,0,0,0,0
+2012,nl,Tristan H. Cockcroft,Jean Segura,3177,Sea,UT,10,act,active,SS,121,0,36,17,0,11,6,16,12,0.321,0.331,0,0,0,0,0,44,0
+2012,nl,Tristan H. Cockcroft,Andrelton Simmons,3717,LAA,SW,21,act,active,SS,159,0,47,17,3,19,1,21,12,0.343,0.421,0,0,0,0,0,49,0
+2012,nl,Tristan H. Cockcroft,Ike Davis,2618,LAD,1B,19,trd,previously_active,,358,0,104,43,20,61,0,101,32,0.277,0.43,0,0,148,0,0,0,0
+2012,nl,Tristan H. Cockcroft,Matt Hague,2729,Was,CI,0,rel,previously_active,,5,0,3,0,0,1,0,2,0,0.0,0.0,4,0,16,0,0,0,0
+2012,nl,Tristan H. Cockcroft,Ronny Cedeno,282,SF,MI,0,rel,previously_active,,8,0,4,1,1,1,0,2,0,0.25,0.75,0,0,0,28,3,27,0
+2012,nl,Tristan H. Cockcroft,Alex Gonzalez,340,FA,MI,6,rel,previously_active,,81,0,24,8,4,15,1,15,6,0.326,0.457,0,0,0,0,0,24,0
+2012,nl,Tristan H. Cockcroft,Jack Wilson,1189,FA,MI,0,rel,previously_active,,2,0,1,0,0,0,0,1,0,0.0,0.0,0,0,0,2,0,29,0
+2012,nl,Tristan H. Cockcroft,Freddy Galvis,3005,SD,2B,0,dis,previously_active,"SS,2B",190,0,58,14,3,24,0,29,7,0.254,0.363,0,0,0,55,0,5,0
+2012,nl,Tristan H. Cockcroft,Matt Downs,2387,Mia,2B,1,rel,previously_active,,151,0,75,13,7,13,2,26,6,0.256,0.384,0,0,25,3,18,1,13
+2012,nl,Tristan H. Cockcroft,Ian Stewart,460,FA,3B,11,rel,previously_active,,179,0,55,16,5,17,0,46,21,0.292,0.335,0,0,0,0,52,0,0
+2012,nl,Tristan H. Cockcroft,Jeremy Hermida,572,Mil,OF,0,rel,previously_active,,20,0,9,0,0,2,1,6,3,0.304,0.35,0,0,0,0,0,0,7
+2012,nl,Tristan H. Cockcroft,George Kottaras,173,Atl,C,2,rel,previously_active,,105,0,64,12,4,15,0,30,32,0.394,0.362,1,54,6,0,0,0,0
+2012,nl,Tristan H. Cockcroft,Rick Ankiel,1413,NYM,UT,1,rel,previously_active,,150,0,66,14,5,15,1,58,12,0.29,0.42,0,0,0,0,0,0,62
+2012,nl,Tristan H. Cockcroft,Tyler Moore,3632,Mia,UT,8,res,previously_active,"1B,OF",7,0,5,1,1,3,0,1,0,0.429,1.14,0,0,14,0,0,0,41
+2012,nl,Tristan H. Cockcroft,Xavier Nady,1195,FA,UT,2,rel,previously_active,,7,0,3,0,0,0,0,3,1,0.333,0.143,0,0,0,0,0,0,51
+2012,nl,Tristan H. Cockcroft,Emmanuel Burriss,1324,LAA,UT,0,rel,previously_active,,1,0,2,0,0,0,0,0,0,0.0,0.0,0,0,0,37,6,6,1
+2012,nl,Tristan H. Cockcroft,Matt Diaz,85,Mia,SW,2,dis,previously_active,"OF,SW",70,0,33,3,0,8,0,16,2,0.222,0.257,2,0,0,0,0,0,24
+2012,nl,Tristan H. Cockcroft,Freddy Galvis,3005,SD,2B,0,dis,reserved,"SS,2B",0,0,0,0,0,0,0,0,0,0.0,0.0,0,0,0,55,0,5,0
+2012,nl,Tristan H. Cockcroft,Tyler Moore,3632,Mia,UT,8,res,reserved,"1B,OF",25,0,14,3,3,7,0,9,2,0.222,0.56,0,0,14,0,0,0,41
+2012,nl,Tristan H. Cockcroft,Matt Diaz,85,Mia,SW,2,dis,reserved,"OF,SW",8,0,4,1,0,0,0,1,1,0.222,0.25,2,0,0,0,0,0,24
+2012,nl,Tristan H. Cockcroft,Matt Hague,2729,Was,CI,0,rel,previously_reserved,,4,0,2,0,0,1,0,0,0,0.25,0.25,4,0,16,0,0,0,0
+2012,nl,Tristan H. Cockcroft,Matt Downs,2387,Mia,2B,1,rel,previously_reserved,,3,0,1,0,0,0,0,1,0,0.0,0.0,0,0,25,3,18,1,13
+2012,nl,Tristan H. Cockcroft,Todd Frazier,1979,NYM,3B,1,act,previously_reserved,"1B,3B,CI,OF,SW",15,0,9,1,1,3,0,1,2,0.529,1.07,1,0,39,0,73,0,7
+2012,nl,Tristan H. Cockcroft,George Kottaras,173,Atl,C,2,rel,previously_reserved,,16,0,4,4,2,8,0,3,1,0.294,0.687,1,54,6,0,0,0,0
+2012,nl,Tristan H. Cockcroft,Rick Ankiel,1413,NYM,UT,1,rel,previously_reserved,,8,0,2,1,0,0,0,1,0,0.125,0.25,0,0,0,0,0,0,62
+2012,nl,Tristan H. Cockcroft,Jean Segura,3177,Sea,UT,10,act,previously_reserved,SS,27,0,8,2,0,3,1,5,1,0.321,0.333,0,0,0,0,0,44,0
+2012,nl,Phil Hertz,Adrian Gonzalez,1250,FA,1B,41,act,active,"1B,OF,SW,CI",136,0,34,11,2,18,1,27,10,0.34,0.426,1,0,151,0,0,0,18
+2012,nl,Phil Hertz,Ike Davis,2618,LAD,CI,19,act,active,"1B,SW,CI",161,0,52,23,12,29,0,40,29,0.372,0.534,0,0,148,0,0,0,0
+2012,nl,Phil Hertz,Steve Lombardozzi,3718,Oak,MI,0,act,active,"2B,3B,SW,CI,MI,OF",308,0,96,35,2,22,5,37,15,0.315,0.357,0,0,0,51,13,1,41
+2012,nl,Phil Hertz,Luis Valbuena,2200,FA,2B,1,act,active,"3B,2B,SW,MI",227,0,76,23,3,23,0,46,29,0.306,0.335,0,0,0,5,82,0,0
+2012,nl,Phil Hertz,Stephen Drew,30,Was,SS,9,act,active,"SS,MI,SW",259,0,70,35,7,25,1,69,35,0.318,0.363,0,0,0,0,0,75,0
+2012,nl,Phil Hertz,Chase Headley,1252,FA,3B,20,act,active,"3B,SW,CI",604,0,161,95,31,115,17,157,86,0.376,0.498,0,0,1,0,159,0,0
+2012,nl,Phil Hertz,Norichika Aoki,2041,FA,OF,0,act,active,OF,487,0,133,78,9,46,30,51,40,0.349,0.425,0,0,0,0,0,0,133
+2012,nl,Phil Hertz,Andre Ethier,797,LAD,OF,23,act,active,"OF,SW",556,0,149,79,20,89,2,124,50,0.351,0.46,2,0,0,0,0,0,147
+2012,nl,Phil Hertz,Starling Marte,2908,Pit,OF,3,act,active,OF,154,0,43,17,4,15,12,46,6,0.305,0.442,0,0,0,0,0,0,45
+2012,nl,Phil Hertz,Jay Bruce,371,NYM,OF,34,act,active,"UT,OF,SW",560,0,155,89,34,99,9,155,62,0.327,0.514,0,0,0,0,0,0,154
+2012,nl,Phil Hertz,Rob Brantly,3480,Cle,C,10,act,active,C,100,0,31,14,3,8,1,16,13,0.372,0.46,0,28,0,0,0,0,0
+2012,nl,Phil Hertz,Yadier Molina,1404,StL,C,15,act,active,"C,SW",505,0,138,65,22,76,12,55,45,0.373,0.501,0,136,3,0,0,0,0
+2012,nl,Phil Hertz,Scott Moore,128,FA,UT,10,act,active,"3B,2B,OF,1B",25,0,8,1,0,2,0,7,1,0.308,0.32,0,0,19,6,28,0,17
+2012,nl,Phil Hertz,Gerardo Parra,2000,Col,SW,7,act,active,"OF,SW",370,0,125,56,7,35,15,76,30,0.326,0.389,0,0,0,0,0,0,109
+2012,nl,Phil Hertz,Michael Cuddyer,901,NYM,CI,28,trd,previously_active,,180,0,52,31,7,37,7,36,20,0.35,0.511,0,0,26,0,0,0,74
+2012,nl,Phil Hertz,Jeff Bianchi,2156,Col,MI,6,rel,previously_active,,25,0,10,4,1,3,0,6,2,0.185,0.24,0,0,0,4,6,14,0
+2012,nl,Phil Hertz,Chris Nelson,482,KC,MI,4,rel,previously_active,,54,0,17,3,0,4,1,15,6,0.3,0.296,0,0,0,21,92,1,0
+2012,nl,Phil Hertz,Jordany Valdespin,3407,Det,MI,3,rel,previously_active,,91,0,38,10,4,12,3,22,5,0.271,0.396,2,0,0,16,0,4,39
+2012,nl,Phil Hertz,James Loney,795,FA,CI,17,res,previously_active,"1B,CI,SW",403,0,135,31,3,36,0,49,27,0.292,0.318,0,0,133,0,0,0,0
+2012,nl,Phil Hertz,Darwin Barney,2055,FA,2B,5,trd,previously_active,,293,0,82,36,3,23,5,28,18,0.304,0.362,0,0,0,155,0,3,0
+2012,nl,Phil Hertz,Everth Cabrera,2297,FA,SS,2,trd,previously_active,,141,0,42,17,2,11,15,44,16,0.346,0.39,0,0,0,6,1,111,0
+2012,nl,Phil Hertz,Shane Victorino,1138,ChC,OF,29,trd,previously_active,,404,0,105,47,9,40,25,51,35,0.316,0.391,0,0,0,0,0,0,154
+2012,nl,Phil Hertz,Steve Clevenger,2435,Sea,C,4,rel,previously_active,,99,0,32,9,0,9,0,20,3,0.216,0.242,0,51,9,0,1,0,0
+2012,nl,Phil Hertz,John Baker,591,FA,C,0,rel,previously_active,,45,0,13,5,0,1,0,9,3,0.292,0.267,0,56,0,0,0,0,0
+2012,nl,Phil Hertz,Chris Snyder,26,Tex,C,4,trd,previously_active,,59,0,18,5,3,10,0,20,8,0.284,0.39,0,72,1,0,0,0,0
+2012,nl,Phil Hertz,Kirk Nieuwenhuis,3095,FA,UT,12,rel,previously_active,,239,0,73,39,7,25,4,78,22,0.333,0.414,0,0,0,0,0,0,83
+2012,nl,Phil Hertz,Juan Francisco,1995,FA,UT,0,rel,previously_active,,9,0,8,0,0,4,0,3,2,0.545,0.556,0,0,0,0,49,0,0
+2012,nl,Phil Hertz,Travis Ishikawa,1306,SF,UT,0,rel,previously_active,,8,0,6,2,0,0,0,3,0,0.375,0.625,0,0,43,0,0,0,3
+2012,nl,Phil Hertz,Fernando Martinez,978,NYY,UT,6,res,previously_active,"OF,SW",48,0,19,5,1,5,0,9,4,0.345,0.437,0,0,0,0,0,0,37
+2012,nl,Phil Hertz,Brandon Crawford,3051,SF,SW,1,rel,previously_active,,168,0,51,11,1,15,1,36,9,0.27,0.315,0,0,0,0,0,139,0
+2012,nl,Phil Hertz,Matt McBride,2682,Phi,SW,5,rel,previously_active,,12,0,5,0,0,0,0,3,0,0.083,0.083,0,0,8,0,0,0,12
+2012,nl,Phil Hertz,James Loney,795,FA,CI,17,res,reserved,"1B,CI,SW",31,0,9,6,3,5,0,2,1,0.312,0.581,0,0,133,0,0,0,0
+2012,nl,Phil Hertz,Fernando Martinez,978,NYY,UT,6,res,reserved,"OF,SW",45,0,15,7,5,7,0,15,2,0.34,0.667,0,0,0,0,0,0,37
+2012,nl,Phil Hertz,Jeff Bianchi,2156,Col,MI,6,rel,previously_reserved,,4,0,3,1,0,0,0,1,0,0.25,0.25,0,0,0,4,6,14,0
+2012,nl,Phil Hertz,Chris Nelson,482,KC,MI,4,rel,previously_reserved,,19,0,7,1,0,3,0,4,4,0.348,0.263,0,0,0,21,92,1,0
+2012,nl,Phil Hertz,Steve Lombardozzi,3718,Oak,MI,0,act,previously_reserved,"2B,3B,SW,CI,MI,OF",76,0,30,5,1,5,0,9,4,0.325,0.342,0,0,0,51,13,1,41
+2012,nl,Phil Hertz,Jordany Valdespin,3407,Det,MI,3,rel,previously_reserved,,26,0,17,2,0,0,3,6,3,0.31,0.231,2,0,0,16,0,4,39
+2012,nl,Phil Hertz,Luis Valbuena,2200,FA,2B,1,act,previously_reserved,"3B,2B,SW,MI",26,0,10,2,0,1,0,6,6,0.375,0.346,0,0,0,5,82,0,0
+2012,nl,Phil Hertz,Everth Cabrera,2297,FA,SS,2,trd,previously_reserved,,14,0,4,0,0,0,0,4,1,0.067,0.0,0,0,0,6,1,111,0
+2012,nl,Phil Hertz,Norichika Aoki,2041,FA,OF,0,act,previously_reserved,OF,33,0,18,3,1,4,0,4,3,0.432,0.545,0,0,0,0,0,0,133
+2012,nl,Phil Hertz,Starling Marte,2908,Pit,OF,3,act,previously_reserved,OF,13,0,4,1,1,2,0,4,2,0.25,0.385,0,0,0,0,0,0,45
+2012,nl,Phil Hertz,Steve Clevenger,2435,Sea,C,4,rel,previously_reserved,,19,0,6,3,1,4,0,1,1,0.35,0.526,0,51,9,0,1,0,0
+2012,nl,Phil Hertz,Chris Snyder,26,Tex,C,4,trd,previously_reserved,,19,0,6,1,0,2,0,6,3,0.304,0.158,0,72,1,0,0,0,0
+2012,nl,Phil Hertz,John Baker,591,FA,C,0,rel,previously_reserved,,35,0,11,4,0,4,0,9,3,0.316,0.257,0,56,0,0,0,0,0
+2012,nl,Phil Hertz,Kirk Nieuwenhuis,3095,FA,UT,12,rel,previously_reserved,,38,0,16,1,0,3,0,18,3,0.19,0.132,0,0,0,0,0,0,83
+2012,nl,Phil Hertz,Juan Francisco,1995,FA,UT,0,rel,previously_reserved,,26,0,12,2,1,3,0,8,3,0.31,0.462,0,0,0,0,49,0,0
+2012,nl,Phil Hertz,Brandon Crawford,3051,SF,SW,1,rel,previously_reserved,,94,0,29,9,0,6,0,21,6,0.301,0.34,0,0,0,0,0,139,0
+2012,nl,Phil Hertz,Gerardo Parra,2000,Col,SW,7,act,previously_reserved,"OF,SW",15,0,8,2,0,1,0,1,3,0.526,0.467,0,0,0,0,0,0,109
+2012,nl,Derek Carty,Michael Morse,1362,FA,1B,24,act,active,"1B,OF,SW,CI",398,0,100,53,18,62,0,94,16,0.327,0.48,9,0,1,0,0,0,92
+2012,nl,Derek Carty,Adam LaRoche,1187,CWS,CI,9,act,active,"1B,CI,SW",248,0,66,37,17,45,0,45,25,0.356,0.552,0,0,153,0,0,0,0
+2012,nl,Derek Carty,Mark Ellis,1067,FA,MI,3,act,active,"2B,MI,SW",237,0,61,29,4,20,1,40,16,0.307,0.367,0,0,0,110,0,0,0
+2012,nl,Derek Carty,Rickie Weeks,857,FA,2B,23,act,active,"UT,2B,MI,SW",259,0,67,47,12,30,10,57,25,0.354,0.475,2,0,0,152,0,0,0
+2012,nl,Derek Carty,Tyler Greene,2310,Phi,SS,10,act,active,"SS,2B,MI,SW",284,0,106,30,10,27,10,87,19,0.271,0.384,0,0,0,59,0,43,3
+2012,nl,Derek Carty,Chipper Jones,79,Atl,3B,8,act,active,"3B,SW,CI",380,0,110,57,13,60,1,51,56,0.377,0.45,1,0,0,0,103,0,0
+2012,nl,Derek Carty,Justin Upton,39,LAA,OF,38,act,active,"OF,SW",554,0,150,107,17,67,18,121,63,0.355,0.43,0,0,0,0,0,0,149
+2012,nl,Derek Carty,Nate Schierholtz,1315,FA,OF,7,act,active,"OF,SW",142,0,64,11,3,13,3,24,12,0.301,0.394,2,0,0,0,0,0,85
+2012,nl,Derek Carty,Ryan Ludwick,1418,Tex,OF,6,act,active,"OF,SW",422,0,125,53,26,80,0,97,42,0.346,0.531,2,0,0,0,0,0,108
+2012,nl,Derek Carty,Xavier Nady,1195,FA,OF,0,act,active,"OF,SW,CI,1B",9,0,3,0,0,0,0,2,1,0.1,0.0,0,0,0,0,0,0,51
+2012,nl,Derek Carty,Welington Castillo,2434,CWS,C,15,act,active,"C,SW",124,0,40,11,2,15,0,40,14,0.355,0.395,0,49,1,0,0,0,0
+2012,nl,Derek Carty,Rod Barajas,1572,FA,C,7,act,active,"C,SW",321,0,104,29,11,31,0,69,29,0.283,0.343,0,99,1,0,0,0,0
+2012,nl,Derek Carty,Jon Jay,2475,Ari,UT,11,act,active,"OF,SW",433,0,114,67,4,39,19,68,34,0.373,0.402,0,0,0,0,0,0,116
+2012,nl,Derek Carty,Carlos Ruiz,1123,FA,SW,9,act,active,"C,SW",44,0,13,5,2,8,0,7,5,0.347,0.477,0,106,0,0,0,0,0
+2012,nl,Derek Carty,Marwin Gonzalez,3884,Hou,MI,3,rel,previously_active,,29,0,13,5,0,1,0,3,1,0.3,0.345,0,0,0,6,14,47,0
+2012,nl,Derek Carty,Jason Bartlett,1465,FA,MI,10,rel,previously_active,,81,0,28,8,0,4,0,26,11,0.237,0.198,0,0,0,0,0,27,0
+2012,nl,Derek Carty,Yamaico Navarro,2669,NYY,CI,0,rel,previously_active,,22,0,14,3,1,4,0,5,2,0.28,0.364,0,0,0,1,2,3,10
+2012,nl,Derek Carty,Cesar Izturis,1408,FA,MI,4,rel,previously_active,,90,0,27,4,1,5,1,7,2,0.272,0.356,0,0,1,2,4,46,0
+2012,nl,Derek Carty,Adrian Cardenas,1997,ChC,2B,3,rel,previously_active,,29,0,19,2,0,1,0,5,2,0.226,0.345,0,0,0,12,1,0,3
+2012,nl,Derek Carty,Elian Herrera,4136,LAD,2B,4,trd,previously_active,,169,0,51,21,1,16,4,45,20,0.326,0.331,0,0,0,13,20,2,32
+2012,nl,Derek Carty,Paul Janish,342,Bal,SS,1,rel,previously_active,,89,0,26,13,0,4,0,16,9,0.283,0.247,0,0,0,0,0,55,0
+2012,nl,Derek Carty,Dexter Fowler,484,StL,OF,19,res,previously_active,"OF,SW",454,0,140,72,13,53,12,128,68,0.389,0.474,0,0,0,0,0,0,131
+2012,nl,Derek Carty,Justin Ruggiano,1475,SF,OF,4,res,previously_active,"OF,SW",280,0,87,37,12,34,14,82,29,0.374,0.525,0,0,0,0,0,0,85
+2012,nl,Derek Carty,Wil Nieves,1668,FA,C,0,rel,previously_active,,35,0,13,1,1,4,0,6,3,0.359,0.429,0,24,2,0,0,0,0
+2012,nl,Derek Carty,Shane Robinson,2792,NYY,UT,2,rel,previously_active,,58,0,26,6,1,5,0,10,3,0.274,0.345,0,0,0,0,0,0,60
+2012,nl,Derek Carty,Ramon Hernandez,122,FA,SW,12,rel,previously_active,,156,0,45,14,5,26,0,26,6,0.259,0.378,0,46,2,0,0,0,0
+2012,nl,Derek Carty,Brian Bixler,1185,Tor,SW,0,rel,previously_active,,1,0,1,0,0,0,0,1,0,0.0,0.0,0,0,0,5,4,6,12
+2012,nl,Derek Carty,Juan Uribe,238,FA,SW,4,trd,previously_active,,123,0,44,12,2,16,0,27,10,0.252,0.285,0,0,0,0,46,1,0
+2012,nl,Derek Carty,Omar Quintanilla,459,Col,SW,0,rel,previously_active,,54,0,23,8,1,4,0,13,5,0.317,0.352,0,0,0,34,0,30,0
+2012,nl,Derek Carty,Todd Helton,455,Col,SW,11,rel,previously_active,,234,0,67,31,7,36,1,43,38,0.339,0.402,0,0,67,0,0,0,0
+2012,nl,Derek Carty,Justin Ruggiano,1475,SF,OF,4,res,reserved,"OF,SW",0,0,0,0,0,0,0,0,0,0.0,0.0,0,0,0,0,0,0,85
+2012,nl,Derek Carty,Dexter Fowler,484,StL,OF,19,res,reserved,"OF,SW",0,0,3,0,0,0,0,0,0,0.0,0.0,0,0,0,0,0,0,131
+2012,nl,Derek Carty,Marwin Gonzalez,3884,Hou,MI,3,rel,previously_reserved,,2,0,3,0,0,0,0,0,0,0.0,0.0,0,0,0,6,14,47,0
+2012,nl,Derek Carty,Jason Bartlett,1465,FA,MI,10,rel,previously_reserved,,2,0,1,0,0,0,0,1,1,0.333,0.0,0,0,0,0,0,27,0
+2012,nl,Derek Carty,Michael Morse,1362,FA,1B,24,act,previously_reserved,"1B,OF,SW,CI",8,0,2,0,0,0,0,3,0,0.0,0.0,9,0,1,0,0,0,92
+2012,nl,Derek Carty,Cesar Izturis,1408,FA,MI,4,rel,previously_reserved,,32,0,11,0,0,2,0,4,0,0.094,0.125,0,0,1,2,4,46,0
+2012,nl,Derek Carty,Yamaico Navarro,2669,NYY,CI,0,rel,previously_reserved,,17,0,8,0,0,0,0,4,2,0.211,0.118,0,0,0,1,2,3,10
+2012,nl,Derek Carty,Adrian Cardenas,1997,ChC,2B,3,rel,previously_reserved,,4,0,4,0,0,0,0,2,0,0.0,0.0,0,0,0,12,1,0,3
+2012,nl,Derek Carty,Michael Martinez,3414,Cle,3B,0,rel,previously_reserved,,45,0,16,3,1,4,0,11,3,0.187,0.2,0,0,0,16,10,8,9
+2012,nl,Derek Carty,Chipper Jones,79,Atl,3B,8,act,previously_reserved,"3B,SW,CI",7,0,2,1,1,2,0,0,1,0.375,0.714,1,0,0,0,103,0,0
+2012,nl,Derek Carty,Nate Schierholtz,1315,FA,OF,7,act,previously_reserved,"OF,SW",99,0,50,9,3,8,0,22,11,0.348,0.424,2,0,0,0,0,0,85
+2012,nl,Derek Carty,Wil Nieves,1668,FA,C,0,rel,previously_reserved,,10,0,5,2,1,2,0,2,0,0.4,0.7,0,24,2,0,0,0,0
+2012,nl,Derek Carty,Shane Robinson,2792,NYY,UT,2,rel,previously_reserved,,8,0,8,0,0,1,0,1,2,0.4,0.25,0,0,0,0,0,0,60
+2012,nl,Derek Carty,Jon Jay,2475,Ari,UT,11,act,previously_reserved,"OF,SW",10,0,3,3,0,1,0,3,0,0.364,0.3,0,0,0,0,0,0,116
+2012,nl,Derek Carty,Carlos Ruiz,1123,FA,SW,9,act,previously_reserved,"C,SW",15,0,6,4,0,2,1,2,2,0.421,0.333,0,106,0,0,0,0,0
+2012,nl,Derek Carty,Ramon Hernandez,122,FA,SW,12,rel,previously_reserved,,28,0,7,2,0,2,0,6,0,0.179,0.214,0,46,2,0,0,0,0
+2012,nl,Derek Carty,Juan Uribe,238,FA,SW,4,trd,previously_reserved,,24,0,8,1,0,1,0,5,0,0.24,0.333,0,0,0,0,46,1,0
+2012,nl,Derek Carty,Todd Helton,455,Col,SW,11,rel,previously_reserved,,6,0,2,0,0,1,0,1,1,0.444,0.333,0,0,67,0,0,0,0
+2012,nl,Peter Kreutzer,Tyler Colvin,308,LAD,CI,0,act,active,"OF,SW,1B",420,0,136,62,18,72,7,117,21,0.327,0.531,0,0,31,0,0,0,94
+2012,nl,Peter Kreutzer,Gaby Sanchez,600,FA,1B,19,act,active,"1B,CI,SW",242,0,82,22,6,23,1,46,17,0.249,0.326,0,0,95,0,0,0,0
+2012,nl,Peter Kreutzer,Josh Rutledge,4084,FA,MI,8,act,active,"UT,2B,SS",269,0,70,36,8,35,6,53,7,0.304,0.472,0,0,0,7,0,57,0
+2012,nl,Peter Kreutzer,Chris Nelson,482,KC,2B,6,act,active,"3B,2B,CI,SW,MI",254,0,78,39,8,43,1,62,14,0.363,0.504,0,0,0,21,92,1,0
+2012,nl,Peter Kreutzer,Daniel Descalso,2899,Ari,SS,4,act,active,"2B,3B,SS,CI,MI,SW,1B",54,0,20,6,0,5,0,11,7,0.317,0.333,0,0,5,96,22,26,0
+2012,nl,Peter Kreutzer,Aramis Ramirez,286,Pit,3B,23,act,active,"3B,SW,CI",570,0,149,92,27,105,9,82,44,0.36,0.54,3,0,0,0,143,0,0
+2012,nl,Peter Kreutzer,Bryce Harper,2628,Was,OF,4,act,active,OF,273,0,73,54,14,34,7,63,28,0.336,0.498,0,0,0,0,0,0,138
+2012,nl,Peter Kreutzer,Jason Heyward,1968,ChC,OF,22,act,active,"OF,SW",587,0,158,93,27,82,21,152,58,0.335,0.479,0,0,0,0,0,0,156
+2012,nl,Peter Kreutzer,Drew Stubbs,1989,FA,OF,26,act,active,"OF,SW",493,0,136,75,14,40,30,166,42,0.277,0.333,0,0,0,0,0,0,135
+2012,nl,Peter Kreutzer,Chris Heisey,2809,FA,OF,15,act,active,"OF,SW",309,0,106,36,5,22,4,75,18,0.306,0.375,0,0,0,0,0,0,101
+2012,nl,Peter Kreutzer,John Baker,591,FA,C,0,act,active,"C,SW",6,0,4,0,0,0,0,1,0,0.167,0.333,0,56,0,0,0,0,0
+2012,nl,Peter Kreutzer,Buster Posey,2187,SF,C,19,act,active,"C,1B,SW",530,0,148,78,24,103,1,96,69,0.408,0.549,3,114,29,0,0,0,0
+2012,nl,Peter Kreutzer,Carlos Quentin,242,Min,UT,9,act,active,"OF,SW",160,0,50,27,8,25,0,19,18,0.36,0.494,5,0,0,0,0,0,72
+2012,nl,Peter Kreutzer,Francisco Peguero,2979,Bal,SW,0,act,active,OF,2,0,1,0,0,0,0,1,0,0.0,0.0,0,0,0,0,0,0,10
+2012,nl,Peter Kreutzer,Juan Rivera,751,Ari,1B,9,res,previously_active,"1B,OF,CI,SW",293,0,100,28,7,42,1,31,18,0.285,0.362,1,0,54,0,0,0,46
+2012,nl,Peter Kreutzer,Donovan Solano,3063,LAD,MI,0,rel,previously_active,,30,0,11,2,0,3,1,8,3,0.286,0.3,0,0,0,58,10,5,10
+2012,nl,Peter Kreutzer,Charlie Culberson,3504,Atl,MI,4,rel,previously_active,,18,0,5,0,0,1,0,6,0,0.111,0.111,0,0,0,6,0,0,0
+2012,nl,Peter Kreutzer,Lyle Overbay,1581,FA,1B,2,rel,previously_active,,82,0,38,11,2,10,0,19,12,0.4,0.5,1,0,23,0,0,0,0
+2012,nl,Peter Kreutzer,Josh Vitters,1977,Col,CI,2,rel,previously_active,,15,0,5,1,0,2,0,5,0,0.133,0.2,0,0,0,0,29,0,0
+2012,nl,Peter Kreutzer,Emilio Bonifacio,27,Mil,MI,17,trd,previously_active,,158,0,42,20,0,6,21,36,21,0.356,0.316,0,0,0,15,0,0,51
+2012,nl,Peter Kreutzer,Nick Green,1032,Mia,2B,3,rel,previously_active,,22,0,6,1,0,1,0,6,0,0.217,0.318,0,0,0,2,3,1,0
+2012,nl,Peter Kreutzer,Ivan DeJesus,2147,Bos,2B,4,rel,previously_active,,14,0,8,2,0,0,0,3,1,0.333,0.429,2,0,0,12,6,1,0
+2012,nl,Peter Kreutzer,Ryan Theriot,287,FA,SS,0,res,previously_active,"2B,MI,SW,SS",332,0,93,44,0,27,12,44,24,0.314,0.313,0,0,0,91,0,0,2
+2012,nl,Peter Kreutzer,Brandon Crawford,3051,SF,SS,2,rel,previously_active,,30,0,10,0,0,3,0,9,5,0.286,0.167,0,0,0,0,0,139,0
+2012,nl,Peter Kreutzer,Justin Sellers,3525,SD,SS,2,dis,previously_active,"UT,SS,SW,MI,3B",5,0,2,1,0,1,0,1,0,0.4,0.8,0,0,0,3,7,9,0
+2012,nl,Peter Kreutzer,Mike Fontenot,284,TB,SS,4,rel,previously_active,,23,0,14,3,0,2,0,4,2,0.462,0.435,1,0,0,17,12,0,0
+2012,nl,Peter Kreutzer,Juan Pierre,801,FA,OF,6,trd,previously_active,,191,0,58,24,0,12,14,12,11,0.363,0.372,0,0,0,0,0,0,107
+2012,nl,Peter Kreutzer,Vinny Rottino,856,CWS,OF,0,rel,previously_active,,3,0,2,1,0,0,0,1,2,0.4,0.0,3,2,7,0,2,0,20
+2012,nl,Peter Kreutzer,Wil Nieves,1668,FA,C,2,rel,previously_active,,3,0,1,0,0,0,0,1,1,0.5,0.333,0,24,2,0,0,0,0
+2012,nl,Peter Kreutzer,Devin Mesoraco,1987,NYM,C,8,rel,previously_active,,162,0,52,16,5,14,1,31,17,0.287,0.352,0,53,0,0,0,0,0
+2012,nl,Peter Kreutzer,Dioner Navarro,1462,FA,C,1,rel,previously_active,,31,0,10,2,0,3,0,7,2,0.303,0.323,0,21,0,0,0,0,0
+2012,nl,Peter Kreutzer,Brett Hayes,594,Tex,C,1,rel,previously_active,,14,0,4,1,0,0,0,3,0,0.214,0.286,0,33,0,0,0,0,0
+2012,nl,Peter Kreutzer,Mark Ellis,1067,FA,UT,3,trd,previously_active,,155,0,43,31,3,11,4,24,22,0.372,0.374,0,0,0,110,0,0,0
+2012,nl,Peter Kreutzer,Jose Constanza,3448,TB,SW,0,rel,previously_active,,26,0,9,3,0,0,1,8,3,0.207,0.115,0,0,0,0,0,0,25
+2012,nl,Peter Kreutzer,Bryan Petersen,3101,Mil,SW,4,rel,previously_active,,33,0,10,6,0,1,1,10,2,0.306,0.303,0,0,0,0,0,0,72
+2012,nl,Peter Kreutzer,Ben Francisco,407,FA,SW,5,res,previously_active,"OF,SW",125,0,46,8,3,10,0,35,8,0.293,0.392,16,0,0,0,0,0,53
+2012,nl,Peter Kreutzer,Juan Rivera,751,Ari,1B,9,res,reserved,"1B,OF,CI,SW",19,0,9,2,2,5,0,4,0,0.3,0.579,1,0,54,0,0,0,46
+2012,nl,Peter Kreutzer,Ryan Theriot,287,FA,SS,0,res,reserved,"2B,MI,SW,SS",20,0,11,1,0,1,1,3,0,0.35,0.45,0,0,0,91,0,0,2
+2012,nl,Peter Kreutzer,Justin Sellers,3525,SD,SS,2,dis,reserved,"UT,SS,SW,MI,3B",0,0,0,0,0,0,0,0,0,0.0,0.0,0,0,0,3,7,9,0
+2012,nl,Peter Kreutzer,Ben Francisco,407,FA,SW,5,res,reserved,"OF,SW",11,0,6,1,1,3,0,4,1,0.214,0.455,16,0,0,0,0,0,53
+2012,nl,Peter Kreutzer,Josh Vitters,1977,Col,CI,2,rel,previously_reserved,,56,0,19,5,2,3,1,19,4,0.131,0.196,0,0,0,0,29,0,0
+2012,nl,Peter Kreutzer,Gaby Sanchez,600,FA,1B,19,act,previously_reserved,"1B,CI,SW",57,0,23,8,1,7,0,10,8,0.4,0.404,0,0,95,0,0,0,0
+2012,nl,Peter Kreutzer,Chris Nelson,482,KC,2B,6,act,previously_reserved,"3B,2B,CI,SW,MI",13,0,6,1,0,2,0,3,2,0.375,0.385,0,0,0,21,92,1,0
+2012,nl,Peter Kreutzer,Chris Heisey,2809,FA,OF,15,act,previously_reserved,"OF,SW",38,0,14,8,2,9,2,6,0,0.385,0.605,0,0,0,0,0,0,101
+2012,nl,Peter Kreutzer,Devin Mesoraco,1987,NYM,C,8,rel,previously_reserved,,3,0,2,1,0,0,0,2,0,0.333,0.333,0,53,0,0,0,0,0
+2012,nl,Peter Kreutzer,Mark Ellis,1067,FA,UT,3,trd,previously_reserved,,0,0,1,0,0,0,0,0,0,0.0,0.0,0,0,0,110,0,0,0
+2012,nl,Todd Zola,Marco Scutaro,1584,SF,MI,14,act,active,"2B,SS,MI,3B,SW",620,0,156,87,7,74,9,49,40,0.348,0.405,0,0,0,118,15,27,0
+2012,nl,Todd Zola,Allen Craig,2108,SD,1B,17,act,active,"OF,1B,SW",469,0,119,76,22,92,2,89,37,0.354,0.522,1,0,91,0,0,0,30
+2012,nl,Todd Zola,Brett Wallace,2188,FA,CI,2,act,active,"3B,1B,CI,SW",204,0,59,17,7,20,0,65,15,0.299,0.382,0,0,58,0,8,0,0
+2012,nl,Todd Zola,Jose Altuve,3776,Hou,2B,17,act,active,"2B,SW,MI",576,0,147,80,7,37,33,74,40,0.34,0.399,0,0,0,147,0,0,0
+2012,nl,Todd Zola,Zack Cozart,3043,LAA,SS,13,act,active,"SS,SW,MI",561,0,138,72,15,35,4,113,31,0.288,0.399,0,0,0,0,0,138,0
+2012,nl,Todd Zola,Jimmy Paredes,3350,FA,3B,0,act,active,"OF,SW,2B,CI,3B",74,0,24,7,0,3,2,21,6,0.244,0.23,0,0,0,5,0,0,16
+2012,nl,Todd Zola,J.D. Martinez,3567,Bos,OF,13,act,active,"OF,SW",391,0,112,34,11,55,0,95,40,0.311,0.376,5,0,0,0,0,0,100
+2012,nl,Todd Zola,Carlos Lee,638,FA,OF,21,act,active,"1B,OF,CI,SW",546,0,146,53,9,75,3,48,58,0.331,0.364,1,0,145,0,0,0,0
+2012,nl,Todd Zola,Alfonso Soriano,294,FA,OF,13,act,active,"OF,SW",169,0,46,26,12,39,1,48,18,0.333,0.533,6,0,0,0,0,0,145
+2012,nl,Todd Zola,Jason Kubel,904,FA,OF,16,act,active,"OF,SW",506,0,141,75,30,90,1,151,57,0.327,0.506,6,0,0,0,0,0,125
+2012,nl,Todd Zola,Brian McCann,73,Hou,C,21,act,active,"C,SW",439,0,121,44,20,67,3,76,44,0.3,0.399,3,114,0,0,0,0,0
+2012,nl,Todd Zola,Miguel Montero,25,Was,C,18,act,active,"C,SW",486,0,141,65,15,88,0,130,73,0.391,0.438,0,139,0,0,0,0,0
+2012,nl,Todd Zola,Travis Ishikawa,1306,SF,UT,4,act,active,1B,50,0,26,8,2,12,0,12,7,0.383,0.5,0,0,43,0,0,0,3
+2012,nl,Todd Zola,Angel Pagan,959,FA,OF,17,trd,previously_active,,418,0,108,57,7,43,19,70,35,0.33,0.411,1,0,0,0,0,0,151
+2012,nl,Todd Zola,Eric Hinske,1488,FA,OF,10,rel,previously_active,,104,0,72,5,0,8,0,35,14,0.227,0.183,4,0,15,0,0,0,10
+2012,nl,Todd Zola,Wilson Ramos,2170,Phi,C,13,rel,previously_active,,83,0,24,11,3,10,0,19,12,0.354,0.398,0,24,0,0,0,0,0
+2012,nl,Todd Zola,Adam Kennedy,1409,FA,UT,12,dis,previously_active,"3B,2B,CI,MI,SW,1B",114,0,55,14,2,10,1,20,13,0.336,0.36,0,0,3,16,39,0,1
+2012,nl,Todd Zola,Chad Tracy,35,LAA,UT,0,rel,previously_active,,37,0,23,5,3,7,0,6,4,0.31,0.486,0,0,14,0,10,0,0
+2012,nl,Todd Zola,Miguel Cairo,1358,FA,UT,0,rel,previously_active,,9,0,4,0,0,0,0,2,1,0.2,0.111,1,0,24,8,13,0,0
+2012,nl,Todd Zola,Jerry Hairston Jr.,369,LAD,UT,2,dis,previously_active,"3B,OF,2B,MI,CI,SW",234,0,76,19,4,25,1,27,22,0.337,0.385,1,0,1,30,32,2,18
+2012,nl,Todd Zola,Josh Bell,2016,SD,UT,3,rel,previously_active,,33,0,13,2,1,3,0,8,4,0.27,0.303,0,0,0,0,12,0,0
+2012,nl,Todd Zola,D.J. LeMahieu,3275,Col,SW,7,rel,previously_active,,19,0,10,1,0,0,0,5,2,0.238,0.158,0,0,1,67,9,2,0
+2012,nl,Todd Zola,Andrew M. Brown,3753,LAA,SW,6,rel,previously_active,,9,0,4,0,0,0,0,4,1,0.2,0.111,0,0,0,0,0,0,33
+2012,nl,Todd Zola,Jerry Hairston Jr.,369,LAD,UT,2,dis,reserved,"3B,OF,2B,MI,CI,SW",4,0,2,0,0,1,0,0,1,0.6,0.5,1,0,1,30,32,2,18
+2012,nl,Todd Zola,Adam Kennedy,1409,FA,UT,12,dis,reserved,"3B,2B,CI,MI,SW,1B",1,0,1,0,0,0,0,0,0,1.0,1.0,0,0,3,16,39,0,1
+2012,nl,Todd Zola,Brett Wallace,2188,FA,CI,2,act,previously_reserved,"3B,1B,CI,SW",25,0,7,7,2,4,0,8,3,0.5,0.76,0,0,58,0,8,0,0
+2012,nl,Todd Zola,Eric Hinske,1488,FA,OF,10,rel,previously_reserved,,16,0,6,3,1,4,0,2,0,0.625,0.937,4,0,15,0,0,0,10
+2012,nl,Todd Zola,Carlos Lee,638,FA,OF,21,act,previously_reserved,"1B,OF,CI,SW",4,0,1,0,0,2,0,1,0,0.5,0.5,1,0,145,0,0,0,0
+2012,nl,Todd Zola,J.D. Martinez,3567,Bos,OF,13,act,previously_reserved,"OF,SW",4,0,1,0,0,0,0,1,0,0.25,0.25,5,0,0,0,0,0,100
+2012,nl,Todd Zola,Chad Tracy,35,LAA,UT,0,rel,previously_reserved,,13,0,10,1,0,3,0,3,1,0.333,0.385,0,0,14,0,10,0,0
+2012,nl,Todd Zola,Josh Bell,2016,SD,UT,3,rel,previously_reserved,,18,0,7,1,0,1,0,6,0,0.167,0.222,0,0,0,0,12,0,0
+2012,nl,Todd Zola,Andrew M. Brown,3753,LAA,SW,6,rel,previously_reserved,,5,0,2,1,0,0,0,1,0,0.2,0.4,0,0,0,0,0,0,33
+2012,nl,Scott Wilderman,Brandon Belt,3336,SF,1B,12,act,active,"1B,CI,SW,OF",411,0,145,47,7,56,12,106,54,0.36,0.421,0,0,139,0,0,0,4
+2012,nl,Scott Wilderman,John Mayberry,1550,FA,CI,14,act,active,"OF,1B,CI,SW",441,0,149,53,14,46,1,111,34,0.301,0.395,1,0,27,0,0,0,128
+2012,nl,Scott Wilderman,Chase Utley,1132,LAD,MI,10,act,active,"2B,MI,SW",296,0,82,47,10,44,11,43,43,0.361,0.416,0,0,0,81,0,0,0
+2012,nl,Scott Wilderman,Aaron Hill,1578,FA,2B,15,act,active,"UT,2B,MI,SW",609,0,156,93,26,85,14,86,52,0.36,0.522,0,0,0,153,0,0,0
+2012,nl,Scott Wilderman,Luis Cruz,1216,NYY,SS,6,act,active,"3B,SS",261,0,71,22,6,36,1,30,6,0.316,0.425,0,0,0,2,51,24,0
+2012,nl,Scott Wilderman,Chris Johnson,2101,Bal,3B,5,act,active,"1B,3B,SW,CI",488,0,136,48,15,76,5,132,31,0.326,0.451,0,0,6,0,127,0,1
+2012,nl,Scott Wilderman,Giancarlo Stanton,2378,NYY,OF,32,act,active,"OF,SW",446,0,122,75,37,85,6,141,46,0.364,0.612,1,0,0,0,0,0,117
+2012,nl,Scott Wilderman,Angel Pagan,959,FA,OF,17,act,active,"OF,SW",187,0,46,38,1,13,10,27,13,0.355,0.503,1,0,0,0,0,0,151
+2012,nl,Scott Wilderman,Tony Campana,3739,CWS,OF,7,act,active,"OF,SW",171,0,87,26,0,5,30,41,11,0.308,0.298,0,0,0,0,0,0,69
+2012,nl,Scott Wilderman,Corey Hart,862,FA,OF,22,act,active,"1B,OF,SW",562,0,149,91,30,83,5,151,44,0.334,0.507,0,0,103,0,0,0,53
+2012,nl,Scott Wilderman,Jesus Flores,1627,Mia,C,2,act,active,"C,SW",277,0,83,22,6,26,1,59,13,0.248,0.329,0,80,0,0,0,0,0
+2012,nl,Scott Wilderman,Mike McKenry,2104,TB,C,0,act,active,"C,SW",233,0,84,23,11,38,0,70,25,0.311,0.433,0,81,0,0,0,0,0
+2012,nl,Scott Wilderman,Brandon Crawford,3051,SF,UT,3,act,active,"SS,SW,MI",103,0,40,17,1,12,0,22,9,0.325,0.388,0,0,0,0,0,139,0
+2012,nl,Scott Wilderman,Brandon Barnes,3890,Cle,SW,10,act,active,OF,52,0,22,4,0,3,0,16,4,0.263,0.231,0,0,0,0,0,0,37
+2012,nl,Scott Wilderman,Blake DeWitt,1965,FA,MI,0,rel,previously_active,,19,0,13,1,0,1,0,1,0,0.1,0.158,0,0,0,4,0,0,1
+2012,nl,Scott Wilderman,Dee Gordon,2693,Sea,SS,22,res,previously_active,"SS,SW,MI",301,0,78,36,1,17,30,62,19,0.28,0.282,0,0,0,0,0,79,0
+2012,nl,Scott Wilderman,Alfonso Soriano,294,FA,OF,13,trd,previously_active,,392,0,105,42,20,69,5,105,26,0.317,0.485,6,0,0,0,0,0,145
+2012,nl,Scott Wilderman,Logan Morrison,2111,Min,OF,18,rel,previously_active,,296,0,93,30,11,36,1,58,31,0.308,0.399,3,0,21,0,0,0,59
+2012,nl,Scott Wilderman,Scott Moore,128,FA,OF,10,rel,previously_active,,119,0,42,14,4,17,0,33,10,0.29,0.345,0,0,19,6,28,0,17
+2012,nl,Scott Wilderman,Brett Hayes,594,Tex,C,1,rel,previously_active,,7,0,3,2,0,0,0,3,0,0.143,0.143,0,33,0,0,0,0,0
+2012,nl,Scott Wilderman,Mike Baxter,3363,Sea,SW,0,res,previously_active,"OF,SW",87,0,34,13,0,4,2,25,12,0.33,0.287,1,0,0,0,0,0,63
+2012,nl,Scott Wilderman,Geoff Blum,630,FA,SW,0,rel,previously_active,,15,0,9,0,0,1,0,5,2,0.167,0.067,0,0,0,0,6,0,0
+2012,nl,Scott Wilderman,A.J. Pollock,2837,Ari,SW,10,rel,previously_active,,25,0,12,3,1,2,0,2,3,0.393,0.52,0,0,0,0,0,0,25
+2012,nl,Scott Wilderman,John McDonald,1580,LAA,SW,0,rel,previously_active,,61,0,24,5,3,9,0,7,4,0.308,0.475,0,0,0,4,5,54,0
+2012,nl,Scott Wilderman,Adron Chambers,3228,Phi,SW,0,rel,previously_active,,8,0,6,1,0,0,0,2,1,0.444,0.375,0,0,0,0,0,0,26
+2012,nl,Scott Wilderman,Dee Gordon,2693,Sea,SS,22,res,reserved,"SS,SW,MI",2,0,9,2,0,0,2,0,1,0.333,0.0,0,0,0,0,0,79,0
+2012,nl,Scott Wilderman,Mike Baxter,3363,Sea,SW,0,res,reserved,"OF,SW",74,0,36,9,3,9,2,12,10,0.391,0.541,1,0,0,0,0,0,63
+2012,nl,Scott Wilderman,Chase Utley,1132,LAD,MI,10,act,previously_reserved,"2B,MI,SW",5,0,1,1,1,1,0,0,0,0.6,1.2,0,0,0,81,0,0,0
+2012,nl,Scott Wilderman,Willie Harris,1642,Cin,OF,0,rel,previously_reserved,,17,0,9,1,0,0,0,2,1,0.111,0.118,1,0,0,7,1,0,1
+2012,nl,Scott Wilderman,Scott Moore,128,FA,OF,10,rel,previously_reserved,,7,0,7,1,1,2,0,1,2,0.7,1.0,0,0,19,6,28,0,17
+2012,nl,Scott Wilderman,Giancarlo Stanton,2378,NYY,OF,32,act,previously_reserved,"OF,SW",3,0,1,0,0,1,0,2,0,0.0,0.0,1,0,0,0,0,0,117
+2012,nl,Scott Wilderman,Tony Campana,3739,CWS,OF,7,act,previously_reserved,"OF,SW",3,0,2,0,0,0,0,2,0,0.333,0.333,0,0,0,0,0,0,69
+2012,nl,Scott Wilderman,John McDonald,1580,LAA,SW,0,rel,previously_reserved,,14,0,8,0,0,0,0,3,0,0.143,0.143,0,0,0,4,5,54,0
+2012,nl,Scott Wilderman,Brandon Barnes,3890,Cle,SW,10,act,previously_reserved,OF,19,0,12,1,0,1,1,8,0,0.263,0.316,0,0,0,0,0,0,37
+2012,nl,Scott Wilderman,A.J. Pollock,2837,Ari,SW,10,rel,previously_reserved,,16,0,4,2,0,2,1,3,0,0.294,0.312,0,0,0,0,0,0,25
+2012,nl,Scott Wilderman,Geoff Blum,630,FA,SW,0,rel,previously_reserved,,11,0,6,1,0,0,0,1,0,0.273,0.273,0,0,0,0,6,0,0
+2012,nl,Scott Wilderman,Jerry Sands,3249,SF,SW,3,rel,previously_reserved,,23,0,9,2,0,1,0,9,1,0.208,0.261,0,0,1,0,0,0,7
+2012,nl,Brian Walton,Daniel Murphy,2100,ChC,1B,15,act,active,"1B,2B,MI,3B,CI,SW",571,0,156,62,6,65,10,82,36,0.332,0.403,0,0,12,138,0,0,0
+2012,nl,Brian Walton,Kevin Frandsen,1305,FA,CI,1,act,active,3B,169,0,48,21,1,12,0,17,9,0.396,0.462,0,0,0,0,52,0,0
+2012,nl,Brian Walton,Nick Punto,899,Ari,MI,0,act,active,"2B,SW,1B,SS,3B,MI",3,0,2,0,0,0,0,1,0,0.0,0.0,2,0,5,26,31,6,0
+2012,nl,Brian Walton,Ryan Roberts,1547,Oak,2B,16,act,active,"3B,2B,MI,CI,SW",439,0,143,51,12,52,10,92,40,0.296,0.36,1,0,0,54,78,0,1
+2012,nl,Brian Walton,Ian Desmond,1671,Col,SS,18,act,active,"UT,SS,MI,SW",502,0,127,72,25,73,21,110,30,0.341,0.522,0,0,0,0,0,128,0
+2012,nl,Brian Walton,Pedro Alvarez,2050,Bal,3B,0,act,active,"3B,SW,CI",525,0,149,64,30,85,1,180,57,0.317,0.467,1,0,0,0,145,0,0
+2012,nl,Brian Walton,Jayson Werth,1139,Sea,OF,25,act,active,"OF,SW",300,0,81,42,5,31,8,57,42,0.387,0.44,0,0,0,0,0,0,79
+2012,nl,Brian Walton,Carlos Beltran,956,Hou,OF,19,act,active,"OF,SW",547,0,151,83,32,97,13,124,65,0.346,0.495,3,0,0,0,0,0,133
+2012,nl,Brian Walton,Gorkys Hernandez,1970,SF,OF,0,act,active,OF,65,0,21,6,1,4,1,18,5,0.286,0.354,0,0,0,0,0,0,56
+2012,nl,Brian Walton,Justin Maxwell,1646,FA,OF,1,act,active,OF,291,0,114,42,17,50,9,105,30,0.302,0.457,0,0,0,0,0,0,95
+2012,nl,Brian Walton,John Buck,674,Atl,C,10,act,active,"C,SW",327,0,101,25,10,34,0,100,47,0.29,0.321,0,105,0,0,0,0,0
+2012,nl,Brian Walton,Yasmani Grandal,3311,LAD,C,10,act,active,C,177,0,55,26,6,33,0,37,29,0.407,0.463,0,55,0,0,0,0,0
+2012,nl,Brian Walton,A.J. Pollock,2837,Ari,UT,0,act,active,OF,8,0,2,2,1,1,0,2,3,0.364,0.5,0,0,0,0,0,0,25
+2012,nl,Brian Walton,Daniel Descalso,2899,Ari,CI,4,rel,previously_active,,242,0,89,26,2,13,3,51,21,0.276,0.289,0,0,5,96,22,26,0
+2012,nl,Brian Walton,Brock Holt,4192,Bos,MI,3,rel,previously_active,,35,0,15,1,0,0,0,7,3,0.263,0.229,0,0,0,14,0,0,0
+2012,nl,Brian Walton,Drew Sutton,2258,Bos,CI,1,rel,previously_active,,56,0,17,6,1,4,0,20,2,0.237,0.393,0,0,3,8,11,0,19
+2012,nl,Brian Walton,Ryan Howard,1129,Col,1B,15,trd,previously_active,,48,0,15,5,4,9,0,21,7,0.333,0.479,0,0,67,0,0,0,0
+2012,nl,Brian Walton,Marwin Gonzalez,3884,Hou,SS,7,rel,previously_active,,82,0,24,6,1,7,1,12,8,0.256,0.28,0,0,0,6,14,47,0
+2012,nl,Brian Walton,David Wright,953,NYM,3B,22,trd,previously_active,,277,0,76,53,9,50,8,42,48,0.447,0.56,0,0,0,0,155,1,0
+2012,nl,Brian Walton,Melky Cabrera,1014,Cle,OF,18,trd,previously_active,,221,0,54,40,4,27,9,29,17,0.413,0.548,0,0,0,0,0,0,112
+2012,nl,Brian Walton,Bobby Abreu,1013,FA,OF,3,rel,previously_active,,179,0,70,26,2,17,5,46,30,0.359,0.341,4,0,0,0,0,0,54
+2012,nl,Brian Walton,Scott Cousins,2376,Tex,OF,0,rel,previously_active,,33,0,19,3,1,2,0,10,0,0.152,0.303,0,0,0,0,0,0,36
+2012,nl,Brian Walton,Scott Van Slyke,2804,Mia,OF,0,rel,previously_active,,14,0,6,1,1,1,0,2,1,0.2,0.357,0,0,5,0,0,0,21
+2012,nl,Brian Walton,Andrew M. Brown,3753,LAA,OF,1,rel,previously_active,,17,0,11,3,1,2,1,7,4,0.429,0.529,0,0,0,0,0,0,33
+2012,nl,Brian Walton,Andres Torres,310,FA,OF,7,trd,previously_active,,161,0,57,25,1,20,9,37,29,0.332,0.292,1,0,0,0,0,0,124
+2012,nl,Brian Walton,Matt Diaz,85,Mia,OF,0,rel,previously_active,,18,0,8,4,1,4,0,2,3,0.364,0.5,2,0,0,0,0,0,24
+2012,nl,Brian Walton,Jason Bay,1191,FA,OF,2,rel,previously_active,,17,0,7,1,1,2,0,6,0,0.059,0.235,0,0,0,0,0,0,65
+2012,nl,Brian Walton,Mark Kotsay,88,SD,OF,0,rel,previously_active,,8,0,4,0,0,0,0,1,2,0.5,0.375,0,0,5,0,0,0,27
+2012,nl,Brian Walton,Jason Castro,2343,Min,C,3,res,previously_active,C,225,0,76,20,3,25,0,53,26,0.332,0.378,0,79,0,0,0,0,0
+2012,nl,Brian Walton,Eddy Rodriguez,1890,Min,C,0,rel,previously_active,,2,0,1,0,0,0,0,2,1,0.333,0.0,0,2,0,0,0,0,0
+2012,nl,Brian Walton,Xavier Paul,800,Tex,UT,0,rel,previously_active,,8,0,3,1,1,1,0,2,0,0.375,0.75,0,0,0,0,0,0,18
+2012,nl,Brian Walton,Steve Pearce,1196,Bos,UT,1,rel,previously_active,,75,0,28,7,1,9,1,22,10,0.322,0.307,2,0,19,0,0,0,36
+2012,nl,Brian Walton,Tyler Moore,3632,Mia,UT,1,rel,previously_active,,7,0,5,0,0,0,0,2,0,0.286,0.286,0,0,14,0,0,0,41
+2012,nl,Brian Walton,Reed Johnson,1586,FA,UT,0,rel,previously_active,,49,0,20,7,0,3,0,6,0,0.333,0.347,0,0,0,0,0,0,86
+2012,nl,Brian Walton,Matt Hague,2729,Was,SW,10,rel,previously_active,,51,0,21,4,0,4,1,11,1,0.25,0.275,4,0,16,0,0,0,0
+2012,nl,Brian Walton,Emmanuel Burriss,1324,LAA,SW,2,rel,previously_active,,104,0,36,13,0,5,3,18,9,0.278,0.221,0,0,0,37,6,6,1
+2012,nl,Brian Walton,Lance Berkman,629,Tex,SW,20,rel,previously_active,,38,0,18,4,1,3,1,9,8,0.34,0.316,0,0,23,0,0,0,0
+2012,nl,Brian Walton,Mike Costanzo,147,Cin,SW,0,rel,previously_active,,7,0,5,0,0,1,0,3,0,0.125,0.143,1,0,2,0,0,0,0
+2012,nl,Brian Walton,Jason Castro,2343,Min,C,3,res,reserved,C,32,0,11,9,3,4,0,8,5,0.351,0.562,0,79,0,0,0,0,0
+2012,nl,Brian Walton,Daniel Descalso,2899,Ari,CI,4,rel,previously_reserved,,41,0,21,5,1,4,1,10,7,0.417,0.488,0,0,5,96,22,26,0
+2012,nl,Brian Walton,Drew Sutton,2258,Bos,CI,1,rel,previously_reserved,,1,0,1,0,0,0,0,1,0,0.0,0.0,0,0,3,8,11,0,19
+2012,nl,Brian Walton,Ryan Howard,1129,Col,1B,15,trd,previously_reserved,,8,0,2,0,0,0,0,2,0,0.25,0.375,0,0,67,0,0,0,0
+2012,nl,Brian Walton,Ian Desmond,1671,Col,SS,18,act,previously_reserved,"UT,SS,MI,SW",11,0,3,0,0,0,0,3,0,0.0,0.0,0,0,0,0,0,128,0
+2012,nl,Brian Walton,Scott Cousins,2376,Tex,OF,0,rel,previously_reserved,,2,0,3,0,0,0,0,0,0,0.0,0.0,0,0,0,0,0,0,36
+2012,nl,Brian Walton,Justin Maxwell,1646,FA,OF,1,act,previously_reserved,OF,24,0,10,4,1,3,0,9,2,0.333,0.5,0,0,0,0,0,0,95
+2012,nl,Brian Walton,Matt Diaz,85,Mia,OF,0,rel,previously_reserved,,2,0,1,0,0,0,0,0,1,0.333,0.0,2,0,0,0,0,0,24
+2012,nl,Brian Walton,Jason Bay,1191,FA,OF,2,rel,previously_reserved,,3,0,2,0,0,0,0,0,0,0.333,0.333,0,0,0,0,0,0,65
+2012,nl,Brian Walton,Mark Kotsay,88,SD,OF,0,rel,previously_reserved,,17,0,10,0,0,1,0,0,3,0.4,0.294,0,0,5,0,0,0,27
+2012,nl,Brian Walton,Yasmani Grandal,3311,LAD,C,10,act,previously_reserved,C,14,0,4,2,2,3,0,2,2,0.25,0.571,0,55,0,0,0,0,0
+2012,nl,Brian Walton,John Buck,674,Atl,C,10,act,previously_reserved,"C,SW",16,0,5,4,2,7,0,3,2,0.444,0.875,0,105,0,0,0,0,0
+2012,nl,Brian Walton,Reed Johnson,1586,FA,UT,0,rel,previously_reserved,,29,0,10,1,0,1,0,4,1,0.267,0.31,0,0,0,0,0,0,86
+2012,nl,Brian Walton,Emmanuel Burriss,1324,LAA,SW,2,rel,previously_reserved,,9,0,6,0,0,0,1,3,0,0.222,0.222,0,0,0,37,6,6,1
+2012,nl,Brian Walton,Matt Hague,2729,Was,SW,10,rel,previously_reserved,,1,0,1,0,0,0,0,0,0,0.0,0.0,4,0,16,0,0,0,0
+2012,nl,Brian Walton,Mike Costanzo,147,Cin,SW,0,rel,previously_reserved,,5,0,5,0,0,0,0,5,0,0.0,0.0,1,0,2,0,0,0,0
+2012,nl,Scott Pianowski,Jimmy Rollins,1131,FA,MI,22,act,active,"SS,MI,SW",632,0,156,102,23,68,30,96,62,0.316,0.427,0,0,0,0,0,156,0
+2012,nl,Scott Pianowski,Freddie Freeman,2466,Atl,1B,22,act,active,"1B,SW,CI",540,0,147,91,23,94,2,129,64,0.34,0.456,0,0,146,0,0,0,0
+2012,nl,Scott Pianowski,David Freese,1432,LAD,CI,15,act,active,"3B,SW,CI",501,0,144,70,20,79,3,122,57,0.372,0.467,0,0,0,0,134,0,0
+2012,nl,Scott Pianowski,Brandon Phillips,344,Bos,2B,27,act,active,"2B,SW,MI",580,0,147,86,18,77,15,79,28,0.321,0.429,0,0,0,146,0,0,0
+2012,nl,Scott Pianowski,Jose Reyes,952,NYM,SS,30,act,active,"UT,SS,MI,SW",642,0,160,86,11,57,40,56,63,0.347,0.433,0,0,0,0,0,160,0
+2012,nl,Scott Pianowski,David Wright,953,NYM,3B,22,act,active,"3B,CI,SW",304,0,80,38,12,43,7,70,33,0.337,0.431,0,0,0,0,155,1,0
+2012,nl,Scott Pianowski,Skip Schumaker,1420,SD,OF,0,act,active,"OF,2B,SW,MI",193,0,75,25,1,16,1,38,15,0.295,0.321,0,0,0,61,0,0,24
+2012,nl,Scott Pianowski,Andres Torres,310,FA,OF,7,act,active,"OF,SW",213,0,75,22,2,15,4,53,23,0.324,0.371,1,0,0,0,0,0,124
+2012,nl,Scott Pianowski,Brian Bogusevic,2259,Bos,OF,6,act,active,"OF,SW",355,0,146,39,7,28,15,96,41,0.297,0.299,0,0,0,0,0,0,121
+2012,nl,Scott Pianowski,Nyjer Morgan,1194,FA,OF,11,act,active,"OF,SW",289,0,122,44,3,16,12,63,20,0.302,0.308,1,0,0,0,0,0,86
+2012,nl,Scott Pianowski,Ryan Hanigan,334,FA,C,8,act,active,"C,SW",317,0,112,25,2,24,0,37,44,0.365,0.338,0,110,0,0,0,0,0
+2012,nl,Scott Pianowski,Jonathan Lucroy,2346,Oak,C,10,act,active,"C,SW",313,0,95,46,12,58,4,44,22,0.368,0.514,0,88,0,0,0,0,0
+2012,nl,Scott Pianowski,Ty Wigginton,634,FA,UT,13,act,active,"1B,OF,3B,SW,CI",287,0,106,36,10,37,1,76,31,0.305,0.369,0,0,71,0,22,0,7
+2012,nl,Scott Pianowski,Donovan Solano,3063,LAD,SW,3,act,active,"UT,2B,SS,OF,3B",165,0,44,16,2,18,2,36,8,0.307,0.364,0,0,0,58,10,5,10
+2012,nl,Scott Pianowski,Juan Francisco,1995,FA,CI,2,rel,previously_active,,66,0,35,6,3,12,0,24,3,0.229,0.379,0,0,0,0,49,0,0
+2012,nl,Scott Pianowski,Miguel Cairo,1358,FA,CI,1,rel,previously_active,,1,0,1,0,0,0,0,0,0,0.0,0.0,1,0,24,8,13,0,0
+2012,nl,Scott Pianowski,Carlos Gomez,902,TB,OF,3,trd,previously_active,,138,0,55,21,4,15,9,28,8,0.289,0.428,0,0,0,0,0,0,128
+2012,nl,Scott Pianowski,Matt Treanor,561,Cle,C,0,rel,previously_active,,33,0,12,1,0,3,0,13,4,0.189,0.121,0,35,0,0,0,0,0
+2012,nl,Scott Pianowski,Casey McGehee,306,FA,UT,7,res,previously_active,"3B,CI,SW,1B",301,0,100,33,9,40,1,67,26,0.286,0.369,2,0,85,1,21,0,0
+2012,nl,Scott Pianowski,Donnie Murphy,1071,Mil,UT,5,rel,previously_active,,5,0,3,0,0,0,0,2,1,0.167,0.0,0,0,0,13,22,2,0
+2012,nl,Scott Pianowski,Shane Robinson,2792,NYY,SW,5,rel,previously_active,,7,0,4,1,0,1,0,1,0,0.143,0.143,0,0,0,0,0,0,60
+2012,nl,Scott Pianowski,Mark DeRosa,283,Tor,SW,2,rel,previously_active,,7,0,2,0,0,0,0,1,0,0.0,0.0,0,0,3,1,11,1,16
+2012,nl,Scott Pianowski,Mike Fontenot,284,TB,SW,10,res,previously_active,"2B,SW,SS,MI,3B",21,0,10,3,0,0,0,6,2,0.348,0.286,1,0,0,17,12,0,0
+2012,nl,Scott Pianowski,Cesar Izturis,1408,FA,SW,0,rel,previously_active,,2,0,2,0,0,0,0,0,0,0.0,0.0,0,0,1,2,4,46,0
+2012,nl,Scott Pianowski,Xavier Nady,1195,FA,SW,0,rel,previously_active,,29,0,11,0,0,1,0,4,1,0.167,0.172,0,0,0,0,0,0,51
+2012,nl,Scott Pianowski,Brian Bixler,1185,Tor,SW,6,rel,previously_active,,42,0,16,4,1,2,0,15,2,0.182,0.262,0,0,0,5,4,6,12
+2012,nl,Scott Pianowski,Willie Harris,1642,Cin,SW,0,rel,previously_active,,4,0,3,1,0,0,0,0,0,0.25,0.25,1,0,0,7,1,0,1
+2012,nl,Scott Pianowski,Casey McGehee,306,FA,UT,7,res,reserved,"3B,CI,SW,1B",17,0,14,3,0,1,0,3,3,0.25,0.176,2,0,85,1,21,0,0
+2012,nl,Scott Pianowski,Mike Fontenot,284,TB,SW,10,res,reserved,"2B,SW,SS,MI,3B",37,0,17,5,0,0,0,11,1,0.263,0.27,1,0,0,17,12,0,0
+2012,nl,Scott Pianowski,Juan Francisco,1995,FA,CI,2,rel,previously_reserved,,54,0,23,5,3,6,1,18,3,0.293,0.463,0,0,0,0,49,0,0
+2012,nl,Scott Pianowski,Jonathan Herrera,456,ChC,2B,0,rel,previously_reserved,,8,0,5,1,0,0,0,1,0,0.375,0.375,0,0,0,19,13,42,0
+2012,nl,Scott Pianowski,Skip Schumaker,1420,SD,OF,0,act,previously_reserved,"OF,2B,SW,MI",79,0,32,12,0,12,0,12,12,0.44,0.481,0,0,0,61,0,0,24
+2012,nl,Scott Pianowski,Scott Hairston,1261,FA,OF,0,rel,previously_reserved,,21,0,11,2,1,2,0,7,0,0.19,0.381,0,0,0,0,0,0,108
+2012,nl,Scott Pianowski,Carlos Gomez,902,TB,OF,3,trd,previously_reserved,,2,0,1,1,0,0,0,1,0,0.5,0.5,0,0,0,0,0,0,128
+2012,nl,Scott Pianowski,Jonathan Lucroy,2346,Oak,C,10,act,previously_reserved,"C,SW",3,0,1,0,0,0,0,0,0,0.333,0.333,0,88,0,0,0,0,0
+2012,nl,Scott Pianowski,Ty Wigginton,634,FA,UT,13,act,previously_reserved,"1B,OF,3B,SW,CI",28,0,19,4,1,6,0,5,6,0.4,0.429,0,0,71,0,22,0,7
+2012,nl,Scott Pianowski,Shane Robinson,2792,NYY,SW,5,rel,previously_reserved,,32,0,17,3,0,0,1,9,3,0.343,0.344,0,0,0,0,0,0,60
+2012,nl,Scott Pianowski,Willie Harris,1642,Cin,SW,0,rel,previously_reserved,,5,0,3,1,0,0,0,2,1,0.167,0.0,1,0,0,7,1,0,1
+2012,nl,Scott Pianowski,Brian Bixler,1185,Tor,SW,6,rel,previously_reserved,,7,0,3,0,0,0,0,6,1,0.125,0.0,0,0,0,5,4,6,12
+2012,nl,Scott Pianowski,Xavier Nady,1195,FA,SW,0,rel,previously_reserved,,73,0,29,6,3,5,1,20,6,0.228,0.315,0,0,0,0,0,0,51
+2012,nl,Scott Pianowski,Donovan Solano,3063,LAD,SW,3,act,previously_reserved,"UT,2B,SS,OF,3B",49,0,14,7,0,4,1,6,5,0.429,0.408,0,0,0,58,10,5,10
+2012,nl,Scott Pianowski,Mark DeRosa,283,Tor,SW,2,rel,previously_reserved,,33,0,14,4,0,3,0,5,10,0.318,0.152,0,0,3,1,11,1,16
+2012,nl,Lenny Melnick & Paul Greco,Garrett Jones,903,FA,1B,11,act,active,"OF,1B,SW,CI",475,0,145,68,27,86,2,103,33,0.317,0.516,4,0,72,0,0,0,66
+2012,nl,Lenny Melnick & Paul Greco,Alexi Amarista,3084,Phi,MI,17,act,active,"OF,2B,MI,SW,SS",245,0,93,31,5,30,7,38,16,0.289,0.392,1,0,0,52,1,12,34
+2012,nl,Lenny Melnick & Paul Greco,Hanley Ramirez,566,FA,CI,39,act,active,"UT,SS,3B,MI,SW",604,0,157,79,24,92,21,132,54,0.322,0.437,2,0,0,0,98,57,0
+2012,nl,Lenny Melnick & Paul Greco,Neil Walker,1221,NYY,2B,19,act,active,"UT,2B,SW,MI",472,0,129,62,14,69,7,104,47,0.342,0.426,1,0,0,125,0,0,0
+2012,nl,Lenny Melnick & Paul Greco,Clint Barmes,454,FA,SS,1,act,active,"SS,MI,SW",439,0,138,33,8,44,0,103,19,0.272,0.323,0,0,1,0,0,142,0
+2012,nl,Lenny Melnick & Paul Greco,Cody Ransom,1034,FA,3B,5,act,active,"3B,SS,2B,SW,MI",202,0,77,23,9,34,0,88,24,0.303,0.396,1,0,1,6,35,48,0
+2012,nl,Lenny Melnick & Paul Greco,Hunter Pence,639,SF,OF,33,act,active,"OF,SW",617,0,160,87,24,104,5,145,56,0.319,0.425,0,0,0,0,0,0,159
+2012,nl,Lenny Melnick & Paul Greco,Cameron Maybin,573,Sea,OF,28,act,active,"OF,SW",499,0,144,65,8,43,26,109,44,0.305,0.345,0,0,0,0,0,0,145
+2012,nl,Lenny Melnick & Paul Greco,Matt Holliday,464,Col,OF,32,act,active,"OF,SW",599,0,157,95,27,102,4,132,75,0.379,0.497,2,0,0,0,0,0,152
+2012,nl,Lenny Melnick & Paul Greco,Will Venable,1278,LAD,OF,14,act,active,"OF,SW",408,0,146,60,8,43,24,94,40,0.332,0.417,0,0,0,0,0,0,135
+2012,nl,Lenny Melnick & Paul Greco,Hector Sanchez,3050,FA,C,3,act,active,"C,SW",218,0,74,22,3,34,0,52,5,0.295,0.39,1,56,0,0,0,0,0
+2012,nl,Lenny Melnick & Paul Greco,A.J. Ellis,817,SD,C,2,act,active,"C,SW",423,0,133,44,13,52,0,107,65,0.373,0.414,0,131,0,0,0,0,0
+2012,nl,Lenny Melnick & Paul Greco,Scott Podsednik,485,FA,UT,0,act,active,OF,164,0,49,11,0,9,6,27,5,0.302,0.317,3,0,0,0,0,0,57
+2012,nl,Lenny Melnick & Paul Greco,Gregor Blanco,84,SF,SW,1,act,active,OF,377,0,136,53,5,33,26,101,48,0.329,0.34,1,0,0,0,0,0,125
+2012,nl,Lenny Melnick & Paul Greco,Conor Gillaspie,2208,SF,3B,13,rel,previously_active,,4,0,2,0,0,0,0,0,0,0.0,0.0,0,0,0,0,5,0,0
+2012,nl,Lenny Melnick & Paul Greco,Mat Gamel,1986,FA,3B,17,rel,previously_active,,69,0,21,10,1,6,3,15,4,0.293,0.348,0,0,20,0,1,0,0
+2012,nl,Lenny Melnick & Paul Greco,Chris Coghlan,599,ChC,UT,10,res,previously_active,"OF,SW",55,0,19,7,1,7,0,6,8,0.262,0.218,0,0,0,0,0,0,32
+2012,nl,Lenny Melnick & Paul Greco,Austin Kearns,1643,Mia,UT,2,rel,previously_active,,17,0,12,3,1,4,0,4,2,0.333,0.353,2,0,2,0,0,0,34
+2012,nl,Lenny Melnick & Paul Greco,Brett Pill,2582,Det,UT,6,res,previously_active,"1B,OF,SW,CI",60,0,25,6,2,7,1,13,2,0.226,0.317,0,0,24,0,1,0,7
+2012,nl,Lenny Melnick & Paul Greco,Laynce Nix,868,FA,UT,1,res,previously_active,"OF,1B,SW",59,0,30,7,2,12,0,18,5,0.344,0.492,0,0,10,0,0,0,29
+2012,nl,Lenny Melnick & Paul Greco,Josh Harrison,3747,Pit,SW,1,rel,previously_active,,18,0,10,1,0,1,0,3,0,0.158,0.278,1,0,0,28,14,25,13
+2012,nl,Lenny Melnick & Paul Greco,Laynce Nix,868,FA,UT,1,res,reserved,"OF,1B,SW",55,0,39,6,1,4,0,24,7,0.286,0.327,0,0,10,0,0,0,29
+2012,nl,Lenny Melnick & Paul Greco,Brett Pill,2582,Det,UT,6,res,reserved,"1B,OF,SW,CI",31,0,18,3,1,3,0,3,3,0.361,0.419,0,0,24,0,1,0,7
+2012,nl,Lenny Melnick & Paul Greco,Chris Coghlan,599,ChC,UT,10,res,reserved,"OF,SW",0,0,0,0,0,0,0,0,0,0.0,0.0,0,0,0,0,0,0,32
+2012,nl,Lenny Melnick & Paul Greco,Alexi Amarista,3084,Phi,MI,17,act,previously_reserved,"OF,2B,MI,SW,SS",16,0,8,2,0,0,0,3,0,0.125,0.25,1,0,0,52,1,12,34
+2012,nl,Lenny Melnick & Paul Greco,Clint Barmes,454,FA,SS,1,act,previously_reserved,"SS,MI,SW",16,0,6,1,0,1,0,3,1,0.278,0.25,0,0,1,0,0,142,0
+2012,nl,Lenny Melnick & Paul Greco,Cody Ransom,1034,FA,3B,5,act,previously_reserved,"3B,SS,2B,SW,MI",26,0,8,4,1,3,0,16,4,0.3,0.346,1,0,1,6,35,48,0
+2012,nl,Lenny Melnick & Paul Greco,Cameron Maybin,573,Sea,OF,28,act,previously_reserved,"OF,SW",8,0,3,2,0,2,0,1,0,0.375,0.625,0,0,0,0,0,0,145
+2012,nl,Lenny Melnick & Paul Greco,Will Venable,1278,LAD,OF,14,act,previously_reserved,"OF,SW",9,0,2,2,1,2,0,0,1,0.5,1.0,0,0,0,0,0,0,135
+2012,nl,Lenny Melnick & Paul Greco,Austin Kearns,1643,Mia,UT,2,rel,previously_reserved,,17,0,9,3,0,0,0,5,5,0.318,0.118,2,0,2,0,0,0,34
+2012,nl,Lenny Melnick & Paul Greco,Scott Podsednik,485,FA,UT,0,act,previously_reserved,OF,35,0,14,8,1,3,2,8,1,0.417,0.514,3,0,0,0,0,0,57
+2012,nl,Lenny Melnick & Paul Greco,Gregor Blanco,84,SF,SW,1,act,previously_reserved,OF,16,0,5,3,0,1,0,3,3,0.421,0.437,1,0,0,0,0,0,125
+2012,nl,Mike Gianella,Matt Carpenter,3510,StL,CI,4,act,active,"1B,3B,OF,CI,SW,2B",225,0,88,36,5,36,0,51,27,0.36,0.453,0,0,44,5,33,0,21
+2012,nl,Mike Gianella,Yonder Alonso,2142,Cle,1B,11,act,active,"1B,OF,SW",549,0,155,47,9,62,3,101,62,0.348,0.393,0,0,149,0,0,0,0
+2012,nl,Mike Gianella,Everth Cabrera,2297,FA,MI,2,act,active,"SS,MI,SW,2B",243,0,69,32,0,13,29,62,26,0.326,0.305,0,0,0,6,1,111,0
+2012,nl,Mike Gianella,Darwin Barney,2055,FA,2B,5,act,active,"2B,MI,SW",255,0,74,37,4,21,1,30,15,0.293,0.345,0,0,0,155,0,3,0
+2012,nl,Mike Gianella,John McDonald,1580,LAA,SS,0,act,active,"3B,SS,CI,MI,SW,2B",61,0,17,5,1,5,0,11,2,0.312,0.361,0,0,0,4,5,54,0
+2012,nl,Mike Gianella,Scott Rolen,1582,FA,3B,12,act,active,"3B,SW,CI",272,0,85,23,7,34,2,57,28,0.311,0.39,0,0,0,0,87,0,0
+2012,nl,Mike Gianella,Alex Presley,3365,FA,OF,54,act,active,"OF,SW",192,0,61,30,7,14,3,35,13,0.29,0.448,0,0,0,0,0,0,90
+2012,nl,Mike Gianella,Michael Bourn,636,FA,OF,29,act,active,"OF,SW",624,0,155,96,9,57,42,155,70,0.348,0.391,0,0,0,0,0,0,153
+2012,nl,Mike Gianella,Brett Jackson,2849,SF,OF,0,act,active,OF,116,0,43,13,4,9,0,58,21,0.292,0.336,0,0,0,0,0,0,39
+2012,nl,Mike Gianella,David DeJesus,689,FA,OF,9,act,active,"OF,SW",506,0,148,76,9,50,7,89,61,0.35,0.403,0,0,0,0,0,0,143
+2012,nl,Mike Gianella,Steve Clevenger,2435,Sea,C,1,act,active,"C,SW,1B",63,0,23,2,0,2,0,16,11,0.257,0.175,0,51,9,0,1,0,0
+2012,nl,Mike Gianella,Kelly Shoppach,395,Cle,C,7,act,active,"C,SW",69,0,25,4,2,8,0,23,3,0.253,0.304,1,73,0,0,0,0,0
+2012,nl,Mike Gianella,Dave Sappelt,3532,Phi,UT,0,act,active,"OF,SW",40,0,15,4,2,5,0,5,4,0.333,0.45,0,0,0,0,0,0,21
+2012,nl,Mike Gianella,Darin Ruf,4191,FA,SW,1,act,active,"UT,OF",33,0,11,4,3,9,0,12,2,0.361,0.727,0,0,3,0,0,0,6
+2012,nl,Mike Gianella,Stephen Drew,30,Was,MI,9,trd,previously_active,,20,0,7,3,0,3,0,6,2,0.261,0.25,0,0,0,0,0,75,0
+2012,nl,Mike Gianella,Wilson Valdez,1930,Mia,CI,0,rel,previously_active,,5,0,2,1,0,1,0,1,0,0.4,0.4,0,0,0,22,14,33,5
+2012,nl,Mike Gianella,Tyler Moore,3632,Mia,CI,4,rel,previously_active,,64,0,31,5,2,7,0,20,2,0.269,0.375,0,0,14,0,0,0,41
+2012,nl,Mike Gianella,Jordy Mercer,3871,Pit,MI,0,rel,previously_active,,0,0,1,0,0,0,0,0,1,1.0,0.0,0,0,0,7,1,28,0
+2012,nl,Mike Gianella,Brooks Conrad,1094,KC,MI,2,rel,previously_active,,3,0,3,0,0,0,0,2,0,0.0,0.0,1,0,7,13,16,1,0
+2012,nl,Mike Gianella,Aubrey Huff,126,SF,CI,10,rel,previously_active,,57,0,31,7,1,5,0,8,12,0.3,0.263,0,0,15,1,0,0,5
+2012,nl,Mike Gianella,Jordany Valdespin,3407,Det,2B,1,rel,previously_active,,47,0,20,10,1,9,3,9,0,0.292,0.489,2,0,0,16,0,4,39
+2012,nl,Mike Gianella,Orlando Hudson,31,FA,2B,6,rel,previously_active,,206,0,61,16,2,21,4,38,17,0.251,0.301,4,0,0,44,29,0,0
+2012,nl,Mike Gianella,Andy Parrino,3471,CWS,2B,0,rel,previously_active,,23,0,11,2,0,2,0,9,3,0.333,0.304,0,0,0,15,2,26,1
+2012,nl,Mike Gianella,Emmanuel Burriss,1324,LAA,2B,0,rel,previously_active,,6,0,3,1,0,0,0,1,1,0.286,0.167,0,0,0,37,6,6,1
+2012,nl,Mike Gianella,Jake Elmore,4160,CWS,SS,0,rel,previously_active,,7,0,3,0,0,2,0,1,0,0.286,0.429,0,0,0,5,0,17,0
+2012,nl,Mike Gianella,Rafael Furcal,790,KC,SS,10,dis,previously_active,"SS,MI,SW",477,0,121,69,5,49,12,57,44,0.325,0.346,0,0,0,0,0,120,0
+2012,nl,Mike Gianella,Bryce Harper,2628,Was,OF,4,trd,previously_active,,260,0,66,44,8,25,11,57,28,0.345,0.454,0,0,0,0,0,0,138
+2012,nl,Mike Gianella,Reed Johnson,1586,FA,OF,3,rel,previously_active,,43,0,22,6,1,4,0,9,3,0.277,0.395,0,0,0,0,0,0,86
+2012,nl,Mike Gianella,Carlos Quentin,242,Min,OF,9,trd,previously_active,,124,0,36,17,8,21,0,22,18,0.391,0.516,5,0,0,0,0,0,72
+2012,nl,Mike Gianella,Carlos Ruiz,1123,FA,C,9,trd,previously_active,,313,0,95,47,14,58,3,41,22,0.399,0.559,0,106,0,0,0,0,0
+2012,nl,Mike Gianella,Nick Hundley,1268,SF,C,10,rel,previously_active,,201,0,57,14,3,22,0,55,14,0.218,0.249,0,56,0,0,0,0,0
+2012,nl,Mike Gianella,Brett Hayes,594,Tex,C,0,rel,previously_active,,22,0,7,0,0,0,0,14,0,0.091,0.091,0,33,0,0,0,0,0
+2012,nl,Mike Gianella,Sandy Leon,3901,Bos,C,0,rel,previously_active,,7,0,2,0,0,0,0,5,0,0.286,0.429,0,12,0,0,0,0,0
+2012,nl,Mike Gianella,Placido Polanco,513,Mia,UT,12,rel,previously_active,,302,0,89,28,2,19,0,24,18,0.303,0.328,0,0,0,0,80,0,0
+2012,nl,Mike Gianella,Mark Ellis,1067,FA,UT,3,trd,previously_active,,23,0,5,2,0,0,0,6,2,0.32,0.261,0,0,0,110,0,0,0
+2012,nl,Mike Gianella,Ronny Cedeno,282,SF,UT,0,rel,previously_active,,78,0,30,5,1,6,0,15,10,0.337,0.333,0,0,0,28,3,27,0
+2012,nl,Mike Gianella,Bryan Petersen,3101,Mil,UT,0,rel,previously_active,,36,0,11,4,0,5,1,7,2,0.263,0.333,0,0,0,0,0,0,72
+2012,nl,Mike Gianella,Nick Punto,899,Ari,UT,0,rel,previously_active,,3,0,3,0,0,0,0,0,0,0.0,0.0,2,0,5,26,31,6,0
+2012,nl,Mike Gianella,Xavier Paul,800,Tex,SW,1,rel,previously_active,,6,0,5,2,1,2,0,0,2,0.5,1.17,0,0,0,0,0,0,18
+2012,nl,Mike Gianella,Jason Bay,1191,FA,SW,13,rel,previously_active,,140,0,44,17,5,12,4,44,16,0.228,0.264,0,0,0,0,0,0,65
+2012,nl,Mike Gianella,Vinny Rottino,856,CWS,SW,0,rel,previously_active,,3,0,2,0,0,0,0,0,1,0.25,0.0,3,2,7,0,2,0,20
+2012,nl,Mike Gianella,Emilio Bonifacio,27,Mil,SW,17,dis,previously_active,"OF,2B,SW,SS,CI,3B,MI",81,0,21,9,1,5,9,15,4,0.282,0.321,0,0,0,15,0,0,51
+2012,nl,Mike Gianella,Juan Uribe,238,FA,SW,4,rel,previously_active,,3,0,4,0,0,0,0,1,0,0.667,0.667,0,0,0,0,46,1,0
+2012,nl,Mike Gianella,James Darnell,2709,TB,SW,2,dis,previously_active,"3B,SW,CI",9,0,4,1,1,1,0,1,2,0.364,0.667,0,0,0,0,1,0,4
+2012,nl,Mike Gianella,Rafael Furcal,790,KC,SS,10,dis,reserved,"SS,MI,SW",0,0,0,0,0,0,0,0,0,0.0,0.0,0,0,0,0,0,120,0
+2012,nl,Mike Gianella,James Darnell,2709,TB,SW,2,dis,reserved,"3B,SW,CI",0,0,0,0,0,0,0,0,0,0.0,0.0,0,0,0,0,1,0,4
+2012,nl,Mike Gianella,Emilio Bonifacio,27,Mil,SW,17,dis,reserved,"OF,2B,SW,SS,CI,3B,MI",5,0,1,1,0,0,0,1,0,0.2,0.2,0,0,0,15,0,0,51
+2012,nl,Mike Gianella,Matt Carpenter,3510,StL,CI,4,act,previously_reserved,"1B,3B,OF,CI,SW,2B",65,0,23,6,1,8,1,10,6,0.389,0.508,0,0,44,5,33,0,21
+2012,nl,Mike Gianella,Stephen Drew,30,Was,MI,9,trd,previously_reserved,,8,0,2,0,0,0,0,1,0,0.125,0.125,0,0,0,0,0,75,0
+2012,nl,Mike Gianella,Aubrey Huff,126,SF,CI,10,rel,previously_reserved,,1,0,1,0,0,0,0,0,0,0.0,0.0,0,0,15,1,0,0,5
+2012,nl,Mike Gianella,Tyler Moore,3632,Mia,CI,4,rel,previously_reserved,,41,0,14,10,4,12,3,9,8,0.51,0.78,0,0,14,0,0,0,41
+2012,nl,Mike Gianella,Jordany Valdespin,3407,Det,2B,1,rel,previously_reserved,,10,0,7,2,1,3,0,2,1,0.182,0.4,2,0,0,16,0,4,39
+2012,nl,Mike Gianella,Orlando Hudson,31,FA,2B,6,rel,previously_reserved,,5,0,2,1,0,1,0,2,0,0.4,0.4,4,0,0,44,29,0,0
+2012,nl,Mike Gianella,Emmanuel Burriss,1324,LAA,2B,0,rel,previously_reserved,,4,0,1,1,0,0,0,0,0,0.25,0.25,0,0,0,37,6,6,1
+2012,nl,Mike Gianella,Scott Rolen,1582,FA,3B,12,act,previously_reserved,"3B,SW,CI",22,0,7,3,1,5,0,5,2,0.4,0.5,0,0,0,0,87,0,0
+2012,nl,Mike Gianella,Brett Jackson,2849,SF,OF,0,act,previously_reserved,OF,4,0,1,1,0,0,0,1,1,0.6,0.5,0,0,0,0,0,0,39
+2012,nl,Mike Gianella,Alex Presley,3365,FA,OF,54,act,previously_reserved,"OF,SW",9,0,3,0,0,2,0,4,1,0.4,0.444,0,0,0,0,0,0,90
+2012,nl,Mike Gianella,Nick Hundley,1268,SF,C,10,rel,previously_reserved,,3,0,1,0,0,0,0,1,1,0.25,0.0,0,56,0,0,0,0,0
+2012,nl,Mike Gianella,Ronny Cedeno,282,SF,UT,0,rel,previously_reserved,,14,0,4,4,0,1,0,4,2,0.437,0.357,0,0,0,28,3,27,0
+2012,nl,Mike Gianella,Jason Bay,1191,FA,SW,13,rel,previously_reserved,,22,0,11,3,2,6,0,5,2,0.333,0.545,0,0,0,0,0,0,65
+2012,nl,Mike Gianella,Juan Uribe,238,FA,SW,4,rel,previously_reserved,,11,0,9,2,0,0,0,4,3,0.214,0.0,0,0,0,0,46,1,0
+2012,nl,Mike Gianella,Darin Ruf,4191,FA,SW,1,act,previously_reserved,"UT,OF",0,0,1,0,0,1,0,0,0,0.0,0.0,0,0,3,0,0,0,6
+2012,nl,Nate Ravitz,Ruben Tejada,2638,Bal,MI,3,act,active,"SS,2B,SW,MI",460,0,113,53,1,23,4,72,27,0.333,0.35,0,0,0,0,0,112,0
+2012,nl,Nate Ravitz,Jesus Guzman,2388,FA,CI,9,act,active,"1B,OF,CI,2B,SW",287,0,120,32,9,48,3,71,29,0.319,0.418,1,0,19,4,0,0,58
+2012,nl,Nate Ravitz,Ryan Howard,1129,Col,1B,15,act,active,"1B,CI,SW",204,0,54,23,10,47,0,76,18,0.286,0.412,0,0,67,0,0,0,0
+2012,nl,Nate Ravitz,Dan Uggla,567,FA,2B,28,act,active,"2B,SW,MI",523,0,154,86,19,78,4,168,94,0.348,0.384,0,0,0,152,0,0,0
+2012,nl,Nate Ravitz,Willie Bloomquist,1357,Sea,SS,6,act,active,"UT,SS,SW,MI,OF,3B",324,0,80,47,0,23,7,55,12,0.325,0.398,0,0,0,1,11,64,2
+2012,nl,Nate Ravitz,Justin Turner,2415,LAD,3B,0,act,active,"1B,2B,3B,SW,SS,CI,MI",160,0,89,19,2,18,1,18,9,0.333,0.412,0,0,11,14,11,10,0
+2012,nl,Nate Ravitz,Charlie Blackmon,2620,Col,OF,3,act,active,"OF,SW",108,0,40,15,2,9,1,16,4,0.339,0.426,0,0,0,0,0,0,33
+2012,nl,Nate Ravitz,Matt Kemp,799,LAD,OF,42,act,active,"OF,SW",403,0,106,74,23,69,9,103,40,0.367,0.538,0,0,0,0,0,0,105
+2012,nl,Nate Ravitz,Austin Kearns,1643,Mia,OF,0,act,active,"OF,SW",42,0,34,6,0,5,2,12,10,0.491,0.452,2,0,2,0,0,0,34
+2012,nl,Nate Ravitz,Domonic Brown,2066,FA,OF,1,act,active,"OF,SW",169,0,50,20,5,25,0,33,19,0.312,0.402,0,0,0,0,0,0,51
+2012,nl,Nate Ravitz,Chris Snyder,26,Tex,C,4,act,active,"C,SW",143,0,52,17,4,12,0,44,22,0.298,0.294,0,72,1,0,0,0,0
+2012,nl,Nate Ravitz,Kurt Suzuki,1063,Atl,C,16,act,active,"C,SW",143,0,42,17,5,25,1,19,11,0.327,0.413,0,117,0,0,0,0,0
+2012,nl,Nate Ravitz,Joey Votto,345,Cin,UT,41,act,active,"1B,CI,SW",374,0,111,59,14,56,5,85,94,0.474,0.567,0,0,109,0,0,0,0
+2012,nl,Nate Ravitz,Alex Castellanos,3864,Bal,MI,1,rel,previously_active,,18,0,9,1,0,0,0,6,0,0.056,0.056,0,0,0,0,0,0,13
+2012,nl,Nate Ravitz,Adam Kennedy,1409,FA,MI,1,rel,previously_active,,33,0,23,4,0,3,0,7,7,0.317,0.212,0,0,3,16,39,0,1
+2012,nl,Nate Ravitz,Edwin Maysonet,2195,ChC,MI,0,rel,previously_active,,24,0,13,0,0,0,0,5,0,0.16,0.125,0,0,0,3,1,18,0
+2012,nl,Nate Ravitz,Melky Cabrera,1014,Cle,OF,18,rel,previously_active,,238,0,59,44,7,33,4,34,19,0.369,0.487,0,0,0,0,0,0,112
+2012,nl,Nate Ravitz,Lance Berkman,629,Tex,OF,20,trd,previously_active,,37,0,12,8,1,4,1,7,6,0.455,0.622,0,0,23,0,0,0,0
+2012,nl,Nate Ravitz,Travis Buck,1074,SD,OF,0,rel,previously_active,,52,0,22,3,0,2,0,10,5,0.276,0.231,0,0,0,0,0,0,21
+2012,nl,Nate Ravitz,Reed Johnson,1586,FA,OF,0,trd,previously_active,,109,0,46,14,2,9,2,26,7,0.407,0.486,0,0,0,0,0,0,86
+2012,nl,Nate Ravitz,Michael Cuddyer,901,NYM,OF,28,dis,previously_active,"OF,1B,MI,CI,SW,2B",170,0,46,21,8,19,1,39,11,0.28,0.459,0,0,26,0,0,0,74
+2012,nl,Nate Ravitz,Tony Gwynn Jr.,861,Was,OF,3,rel,previously_active,,259,0,103,29,0,17,13,52,16,0.276,0.293,0,0,0,0,0,0,90
+2012,nl,Nate Ravitz,John Baker,591,FA,C,1,trd,previously_active,,54,0,18,2,0,5,2,12,7,0.328,0.333,0,56,0,0,0,0,0
+2012,nl,Nate Ravitz,Welington Castillo,2434,CWS,C,1,rel,previously_active,,34,0,9,3,1,4,0,9,3,0.27,0.353,0,49,1,0,0,0,0
+2012,nl,Nate Ravitz,Jim Thome,244,Cle,UT,2,dis,previously_active,"UT,SW",93,0,37,7,3,7,0,40,14,0.327,0.355,36,0,4,0,0,0,0
+2012,nl,Nate Ravitz,Matt Adams,3755,StL,UT,57,res,previously_active,1B,82,0,26,7,2,13,0,24,5,0.276,0.378,0,0,24,0,0,0,0
+2012,nl,Nate Ravitz,Alex Presley,3365,FA,SW,14,rel,previously_active,,118,0,34,11,2,7,3,30,4,0.246,0.305,0,0,0,0,0,0,90
+2012,nl,Nate Ravitz,Carlos Corporan,2345,ChC,SW,3,rel,previously_active,,37,0,12,2,2,5,0,8,3,0.31,0.405,0,24,0,0,0,0,0
+2012,nl,Nate Ravitz,Fernando Martinez,978,NYY,SW,1,rel,previously_active,,15,0,4,0,0,2,0,9,0,0.067,0.133,0,0,0,0,0,0,37
+2012,nl,Nate Ravitz,Michael Cuddyer,901,NYM,OF,28,dis,reserved,"OF,1B,MI,CI,SW,2B",8,0,3,1,1,2,0,3,1,0.333,0.625,0,0,26,0,0,0,74
+2012,nl,Nate Ravitz,Billy Hamilton,3576,Cin,UT,3,res,reserved,OF,0,0,0,0,0,0,0,0,0,0.0,0.0,0,0,0,0,0,0,0
+2012,nl,Nate Ravitz,Jim Thome,244,Cle,UT,2,dis,reserved,"UT,SW",70,0,21,10,5,18,0,21,8,0.367,0.557,36,0,4,0,0,0,0
+2012,nl,Nate Ravitz,Matt Adams,3755,StL,UT,57,res,reserved,1B,0,0,0,0,0,0,0,0,0,0.0,0.0,0,0,24,0,0,0,0
+2012,nl,Nate Ravitz,Alex Castellanos,3864,Bal,MI,1,rel,previously_reserved,,3,0,2,0,0,2,0,1,0,0.6,1.33,0,0,0,0,0,0,13
+2012,nl,Nate Ravitz,Ruben Tejada,2638,Bal,MI,3,act,previously_reserved,"SS,2B,SW,MI",4,0,1,0,0,2,0,1,0,0.4,0.5,0,0,0,0,0,112,0
+2012,nl,Nate Ravitz,Justin Turner,2415,LAD,3B,0,act,previously_reserved,"1B,2B,3B,SW,SS,CI,MI",11,0,5,1,0,1,0,6,0,0.091,0.091,0,0,11,14,11,10,0
+2012,nl,Nate Ravitz,Lance Berkman,629,Tex,OF,20,trd,previously_reserved,,5,0,1,0,0,0,0,3,0,0.2,0.2,0,0,23,0,0,0,0
+2012,nl,Nate Ravitz,Domonic Brown,2066,FA,OF,1,act,previously_reserved,"OF,SW",18,0,6,1,0,1,0,1,2,0.35,0.333,0,0,0,0,0,0,51
+2012,nl,Nate Ravitz,Austin Kearns,1643,Mia,OF,0,act,previously_reserved,"OF,SW",8,0,2,0,0,0,0,3,0,0.125,0.125,2,0,2,0,0,0,34
+2012,nl,Steve Gardner,Logan Forsythe,2920,Min,MI,0,act,active,"UT,2B,3B,MI,SS,CI,SW",312,0,90,45,6,26,8,57,28,0.34,0.378,2,0,0,81,4,5,0
+2012,nl,Steve Gardner,Greg Dobbs,1125,FA,1B,0,act,active,"1B,3B,SW,CI,OF",285,0,102,24,5,35,3,47,12,0.311,0.389,1,0,18,0,36,0,37
+2012,nl,Steve Gardner,Lucas Duda,3305,Atl,CI,20,act,active,"1B,OF,SW,CI",399,0,120,43,15,57,1,120,50,0.329,0.391,5,0,6,0,0,0,105
+2012,nl,Steve Gardner,Omar Infante,77,Det,2B,11,act,active,"2B,3B,MI,SW",554,0,149,69,12,53,17,65,21,0.3,0.419,0,0,0,144,6,0,0
+2012,nl,Steve Gardner,Jed Lowrie,201,Oak,SS,11,act,active,"UT,SS,CI,SW,MI,3B",325,0,93,42,16,41,1,61,38,0.327,0.449,0,0,0,0,0,93,0
+2012,nl,Steve Gardner,Pablo Sandoval,2182,SF,3B,27,act,active,"3B,SW,CI",389,0,106,58,12,62,1,59,38,0.345,0.452,2,0,3,0,102,0,0
+2012,nl,Steve Gardner,Travis Snider,1606,NYM,OF,83,act,active,"OF,SW",113,0,45,14,1,8,1,31,12,0.331,0.345,0,0,0,0,0,0,46
+2012,nl,Steve Gardner,Scott Hairston,1261,FA,OF,7,act,active,"OF,SW",333,0,115,47,18,50,8,69,17,0.301,0.508,0,0,0,0,0,0,108
+2012,nl,Steve Gardner,Carlos Gomez,902,TB,OF,3,act,active,"OF,SW",275,0,81,50,15,36,28,69,12,0.312,0.48,0,0,0,0,0,0,128
+2012,nl,Steve Gardner,Carlos Gonzalez,1077,Col,OF,39,act,active,"OF,SW",518,0,135,89,22,85,20,115,56,0.371,0.51,0,0,0,0,0,0,131
+2012,nl,Steve Gardner,Josh Thole,2441,Det,C,8,act,active,"C,SW",313,0,102,23,1,21,0,48,27,0.295,0.291,0,100,0,0,0,0,0
+2012,nl,Steve Gardner,Wilin Rosario,2499,FA,C,4,act,active,"C,SW",396,0,117,67,28,71,4,99,25,0.312,0.53,0,105,1,0,3,0,0
+2012,nl,Steve Gardner,Jose Tabata,1041,Tor,UT,19,act,active,"OF,SW",305,0,96,39,3,15,8,54,26,0.312,0.344,0,0,0,0,0,0,96
+2012,nl,Steve Gardner,Chris Denorfia,1075,FA,SW,0,act,active,"OF,SW",289,0,110,42,6,26,10,43,23,0.339,0.446,0,0,0,0,0,0,118
+2012,nl,Steve Gardner,Jeff Baker,462,FA,CI,0,res,previously_active,"1B,2B,SW,CI,MI,OF",72,0,30,5,1,10,4,18,6,0.291,0.347,0,0,20,9,4,0,31
+2012,nl,Steve Gardner,Aubrey Huff,126,SF,CI,1,rel,previously_active,,1,0,1,0,0,1,0,0,0,0.0,0.0,0,0,15,1,0,0,5
+2012,nl,Steve Gardner,Paul Janish,342,Bal,SS,3,rel,previously_active,,51,0,20,2,0,3,0,10,6,0.193,0.157,0,0,0,0,0,55,0
+2012,nl,Steve Gardner,Tyler Pastornicky,3333,Phi,SS,4,rel,previously_active,,155,0,61,20,2,13,2,30,9,0.301,0.348,0,0,0,3,0,47,0
+2012,nl,Steve Gardner,Marlon Byrd,1527,FA,OF,12,rel,previously_active,,143,0,48,10,1,9,0,31,5,0.243,0.245,0,0,0,0,0,0,48
+2012,nl,Steve Gardner,Mike Nickeas,971,Tor,C,0,rel,previously_active,,30,0,11,2,1,6,0,11,2,0.125,0.167,0,45,0,0,0,0,0
+2012,nl,Steve Gardner,Kyle Blanks,1270,FA,UT,3,rel,previously_active,,1,0,2,0,0,0,0,1,1,0.5,0.0,0,0,1,0,0,0,1
+2012,nl,Steve Gardner,Chris Coghlan,599,ChC,SW,0,rel,previously_active,,14,0,10,1,0,1,0,3,1,0.133,0.071,0,0,0,0,0,0,32
+2012,nl,Steve Gardner,Joe Mather,1419,Cin,SW,6,res,previously_active,"OF,3B,SW",3,0,2,0,0,0,0,1,1,0.25,0.0,0,0,2,0,18,0,56
+2012,nl,Steve Gardner,Nate McLouth,1193,Was,SW,4,rel,previously_active,,13,0,12,2,0,1,0,3,2,0.267,0.231,0,0,0,0,0,0,71
+2012,nl,Steve Gardner,Bryan LaHair,1360,FA,SW,11,res,previously_active,"1B,OF,SW",321,0,115,41,15,34,4,117,39,0.338,0.449,0,0,58,0,0,0,36
+2012,nl,Steve Gardner,Jeff Baker,462,FA,CI,0,res,reserved,"1B,2B,SW,CI,MI,OF",116,0,53,13,3,15,0,30,5,0.27,0.397,0,0,20,9,4,0,31
+2012,nl,Steve Gardner,Bryan LaHair,1360,FA,SW,11,res,reserved,"1B,OF,SW",19,0,15,1,1,6,0,7,0,0.263,0.474,0,0,58,0,0,0,36
+2012,nl,Steve Gardner,Joe Mather,1419,Cin,SW,6,res,reserved,"OF,3B,SW",8,0,4,1,0,0,0,2,1,0.333,0.5,0,0,2,0,18,0,56
+2012,nl,Steve Gardner,Aubrey Huff,126,SF,CI,1,rel,previously_reserved,,8,0,8,0,0,0,0,2,1,0.444,0.375,0,0,15,1,0,0,5
+2012,nl,Steve Gardner,Lucas Duda,3305,Atl,CI,20,act,previously_reserved,"1B,OF,SW,CI",2,0,1,0,0,0,0,0,1,0.333,0.0,5,0,6,0,0,0,105
+2012,nl,Steve Gardner,Tyler Pastornicky,3333,Phi,SS,4,rel,previously_reserved,,1,0,1,0,0,0,0,1,0,0.0,0.0,0,0,0,3,0,47,0
+2012,nl,Steve Gardner,Jed Lowrie,201,Oak,SS,11,act,previously_reserved,"UT,SS,CI,SW,MI,3B",15,0,4,1,0,1,1,4,5,0.4,0.2,0,0,0,0,0,93,0
+2012,nl,Steve Gardner,Pablo Sandoval,2182,SF,3B,27,act,previously_reserved,"3B,SW,CI",7,0,2,1,0,1,0,0,0,0.143,0.143,2,0,3,0,102,0,0
+2012,nl,Steve Gardner,Josh Thole,2441,Det,C,8,act,previously_reserved,"C,SW",8,0,2,1,0,0,0,2,0,0.25,0.25,0,100,0,0,0,0,0
+2012,nl,Steve Gardner,Kyle Blanks,1270,FA,UT,3,rel,previously_reserved,,4,0,2,0,0,0,0,1,0,0.25,0.25,0,0,1,0,0,0,1
+2012,nl,Steve Gardner,Jose Tabata,1041,Tor,UT,19,act,previously_reserved,"OF,SW",28,0,7,4,0,1,0,4,3,0.355,0.393,0,0,0,0,0,0,96
+2012,nl,Steve Gardner,Chris Denorfia,1075,FA,SW,0,act,previously_reserved,"OF,SW",59,0,20,14,2,10,3,9,4,0.375,0.475,0,0,0,0,0,0,118
+2012,nl,Steve Gardner,Chris Coghlan,599,ChC,SW,0,rel,previously_reserved,,20,0,9,2,0,1,0,2,0,0.15,0.2,0,0,0,0,0,0,32
+2012,nl,Steve Gardner,Nate McLouth,1193,Was,SW,4,rel,previously_reserved,,44,0,22,2,0,1,0,15,3,0.191,0.159,0,0,0,0,0,0,71
+2012,nl,Dean Peterson,Pete Kozma,2112,Det,MI,0,act,active,"SS,SW,2B,MI",7,0,3,0,0,0,0,3,2,0.444,0.286,0,0,0,1,0,25,0
+2012,nl,Dean Peterson,Paul Goldschmidt,3159,Ari,1B,18,act,active,"1B,CI,SW",514,0,145,82,20,82,18,130,60,0.359,0.49,0,0,139,0,0,0,0
+2012,nl,Dean Peterson,Matt McBride,2682,Phi,CI,0,act,active,"UT,1B,OF",25,0,8,3,1,4,0,6,1,0.185,0.32,0,0,8,0,0,0,12
+2012,nl,Dean Peterson,Danny Espinosa,2765,Phi,2B,18,act,active,"2B,SW,SS,MI",594,0,160,82,17,56,20,189,46,0.315,0.402,0,0,0,126,0,36,0
+2012,nl,Dean Peterson,Joaquin Arias,1517,Ari,SS,1,act,active,"3B,SS",255,0,95,24,4,29,3,36,8,0.293,0.373,0,0,0,4,74,50,0
+2012,nl,Dean Peterson,Ryan Zimmerman,1638,Was,3B,29,act,active,"3B,CI,SW",574,0,144,92,25,95,5,116,57,0.347,0.479,0,0,0,0,145,0,0
+2012,nl,Dean Peterson,Chris B. Young,40,LAA,OF,22,act,active,"OF,SW",317,0,99,36,14,39,8,78,36,0.313,0.435,2,0,0,0,0,0,87
+2012,nl,Dean Peterson,Andrew M. Brown,3753,LAA,OF,0,act,active,"OF,SW",31,0,9,4,2,3,1,12,4,0.343,0.484,0,0,0,0,0,0,33
+2012,nl,Dean Peterson,Bryan Petersen,3101,Mil,OF,0,act,active,"OF,SW",107,0,33,14,0,7,3,27,12,0.267,0.262,0,0,0,0,0,0,72
+2012,nl,Dean Peterson,Adam Eaton,3588,Was,OF,20,act,active,OF,60,0,17,13,2,5,1,12,13,0.368,0.383,0,0,0,0,0,0,21
+2012,nl,Dean Peterson,Geovany Soto,281,FA,C,13,act,active,"C,SW",292,0,90,40,9,36,1,70,26,0.269,0.336,1,96,0,0,0,0,0
+2012,nl,Dean Peterson,Jordan Pacheco,3116,Min,C,4,act,active,"3B,1B,C,SW,CI",475,0,132,51,5,54,7,61,22,0.341,0.421,0,5,43,0,82,0,0
+2012,nl,Dean Peterson,Ryan Wheeler,3187,Ari,UT,30,act,active,3B,99,0,46,9,1,10,1,20,9,0.294,0.343,0,0,4,0,23,0,0
+2012,nl,Dean Peterson,Adam LaRoche,1187,CWS,CI,9,trd,previously_active,,323,0,88,39,16,55,1,93,42,0.333,0.477,0,0,153,0,0,0,0
+2012,nl,Dean Peterson,Jonathan Herrera,456,ChC,MI,2,rel,previously_active,,149,0,60,21,2,7,1,32,13,0.299,0.315,0,0,0,19,13,42,0
+2012,nl,Dean Peterson,Rickie Weeks,857,FA,MI,23,trd,previously_active,,306,0,84,37,8,32,6,100,48,0.318,0.346,2,0,0,152,0,0,0
+2012,nl,Dean Peterson,Josh Vitters,1977,Col,CI,7,rel,previously_active,,6,0,3,0,0,0,0,3,0,0.167,0.167,0,0,0,0,29,0,0
+2012,nl,Dean Peterson,Troy Tulowitzki,461,Tor,SS,37,dis,previously_active,"SS,MI,SW",181,0,47,33,8,27,2,19,19,0.36,0.486,0,0,0,0,0,47,0
+2012,nl,Dean Peterson,Josh Harrison,3747,Pit,OF,0,res,previously_active,"3B,SS,CI,OF,MI,2B,SW",170,0,68,25,3,9,5,24,8,0.296,0.382,1,0,0,28,14,25,13
+2012,nl,Dean Peterson,Blake Tekotte,2578,Bos,OF,0,rel,previously_active,,3,0,5,0,0,0,1,1,0,0.0,0.0,0,0,0,0,0,0,4
+2012,nl,Dean Peterson,Jordan Schafer,97,SF,OF,14,rel,previously_active,,305,0,96,40,4,23,26,101,36,0.304,0.302,0,0,0,0,0,0,87
+2012,nl,Dean Peterson,Joe Mather,1419,Cin,OF,3,rel,previously_active,,73,0,29,5,2,7,1,19,5,0.278,0.342,0,0,2,0,18,0,56
+2012,nl,Dean Peterson,Roger Bernadina,1639,NYM,OF,1,rel,previously_active,,163,0,78,16,4,14,8,44,18,0.326,0.362,0,0,0,0,0,0,94
+2012,nl,Dean Peterson,Scott Van Slyke,2804,Mia,OF,6,rel,previously_active,,7,0,6,1,1,3,0,2,0,0.143,0.571,0,0,5,0,0,0,21
+2012,nl,Dean Peterson,Eric Young Jr.,2059,LAA,OF,7,dis,previously_active,"OF,SW",169,0,97,35,4,15,13,30,13,0.376,0.45,1,0,0,0,0,0,34
+2012,nl,Dean Peterson,Justin Christian,1037,TB,OF,3,rel,previously_active,,14,0,6,1,0,1,1,1,0,0.071,0.071,3,0,0,0,0,0,18
+2012,nl,Dean Peterson,Matt Treanor,561,Cle,C,0,rel,previously_active,,12,0,4,1,0,2,0,2,0,0.214,0.417,0,35,0,0,0,0,0
+2012,nl,Dean Peterson,Koyie Hill,302,Phi,C,0,rel,previously_active,,22,0,6,2,0,0,0,4,0,0.136,0.136,0,11,0,0,0,0,0
+2012,nl,Dean Peterson,Brian Schneider,946,FA,C,0,rel,previously_active,,7,0,3,0,0,0,0,1,0,0.0,0.0,0,29,0,0,0,0,0
+2012,nl,Dean Peterson,Martin Maldonado,2347,Hou,C,0,rel,previously_active,,183,0,60,17,4,16,1,45,11,0.328,0.399,0,69,4,0,0,0,0
+2012,nl,Dean Peterson,Taylor Green,2697,Mil,UT,2,rel,previously_active,,74,0,39,7,2,10,0,20,7,0.282,0.365,1,0,18,4,13,0,0
+2012,nl,Dean Peterson,Andy Parrino,3471,CWS,SW,1,rel,previously_active,,46,0,16,3,0,0,1,11,6,0.269,0.217,0,0,0,15,2,26,1
+2012,nl,Dean Peterson,Jose Constanza,3448,TB,SW,0,rel,previously_active,,3,0,3,0,0,0,0,2,0,0.0,0.0,0,0,0,0,0,0,25
+2012,nl,Dean Peterson,Troy Tulowitzki,461,Tor,SS,37,dis,reserved,"SS,MI,SW",0,0,0,0,0,0,0,0,0,0.0,0.0,0,0,0,0,0,47,0
+2012,nl,Dean Peterson,Eric Young Jr.,2059,LAA,OF,7,dis,reserved,"OF,SW",5,0,1,1,0,0,1,1,0,0.4,0.4,1,0,0,0,0,0,34
+2012,nl,Dean Peterson,Josh Harrison,3747,Pit,OF,0,res,reserved,"3B,SS,CI,OF,MI,2B,SW",47,0,19,8,0,2,2,7,2,0.26,0.255,1,0,0,28,14,25,13
+2012,nl,Dean Peterson,Tyler Greene,2310,Phi,MI,5,rel,previously_reserved,,8,0,6,0,0,2,1,2,0,0.333,0.5,0,0,0,59,0,43,3
+2012,nl,Dean Peterson,Rickie Weeks,857,FA,MI,23,trd,previously_reserved,,23,0,6,1,1,1,0,12,1,0.167,0.261,2,0,0,152,0,0,0
+2012,nl,Dean Peterson,Jonathan Herrera,456,ChC,MI,2,rel,previously_reserved,,49,0,16,6,0,2,2,4,1,0.28,0.306,0,0,0,19,13,42,0
+2012,nl,Dean Peterson,Joaquin Arias,1517,Ari,SS,1,act,previously_reserved,"3B,SS",53,0,13,4,1,3,2,6,4,0.333,0.415,0,0,0,4,74,50,0
+2012,nl,Dean Peterson,Ryan Zimmerman,1638,Was,3B,29,act,previously_reserved,"3B,CI,SW",4,0,1,1,0,0,0,0,0,0.25,0.25,0,0,0,0,145,0,0
+2012,nl,Dean Peterson,Scott Van Slyke,2804,Mia,OF,6,rel,previously_reserved,,22,0,9,1,0,0,0,6,0,0.136,0.182,0,0,5,0,0,0,21
+2012,nl,Dean Peterson,Justin Christian,1037,TB,OF,3,rel,previously_reserved,,4,0,4,0,0,0,0,1,0,0.0,0.0,3,0,0,0,0,0,18
+2012,nl,Dean Peterson,Jordan Schafer,97,SF,OF,14,rel,previously_reserved,,8,0,7,0,0,0,0,5,0,0.0,0.0,0,0,0,0,0,0,87
+2012,nl,Dean Peterson,Roger Bernadina,1639,NYM,OF,1,rel,previously_reserved,,55,0,42,5,0,9,7,9,8,0.492,0.509,0,0,0,0,0,0,94
+2012,nl,Dean Peterson,Joe Mather,1419,Cin,OF,3,rel,previously_reserved,,73,0,33,4,2,7,1,10,4,0.256,0.37,0,0,2,0,18,0,56
+2012,nl,Dean Peterson,Chris B. Young,40,LAA,OF,22,act,previously_reserved,"OF,SW",8,0,2,0,0,2,0,1,0,0.25,0.375,2,0,0,0,0,0,87
+2012,nl,Dean Peterson,Geovany Soto,281,FA,C,13,act,previously_reserved,"C,SW",32,0,9,5,2,3,0,6,4,0.278,0.406,1,96,0,0,0,0,0
+2012,nl,Dean Peterson,Matt Treanor,561,Cle,C,0,rel,previously_reserved,,4,0,1,1,0,0,0,0,0,0.5,0.5,0,35,0,0,0,0,0
+2012,nl,Dean Peterson,Ryan Wheeler,3187,Ari,UT,30,act,previously_reserved,3B,1,0,1,0,0,0,0,0,0,1.0,1.0,0,0,4,0,23,0,0
+2012,nl,Dean Peterson,Taylor Green,2697,Mil,UT,2,rel,previously_reserved,,7,0,5,0,0,0,0,1,2,0.333,0.286,1,0,18,4,13,0,0

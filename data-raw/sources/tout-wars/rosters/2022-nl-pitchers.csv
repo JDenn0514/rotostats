@@ -1,418 +1,418 @@
 year,league,team,player_name,player_id,mlb_team,position,salary,status,roster_section,eligibility,g,w,l,sv,ip,bb,hr,so,era,whip
+2022,nl,Ian Kahn,Jack Flaherty,5103,StL,P,10,act,active,P,6,2,1,0,28.0,13,3,27,3.86,1.464
+2022,nl,Ian Kahn,Edwin Diaz,4840,NYM,P,21,act,active,P,61,3,1,32,62.0,18,3,118,1.31,0.839
+2022,nl,Ian Kahn,Luis Garcia,4598,SD,P,32,act,active,P,19,0,0,1,17.7,5,1,21,4.08,1.189
+2022,nl,Ian Kahn,Carlos Rodon,4437,NYY,P,20,act,active,P,31,14,8,0,178.0,52,12,237,2.88,1.028
+2022,nl,Ian Kahn,Phil Bickford,5392,LAD,P,2,act,active,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2022,nl,Ian Kahn,Tommy Kahnle,4371,NYY,P,3,act,active,P,1,0,0,0,1.0,0,0,0,0.0,0.0
+2022,nl,Ian Kahn,Chris Martin,4806,Bos,P,5,act,active,P,4,0,0,0,2.7,0,0,6,0.0,0.75
 2022,nl,Ian Kahn,Marcus Stroman,4137,ChC,P,12,act,active,P,22,4,7,0,121.7,32,16,103,3.92,1.184
 2022,nl,Ian Kahn,Hoby Milner,5906,Mil,P,1,act,active,P,4,0,0,0,4.7,0,1,6,3.86,1.5
-2022,nl,Ian Kahn,Jack Flaherty,5103,StL,P,10,act,active,P,6,2,1,0,28.0,13,3,27,3.86,1.464
-2022,nl,Ian Kahn,Tommy Kahnle,4371,NYY,P,3,act,active,P,1,0,0,0,1.0,0,0,0,0.0,0.0
-2022,nl,Ian Kahn,Edwin Diaz,4840,NYM,P,21,act,active,P,61,3,1,32,62.0,18,3,118,1.31,0.839
-2022,nl,Ian Kahn,Phil Bickford,5392,LAD,P,2,act,active,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2022,nl,Ian Kahn,Chris Martin,4806,Bos,P,5,act,active,P,4,0,0,0,2.7,0,0,6,0.0,0.75
-2022,nl,Ian Kahn,Carlos Rodon,4437,NYY,P,20,act,active,P,31,14,8,0,178.0,52,12,237,2.88,1.028
-2022,nl,Ian Kahn,Luis Garcia,4598,SD,P,32,act,active,P,19,0,0,1,17.7,5,1,21,4.08,1.189
-2022,nl,Ian Kahn,Daniel Bard,2159,Col,P,44,trd,previously_active,,29,3,2,16,30.7,15,3,38,2.05,1.011
-2022,nl,Ian Kahn,Patrick Corbin,3339,Was,P,2,rel,previously_active,,13,4,8,0,66.7,18,14,62,6.62,1.815
-2022,nl,Ian Kahn,Keegan Thompson,7449,ChC,P,46,rel,previously_active,,19,7,5,0,80.7,30,14,67,4.91,1.45
-2022,nl,Ian Kahn,Tanner Scott,5757,Mia,P,31,res,previously_active,P,44,3,4,18,41.7,28,4,59,3.89,1.536
-2022,nl,Ian Kahn,Dylan Floro,5198,Mia,P,6,rel,previously_active,,5,0,0,0,4.7,2,1,3,17.36,2.571
 2022,nl,Ian Kahn,Tony Santillan,6502,Cin,P,2,rel,previously_active,,2,0,0,0,1.3,1,1,2,20.25,2.25
-2022,nl,Ian Kahn,Taijuan Walker,3796,Phi,P,4,res,previously_active,P,27,12,5,0,148.0,43,15,121,3.71,1.216
-2022,nl,Ian Kahn,Spencer Strider,7491,Atl,P,21,dis,previously_active,P,28,11,5,0,122.7,39,7,191,2.79,0.995
-2022,nl,Ian Kahn,Trevor May,3192,Oak,P,4,rel,previously_active,,5,0,0,1,5.3,1,2,4,6.75,1.5
-2022,nl,Ian Kahn,Kyle Hendricks,4620,ChC,P,5,rel,previously_active,,16,4,6,0,84.3,24,15,66,4.8,1.292
-2022,nl,Ian Kahn,Stephen Strasburg,2528,Was,P,9,rel,previously_active,,1,0,1,0,4.7,2,1,5,13.5,2.143
-2022,nl,Ian Kahn,Matthew Liberatore,6610,StL,P,0,rel,previously_active,,3,1,1,0,13.0,8,4,10,5.54,1.846
-2022,nl,Ian Kahn,Mitchell White,6104,Tor,P,54,rel,previously_active,,5,0,1,0,26.3,9,2,17,3.08,1.367
-2022,nl,Ian Kahn,Sean Manaea,4443,SF,P,33,rel,previously_active,,1,0,1,0,5.0,0,2,3,3.6,0.6
 2022,nl,Ian Kahn,Caleb Kilian,8079,ChC,P,62,rel,previously_active,,2,0,2,0,6.3,10,0,3,14.21,2.842
+2022,nl,Ian Kahn,Dylan Floro,5198,Mia,P,6,rel,previously_active,,5,0,0,0,4.7,2,1,3,17.36,2.571
+2022,nl,Ian Kahn,Sean Manaea,4443,SF,P,33,rel,previously_active,,1,0,1,0,5.0,0,2,3,3.6,0.6
 2022,nl,Ian Kahn,Jesus Luzardo,6224,Mia,P,6,res,previously_active,P,17,3,7,0,94.3,34,10,108,3.53,1.049
 2022,nl,Ian Kahn,Brad Boxberger,3185,ChC,P,1,rel,previously_active,,11,0,1,0,7.7,6,1,12,4.7,1.696
-2022,nl,Ian Kahn,Spencer Strider,7491,Atl,P,21,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2022,nl,Ian Kahn,Tanner Scott,5757,Mia,P,31,res,previously_active,P,44,3,4,18,41.7,28,4,59,3.89,1.536
+2022,nl,Ian Kahn,Kyle Hendricks,4620,ChC,P,5,rel,previously_active,,16,4,6,0,84.3,24,15,66,4.8,1.292
+2022,nl,Ian Kahn,Daniel Bard,2159,Col,P,44,trd,previously_active,,29,3,2,16,30.7,15,3,38,2.05,1.011
+2022,nl,Ian Kahn,Stephen Strasburg,2528,Was,P,9,rel,previously_active,,1,0,1,0,4.7,2,1,5,13.5,2.143
+2022,nl,Ian Kahn,Taijuan Walker,3796,Phi,P,4,res,previously_active,P,27,12,5,0,148.0,43,15,121,3.71,1.216
+2022,nl,Ian Kahn,Keegan Thompson,7449,ChC,P,46,rel,previously_active,,19,7,5,0,80.7,30,14,67,4.91,1.45
+2022,nl,Ian Kahn,Matthew Liberatore,6610,StL,P,0,rel,previously_active,,3,1,1,0,13.0,8,4,10,5.54,1.846
+2022,nl,Ian Kahn,Mitchell White,6104,Tor,P,54,rel,previously_active,,5,0,1,0,26.3,9,2,17,3.08,1.367
+2022,nl,Ian Kahn,Spencer Strider,7491,Atl,P,21,dis,previously_active,P,28,11,5,0,122.7,39,7,191,2.79,0.995
+2022,nl,Ian Kahn,Patrick Corbin,3339,Was,P,2,rel,previously_active,,13,4,8,0,66.7,18,14,62,6.62,1.815
+2022,nl,Ian Kahn,Trevor May,3192,Oak,P,4,rel,previously_active,,5,0,0,1,5.3,1,2,4,6.75,1.5
 2022,nl,Ian Kahn,Taijuan Walker,3796,Phi,P,4,res,reserved,P,2,0,0,0,9.3,2,0,11,0.0,0.857
-2022,nl,Ian Kahn,Tanner Scott,5757,Mia,P,31,res,reserved,P,10,0,0,1,9.0,10,1,15,6.0,2.0
+2022,nl,Ian Kahn,Spencer Strider,7491,Atl,P,21,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
 2022,nl,Ian Kahn,Jesus Luzardo,6224,Mia,P,6,res,reserved,P,1,1,0,0,6.0,1,0,12,0.0,0.833
-2022,nl,Ian Kahn,Brad Boxberger,3185,ChC,P,1,rel,previously_reserved,,3,0,0,0,3.0,1,0,2,3.0,1.0
-2022,nl,Ian Kahn,Tucker Davidson,6825,LAA,P,0,rel,previously_reserved,,1,0,0,0,2.7,2,0,2,16.87,2.625
-2022,nl,Ian Kahn,Sean Manaea,4443,SF,P,33,rel,previously_reserved,,2,0,0,0,7.7,3,1,5,4.7,1.435
+2022,nl,Ian Kahn,Tanner Scott,5757,Mia,P,31,res,reserved,P,10,0,0,1,9.0,10,1,15,6.0,2.0
 2022,nl,Ian Kahn,Marcus Stroman,4137,ChC,P,12,act,previously_reserved,P,3,2,0,0,17.0,4,0,16,0.53,0.882
-2022,nl,Ian Kahn,Trevor May,3192,Oak,P,4,rel,previously_reserved,,3,1,0,0,3.0,2,0,1,12.0,2.667
-2022,nl,Ian Kahn,Tony Santillan,6502,Cin,P,2,rel,previously_reserved,,2,0,0,0,2.3,1,0,1,3.86,1.714
+2022,nl,Ian Kahn,Brad Boxberger,3185,ChC,P,1,rel,previously_reserved,,3,0,0,0,3.0,1,0,2,3.0,1.0
+2022,nl,Ian Kahn,Sean Manaea,4443,SF,P,33,rel,previously_reserved,,2,0,0,0,7.7,3,1,5,4.7,1.435
 2022,nl,Ian Kahn,Dylan Floro,5198,Mia,P,6,rel,previously_reserved,,13,0,0,0,12.3,2,0,4,0.0,0.811
-2022,nl,Ian Kahn,Keegan Thompson,7449,ChC,P,46,rel,previously_reserved,,4,1,0,0,15.0,6,1,19,1.2,0.933
+2022,nl,Ian Kahn,Tony Santillan,6502,Cin,P,2,rel,previously_reserved,,2,0,0,0,2.3,1,0,1,3.86,1.714
+2022,nl,Ian Kahn,Trevor May,3192,Oak,P,4,rel,previously_reserved,,3,1,0,0,3.0,2,0,1,12.0,2.667
 2022,nl,Ian Kahn,Patrick Corbin,3339,Was,P,2,rel,previously_reserved,,2,0,1,0,11.0,6,3,10,4.09,1.364
-2022,nl,Phil Hertz,Hunter Greene,6084,Cin,P,2,act,active,P,16,5,6,0,85.7,29,13,108,3.57,1.086
-2022,nl,Phil Hertz,Bryse Wilson,6520,Mil,P,0,act,active,P,1,0,0,0,3.3,2,0,1,5.4,1.5
-2022,nl,Phil Hertz,Clayton Kershaw,1961,LAD,P,19,act,active,P,22,12,3,0,126.3,23,10,137,2.28,0.942
-2022,nl,Phil Hertz,David Peterson,6196,NYM,P,111,act,active,P,21,6,4,0,87.3,39,10,109,4.02,1.317
-2022,nl,Phil Hertz,Javier Assad,8270,ChC,P,0,act,active,P,1,0,0,0,5.3,1,0,4,0.0,0.937
-2022,nl,Phil Hertz,Joe Musgrove,5406,SD,P,20,act,active,P,30,10,7,0,181.0,42,22,184,2.93,1.083
+2022,nl,Ian Kahn,Keegan Thompson,7449,ChC,P,46,rel,previously_reserved,,4,1,0,0,15.0,6,1,19,1.2,0.933
+2022,nl,Ian Kahn,Tucker Davidson,6825,LAA,P,0,rel,previously_reserved,,1,0,0,0,2.7,2,0,2,16.87,2.625
 2022,nl,Phil Hertz,Carlos Carrasco,1141,NYM,P,7,act,active,P,27,14,6,0,144.0,39,17,146,4.06,1.299
+2022,nl,Phil Hertz,Tommy Henry,7384,Ari,P,0,act,active,P,4,1,2,0,20.7,9,2,19,4.35,1.452
+2022,nl,Phil Hertz,Joe Musgrove,5406,SD,P,20,act,active,P,30,10,7,0,181.0,42,22,184,2.93,1.083
+2022,nl,Phil Hertz,Javier Assad,8270,ChC,P,0,act,active,P,1,0,0,0,5.3,1,0,4,0.0,0.937
+2022,nl,Phil Hertz,Hunter Greene,6084,Cin,P,2,act,active,P,16,5,6,0,85.7,29,13,108,3.57,1.086
+2022,nl,Phil Hertz,David Peterson,6196,NYM,P,111,act,active,P,21,6,4,0,87.3,39,10,109,4.02,1.317
 2022,nl,Phil Hertz,Jose Urena,4615,Was,P,0,act,active,P,2,0,1,0,11.0,4,1,10,2.45,1.182
 2022,nl,Phil Hertz,Chad Kuhl,5552,FA,P,1,act,active,P,2,0,1,0,10.3,3,1,11,6.97,1.645
-2022,nl,Phil Hertz,Tommy Henry,7384,Ari,P,0,act,active,P,4,1,2,0,20.7,9,2,19,4.35,1.452
-2022,nl,Phil Hertz,Mark Leiter,6164,ChC,P,3,rel,previously_active,,1,0,0,0,3.7,1,2,5,7.36,1.364
-2022,nl,Phil Hertz,Paolo Espino,5649,Was,P,4,rel,previously_active,,4,0,1,0,8.0,1,1,10,4.5,1.625
-2022,nl,Phil Hertz,Dinelson Lamet,6035,Bos,P,3,rel,previously_active,,6,0,1,0,4.7,6,1,7,11.57,2.786
-2022,nl,Phil Hertz,Dominic Leone,4769,NYM,P,51,rel,previously_active,,2,1,0,0,2.0,0,0,3,0.0,0.5
-2022,nl,Phil Hertz,Tanner Rainey,6394,Was,P,3,rel,previously_active,,29,1,3,12,30.0,13,5,36,3.3,1.3
-2022,nl,Phil Hertz,Ian Kennedy,990,Tex,P,3,rel,previously_active,,9,1,2,3,7.7,3,2,6,4.7,1.696
-2022,nl,Phil Hertz,Seth Lugo,5417,SD,P,6,rel,previously_active,,38,2,1,0,40.7,12,8,51,5.09,1.254
-2022,nl,Phil Hertz,Giovanny Gallegos,5884,StL,P,16,rel,previously_active,,52,3,5,14,54.7,15,6,66,3.13,1.043
-2022,nl,Phil Hertz,Kyle Finnegan,6364,Was,P,13,res,previously_active,P,33,4,2,10,36.3,11,5,33,3.72,0.991
-2022,nl,Phil Hertz,Zach Thompson,6771,Tor,P,32,rel,previously_active,,5,1,2,0,24.7,12,5,16,2.55,1.419
-2022,nl,Phil Hertz,Jose Alvarado,5898,Phi,P,18,rel,previously_active,,4,0,0,0,3.7,2,0,6,2.45,1.636
-2022,nl,Phil Hertz,Jake Junis,5833,SF,P,21,rel,previously_active,,14,3,4,0,70.3,14,9,60,4.09,1.166
-2022,nl,Phil Hertz,Drew Smith,6236,NYM,P,1,rel,previously_active,,5,0,1,0,5.7,4,1,6,3.18,1.235
-2022,nl,Phil Hertz,Daniel Hudson,2764,LAD,P,17,dis,previously_active,P,15,0,3,3,14.7,3,1,18,3.68,1.227
-2022,nl,Phil Hertz,Reyes Moronta,5892,LAA,P,4,rel,previously_active,,2,1,0,0,2.0,3,0,1,4.5,2.5
+2022,nl,Phil Hertz,Clayton Kershaw,1961,LAD,P,19,act,active,P,22,12,3,0,126.3,23,10,137,2.28,0.942
+2022,nl,Phil Hertz,Bryse Wilson,6520,Mil,P,0,act,active,P,1,0,0,0,3.3,2,0,1,5.4,1.5
 2022,nl,Phil Hertz,Zack Thompson,7055,StL,P,6,rel,previously_active,,2,0,0,0,2.0,0,0,1,0.0,0.0
-2022,nl,Phil Hertz,Jackson Tetreault,8222,Was,P,7,rel,previously_active,,1,0,1,0,4.0,5,1,1,9.0,2.25
-2022,nl,Phil Hertz,Kyle Wright,6121,Atl,P,35,res,previously_active,P,30,21,5,0,180.3,53,19,174,3.19,1.159
+2022,nl,Phil Hertz,Reyes Moronta,5892,LAA,P,4,rel,previously_active,,2,1,0,0,2.0,3,0,1,4.5,2.5
 2022,nl,Phil Hertz,Steve Cishek,3368,Was,P,2,rel,previously_active,,6,0,1,0,4.7,3,0,6,1.93,1.5
+2022,nl,Phil Hertz,Daniel Hudson,2764,LAD,P,17,dis,previously_active,P,15,0,3,3,14.7,3,1,18,3.68,1.227
+2022,nl,Phil Hertz,Ian Kennedy,990,Tex,P,3,rel,previously_active,,9,1,2,3,7.7,3,2,6,4.7,1.696
+2022,nl,Phil Hertz,Mark Leiter,6164,ChC,P,3,rel,previously_active,,1,0,0,0,3.7,1,2,5,7.36,1.364
+2022,nl,Phil Hertz,Kyle Wright,6121,Atl,P,35,res,previously_active,P,30,21,5,0,180.3,53,19,174,3.19,1.159
+2022,nl,Phil Hertz,Paolo Espino,5649,Was,P,4,rel,previously_active,,4,0,1,0,8.0,1,1,10,4.5,1.625
+2022,nl,Phil Hertz,Dominic Leone,4769,NYM,P,51,rel,previously_active,,2,1,0,0,2.0,0,0,3,0.0,0.5
+2022,nl,Phil Hertz,Giovanny Gallegos,5884,StL,P,16,rel,previously_active,,52,3,5,14,54.7,15,6,66,3.13,1.043
+2022,nl,Phil Hertz,Dinelson Lamet,6035,Bos,P,3,rel,previously_active,,6,0,1,0,4.7,6,1,7,11.57,2.786
+2022,nl,Phil Hertz,Jake Junis,5833,SF,P,21,rel,previously_active,,14,3,4,0,70.3,14,9,60,4.09,1.166
+2022,nl,Phil Hertz,Seth Lugo,5417,SD,P,6,rel,previously_active,,38,2,1,0,40.7,12,8,51,5.09,1.254
+2022,nl,Phil Hertz,Kyle Finnegan,6364,Was,P,13,res,previously_active,P,33,4,2,10,36.3,11,5,33,3.72,0.991
 2022,nl,Phil Hertz,Ryne Nelson,7360,Ari,P,14,dis,previously_active,P,2,0,1,0,11.3,6,2,9,2.38,0.971
-2022,nl,Phil Hertz,Kyle Finnegan,6364,Was,P,13,res,reserved,P,8,0,1,1,7.0,2,2,9,2.57,1.286
-2022,nl,Phil Hertz,Kyle Wright,6121,Atl,P,35,res,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2022,nl,Phil Hertz,Zach Thompson,6771,Tor,P,32,rel,previously_active,,5,1,2,0,24.7,12,5,16,2.55,1.419
+2022,nl,Phil Hertz,Drew Smith,6236,NYM,P,1,rel,previously_active,,5,0,1,0,5.7,4,1,6,3.18,1.235
+2022,nl,Phil Hertz,Jose Alvarado,5898,Phi,P,18,rel,previously_active,,4,0,0,0,3.7,2,0,6,2.45,1.636
+2022,nl,Phil Hertz,Jackson Tetreault,8222,Was,P,7,rel,previously_active,,1,0,1,0,4.0,5,1,1,9.0,2.25
+2022,nl,Phil Hertz,Tanner Rainey,6394,Was,P,3,rel,previously_active,,29,1,3,12,30.0,13,5,36,3.3,1.3
 2022,nl,Phil Hertz,Ryne Nelson,7360,Ari,P,14,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2022,nl,Phil Hertz,Kyle Finnegan,6364,Was,P,13,res,reserved,P,8,0,1,1,7.0,2,2,9,2.57,1.286
 2022,nl,Phil Hertz,Daniel Hudson,2764,LAD,P,17,dis,reserved,P,7,1,0,1,6.3,2,0,10,0.0,0.632
-2022,nl,Phil Hertz,Jake Junis,5833,SF,P,21,rel,previously_reserved,,2,0,0,0,7.0,2,2,7,6.43,1.429
-2022,nl,Phil Hertz,Drew Smith,6236,NYM,P,1,rel,previously_reserved,,8,0,0,0,9.0,3,2,8,4.0,1.222
-2022,nl,Phil Hertz,Steve Cishek,3368,Was,P,2,rel,previously_reserved,,4,0,0,0,4.3,4,1,8,4.15,1.385
+2022,nl,Phil Hertz,Kyle Wright,6121,Atl,P,35,res,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
 2022,nl,Phil Hertz,Carlos Carrasco,1141,NYM,P,7,act,previously_reserved,P,2,1,1,0,8.0,2,0,6,2.25,1.875
-2022,nl,Phil Hertz,Zack Thompson,7055,StL,P,6,rel,previously_reserved,,2,0,0,0,2.0,1,0,2,0.0,0.5
 2022,nl,Phil Hertz,Tommy Henry,7384,Ari,P,0,act,previously_reserved,P,1,0,1,0,4.3,1,3,2,10.38,1.846
-2022,nl,Phil Hertz,Chad Kuhl,5552,FA,P,1,act,previously_reserved,P,1,0,1,0,3.3,3,1,2,16.2,3.3
-2022,nl,Phil Hertz,Hunter Greene,6084,Cin,P,2,act,previously_reserved,P,8,0,7,0,40.0,19,11,56,6.3,1.475
-2022,nl,Phil Hertz,Dominic Leone,4769,NYM,P,51,rel,previously_reserved,,3,0,0,0,2.0,0,0,1,0.0,2.0
-2022,nl,Phil Hertz,Dinelson Lamet,6035,Bos,P,3,rel,previously_reserved,,3,0,0,0,2.7,0,1,2,3.37,0.375
-2022,nl,Phil Hertz,David Peterson,6196,NYM,P,111,act,previously_reserved,P,5,1,1,0,10.0,5,1,10,5.4,1.6
+2022,nl,Phil Hertz,Drew Smith,6236,NYM,P,1,rel,previously_reserved,,8,0,0,0,9.0,3,2,8,4.0,1.222
 2022,nl,Phil Hertz,Zach Thompson,6771,Tor,P,32,rel,previously_reserved,,4,0,1,0,19.3,5,4,11,4.19,1.19
+2022,nl,Phil Hertz,David Peterson,6196,NYM,P,111,act,previously_reserved,P,5,1,1,0,10.0,5,1,10,5.4,1.6
+2022,nl,Phil Hertz,Hunter Greene,6084,Cin,P,2,act,previously_reserved,P,8,0,7,0,40.0,19,11,56,6.3,1.475
+2022,nl,Phil Hertz,Chad Kuhl,5552,FA,P,1,act,previously_reserved,P,1,0,1,0,3.3,3,1,2,16.2,3.3
+2022,nl,Phil Hertz,Steve Cishek,3368,Was,P,2,rel,previously_reserved,,4,0,0,0,4.3,4,1,8,4.15,1.385
+2022,nl,Phil Hertz,Zack Thompson,7055,StL,P,6,rel,previously_reserved,,2,0,0,0,2.0,1,0,2,0.0,0.5
 2022,nl,Phil Hertz,Ian Kennedy,990,Tex,P,3,rel,previously_reserved,,11,2,1,0,10.7,6,1,9,3.38,1.594
-2022,nl,Phil Hertz,Seth Lugo,5417,SD,P,6,rel,previously_reserved,,17,1,1,1,17.3,5,1,14,1.56,1.038
+2022,nl,Phil Hertz,Dinelson Lamet,6035,Bos,P,3,rel,previously_reserved,,3,0,0,0,2.7,0,1,2,3.37,0.375
 2022,nl,Phil Hertz,Giovanny Gallegos,5884,StL,P,16,rel,previously_reserved,,4,0,0,0,4.0,0,0,6,0.0,0.0
-2022,nl,Wilderman/Prior,Eric Lauer,5798,Mil,P,3,act,active,P,26,10,7,0,145.7,53,25,144,3.65,1.201
+2022,nl,Phil Hertz,Dominic Leone,4769,NYM,P,51,rel,previously_reserved,,3,0,0,0,2.0,0,0,1,0.0,2.0
+2022,nl,Phil Hertz,Jake Junis,5833,SF,P,21,rel,previously_reserved,,2,0,0,0,7.0,2,2,7,6.43,1.429
+2022,nl,Phil Hertz,Seth Lugo,5417,SD,P,6,rel,previously_reserved,,17,1,1,1,17.3,5,1,14,1.56,1.038
 2022,nl,Wilderman/Prior,Tyler Anderson,3678,LAA,P,0,act,active,P,30,15,5,0,178.7,34,14,138,2.57,1.002
-2022,nl,Wilderman/Prior,Evan Phillips,6597,LAD,P,2,act,active,P,39,6,0,2,37.3,7,0,45,0.48,0.589
-2022,nl,Wilderman/Prior,Charlie Morton,61,Atl,P,17,act,active,P,31,9,6,0,172.0,63,28,205,4.34,1.233
-2022,nl,Wilderman/Prior,Wade Miley,2622,Mil,P,0,act,active,P,3,1,2,0,9.0,3,2,5,4.0,1.444
-2022,nl,Wilderman/Prior,Josh Hader,4656,SD,P,25,act,active,P,53,2,5,35,47.7,19,8,76,4.34,1.133
 2022,nl,Wilderman/Prior,Anthony Bass,3754,FA,P,10,act,active,P,52,3,1,0,49.3,15,5,53,1.28,1.014
+2022,nl,Wilderman/Prior,Eric Lauer,5798,Mil,P,3,act,active,P,26,10,7,0,145.7,53,25,144,3.65,1.201
+2022,nl,Wilderman/Prior,Wade Miley,2622,Mil,P,0,act,active,P,3,1,2,0,9.0,3,2,5,4.0,1.444
+2022,nl,Wilderman/Prior,Charlie Morton,61,Atl,P,17,act,active,P,31,9,6,0,172.0,63,28,205,4.34,1.233
+2022,nl,Wilderman/Prior,Josh Hader,4656,SD,P,25,act,active,P,53,2,5,35,47.7,19,8,76,4.34,1.133
 2022,nl,Wilderman/Prior,Adam Wainwright,1400,StL,P,8,act,active,P,32,11,12,0,191.7,54,16,143,3.71,1.283
+2022,nl,Wilderman/Prior,Evan Phillips,6597,LAD,P,2,act,active,P,39,6,0,2,37.3,7,0,45,0.48,0.589
 2022,nl,Wilderman/Prior,Miles Mikolas,3895,StL,P,1,act,active,P,33,12,13,0,202.3,39,25,153,3.29,1.033
 2022,nl,Wilderman/Prior,Chris Martin,4806,Bos,P,1,rel,previously_active,,2,0,0,0,2.0,1,1,4,13.5,2.5
-2022,nl,Wilderman/Prior,Tyler Matzek,2835,Atl,P,1,rel,previously_active,,7,0,1,0,5.0,7,1,4,9.0,2.4
-2022,nl,Wilderman/Prior,Tyler Rogers,6176,SF,P,1,rel,previously_active,,31,0,3,0,30.3,9,1,18,5.34,1.484
-2022,nl,Wilderman/Prior,Blake Treinen,4790,LAD,P,15,rel,previously_active,,3,1,1,0,3.0,0,1,5,3.0,0.333
-2022,nl,Wilderman/Prior,John Brebbia,6181,SF,P,0,rel,previously_active,,32,4,1,0,27.0,6,3,17,3.33,1.259
-2022,nl,Wilderman/Prior,Max Fried,4194,Atl,P,22,trd,previously_active,,8,4,2,0,49.0,6,4,47,3.31,1.041
-2022,nl,Wilderman/Prior,Drew Smith,6236,NYM,P,5,rel,previously_active,,9,0,1,0,8.7,3,4,6,6.23,1.5
-2022,nl,Wilderman/Prior,Drew Smyly,3904,ChC,P,0,res,previously_active,P,6,3,2,0,31.0,6,4,27,2.32,0.968
 2022,nl,Wilderman/Prior,Carl Edwards,4609,Was,P,80,rel,previously_active,,13,3,0,0,12.7,3,1,10,1.42,1.026
+2022,nl,Wilderman/Prior,Drew Smith,6236,NYM,P,5,rel,previously_active,,9,0,1,0,8.7,3,4,6,6.23,1.5
+2022,nl,Wilderman/Prior,John Brebbia,6181,SF,P,0,rel,previously_active,,32,4,1,0,27.0,6,3,17,3.33,1.259
+2022,nl,Wilderman/Prior,Blake Treinen,4790,LAD,P,15,rel,previously_active,,3,1,1,0,3.0,0,1,5,3.0,0.333
+2022,nl,Wilderman/Prior,Max Fried,4194,Atl,P,22,trd,previously_active,,8,4,2,0,49.0,6,4,47,3.31,1.041
+2022,nl,Wilderman/Prior,Tyler Matzek,2835,Atl,P,1,rel,previously_active,,7,0,1,0,5.0,7,1,4,9.0,2.4
+2022,nl,Wilderman/Prior,Drew Smyly,3904,ChC,P,0,res,previously_active,P,6,3,2,0,31.0,6,4,27,2.32,0.968
+2022,nl,Wilderman/Prior,Tyler Rogers,6176,SF,P,1,rel,previously_active,,31,0,3,0,30.3,9,1,18,5.34,1.484
 2022,nl,Wilderman/Prior,Anthony Bender,7552,Mia,P,151,rel,previously_active,,3,0,0,0,2.3,1,0,1,0.0,0.429
 2022,nl,Wilderman/Prior,Drew Smyly,3904,ChC,P,0,res,reserved,P,16,4,6,0,75.3,20,12,64,3.94,1.288
 2022,nl,Wilderman/Prior,Eric Lauer,5798,Mil,P,3,act,previously_reserved,P,3,1,0,0,13.0,6,2,13,4.15,1.462
+2022,nl,Wilderman/Prior,John Brebbia,6181,SF,P,0,rel,previously_reserved,,21,1,1,0,18.0,7,1,15,2.5,1.556
 2022,nl,Wilderman/Prior,Tyler Rogers,6176,SF,P,1,rel,previously_reserved,,17,2,0,0,20.3,7,0,14,3.54,1.131
-2022,nl,Wilderman/Prior,Chris Martin,4806,Bos,P,1,rel,previously_reserved,,4,1,0,0,3.7,0,1,2,7.36,1.364
 2022,nl,Wilderman/Prior,Mitch Keller,5144,Pit,P,1,rel,previously_reserved,,8,1,5,0,35.3,14,5,30,6.37,1.557
 2022,nl,Wilderman/Prior,Tyler Matzek,2835,Atl,P,1,rel,previously_reserved,,3,0,1,0,4.7,1,0,2,0.0,0.857
+2022,nl,Wilderman/Prior,Chris Martin,4806,Bos,P,1,rel,previously_reserved,,4,1,0,0,3.7,0,1,2,7.36,1.364
 2022,nl,Wilderman/Prior,Josh Hader,4656,SD,P,25,act,previously_reserved,P,3,0,0,1,2.3,2,0,5,23.14,4.286
-2022,nl,Wilderman/Prior,Adbert Alzolay,6285,ChC,P,0,rel,previously_reserved,,1,0,1,0,2.0,1,0,5,9.0,1.5
 2022,nl,Wilderman/Prior,Carl Edwards,4609,Was,P,80,rel,previously_reserved,,6,0,0,0,6.7,2,1,4,1.35,1.65
-2022,nl,Wilderman/Prior,John Brebbia,6181,SF,P,0,rel,previously_reserved,,21,1,1,0,18.0,7,1,15,2.5,1.556
 2022,nl,Wilderman/Prior,Drew Smith,6236,NYM,P,5,rel,previously_reserved,,7,2,1,0,6.3,1,1,12,5.68,1.421
-2022,nl,Tristan H. Cockcroft,Adbert Alzolay,6285,ChC,P,1,act,active,P,1,1,0,0,2.3,1,0,3,0.0,1.286
-2022,nl,Tristan H. Cockcroft,Corbin Burnes,6208,Mil,P,32,act,active,P,33,12,8,0,202.0,51,23,243,2.94,0.965
-2022,nl,Tristan H. Cockcroft,Tony Gonsolin,6845,LAD,P,3,act,active,P,23,16,1,0,127.3,34,11,116,2.12,0.848
-2022,nl,Tristan H. Cockcroft,David Robertson,2132,NYM,P,0,act,active,P,57,4,3,20,62.7,35,6,79,2.44,1.181
-2022,nl,Tristan H. Cockcroft,Aaron Ashby,7004,Mil,P,6,act,active,P,26,2,9,1,103.7,46,13,120,4.25,1.418
+2022,nl,Wilderman/Prior,Adbert Alzolay,6285,ChC,P,0,rel,previously_reserved,,1,0,1,0,2.0,1,0,5,9.0,1.5
 2022,nl,Tristan H. Cockcroft,Nick Martinez,4900,SD,P,2,act,active,P,45,4,4,8,102.7,41,15,92,3.59,1.286
-2022,nl,Tristan H. Cockcroft,Andrew Heaney,4146,Tex,P,5,act,active,P,16,4,4,0,72.7,19,14,110,3.1,1.087
+2022,nl,Tristan H. Cockcroft,Aaron Ashby,7004,Mil,P,6,act,active,P,26,2,9,1,103.7,46,13,120,4.25,1.418
 2022,nl,Tristan H. Cockcroft,Daniel Bard,2159,Col,P,44,act,active,P,28,3,2,18,29.7,10,0,31,1.52,0.978
+2022,nl,Tristan H. Cockcroft,Corbin Burnes,6208,Mil,P,32,act,active,P,33,12,8,0,202.0,51,23,243,2.94,0.965
+2022,nl,Tristan H. Cockcroft,Adbert Alzolay,6285,ChC,P,1,act,active,P,1,1,0,0,2.3,1,0,3,0.0,1.286
+2022,nl,Tristan H. Cockcroft,Andrew Heaney,4146,Tex,P,5,act,active,P,16,4,4,0,72.7,19,14,110,3.1,1.087
+2022,nl,Tristan H. Cockcroft,David Robertson,2132,NYM,P,0,act,active,P,57,4,3,20,62.7,35,6,79,2.44,1.181
+2022,nl,Tristan H. Cockcroft,Tony Gonsolin,6845,LAD,P,3,act,active,P,23,16,1,0,127.3,34,11,116,2.12,0.848
 2022,nl,Tristan H. Cockcroft,Keegan Thompson,7449,ChC,P,0,act,active,P,1,0,0,0,2.7,2,1,5,6.75,1.125
-2022,nl,Tristan H. Cockcroft,J.T. Brubaker,6720,Pit,P,1,dis,previously_active,P,27,3,12,0,141.3,53,17,145,4.58,1.458
-2022,nl,Tristan H. Cockcroft,Tony Santillan,6502,Cin,P,25,dis,previously_active,P,7,0,1,2,5.7,6,0,5,6.35,2.824
-2022,nl,Tristan H. Cockcroft,Max Scherzer,19,NYM,P,29,res,previously_active,P,23,11,5,0,145.3,24,13,173,2.29,0.908
-2022,nl,Tristan H. Cockcroft,Jake Junis,5833,SF,P,8,rel,previously_active,,5,1,3,0,25.3,7,1,22,5.68,1.618
-2022,nl,Tristan H. Cockcroft,Connor Overton,7813,Cin,P,0,rel,previously_active,,2,1,0,0,14.0,5,0,3,1.29,0.786
+2022,nl,Tristan H. Cockcroft,Bryse Wilson,6520,Mil,P,0,rel,previously_active,,3,0,2,0,11.7,4,1,12,6.94,1.886
 2022,nl,Tristan H. Cockcroft,Daniel Castano,7203,Mia,P,0,dis,previously_active,P,3,1,0,0,15.3,7,3,10,4.11,1.5
 2022,nl,Tristan H. Cockcroft,Austin Gomber,5593,Col,P,0,rel,previously_active,,5,1,0,0,19.3,6,1,16,2.33,1.241
-2022,nl,Tristan H. Cockcroft,Bryse Wilson,6520,Mil,P,0,rel,previously_active,,3,0,2,0,11.7,4,1,12,6.94,1.886
+2022,nl,Tristan H. Cockcroft,Brent Suter,5835,Col,P,0,rel,previously_active,,3,0,1,0,5.3,4,1,3,3.38,1.125
 2022,nl,Tristan H. Cockcroft,Michael Grove,7287,LAD,P,8,dis,previously_active,P,1,0,0,0,5.0,2,2,3,7.2,1.6
-2022,nl,Tristan H. Cockcroft,Ryan Pepiot,7438,LAD,P,21,res,previously_active,P,1,1,0,0,3.0,1,0,4,0.0,0.667
+2022,nl,Tristan H. Cockcroft,J.T. Brubaker,6720,Pit,P,1,dis,previously_active,P,27,3,12,0,141.3,53,17,145,4.58,1.458
+2022,nl,Tristan H. Cockcroft,Luis Garcia,4598,SD,P,0,rel,previously_active,,15,0,3,0,15.3,3,2,19,4.7,1.37
+2022,nl,Tristan H. Cockcroft,Max Scherzer,19,NYM,P,29,res,previously_active,P,23,11,5,0,145.3,24,13,173,2.29,0.908
+2022,nl,Tristan H. Cockcroft,Jake Junis,5833,SF,P,8,rel,previously_active,,5,1,3,0,25.3,7,1,22,5.68,1.618
+2022,nl,Tristan H. Cockcroft,Anthony Bender,7552,Mia,P,2,rel,previously_active,,16,1,3,6,14.0,5,3,13,4.5,1.571
 2022,nl,Tristan H. Cockcroft,Art Warren,6374,NYY,P,2,rel,previously_active,,27,1,3,3,23.7,14,4,23,7.61,1.521
 2022,nl,Tristan H. Cockcroft,Cade Cavalli,7372,Was,P,11,dis,previously_active,P,1,0,1,0,4.3,2,0,6,14.54,1.846
-2022,nl,Tristan H. Cockcroft,Anthony Bender,7552,Mia,P,2,rel,previously_active,,16,1,3,6,14.0,5,3,13,4.5,1.571
-2022,nl,Tristan H. Cockcroft,Brent Suter,5835,Col,P,0,rel,previously_active,,3,0,1,0,5.3,4,1,3,3.38,1.125
-2022,nl,Tristan H. Cockcroft,Luis Garcia,4598,SD,P,0,rel,previously_active,,15,0,3,0,15.3,3,2,19,4.7,1.37
-2022,nl,Tristan H. Cockcroft,Cade Cavalli,7372,Was,P,11,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2022,nl,Tristan H. Cockcroft,Michael Grove,7287,LAD,P,8,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2022,nl,Tristan H. Cockcroft,Ryan Pepiot,7438,LAD,P,21,res,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2022,nl,Tristan H. Cockcroft,Max Scherzer,19,NYM,P,29,res,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2022,nl,Tristan H. Cockcroft,J.T. Brubaker,6720,Pit,P,1,dis,reserved,P,1,0,0,0,2.7,1,0,2,10.13,1.875
-2022,nl,Tristan H. Cockcroft,Tony Santillan,6502,Cin,P,25,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2022,nl,Tristan H. Cockcroft,Connor Overton,7813,Cin,P,0,rel,previously_active,,2,1,0,0,14.0,5,0,3,1.29,0.786
+2022,nl,Tristan H. Cockcroft,Ryan Pepiot,7438,LAD,P,21,res,previously_active,P,1,1,0,0,3.0,1,0,4,0.0,0.667
+2022,nl,Tristan H. Cockcroft,Tony Santillan,6502,Cin,P,25,dis,previously_active,P,7,0,1,2,5.7,6,0,5,6.35,2.824
 2022,nl,Tristan H. Cockcroft,Daniel Castano,7203,Mia,P,0,dis,reserved,P,3,0,2,0,9.7,0,2,5,8.38,1.655
-2022,nl,Tristan H. Cockcroft,Nick Martinez,4900,SD,P,2,act,previously_reserved,P,2,0,0,0,3.7,0,0,3,0.0,1.364
+2022,nl,Tristan H. Cockcroft,Max Scherzer,19,NYM,P,29,res,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2022,nl,Tristan H. Cockcroft,Michael Grove,7287,LAD,P,8,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2022,nl,Tristan H. Cockcroft,J.T. Brubaker,6720,Pit,P,1,dis,reserved,P,1,0,0,0,2.7,1,0,2,10.13,1.875
+2022,nl,Tristan H. Cockcroft,Cade Cavalli,7372,Was,P,11,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2022,nl,Tristan H. Cockcroft,Ryan Pepiot,7438,LAD,P,21,res,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2022,nl,Tristan H. Cockcroft,Tony Santillan,6502,Cin,P,25,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2022,nl,Tristan H. Cockcroft,David Robertson,2132,NYM,P,0,act,previously_reserved,P,1,0,0,0,1.0,0,0,2,0.0,0.0
 2022,nl,Tristan H. Cockcroft,Connor Overton,7813,Cin,P,0,rel,previously_reserved,,1,0,0,0,3.0,3,1,1,15.0,2.333
 2022,nl,Tristan H. Cockcroft,Tony Gonsolin,6845,LAD,P,3,act,previously_reserved,P,1,0,0,0,3.0,1,0,3,3.0,2.0
-2022,nl,Tristan H. Cockcroft,David Robertson,2132,NYM,P,0,act,previously_reserved,P,1,0,0,0,1.0,0,0,2,0.0,0.0
 2022,nl,Tristan H. Cockcroft,Art Warren,6374,NYY,P,2,rel,previously_reserved,,4,1,0,0,5.0,1,1,7,3.6,1.0
-2022,nl,Tristan H. Cockcroft,Brent Suter,5835,Col,P,0,rel,previously_reserved,,21,1,1,0,25.0,7,2,17,4.68,1.32
+2022,nl,Tristan H. Cockcroft,Nick Martinez,4900,SD,P,2,act,previously_reserved,P,2,0,0,0,3.7,0,0,3,0.0,1.364
 2022,nl,Tristan H. Cockcroft,Aaron Ashby,7004,Mil,P,6,act,previously_reserved,P,1,0,1,0,3.7,1,2,6,9.82,1.636
-2022,nl,Derek Carty,Zac Gallen,6448,Ari,P,10,act,active,P,30,12,4,0,178.0,45,15,187,2.63,0.921
-2022,nl,Derek Carty,Zach Eflin,4105,TB,P,4,act,active,P,16,3,4,1,56.0,13,6,42,4.66,1.179
+2022,nl,Tristan H. Cockcroft,Brent Suter,5835,Col,P,0,rel,previously_reserved,,21,1,1,0,25.0,7,2,17,4.68,1.32
+2022,nl,Derek Carty,A.J. Minter,5992,Atl,P,0,act,active,P,55,1,4,5,51.0,14,4,65,1.94,0.961
 2022,nl,Derek Carty,David Bednar,6796,Pit,P,12,act,active,P,44,3,4,19,50.7,15,4,68,2.49,1.086
-2022,nl,Derek Carty,Aaron Nola,4916,Phi,P,26,act,active,P,32,11,13,0,205.0,29,19,235,3.25,0.961
 2022,nl,Derek Carty,Jake Odorizzi,2653,Tex,P,294,act,active,P,9,2,2,0,41.7,15,9,36,5.4,1.512
-2022,nl,Derek Carty,Craig Kimbrel,2633,Phi,P,802,act,active,P,63,6,7,22,60.0,28,4,72,3.75,1.317
+2022,nl,Derek Carty,Zach Eflin,4105,TB,P,4,act,active,P,16,3,4,1,56.0,13,6,42,4.66,1.179
+2022,nl,Derek Carty,Aaron Nola,4916,Phi,P,26,act,active,P,32,11,13,0,205.0,29,19,235,3.25,0.961
+2022,nl,Derek Carty,Zac Gallen,6448,Ari,P,10,act,active,P,30,12,4,0,178.0,45,15,187,2.63,0.921
 2022,nl,Derek Carty,Alex Vesia,7204,LAD,P,1,act,active,P,35,4,0,0,31.3,11,1,46,1.72,0.926
 2022,nl,Derek Carty,Tylor Megill,7621,NYM,P,3,act,active,P,9,4,2,0,40.0,10,5,44,4.73,1.15
-2022,nl,Derek Carty,A.J. Minter,5992,Atl,P,0,act,active,P,55,1,4,5,51.0,14,4,65,1.94,0.961
-2022,nl,Derek Carty,Joan Adon,7425,Was,P,0,rel,previously_active,,2,1,1,0,10.3,3,1,8,4.35,1.161
-2022,nl,Derek Carty,Jason Alexander,7911,Mil,P,0,rel,previously_active,,1,0,1,0,5.3,1,1,4,8.44,1.875
-2022,nl,Derek Carty,Will Smith,3082,Tex,P,6,rel,previously_active,,26,0,1,4,24.0,14,5,26,4.5,1.458
-2022,nl,Derek Carty,Josiah Gray,7056,Was,P,6,res,previously_active,P,26,7,9,0,138.7,62,35,142,4.93,1.356
-2022,nl,Derek Carty,Patrick Corbin,3339,Was,P,0,res,previously_active,P,5,2,1,0,30.3,6,4,20,2.67,1.055
-2022,nl,Derek Carty,Bailey Falter,6940,Phi,P,2,rel,previously_active,,1,0,0,0,6.0,1,1,8,3.0,1.0
-2022,nl,Derek Carty,Mitchell White,6104,Tor,P,1,rel,previously_active,,2,0,1,0,10.0,2,1,12,2.7,0.8
-2022,nl,Derek Carty,Adrian Sampson,5138,ChC,P,1,rel,previously_active,,3,0,2,0,17.0,3,2,13,4.76,1.176
-2022,nl,Derek Carty,Jack Flaherty,5103,StL,P,10,trd,previously_active,,2,0,0,0,5.0,7,1,3,3.6,2.2
-2022,nl,Derek Carty,Dylan Lee,6793,Atl,P,0,rel,previously_active,,4,1,0,0,4.7,0,1,7,5.79,1.286
-2022,nl,Derek Carty,Mike Minor,2833,FA,P,4,dis,previously_active,P,16,4,11,0,85.3,31,21,66,6.12,1.57
+2022,nl,Derek Carty,Craig Kimbrel,2633,Phi,P,802,act,active,P,63,6,7,22,60.0,28,4,72,3.75,1.317
 2022,nl,Derek Carty,Humberto Castellanos,7451,Ari,P,1,rel,previously_active,,2,0,0,0,10.7,2,3,9,4.22,1.031
 2022,nl,Derek Carty,MacKenzie Gore,6188,Was,P,0,dis,previously_active,P,14,4,3,0,60.7,32,3,68,3.71,1.418
+2022,nl,Derek Carty,Patrick Corbin,3339,Was,P,0,res,previously_active,P,5,2,1,0,30.3,6,4,20,2.67,1.055
+2022,nl,Derek Carty,Will Smith,3082,Tex,P,6,rel,previously_active,,26,0,1,4,24.0,14,5,26,4.5,1.458
+2022,nl,Derek Carty,Josiah Gray,7056,Was,P,6,res,previously_active,P,26,7,9,0,138.7,62,35,142,4.93,1.356
+2022,nl,Derek Carty,Bailey Falter,6940,Phi,P,2,rel,previously_active,,1,0,0,0,6.0,1,1,8,3.0,1.0
+2022,nl,Derek Carty,Jason Alexander,7911,Mil,P,0,rel,previously_active,,1,0,1,0,5.3,1,1,4,8.44,1.875
+2022,nl,Derek Carty,Mitchell White,6104,Tor,P,1,rel,previously_active,,2,0,1,0,10.0,2,1,12,2.7,0.8
+2022,nl,Derek Carty,Jack Flaherty,5103,StL,P,10,trd,previously_active,,2,0,0,0,5.0,7,1,3,3.6,2.2
+2022,nl,Derek Carty,Mike Minor,2833,FA,P,4,dis,previously_active,P,16,4,11,0,85.3,31,21,66,6.12,1.57
+2022,nl,Derek Carty,Joan Adon,7425,Was,P,0,rel,previously_active,,2,1,1,0,10.3,3,1,8,4.35,1.161
 2022,nl,Derek Carty,Zach Thompson,6771,Tor,P,0,rel,previously_active,,2,0,1,0,5.3,4,2,5,8.44,2.813
-2022,nl,Derek Carty,MacKenzie Gore,6188,Was,P,0,dis,reserved,P,2,0,1,0,9.3,5,4,4,9.64,1.821
-2022,nl,Derek Carty,Mike Minor,2833,FA,P,4,dis,reserved,P,3,0,1,0,12.7,9,3,10,5.68,2.053
-2022,nl,Derek Carty,Josiah Gray,7056,Was,P,6,res,reserved,P,2,0,1,0,10.0,4,3,12,6.3,1.4
+2022,nl,Derek Carty,Dylan Lee,6793,Atl,P,0,rel,previously_active,,4,1,0,0,4.7,0,1,7,5.79,1.286
+2022,nl,Derek Carty,Adrian Sampson,5138,ChC,P,1,rel,previously_active,,3,0,2,0,17.0,3,2,13,4.76,1.176
 2022,nl,Derek Carty,Patrick Corbin,3339,Was,P,0,res,reserved,P,3,0,2,0,12.0,3,2,6,9.0,2.167
+2022,nl,Derek Carty,MacKenzie Gore,6188,Was,P,0,dis,reserved,P,2,0,1,0,9.3,5,4,4,9.64,1.821
+2022,nl,Derek Carty,Josiah Gray,7056,Was,P,6,res,reserved,P,2,0,1,0,10.0,4,3,12,6.3,1.4
+2022,nl,Derek Carty,Mike Minor,2833,FA,P,4,dis,reserved,P,3,0,1,0,12.7,9,3,10,5.68,2.053
 2022,nl,Derek Carty,Zac Gallen,6448,Ari,P,10,act,previously_reserved,P,1,0,0,0,6.0,2,0,5,0.0,0.667
-2022,nl,Derek Carty,Zach Eflin,4105,TB,P,4,act,previously_reserved,P,4,0,1,0,19.7,2,2,23,2.29,0.966
 2022,nl,Derek Carty,Joan Adon,7425,Was,P,0,rel,previously_reserved,,6,0,5,0,28.0,19,1,22,5.46,1.679
+2022,nl,Derek Carty,Dylan Lee,6793,Atl,P,0,rel,previously_reserved,,5,0,1,0,3.3,2,0,5,5.4,2.4
+2022,nl,Derek Carty,Zach Eflin,4105,TB,P,4,act,previously_reserved,P,4,0,1,0,19.7,2,2,23,2.29,0.966
+2022,nl,Derek Carty,A.J. Minter,5992,Atl,P,0,act,previously_reserved,P,13,4,0,0,12.3,0,1,17,1.46,0.73
+2022,nl,Derek Carty,David Bednar,6796,Pit,P,12,act,previously_reserved,P,1,0,0,0,1.0,1,0,1,9.0,3.0
+2022,nl,Derek Carty,Alex Vesia,7204,LAD,P,1,act,previously_reserved,P,17,1,0,1,14.3,11,1,21,2.51,1.744
+2022,nl,Derek Carty,Jack Flaherty,5103,StL,P,10,trd,previously_reserved,,1,0,0,0,3.0,2,0,3,9.0,2.0
 2022,nl,Derek Carty,Jason Alexander,7911,Mil,P,0,rel,previously_reserved,,1,0,0,0,3.7,1,3,5,7.36,1.909
 2022,nl,Derek Carty,Will Smith,3082,Tex,P,6,rel,previously_reserved,,14,0,0,1,12.7,6,1,14,2.84,1.421
-2022,nl,Derek Carty,A.J. Minter,5992,Atl,P,0,act,previously_reserved,P,13,4,0,0,12.3,0,1,17,1.46,0.73
 2022,nl,Derek Carty,Tylor Megill,7621,NYM,P,3,act,previously_reserved,P,6,0,0,0,7.3,3,2,7,7.36,1.773
-2022,nl,Derek Carty,Jack Flaherty,5103,StL,P,10,trd,previously_reserved,,1,0,0,0,3.0,2,0,3,9.0,2.0
-2022,nl,Derek Carty,Alex Vesia,7204,LAD,P,1,act,previously_reserved,P,17,1,0,1,14.3,11,1,21,2.51,1.744
-2022,nl,Derek Carty,David Bednar,6796,Pit,P,12,act,previously_reserved,P,1,0,0,0,1.0,1,0,1,9.0,3.0
-2022,nl,Derek Carty,Dylan Lee,6793,Atl,P,0,rel,previously_reserved,,5,0,1,0,3.3,2,0,5,5.4,2.4
 2022,nl,Steve Gardner,Freddy Peralta,5521,Mil,P,22,act,active,P,18,4,4,0,78.0,27,6,86,3.58,1.038
+2022,nl,Steve Gardner,Sandy Alcantara,5706,Mia,P,22,act,active,P,32,14,9,0,228.7,50,16,207,2.28,0.98
 2022,nl,Steve Gardner,Bryce Elder,7987,Atl,P,12,act,active,P,2,1,1,0,14.0,2,1,11,2.57,1.0
+2022,nl,Steve Gardner,Alex Cobb,3431,SF,P,6,act,active,P,27,7,8,0,145.7,42,7,149,3.71,1.304
 2022,nl,Steve Gardner,Ian Kennedy,990,Tex,P,15,act,active,P,28,0,4,6,23.0,12,7,21,7.83,1.87
 2022,nl,Steve Gardner,Alexis Diaz,7868,Cin,P,101,act,active,P,41,5,3,9,44.0,22,4,59,2.25,0.955
-2022,nl,Steve Gardner,Sandy Alcantara,5706,Mia,P,22,act,active,P,32,14,9,0,228.7,50,16,207,2.28,0.98
+2022,nl,Steve Gardner,Mitch Keller,5144,Pit,P,54,act,active,P,14,1,4,0,73.7,28,4,60,3.91,1.412
 2022,nl,Steve Gardner,Noah Syndergaard,4002,LAD,P,501,act,active,P,9,4,2,0,49.7,9,5,29,3.81,1.228
 2022,nl,Steve Gardner,Merrill Kelly,4802,Ari,P,1,act,active,P,33,13,8,0,200.3,61,21,177,3.37,1.138
-2022,nl,Steve Gardner,Mitch Keller,5144,Pit,P,54,act,active,P,14,1,4,0,73.7,28,4,60,3.91,1.412
-2022,nl,Steve Gardner,Alex Cobb,3431,SF,P,6,act,active,P,27,7,8,0,145.7,42,7,149,3.71,1.304
-2022,nl,Steve Gardner,Steven Wilson,7189,SD,P,1,rel,previously_active,,6,1,1,1,5.3,3,1,4,5.06,1.687
-2022,nl,Steve Gardner,Anthony DeSclafani,4732,SF,P,8,rel,previously_active,,3,0,1,0,13.3,2,2,13,6.07,1.8
-2022,nl,Steve Gardner,Chris Paddack,5809,Min,P,5,rel,previously_active,,4,1,1,0,18.3,2,0,17,3.44,1.145
-2022,nl,Steve Gardner,Joe Mantiply,5165,Ari,P,1,res,previously_active,P,36,1,3,0,30.3,4,4,32,3.56,1.187
 2022,nl,Steve Gardner,Emilio Pagan,6169,Min,P,0,rel,previously_active,,33,3,4,9,31.7,16,8,46,5.4,1.421
-2022,nl,Steve Gardner,Mark Melancon,1022,Ari,P,10,rel,previously_active,,45,3,9,16,40.7,16,2,29,4.65,1.525
-2022,nl,Steve Gardner,Patrick Corbin,3339,Was,P,2,trd,previously_active,,3,0,2,0,12.0,8,0,11,7.5,2.083
-2022,nl,Steve Gardner,Kyle Finnegan,6364,Was,P,1,rel,previously_active,,12,1,1,0,10.0,6,1,10,7.2,2.0
 2022,nl,Steve Gardner,Hunter Strickland,2873,FA,P,37,rel,previously_active,,15,2,1,4,13.3,5,4,8,6.08,1.2
-2022,nl,Steve Gardner,Dustin May,6466,LAD,P,26,dis,previously_active,P,5,1,3,0,25.0,12,3,20,5.4,1.28
-2022,nl,Steve Gardner,Wil Crowe,6522,Pit,P,3,rel,previously_active,,21,2,4,1,27.0,13,2,28,3.67,1.222
-2022,nl,Steve Gardner,Cole Sulser,6351,Ari,P,55,rel,previously_active,,4,0,2,0,2.0,1,1,3,22.5,2.5
 2022,nl,Steve Gardner,Chad Kuhl,5552,FA,P,33,rel,previously_active,,16,4,6,0,83.7,38,16,63,5.59,1.59
+2022,nl,Steve Gardner,Patrick Corbin,3339,Was,P,2,trd,previously_active,,3,0,2,0,12.0,8,0,11,7.5,2.083
+2022,nl,Steve Gardner,Joe Mantiply,5165,Ari,P,1,res,previously_active,P,36,1,3,0,30.3,4,4,32,3.56,1.187
+2022,nl,Steve Gardner,Cole Sulser,6351,Ari,P,55,rel,previously_active,,4,0,2,0,2.0,1,1,3,22.5,2.5
+2022,nl,Steve Gardner,Anthony DeSclafani,4732,SF,P,8,rel,previously_active,,3,0,1,0,13.3,2,2,13,6.07,1.8
+2022,nl,Steve Gardner,Mark Melancon,1022,Ari,P,10,rel,previously_active,,45,3,9,16,40.7,16,2,29,4.65,1.525
+2022,nl,Steve Gardner,Kyle Finnegan,6364,Was,P,1,rel,previously_active,,12,1,1,0,10.0,6,1,10,7.2,2.0
+2022,nl,Steve Gardner,Wil Crowe,6522,Pit,P,3,rel,previously_active,,21,2,4,1,27.0,13,2,28,3.67,1.222
+2022,nl,Steve Gardner,Chris Paddack,5809,Min,P,5,rel,previously_active,,4,1,1,0,18.3,2,0,17,3.44,1.145
+2022,nl,Steve Gardner,Steven Wilson,7189,SD,P,1,rel,previously_active,,6,1,1,1,5.3,3,1,4,5.06,1.687
+2022,nl,Steve Gardner,Dustin May,6466,LAD,P,26,dis,previously_active,P,5,1,3,0,25.0,12,3,20,5.4,1.28
 2022,nl,Steve Gardner,Joe Mantiply,5165,Ari,P,1,res,reserved,P,17,0,2,0,16.0,1,2,18,3.38,1.188
 2022,nl,Steve Gardner,Dustin May,6466,LAD,P,26,dis,reserved,P,1,1,0,0,5.0,2,0,9,0.0,0.6
-2022,nl,Steve Gardner,Ian Kennedy,990,Tex,P,15,act,previously_reserved,P,4,1,0,0,4.7,1,0,4,1.93,0.429
-2022,nl,Steve Gardner,Cole Sulser,6351,Ari,P,55,rel,previously_reserved,,5,1,0,0,5.7,2,0,6,0.0,1.235
-2022,nl,Steve Gardner,Wil Crowe,6522,Pit,P,3,rel,previously_reserved,,1,1,0,0,2.0,0,0,0,0.0,1.0
 2022,nl,Steve Gardner,Chad Kuhl,5552,FA,P,33,rel,previously_reserved,,2,0,1,0,8.0,2,2,4,9.0,1.875
-2022,nl,Steve Gardner,Mark Melancon,1022,Ari,P,10,rel,previously_reserved,,6,0,1,1,4.3,2,1,2,10.38,2.308
-2022,nl,Steve Gardner,Emilio Pagan,6169,Min,P,0,rel,previously_reserved,,8,0,1,0,7.0,1,1,10,2.57,1.286
-2022,nl,Steve Gardner,Patrick Corbin,3339,Was,P,2,trd,previously_reserved,,3,0,3,0,15.7,5,1,15,6.89,1.596
-2022,nl,Steve Gardner,Kyle Finnegan,6364,Was,P,1,rel,previously_reserved,,11,1,0,0,11.0,1,1,16,0.82,0.636
 2022,nl,Steve Gardner,Hunter Strickland,2873,FA,P,37,rel,previously_reserved,,9,1,0,1,8.3,6,1,11,4.32,1.92
-2022,nl,Steve Gardner,Mitch Keller,5144,Pit,P,54,act,previously_reserved,P,7,2,3,0,41.7,12,4,41,1.94,1.2
 2022,nl,Steve Gardner,Alex Cobb,3431,SF,P,6,act,previously_reserved,P,1,0,0,0,4.0,1,2,2,4.5,1.25
-2022,nl,Steve Gardner,Chris Paddack,5809,Min,P,5,rel,previously_reserved,,1,0,1,0,4.0,0,0,3,6.75,1.5
-2022,nl,Steve Gardner,Steven Wilson,7189,SD,P,1,rel,previously_reserved,,1,0,0,0,1.0,0,0,1,0.0,0.0
+2022,nl,Steve Gardner,Emilio Pagan,6169,Min,P,0,rel,previously_reserved,,8,0,1,0,7.0,1,1,10,2.57,1.286
 2022,nl,Steve Gardner,Anthony DeSclafani,4732,SF,P,8,rel,previously_reserved,,2,0,1,0,5.7,2,2,4,7.94,2.471
-2022,nl,Grey Albright,Edward Cabrera,6960,Mia,P,59,act,active,P,14,6,4,0,71.7,33,10,75,3.01,1.074
-2022,nl,Grey Albright,Jose Quintana,3839,NYM,P,2,act,active,P,32,6,7,0,165.7,47,8,137,2.93,1.213
-2022,nl,Grey Albright,Johnny Cueto,354,Mia,P,0,act,active,P,25,8,10,0,158.3,33,15,102,3.35,1.225
-2022,nl,Grey Albright,Rowan Wick,5896,ChC,P,6,act,active,P,51,4,6,9,51.7,23,6,58,2.96,1.568
-2022,nl,Grey Albright,Mike Clevinger,4528,CWS,P,14,act,active,P,22,7,7,0,112.3,35,20,89,4.25,1.175
-2022,nl,Grey Albright,Raisel Iglesias,4929,Atl,P,57,act,active,P,20,0,0,1,19.3,3,0,25,0.47,0.879
-2022,nl,Grey Albright,German Marquez,5513,Col,P,8,act,active,P,29,9,12,0,172.3,59,28,142,4.91,1.34
+2022,nl,Steve Gardner,Cole Sulser,6351,Ari,P,55,rel,previously_reserved,,5,1,0,0,5.7,2,0,6,0.0,1.235
+2022,nl,Steve Gardner,Patrick Corbin,3339,Was,P,2,trd,previously_reserved,,3,0,3,0,15.7,5,1,15,6.89,1.596
+2022,nl,Steve Gardner,Mark Melancon,1022,Ari,P,10,rel,previously_reserved,,6,0,1,1,4.3,2,1,2,10.38,2.308
+2022,nl,Steve Gardner,Steven Wilson,7189,SD,P,1,rel,previously_reserved,,1,0,0,0,1.0,0,0,1,0.0,0.0
+2022,nl,Steve Gardner,Chris Paddack,5809,Min,P,5,rel,previously_reserved,,1,0,1,0,4.0,0,0,3,6.75,1.5
+2022,nl,Steve Gardner,Mitch Keller,5144,Pit,P,54,act,previously_reserved,P,7,2,3,0,41.7,12,4,41,1.94,1.2
+2022,nl,Steve Gardner,Ian Kennedy,990,Tex,P,15,act,previously_reserved,P,4,1,0,0,4.7,1,0,4,1.93,0.429
+2022,nl,Steve Gardner,Wil Crowe,6522,Pit,P,3,rel,previously_reserved,,1,1,0,0,2.0,0,0,0,0.0,1.0
+2022,nl,Steve Gardner,Kyle Finnegan,6364,Was,P,1,rel,previously_reserved,,11,1,0,0,11.0,1,1,16,0.82,0.636
 2022,nl,Grey Albright,Graham Ashcraft,7748,Cin,P,27,act,active,P,16,5,4,0,94.0,26,10,65,4.4,1.351
+2022,nl,Grey Albright,Jose Quintana,3839,NYM,P,2,act,active,P,32,6,7,0,165.7,47,8,137,2.93,1.213
 2022,nl,Grey Albright,Ranger Suarez,6308,Phi,P,11,act,active,P,28,9,7,0,150.3,58,15,125,3.77,1.35
+2022,nl,Grey Albright,Rowan Wick,5896,ChC,P,6,act,active,P,51,4,6,9,51.7,23,6,58,2.96,1.568
+2022,nl,Grey Albright,German Marquez,5513,Col,P,8,act,active,P,29,9,12,0,172.3,59,28,142,4.91,1.34
+2022,nl,Grey Albright,Johnny Cueto,354,Mia,P,0,act,active,P,25,8,10,0,158.3,33,15,102,3.35,1.225
+2022,nl,Grey Albright,Raisel Iglesias,4929,Atl,P,57,act,active,P,20,0,0,1,19.3,3,0,25,0.47,0.879
+2022,nl,Grey Albright,Mike Clevinger,4528,CWS,P,14,act,active,P,22,7,7,0,112.3,35,20,89,4.25,1.175
+2022,nl,Grey Albright,Edward Cabrera,6960,Mia,P,59,act,active,P,14,6,4,0,71.7,33,10,75,3.01,1.074
 2022,nl,Grey Albright,Bryce Elder,7987,Atl,P,13,rel,previously_active,,1,0,1,0,4.3,3,1,1,6.23,1.615
-2022,nl,Grey Albright,Cody Poteet,7486,KC,P,13,dis,previously_active,P,3,0,1,0,9.7,4,2,6,5.59,1.138
-2022,nl,Grey Albright,Ian Anderson,6078,Atl,P,10,rel,previously_active,,21,9,6,0,105.7,53,11,93,5.11,1.543
-2022,nl,Grey Albright,Huascar Ynoa,6229,Atl,P,9,rel,previously_active,,2,0,2,0,6.7,6,2,8,13.5,2.55
 2022,nl,Grey Albright,Ethan Small,7079,Mil,P,59,rel,previously_active,,1,0,0,0,2.7,4,0,4,6.75,3.0
-2022,nl,Grey Albright,Cole Sulser,6351,Ari,P,43,rel,previously_active,,15,0,1,1,14.3,7,1,14,3.14,1.256
+2022,nl,Grey Albright,Huascar Ynoa,6229,Atl,P,9,rel,previously_active,,2,0,2,0,6.7,6,2,8,13.5,2.55
 2022,nl,Grey Albright,Chris Bassitt,4773,Tor,P,16,res,previously_active,P,30,15,9,0,181.7,49,19,167,3.42,1.145
 2022,nl,Grey Albright,Chris Stratton,4489,StL,P,0,rel,previously_active,,23,3,2,2,22.3,9,1,22,5.24,1.836
 2022,nl,Grey Albright,Alex Colome,3154,CWS,P,4,rel,previously_active,,21,2,3,2,19.3,10,0,17,6.05,2.276
+2022,nl,Grey Albright,Ian Anderson,6078,Atl,P,10,rel,previously_active,,21,9,6,0,105.7,53,11,93,5.11,1.543
+2022,nl,Grey Albright,Cody Poteet,7486,KC,P,13,dis,previously_active,P,3,0,1,0,9.7,4,2,6,5.59,1.138
+2022,nl,Grey Albright,Cole Sulser,6351,Ari,P,43,rel,previously_active,,15,0,1,1,14.3,7,1,14,3.14,1.256
 2022,nl,Grey Albright,Chris Bassitt,4773,Tor,P,16,res,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
 2022,nl,Grey Albright,Cody Poteet,7486,KC,P,13,dis,reserved,P,1,0,0,0,2.0,0,2,1,22.5,3.5
+2022,nl,Grey Albright,Mike Clevinger,4528,CWS,P,14,act,previously_reserved,P,1,0,0,0,2.0,0,0,2,9.0,2.5
+2022,nl,Grey Albright,Yerry De Los Santos,7563,Pit,P,7,rel,previously_reserved,,11,0,2,1,11.7,4,1,12,4.63,1.371
 2022,nl,Grey Albright,Chris Stratton,4489,StL,P,0,rel,previously_reserved,,18,2,2,0,19.3,4,3,16,4.66,1.19
 2022,nl,Grey Albright,Alex Colome,3154,CWS,P,4,rel,previously_reserved,,31,0,4,2,26.7,12,5,14,5.74,1.312
-2022,nl,Grey Albright,Cole Sulser,6351,Ari,P,43,rel,previously_reserved,,2,0,0,0,1.7,0,0,2,0.0,0.6
-2022,nl,Grey Albright,Rowan Wick,5896,ChC,P,6,act,previously_reserved,P,13,0,1,0,12.3,6,3,11,9.49,2.189
 2022,nl,Grey Albright,Raisel Iglesias,4929,Atl,P,57,act,previously_reserved,P,6,0,0,0,5.0,2,0,2,0.0,0.8
-2022,nl,Grey Albright,Mike Clevinger,4528,CWS,P,14,act,previously_reserved,P,1,0,0,0,2.0,0,0,2,9.0,2.5
-2022,nl,Grey Albright,Ranger Suarez,6308,Phi,P,11,act,previously_reserved,P,1,1,0,0,5.0,0,0,4,0.0,0.8
-2022,nl,Grey Albright,Yerry De Los Santos,7563,Pit,P,7,rel,previously_reserved,,11,0,2,1,11.7,4,1,12,4.63,1.371
+2022,nl,Grey Albright,Cole Sulser,6351,Ari,P,43,rel,previously_reserved,,2,0,0,0,1.7,0,0,2,0.0,0.6
 2022,nl,Grey Albright,German Marquez,5513,Col,P,8,act,previously_reserved,P,2,0,1,0,9.3,4,2,8,6.75,1.821
+2022,nl,Grey Albright,Ranger Suarez,6308,Phi,P,11,act,previously_reserved,P,1,1,0,0,5.0,0,0,4,0.0,0.8
+2022,nl,Grey Albright,Rowan Wick,5896,ChC,P,6,act,previously_reserved,P,13,0,1,0,12.3,6,3,11,9.49,2.189
 2022,nl,Grey Albright,Graham Ashcraft,7748,Cin,P,27,act,previously_reserved,P,2,0,2,0,6.7,2,1,3,12.15,2.4
 2022,nl,Todd Zola,Zack Wheeler,2831,Phi,P,22,act,active,P,26,12,7,0,153.0,34,13,163,2.82,1.039
-2022,nl,Todd Zola,Brusdar Graterol,6474,LAD,P,1,act,active,P,44,2,4,4,47.7,10,3,41,3.4,0.986
-2022,nl,Todd Zola,Robert Suarez,7908,SD,P,13,act,active,P,38,4,1,1,39.7,19,4,53,2.5,1.008
-2022,nl,Todd Zola,Jarlin Garcia,5342,Pit,P,17,act,active,P,19,0,1,1,24.7,4,5,24,3.28,0.932
 2022,nl,Todd Zola,Collin McHugh,4190,Atl,P,1,act,active,P,58,3,2,0,69.3,14,5,75,2.6,0.938
+2022,nl,Todd Zola,Jarlin Garcia,5342,Pit,P,17,act,active,P,19,0,1,1,24.7,4,5,24,3.28,0.932
+2022,nl,Todd Zola,Brusdar Graterol,6474,LAD,P,1,act,active,P,44,2,4,4,47.7,10,3,41,3.4,0.986
 2022,nl,Todd Zola,Dylan Floro,5198,Mia,P,27,act,active,P,33,1,3,8,32.3,10,2,37,1.95,1.113
-2022,nl,Todd Zola,Adrian Sampson,5138,ChC,P,37,act,active,P,10,4,2,0,51.0,13,5,31,2.29,1.176
 2022,nl,Todd Zola,Braxton Garrett,5807,Mia,P,43,act,active,P,13,1,6,0,68.3,20,6,70,3.69,1.288
+2022,nl,Todd Zola,Adrian Sampson,5138,ChC,P,37,act,active,P,10,4,2,0,51.0,13,5,31,2.29,1.176
 2022,nl,Todd Zola,Luis Castillo,5137,Sea,P,19,act,active,P,25,8,6,0,150.3,45,13,167,2.99,1.084
-2022,nl,Todd Zola,Kyle Muller,6826,Oak,P,0,res,previously_active,P,2,1,0,0,9.7,2,2,9,3.72,1.138
-2022,nl,Todd Zola,Jake Woodford,5718,StL,P,37,rel,previously_active,,1,0,0,0,3.0,1,0,1,9.0,2.0
-2022,nl,Todd Zola,Tucker Davidson,6825,LAA,P,87,rel,previously_active,,2,0,2,0,7.7,8,0,5,7.04,1.957
-2022,nl,Todd Zola,Sam Long,7555,Oak,P,43,rel,previously_active,,15,1,2,0,23.7,7,7,21,4.94,1.437
-2022,nl,Todd Zola,Reiver Sanmartin,7842,Cin,P,1,rel,previously_active,,5,0,4,0,16.3,9,4,10,13.78,2.265
-2022,nl,Todd Zola,Manny Banuelos,3220,FA,P,0,rel,previously_active,,5,0,0,0,5.3,2,0,4,6.75,0.938
-2022,nl,Todd Zola,Bryse Wilson,6520,Mil,P,23,rel,previously_active,,1,0,1,0,6.7,0,1,4,1.35,1.05
-2022,nl,Todd Zola,Tyler Mahle,5916,Min,P,14,dis,previously_active,P,22,6,7,0,118.7,43,15,126,4.17,1.197
+2022,nl,Todd Zola,Robert Suarez,7908,SD,P,13,act,active,P,38,4,1,1,39.7,19,4,53,2.5,1.008
 2022,nl,Todd Zola,Logan Webb,6725,SF,P,18,dis,previously_active,P,32,15,9,0,192.3,49,11,163,2.9,1.159
+2022,nl,Todd Zola,Tucker Davidson,6825,LAA,P,87,rel,previously_active,,2,0,2,0,7.7,8,0,5,7.04,1.957
+2022,nl,Todd Zola,Reiver Sanmartin,7842,Cin,P,1,rel,previously_active,,5,0,4,0,16.3,9,4,10,13.78,2.265
+2022,nl,Todd Zola,Tyler Mahle,5916,Min,P,14,dis,previously_active,P,22,6,7,0,118.7,43,15,126,4.17,1.197
+2022,nl,Todd Zola,Kyle Muller,6826,Oak,P,0,res,previously_active,P,2,1,0,0,9.7,2,2,9,3.72,1.138
+2022,nl,Todd Zola,Manny Banuelos,3220,FA,P,0,rel,previously_active,,5,0,0,0,5.3,2,0,4,6.75,0.938
 2022,nl,Todd Zola,Luis Cessa,5422,Col,P,0,rel,previously_active,,14,2,1,0,16.3,4,1,12,4.41,1.224
+2022,nl,Todd Zola,Jake Woodford,5718,StL,P,37,rel,previously_active,,1,0,0,0,3.0,1,0,1,9.0,2.0
+2022,nl,Todd Zola,Bryse Wilson,6520,Mil,P,23,rel,previously_active,,1,0,1,0,6.7,0,1,4,1.35,1.05
 2022,nl,Todd Zola,Erick Fedde,5121,FA,P,0,rel,previously_active,,23,6,10,0,109.7,52,16,79,5.5,1.614
+2022,nl,Todd Zola,Sam Long,7555,Oak,P,43,rel,previously_active,,15,1,2,0,23.7,7,7,21,4.94,1.437
+2022,nl,Todd Zola,Kyle Muller,6826,Oak,P,0,res,reserved,P,1,0,1,0,2.7,6,0,3,23.62,3.75
 2022,nl,Todd Zola,Tyler Mahle,5916,Min,P,14,dis,reserved,P,1,0,1,0,2.0,0,1,0,18.0,2.5
 2022,nl,Todd Zola,Logan Webb,6725,SF,P,18,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2022,nl,Todd Zola,Kyle Muller,6826,Oak,P,0,res,reserved,P,1,0,1,0,2.7,6,0,3,23.62,3.75
-2022,nl,Todd Zola,Brusdar Graterol,6474,LAD,P,1,act,previously_reserved,P,2,0,0,0,2.0,0,0,2,0.0,1.0
-2022,nl,Todd Zola,Erick Fedde,5121,FA,P,0,rel,previously_reserved,,2,0,1,0,10.0,3,2,11,3.6,1.1
-2022,nl,Todd Zola,Luis Cessa,5422,Col,P,0,rel,previously_reserved,,3,0,0,0,2.3,0,2,1,15.43,2.571
-2022,nl,Todd Zola,Reiver Sanmartin,7842,Cin,P,1,rel,previously_reserved,,5,0,0,0,4.7,2,0,6,3.86,1.5
-2022,nl,Todd Zola,Jarlin Garcia,5342,Pit,P,17,act,previously_reserved,P,1,0,0,0,1.0,1,0,1,36.0,5.0
 2022,nl,Todd Zola,Sam Long,7555,Oak,P,43,rel,previously_reserved,,1,0,0,1,0.3,0,0,1,0.0,0.0
+2022,nl,Todd Zola,Erick Fedde,5121,FA,P,0,rel,previously_reserved,,2,0,1,0,10.0,3,2,11,3.6,1.1
+2022,nl,Todd Zola,Reiver Sanmartin,7842,Cin,P,1,rel,previously_reserved,,5,0,0,0,4.7,2,0,6,3.86,1.5
 2022,nl,Todd Zola,Braxton Garrett,5807,Mia,P,43,act,previously_reserved,P,2,1,0,0,10.7,2,2,10,2.53,0.844
+2022,nl,Todd Zola,Brusdar Graterol,6474,LAD,P,1,act,previously_reserved,P,2,0,0,0,2.0,0,0,2,0.0,1.0
+2022,nl,Todd Zola,Luis Cessa,5422,Col,P,0,rel,previously_reserved,,3,0,0,0,2.3,0,2,1,15.43,2.571
+2022,nl,Todd Zola,Jarlin Garcia,5342,Pit,P,17,act,previously_reserved,P,1,0,0,0,1.0,1,0,1,36.0,5.0
 2022,nl,Brian Walton,Nick Lodolo,7026,Cin,P,3,act,active,P,19,4,7,0,103.3,39,13,131,3.66,1.248
-2022,nl,Brian Walton,Roansy Contreras,7534,Pit,P,3,act,active,P,18,5,3,0,80.3,30,12,78,3.59,1.245
-2022,nl,Brian Walton,Andre Pallante,8077,StL,P,85,act,active,P,28,4,5,0,73.3,24,8,49,4.17,1.418
-2022,nl,Brian Walton,Pablo Lopez,6227,Min,P,16,act,active,P,32,10,10,0,180.0,53,21,174,3.75,1.167
-2022,nl,Brian Walton,Blake Snell,4366,SD,P,17,act,active,P,23,8,9,0,124.3,48,10,166,3.26,1.19
-2022,nl,Brian Walton,Luis Cessa,5422,Col,P,6,act,active,P,6,1,1,0,32.3,8,5,24,3.62,0.959
-2022,nl,Brian Walton,Bailey Falter,6940,Phi,P,12,act,active,P,7,4,1,0,33.0,4,4,28,3.0,1.182
-2022,nl,Brian Walton,Hayden Wesneski,8122,ChC,P,7,act,active,P,3,2,1,0,17.3,5,1,15,2.08,1.154
 2022,nl,Brian Walton,Jordan Montgomery,5837,StL,P,589,act,active,P,10,5,3,0,58.7,12,6,60,3.37,1.125
+2022,nl,Brian Walton,Luis Cessa,5422,Col,P,6,act,active,P,6,1,1,0,32.3,8,5,24,3.62,0.959
+2022,nl,Brian Walton,Andre Pallante,8077,StL,P,85,act,active,P,28,4,5,0,73.3,24,8,49,4.17,1.418
+2022,nl,Brian Walton,Roansy Contreras,7534,Pit,P,3,act,active,P,18,5,3,0,80.3,30,12,78,3.59,1.245
+2022,nl,Brian Walton,Hayden Wesneski,8122,ChC,P,7,act,active,P,3,2,1,0,17.3,5,1,15,2.08,1.154
 2022,nl,Brian Walton,Ryan Helsley,6446,StL,P,6,act,active,P,49,9,1,19,59.3,20,6,83,1.37,0.792
-2022,nl,Brian Walton,Hunter Harvey,4796,Was,P,0,rel,previously_active,,9,0,0,0,9.3,4,0,7,3.86,1.393
+2022,nl,Brian Walton,Blake Snell,4366,SD,P,17,act,active,P,23,8,9,0,124.3,48,10,166,3.26,1.19
+2022,nl,Brian Walton,Bailey Falter,6940,Phi,P,12,act,active,P,7,4,1,0,33.0,4,4,28,3.0,1.182
+2022,nl,Brian Walton,Pablo Lopez,6227,Min,P,16,act,active,P,32,10,10,0,180.0,53,21,174,3.75,1.167
 2022,nl,Brian Walton,Luis Garcia,4598,SD,P,1,rel,previously_active,,13,2,2,0,12.7,4,0,15,4.26,1.342
-2022,nl,Brian Walton,Paolo Espino,5649,Was,P,7,rel,previously_active,,8,0,3,0,36.7,5,11,27,5.4,1.418
-2022,nl,Brian Walton,Elieser Hernandez,6333,NYM,P,3,rel,previously_active,,14,2,5,0,53.0,18,18,52,6.11,1.396
 2022,nl,Brian Walton,Colin Holderman,8142,Pit,P,2,rel,previously_active,,1,0,0,0,0.3,3,0,0,81.0,12.0
-2022,nl,Brian Walton,Anthony Bass,3754,FA,P,2,rel,previously_active,,8,1,1,0,7.0,3,0,8,3.86,1.714
-2022,nl,Brian Walton,Corey Knebel,4845,FA,P,15,rel,previously_active,,43,3,5,12,42.3,25,4,39,3.61,1.37
-2022,nl,Brian Walton,Walker Buehler,5327,LAD,P,26,rel,previously_active,,12,6,3,0,65.0,17,8,58,4.02,1.292
-2022,nl,Brian Walton,Jackson Stephens,5869,Atl,P,0,rel,previously_active,,3,0,0,0,4.7,3,0,1,3.86,1.5
-2022,nl,Brian Walton,Austin Gomber,5593,Col,P,0,rel,previously_active,,15,4,7,0,73.0,22,13,54,6.53,1.452
-2022,nl,Brian Walton,Jake McGee,1481,Was,P,5,rel,previously_active,,23,1,2,3,20.3,5,2,11,6.64,1.377
-2022,nl,Brian Walton,Caleb Smith,5905,Pit,P,51,rel,previously_active,,2,0,1,0,4.0,6,4,4,20.25,3.25
-2022,nl,Brian Walton,Andrew Bellatti,5197,Phi,P,6,rel,previously_active,,12,2,0,0,11.3,2,0,16,3.97,1.412
-2022,nl,Brian Walton,Max Meyer,7363,Mia,P,0,rel,previously_active,,1,0,0,0,0.7,1,0,1,0.0,1.5
-2022,nl,Brian Walton,Justin Dunn,6000,Cin,P,2,dis,previously_active,P,7,1,3,0,31.0,17,11,21,6.1,1.581
 2022,nl,Brian Walton,Caleb Ferguson,6598,LAD,P,0,res,previously_active,P,10,0,0,0,9.7,5,1,10,4.66,1.655
+2022,nl,Brian Walton,Corey Knebel,4845,FA,P,15,rel,previously_active,,43,3,5,12,42.3,25,4,39,3.61,1.37
+2022,nl,Brian Walton,Max Meyer,7363,Mia,P,0,rel,previously_active,,1,0,0,0,0.7,1,0,1,0.0,1.5
+2022,nl,Brian Walton,Anthony Bass,3754,FA,P,2,rel,previously_active,,8,1,1,0,7.0,3,0,8,3.86,1.714
+2022,nl,Brian Walton,Walker Buehler,5327,LAD,P,26,rel,previously_active,,12,6,3,0,65.0,17,8,58,4.02,1.292
+2022,nl,Brian Walton,Elieser Hernandez,6333,NYM,P,3,rel,previously_active,,14,2,5,0,53.0,18,18,52,6.11,1.396
+2022,nl,Brian Walton,Andrew Bellatti,5197,Phi,P,6,rel,previously_active,,12,2,0,0,11.3,2,0,16,3.97,1.412
+2022,nl,Brian Walton,Justin Dunn,6000,Cin,P,2,dis,previously_active,P,7,1,3,0,31.0,17,11,21,6.1,1.581
+2022,nl,Brian Walton,Paolo Espino,5649,Was,P,7,rel,previously_active,,8,0,3,0,36.7,5,11,27,5.4,1.418
+2022,nl,Brian Walton,Caleb Smith,5905,Pit,P,51,rel,previously_active,,2,0,1,0,4.0,6,4,4,20.25,3.25
+2022,nl,Brian Walton,Jake McGee,1481,Was,P,5,rel,previously_active,,23,1,2,3,20.3,5,2,11,6.64,1.377
+2022,nl,Brian Walton,Austin Gomber,5593,Col,P,0,rel,previously_active,,15,4,7,0,73.0,22,13,54,6.53,1.452
+2022,nl,Brian Walton,Jackson Stephens,5869,Atl,P,0,rel,previously_active,,3,0,0,0,4.7,3,0,1,3.86,1.5
+2022,nl,Brian Walton,Hunter Harvey,4796,Was,P,0,rel,previously_active,,9,0,0,0,9.3,4,0,7,3.86,1.393
 2022,nl,Brian Walton,Justin Dunn,6000,Cin,P,2,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
 2022,nl,Brian Walton,Caleb Ferguson,6598,LAD,P,0,res,reserved,P,9,0,0,0,7.3,6,0,11,2.45,1.909
-2022,nl,Brian Walton,Max Meyer,7363,Mia,P,0,rel,previously_reserved,,1,0,1,0,5.3,1,2,5,8.44,1.5
-2022,nl,Brian Walton,Corey Knebel,4845,FA,P,15,rel,previously_reserved,,1,0,0,0,1.0,1,0,0,0.0,1.0
-2022,nl,Brian Walton,Roansy Contreras,7534,Pit,P,3,act,previously_reserved,P,3,0,2,0,14.7,9,1,8,4.91,1.432
-2022,nl,Brian Walton,Paolo Espino,5649,Was,P,7,rel,previously_reserved,,4,0,2,0,19.0,6,3,15,6.16,1.526
 2022,nl,Brian Walton,Blake Snell,4366,SD,P,17,act,previously_reserved,P,1,0,1,0,3.7,3,1,5,7.36,1.636
+2022,nl,Brian Walton,Paolo Espino,5649,Was,P,7,rel,previously_reserved,,4,0,2,0,19.0,6,3,15,6.16,1.526
 2022,nl,Brian Walton,Luis Cessa,5422,Col,P,6,act,previously_reserved,P,1,0,1,0,4.7,4,0,3,3.86,2.143
-2022,nl,Peter Kreutzer,Scott Effross,7825,NYY,P,0,act,active,P,20,0,1,4,20.0,7,1,20,1.35,1.0
-2022,nl,Peter Kreutzer,Manuel Rodriguez,7119,ChC,P,14,act,active,P,1,0,0,0,0.3,2,0,1,27.0,12.0
-2022,nl,Peter Kreutzer,Jacob DeGrom,4563,Tex,P,34,act,active,P,11,5,4,0,64.3,8,9,102,3.08,0.746
-2022,nl,Peter Kreutzer,Johan Oviedo,6467,Pit,P,14,act,active,P,1,0,0,0,4.0,0,0,1,4.5,1.25
+2022,nl,Brian Walton,Roansy Contreras,7534,Pit,P,3,act,previously_reserved,P,3,0,2,0,14.7,9,1,8,4.91,1.432
+2022,nl,Brian Walton,Corey Knebel,4845,FA,P,15,rel,previously_reserved,,1,0,0,0,1.0,1,0,0,0.0,1.0
+2022,nl,Brian Walton,Max Meyer,7363,Mia,P,0,rel,previously_reserved,,1,0,1,0,5.3,1,2,5,8.44,1.5
 2022,nl,Peter Kreutzer,Camilo Doval,7431,SF,P,10,act,active,P,68,6,6,27,67.7,30,4,80,2.53,1.241
-2022,nl,Peter Kreutzer,Julio Urias,4638,LAD,P,26,act,active,P,31,17,7,0,175.0,41,23,166,2.16,0.96
-2022,nl,Peter Kreutzer,Adam Ottavino,1424,NYM,P,0,act,active,P,35,4,1,3,37.3,6,3,44,1.45,0.884
+2022,nl,Peter Kreutzer,Jacob DeGrom,4563,Tex,P,34,act,active,P,11,5,4,0,64.3,8,9,102,3.08,0.746
 2022,nl,Peter Kreutzer,Andrew Bellatti,5197,Phi,P,1,act,active,P,10,1,1,0,9.7,6,0,11,1.86,1.345
+2022,nl,Peter Kreutzer,Manuel Rodriguez,7119,ChC,P,14,act,active,P,1,0,0,0,0.3,2,0,1,27.0,12.0
 2022,nl,Peter Kreutzer,Jose Alvarado,5898,Phi,P,13,act,active,P,3,0,1,0,2.7,0,0,6,10.13,1.125
-2022,nl,Peter Kreutzer,Lucas Sims,4510,Cin,P,10,rel,previously_active,,4,1,0,0,4.7,6,0,4,9.64,1.929
-2022,nl,Peter Kreutzer,Jason Alexander,7911,Mil,P,0,rel,previously_active,,7,2,1,0,29.0,12,3,14,5.28,1.793
-2022,nl,Peter Kreutzer,Wil Crowe,6522,Pit,P,1,rel,previously_active,,14,1,3,1,13.7,5,4,11,5.27,1.61
-2022,nl,Peter Kreutzer,Pierce Johnson,4507,Col,P,1,rel,previously_active,,4,0,1,0,4.0,4,0,8,6.75,2.25
-2022,nl,Peter Kreutzer,Jarlin Garcia,5342,Pit,P,11,rel,previously_active,,17,1,2,0,18.0,7,3,12,2.5,0.944
-2022,nl,Peter Kreutzer,Matt Swarmer,8214,Atl,P,0,rel,previously_active,,4,0,3,0,15.0,8,8,17,8.4,1.6
-2022,nl,Peter Kreutzer,Madison Bumgarner,2053,FA,P,1,rel,previously_active,,27,6,13,0,141.7,45,20,103,4.83,1.475
-2022,nl,Peter Kreutzer,Sean Manaea,4443,SF,P,981,rel,previously_active,,24,7,7,0,134.0,45,23,136,4.9,1.328
-2022,nl,Peter Kreutzer,Dominic Leone,4769,NYM,P,0,rel,previously_active,,20,1,1,0,19.7,9,3,22,4.12,1.475
-2022,nl,Peter Kreutzer,Steven Okert,5192,Mia,P,1,rel,previously_active,,6,0,3,0,4.7,6,0,5,5.79,1.929
-2022,nl,Peter Kreutzer,Tanner Scott,5757,Mia,P,0,rel,previously_active,,6,0,1,0,5.0,6,0,4,5.4,2.2
-2022,nl,Peter Kreutzer,Trevor Gott,5123,NYM,P,0,rel,previously_active,,9,1,0,0,7.7,3,2,9,8.22,1.304
-2022,nl,Peter Kreutzer,Hoby Milner,5906,Mil,P,0,rel,previously_active,,7,0,0,0,6.0,0,0,3,7.5,1.167
-2022,nl,Peter Kreutzer,Matt Bush,2291,FA,P,8,rel,previously_active,,16,0,1,0,15.0,5,5,19,4.2,0.867
-2022,nl,Peter Kreutzer,Victor Arano,5963,Was,P,0,rel,previously_active,,11,0,0,1,10.7,1,1,10,5.06,1.125
-2022,nl,Peter Kreutzer,Brad Boxberger,3185,ChC,P,0,rel,previously_active,,6,2,1,0,5.3,4,1,7,3.38,1.688
+2022,nl,Peter Kreutzer,Scott Effross,7825,NYY,P,0,act,active,P,20,0,1,4,20.0,7,1,20,1.35,1.0
+2022,nl,Peter Kreutzer,Julio Urias,4638,LAD,P,26,act,active,P,31,17,7,0,175.0,41,23,166,2.16,0.96
+2022,nl,Peter Kreutzer,Johan Oviedo,6467,Pit,P,14,act,active,P,1,0,0,0,4.0,0,0,1,4.5,1.25
+2022,nl,Peter Kreutzer,Adam Ottavino,1424,NYM,P,0,act,active,P,35,4,1,3,37.3,6,3,44,1.45,0.884
 2022,nl,Peter Kreutzer,Humberto Castellanos,7451,Ari,P,0,dis,previously_active,P,2,0,1,0,8.7,3,2,6,11.42,2.308
-2022,nl,Peter Kreutzer,Javier Assad,8270,ChC,P,68,rel,previously_active,,6,1,2,0,23.3,13,4,20,5.01,1.5
 2022,nl,Peter Kreutzer,Jordan Hicks,6366,StL,P,1,rel,previously_active,,12,1,4,0,32.3,23,3,31,4.73,1.392
-2022,nl,Peter Kreutzer,Dakota Hudson,6093,StL,P,90,rel,previously_active,,4,1,1,0,21.0,10,1,16,5.57,1.571
-2022,nl,Peter Kreutzer,Nabil Crismatt,6809,Ari,P,0,rel,previously_active,,6,1,1,0,5.7,4,1,10,7.94,1.941
-2022,nl,Peter Kreutzer,Chris Martin,4806,Bos,P,2,rel,previously_active,,6,2,0,0,5.3,0,1,3,1.69,0.375
-2022,nl,Peter Kreutzer,David Price,1453,FA,P,1,rel,previously_active,,11,0,0,0,11.3,3,2,14,4.76,1.588
-2022,nl,Peter Kreutzer,Mark Leiter,6164,ChC,P,13,rel,previously_active,,2,0,0,0,2.3,0,0,3,7.71,1.714
-2022,nl,Peter Kreutzer,Jesse Chavez,1202,Atl,P,4,res,previously_active,P,9,1,1,0,8.0,1,2,6,2.25,0.75
-2022,nl,Peter Kreutzer,Kyle Nelson,7391,Ari,P,0,rel,previously_active,,6,0,0,0,4.7,2,0,1,0.0,0.643
+2022,nl,Peter Kreutzer,Brad Boxberger,3185,ChC,P,0,rel,previously_active,,6,2,1,0,5.3,4,1,7,3.38,1.688
+2022,nl,Peter Kreutzer,Dominic Leone,4769,NYM,P,0,rel,previously_active,,20,1,1,0,19.7,9,3,22,4.12,1.475
 2022,nl,Peter Kreutzer,Carlos Estevez,5488,LAA,P,0,rel,previously_active,,11,1,1,0,8.7,4,2,2,5.19,1.846
+2022,nl,Peter Kreutzer,David Price,1453,FA,P,1,rel,previously_active,,11,0,0,0,11.3,3,2,14,4.76,1.588
+2022,nl,Peter Kreutzer,Nabil Crismatt,6809,Ari,P,0,rel,previously_active,,6,1,1,0,5.7,4,1,10,7.94,1.941
+2022,nl,Peter Kreutzer,Matt Swarmer,8214,Atl,P,0,rel,previously_active,,4,0,3,0,15.0,8,8,17,8.4,1.6
+2022,nl,Peter Kreutzer,Pierce Johnson,4507,Col,P,1,rel,previously_active,,4,0,1,0,4.0,4,0,8,6.75,2.25
+2022,nl,Peter Kreutzer,Dakota Hudson,6093,StL,P,90,rel,previously_active,,4,1,1,0,21.0,10,1,16,5.57,1.571
+2022,nl,Peter Kreutzer,Wil Crowe,6522,Pit,P,1,rel,previously_active,,14,1,3,1,13.7,5,4,11,5.27,1.61
 2022,nl,Peter Kreutzer,Zack Thompson,7055,StL,P,0,rel,previously_active,,2,0,0,0,8.0,2,2,6,5.62,1.125
+2022,nl,Peter Kreutzer,Trevor Gott,5123,NYM,P,0,rel,previously_active,,9,1,0,0,7.7,3,2,9,8.22,1.304
+2022,nl,Peter Kreutzer,Kyle Nelson,7391,Ari,P,0,rel,previously_active,,6,0,0,0,4.7,2,0,1,0.0,0.643
+2022,nl,Peter Kreutzer,Chris Martin,4806,Bos,P,2,rel,previously_active,,6,2,0,0,5.3,0,1,3,1.69,0.375
+2022,nl,Peter Kreutzer,Jason Alexander,7911,Mil,P,0,rel,previously_active,,7,2,1,0,29.0,12,3,14,5.28,1.793
+2022,nl,Peter Kreutzer,Madison Bumgarner,2053,FA,P,1,rel,previously_active,,27,6,13,0,141.7,45,20,103,4.83,1.475
+2022,nl,Peter Kreutzer,Matt Bush,2291,FA,P,8,rel,previously_active,,16,0,1,0,15.0,5,5,19,4.2,0.867
+2022,nl,Peter Kreutzer,Mark Leiter,6164,ChC,P,13,rel,previously_active,,2,0,0,0,2.3,0,0,3,7.71,1.714
+2022,nl,Peter Kreutzer,Jarlin Garcia,5342,Pit,P,11,rel,previously_active,,17,1,2,0,18.0,7,3,12,2.5,0.944
+2022,nl,Peter Kreutzer,Hoby Milner,5906,Mil,P,0,rel,previously_active,,7,0,0,0,6.0,0,0,3,7.5,1.167
+2022,nl,Peter Kreutzer,Tanner Scott,5757,Mia,P,0,rel,previously_active,,6,0,1,0,5.0,6,0,4,5.4,2.2
+2022,nl,Peter Kreutzer,Jesse Chavez,1202,Atl,P,4,res,previously_active,P,9,1,1,0,8.0,1,2,6,2.25,0.75
+2022,nl,Peter Kreutzer,Steven Okert,5192,Mia,P,1,rel,previously_active,,6,0,3,0,4.7,6,0,5,5.79,1.929
+2022,nl,Peter Kreutzer,Victor Arano,5963,Was,P,0,rel,previously_active,,11,0,0,1,10.7,1,1,10,5.06,1.125
+2022,nl,Peter Kreutzer,Javier Assad,8270,ChC,P,68,rel,previously_active,,6,1,2,0,23.3,13,4,20,5.01,1.5
+2022,nl,Peter Kreutzer,Lucas Sims,4510,Cin,P,10,rel,previously_active,,4,1,0,0,4.7,6,0,4,9.64,1.929
+2022,nl,Peter Kreutzer,Sean Manaea,4443,SF,P,981,rel,previously_active,,24,7,7,0,134.0,45,23,136,4.9,1.328
+2022,nl,Peter Kreutzer,Humberto Castellanos,7451,Ari,P,0,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
 2022,nl,Peter Kreutzer,Danny Duffy,2662,Tex,P,0,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
 2022,nl,Peter Kreutzer,Jesse Chavez,1202,Atl,P,4,res,reserved,P,2,0,1,0,1.3,1,0,2,27.0,4.5
-2022,nl,Peter Kreutzer,Humberto Castellanos,7451,Ari,P,0,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2022,nl,Peter Kreutzer,Scott Effross,7825,NYY,P,0,act,previously_reserved,P,7,0,1,0,5.7,1,1,5,4.76,0.706
+2022,nl,Peter Kreutzer,Jordan Hicks,6366,StL,P,1,rel,previously_reserved,,6,1,1,0,7.7,3,0,5,5.87,1.174
+2022,nl,Peter Kreutzer,Jose Alvarado,5898,Phi,P,13,act,previously_reserved,P,5,0,0,0,4.3,2,1,5,2.08,1.615
+2022,nl,Peter Kreutzer,David Price,1453,FA,P,1,rel,previously_reserved,,2,0,0,0,2.3,0,1,3,3.86,1.286
+2022,nl,Peter Kreutzer,Dominic Leone,4769,NYM,P,0,rel,previously_reserved,,5,0,2,1,4.3,1,0,3,6.23,1.385
+2022,nl,Peter Kreutzer,Kyle Nelson,7391,Ari,P,0,rel,previously_reserved,,3,0,0,0,2.0,2,0,0,4.5,2.5
+2022,nl,Peter Kreutzer,Chris Martin,4806,Bos,P,2,rel,previously_reserved,,5,1,0,0,5.3,0,0,10,1.69,0.563
+2022,nl,Peter Kreutzer,Jason Alexander,7911,Mil,P,0,rel,previously_reserved,,2,0,0,0,9.0,4,3,6,9.0,1.667
+2022,nl,Peter Kreutzer,Trevor Gott,5123,NYM,P,0,rel,previously_reserved,,3,0,0,0,3.0,1,0,3,0.0,0.667
+2022,nl,Peter Kreutzer,Pierce Johnson,4507,Col,P,1,rel,previously_reserved,,2,0,0,0,2.0,0,0,3,0.0,0.5
 2022,nl,Peter Kreutzer,Jarlin Garcia,5342,Pit,P,11,rel,previously_reserved,,4,0,0,0,4.7,0,0,4,0.0,0.643
 2022,nl,Peter Kreutzer,Sean Manaea,4443,SF,P,981,rel,previously_reserved,,1,0,1,0,4.3,1,3,4,16.62,2.308
-2022,nl,Peter Kreutzer,Dominic Leone,4769,NYM,P,0,rel,previously_reserved,,5,0,2,1,4.3,1,0,3,6.23,1.385
-2022,nl,Peter Kreutzer,Jose Alvarado,5898,Phi,P,13,act,previously_reserved,P,5,0,0,0,4.3,2,1,5,2.08,1.615
 2022,nl,Peter Kreutzer,Lucas Sims,4510,Cin,P,10,rel,previously_reserved,,2,0,0,1,2.0,0,0,1,9.0,1.0
-2022,nl,Peter Kreutzer,Jason Alexander,7911,Mil,P,0,rel,previously_reserved,,2,0,0,0,9.0,4,3,6,9.0,1.667
-2022,nl,Peter Kreutzer,Pierce Johnson,4507,Col,P,1,rel,previously_reserved,,2,0,0,0,2.0,0,0,3,0.0,0.5
-2022,nl,Peter Kreutzer,Jordan Hicks,6366,StL,P,1,rel,previously_reserved,,6,1,1,0,7.7,3,0,5,5.87,1.174
-2022,nl,Peter Kreutzer,Chris Martin,4806,Bos,P,2,rel,previously_reserved,,5,1,0,0,5.3,0,0,10,1.69,0.563
-2022,nl,Peter Kreutzer,David Price,1453,FA,P,1,rel,previously_reserved,,2,0,0,0,2.3,0,1,3,3.86,1.286
-2022,nl,Peter Kreutzer,Scott Effross,7825,NYY,P,0,act,previously_reserved,P,7,0,1,0,5.7,1,1,5,4.76,0.706
-2022,nl,Peter Kreutzer,Kyle Nelson,7391,Ari,P,0,rel,previously_reserved,,3,0,0,0,2.0,2,0,0,4.5,2.5
-2022,nl,Peter Kreutzer,Trevor Gott,5123,NYM,P,0,rel,previously_reserved,,3,0,0,0,3.0,1,0,3,0.0,0.667
 2022,nl,Peter Kreutzer,Victor Arano,5963,Was,P,0,rel,previously_reserved,,7,0,0,0,6.3,3,1,5,7.11,1.737
-2022,nl,Michael Simione,Zach Davies,4919,Ari,P,17,act,active,P,22,1,4,0,111.0,41,18,86,4.05,1.288
+2022,nl,Michael Simione,Tyler Beede,3727,FA,P,0,act,active,P,21,2,5,0,44.7,19,6,32,5.64,1.679
 2022,nl,Michael Simione,Kyle Freeland,4950,Col,P,3,act,active,P,29,8,11,0,162.7,51,18,128,4.54,1.414
-2022,nl,Michael Simione,Brad Hand,3496,Col,P,7,act,active,P,52,3,2,4,42.3,22,2,35,2.98,1.394
-2022,nl,Michael Simione,Brandon Woodruff,5857,Mil,P,28,act,active,P,27,13,4,0,153.3,42,18,190,3.05,1.07
 2022,nl,Michael Simione,Justin Steele,6703,ChC,P,57,act,active,P,19,3,6,0,95.0,38,7,103,2.94,1.337
+2022,nl,Michael Simione,Brad Hand,3496,Col,P,7,act,active,P,52,3,2,4,42.3,22,2,35,2.98,1.394
+2022,nl,Michael Simione,Zach Davies,4919,Ari,P,17,act,active,P,22,1,4,0,111.0,41,18,86,4.05,1.288
+2022,nl,Michael Simione,Devin Williams,4885,Mil,P,8,act,active,P,65,6,4,15,60.7,30,2,96,1.93,1.005
+2022,nl,Michael Simione,Kenley Jansen,2963,Bos,P,18,act,active,P,65,5,2,41,64.0,22,8,85,3.38,1.047
+2022,nl,Michael Simione,Brandon Woodruff,5857,Mil,P,28,act,active,P,27,13,4,0,153.3,42,18,190,3.05,1.07
 2022,nl,Michael Simione,Alex Wood,4113,SF,P,9,act,active,P,26,8,12,0,130.7,30,17,131,5.1,1.24
 2022,nl,Michael Simione,Taylor Rogers,5129,SF,P,822,act,active,P,64,4,8,29,62.3,18,7,83,4.91,1.203
-2022,nl,Michael Simione,Tyler Beede,3727,FA,P,0,act,active,P,21,2,5,0,44.7,19,6,32,5.64,1.679
-2022,nl,Michael Simione,Kenley Jansen,2963,Bos,P,18,act,active,P,65,5,2,41,64.0,22,8,85,3.38,1.047
-2022,nl,Michael Simione,Devin Williams,4885,Mil,P,8,act,active,P,65,6,4,15,60.7,30,2,96,1.93,1.005
-2022,nl,Michael Simione,Zach Thompson,6771,Tor,P,1,rel,previously_active,,3,0,2,0,10.0,7,3,9,10.8,2.7
 2022,nl,Michael Simione,Steven Matz,4541,StL,P,8,rel,previously_active,,9,3,3,0,37.3,8,8,44,6.03,1.393
-2022,nl,Michael Simione,Wade Miley,2622,Mil,P,1,rel,previously_active,,2,1,0,0,13.0,2,0,9,2.08,0.692
+2022,nl,Michael Simione,Zach Thompson,6771,Tor,P,1,rel,previously_active,,3,0,2,0,10.0,7,3,9,10.8,2.7
 2022,nl,Michael Simione,Luke Weaver,4987,Cin,P,1,rel,previously_active,,1,0,0,0,0.7,0,0,0,13.5,4.5
-2022,nl,Michael Simione,Antonio Senzatela,5237,Col,P,0,rel,previously_reserved,,2,1,0,0,8.3,1,0,2,2.16,2.04
+2022,nl,Michael Simione,Wade Miley,2622,Mil,P,1,rel,previously_active,,2,1,0,0,13.0,2,0,9,2.08,0.692
 2022,nl,Michael Simione,Wade Miley,2622,Mil,P,1,rel,previously_reserved,,4,0,0,0,15.0,9,1,14,3.6,1.533
 2022,nl,Michael Simione,Kyle Freeland,4950,Col,P,3,act,previously_reserved,P,2,1,0,0,12.0,2,1,3,4.5,1.333
+2022,nl,Michael Simione,Tyler Beede,3727,FA,P,0,act,previously_reserved,P,10,0,0,0,16.7,10,1,7,3.78,1.5
 2022,nl,Michael Simione,Justin Steele,6703,ChC,P,57,act,previously_reserved,P,4,0,1,0,19.0,11,1,18,5.21,1.526
 2022,nl,Michael Simione,Zach Thompson,6771,Tor,P,1,rel,previously_reserved,,1,0,1,0,4.3,2,1,3,8.31,1.154
-2022,nl,Michael Simione,Tyler Beede,3727,FA,P,0,act,previously_reserved,P,10,0,0,0,16.7,10,1,7,3.78,1.5
-2022,nl,Lenny Melnick,Seranthony Dominguez,6307,Phi,P,11,act,active,P,33,3,4,7,31.7,20,3,38,3.69,1.484
-2022,nl,Lenny Melnick,Adrian Houser,5231,Mil,P,2,act,active,P,22,6,10,0,102.7,47,8,69,4.73,1.461
-2022,nl,Lenny Melnick,Yu Darvish,2044,SD,P,19,act,active,P,30,16,8,0,194.7,37,22,197,3.1,0.95
-2022,nl,Lenny Melnick,Kyle Gibson,2705,Bal,P,4,act,active,P,31,10,8,0,167.7,48,24,144,5.05,1.336
-2022,nl,Lenny Melnick,Brandon Hughes,8209,ChC,P,41,act,active,P,42,1,3,8,40.7,12,9,42,2.66,0.91
-2022,nl,Lenny Melnick,Mychal Givens,3256,Bal,P,1,act,active,P,56,7,3,2,58.3,25,8,67,3.55,1.354
-2022,nl,Lenny Melnick,Trevor Williams,4867,Was,P,25,act,active,P,23,3,2,1,70.7,21,9,67,2.67,1.203
+2022,nl,Michael Simione,Antonio Senzatela,5237,Col,P,0,rel,previously_reserved,,2,1,0,0,8.3,1,0,2,2.16,2.04
 2022,nl,Lenny Melnick,Trevor Rogers,6201,Mia,P,17,act,active,P,23,4,11,0,107.0,45,15,106,5.47,1.505
 2022,nl,Lenny Melnick,Max Fried,4194,Atl,P,22,act,active,P,22,10,5,0,136.3,26,8,123,2.18,1.005
-2022,nl,Lenny Melnick,Genesis Cabrera,6545,StL,P,1,res,previously_active,P,33,4,2,1,39.3,15,8,27,3.2,1.068
+2022,nl,Lenny Melnick,Adrian Houser,5231,Mil,P,2,act,active,P,22,6,10,0,102.7,47,8,69,4.73,1.461
+2022,nl,Lenny Melnick,Yu Darvish,2044,SD,P,19,act,active,P,30,16,8,0,194.7,37,22,197,3.1,0.95
+2022,nl,Lenny Melnick,Seranthony Dominguez,6307,Phi,P,11,act,active,P,33,3,4,7,31.7,20,3,38,3.69,1.484
+2022,nl,Lenny Melnick,Brandon Hughes,8209,ChC,P,41,act,active,P,42,1,3,8,40.7,12,9,42,2.66,0.91
+2022,nl,Lenny Melnick,Kyle Gibson,2705,Bal,P,4,act,active,P,31,10,8,0,167.7,48,24,144,5.05,1.336
+2022,nl,Lenny Melnick,Mychal Givens,3256,Bal,P,1,act,active,P,56,7,3,2,58.3,25,8,67,3.55,1.354
+2022,nl,Lenny Melnick,Trevor Williams,4867,Was,P,25,act,active,P,23,3,2,1,70.7,21,9,67,2.67,1.203
 2022,nl,Lenny Melnick,Dakota Hudson,6093,StL,P,3,rel,previously_active,,18,6,6,0,96.7,42,7,53,4.1,1.355
 2022,nl,Lenny Melnick,Hunter Strickland,2873,FA,P,31,rel,previously_active,,16,0,1,0,15.7,14,1,12,5.74,1.915
+2022,nl,Lenny Melnick,Genesis Cabrera,6545,StL,P,1,res,previously_active,P,33,4,2,1,39.3,15,8,27,3.2,1.068
 2022,nl,Lenny Melnick,Genesis Cabrera,6545,StL,P,1,res,reserved,P,6,0,0,0,5.3,5,0,5,15.19,3.187
 2022,nl,Lenny Melnick,Brandon Hughes,8209,ChC,P,41,act,previously_reserved,P,12,1,0,0,13.0,8,2,18,4.85,1.692
-2022,nl,Lenny Melnick,Mychal Givens,3256,Bal,P,1,act,previously_reserved,P,3,0,0,0,3.0,0,0,4,0.0,0.667
 2022,nl,Lenny Melnick,Seranthony Dominguez,6307,Phi,P,11,act,previously_reserved,P,12,2,0,2,11.0,0,1,14,0.82,0.273
 2022,nl,Lenny Melnick,Dakota Hudson,6093,StL,P,3,rel,previously_reserved,,1,0,0,0,4.3,2,1,1,4.15,1.385
+2022,nl,Lenny Melnick,Mychal Givens,3256,Bal,P,1,act,previously_reserved,P,3,0,0,0,3.0,0,0,4,0.0,0.667
