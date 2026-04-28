@@ -95,3 +95,19 @@ def parse_ip(text: str) -> float:
         return float(s)
     except ValueError:
         return 0.0
+
+
+def parse_player_name_and_id(name_cell: Tag) -> tuple[str, str]:
+    """Extract (player_name, player_id) from a <td> in the Name column.
+
+    Strips Onroto's parenthesized status annotations (e.g. "(DL)", "(Off DL)")
+    and any leading "#" marker. Returns ("", "") when the cell is blank.
+    """
+    link = name_cell.find("a", href=True)
+    if link is None:
+        raw = name_cell.get_text(strip=True)
+        cleaned = raw.lstrip("#").strip()
+        return (cleaned, "")
+    raw_name = ANNOTATION_RE.sub("", link.get_text()).lstrip("#").strip()
+    m = PLAYER_ID_RE.search(link["href"])
+    return (raw_name, m.group(1) if m else "")

@@ -3,6 +3,7 @@
 from pathlib import Path
 
 import pytest
+from bs4 import BeautifulSoup
 
 import team_stats
 
@@ -52,3 +53,33 @@ def test_parse_float(raw, expected):
 )
 def test_parse_ip(raw, expected):
     assert team_stats.parse_ip(raw) == expected
+
+
+def _td(html_fragment: str):
+    """Build a <td> tag from an HTML fragment, for parser testing."""
+    return BeautifulSoup(f"<table><tr><td>{html_fragment}</td></tr></table>", "lxml").td
+
+
+def test_parse_player_name_and_id_with_link():
+    cell = _td('<a href="/x?+1010&y">Derek Jeter</a>')
+    assert team_stats.parse_player_name_and_id(cell) == ("Derek Jeter", "1010")
+
+
+def test_parse_player_name_and_id_strips_annotations():
+    cell = _td('<a href="/x?+2080&y">Jake Arrieta (DL)</a>')
+    assert team_stats.parse_player_name_and_id(cell) == ("Jake Arrieta", "2080")
+
+
+def test_parse_player_name_and_id_strips_off_dl_annotation():
+    cell = _td('<a href="/x?+2080&y">#Jake Arrieta (Off DL)</a>')
+    assert team_stats.parse_player_name_and_id(cell) == ("Jake Arrieta", "2080")
+
+
+def test_parse_player_name_and_id_no_link():
+    cell = _td("Some Player")
+    assert team_stats.parse_player_name_and_id(cell) == ("Some Player", "")
+
+
+def test_parse_player_name_and_id_blank():
+    cell = _td("")
+    assert team_stats.parse_player_name_and_id(cell) == ("", "")
