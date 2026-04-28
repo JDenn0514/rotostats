@@ -65,3 +65,64 @@ test_that(".filter_active_sections errors on unknown section value", {
     class = "rotostats_error_team_season_unknown_section"
   )
 })
+
+test_that(".aggregate_team_batting sums AB and reconstructs H/BB/SO per team", {
+  bat <- tibble::tibble(
+    year = 2024L, league = "al", team = "Owner1",
+    roster_section = "active",
+    ab  = c(500L, 400L, 300L),
+    bb  = c( 50L,  40L,  20L),
+    so  = c(120L,  90L,  60L),
+    avg = c(0.300, 0.250, 0.200),
+    obp = c(0.380, 0.320, 0.260)
+  )
+  out <- rotostats:::.aggregate_team_batting(bat)
+  expect_equal(out$year, 2024L)
+  expect_equal(out$league, "al")
+  expect_equal(out$team, "Owner1")
+  expect_equal(out$ab, 1200L)
+  expect_equal(out$bb_bat, 110L)
+  expect_equal(out$so_bat, 270L)
+  # H_eq = round(500*.300) + round(400*.250) + round(300*.200) = 150+100+60 = 310
+  expect_equal(out$h_bat_eq, 310L)
+})
+
+test_that(".aggregate_team_batting groups by (year, league, team)", {
+  bat <- tibble::tibble(
+    year = c(2024L, 2024L, 2024L),
+    league = c("al", "al", "al"),
+    team = c("A", "A", "B"),
+    roster_section = "active",
+    ab  = c(500L, 400L, 100L),
+    bb  = 0L, so = 0L,
+    avg = 0.300, obp = 0.380
+  )
+  out <- rotostats:::.aggregate_team_batting(bat)
+  expect_equal(nrow(out), 2L)
+  expect_setequal(out$team, c("A", "B"))
+  ab_a <- out$ab[out$team == "A"]
+  ab_b <- out$ab[out$team == "B"]
+  expect_equal(ab_a, 900L)
+  expect_equal(ab_b, 100L)
+})
+
+test_that(".aggregate_team_pitching sums IP and reconstructs ER/H/BB", {
+  pit <- tibble::tibble(
+    year = 2024L, league = "al", team = "Owner1",
+    roster_section = "active",
+    ip   = c(200.0, 150.0, 60.0),
+    bb   = c( 50L,   40L,  20L),
+    era  = c(3.60, 4.20, 5.00),
+    whip = c(1.20, 1.30, 1.40)
+  )
+  out <- rotostats:::.aggregate_team_pitching(pit)
+  expect_equal(out$ip, 410.0)
+  expect_equal(out$bb_pit, 110L)
+  # ER_eq = round(200*3.60/9) + round(150*4.20/9) + round(60*5.00/9)
+  #       = 80 + 70 + 33 = 183
+  expect_equal(out$er_eq, 183L)
+  # h_pit_eq per row = round(ip*whip) - bb
+  # rows: round(240) - 50 = 190, round(195) - 40 = 155, round(84) - 20 = 64
+  # sum = 190 + 155 + 64 = 409
+  expect_equal(out$h_pit_eq, 409L)
+})

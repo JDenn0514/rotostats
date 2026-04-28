@@ -146,3 +146,51 @@
   }
   df[df$roster_section %in% .tw_ts_kept_sections, , drop = FALSE]
 }
+
+#' Aggregate batter rows to per-team-season totals.
+#'
+#' Sums AB, BB, SO directly. Reconstructs hits via per-player
+#' `round(ab * avg)` then sums, matching Onroto's three-digit AVG display
+#' precision. Output columns: year, league, team, ab, bb_bat, so_bat,
+#' h_bat_eq.
+#'
+#' @param df Tibble of batter rows (one per player-team-season).
+#' @return Tibble grouped by (year, league, team).
+#' @keywords internal
+#' @noRd
+.aggregate_team_batting <- function(df) {
+  df$h_eq_row <- as.integer(round(df$ab * df$avg))
+  out <- dplyr::summarise(
+    dplyr::group_by(df, .data$year, .data$league, .data$team),
+    ab        = sum(.data$ab),
+    bb_bat    = sum(.data$bb),
+    so_bat    = sum(.data$so),
+    h_bat_eq  = sum(.data$h_eq_row),
+    .groups   = "drop"
+  )
+  out
+}
+
+#' Aggregate pitcher rows to per-team-season totals.
+#'
+#' Sums IP and BB directly. Reconstructs ER via per-player
+#' `round(ip * era / 9)` and H via per-player `round(ip * whip) - bb`. All
+#' reconstructions match Onroto's two-digit ERA / three-digit WHIP display.
+#'
+#' @param df Tibble of pitcher rows.
+#' @return Tibble grouped by (year, league, team).
+#' @keywords internal
+#' @noRd
+.aggregate_team_pitching <- function(df) {
+  df$er_eq_row <- as.integer(round(df$ip * df$era / 9))
+  df$h_eq_row  <- as.integer(round(df$ip * df$whip)) - df$bb
+  out <- dplyr::summarise(
+    dplyr::group_by(df, .data$year, .data$league, .data$team),
+    ip       = sum(.data$ip),
+    bb_pit   = sum(.data$bb),
+    er_eq    = sum(.data$er_eq_row),
+    h_pit_eq = sum(.data$h_eq_row),
+    .groups  = "drop"
+  )
+  out
+}
