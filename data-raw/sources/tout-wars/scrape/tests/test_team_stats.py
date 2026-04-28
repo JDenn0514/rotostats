@@ -185,3 +185,36 @@ def test_is_empty_team_page_true(html_2025_al_team_empty):
 
 def test_is_empty_team_page_false(html_2025_al_team1):
     assert team_stats.is_empty_team_page(html_2025_al_team1) is False
+
+
+@pytest.fixture
+def html_rosters_2025_al():
+    return (FIXTURE_DIR / "rosters_2025_al.html").read_text()
+
+
+def test_parse_roster_page_for_eligibility(html_rosters_2025_al):
+    elig_map = team_stats.parse_roster_page_for_eligibility(html_rosters_2025_al)
+    # Map is keyed by (team, key) with key = "id:<pid>" or "name:<name>"
+    assert isinstance(elig_map, dict)
+    assert len(elig_map) > 100, f"expected lots of player rows, got {len(elig_map)}"
+    # At least some non-empty eligibility values
+    sample_values = [v for v in elig_map.values() if v]
+    assert len(sample_values) > 50
+
+
+def test_lookup_eligibility_prefers_id_over_name():
+    elig_map = {
+        ("Team A", "id:1010"): "SS,MI",
+        ("Team A", "name:Derek Jeter"): "WRONG",
+    }
+    assert team_stats.lookup_eligibility(elig_map, "Team A", "1010", "Derek Jeter") == "SS,MI"
+
+
+def test_lookup_eligibility_falls_back_to_name():
+    elig_map = {("Team A", "name:Some Player"): "OF"}
+    assert team_stats.lookup_eligibility(elig_map, "Team A", "", "Some Player") == "OF"
+
+
+def test_lookup_eligibility_returns_blank_when_missing():
+    elig_map = {}
+    assert team_stats.lookup_eligibility(elig_map, "Team A", "999", "Nobody") == ""

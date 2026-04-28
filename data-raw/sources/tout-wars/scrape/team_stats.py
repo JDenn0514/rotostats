@@ -555,3 +555,116 @@ def is_empty_team_page(html: str) -> bool:
     """
     result = parse_team_page(html, year=0, league_short="")
     return not result.batter_rows and not result.pitcher_rows and not result.totals
+
+
+def _team_class(team_p: Tag) -> str:
+    for c in team_p.get("class", []):
+        if c.startswith("team_"):
+            return c
+    return ""
+
+
+def _team_name_from_p(team_p: Tag) -> str:
+    b = team_p.find("b")
+    if b:
+        return b.get_text(strip=True)
+    return team_p.get_text(strip=True).split(",")[0].strip()
+
+
+def _team_tables_for_roster(team_p: Tag, team_p_class: str) -> list[Tag]:
+    """Walk forward from a team's <p> tag, collecting Active/Reserved tables
+    until a <p> with a different team_NNNN class is encountered.
+    """
+    out: list[Tag] = []
+    sib = team_p.next_sibling
+    while sib is not None:
+        if isinstance(sib, Tag):
+            if sib.name == "p":
+                cls = next(
+                    (c for c in sib.get("class", []) if c.startswith("team_")), None
+                )
+                if cls is not None and cls != team_p_class:
+                    break
+            elif sib.name == "table":
+                classes = " ".join(sib.get("class", []))
+                if "Active_table" in classes or "Reserved_table" in classes:
+                    out.append(sib)
+        sib = sib.next_sibling
+    return out
+
+
+def _roster_eligibility_columns(table: Tag) -> tuple[int, int, int] | None:
+    """Return (name_col, elig_col, max_col_seen) for a roster page table."""
+    th_row = table.find("tr")
+    if th_row is None:
+        return None
+    headers = [th.get_text(strip=True) for th in th_row.find_all("th")]
+    if "Elig" not in headers:
+        return None
+    elig_col = headers.index("Elig")
+    name_candidates = [
+        h for h in headers
+        if h not in {"Pos", "Team", "Sal", "Stat", "Elig",
+                     "Games Played By Position",
+                     "DH", "C", "1B", "2B", "3B", "SS", "OF"}
+    ]
+    if not name_candidates:
+        return None
+    name_col = headers.index(name_candidates[0])
+    return (name_col, elig_col, max(name_col, elig_col))
+
+
+def parse_roster_page_for_eligibility(html: str) -> dict[tuple[str, str], str]:
+    """Parse display_roster.pl into a {(team, key) → eligibility} map.
+
+    `key` is `"id:<player_id>"` when a link/id is present, else
+    `"name:<player_name>"`. Both keys are emitted for each player so the
+    join can fall back to name when player_id is missing on the team_stats
+    side.
+    """
+    soup = BeautifulSoup(html, "lxml")
+    out: dict[tuple[str, str], str] = {}
+
+    seen: set[str] = set()
+    team_ps: list[Tag] = []
+    for p in soup.find_all("p", class_=re.compile(r"^team_\d+$")):
+        cls = next((c for c in p.get("class", []) if c.startswith("team_")), None)
+        if cls is None or cls in seen:
+            continue
+        seen.add(cls)
+        team_ps.append(p)
+
+    for team_p in team_ps:
+        team_name = _team_name_from_p(team_p)
+        for table in _team_tables_for_roster(team_p, _team_class(team_p)):
+            cols = _roster_eligibility_columns(table)
+            if cols is None:
+                continue
+            name_col, elig_col, max_col = cols
+            for row in table.find_all("tr"):
+                cells = row.find_all("td")
+                if len(cells) < max_col + 1:
+                    continue
+                name, pid = parse_player_name_and_id(cells[name_col])
+                if not name:
+                    continue
+                elig = cells[elig_col].get_text(strip=True)
+                if pid:
+                    out[(team_name, f"id:{pid}")] = elig
+                out[(team_name, f"name:{name}")] = elig
+    return out
+
+
+def lookup_eligibility(
+    elig_map: dict[tuple[str, str], str],
+    team: str,
+    player_id: str,
+    player_name: str,
+) -> str:
+    """Look up eligibility, preferring player_id over player_name."""
+    if player_id:
+        v = elig_map.get((team, f"id:{player_id}"))
+        if v is not None:
+            return v
+    v = elig_map.get((team, f"name:{player_name}"))
+    return v if v is not None else ""
