@@ -1,17 +1,17 @@
-"""Run both scrapers end-to-end.
+"""Run all Tout Wars scrapers end-to-end.
 
 Usage: python run_all.py
 """
 
 import standings
-import rosters
+import team_stats
 
 
 def main() -> None:
     print("=== Standings ===")
     standings.main()
-    print("\n=== Rosters ===")
-    rosters.main()
+    print("\n=== Team Stats ===")
+    team_stats.main()
     print("\nDone.")
 
 
