@@ -15,6 +15,26 @@ def test_module_importable():
     assert len(team_stats.LEAGUES) == 3
 
 
+@pytest.mark.parametrize("raw,expected", [
+    ("0", 0), ("17", 17), (" 17 ", 17), ("", 0), ("---", 0), ("N/A", 0),
+])
+def test_parse_int(raw, expected):
+    assert team_stats.parse_int(raw) == expected
+
+
+@pytest.mark.parametrize("raw,expected", [
+    ("0.000", 0.0),
+    (".286", pytest.approx(0.286)),
+    ("0.286", pytest.approx(0.286)),
+    ("3.45", pytest.approx(3.45)),
+    ("", 0.0),
+    ("---", 0.0),
+    ("N/A", 0.0),
+])
+def test_parse_float(raw, expected):
+    assert team_stats.parse_float(raw) == expected
+
+
 @pytest.mark.parametrize(
     "raw,expected",
     [

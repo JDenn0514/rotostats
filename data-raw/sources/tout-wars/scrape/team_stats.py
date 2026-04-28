@@ -41,6 +41,22 @@ PLAYER_ID_RE = re.compile(r"\+(\d+)&")
 ANNOTATION_RE = re.compile(r"\s*\((?:Off DL|Non Elig Pos|DL|Farm|Res)\s*\)\s*$")
 
 
+def parse_int(text: str) -> int:
+    s = (text or "").strip()
+    try:
+        return int(s)
+    except ValueError:
+        return 0
+
+
+def parse_float(text: str) -> float:
+    s = (text or "").strip()
+    try:
+        return float(s)
+    except ValueError:
+        return 0.0
+
+
 BATTER_COLUMNS = [
     "year", "league", "team",
     "player_name", "player_id", "mlb_team",
