@@ -99,3 +99,47 @@ def test_parse_player_name_and_id_blank():
 ])
 def test_section_label_from_heading(heading, expected):
     assert team_stats.section_label_from_heading(heading) == expected
+
+
+@pytest.fixture
+def html_2025_al_team1():
+    return (FIXTURE_DIR / "team_stats_2025_al_team1.html").read_text()
+
+
+def test_parse_team_page_returns_team_name_and_rows(html_2025_al_team1):
+    result = team_stats.parse_team_page(html_2025_al_team1, year=2025, league_short="al")
+    assert isinstance(result.team_name, str) and result.team_name != ""
+    assert len(result.batter_rows) > 0, "expected at least one batter row"
+    assert len(result.pitcher_rows) > 0, "expected at least one pitcher row"
+
+    first_b = result.batter_rows[0]
+    assert set(first_b.keys()) == set(team_stats.BATTER_COLUMNS) - {"eligibility"}
+    # eligibility is joined later; team_page parser leaves it absent
+    assert first_b["year"] == 2025
+    assert first_b["league"] == "al"
+    assert first_b["team"] == result.team_name
+    assert isinstance(first_b["salary"], int)
+    assert isinstance(first_b["ab"], int)
+    assert isinstance(first_b["avg"], float)
+
+    first_p = result.pitcher_rows[0]
+    assert set(first_p.keys()) == set(team_stats.PITCHER_COLUMNS) - {"eligibility"}
+    assert isinstance(first_p["ip"], float)
+    assert isinstance(first_p["era"], float)
+
+
+def test_parse_team_page_sections_present(html_2025_al_team1):
+    result = team_stats.parse_team_page(html_2025_al_team1, year=2025, league_short="al")
+    bat_sections = {r["roster_section"] for r in result.batter_rows}
+    pit_sections = {r["roster_section"] for r in result.pitcher_rows}
+    valid = {"active", "reserved", "previously_active", "previously_reserved"}
+    assert bat_sections.issubset(valid)
+    assert pit_sections.issubset(valid)
+    assert "active" in bat_sections
+    assert "active" in pit_sections
+
+
+def test_parse_team_page_skips_total_rows_from_player_rows(html_2025_al_team1):
+    result = team_stats.parse_team_page(html_2025_al_team1, year=2025, league_short="al")
+    for r in result.batter_rows + result.pitcher_rows:
+        assert not r["player_name"].upper().startswith("TOTAL")
