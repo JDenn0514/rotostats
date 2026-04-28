@@ -290,3 +290,40 @@ def test_warn_high_salaries_at_threshold_is_silent():
 
 def test_warn_high_salaries_empty():
     assert team_stats.warn_high_salaries([], threshold=750) == []
+
+
+def test_scrape_league_year_with_mocked_fetchers(
+    html_rosters_2025_al, html_2025_al_team1, html_2025_al_team_empty
+):
+    """Run the orchestrator with two team pages then an empty page."""
+    fetched = []
+
+    def fake_fetch_rosters(session, sid, code, year):
+        fetched.append(("rosters", code, year))
+        return html_rosters_2025_al
+
+    def fake_fetch_team_stats(session, sid, code, idx, year):
+        fetched.append(("team", code, idx, year))
+        if idx == 1 or idx == 2:
+            return html_2025_al_team1
+        return html_2025_al_team_empty
+
+    bat_df, pit_df = team_stats.scrape_league_year(
+        session=None, sid="guest",
+        league_code="toutal", league_short="al", year=2025,
+        fetch_rosters_fn=fake_fetch_rosters,
+        fetch_team_stats_fn=fake_fetch_team_stats,
+        sleep_seconds=0,
+    )
+    assert ("rosters", "toutal", 2025) in fetched
+    assert ("team", "toutal", 1, 2025) in fetched
+    assert ("team", "toutal", 3, 2025) in fetched  # iteration kept going
+    # Stopped at idx=3 (the empty fixture)
+    assert ("team", "toutal", 4, 2025) not in fetched
+    assert len(bat_df) > 0
+    assert len(pit_df) > 0
+    assert list(bat_df.columns) == team_stats.BATTER_COLUMNS
+    assert list(pit_df.columns) == team_stats.PITCHER_COLUMNS
+    # Eligibility joined for at least some active rows
+    active_bats = bat_df[bat_df["roster_section"] == "active"]
+    assert (active_bats["eligibility"] != "").sum() > 0

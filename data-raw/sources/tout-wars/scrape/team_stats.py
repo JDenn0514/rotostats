@@ -15,6 +15,7 @@ design rationale.
 
 from __future__ import annotations
 
+import logging
 import re
 import time
 from pathlib import Path
@@ -721,6 +722,9 @@ def warn_high_salaries(rows: list[dict], threshold: int = SALARY_WARN_THRESHOLD)
     return out
 
 
+log = logging.getLogger(__name__)
+
+
 def fetch_rosters(session: requests.Session, sid: str,
                   league_code: str, year: int) -> str:
     url = (
@@ -741,3 +745,55 @@ def fetch_team_stats(session: requests.Session, sid: str,
     resp = session.get(url)
     resp.raise_for_status()
     return resp.text
+
+
+def scrape_league_year(
+    session: requests.Session | None,
+    sid: str,
+    league_code: str,
+    league_short: str,
+    year: int,
+    fetch_rosters_fn=fetch_rosters,
+    fetch_team_stats_fn=fetch_team_stats,
+    sleep_seconds: float = 0.5,
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Fetch and parse one (league, year), returning (batters_df, pitchers_df)."""
+    rosters_html = fetch_rosters_fn(session, sid, league_code, year)
+    elig_map = parse_roster_page_for_eligibility(rosters_html)
+
+    all_batters: list[dict] = []
+    all_pitchers: list[dict] = []
+
+    for team_idx in range(1, MAX_TEAM_IDX + 1):
+        if sleep_seconds:
+            time.sleep(sleep_seconds)
+        html = fetch_team_stats_fn(session, sid, league_code, team_idx, year)
+        if is_empty_team_page(html):
+            break
+        result = parse_team_page(html, year=year, league_short=league_short)
+        for w in check_section_totals(result):
+            log.warning(w)
+        all_batters.extend(result.batter_rows)
+        all_pitchers.extend(result.pitcher_rows)
+
+    # Audit duplicates / cross-section per type
+    all_batters, info_b, warn_b = audit_player_sections(all_batters)
+    all_pitchers, info_p, warn_p = audit_player_sections(all_pitchers)
+    for m in info_b + info_p:
+        log.info(m)
+    for m in warn_b + warn_p:
+        log.warning(m)
+
+    # Salary warnings
+    for m in warn_high_salaries(all_batters) + warn_high_salaries(all_pitchers):
+        log.warning(m)
+
+    # Eligibility join
+    for r in all_batters + all_pitchers:
+        r["eligibility"] = lookup_eligibility(
+            elig_map, r["team"], r["player_id"], r["player_name"]
+        )
+
+    bat_df = pd.DataFrame(all_batters, columns=BATTER_COLUMNS)
+    pit_df = pd.DataFrame(all_pitchers, columns=PITCHER_COLUMNS)
+    return bat_df, pit_df
