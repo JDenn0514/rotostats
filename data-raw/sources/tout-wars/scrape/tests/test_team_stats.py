@@ -270,3 +270,23 @@ def test_audit_player_sections_clean_input():
     assert len(deduped) == 3
     assert info == []
     assert warns == []
+
+
+def test_warn_high_salaries_flags_over_threshold():
+    rows = [
+        _bat_row("Team A", "Cheap", "1", "active") | {"salary": 100},
+        _bat_row("Team A", "Pricey", "2", "active") | {"salary": 800},
+    ]
+    warns = team_stats.warn_high_salaries(rows, threshold=750)
+    assert len(warns) == 1
+    assert "Pricey" in warns[0]
+    assert "800" in warns[0]
+
+
+def test_warn_high_salaries_at_threshold_is_silent():
+    rows = [_bat_row("Team A", "Border", "1", "active") | {"salary": 750}]
+    assert team_stats.warn_high_salaries(rows, threshold=750) == []
+
+
+def test_warn_high_salaries_empty():
+    assert team_stats.warn_high_salaries([], threshold=750) == []

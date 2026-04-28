@@ -706,3 +706,16 @@ def audit_player_sections(
                 f"sections={sorted(sections)}"
             )
     return out, info, warns
+
+
+def warn_high_salaries(rows: list[dict], threshold: int = SALARY_WARN_THRESHOLD) -> list[str]:
+    """Return one warning per row whose `salary` strictly exceeds `threshold`."""
+    out: list[str] = []
+    for r in rows:
+        sal = r.get("salary", 0)
+        if sal > threshold:
+            out.append(
+                f"high salary: year={r.get('year')} league={r.get('league')} "
+                f"team={r.get('team')!r} player={r.get('player_name')!r} salary={sal}"
+            )
+    return out
