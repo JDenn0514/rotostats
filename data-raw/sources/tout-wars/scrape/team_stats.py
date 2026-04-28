@@ -719,3 +719,25 @@ def warn_high_salaries(rows: list[dict], threshold: int = SALARY_WARN_THRESHOLD)
                 f"team={r.get('team')!r} player={r.get('player_name')!r} salary={sal}"
             )
     return out
+
+
+def fetch_rosters(session: requests.Session, sid: str,
+                  league_code: str, year: int) -> str:
+    url = (
+        f"{BASE_URL}/baseball/webnew/display_roster.pl?"
+        f"{league_code}+0+all+{year}&session_id={sid}"
+    )
+    resp = session.get(url)
+    resp.raise_for_status()
+    return resp.text
+
+
+def fetch_team_stats(session: requests.Session, sid: str,
+                     league_code: str, team_idx: int, year: int) -> str:
+    url = (
+        f"{BASE_URL}/baseball/webnew/display_team_stats.pl?"
+        f"{league_code}+0+{team_idx}+{year}&session_id={sid}"
+    )
+    resp = session.get(url)
+    resp.raise_for_status()
+    return resp.text
