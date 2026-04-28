@@ -1,385 +1,385 @@
 year,league,team,player_name,player_id,mlb_team,position,salary,status,roster_section,eligibility,g,w,l,sv,ip,bb,hr,so,era,whip
-2013,al,Larry Schechter,Greg Holland,3343,KC,P,18,act,active,P,68,2,1,47,67.0,18,3,103,1.21,0.866
-2013,al,Larry Schechter,Wei-Yin Chen,3151,Bal,P,6,act,active,P,21,7,7,0,125.3,39,14,91,4.09,1.309
-2013,al,Larry Schechter,A.J. Griffin,3734,Oak,P,5,act,active,P,32,14,10,0,200.0,54,36,171,3.82,1.125
 2013,al,Larry Schechter,Sean Doolittle,2332,Oak,P,0,act,active,P,7,1,0,1,8.3,0,0,8,1.08,0.6
-2013,al,Larry Schechter,Joaquin Benoit,1493,SD,P,3,act,active,P,36,2,1,20,35.7,13,3,36,2.02,1.037
 2013,al,Larry Schechter,Jered Weaver,730,LAA,P,24,act,active,P,24,11,8,0,154.3,37,17,117,3.27,1.14
-2013,al,Larry Schechter,Jason Vargas,942,KC,P,2,act,active,P,21,8,7,0,134.0,41,14,98,3.96,1.343
+2013,al,Larry Schechter,Joaquin Benoit,1493,SD,P,3,act,active,P,36,2,1,20,35.7,13,3,36,2.02,1.037
+2013,al,Larry Schechter,Wei-Yin Chen,3151,Bal,P,6,act,active,P,21,7,7,0,125.3,39,14,91,4.09,1.309
 2013,al,Larry Schechter,Scott Feldman,1495,Hou,P,16,act,active,P,14,5,6,0,84.7,31,8,59,4.36,1.24
+2013,al,Larry Schechter,A.J. Griffin,3734,Oak,P,5,act,active,P,32,14,10,0,200.0,54,36,171,3.82,1.125
 2013,al,Larry Schechter,Bruce Chen,1720,Cle,P,1,act,active,P,13,6,3,0,77.0,20,9,47,3.39,1.078
-2013,al,Larry Schechter,Andrew Bailey,2326,NYY,P,1,rel,previously_active,,6,1,1,2,4.3,5,4,3,16.62,3.462
-2013,al,Larry Schechter,Joel Peralta,668,LAD,P,0,res,previously_active,P,48,1,6,1,43.0,22,5,45,3.98,1.14
-2013,al,Larry Schechter,Joe Smith,939,LAA,P,2,rel,previously_active,,1,0,0,0,1.0,0,0,1,0.0,1.0
-2013,al,Larry Schechter,Ricky Romero,2031,Tor,P,1,rel,previously_active,,1,0,1,0,0.3,2,0,0,81.0,18.0
-2013,al,Larry Schechter,Charlie Furbush,3386,Sea,P,1,rel,previously_active,,5,1,0,0,3.3,1,0,8,8.1,1.8
-2013,al,Larry Schechter,Phil Hughes,987,Min,P,4,trd,previously_active,,10,3,3,0,54.7,17,10,52,4.94,1.372
-2013,al,Larry Schechter,Tommy Hunter,2152,Bal,P,1,rel,previously_active,,2,0,0,0,4.0,1,1,3,2.25,1.0
+2013,al,Larry Schechter,Jason Vargas,942,KC,P,2,act,active,P,21,8,7,0,134.0,41,14,98,3.96,1.343
+2013,al,Larry Schechter,Greg Holland,3343,KC,P,18,act,active,P,68,2,1,47,67.0,18,3,103,1.21,0.866
 2013,al,Larry Schechter,Vinnie Pestano,3370,LAA,P,8,rel,previously_active,,29,0,2,6,28.7,15,6,30,4.71,1.535
-2013,al,Larry Schechter,Ryan Dempster,258,FA,P,9,res,previously_active,P,21,6,8,0,121.7,57,21,114,4.51,1.479
 2013,al,Larry Schechter,Darren O'Day,1964,Bal,P,0,trd,previously_active,,26,2,0,1,25.7,9,2,30,1.75,1.091
 2013,al,Larry Schechter,Yoervis Medina,3425,Sea,P,6,rel,previously_active,,6,1,0,0,4.0,2,0,5,2.25,1.5
+2013,al,Larry Schechter,Ricky Romero,2031,Tor,P,1,rel,previously_active,,1,0,1,0,0.3,2,0,0,81.0,18.0
+2013,al,Larry Schechter,Tommy Hunter,2152,Bal,P,1,rel,previously_active,,2,0,0,0,4.0,1,1,3,2.25,1.0
+2013,al,Larry Schechter,Phil Hughes,987,Min,P,4,trd,previously_active,,10,3,3,0,54.7,17,10,52,4.94,1.372
 2013,al,Larry Schechter,Justin Masterson,195,Bos,P,3,res,previously_active,P,29,14,10,0,189.3,75,13,188,3.52,1.215
+2013,al,Larry Schechter,Ryan Dempster,258,FA,P,9,res,previously_active,P,21,6,8,0,121.7,57,21,114,4.51,1.479
+2013,al,Larry Schechter,Charlie Furbush,3386,Sea,P,1,rel,previously_active,,5,1,0,0,3.3,1,0,8,8.1,1.8
+2013,al,Larry Schechter,Joe Smith,939,LAA,P,2,rel,previously_active,,1,0,0,0,1.0,0,0,1,0.0,1.0
+2013,al,Larry Schechter,Joel Peralta,668,LAD,P,0,res,previously_active,P,48,1,6,1,43.0,22,5,45,3.98,1.14
+2013,al,Larry Schechter,Andrew Bailey,2326,NYY,P,1,rel,previously_active,,6,1,1,2,4.3,5,4,3,16.62,3.462
+2013,al,Larry Schechter,Joel Peralta,668,LAD,P,0,res,reserved,P,32,2,2,0,28.3,12,2,29,2.54,1.129
 2013,al,Larry Schechter,Ryan Dempster,258,FA,P,9,res,reserved,P,11,2,1,0,49.7,22,5,43,4.71,1.389
 2013,al,Larry Schechter,Justin Masterson,195,Bos,P,3,res,reserved,P,3,0,0,0,3.7,1,0,7,0.0,0.545
-2013,al,Larry Schechter,Joel Peralta,668,LAD,P,0,res,reserved,P,32,2,2,0,28.3,12,2,29,2.54,1.129
 2013,al,Larry Schechter,Andrew Bailey,2326,NYY,P,1,rel,previously_reserved,,5,0,0,0,6.0,1,1,9,1.5,0.667
+2013,al,Larry Schechter,Wei-Yin Chen,3151,Bal,P,6,act,previously_reserved,P,2,0,0,0,11.7,0,3,13,3.86,1.457
+2013,al,Larry Schechter,Phil Hughes,987,Min,P,4,trd,previously_reserved,,2,0,1,0,11.0,0,2,10,4.09,1.273
 2013,al,Larry Schechter,Charlie Furbush,3386,Sea,P,1,rel,previously_reserved,,5,1,1,0,5.0,0,0,5,1.8,0.6
-2013,al,Larry Schechter,Jason Vargas,942,KC,P,2,act,previously_reserved,P,3,1,1,0,16.0,5,3,11,4.5,1.75
 2013,al,Larry Schechter,Bruce Chen,1720,Cle,P,1,act,previously_reserved,P,1,0,1,0,4.3,2,1,3,12.46,2.077
 2013,al,Larry Schechter,Tommy Hunter,2152,Bal,P,1,rel,previously_reserved,,5,0,0,0,7.7,1,1,5,2.35,1.174
+2013,al,Larry Schechter,Jason Vargas,942,KC,P,2,act,previously_reserved,P,3,1,1,0,16.0,5,3,11,4.5,1.75
 2013,al,Larry Schechter,Vinnie Pestano,3370,LAA,P,8,rel,previously_reserved,,5,1,0,0,4.7,4,0,4,0.0,1.5
-2013,al,Larry Schechter,Phil Hughes,987,Min,P,4,trd,previously_reserved,,2,0,1,0,11.0,0,2,10,4.09,1.273
-2013,al,Larry Schechter,Wei-Yin Chen,3151,Bal,P,6,act,previously_reserved,P,2,0,0,0,11.7,0,3,13,3.86,1.457
 2013,al,Larry Schechter,Darren O'Day,1964,Bal,P,0,trd,previously_reserved,,3,1,0,0,2.3,0,0,1,0.0,0.429
 2013,al,Larry Schechter,Yoervis Medina,3425,Sea,P,6,rel,previously_reserved,,26,1,3,0,30.3,18,4,33,3.26,1.319
-2013,al,Rick Wolf/Glenn Colton,Jon Lester,160,ChC,P,20,act,active,P,33,15,8,0,213.3,67,19,177,3.75,1.294
-2013,al,Rick Wolf/Glenn Colton,Jeremy Guthrie,108,KC,P,3,act,active,P,28,12,11,0,177.7,53,29,87,4.41,1.418
-2013,al,Rick Wolf/Glenn Colton,Jake McGee,1481,TB,P,3,act,active,P,44,3,3,1,40.7,13,6,51,4.65,1.205
-2013,al,Rick Wolf/Glenn Colton,Josh Fields,2526,Hou,P,1,act,active,P,14,0,1,3,13.3,4,2,15,1.35,1.05
-2013,al,Rick Wolf/Glenn Colton,Mike Pelfrey,933,Min,P,0,act,active,P,12,0,7,0,63.3,22,6,52,5.54,1.642
 2013,al,Rick Wolf/Glenn Colton,Max Scherzer,19,Was,P,21,act,active,P,32,21,3,0,214.3,56,18,240,2.9,0.97
-2013,al,Rick Wolf/Glenn Colton,Pedro Hernandez,3873,FA,P,0,act,active,P,5,0,2,0,17.7,7,4,8,9.68,2.151
-2013,al,Rick Wolf/Glenn Colton,Corey Kluber,3382,Cle,P,1,act,active,P,20,8,4,0,118.3,31,13,103,4.03,1.327
+2013,al,Rick Wolf/Glenn Colton,Jeremy Guthrie,108,KC,P,3,act,active,P,28,12,11,0,177.7,53,29,87,4.41,1.418
+2013,al,Rick Wolf/Glenn Colton,Jon Lester,160,ChC,P,20,act,active,P,33,15,8,0,213.3,67,19,177,3.75,1.294
 2013,al,Rick Wolf/Glenn Colton,Matt Garza,1441,Mil,P,86,act,active,P,12,3,5,0,77.0,22,12,69,4.79,1.377
-2013,al,Rick Wolf/Glenn Colton,Octavio Dotel,210,Det,P,0,dis,previously_active,P,3,0,0,0,1.7,3,0,0,37.8,6.6
-2013,al,Rick Wolf/Glenn Colton,Liam Hendriks,3659,Tor,P,0,res,previously_active,P,5,0,1,0,21.0,8,4,24,9.0,2.095
-2013,al,Rick Wolf/Glenn Colton,Wesley Wright,625,Bal,P,0,rel,previously_active,,3,0,0,0,1.3,3,0,2,0.0,3.75
-2013,al,Rick Wolf/Glenn Colton,Nate Jones,3378,CWS,P,0,rel,previously_active,,6,1,0,0,6.7,1,0,8,0.0,0.75
-2013,al,Rick Wolf/Glenn Colton,Todd Redmond,2220,Tor,P,0,rel,previously_active,,6,2,1,0,29.3,11,5,36,5.83,1.466
-2013,al,Rick Wolf/Glenn Colton,Ivan Nova,2293,NYY,P,4,rel,previously_active,,4,1,1,0,16.7,8,1,18,6.48,1.86
-2013,al,Rick Wolf/Glenn Colton,David Robertson,2132,CWS,P,4,res,previously_active,P,61,4,1,2,58.3,17,4,70,1.85,0.994
-2013,al,Rick Wolf/Glenn Colton,Zach Britton,3134,Bal,P,2,rel,previously_active,,1,0,1,0,6.0,2,1,2,9.0,2.0
-2013,al,Rick Wolf/Glenn Colton,Allen Webster,3279,Ari,P,0,rel,previously_active,,2,1,0,0,8.3,6,2,6,9.72,2.04
-2013,al,Rick Wolf/Glenn Colton,David Phelps,3561,Mia,P,21,dis,previously_active,P,12,5,4,0,65.7,24,6,53,4.93,1.416
-2013,al,Rick Wolf/Glenn Colton,Joaquin Benoit,1493,SD,P,3,trd,previously_active,,30,2,0,4,31.3,9,2,37,2.01,1.021
+2013,al,Rick Wolf/Glenn Colton,Josh Fields,2526,Hou,P,1,act,active,P,14,0,1,3,13.3,4,2,15,1.35,1.05
+2013,al,Rick Wolf/Glenn Colton,Pedro Hernandez,3873,FA,P,0,act,active,P,5,0,2,0,17.7,7,4,8,9.68,2.151
+2013,al,Rick Wolf/Glenn Colton,Mike Pelfrey,933,Min,P,0,act,active,P,12,0,7,0,63.3,22,6,52,5.54,1.642
+2013,al,Rick Wolf/Glenn Colton,Jake McGee,1481,TB,P,3,act,active,P,44,3,3,1,40.7,13,6,51,4.65,1.205
+2013,al,Rick Wolf/Glenn Colton,Corey Kluber,3382,Cle,P,1,act,active,P,20,8,4,0,118.3,31,13,103,4.03,1.327
 2013,al,Rick Wolf/Glenn Colton,Jesse Crain,874,CWS,P,0,dis,previously_active,P,27,1,2,0,26.7,7,0,31,0.34,1.125
 2013,al,Rick Wolf/Glenn Colton,Dallas Keuchel,4149,Hou,P,0,res,previously_active,P,2,0,2,0,10.3,4,0,11,6.97,1.742
 2013,al,Rick Wolf/Glenn Colton,Casey Fien,2365,Min,P,0,rel,previously_active,,17,1,0,0,16.0,2,4,20,4.5,1.125
-2013,al,Rick Wolf/Glenn Colton,Louis Coleman,3166,KC,P,0,rel,previously_active,,4,0,0,0,3.7,0,0,2,0.0,0.545
-2013,al,Rick Wolf/Glenn Colton,Jerome Williams,1944,Phi,P,1,rel,previously_active,,10,4,1,0,52.3,12,6,33,2.92,1.166
+2013,al,Rick Wolf/Glenn Colton,Ivan Nova,2293,NYY,P,4,rel,previously_active,,4,1,1,0,16.7,8,1,18,6.48,1.86
 2013,al,Rick Wolf/Glenn Colton,Carlos Carrasco,1141,Cle,P,0,rel,previously_active,,1,0,0,0,4.3,0,0,4,8.31,2.308
-2013,al,Rick Wolf/Glenn Colton,Robert Coello,3362,Bal,P,1,rel,previously_active,,3,0,1,0,4.0,2,0,4,2.25,1.5
+2013,al,Rick Wolf/Glenn Colton,Wesley Wright,625,Bal,P,0,rel,previously_active,,3,0,0,0,1.3,3,0,2,0.0,3.75
 2013,al,Rick Wolf/Glenn Colton,Garrett Richards,3535,LAA,P,0,rel,previously_active,,9,0,3,0,25.7,10,3,14,8.06,1.714
+2013,al,Rick Wolf/Glenn Colton,Jerome Williams,1944,Phi,P,1,rel,previously_active,,10,4,1,0,52.3,12,6,33,2.92,1.166
+2013,al,Rick Wolf/Glenn Colton,Zach Britton,3134,Bal,P,2,rel,previously_active,,1,0,1,0,6.0,2,1,2,9.0,2.0
+2013,al,Rick Wolf/Glenn Colton,Todd Redmond,2220,Tor,P,0,rel,previously_active,,6,2,1,0,29.3,11,5,36,5.83,1.466
+2013,al,Rick Wolf/Glenn Colton,Octavio Dotel,210,Det,P,0,dis,previously_active,P,3,0,0,0,1.7,3,0,0,37.8,6.6
+2013,al,Rick Wolf/Glenn Colton,Robert Coello,3362,Bal,P,1,rel,previously_active,,3,0,1,0,4.0,2,0,4,2.25,1.5
+2013,al,Rick Wolf/Glenn Colton,Joaquin Benoit,1493,SD,P,3,trd,previously_active,,30,2,0,4,31.3,9,2,37,2.01,1.021
+2013,al,Rick Wolf/Glenn Colton,Liam Hendriks,3659,Tor,P,0,res,previously_active,P,5,0,1,0,21.0,8,4,24,9.0,2.095
+2013,al,Rick Wolf/Glenn Colton,David Robertson,2132,CWS,P,4,res,previously_active,P,61,4,1,2,58.3,17,4,70,1.85,0.994
+2013,al,Rick Wolf/Glenn Colton,Allen Webster,3279,Ari,P,0,rel,previously_active,,2,1,0,0,8.3,6,2,6,9.72,2.04
+2013,al,Rick Wolf/Glenn Colton,David Phelps,3561,Mia,P,21,dis,previously_active,P,12,5,4,0,65.7,24,6,53,4.93,1.416
+2013,al,Rick Wolf/Glenn Colton,Louis Coleman,3166,KC,P,0,rel,previously_active,,4,0,0,0,3.7,0,0,2,0.0,0.545
+2013,al,Rick Wolf/Glenn Colton,Nate Jones,3378,CWS,P,0,rel,previously_active,,6,1,0,0,6.7,1,0,8,0.0,0.75
 2013,al,Rick Wolf/Glenn Colton,Josh Lindblom,2584,FA,P,1,rel,previously_active,,1,0,1,0,4.7,2,1,4,7.71,1.929
-2013,al,Rick Wolf/Glenn Colton,Dallas Keuchel,4149,Hou,P,0,res,reserved,P,3,1,1,0,18.3,6,2,21,6.38,1.582
-2013,al,Rick Wolf/Glenn Colton,Jesse Crain,874,CWS,P,0,dis,reserved,P,11,1,1,0,10.0,4,0,15,1.8,1.2
 2013,al,Rick Wolf/Glenn Colton,Octavio Dotel,210,Det,P,0,dis,reserved,P,3,0,0,0,3.0,1,0,4,0.0,1.0
 2013,al,Rick Wolf/Glenn Colton,Liam Hendriks,3659,Tor,P,0,res,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2013,al,Rick Wolf/Glenn Colton,David Phelps,3561,Mia,P,21,dis,reserved,P,4,0,0,0,4.0,3,0,4,4.5,1.25
 2013,al,Rick Wolf/Glenn Colton,David Robertson,2132,CWS,P,4,res,reserved,P,9,1,0,1,8.0,1,1,7,3.38,1.375
-2013,al,Rick Wolf/Glenn Colton,Garrett Richards,3535,LAA,P,0,rel,previously_reserved,,15,2,0,1,23.0,2,1,18,1.96,0.87
-2013,al,Rick Wolf/Glenn Colton,Corey Kluber,3382,Cle,P,1,act,previously_reserved,P,4,2,1,0,24.0,2,2,28,3.38,1.0
-2013,al,Rick Wolf/Glenn Colton,Pedro Hernandez,3873,FA,P,0,act,previously_reserved,P,4,1,0,0,13.3,6,3,7,7.42,2.025
+2013,al,Rick Wolf/Glenn Colton,David Phelps,3561,Mia,P,21,dis,reserved,P,4,0,0,0,4.0,3,0,4,4.5,1.25
+2013,al,Rick Wolf/Glenn Colton,Jesse Crain,874,CWS,P,0,dis,reserved,P,11,1,1,0,10.0,4,0,15,1.8,1.2
+2013,al,Rick Wolf/Glenn Colton,Dallas Keuchel,4149,Hou,P,0,res,reserved,P,3,1,1,0,18.3,6,2,21,6.38,1.582
 2013,al,Rick Wolf/Glenn Colton,Casey Fien,2365,Min,P,0,rel,previously_reserved,,5,1,0,0,3.0,0,1,3,9.0,2.0
-2013,al,Rick Wolf/Glenn Colton,Jerome Williams,1944,Phi,P,1,rel,previously_reserved,,4,0,3,0,14.0,8,5,7,13.5,2.429
+2013,al,Rick Wolf/Glenn Colton,Ivan Nova,2293,NYY,P,4,rel,previously_reserved,,2,1,0,0,6.0,2,0,8,1.5,1.5
+2013,al,Rick Wolf/Glenn Colton,Pedro Hernandez,3873,FA,P,0,act,previously_reserved,P,4,1,0,0,13.3,6,3,7,7.42,2.025
 2013,al,Rick Wolf/Glenn Colton,Josh Fields,2526,Hou,P,1,act,previously_reserved,P,2,0,0,1,3.3,2,0,2,2.7,0.6
+2013,al,Rick Wolf/Glenn Colton,Wesley Wright,625,Bal,P,0,rel,previously_reserved,,2,0,0,0,2.0,0,0,2,0.0,1.0
+2013,al,Rick Wolf/Glenn Colton,Garrett Richards,3535,LAA,P,0,rel,previously_reserved,,15,2,0,1,23.0,2,1,18,1.96,0.87
+2013,al,Rick Wolf/Glenn Colton,Jeremy Guthrie,108,KC,P,3,act,previously_reserved,P,5,3,1,0,34.0,6,1,24,2.12,1.265
+2013,al,Rick Wolf/Glenn Colton,Corey Kluber,3382,Cle,P,1,act,previously_reserved,P,4,2,1,0,24.0,2,2,28,3.38,1.0
+2013,al,Rick Wolf/Glenn Colton,Bruce Rondon,4157,Det,P,6,rel,previously_reserved,,3,0,0,0,2.3,2,0,1,11.57,3.0
 2013,al,Rick Wolf/Glenn Colton,Louis Coleman,3166,KC,P,0,rel,previously_reserved,,2,0,0,0,3.0,0,0,6,0.0,0.0
+2013,al,Rick Wolf/Glenn Colton,Nate Jones,3378,CWS,P,0,rel,previously_reserved,,3,0,1,0,2.3,0,0,3,7.71,0.857
+2013,al,Rick Wolf/Glenn Colton,Jerome Williams,1944,Phi,P,1,rel,previously_reserved,,4,0,3,0,14.0,8,5,7,13.5,2.429
+2013,al,Rick Wolf/Glenn Colton,Jake McGee,1481,TB,P,3,act,previously_reserved,P,27,2,0,0,22.0,9,2,24,2.86,1.136
 2013,al,Rick Wolf/Glenn Colton,Mike Pelfrey,933,Min,P,0,act,previously_reserved,P,4,2,0,0,24.7,10,1,14,1.82,1.135
 2013,al,Rick Wolf/Glenn Colton,Robert Coello,3362,Bal,P,1,rel,previously_reserved,,3,1,1,0,2.3,5,1,3,23.14,4.714
-2013,al,Rick Wolf/Glenn Colton,Jake McGee,1481,TB,P,3,act,previously_reserved,P,27,2,0,0,22.0,9,2,24,2.86,1.136
-2013,al,Rick Wolf/Glenn Colton,Ivan Nova,2293,NYY,P,4,rel,previously_reserved,,2,1,0,0,6.0,2,0,8,1.5,1.5
-2013,al,Rick Wolf/Glenn Colton,Jeremy Guthrie,108,KC,P,3,act,previously_reserved,P,5,3,1,0,34.0,6,1,24,2.12,1.265
-2013,al,Rick Wolf/Glenn Colton,Nate Jones,3378,CWS,P,0,rel,previously_reserved,,3,0,1,0,2.3,0,0,3,7.71,0.857
-2013,al,Rick Wolf/Glenn Colton,Wesley Wright,625,Bal,P,0,rel,previously_reserved,,2,0,0,0,2.0,0,0,2,0.0,1.0
-2013,al,Rick Wolf/Glenn Colton,Bruce Rondon,4157,Det,P,6,rel,previously_reserved,,3,0,0,0,2.3,2,0,1,11.57,3.0
-2013,al,Joe Sheehan,Felix Hernandez,1338,Sea,P,24,act,active,P,31,12,10,0,204.3,46,15,216,3.04,1.131
+2013,al,Joe Sheehan,Mariano Rivera,998,NYY,P,19,act,active,P,33,6,1,18,36.0,3,5,27,2.5,0.889
+2013,al,Joe Sheehan,Bud Norris,2113,Bal,P,6,act,active,P,32,10,12,0,176.7,67,17,147,4.18,1.489
+2013,al,Joe Sheehan,Ernesto Frieri,1225,TB,P,9,act,active,P,28,2,3,15,28.0,9,6,37,5.14,1.357
 2013,al,Joe Sheehan,Erik Bedard,1333,LAD,P,1,act,active,P,3,0,2,0,16.0,4,1,23,5.62,1.188
+2013,al,Joe Sheehan,Felix Hernandez,1338,Sea,P,24,act,active,P,31,12,10,0,204.3,46,15,216,3.04,1.131
 2013,al,Joe Sheehan,Joakim Soria,671,Det,P,1,act,active,P,22,1,0,0,19.7,12,2,24,4.58,1.424
 2013,al,Joe Sheehan,Grant Balfour,1438,TB,P,14,act,active,P,19,1,1,9,18.7,13,2,22,4.34,1.607
 2013,al,Joe Sheehan,David Price,1453,Det,P,28,act,active,P,27,10,8,0,186.7,27,16,151,3.33,1.098
-2013,al,Joe Sheehan,Ernesto Frieri,1225,TB,P,9,act,active,P,28,2,3,15,28.0,9,6,37,5.14,1.357
 2013,al,Joe Sheehan,Rick Porcello,496,Bos,P,5,act,active,P,32,13,8,0,177.0,42,18,142,4.32,1.282
-2013,al,Joe Sheehan,Bud Norris,2113,Bal,P,6,act,active,P,32,10,12,0,176.7,67,17,147,4.18,1.489
-2013,al,Joe Sheehan,Mariano Rivera,998,NYY,P,19,act,active,P,33,6,1,18,36.0,3,5,27,2.5,0.889
-2013,al,Joe Sheehan,Paul Clemens,3858,Phi,P,1,rel,previously_active,,1,0,0,0,3.7,3,2,0,7.36,2.727
-2013,al,Joe Sheehan,Chris Archer,2797,TB,P,0,trd,previously_active,,11,6,3,0,70.7,25,5,47,2.17,1.005
-2013,al,Joe Sheehan,Hector Ambriz,2502,SD,P,12,trd,previously_active,,5,0,1,0,2.3,0,0,0,7.71,3.0
 2013,al,Joe Sheehan,Dallas Keuchel,4149,Hou,P,0,rel,previously_active,,11,5,4,0,61.7,16,10,53,4.23,1.395
-2013,al,Joe Sheehan,Tim Collins,2666,KC,P,1,rel,previously_active,,42,2,5,0,34.0,20,2,31,4.76,1.5
-2013,al,Joe Sheehan,Zach Britton,3134,Bal,P,1,rel,previously_active,,2,0,1,0,12.0,4,2,3,5.25,1.5
-2013,al,Joe Sheehan,Nate Jones,3378,CWS,P,0,rel,previously_active,,5,0,1,0,5.0,2,0,5,5.4,1.6
+2013,al,Joe Sheehan,Chris Archer,2797,TB,P,0,trd,previously_active,,11,6,3,0,70.7,25,5,47,2.17,1.005
+2013,al,Joe Sheehan,Paul Clemens,3858,Phi,P,1,rel,previously_active,,1,0,0,0,3.7,3,2,0,7.36,2.727
 2013,al,Joe Sheehan,Alberto Alburquerque,2945,Det,P,7,rel,previously_active,,15,0,1,0,14.3,13,0,26,3.14,1.814
-2013,al,Joe Sheehan,Sergio Santos,1583,LAD,P,8,res,previously_active,P,16,0,1,0,13.7,3,1,15,1.98,0.805
-2013,al,Joe Sheehan,Cody Allen,4164,Cle,P,0,rel,previously_active,,18,1,0,0,17.0,5,1,20,1.59,0.941
-2013,al,Joe Sheehan,Sean Doolittle,2332,Oak,P,4,trd,previously_active,,38,3,3,0,36.7,6,3,31,3.93,1.009
-2013,al,Joe Sheehan,Taijuan Walker,3796,Sea,P,1,rel,previously_active,,2,0,0,0,10.0,3,0,10,5.4,1.2
+2013,al,Joe Sheehan,Hector Ambriz,2502,SD,P,12,trd,previously_active,,5,0,1,0,2.3,0,0,0,7.71,3.0
 2013,al,Joe Sheehan,Tanner Scheppers,2869,Tex,P,1,trd,previously_active,,28,4,0,0,29.3,11,2,19,1.23,0.886
+2013,al,Joe Sheehan,Taijuan Walker,3796,Sea,P,1,rel,previously_active,,2,0,0,0,10.0,3,0,10,5.4,1.2
+2013,al,Joe Sheehan,Zach Britton,3134,Bal,P,1,rel,previously_active,,2,0,1,0,12.0,4,2,3,5.25,1.5
+2013,al,Joe Sheehan,Cody Allen,4164,Cle,P,0,rel,previously_active,,18,1,0,0,17.0,5,1,20,1.59,0.941
+2013,al,Joe Sheehan,Tim Collins,2666,KC,P,1,rel,previously_active,,42,2,5,0,34.0,20,2,31,4.76,1.5
+2013,al,Joe Sheehan,Sean Doolittle,2332,Oak,P,4,trd,previously_active,,38,3,3,0,36.7,6,3,31,3.93,1.009
+2013,al,Joe Sheehan,Sergio Santos,1583,LAD,P,8,res,previously_active,P,16,0,1,0,13.7,3,1,15,1.98,0.805
+2013,al,Joe Sheehan,Nate Jones,3378,CWS,P,0,rel,previously_active,,5,0,1,0,5.0,2,0,5,5.4,1.6
 2013,al,Joe Sheehan,Sergio Santos,1583,LAD,P,8,res,reserved,P,13,1,0,1,12.0,1,0,13,1.5,0.333
 2013,al,Joe Sheehan,Chris Archer,2797,TB,P,0,trd,previously_reserved,,1,0,1,0,4.0,3,2,4,11.25,2.5
-2013,al,Joe Sheehan,Hector Ambriz,2502,SD,P,12,trd,previously_reserved,,2,1,1,0,1.7,1,2,1,10.8,1.8
 2013,al,Joe Sheehan,Joakim Soria,671,Det,P,1,act,previously_reserved,P,4,0,0,0,4.0,2,0,4,0.0,1.0
-2013,al,Joe Sheehan,Sean Doolittle,2332,Oak,P,4,trd,previously_reserved,,4,0,0,0,4.3,1,0,4,0.0,0.692
+2013,al,Joe Sheehan,Hector Ambriz,2502,SD,P,12,trd,previously_reserved,,2,1,1,0,1.7,1,2,1,10.8,1.8
 2013,al,Joe Sheehan,Taijuan Walker,3796,Sea,P,1,rel,previously_reserved,,1,1,0,0,5.0,1,0,2,0.0,0.6
-2013,al,Jeff Erickson,Fernando Rodney,499,Sea,P,19,act,active,P,68,5,4,37,66.7,36,3,82,3.38,1.335
+2013,al,Joe Sheehan,Sean Doolittle,2332,Oak,P,4,trd,previously_reserved,,4,0,0,0,4.3,1,0,4,0.0,0.692
 2013,al,Jeff Erickson,Joe Nathan,882,Det,P,19,act,active,P,67,6,2,43,64.7,22,2,73,1.39,0.897
 2013,al,Jeff Erickson,Drew Smyly,3904,TB,P,2,act,active,P,63,6,0,2,76.0,17,4,81,2.37,1.039
-2013,al,Jeff Erickson,Andy Pettitte,996,NYY,P,5,act,active,P,29,11,10,0,179.3,46,17,122,3.71,1.327
-2013,al,Jeff Erickson,Doug Fister,2890,Was,P,15,act,active,P,33,14,9,0,208.7,44,14,159,3.67,1.308
 2013,al,Jeff Erickson,Joe Saunders,726,FA,P,0,act,active,P,21,7,11,0,121.3,38,15,83,4.97,1.467
 2013,al,Jeff Erickson,C.J. Wilson,1513,LAA,P,13,act,active,P,33,17,7,0,212.3,85,15,188,3.39,1.342
-2013,al,Jeff Erickson,Garrett Richards,3535,LAA,P,10,act,active,P,12,5,4,0,72.3,23,6,49,3.98,1.396
+2013,al,Jeff Erickson,Fernando Rodney,499,Sea,P,19,act,active,P,68,5,4,37,66.7,36,3,82,3.38,1.335
 2013,al,Jeff Erickson,Hector Santiago,3770,LAA,P,0,act,active,P,14,1,4,0,81.3,38,10,67,3.54,1.451
+2013,al,Jeff Erickson,Andy Pettitte,996,NYY,P,5,act,active,P,29,11,10,0,179.3,46,17,122,3.71,1.327
+2013,al,Jeff Erickson,Garrett Richards,3535,LAA,P,10,act,active,P,12,5,4,0,72.3,23,6,49,3.98,1.396
+2013,al,Jeff Erickson,Doug Fister,2890,Was,P,15,act,active,P,33,14,9,0,208.7,44,14,159,3.67,1.308
+2013,al,Jeff Erickson,Luis Mendoza,1506,FA,P,1,rel,previously_active,,4,0,2,0,17.3,10,1,12,7.79,1.731
+2013,al,Jeff Erickson,Samuel Deduno,2246,Hou,P,1,dis,previously_active,P,14,6,6,0,82.7,33,6,55,3.59,1.355
 2013,al,Jeff Erickson,Brett Myers,1116,FA,P,3,rel,previously_active,,4,0,3,0,21.3,5,10,12,8.02,1.594
+2013,al,Jeff Erickson,Koji Uehara,2049,Bos,P,1,trd,previously_active,,25,1,0,4,23.7,4,4,35,1.9,0.887
+2013,al,Jeff Erickson,Brian Matusz,2091,Bal,P,0,rel,previously_active,,9,1,0,0,7.7,3,0,7,3.52,1.174
+2013,al,Jeff Erickson,Danny Farquhar,3065,Sea,P,0,rel,previously_active,,1,0,0,0,1.0,0,1,1,9.0,1.0
 2013,al,Jeff Erickson,Dylan Axelrod,3829,Cin,P,0,rel,previously_active,,12,1,3,0,69.7,20,12,43,4.13,1.421
 2013,al,Jeff Erickson,Jake Odorizzi,2653,TB,P,18,rel,previously_active,,2,0,0,0,9.0,2,1,8,9.0,1.667
-2013,al,Jeff Erickson,Danny Farquhar,3065,Sea,P,0,rel,previously_active,,1,0,0,0,1.0,0,1,1,9.0,1.0
-2013,al,Jeff Erickson,Brian Matusz,2091,Bal,P,0,rel,previously_active,,9,1,0,0,7.7,3,0,7,3.52,1.174
-2013,al,Jeff Erickson,Samuel Deduno,2246,Hou,P,1,dis,previously_active,P,14,6,6,0,82.7,33,6,55,3.59,1.355
-2013,al,Jeff Erickson,Koji Uehara,2049,Bos,P,1,trd,previously_active,,25,1,0,4,23.7,4,4,35,1.9,0.887
-2013,al,Jeff Erickson,Luis Mendoza,1506,FA,P,1,rel,previously_active,,4,0,2,0,17.3,10,1,12,7.79,1.731
 2013,al,Jeff Erickson,Samuel Deduno,2246,Hou,P,1,dis,reserved,P,2,1,1,0,13.0,3,0,8,4.15,1.231
-2013,al,Jeff Erickson,Joe Saunders,726,FA,P,0,act,previously_reserved,P,11,4,5,0,61.7,23,10,24,5.84,1.865
-2013,al,Jeff Erickson,Luis Mendoza,1506,FA,P,1,rel,previously_reserved,,1,0,0,0,3.3,1,1,0,13.5,2.4
 2013,al,Jeff Erickson,Koji Uehara,2049,Bos,P,1,trd,previously_reserved,,11,0,0,0,10.3,3,1,14,2.61,0.677
 2013,al,Jeff Erickson,Brian Matusz,2091,Bal,P,0,rel,previously_reserved,,25,1,1,0,22.3,5,3,17,4.43,1.03
-2013,al,Jeff Erickson,Andy Pettitte,996,NYY,P,5,act,previously_reserved,P,1,0,1,0,6.0,2,0,6,4.5,1.333
 2013,al,Jeff Erickson,Dylan Axelrod,3829,Cin,P,0,rel,previously_reserved,,14,3,6,0,43.0,15,11,22,6.91,1.767
-2013,al,Matthew Berry,Jarred Cosart,3605,Mia,P,1,act,active,P,9,0,1,0,52.0,32,3,31,2.25,1.462
-2013,al,Matthew Berry,Scott Kazmir,1447,Oak,P,10,act,active,P,21,7,6,0,111.7,35,12,116,4.11,1.343
+2013,al,Jeff Erickson,Joe Saunders,726,FA,P,0,act,previously_reserved,P,11,4,5,0,61.7,23,10,24,5.84,1.865
+2013,al,Jeff Erickson,Luis Mendoza,1506,FA,P,1,rel,previously_reserved,,1,0,0,0,3.3,1,1,0,13.5,2.4
+2013,al,Jeff Erickson,Andy Pettitte,996,NYY,P,5,act,previously_reserved,P,1,0,1,0,6.0,2,0,6,4.5,1.333
 2013,al,Matthew Berry,Erasmo Ramirez,1878,Sea,P,3,act,active,P,14,5,3,0,72.3,26,12,57,4.98,1.452
-2013,al,Matthew Berry,Bartolo Colon,192,NYM,P,2,act,active,P,27,16,6,0,172.3,27,13,111,2.61,1.155
 2013,al,Matthew Berry,R.A. Dickey,1334,Tor,P,20,act,active,P,34,14,13,0,224.7,71,35,177,4.21,1.237
-2013,al,Matthew Berry,Pedro Strop,446,ChC,P,3,act,active,P,36,1,3,0,30.3,17,4,32,5.34,1.352
-2013,al,Matthew Berry,Yu Darvish,2044,Tex,P,24,act,active,P,32,13,9,0,209.7,80,26,277,2.83,1.073
+2013,al,Matthew Berry,Bartolo Colon,192,NYM,P,2,act,active,P,27,16,6,0,172.3,27,13,111,2.61,1.155
 2013,al,Matthew Berry,Ervin Santana,725,Min,P,4,act,active,P,32,9,10,0,211.0,51,26,161,3.24,1.142
+2013,al,Matthew Berry,Yu Darvish,2044,Tex,P,24,act,active,P,32,13,9,0,209.7,80,26,277,2.83,1.073
+2013,al,Matthew Berry,Scott Kazmir,1447,Oak,P,10,act,active,P,21,7,6,0,111.7,35,12,116,4.11,1.343
+2013,al,Matthew Berry,Pedro Strop,446,ChC,P,3,act,active,P,36,1,3,0,30.3,17,4,32,5.34,1.352
 2013,al,Matthew Berry,Jim Johnson,110,Atl,P,16,act,active,P,74,3,8,50,70.3,18,5,56,2.94,1.28
-2013,al,Matthew Berry,Francisco Rodriguez,724,FA,P,1,res,previously_active,P,7,1,0,0,7.3,0,3,10,6.14,0.955
-2013,al,Matthew Berry,Nick Tepesch,4387,Tex,P,0,res,previously_active,P,13,3,4,0,67.3,17,10,59,5.21,1.337
-2013,al,Matthew Berry,John Danks,208,CWS,P,0,res,previously_active,P,16,3,11,0,98.3,18,20,63,5.03,1.373
+2013,al,Matthew Berry,Jarred Cosart,3605,Mia,P,1,act,active,P,9,0,1,0,52.0,32,3,31,2.25,1.462
+2013,al,Matthew Berry,Kyle Gibson,2705,Min,P,1,rel,previously_active,,5,1,2,0,25.3,4,5,16,7.46,1.737
 2013,al,Matthew Berry,Nate Jones,3378,CWS,P,0,rel,previously_active,,2,0,0,0,1.7,1,1,1,21.6,3.0
 2013,al,Matthew Berry,Bruce Chen,1720,Cle,P,0,rel,previously_active,,3,0,0,0,4.7,0,0,1,5.79,0.857
-2013,al,Matthew Berry,Luis Mendoza,1506,FA,P,3,rel,previously_active,,4,0,2,0,23.0,10,1,13,4.3,1.304
 2013,al,Matthew Berry,Andrew Bailey,2326,NYY,P,1,trd,previously_active,,19,2,0,6,18.3,6,2,27,1.47,0.873
-2013,al,Matthew Berry,Darren O'Day,1964,Bal,P,0,res,previously_active,P,12,0,1,1,12.3,0,1,12,2.92,0.892
+2013,al,Matthew Berry,John Danks,208,CWS,P,0,res,previously_active,P,16,3,11,0,98.3,18,20,63,5.03,1.373
+2013,al,Matthew Berry,Luis Mendoza,1506,FA,P,3,rel,previously_active,,4,0,2,0,23.0,10,1,13,4.3,1.304
 2013,al,Matthew Berry,Erik Bedard,1333,LAD,P,2,rel,previously_active,,5,0,2,1,14.7,8,5,19,7.98,1.773
-2013,al,Matthew Berry,Liam Hendriks,3659,Tor,P,1,rel,previously_active,,1,0,0,0,4.7,1,0,1,7.71,1.929
-2013,al,Matthew Berry,Kyle Gibson,2705,Min,P,1,rel,previously_active,,5,1,2,0,25.3,4,5,16,7.46,1.737
 2013,al,Matthew Berry,Kevin Jepsen,2207,TB,P,1,dis,previously_active,P,6,0,0,0,4.3,2,1,3,8.31,2.308
 2013,al,Matthew Berry,Brett Cecil,2077,Tor,P,0,rel,previously_active,,8,0,0,0,7.3,7,1,11,4.91,2.455
+2013,al,Matthew Berry,Nick Tepesch,4387,Tex,P,0,res,previously_active,P,13,3,4,0,67.3,17,10,59,5.21,1.337
+2013,al,Matthew Berry,Darren O'Day,1964,Bal,P,0,res,previously_active,P,12,0,1,1,12.3,0,1,12,2.92,0.892
+2013,al,Matthew Berry,Liam Hendriks,3659,Tor,P,1,rel,previously_active,,1,0,0,0,4.7,1,0,1,7.71,1.929
+2013,al,Matthew Berry,Francisco Rodriguez,724,FA,P,1,res,previously_active,P,7,1,0,0,7.3,0,3,10,6.14,0.955
+2013,al,Matthew Berry,Nick Tepesch,4387,Tex,P,0,res,reserved,P,6,1,2,0,25.7,10,2,17,3.86,1.442
 2013,al,Matthew Berry,Darren O'Day,1964,Bal,P,0,res,reserved,P,27,2,2,0,21.7,6,4,16,2.49,1.015
 2013,al,Matthew Berry,Kevin Jepsen,2207,TB,P,1,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2013,al,Matthew Berry,Nick Tepesch,4387,Tex,P,0,res,reserved,P,6,1,2,0,25.7,10,2,17,3.86,1.442
 2013,al,Matthew Berry,Francisco Rodriguez,724,FA,P,1,res,reserved,P,14,1,1,0,12.7,4,1,17,3.55,1.658
 2013,al,Matthew Berry,John Danks,208,CWS,P,0,res,reserved,P,6,1,3,0,40.0,9,8,26,4.05,1.075
-2013,al,Matthew Berry,Kyle Gibson,2705,Min,P,1,rel,previously_reserved,,5,1,2,0,25.7,16,2,13,5.61,1.753
+2013,al,Matthew Berry,Luis Mendoza,1506,FA,P,3,rel,previously_reserved,,2,0,0,0,6.3,4,3,5,8.53,1.895
 2013,al,Matthew Berry,Scott Kazmir,1447,Oak,P,10,act,previously_reserved,P,4,1,2,0,26.0,6,2,21,3.12,1.154
-2013,al,Matthew Berry,Bartolo Colon,192,NYM,P,2,act,previously_reserved,P,3,2,0,0,18.0,2,1,6,3.0,1.278
 2013,al,Matthew Berry,Liam Hendriks,3659,Tor,P,1,rel,previously_reserved,,1,0,1,0,5.0,0,1,4,1.8,0.8
 2013,al,Matthew Berry,Erik Bedard,1333,LAD,P,2,rel,previously_reserved,,2,0,0,0,7.3,6,3,5,6.14,1.909
 2013,al,Matthew Berry,Pedro Strop,446,ChC,P,3,act,previously_reserved,P,30,1,2,1,27.0,9,1,34,3.67,1.111
-2013,al,Matthew Berry,Luis Mendoza,1506,FA,P,3,rel,previously_reserved,,2,0,0,0,6.3,4,3,5,8.53,1.895
+2013,al,Matthew Berry,Kyle Gibson,2705,Min,P,1,rel,previously_reserved,,5,1,2,0,25.7,16,2,13,5.61,1.753
+2013,al,Matthew Berry,Bartolo Colon,192,NYM,P,2,act,previously_reserved,P,3,2,0,0,18.0,2,1,6,3.0,1.278
+2013,al,Steve Moyer,Kelvin Herrera,3790,KC,P,4,act,active,P,43,4,6,2,44.0,14,8,57,3.68,1.159
 2013,al,Steve Moyer,Jose Quintana,3839,CWS,P,1,act,active,P,33,9,7,0,200.0,56,23,164,3.51,1.22
-2013,al,Steve Moyer,Miguel Gonzalez,2228,Bal,P,2,act,active,P,30,11,8,0,171.3,53,24,120,3.78,1.226
-2013,al,Steve Moyer,Koji Uehara,2049,Bos,P,1,act,active,P,37,3,1,17,40.3,2,0,52,0.22,0.347
+2013,al,Steve Moyer,Alexi Ogando,3122,Bos,P,12,act,active,P,21,6,4,0,102.0,41,11,71,3.18,1.245
 2013,al,Steve Moyer,Jake Odorizzi,2653,TB,P,1,act,active,P,1,0,0,1,3.0,1,0,3,0.0,0.667
+2013,al,Steve Moyer,Miguel Gonzalez,2228,Bal,P,2,act,active,P,30,11,8,0,171.3,53,24,120,3.78,1.226
+2013,al,Steve Moyer,Tom Wilhelmsen,3426,Sea,P,17,act,active,P,50,0,3,24,50.0,28,2,40,4.5,1.38
 2013,al,Steve Moyer,Felix Doubront,2227,ChC,P,3,act,active,P,29,11,6,0,162.3,71,13,139,4.32,1.429
 2013,al,Steve Moyer,Jeremy Hellickson,2071,Ari,P,12,act,active,P,32,12,10,0,174.0,50,24,135,5.17,1.351
-2013,al,Steve Moyer,Alexi Ogando,3122,Bos,P,12,act,active,P,21,6,4,0,102.0,41,11,71,3.18,1.245
-2013,al,Steve Moyer,Kelvin Herrera,3790,KC,P,4,act,active,P,43,4,6,2,44.0,14,8,57,3.68,1.159
-2013,al,Steve Moyer,Tom Wilhelmsen,3426,Sea,P,17,act,active,P,50,0,3,24,50.0,28,2,40,4.5,1.38
+2013,al,Steve Moyer,Koji Uehara,2049,Bos,P,1,act,active,P,37,3,1,17,40.3,2,0,52,0.22,0.347
+2013,al,Steve Moyer,Oliver Perez,934,Ari,P,10,rel,previously_active,,22,2,3,1,18.7,8,3,29,5.79,1.607
+2013,al,Steve Moyer,Franklin Morales,439,FA,P,0,rel,previously_active,,1,0,0,0,0.7,4,0,0,54.0,9.0
+2013,al,Steve Moyer,Kevin Chapman,4331,Hou,P,1,rel,previously_active,,8,0,1,0,7.3,6,0,6,3.68,1.636
 2013,al,Steve Moyer,C.C. Sabathia,388,NYY,P,20,res,previously_active,P,28,12,12,0,186.7,51,24,158,4.63,1.334
 2013,al,Steve Moyer,Joe Smith,939,LAA,P,0,rel,previously_active,,19,2,1,0,16.7,9,3,10,5.4,1.5
-2013,al,Steve Moyer,Chris Resop,64,Bos,P,0,rel,previously_active,,2,0,0,0,1.7,1,1,2,16.2,3.6
-2013,al,Steve Moyer,Franklin Morales,439,FA,P,0,rel,previously_active,,1,0,0,0,0.7,4,0,0,54.0,9.0
-2013,al,Steve Moyer,Rich Hill,264,FA,P,0,rel,previously_active,,2,0,0,0,1.7,2,0,1,10.8,2.4
 2013,al,Steve Moyer,Alfredo Aceves,2130,FA,P,0,rel,previously_active,,2,1,1,0,9.3,7,2,7,7.71,2.25
-2013,al,Steve Moyer,Oliver Perez,934,Ari,P,10,rel,previously_active,,22,2,3,1,18.7,8,3,29,5.79,1.607
-2013,al,Steve Moyer,Charlie Furbush,3386,Sea,P,0,rel,previously_active,,4,0,0,0,3.3,0,0,4,2.7,0.6
-2013,al,Steve Moyer,Bryan Shaw,3073,Cle,P,0,rel,previously_active,,2,0,0,0,3.0,0,0,2,0.0,0.667
-2013,al,Steve Moyer,Hector Santiago,3770,LAA,P,0,trd,previously_active,,13,3,4,0,53.3,31,6,59,3.88,1.406
-2013,al,Steve Moyer,Travis Blackley,1101,FA,P,1,rel,previously_active,,3,1,1,0,11.3,1,1,9,4.76,1.235
 2013,al,Steve Moyer,Rubby De La Rosa,3524,Ari,P,0,rel,previously_active,,5,0,0,0,5.7,1,2,3,4.76,1.235
-2013,al,Steve Moyer,Kevin Chapman,4331,Hou,P,1,rel,previously_active,,8,0,1,0,7.3,6,0,6,3.68,1.636
+2013,al,Steve Moyer,Charlie Furbush,3386,Sea,P,0,rel,previously_active,,4,0,0,0,3.3,0,0,4,2.7,0.6
+2013,al,Steve Moyer,Rich Hill,264,FA,P,0,rel,previously_active,,2,0,0,0,1.7,2,0,1,10.8,2.4
+2013,al,Steve Moyer,Travis Blackley,1101,FA,P,1,rel,previously_active,,3,1,1,0,11.3,1,1,9,4.76,1.235
+2013,al,Steve Moyer,Hector Santiago,3770,LAA,P,0,trd,previously_active,,13,3,4,0,53.3,31,6,59,3.88,1.406
+2013,al,Steve Moyer,Bryan Shaw,3073,Cle,P,0,rel,previously_active,,2,0,0,0,3.0,0,0,2,0.0,0.667
+2013,al,Steve Moyer,Chris Resop,64,Bos,P,0,rel,previously_active,,2,0,0,0,1.7,1,1,2,16.2,3.6
 2013,al,Steve Moyer,C.C. Sabathia,388,NYY,P,20,res,reserved,P,4,2,1,0,24.3,14,4,17,5.92,1.644
-2013,al,Steve Moyer,Alfredo Aceves,2130,FA,P,0,rel,previously_reserved,,5,1,0,0,15.3,8,5,12,5.87,1.761
 2013,al,Steve Moyer,Tom Wilhelmsen,3426,Sea,P,17,act,previously_reserved,P,9,0,0,0,9.0,5,0,5,2.0,1.0
 2013,al,Steve Moyer,Kelvin Herrera,3790,KC,P,4,act,previously_reserved,P,16,1,1,0,14.3,7,1,17,4.4,1.256
-2013,al,Steve Moyer,Alexi Ogando,3122,Bos,P,12,act,previously_reserved,P,2,1,0,0,2.3,0,0,1,0.0,0.429
 2013,al,Steve Moyer,Hector Santiago,3770,LAA,P,0,trd,previously_reserved,,7,0,1,0,14.3,3,1,11,2.51,1.116
+2013,al,Steve Moyer,Alexi Ogando,3122,Bos,P,12,act,previously_reserved,P,2,1,0,0,2.3,0,0,1,0.0,0.429
+2013,al,Steve Moyer,Alfredo Aceves,2130,FA,P,0,rel,previously_reserved,,5,1,0,0,15.3,8,5,12,5.87,1.761
+2013,al,Rob Leibowitz,Martin Perez,2676,Tex,P,2,act,active,P,18,9,5,0,112.0,34,14,79,3.62,1.33
 2013,al,Rob Leibowitz,James Shields,1457,SD,P,18,act,active,P,34,13,9,0,228.7,68,20,196,3.15,1.238
+2013,al,Rob Leibowitz,Clay Buchholz,154,Bos,P,8,act,active,P,16,12,1,0,108.3,36,4,96,1.74,1.025
+2013,al,Rob Leibowitz,Addison Reed,3793,Ari,P,14,act,active,P,68,5,4,40,71.3,23,6,72,3.79,1.107
+2013,al,Rob Leibowitz,Neftali Feliz,2020,Tex,P,1,act,active,P,5,0,0,0,3.0,2,0,2,0.0,2.0
 2013,al,Rob Leibowitz,Andre Rienzo,4209,Mia,P,8,act,active,P,8,2,3,0,43.0,22,11,29,5.23,1.558
 2013,al,Rob Leibowitz,Jordan Lyles,2695,Col,P,1,act,active,P,7,2,3,1,32.3,12,7,18,6.96,1.515
-2013,al,Rob Leibowitz,Clay Buchholz,154,Bos,P,8,act,active,P,16,12,1,0,108.3,36,4,96,1.74,1.025
-2013,al,Rob Leibowitz,Neftali Feliz,2020,Tex,P,1,act,active,P,5,0,0,0,3.0,2,0,2,0.0,2.0
-2013,al,Rob Leibowitz,Martin Perez,2676,Tex,P,2,act,active,P,18,9,5,0,112.0,34,14,79,3.62,1.33
-2013,al,Rob Leibowitz,John Lackey,721,StL,P,1,act,active,P,28,9,13,0,183.3,38,26,157,3.58,1.156
-2013,al,Rob Leibowitz,Addison Reed,3793,Ari,P,14,act,active,P,68,5,4,40,71.3,23,6,72,3.79,1.107
 2013,al,Rob Leibowitz,Jason Hammel,1443,ChC,P,1,act,active,P,2,0,0,1,4.3,0,0,5,2.08,1.154
-2013,al,Rob Leibowitz,Matt Thornton,223,Was,P,1,rel,previously_active,,45,0,4,0,31.7,9,4,26,3.69,1.389
-2013,al,Rob Leibowitz,Brett Cecil,2077,Tor,P,0,rel,previously_active,,22,3,0,1,23.0,7,2,26,3.13,0.957
-2013,al,Rob Leibowitz,Brandon Maurer,4241,SD,P,9,rel,previously_active,,9,2,6,0,43.7,16,8,30,6.8,1.672
-2013,al,Rob Leibowitz,Mike Pelfrey,933,Min,P,1,rel,previously_active,,4,2,2,0,17.0,5,0,6,7.94,2.0
-2013,al,Rob Leibowitz,Chien-Ming Wang,1001,Atl,P,1,rel,previously_active,,3,0,1,0,9.7,3,2,3,13.03,2.276
-2013,al,Rob Leibowitz,Danny Duffy,2662,KC,P,1,dis,previously_active,P,2,0,0,0,8.0,9,0,5,3.38,2.0
-2013,al,Rob Leibowitz,Joe Blanton,1042,KC,P,1,rel,previously_active,,18,1,10,0,92.7,27,19,75,5.83,1.727
+2013,al,Rob Leibowitz,John Lackey,721,StL,P,1,act,active,P,28,9,13,0,183.3,38,26,157,3.58,1.156
 2013,al,Rob Leibowitz,Scott Diamond,3402,Cin,P,0,rel,previously_active,,11,4,5,0,60.7,13,7,29,5.19,1.516
-2013,al,Rob Leibowitz,Aaron Harang,322,Phi,P,3,rel,previously_active,,21,4,11,0,114.3,27,21,82,5.9,1.364
-2013,al,Rob Leibowitz,Matt Harrison,1500,Tex,P,11,rel,previously_active,,2,0,2,0,10.7,7,2,12,8.44,1.969
-2013,al,Rob Leibowitz,Trevor Bauer,3676,Cle,P,2,rel,previously_active,,1,0,0,0,0.7,1,2,0,67.5,10.5
-2013,al,Rob Leibowitz,Brian Matusz,2091,Bal,P,0,rel,previously_active,,3,0,0,0,2.0,0,0,3,9.0,1.5
-2013,al,Rob Leibowitz,Jose Cisnero,4225,Cin,P,0,rel,previously_active,,11,0,1,0,9.0,10,3,8,11.0,2.667
 2013,al,Rob Leibowitz,Jason Frasor,1557,KC,P,0,rel,previously_active,,2,0,0,0,2.0,0,0,2,0.0,0.5
-2013,al,Rob Leibowitz,Jose Valverde,622,SD,P,9,rel,previously_active,,17,0,1,7,16.3,6,6,17,6.61,1.469
 2013,al,Rob Leibowitz,Dustin McGowan,1564,FA,P,0,rel,previously_active,,1,0,0,0,2.3,1,0,0,0.0,0.857
+2013,al,Rob Leibowitz,Mike Pelfrey,933,Min,P,1,rel,previously_active,,4,2,2,0,17.0,5,0,6,7.94,2.0
+2013,al,Rob Leibowitz,Danny Duffy,2662,KC,P,1,dis,previously_active,P,2,0,0,0,8.0,9,0,5,3.38,2.0
+2013,al,Rob Leibowitz,Brett Cecil,2077,Tor,P,0,rel,previously_active,,22,3,0,1,23.0,7,2,26,3.13,0.957
+2013,al,Rob Leibowitz,Matt Thornton,223,Was,P,1,rel,previously_active,,45,0,4,0,31.7,9,4,26,3.69,1.389
+2013,al,Rob Leibowitz,Joe Blanton,1042,KC,P,1,rel,previously_active,,18,1,10,0,92.7,27,19,75,5.83,1.727
+2013,al,Rob Leibowitz,Trevor Bauer,3676,Cle,P,2,rel,previously_active,,1,0,0,0,0.7,1,2,0,67.5,10.5
+2013,al,Rob Leibowitz,Matt Harrison,1500,Tex,P,11,rel,previously_active,,2,0,2,0,10.7,7,2,12,8.44,1.969
+2013,al,Rob Leibowitz,Brandon Maurer,4241,SD,P,9,rel,previously_active,,9,2,6,0,43.7,16,8,30,6.8,1.672
+2013,al,Rob Leibowitz,Brian Matusz,2091,Bal,P,0,rel,previously_active,,3,0,0,0,2.0,0,0,3,9.0,1.5
+2013,al,Rob Leibowitz,Aaron Harang,322,Phi,P,3,rel,previously_active,,21,4,11,0,114.3,27,21,82,5.9,1.364
+2013,al,Rob Leibowitz,Jose Cisnero,4225,Cin,P,0,rel,previously_active,,11,0,1,0,9.0,10,3,8,11.0,2.667
+2013,al,Rob Leibowitz,Chien-Ming Wang,1001,Atl,P,1,rel,previously_active,,3,0,1,0,9.7,3,2,3,13.03,2.276
+2013,al,Rob Leibowitz,Jose Valverde,622,SD,P,9,rel,previously_active,,17,0,1,7,16.3,6,6,17,6.61,1.469
 2013,al,Rob Leibowitz,Danny Duffy,2662,KC,P,1,dis,reserved,P,1,1,0,0,6.7,0,0,7,0.0,0.75
 2013,al,Rob Leibowitz,Colby Lewis,1813,Tex,P,2,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2013,al,Rob Leibowitz,Brandon Maurer,4241,SD,P,9,rel,previously_reserved,,1,0,1,0,5.7,1,2,2,7.94,1.765
-2013,al,Rob Leibowitz,Matt Thornton,223,Was,P,1,rel,previously_reserved,,10,0,0,0,8.3,4,0,2,3.24,1.44
-2013,al,Rob Leibowitz,Aaron Harang,322,Phi,P,3,rel,previously_reserved,,1,1,0,0,6.0,1,0,5,3.0,0.833
-2013,al,Rob Leibowitz,Joe Blanton,1042,KC,P,1,rel,previously_reserved,,4,1,3,0,26.3,1,5,23,4.44,0.987
-2013,al,Rob Leibowitz,Trevor Bauer,3676,Cle,P,2,rel,previously_reserved,,3,1,2,0,16.3,15,1,11,2.76,1.469
-2013,al,Rob Leibowitz,Cody Allen,4164,Cle,P,0,rel,previously_reserved,,3,0,0,0,4.0,3,1,3,6.75,2.25
 2013,al,Rob Leibowitz,Dustin McGowan,1564,FA,P,0,rel,previously_reserved,,5,0,0,0,4.3,3,0,4,4.15,1.846
+2013,al,Rob Leibowitz,Joe Blanton,1042,KC,P,1,rel,previously_reserved,,4,1,3,0,26.3,1,5,23,4.44,0.987
+2013,al,Rob Leibowitz,Matt Thornton,223,Was,P,1,rel,previously_reserved,,10,0,0,0,8.3,4,0,2,3.24,1.44
+2013,al,Rob Leibowitz,Trevor Bauer,3676,Cle,P,2,rel,previously_reserved,,3,1,2,0,16.3,15,1,11,2.76,1.469
+2013,al,Rob Leibowitz,Brandon Maurer,4241,SD,P,9,rel,previously_reserved,,1,0,1,0,5.7,1,2,2,7.94,1.765
+2013,al,Rob Leibowitz,Cody Allen,4164,Cle,P,0,rel,previously_reserved,,3,0,0,0,4.0,3,1,3,6.75,2.25
 2013,al,Rob Leibowitz,John Lackey,721,StL,P,1,act,previously_reserved,P,1,1,0,0,6.0,2,0,4,1.5,1.167
+2013,al,Rob Leibowitz,Aaron Harang,322,Phi,P,3,rel,previously_reserved,,1,1,0,0,6.0,1,0,5,3.0,0.833
 2013,al,Rob Leibowitz,Jose Valverde,622,SD,P,9,rel,previously_reserved,,3,0,0,2,3.0,0,0,2,0.0,0.0
-2013,al,Ron Shandler,Todd Redmond,2220,Tor,P,23,act,active,P,2,0,1,0,6.3,3,2,3,9.95,2.368
-2013,al,Ron Shandler,Kevin Correia,1282,FA,P,1,act,active,P,29,9,12,0,171.0,43,24,98,4.26,1.439
 2013,al,Ron Shandler,Brett Oberholtzer,3548,Hou,P,4,act,active,P,9,3,5,0,57.3,13,5,35,2.51,1.134
+2013,al,Ron Shandler,Todd Redmond,2220,Tor,P,23,act,active,P,2,0,1,0,6.3,3,2,3,9.95,2.368
+2013,al,Ron Shandler,Sonny Gray,3633,Oak,P,1,act,active,P,10,5,2,0,56.0,17,3,59,2.73,1.125
+2013,al,Ron Shandler,Kevin Correia,1282,FA,P,1,act,active,P,29,9,12,0,171.0,43,24,98,4.26,1.439
+2013,al,Ron Shandler,James Paxton,3577,Sea,P,1,act,active,P,3,2,0,0,18.0,6,1,18,1.5,0.944
+2013,al,Ron Shandler,Brad Peacock,3746,Hou,P,1,act,active,P,13,5,5,0,68.7,31,11,63,5.11,1.413
+2013,al,Ron Shandler,Tommy Milone,3642,Min,P,10,act,active,P,25,11,9,0,145.7,37,23,114,4.26,1.263
 2013,al,Ron Shandler,Esmil Rogers,444,NYY,P,1,act,active,P,2,0,2,0,6.7,6,2,4,10.8,2.55
 2013,al,Ron Shandler,Chris Sale,3309,CWS,P,21,act,active,P,30,11,14,0,214.3,46,23,226,3.07,1.073
-2013,al,Ron Shandler,Tommy Milone,3642,Min,P,10,act,active,P,25,11,9,0,145.7,37,23,114,4.26,1.263
-2013,al,Ron Shandler,Sonny Gray,3633,Oak,P,1,act,active,P,10,5,2,0,56.0,17,3,59,2.73,1.125
-2013,al,Ron Shandler,Brad Peacock,3746,Hou,P,1,act,active,P,13,5,5,0,68.7,31,11,63,5.11,1.413
-2013,al,Ron Shandler,James Paxton,3577,Sea,P,1,act,active,P,3,2,0,0,18.0,6,1,18,1.5,0.944
-2013,al,Ron Shandler,Jake Arrieta,2080,ChC,P,2,rel,previously_active,,5,1,2,0,23.7,17,2,23,7.23,1.775
-2013,al,Ron Shandler,Jordan Lyles,2695,Col,P,1,rel,previously_active,,16,4,5,0,90.3,28,8,58,4.98,1.483
-2013,al,Ron Shandler,Jerry Blevins,1043,Was,P,0,rel,previously_active,,7,2,0,0,6.0,0,1,4,3.0,0.833
-2013,al,Ron Shandler,Gavin Floyd,212,Cle,P,4,rel,previously_active,,5,0,4,0,24.3,12,4,25,5.18,1.603
-2013,al,Ron Shandler,Junichi Tazawa,2230,Bos,P,2,res,previously_active,P,65,4,3,0,63.0,12,8,67,3.0,1.19
-2013,al,Ron Shandler,Ernesto Frieri,1225,TB,P,9,trd,previously_active,,39,0,1,22,40.7,21,5,61,2.88,1.156
-2013,al,Ron Shandler,Ryan Cook,3781,Oak,P,6,res,previously_active,P,54,6,2,2,53.0,18,2,55,2.38,1.226
-2013,al,Ron Shandler,Caleb Thielbar,4229,Min,P,0,rel,previously_active,,22,2,1,0,19.0,8,2,16,1.42,0.947
-2013,al,Ron Shandler,Alberto Alburquerque,2945,Det,P,0,rel,previously_active,,6,1,1,0,5.0,5,1,10,5.4,1.2
 2013,al,Ron Shandler,Carlos Carrasco,1141,Cle,P,0,rel,previously_active,,3,0,2,0,15.7,7,2,9,6.32,1.532
-2013,al,Ron Shandler,Mike Pelfrey,933,Min,P,0,rel,previously_active,,1,0,1,0,4.0,2,2,3,11.25,2.5
-2013,al,Ron Shandler,Sean Doolittle,2332,Oak,P,4,rel,previously_active,,14,1,1,0,13.0,4,0,13,1.38,1.0
-2013,al,Ron Shandler,Carter Capps,4150,Mia,P,1,rel,previously_active,,5,1,0,0,4.0,5,2,4,13.5,3.5
-2013,al,Ron Shandler,Vidal Nuno,4501,Ari,P,1,rel,previously_active,,1,0,0,0,3.0,0,0,2,0.0,1.333
+2013,al,Ron Shandler,Jerry Blevins,1043,Was,P,0,rel,previously_active,,7,2,0,0,6.0,0,1,4,3.0,0.833
+2013,al,Ron Shandler,Ernesto Frieri,1225,TB,P,9,trd,previously_active,,39,0,1,22,40.7,21,5,61,2.88,1.156
+2013,al,Ron Shandler,Junichi Tazawa,2230,Bos,P,2,res,previously_active,P,65,4,3,0,63.0,12,8,67,3.0,1.19
+2013,al,Ron Shandler,Alberto Alburquerque,2945,Det,P,0,rel,previously_active,,6,1,1,0,5.0,5,1,10,5.4,1.2
+2013,al,Ron Shandler,Gavin Floyd,212,Cle,P,4,rel,previously_active,,5,0,4,0,24.3,12,4,25,5.18,1.603
+2013,al,Ron Shandler,Jake Arrieta,2080,ChC,P,2,rel,previously_active,,5,1,2,0,23.7,17,2,23,7.23,1.775
 2013,al,Ron Shandler,Josh Fields,2526,Hou,P,1,rel,previously_active,,2,0,0,0,0.7,0,0,1,0.0,0.0
+2013,al,Ron Shandler,Vidal Nuno,4501,Ari,P,1,rel,previously_active,,1,0,0,0,3.0,0,0,2,0.0,1.333
+2013,al,Ron Shandler,Carter Capps,4150,Mia,P,1,rel,previously_active,,5,1,0,0,4.0,5,2,4,13.5,3.5
+2013,al,Ron Shandler,Caleb Thielbar,4229,Min,P,0,rel,previously_active,,22,2,1,0,19.0,8,2,16,1.42,0.947
+2013,al,Ron Shandler,Mike Pelfrey,933,Min,P,0,rel,previously_active,,1,0,1,0,4.0,2,2,3,11.25,2.5
+2013,al,Ron Shandler,Jordan Lyles,2695,Col,P,1,rel,previously_active,,16,4,5,0,90.3,28,8,58,4.98,1.483
 2013,al,Ron Shandler,Will Smith,3082,Mil,P,0,rel,previously_active,,2,1,0,0,4.7,0,2,2,5.79,1.286
 2013,al,Ron Shandler,Wade Davis,1479,KC,P,5,rel,previously_active,,24,6,10,0,125.3,54,15,107,5.67,1.755
-2013,al,Ron Shandler,Ryan Cook,3781,Oak,P,6,res,reserved,P,17,0,2,0,14.3,7,0,12,3.14,1.535
+2013,al,Ron Shandler,Sean Doolittle,2332,Oak,P,4,rel,previously_active,,14,1,1,0,13.0,4,0,13,1.38,1.0
+2013,al,Ron Shandler,Ryan Cook,3781,Oak,P,6,res,previously_active,P,54,6,2,2,53.0,18,2,55,2.38,1.226
 2013,al,Ron Shandler,Felipe Paulino,619,Bos,P,0,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2013,al,Ron Shandler,Ryan Cook,3781,Oak,P,6,res,reserved,P,17,0,2,0,14.3,7,0,12,3.14,1.535
 2013,al,Ron Shandler,Junichi Tazawa,2230,Bos,P,2,res,reserved,P,6,1,1,0,5.3,0,1,5,5.06,1.313
-2013,al,Ron Shandler,Caleb Thielbar,4229,Min,P,0,rel,previously_reserved,,13,0,1,0,10.7,3,0,10,1.69,0.937
-2013,al,Ron Shandler,Tommy Milone,3642,Min,P,10,act,previously_reserved,P,3,1,0,0,10.7,2,2,12,2.53,1.406
-2013,al,Ron Shandler,Mike Pelfrey,933,Min,P,0,rel,previously_reserved,,2,0,1,0,7.7,4,1,6,8.22,1.696
-2013,al,Ron Shandler,Carlos Carrasco,1141,Cle,P,0,rel,previously_reserved,,3,0,2,0,13.0,6,2,6,12.46,2.769
 2013,al,Ron Shandler,Alberto Alburquerque,2945,Det,P,0,rel,previously_reserved,,7,0,0,0,8.0,4,2,7,9.0,1.75
 2013,al,Ron Shandler,Josh Fields,2526,Hou,P,1,rel,previously_reserved,,3,0,0,0,1.7,1,0,0,10.8,3.6
+2013,al,Ron Shandler,Tommy Milone,3642,Min,P,10,act,previously_reserved,P,3,1,0,0,10.7,2,2,12,2.53,1.406
+2013,al,Ron Shandler,Carlos Carrasco,1141,Cle,P,0,rel,previously_reserved,,3,0,2,0,13.0,6,2,6,12.46,2.769
 2013,al,Ron Shandler,Sonny Gray,3633,Oak,P,1,act,previously_reserved,P,2,0,1,0,8.0,3,1,8,2.25,1.0
 2013,al,Ron Shandler,Sean Doolittle,2332,Oak,P,4,rel,previously_reserved,,5,0,1,0,4.0,2,1,1,11.25,1.75
-2013,al,Lawr Michaels,Justin Verlander,504,Det,P,31,act,active,P,34,13,12,0,218.3,75,19,217,3.46,1.315
-2013,al,Lawr Michaels,Casey Janssen,1559,Was,P,9,act,active,P,56,4,1,34,52.7,13,3,50,2.56,0.987
+2013,al,Ron Shandler,Caleb Thielbar,4229,Min,P,0,rel,previously_reserved,,13,0,1,0,10.7,3,0,10,1.69,0.937
+2013,al,Ron Shandler,Mike Pelfrey,933,Min,P,0,rel,previously_reserved,,2,0,1,0,7.7,4,1,6,8.22,1.696
 2013,al,Lawr Michaels,Aaron Crow,2116,Mia,P,4,act,active,P,40,7,5,0,33.7,17,5,36,3.74,1.634
-2013,al,Lawr Michaels,Chris Perez,1425,Mil,P,14,act,active,P,52,5,3,24,52.0,21,11,53,4.5,1.481
-2013,al,Lawr Michaels,Chris Tillman,142,Bal,P,5,act,active,P,33,16,7,0,206.3,68,33,179,3.71,1.221
 2013,al,Lawr Michaels,Jake Peavy,1237,SF,P,14,act,active,P,23,12,5,0,144.7,36,20,121,4.17,1.147
-2013,al,Lawr Michaels,Mark Buehrle,206,Tor,P,6,act,active,P,33,12,10,0,203.7,51,24,139,4.15,1.345
-2013,al,Lawr Michaels,Alex Torres,2451,SD,P,0,act,active,P,33,3,2,0,47.0,17,1,50,2.11,1.0
+2013,al,Lawr Michaels,Chris Tillman,142,Bal,P,5,act,active,P,33,16,7,0,206.3,68,33,179,3.71,1.221
+2013,al,Lawr Michaels,Casey Janssen,1559,Was,P,9,act,active,P,56,4,1,34,52.7,13,3,50,2.56,0.987
 2013,al,Lawr Michaels,Alex Cobb,3431,TB,P,12,act,active,P,21,10,3,0,138.3,43,12,128,2.8,1.157
-2013,al,Lawr Michaels,Luke Hochevar,661,KC,P,0,res,previously_active,P,28,3,1,2,36.3,9,2,41,1.49,0.908
-2013,al,Lawr Michaels,David Phelps,3561,Mia,P,5,rel,previously_active,,5,0,1,0,13.0,6,1,13,6.23,1.615
-2013,al,Lawr Michaels,Justin Grimm,4148,ChC,P,1,rel,previously_active,,14,6,6,0,75.7,25,14,54,6.3,1.586
+2013,al,Lawr Michaels,Chris Perez,1425,Mil,P,14,act,active,P,52,5,3,24,52.0,21,11,53,4.5,1.481
+2013,al,Lawr Michaels,Alex Torres,2451,SD,P,0,act,active,P,33,3,2,0,47.0,17,1,50,2.11,1.0
+2013,al,Lawr Michaels,Mark Buehrle,206,Tor,P,6,act,active,P,33,12,10,0,203.7,51,24,139,4.15,1.345
+2013,al,Lawr Michaels,Justin Verlander,504,Det,P,31,act,active,P,34,13,12,0,218.3,75,19,217,3.46,1.315
 2013,al,Lawr Michaels,J.A. Happ,1109,Sea,P,0,res,previously_active,P,7,2,2,0,33.0,19,3,26,4.91,1.545
+2013,al,Lawr Michaels,Luke Hochevar,661,KC,P,0,res,previously_active,P,28,3,1,2,36.3,9,2,41,1.49,0.908
 2013,al,Lawr Michaels,Dustin McGowan,1564,FA,P,1,rel,previously_active,,7,0,0,0,8.3,3,1,9,1.08,1.08
+2013,al,Lawr Michaels,Justin Grimm,4148,ChC,P,1,rel,previously_active,,14,6,6,0,75.7,25,14,54,6.3,1.586
+2013,al,Lawr Michaels,David Phelps,3561,Mia,P,5,rel,previously_active,,5,0,1,0,13.0,6,1,13,6.23,1.615
 2013,al,Lawr Michaels,Luke Hochevar,661,KC,P,0,res,reserved,P,30,2,1,0,34.0,8,6,41,2.38,0.735
 2013,al,Lawr Michaels,J.A. Happ,1109,Sea,P,0,res,reserved,P,11,3,5,0,59.7,26,7,51,4.37,1.425
+2013,al,Lawr Michaels,Alex Torres,2451,SD,P,0,act,previously_reserved,P,4,0,0,0,6.7,1,0,9,0.0,0.45
+2013,al,Lawr Michaels,Dustin McGowan,1564,FA,P,1,rel,previously_reserved,,3,0,0,0,3.0,0,0,5,0.0,0.0
 2013,al,Lawr Michaels,Travis Blackley,1101,FA,P,0,rel,previously_reserved,,8,0,0,0,10.0,6,2,7,3.6,1.3
 2013,al,Lawr Michaels,Justin Grimm,4148,ChC,P,1,rel,previously_reserved,,7,0,2,0,9.0,4,0,6,9.0,1.778
-2013,al,Lawr Michaels,Chris Perez,1425,Mil,P,14,act,previously_reserved,P,2,0,0,1,2.0,0,0,1,0.0,0.0
-2013,al,Lawr Michaels,Aaron Crow,2116,Mia,P,4,act,previously_reserved,P,17,0,0,1,14.3,5,1,8,2.51,1.116
-2013,al,Lawr Michaels,Alex Torres,2451,SD,P,0,act,previously_reserved,P,4,0,0,0,6.7,1,0,9,0.0,0.45
 2013,al,Lawr Michaels,Alex Cobb,3431,TB,P,12,act,previously_reserved,P,1,1,0,0,5.0,2,1,6,1.8,1.0
-2013,al,Lawr Michaels,Dustin McGowan,1564,FA,P,1,rel,previously_reserved,,3,0,0,0,3.0,0,0,5,0.0,0.0
-2013,al,Andy Behrens,Cody Allen,4164,Cle,P,1,act,active,P,37,2,0,0,30.7,13,2,36,2.64,1.435
-2013,al,Andy Behrens,Brett Anderson,2011,LAD,P,14,act,active,P,16,1,4,3,44.7,21,5,46,6.04,1.612
-2013,al,Andy Behrens,Jerome Williams,1944,Phi,P,1,act,active,P,11,4,3,0,59.7,19,7,42,4.53,1.391
-2013,al,Andy Behrens,Kevin Gausman,4053,Bal,P,1,act,active,P,15,2,4,0,42.0,11,7,39,5.79,1.357
-2013,al,Andy Behrens,Tanner Scheppers,2869,Tex,P,1,act,active,P,40,1,2,1,38.7,10,4,34,2.79,1.19
-2013,al,Andy Behrens,Ubaldo Jimenez,438,Bal,P,1,act,active,P,28,12,8,0,163.0,70,14,179,3.04,1.356
+2013,al,Lawr Michaels,Aaron Crow,2116,Mia,P,4,act,previously_reserved,P,17,0,0,1,14.3,5,1,8,2.51,1.116
+2013,al,Lawr Michaels,Chris Perez,1425,Mil,P,14,act,previously_reserved,P,2,0,0,1,2.0,0,0,1,0.0,0.0
 2013,al,Andy Behrens,Hiroki Kuroda,771,FA,P,15,act,active,P,32,11,13,0,201.3,43,20,150,3.31,1.162
-2013,al,Andy Behrens,Anibal Sanchez,556,Det,P,14,act,active,P,28,13,8,0,177.0,53,9,198,2.59,1.164
-2013,al,Andy Behrens,Andrew Albers,4639,Tor,P,1,act,active,P,9,1,5,0,51.7,6,6,23,4.7,1.277
 2013,al,Andy Behrens,Danny Salazar,3850,Cle,P,1,act,active,P,9,1,3,0,46.0,14,7,58,3.33,1.217
-2013,al,Andy Behrens,Jason Hammel,1443,ChC,P,7,rel,previously_active,,21,7,8,0,123.0,46,20,85,5.2,1.512
-2013,al,Andy Behrens,Erik Bedard,1333,LAD,P,1,rel,previously_active,,16,3,7,0,91.7,49,7,78,3.93,1.462
+2013,al,Andy Behrens,Andrew Albers,4639,Tor,P,1,act,active,P,9,1,5,0,51.7,6,6,23,4.7,1.277
+2013,al,Andy Behrens,Jerome Williams,1944,Phi,P,1,act,active,P,11,4,3,0,59.7,19,7,42,4.53,1.391
+2013,al,Andy Behrens,Ubaldo Jimenez,438,Bal,P,1,act,active,P,28,12,8,0,163.0,70,14,179,3.04,1.356
+2013,al,Andy Behrens,Tanner Scheppers,2869,Tex,P,1,act,active,P,40,1,2,1,38.7,10,4,34,2.79,1.19
+2013,al,Andy Behrens,Anibal Sanchez,556,Det,P,14,act,active,P,28,13,8,0,177.0,53,9,198,2.59,1.164
+2013,al,Andy Behrens,Cody Allen,4164,Cle,P,1,act,active,P,37,2,0,0,30.7,13,2,36,2.64,1.435
+2013,al,Andy Behrens,Kevin Gausman,4053,Bal,P,1,act,active,P,15,2,4,0,42.0,11,7,39,5.79,1.357
+2013,al,Andy Behrens,Brett Anderson,2011,LAD,P,14,act,active,P,16,1,4,3,44.7,21,5,46,6.04,1.612
+2013,al,Andy Behrens,Sean Burnett,1200,FA,P,0,dis,previously_active,P,1,0,0,0,0.7,1,0,0,0.0,1.5
+2013,al,Andy Behrens,Scott Kazmir,1447,Oak,P,1,rel,previously_active,,1,0,0,0,3.3,3,2,4,16.2,3.3
+2013,al,Andy Behrens,Mariano Rivera,998,NYY,P,19,trd,previously_active,,31,0,1,26,28.0,6,1,27,1.61,1.25
 2013,al,Andy Behrens,Philip Humber,878,Oak,P,1,rel,previously_active,,1,0,1,0,0.3,1,1,0,216.0,27.0
 2013,al,Andy Behrens,Charlie Furbush,3386,Sea,P,1,rel,previously_active,,14,0,2,0,16.0,8,3,21,3.94,1.062
-2013,al,Andy Behrens,Sean Burnett,1200,FA,P,0,dis,previously_active,P,1,0,0,0,0.7,1,0,0,0.0,1.5
-2013,al,Andy Behrens,Jose Alvarez,3938,LAA,P,6,rel,previously_active,,2,0,2,0,8.7,4,3,7,8.31,1.962
-2013,al,Andy Behrens,Wesley Wright,625,Bal,P,0,rel,previously_active,,4,0,0,0,3.0,1,0,1,6.0,1.333
-2013,al,Andy Behrens,Mariano Rivera,998,NYY,P,19,trd,previously_active,,31,0,1,26,28.0,6,1,27,1.61,1.25
-2013,al,Andy Behrens,Michael Kohn,3090,Atl,P,0,rel,previously_active,,4,0,1,0,2.3,1,1,1,3.86,1.286
-2013,al,Andy Behrens,Hector Ambriz,2502,SD,P,12,rel,previously_active,,1,0,0,0,1.0,2,1,0,27.0,6.0
-2013,al,Andy Behrens,Scott Kazmir,1447,Oak,P,1,rel,previously_active,,1,0,0,0,3.3,3,2,4,16.2,3.3
+2013,al,Andy Behrens,Jason Hammel,1443,ChC,P,7,rel,previously_active,,21,7,8,0,123.0,46,20,85,5.2,1.512
 2013,al,Andy Behrens,Carter Capps,4150,Mia,P,1,rel,previously_active,,30,2,2,0,31.7,9,9,40,5.97,1.579
+2013,al,Andy Behrens,Hector Ambriz,2502,SD,P,12,rel,previously_active,,1,0,0,0,1.0,2,1,0,27.0,6.0
 2013,al,Andy Behrens,Jose Veras,1000,Atl,P,8,res,previously_active,P,57,0,5,20,57.3,20,6,52,2.98,1.029
 2013,al,Andy Behrens,Brayan Villarreal,3389,Bos,P,1,rel,previously_active,,2,0,0,0,1.3,2,0,3,33.75,5.25
+2013,al,Andy Behrens,Wesley Wright,625,Bal,P,0,rel,previously_active,,4,0,0,0,3.0,1,0,1,6.0,1.333
+2013,al,Andy Behrens,Jose Alvarez,3938,LAA,P,6,rel,previously_active,,2,0,2,0,8.7,4,3,7,8.31,1.962
+2013,al,Andy Behrens,Erik Bedard,1333,LAD,P,1,rel,previously_active,,16,3,7,0,91.7,49,7,78,3.93,1.462
+2013,al,Andy Behrens,Michael Kohn,3090,Atl,P,0,rel,previously_active,,4,0,1,0,2.3,1,1,1,3.86,1.286
 2013,al,Andy Behrens,Jose Veras,1000,Atl,P,8,res,reserved,P,10,0,0,1,5.3,2,0,8,3.37,1.5
 2013,al,Andy Behrens,Sean Burnett,1200,FA,P,0,dis,reserved,P,2,0,0,0,1.0,0,0,0,0.0,1.0
-2013,al,Andy Behrens,Jason Hammel,1443,ChC,P,7,rel,previously_reserved,,1,0,0,0,2.0,1,0,1,0.0,1.0
-2013,al,Andy Behrens,Philip Humber,878,Oak,P,1,rel,previously_reserved,,6,0,6,0,33.3,12,5,16,6.75,1.68
-2013,al,Andy Behrens,Charlie Furbush,3386,Sea,P,1,rel,previously_reserved,,3,0,1,0,2.7,2,0,6,6.75,1.875
-2013,al,Andy Behrens,Anibal Sanchez,556,Det,P,14,act,previously_reserved,P,1,1,0,0,5.0,1,0,4,1.8,0.8
 2013,al,Andy Behrens,Wesley Wright,625,Bal,P,0,rel,previously_reserved,,6,0,0,0,7.0,2,0,5,2.57,1.143
-2013,al,Andy Behrens,Hector Ambriz,2502,SD,P,12,rel,previously_reserved,,3,0,0,0,2.3,1,0,3,0.0,2.143
-2013,al,Andy Behrens,Kevin Gausman,4053,Bal,P,1,act,previously_reserved,P,5,1,1,0,5.7,2,1,10,4.76,1.235
 2013,al,Andy Behrens,Brayan Villarreal,3389,Bos,P,1,rel,previously_reserved,,2,0,2,0,0.3,3,1,1,108.0,12.0
 2013,al,Andy Behrens,Ubaldo Jimenez,438,Bal,P,1,act,previously_reserved,P,4,1,1,0,19.7,10,2,15,5.49,1.119
+2013,al,Andy Behrens,Kevin Gausman,4053,Bal,P,1,act,previously_reserved,P,5,1,1,0,5.7,2,1,10,4.76,1.235
+2013,al,Andy Behrens,Hector Ambriz,2502,SD,P,12,rel,previously_reserved,,3,0,0,0,2.3,1,0,3,0.0,2.143
+2013,al,Andy Behrens,Anibal Sanchez,556,Det,P,14,act,previously_reserved,P,1,1,0,0,5.0,1,0,4,1.8,0.8
 2013,al,Andy Behrens,Carter Capps,4150,Mia,P,1,rel,previously_reserved,,3,0,0,0,3.7,3,0,2,9.82,2.455
-2013,al,Jason Collette,Danny Farquhar,3065,Sea,P,28,act,active,P,22,0,3,14,20.3,8,0,26,2.66,1.082
+2013,al,Andy Behrens,Jason Hammel,1443,ChC,P,7,rel,previously_reserved,,1,0,0,0,2.0,1,0,1,0.0,1.0
+2013,al,Andy Behrens,Charlie Furbush,3386,Sea,P,1,rel,previously_reserved,,3,0,1,0,2.7,2,0,6,6.75,1.875
+2013,al,Andy Behrens,Philip Humber,878,Oak,P,1,rel,previously_reserved,,6,0,6,0,33.3,12,5,16,6.75,1.68
+2013,al,Jason Collette,Steve Delabar,3830,Tor,P,1,act,active,P,46,3,5,1,48.7,25,3,67,3.7,1.377
+2013,al,Jason Collette,Chris Archer,2797,TB,P,0,act,active,P,11,3,3,0,54.0,10,8,50,4.0,1.185
 2013,al,Jason Collette,Dane De La Rosa,3432,Bal,P,0,act,active,P,35,2,0,1,31.7,11,2,27,2.84,1.074
 2013,al,Jason Collette,Matt Moore,3149,TB,P,19,act,active,P,27,17,4,0,150.3,76,14,143,3.29,1.297
-2013,al,Jason Collette,Zach McAllister,2685,Cle,P,3,act,active,P,23,9,8,0,129.3,46,13,96,3.69,1.33
+2013,al,Jason Collette,Danny Farquhar,3065,Sea,P,28,act,active,P,22,0,3,14,20.3,8,0,26,2.66,1.082
 2013,al,Jason Collette,Glen Perkins,884,Min,P,16,act,active,P,61,2,0,36,62.7,15,5,77,2.3,0.926
-2013,al,Jason Collette,Chris Archer,2797,TB,P,0,act,active,P,11,3,3,0,54.0,10,8,50,4.0,1.185
-2013,al,Jason Collette,Steve Delabar,3830,Tor,P,1,act,active,P,46,3,5,1,48.7,25,3,67,3.7,1.377
 2013,al,Jason Collette,Hisashi Iwakuma,2630,Sea,P,8,act,active,P,33,14,6,0,219.7,42,25,185,2.66,1.006
 2013,al,Jason Collette,Tommy Hunter,2152,Bal,P,1,act,active,P,36,3,3,2,42.3,8,5,35,3.61,1.11
+2013,al,Jason Collette,Zach McAllister,2685,Cle,P,3,act,active,P,23,9,8,0,129.3,46,13,96,3.69,1.33
+2013,al,Jason Collette,Roberto Hernandez,376,Hou,P,0,res,previously_active,P,21,5,9,1,113.0,27,19,90,4.7,1.301
+2013,al,Jason Collette,Josh Johnson,544,SD,P,12,dis,previously_active,P,14,1,7,0,74.0,26,14,77,6.08,1.568
 2013,al,Jason Collette,Grant Balfour,1438,TB,P,14,trd,previously_active,,46,0,2,29,44.0,14,5,50,1.84,1.023
 2013,al,Jason Collette,Alex Colome,3154,TB,P,1,rel,previously_active,,2,0,1,0,10.3,7,2,5,3.48,1.548
 2013,al,Jason Collette,Lucas Harrell,214,FA,P,2,rel,previously_active,,17,5,8,0,89.7,50,14,60,5.72,1.751
-2013,al,Jason Collette,Roberto Hernandez,376,Hou,P,0,res,previously_active,P,21,5,9,1,113.0,27,19,90,4.7,1.301
-2013,al,Jason Collette,Josh Johnson,544,SD,P,12,dis,previously_active,P,14,1,7,0,74.0,26,14,77,6.08,1.568
 2013,al,Jason Collette,Esmil Rogers,444,NYY,P,0,rel,previously_active,,28,2,5,0,98.7,32,16,71,5.11,1.541
-2013,al,Jason Collette,Roberto Hernandez,376,Hou,P,0,res,reserved,P,11,1,4,0,38.0,11,5,23,5.45,1.447
 2013,al,Jason Collette,Josh Johnson,544,SD,P,12,dis,reserved,P,2,1,1,0,7.3,4,1,6,7.36,2.591
-2013,al,Jason Collette,Zach McAllister,2685,Cle,P,3,act,previously_reserved,P,1,0,1,0,5.0,3,0,5,5.4,2.2
-2013,al,Jason Collette,Dane De La Rosa,3432,Bal,P,0,act,previously_reserved,P,7,1,0,1,6.3,5,0,6,0.0,1.105
-2013,al,Jason Collette,Lucas Harrell,214,FA,P,2,rel,previously_reserved,,8,0,4,0,32.7,20,2,13,4.41,1.439
-2013,al,Jason Collette,Tommy Hunter,2152,Bal,P,1,act,previously_reserved,P,9,0,1,1,10.0,1,1,6,2.7,0.8
+2013,al,Jason Collette,Roberto Hernandez,376,Hou,P,0,res,reserved,P,11,1,4,0,38.0,11,5,23,5.45,1.447
 2013,al,Jason Collette,Steve Delabar,3830,Tor,P,1,act,previously_reserved,P,9,2,0,0,10.0,4,1,15,0.9,1.2
+2013,al,Jason Collette,Lucas Harrell,214,FA,P,2,rel,previously_reserved,,8,0,4,0,32.7,20,2,13,4.41,1.439
 2013,al,Jason Collette,Esmil Rogers,444,NYY,P,0,rel,previously_reserved,,10,1,2,0,9.0,1,0,4,4.0,1.111
-2013,al,Mike Siano,Jared Burton,316,NYY,P,0,act,active,P,65,2,9,2,60.0,21,6,54,4.05,1.333
-2013,al,Mike Siano,Ivan Nova,2293,NYY,P,4,act,active,P,15,7,4,0,104.3,31,7,79,2.59,1.179
+2013,al,Jason Collette,Zach McAllister,2685,Cle,P,3,act,previously_reserved,P,1,0,1,0,5.0,3,0,5,5.4,2.2
+2013,al,Jason Collette,Tommy Hunter,2152,Bal,P,1,act,previously_reserved,P,9,0,1,1,10.0,1,1,6,2.7,0.8
+2013,al,Jason Collette,Dane De La Rosa,3432,Bal,P,0,act,previously_reserved,P,7,1,0,1,6.3,5,0,6,0.0,1.105
 2013,al,Mike Siano,Chia-Jen Lo,3031,FA,P,8,act,active,P,12,0,3,1,12.0,10,2,11,6.75,1.583
 2013,al,Mike Siano,Shawn Kelley,2407,SD,P,1,act,active,P,35,2,2,0,31.0,16,3,32,3.77,1.452
-2013,al,Mike Siano,Phil Hughes,987,Min,P,4,act,active,P,18,1,10,0,80.0,25,12,59,5.51,1.538
-2013,al,Mike Siano,Derek Holland,2390,Tex,P,11,act,active,P,33,10,9,0,213.0,64,20,189,3.42,1.286
-2013,al,Mike Siano,Bruce Rondon,4157,Det,P,1,act,active,P,25,1,1,1,24.7,9,2,27,2.55,1.176
 2013,al,Mike Siano,Dan Straily,4151,Hou,P,7,act,active,P,26,9,8,0,145.3,54,16,118,4.15,1.273
 2013,al,Mike Siano,Jarrod Parker,1978,Oak,P,14,act,active,P,32,12,8,0,197.0,63,25,134,3.97,1.223
-2013,al,Mike Siano,Blake Beavan,2165,Ari,P,3,rel,previously_active,,1,0,1,0,5.7,1,1,4,7.94,1.941
-2013,al,Mike Siano,Brandon Workman,3672,Bos,P,0,rel,previously_active,,2,1,1,0,12.0,3,0,13,2.25,1.333
-2013,al,Mike Siano,Brandon Morrow,1342,SD,P,19,rel,previously_active,,10,2,3,0,54.3,18,12,42,5.63,1.491
-2013,al,Mike Siano,Stephen Pryor,3950,Min,P,0,dis,previously_active,P,7,0,0,0,7.3,1,0,7,0.0,0.545
-2013,al,Mike Siano,Jeremy Bonderman,488,Det,P,3,rel,previously_active,,5,0,2,0,27.7,15,1,13,4.23,1.554
+2013,al,Mike Siano,Jared Burton,316,NYY,P,0,act,active,P,65,2,9,2,60.0,21,6,54,4.05,1.333
+2013,al,Mike Siano,Phil Hughes,987,Min,P,4,act,active,P,18,1,10,0,80.0,25,12,59,5.51,1.538
+2013,al,Mike Siano,Bruce Rondon,4157,Det,P,1,act,active,P,25,1,1,1,24.7,9,2,27,2.55,1.176
+2013,al,Mike Siano,Ivan Nova,2293,NYY,P,4,act,active,P,15,7,4,0,104.3,31,7,79,2.59,1.179
+2013,al,Mike Siano,Derek Holland,2390,Tex,P,11,act,active,P,33,10,9,0,213.0,64,20,189,3.42,1.286
 2013,al,Mike Siano,Vance Worley,2757,Pit,P,3,rel,previously_active,,10,1,5,0,48.7,15,9,25,7.21,1.993
-2013,al,Mike Siano,Vidal Nuno,4501,Ari,P,2,rel,previously_active,,3,0,2,0,12.0,3,2,4,3.75,1.0
-2013,al,Mike Siano,Freddy Garcia,1761,FA,P,2,rel,previously_active,,7,1,5,0,27.3,9,12,15,9.22,1.866
-2013,al,Mike Siano,Preston Claiborne,4368,Mia,P,1,rel,previously_active,,6,0,0,0,7.0,3,0,6,5.14,1.714
-2013,al,Mike Siano,Joel Hanrahan,1616,Det,P,15,rel,previously_active,,9,0,1,4,7.3,6,4,5,9.82,2.182
 2013,al,Mike Siano,Tommy Hanson,2019,CWS,P,1,rel,previously_active,,11,4,3,0,57.7,23,10,37,5.62,1.63
-2013,al,Mike Siano,Phil Coke,2198,FA,P,2,rel,previously_active,,17,0,3,1,17.7,6,1,18,5.6,1.245
-2013,al,Mike Siano,Hector Noesi,2971,CWS,P,0,rel,previously_active,,1,0,0,0,2.0,1,0,1,13.5,3.5
 2013,al,Mike Siano,Rhiner Cruz,3886,FA,P,0,rel,previously_active,,4,0,1,0,4.3,6,0,3,6.23,3.231
+2013,al,Mike Siano,Brandon Workman,3672,Bos,P,0,rel,previously_active,,2,1,1,0,12.0,3,0,13,2.25,1.333
+2013,al,Mike Siano,Stephen Pryor,3950,Min,P,0,dis,previously_active,P,7,0,0,0,7.3,1,0,7,0.0,0.545
+2013,al,Mike Siano,Preston Claiborne,4368,Mia,P,1,rel,previously_active,,6,0,0,0,7.0,3,0,6,5.14,1.714
+2013,al,Mike Siano,Freddy Garcia,1761,FA,P,2,rel,previously_active,,7,1,5,0,27.3,9,12,15,9.22,1.866
+2013,al,Mike Siano,Brandon Morrow,1342,SD,P,19,rel,previously_active,,10,2,3,0,54.3,18,12,42,5.63,1.491
+2013,al,Mike Siano,Phil Coke,2198,FA,P,2,rel,previously_active,,17,0,3,1,17.7,6,1,18,5.6,1.245
+2013,al,Mike Siano,Jeremy Bonderman,488,Det,P,3,rel,previously_active,,5,0,2,0,27.7,15,1,13,4.23,1.554
+2013,al,Mike Siano,Blake Beavan,2165,Ari,P,3,rel,previously_active,,1,0,1,0,5.7,1,1,4,7.94,1.941
+2013,al,Mike Siano,Joel Hanrahan,1616,Det,P,15,rel,previously_active,,9,0,1,4,7.3,6,4,5,9.82,2.182
+2013,al,Mike Siano,Vidal Nuno,4501,Ari,P,2,rel,previously_active,,3,0,2,0,12.0,3,2,4,3.75,1.0
+2013,al,Mike Siano,Hector Noesi,2971,CWS,P,0,rel,previously_active,,1,0,0,0,2.0,1,0,1,13.5,3.5
 2013,al,Mike Siano,Stephen Pryor,3950,Min,P,0,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2013,al,Mike Siano,Tommy Hanson,2019,CWS,P,1,rel,previously_reserved,,2,0,0,0,10.0,5,0,15,5.4,1.3
-2013,al,Mike Siano,Phil Coke,2198,FA,P,2,rel,previously_reserved,,1,0,0,0,1.0,0,0,0,0.0,0.0
 2013,al,Mike Siano,Shawn Kelley,2407,SD,P,1,act,previously_reserved,P,3,0,0,0,1.3,1,0,3,0.0,0.75
-2013,al,Mike Siano,Jared Burton,316,NYY,P,0,act,previously_reserved,P,6,0,0,0,6.0,1,0,7,1.5,0.5
-2013,al,Mike Siano,Brandon Workman,3672,Bos,P,0,rel,previously_reserved,,4,2,1,0,10.0,4,2,10,7.2,1.8
-2013,al,Mike Siano,Bruce Rondon,4157,Det,P,1,act,previously_reserved,P,2,0,1,0,1.7,0,0,2,5.4,1.8
 2013,al,Mike Siano,Dan Straily,4151,Hou,P,7,act,previously_reserved,P,1,1,0,0,7.0,3,0,6,0.0,0.571
+2013,al,Mike Siano,Bruce Rondon,4157,Det,P,1,act,previously_reserved,P,2,0,1,0,1.7,0,0,2,5.4,1.8
+2013,al,Mike Siano,Brandon Workman,3672,Bos,P,0,rel,previously_reserved,,4,2,1,0,10.0,4,2,10,7.2,1.8
+2013,al,Mike Siano,Tommy Hanson,2019,CWS,P,1,rel,previously_reserved,,2,0,0,0,10.0,5,0,15,5.4,1.3
+2013,al,Mike Siano,Jared Burton,316,NYY,P,0,act,previously_reserved,P,6,0,0,0,6.0,1,0,7,1.5,0.5
+2013,al,Mike Siano,Phil Coke,2198,FA,P,2,rel,previously_reserved,,1,0,0,0,1.0,0,0,0,0.0,0.0

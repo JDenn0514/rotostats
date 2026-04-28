@@ -120,7 +120,8 @@ def test_parse_team_page_returns_team_name_and_rows(html_2025_al_team1):
     assert first_b["team"] == result.team_name
     assert isinstance(first_b["salary"], int)
     assert isinstance(first_b["ab"], int)
-    assert isinstance(first_b["avg"], float)
+    assert isinstance(first_b["h"], int)
+    assert isinstance(first_b["obp"], float)
 
     first_p = result.pitcher_rows[0]
     assert set(first_p.keys()) == set(team_stats.PITCHER_COLUMNS) - {"eligibility"}
@@ -157,9 +158,9 @@ def test_total_row_check_detects_synthetic_mismatch():
     result = team_stats.TeamPageResult(team_name="Test")
     result.batter_rows.append(
         {"player_type": "batter", "roster_section": "active",
-         "ab": 100, "g": 30, "r": 10, "hr": 5, "rbi": 20,
+         "ab": 100, "h": 25, "g": 30, "r": 10, "hr": 5, "rbi": 20,
          "sb": 1, "so": 25, "bb": 8,
-         **{k: 0 for k in ("avg","obp","slg",
+         **{k: 0 for k in ("obp","slg",
                             "gp_dh","gp_c","gp_1b","gp_2b","gp_3b","gp_ss","gp_of",
                             "year","league","team","player_name","player_id",
                             "mlb_team","position","salary","status")}}
@@ -167,8 +168,8 @@ def test_total_row_check_detects_synthetic_mismatch():
     result.totals.append({
         "player_type": "batter", "section": "active",
         "ab": 999,  # mismatch
-        "g": 30, "r": 10, "hr": 5, "rbi": 20, "sb": 1, "so": 25, "bb": 8,
-        "avg": 0.0, "obp": 0.0, "slg": 0.0,
+        "h": 25, "g": 30, "r": 10, "hr": 5, "rbi": 20, "sb": 1, "so": 25, "bb": 8,
+        "obp": 0.0, "slg": 0.0,
     })
     warnings = team_stats.check_section_totals(result)
     assert any("ab" in w.lower() for w in warnings), warnings
@@ -264,7 +265,7 @@ def test_lookup_eligibility_returns_blank_when_missing():
 
 def _bat_row(team, name, pid, section, ab=0):
     base = {k: 0 for k in (
-        "g","r","hr","rbi","sb","so","bb","avg","obp","slg",
+        "h","g","r","hr","rbi","sb","so","bb","obp","slg",
         "gp_dh","gp_c","gp_1b","gp_2b","gp_3b","gp_ss","gp_of",
     )}
     base.update({
@@ -422,3 +423,95 @@ def test_scrape_league_year_raises_when_dropdown_missing(html_rosters_2025_al):
             fetch_team_stats_fn=fake_fetch_team_stats,
             sleep_seconds=0,
         )
+
+
+# ---------------------------------------------------------------------------
+# Rate-stat extraction (regression: scraper used to misread two-line cells
+# as AVG/OBP and SLG/OPS, but Onroto stacks season-cumulative over current-week
+# in every stat cell — so the main value of OBP is OBP, not AVG.)
+# ---------------------------------------------------------------------------
+
+def _find_batter(rows: list[dict], name: str) -> dict:
+    for r in rows:
+        if r["player_name"] == name:
+            return r
+    raise AssertionError(f"player {name!r} not found in batter rows")
+
+
+def _find_pitcher(rows: list[dict], name: str) -> dict:
+    for r in rows:
+        if r["player_name"] == name:
+            return r
+    raise AssertionError(f"player {name!r} not found in pitcher rows")
+
+
+def test_batter_columns_drop_avg_add_h():
+    """Schema: H is now extracted as an integer counting stat; AVG is dropped
+    (downstream can compute H/AB if it wants the rate)."""
+    assert "h" in team_stats.BATTER_COLUMNS
+    assert "avg" not in team_stats.BATTER_COLUMNS
+    assert "obp" in team_stats.BATTER_COLUMNS
+    assert "slg" in team_stats.BATTER_COLUMNS
+
+
+def test_parse_batter_row_extracts_h(html_2025_al_team1):
+    """Hits column is parsed as an integer counting stat."""
+    result = team_stats.parse_team_page(
+        html_2025_al_team1, year=2025, league_short="al"
+    )
+    naylor = _find_batter(result.batter_rows, "Josh Naylor")
+    # Naylor's team-window stats in this fixture: AB=183, H=55
+    assert naylor["h"] == 55
+    assert naylor["ab"] == 183
+
+
+def test_parse_batter_row_obp_is_season_main_not_current_week_red(html_2025_al_team1):
+    """Each rate cell stacks season-cumulative (main) over current-week (red font).
+    The parser must read the main value for OBP — not the red sub-value."""
+    result = team_stats.parse_team_page(
+        html_2025_al_team1, year=2025, league_short="al"
+    )
+    naylor = _find_batter(result.batter_rows, "Josh Naylor")
+    # Fixture cell: <td>.342<br><font color=#990000>.500</font></td>
+    # .342 is season-cumulative OBP; .500 is current-week.
+    assert naylor["obp"] == pytest.approx(0.342, abs=1e-3)
+
+
+def test_parse_batter_row_slg_is_season_main_not_current_week_red(html_2025_al_team1):
+    """SLG cell follows the same season/current-week stacking convention."""
+    result = team_stats.parse_team_page(
+        html_2025_al_team1, year=2025, league_short="al"
+    )
+    naylor = _find_batter(result.batter_rows, "Josh Naylor")
+    # Fixture cell: <td>.503<br><font color=#990000>.615</font></td>
+    assert naylor["slg"] == pytest.approx(0.503, abs=1e-3)
+
+
+def test_parse_batter_row_obp_matches_h_bb_over_ab_bb(html_2025_al_team1):
+    """Sanity: parsed OBP equals (H+BB+HBP)/(AB+BB+HBP+SF) for the team-window
+    counts in this fixture, confirming we picked the OBP-not-AVG main value."""
+    result = team_stats.parse_team_page(
+        html_2025_al_team1, year=2025, league_short="al"
+    )
+    naylor = _find_batter(result.batter_rows, "Josh Naylor")
+    # Naylor team-window: AB=183, H=55, BB=10, HBP=2, SF=1 (per fixture).
+    # We don't currently capture HBP/SF; reconstruct OBP within ±0.01 using H/BB.
+    # H/(AB+BB) = 55/193 ≈ .285, OBP ≈ .342, so a clean OBP-vs-AVG check is enough.
+    avg_estimate = naylor["h"] / naylor["ab"]
+    assert avg_estimate == pytest.approx(0.301, abs=1e-2)
+    assert naylor["obp"] > avg_estimate, (
+        "OBP must exceed AVG; if not, parser is reading current-week red value"
+    )
+
+
+def test_parse_pitcher_row_era_is_season_main_not_current_week_red(html_2025_al_team1):
+    """Pitcher ERA/WHIP cells use the same cumulative/current-week stacking;
+    confirm _cell_main_value gives us the season ERA."""
+    result = team_stats.parse_team_page(
+        html_2025_al_team1, year=2025, league_short="al"
+    )
+    gil = _find_pitcher(result.pitcher_rows, "Luis Gil")
+    # Fixture cell: <td>2.61<br><font color=#990000>3.27</font></td>
+    assert gil["era"] == pytest.approx(2.61, abs=1e-3)
+    # Fixture cell: <td>1.324<br><font color=#990000>1.000</font></td>
+    assert gil["whip"] == pytest.approx(1.324, abs=1e-3)

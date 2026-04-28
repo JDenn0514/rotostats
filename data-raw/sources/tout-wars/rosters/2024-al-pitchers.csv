@@ -1,468 +1,468 @@
 year,league,team,player_name,player_id,mlb_team,position,salary,status,roster_section,eligibility,g,w,l,sv,ip,bb,hr,so,era,whip
-2024,al,Mike Podhorzer,Carlos Rodon,4437,NYY,P,8,act,active,P,32,16,9,0,175.0,57,31,195,3.96,1.223
-2024,al,Mike Podhorzer,Kevin Gausman,4053,Tor,P,23,act,active,P,31,14,11,0,181.0,56,20,162,3.83,1.221
-2024,al,Mike Podhorzer,Michael Kopech,5107,LAD,P,3,act,active,P,67,6,8,15,67.7,34,9,88,3.46,1.153
-2024,al,Mike Podhorzer,Ben Lively,4880,Cle,P,0,act,active,P,1,0,1,0,4.0,4,0,4,4.5,2.25
 2024,al,Mike Podhorzer,Bryce Miller,8118,Sea,P,10,act,active,P,31,12,8,0,180.3,45,21,171,2.94,0.976
-2024,al,Mike Podhorzer,Jack Flaherty,5103,LAD,P,6,act,active,P,28,13,7,0,162.0,38,24,194,3.17,1.068
 2024,al,Mike Podhorzer,Casey Mize,6499,Det,P,0,act,active,P,15,2,4,0,67.3,16,8,57,4.81,1.455
-2024,al,Mike Podhorzer,Yariel Rodriguez,8918,Tor,P,0,act,active,P,1,0,1,0,5.0,2,0,5,5.4,1.2
+2024,al,Mike Podhorzer,Carlos Rodon,4437,NYY,P,8,act,active,P,32,16,9,0,175.0,57,31,195,3.96,1.223
+2024,al,Mike Podhorzer,Ben Lively,4880,Cle,P,0,act,active,P,1,0,1,0,4.0,4,0,4,4.5,2.25
 2024,al,Mike Podhorzer,Garrett Crochet,7365,Bos,P,3,act,active,P,32,6,12,0,146.0,33,18,209,3.58,1.068
-2024,al,Mike Podhorzer,Max Scherzer,19,Tex,P,1,dis,previously_active,P,8,2,4,0,39.3,8,6,38,3.89,1.093
-2024,al,Mike Podhorzer,Alex Lange,5695,Det,P,10,rel,previously_active,,21,0,3,2,18.7,17,0,21,4.34,1.768
-2024,al,Mike Podhorzer,Hans Crouse,6473,LAA,P,1,rel,previously_active,,17,4,3,0,15.0,10,2,21,4.8,1.467
-2024,al,Mike Podhorzer,Kris Bubic,6847,KC,P,3,res,previously_active,P,14,0,1,0,15.0,2,2,20,3.6,1.067
+2024,al,Mike Podhorzer,Jack Flaherty,5103,LAD,P,6,act,active,P,28,13,7,0,162.0,38,24,194,3.17,1.068
+2024,al,Mike Podhorzer,Michael Kopech,5107,LAD,P,3,act,active,P,67,6,8,15,67.7,34,9,88,3.46,1.153
+2024,al,Mike Podhorzer,Kevin Gausman,4053,Tor,P,23,act,active,P,31,14,11,0,181.0,56,20,162,3.83,1.221
+2024,al,Mike Podhorzer,Yariel Rodriguez,8918,Tor,P,0,act,active,P,1,0,1,0,5.0,2,0,5,5.4,1.2
 2024,al,Mike Podhorzer,Collin Snider,7882,Sea,P,1,rel,previously_active,,6,0,0,0,6.0,2,1,6,1.5,1.0
-2024,al,Mike Podhorzer,Keegan Akin,6550,Bal,P,1,res,previously_active,P,11,0,1,0,11.3,2,1,17,1.59,0.794
-2024,al,Mike Podhorzer,Shane Bieber,6086,Cle,P,10,rel,previously_active,,2,2,0,0,12.0,1,0,20,0.0,0.917
-2024,al,Mike Podhorzer,Tyler Beede,3727,Cle,P,1,rel,previously_active,,8,1,0,0,8.7,5,2,10,8.31,2.077
-2024,al,Mike Podhorzer,Justin Slaten,8763,Bos,P,3,rel,previously_active,,13,2,0,0,15.7,5,2,17,4.02,1.149
-2024,al,Mike Podhorzer,Cam Booser,8772,CWS,P,1,rel,previously_active,,17,1,1,1,14.7,4,0,13,2.45,1.295
-2024,al,Mike Podhorzer,Tyler Mahle,5916,Tex,P,1,rel,previously_active,,2,0,0,0,7.7,3,1,8,7.04,1.565
-2024,al,Mike Podhorzer,Nick Sandlin,7392,Tor,P,0,rel,previously_active,,18,3,0,0,15.0,9,2,11,4.2,1.267
+2024,al,Mike Podhorzer,Max Scherzer,19,Tex,P,1,dis,previously_active,P,8,2,4,0,39.3,8,6,38,3.89,1.093
 2024,al,Mike Podhorzer,Tyler Ferguson,8038,Oak,P,69,rel,previously_active,,12,1,0,0,12.3,6,1,16,2.92,0.892
+2024,al,Mike Podhorzer,Keegan Akin,6550,Bal,P,1,res,previously_active,P,11,0,1,0,11.3,2,1,17,1.59,0.794
+2024,al,Mike Podhorzer,Tyler Beede,3727,Cle,P,1,rel,previously_active,,8,1,0,0,8.7,5,2,10,8.31,2.077
+2024,al,Mike Podhorzer,Tyler Mahle,5916,Tex,P,1,rel,previously_active,,2,0,0,0,7.7,3,1,8,7.04,1.565
+2024,al,Mike Podhorzer,Hans Crouse,6473,LAA,P,1,rel,previously_active,,17,4,3,0,15.0,10,2,21,4.8,1.467
+2024,al,Mike Podhorzer,Justin Slaten,8763,Bos,P,3,rel,previously_active,,13,2,0,0,15.7,5,2,17,4.02,1.149
+2024,al,Mike Podhorzer,Shane Bieber,6086,Cle,P,10,rel,previously_active,,2,2,0,0,12.0,1,0,20,0.0,0.917
+2024,al,Mike Podhorzer,Alex Lange,5695,Det,P,10,rel,previously_active,,21,0,3,2,18.7,17,0,21,4.34,1.768
+2024,al,Mike Podhorzer,Nick Sandlin,7392,Tor,P,0,rel,previously_active,,18,3,0,0,15.0,9,2,11,4.2,1.267
+2024,al,Mike Podhorzer,Kris Bubic,6847,KC,P,3,res,previously_active,P,14,0,1,0,15.0,2,2,20,3.6,1.067
+2024,al,Mike Podhorzer,Cam Booser,8772,CWS,P,1,rel,previously_active,,17,1,1,1,14.7,4,0,13,2.45,1.295
 2024,al,Mike Podhorzer,Keegan Akin,6550,Bal,P,1,res,reserved,P,3,0,0,1,2.3,1,1,1,7.71,1.286
-2024,al,Mike Podhorzer,Kris Bubic,6847,KC,P,3,res,reserved,P,3,1,0,1,3.0,0,0,3,0.0,1.0
 2024,al,Mike Podhorzer,Max Scherzer,19,Tex,P,1,dis,reserved,P,1,0,0,0,4.0,2,1,2,4.5,1.75
-2024,al,Mike Podhorzer,Cam Booser,8772,CWS,P,1,rel,previously_reserved,,1,0,0,0,2.0,1,0,1,0.0,1.0
-2024,al,Mike Podhorzer,Tyler Beede,3727,Cle,P,1,rel,previously_reserved,,1,0,0,0,0.3,2,0,1,135.0,15.0
-2024,al,Mike Podhorzer,Tyler Ferguson,8038,Oak,P,69,rel,previously_reserved,,3,1,1,0,3.0,4,0,4,6.0,2.333
-2024,al,Mike Podhorzer,Casey Mize,6499,Det,P,0,act,previously_reserved,P,7,0,2,0,35.0,13,3,21,3.86,1.486
-2024,al,Mike Podhorzer,Nick Sandlin,7392,Tor,P,0,rel,previously_reserved,,2,0,0,0,2.0,1,1,2,4.5,1.0
-2024,al,Mike Podhorzer,Tyler Mahle,5916,Tex,P,1,rel,previously_reserved,,1,0,1,0,5.0,1,0,2,1.8,1.2
-2024,al,Mike Podhorzer,Hans Crouse,6473,LAA,P,1,rel,previously_reserved,,3,0,0,0,4.0,3,0,5,0.0,1.25
+2024,al,Mike Podhorzer,Kris Bubic,6847,KC,P,3,res,reserved,P,3,1,0,1,3.0,0,0,3,0.0,1.0
 2024,al,Mike Podhorzer,Steven Wilson,7189,CWS,P,0,rel,previously_reserved,,12,1,2,0,11.7,6,3,9,3.86,1.2
+2024,al,Mike Podhorzer,Nick Sandlin,7392,Tor,P,0,rel,previously_reserved,,2,0,0,0,2.0,1,1,2,4.5,1.0
+2024,al,Mike Podhorzer,Cam Booser,8772,CWS,P,1,rel,previously_reserved,,1,0,0,0,2.0,1,0,1,0.0,1.0
+2024,al,Mike Podhorzer,Tyler Ferguson,8038,Oak,P,69,rel,previously_reserved,,3,1,1,0,3.0,4,0,4,6.0,2.333
 2024,al,Mike Podhorzer,Collin Snider,7882,Sea,P,1,rel,previously_reserved,,3,0,1,0,2.7,0,1,1,3.38,1.125
-2024,al,Rick Wolf/Glenn Colton,Fraser Ellard,8408,CWS,P,0,act,active,P,3,0,0,0,2.7,3,0,2,6.75,1.875
-2024,al,Rick Wolf/Glenn Colton,Brady Basso,8756,Oak,P,3,act,active,P,1,0,1,0,3.0,1,2,3,15.0,2.333
-2024,al,Rick Wolf/Glenn Colton,Jonathan Cannon,7700,CWS,P,3,act,active,P,8,2,3,0,44.3,12,5,29,4.26,1.218
+2024,al,Mike Podhorzer,Hans Crouse,6473,LAA,P,1,rel,previously_reserved,,3,0,0,0,4.0,3,0,5,0.0,1.25
+2024,al,Mike Podhorzer,Casey Mize,6499,Det,P,0,act,previously_reserved,P,7,0,2,0,35.0,13,3,21,3.86,1.486
+2024,al,Mike Podhorzer,Tyler Beede,3727,Cle,P,1,rel,previously_reserved,,1,0,0,0,0.3,2,0,1,135.0,15.0
+2024,al,Mike Podhorzer,Tyler Mahle,5916,Tex,P,1,rel,previously_reserved,,1,0,1,0,5.0,1,0,2,1.8,1.2
+2024,al,Rick Wolf/Glenn Colton,Ronel Blanco,7450,Hou,P,29,act,active,P,30,13,6,0,167.3,68,22,166,2.8,1.088
 2024,al,Rick Wolf/Glenn Colton,Jack Kochanowicz,7513,LAA,P,6,act,active,P,3,0,1,0,21.0,1,1,10,1.71,0.714
 2024,al,Rick Wolf/Glenn Colton,Seth Lugo,5417,KC,P,4,act,active,P,33,16,9,0,206.7,48,16,181,3.0,1.089
+2024,al,Rick Wolf/Glenn Colton,Jonathan Cannon,7700,CWS,P,3,act,active,P,8,2,3,0,44.3,12,5,29,4.26,1.218
 2024,al,Rick Wolf/Glenn Colton,Logan Gilbert,6531,Sea,P,22,act,active,P,33,9,12,0,208.7,37,26,220,3.23,0.887
-2024,al,Rick Wolf/Glenn Colton,Ronel Blanco,7450,Hou,P,29,act,active,P,30,13,6,0,167.3,68,22,166,2.8,1.088
-2024,al,Rick Wolf/Glenn Colton,Josh Hader,4656,Hou,P,23,act,active,P,71,8,8,34,71.0,25,12,105,3.8,0.958
+2024,al,Rick Wolf/Glenn Colton,Brady Basso,8756,Oak,P,3,act,active,P,1,0,1,0,3.0,1,2,3,15.0,2.333
+2024,al,Rick Wolf/Glenn Colton,Fraser Ellard,8408,CWS,P,0,act,active,P,3,0,0,0,2.7,3,0,2,6.75,1.875
 2024,al,Rick Wolf/Glenn Colton,Brant Hurter,8648,Det,P,11,act,active,P,6,5,0,0,27.7,5,1,21,1.95,0.94
 2024,al,Rick Wolf/Glenn Colton,Spencer Arrighetti,8577,Hou,P,14,act,active,P,20,5,9,0,102.0,41,16,126,3.79,1.284
-2024,al,Rick Wolf/Glenn Colton,Carson Fulmer,5371,Pit,P,9,rel,previously_active,,1,0,0,0,5.7,3,1,3,4.76,0.882
-2024,al,Rick Wolf/Glenn Colton,Keider Montero,8746,Det,P,2,rel,previously_active,,2,0,1,0,10.0,5,1,9,4.5,1.6
+2024,al,Rick Wolf/Glenn Colton,Josh Hader,4656,Hou,P,23,act,active,P,71,8,8,34,71.0,25,12,105,3.8,0.958
+2024,al,Rick Wolf/Glenn Colton,John Means,6692,Bal,P,1,rel,previously_active,,3,1,0,0,13.7,2,2,8,3.95,1.098
+2024,al,Rick Wolf/Glenn Colton,Chris Stratton,4489,KC,P,0,rel,previously_active,,2,0,1,0,2.0,4,0,2,9.0,3.0
+2024,al,Rick Wolf/Glenn Colton,Alex Wood,4113,Oak,P,16,rel,previously_active,,3,0,1,0,11.7,8,2,9,9.26,2.314
+2024,al,Rick Wolf/Glenn Colton,Carlos Carrasco,1141,Cle,P,1,rel,previously_active,,1,0,0,0,4.7,0,1,3,3.86,0.857
+2024,al,Rick Wolf/Glenn Colton,Yariel Rodriguez,8918,Tor,P,8,rel,previously_active,,8,0,3,0,31.3,17,5,35,6.03,1.436
 2024,al,Rick Wolf/Glenn Colton,Jose Soriano,7549,LAA,P,19,dis,previously_active,P,19,6,5,0,103.0,42,5,88,3.15,1.194
 2024,al,Rick Wolf/Glenn Colton,Luis Medina,6488,Oak,P,8,rel,previously_active,,2,0,2,0,8.0,3,1,7,9.0,2.0
-2024,al,Rick Wolf/Glenn Colton,Tommy Kahnle,4371,NYY,P,0,rel,previously_active,,7,0,0,0,6.0,4,2,9,6.0,1.333
-2024,al,Rick Wolf/Glenn Colton,Andrew Chafin,4142,FA,P,1,rel,previously_active,,7,0,1,0,5.0,1,1,6,10.8,2.2
+2024,al,Rick Wolf/Glenn Colton,Keider Montero,8746,Det,P,2,rel,previously_active,,2,0,1,0,10.0,5,1,9,4.5,1.6
 2024,al,Rick Wolf/Glenn Colton,J.T. Ginn,7701,Oak,P,26,rel,previously_active,,3,0,1,0,15.0,2,2,15,4.8,1.6
-2024,al,Rick Wolf/Glenn Colton,Alex Wood,4113,Oak,P,16,rel,previously_active,,3,0,1,0,11.7,8,2,9,9.26,2.314
 2024,al,Rick Wolf/Glenn Colton,Taj Bradley,7918,TB,P,3,res,previously_active,P,21,6,10,0,114.0,41,18,127,4.34,1.246
-2024,al,Rick Wolf/Glenn Colton,Griffin Canning,6578,NYM,P,4,rel,previously_active,,18,3,9,0,97.0,34,17,66,5.1,1.371
-2024,al,Rick Wolf/Glenn Colton,Ian Hamilton,6624,NYY,P,1,rel,previously_active,,10,0,0,0,13.3,6,0,12,3.38,1.2
-2024,al,Rick Wolf/Glenn Colton,Ryne Stanek,4444,NYM,P,90,rel,previously_active,,18,1,2,1,15.3,7,3,18,4.11,1.37
-2024,al,Rick Wolf/Glenn Colton,Bryan Sammons,9137,Det,P,2,rel,previously_active,,2,1,1,0,8.7,5,2,5,4.15,1.385
-2024,al,Rick Wolf/Glenn Colton,Cade Povich,8454,Bal,P,22,rel,previously_active,,3,0,2,0,14.7,7,3,20,4.91,1.091
-2024,al,Rick Wolf/Glenn Colton,Caden Dana,8908,LAA,P,12,rel,previously_active,,1,0,1,0,1.0,1,3,1,45.0,8.0
-2024,al,Rick Wolf/Glenn Colton,Ben Joyce,8098,LAA,P,14,dis,previously_active,P,21,1,0,4,23.3,8,1,23,1.16,1.029
-2024,al,Rick Wolf/Glenn Colton,Yariel Rodriguez,8918,Tor,P,8,rel,previously_active,,8,0,3,0,31.3,17,5,35,6.03,1.436
-2024,al,Rick Wolf/Glenn Colton,Jack Leiter,6947,Tex,P,19,rel,previously_active,,1,0,0,0,4.0,0,2,3,9.0,1.75
-2024,al,Rick Wolf/Glenn Colton,Chase Silseth,8205,LAA,P,3,rel,previously_active,,2,0,1,0,8.0,4,3,12,6.75,1.5
-2024,al,Rick Wolf/Glenn Colton,Manuel Rodriguez,7119,TB,P,2,rel,previously_active,,2,0,0,0,2.0,1,0,1,4.5,2.0
-2024,al,Rick Wolf/Glenn Colton,Joe Boyle,8226,TB,P,0,rel,previously_active,,5,2,3,0,22.0,15,2,19,5.32,1.318
-2024,al,Rick Wolf/Glenn Colton,John Means,6692,Bal,P,1,rel,previously_active,,3,1,0,0,13.7,2,2,8,3.95,1.098
 2024,al,Rick Wolf/Glenn Colton,Alec Marsh,7521,KC,P,19,res,previously_active,P,1,0,1,0,2.7,3,1,5,10.12,3.0
-2024,al,Rick Wolf/Glenn Colton,Jonathan Loaisiga,6304,NYY,P,0,rel,previously_active,,1,0,0,0,1.0,0,0,1,0.0,0.0
-2024,al,Rick Wolf/Glenn Colton,Jordan Leasure,8703,CWS,P,3,rel,previously_active,,14,0,0,1,12.7,5,2,14,3.55,1.263
-2024,al,Rick Wolf/Glenn Colton,Chris Stratton,4489,KC,P,0,rel,previously_active,,2,0,1,0,2.0,4,0,2,9.0,3.0
+2024,al,Rick Wolf/Glenn Colton,Cade Povich,8454,Bal,P,22,rel,previously_active,,3,0,2,0,14.7,7,3,20,4.91,1.091
+2024,al,Rick Wolf/Glenn Colton,Bryan Sammons,9137,Det,P,2,rel,previously_active,,2,1,1,0,8.7,5,2,5,4.15,1.385
+2024,al,Rick Wolf/Glenn Colton,Chase Silseth,8205,LAA,P,3,rel,previously_active,,2,0,1,0,8.0,4,3,12,6.75,1.5
 2024,al,Rick Wolf/Glenn Colton,Roansy Contreras,7534,Bal,P,14,rel,previously_active,,1,0,1,0,2.7,3,0,1,6.75,2.25
-2024,al,Rick Wolf/Glenn Colton,Carlos Carrasco,1141,Cle,P,1,rel,previously_active,,1,0,0,0,4.7,0,1,3,3.86,0.857
+2024,al,Rick Wolf/Glenn Colton,Griffin Canning,6578,NYM,P,4,rel,previously_active,,18,3,9,0,97.0,34,17,66,5.1,1.371
+2024,al,Rick Wolf/Glenn Colton,Caden Dana,8908,LAA,P,12,rel,previously_active,,1,0,1,0,1.0,1,3,1,45.0,8.0
+2024,al,Rick Wolf/Glenn Colton,Jack Leiter,6947,Tex,P,19,rel,previously_active,,1,0,0,0,4.0,0,2,3,9.0,1.75
+2024,al,Rick Wolf/Glenn Colton,Carson Fulmer,5371,Pit,P,9,rel,previously_active,,1,0,0,0,5.7,3,1,3,4.76,0.882
+2024,al,Rick Wolf/Glenn Colton,Ian Hamilton,6624,NYY,P,1,rel,previously_active,,10,0,0,0,13.3,6,0,12,3.38,1.2
+2024,al,Rick Wolf/Glenn Colton,Tommy Kahnle,4371,NYY,P,0,rel,previously_active,,7,0,0,0,6.0,4,2,9,6.0,1.333
+2024,al,Rick Wolf/Glenn Colton,Ben Joyce,8098,LAA,P,14,dis,previously_active,P,21,1,0,4,23.3,8,1,23,1.16,1.029
+2024,al,Rick Wolf/Glenn Colton,Manuel Rodriguez,7119,TB,P,2,rel,previously_active,,2,0,0,0,2.0,1,0,1,4.5,2.0
+2024,al,Rick Wolf/Glenn Colton,Andrew Chafin,4142,FA,P,1,rel,previously_active,,7,0,1,0,5.0,1,1,6,10.8,2.2
+2024,al,Rick Wolf/Glenn Colton,Jonathan Loaisiga,6304,NYY,P,0,rel,previously_active,,1,0,0,0,1.0,0,0,1,0.0,0.0
+2024,al,Rick Wolf/Glenn Colton,Ryne Stanek,4444,NYM,P,90,rel,previously_active,,18,1,2,1,15.3,7,3,18,4.11,1.37
+2024,al,Rick Wolf/Glenn Colton,Joe Boyle,8226,TB,P,0,rel,previously_active,,5,2,3,0,22.0,15,2,19,5.32,1.318
+2024,al,Rick Wolf/Glenn Colton,Jordan Leasure,8703,CWS,P,3,rel,previously_active,,14,0,0,1,12.7,5,2,14,3.55,1.263
 2024,al,Rick Wolf/Glenn Colton,Jose Soriano,7549,LAA,P,19,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2024,al,Rick Wolf/Glenn Colton,Alec Marsh,7521,KC,P,19,res,reserved,P,1,1,0,0,5.0,0,1,2,1.8,1.0
 2024,al,Rick Wolf/Glenn Colton,Taj Bradley,7918,TB,P,3,res,reserved,P,4,2,1,0,24.0,6,4,27,3.0,1.125
 2024,al,Rick Wolf/Glenn Colton,Ben Joyce,8098,LAA,P,14,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2024,al,Rick Wolf/Glenn Colton,Alec Marsh,7521,KC,P,19,res,reserved,P,1,1,0,0,5.0,0,1,2,1.8,1.0
+2024,al,Rick Wolf/Glenn Colton,Luis Medina,6488,Oak,P,8,rel,previously_reserved,,1,1,0,0,5.7,2,0,3,1.59,1.412
+2024,al,Rick Wolf/Glenn Colton,Yariel Rodriguez,8918,Tor,P,8,rel,previously_reserved,,5,1,2,0,21.7,8,2,18,2.91,1.015
+2024,al,Rick Wolf/Glenn Colton,Spencer Arrighetti,8577,Hou,P,14,act,previously_reserved,P,2,0,0,0,10.3,7,1,9,3.48,1.355
+2024,al,Rick Wolf/Glenn Colton,Keider Montero,8746,Det,P,2,rel,previously_reserved,,1,0,0,0,4.3,2,1,2,10.38,2.077
+2024,al,Rick Wolf/Glenn Colton,John Means,6692,Bal,P,1,rel,previously_reserved,,1,1,0,0,7.0,0,0,8,0.0,0.429
+2024,al,Rick Wolf/Glenn Colton,Alex Wood,4113,Oak,P,16,rel,previously_reserved,,1,0,0,0,5.0,2,0,7,5.4,1.6
+2024,al,Rick Wolf/Glenn Colton,Ian Hamilton,6624,NYY,P,1,rel,previously_reserved,,1,0,0,0,2.0,1,0,0,0.0,0.5
 2024,al,Rick Wolf/Glenn Colton,Jack Leiter,6947,Tex,P,19,rel,previously_reserved,,1,0,1,0,1.7,3,1,1,32.4,3.6
 2024,al,Rick Wolf/Glenn Colton,Manuel Rodriguez,7119,TB,P,2,rel,previously_reserved,,6,1,1,0,6.3,3,0,7,0.0,1.105
-2024,al,Rick Wolf/Glenn Colton,Joe Boyle,8226,TB,P,0,rel,previously_reserved,,2,0,2,0,5.7,8,1,10,14.29,3.353
-2024,al,Rick Wolf/Glenn Colton,Yariel Rodriguez,8918,Tor,P,8,rel,previously_reserved,,5,1,2,0,21.7,8,2,18,2.91,1.015
-2024,al,Rick Wolf/Glenn Colton,Jonathan Cannon,7700,CWS,P,3,act,previously_reserved,P,1,0,1,0,6.0,2,1,1,3.0,1.667
-2024,al,Rick Wolf/Glenn Colton,Jonathan Loaisiga,6304,NYY,P,0,rel,previously_reserved,,2,1,0,0,3.0,1,0,2,0.0,2.667
-2024,al,Rick Wolf/Glenn Colton,Jordan Leasure,8703,CWS,P,3,rel,previously_reserved,,16,0,2,1,16.0,12,1,12,4.5,1.5
-2024,al,Rick Wolf/Glenn Colton,John Means,6692,Bal,P,1,rel,previously_reserved,,1,1,0,0,7.0,0,0,8,0.0,0.429
-2024,al,Rick Wolf/Glenn Colton,Luis Medina,6488,Oak,P,8,rel,previously_reserved,,1,1,0,0,5.7,2,0,3,1.59,1.412
-2024,al,Rick Wolf/Glenn Colton,Spencer Arrighetti,8577,Hou,P,14,act,previously_reserved,P,2,0,0,0,10.3,7,1,9,3.48,1.355
 2024,al,Rick Wolf/Glenn Colton,Tommy Kahnle,4371,NYY,P,0,rel,previously_reserved,,7,0,0,0,5.3,3,0,7,0.0,1.5
 2024,al,Rick Wolf/Glenn Colton,Andrew Chafin,4142,FA,P,1,rel,previously_reserved,,9,1,0,0,7.3,7,0,7,4.91,2.591
-2024,al,Rick Wolf/Glenn Colton,Keider Montero,8746,Det,P,2,rel,previously_reserved,,1,0,0,0,4.3,2,1,2,10.38,2.077
-2024,al,Rick Wolf/Glenn Colton,Alex Wood,4113,Oak,P,16,rel,previously_reserved,,1,0,0,0,5.0,2,0,7,5.4,1.6
-2024,al,Rick Wolf/Glenn Colton,Griffin Canning,6578,NYM,P,4,rel,previously_reserved,,9,1,3,0,47.0,18,8,40,5.36,1.426
-2024,al,Rick Wolf/Glenn Colton,Ian Hamilton,6624,NYY,P,1,rel,previously_reserved,,1,0,0,0,2.0,1,0,0,0.0,0.5
 2024,al,Rick Wolf/Glenn Colton,Ryne Stanek,4444,NYM,P,90,rel,previously_reserved,,14,1,0,0,11.0,11,3,13,8.18,1.636
-2024,al,Chris Blessing,Daniel Lynch,6844,KC,P,43,act,active,P,2,1,0,0,4.7,3,0,5,0.0,1.5
-2024,al,Chris Blessing,Hunter Gaddis,8255,Cle,P,5,act,active,P,76,6,3,0,72.7,14,4,63,1.61,0.771
-2024,al,Chris Blessing,Joey Estes,8192,Oak,P,23,act,active,P,15,4,6,0,72.3,14,16,49,5.47,1.313
-2024,al,Chris Blessing,JP Sears,7892,Oak,P,4,act,active,P,32,11,13,0,180.7,49,28,137,4.38,1.223
-2024,al,Chris Blessing,Erick Fedde,5121,StL,P,5,act,active,P,31,9,9,0,177.3,52,20,154,3.3,1.162
-2024,al,Chris Blessing,Seranthony Dominguez,6307,Bal,P,64,act,active,P,17,0,2,9,14.7,7,5,19,5.52,1.568
+2024,al,Rick Wolf/Glenn Colton,Jonathan Loaisiga,6304,NYY,P,0,rel,previously_reserved,,2,1,0,0,3.0,1,0,2,0.0,2.667
+2024,al,Rick Wolf/Glenn Colton,Jordan Leasure,8703,CWS,P,3,rel,previously_reserved,,16,0,2,1,16.0,12,1,12,4.5,1.5
+2024,al,Rick Wolf/Glenn Colton,Joe Boyle,8226,TB,P,0,rel,previously_reserved,,2,0,2,0,5.7,8,1,10,14.29,3.353
+2024,al,Rick Wolf/Glenn Colton,Griffin Canning,6578,NYM,P,4,rel,previously_reserved,,9,1,3,0,47.0,18,8,40,5.36,1.426
+2024,al,Rick Wolf/Glenn Colton,Jonathan Cannon,7700,CWS,P,3,act,previously_reserved,P,1,0,1,0,6.0,2,1,1,3.0,1.667
 2024,al,Chris Blessing,Hunter Strickland,2873,LAA,P,7,act,active,P,22,1,1,0,21.7,9,3,15,2.49,1.292
+2024,al,Chris Blessing,Seranthony Dominguez,6307,Bal,P,64,act,active,P,17,0,2,9,14.7,7,5,19,5.52,1.568
 2024,al,Chris Blessing,Aaron Civale,7061,Mil,P,0,act,active,P,25,5,9,0,128.0,39,25,123,4.78,1.344
 2024,al,Chris Blessing,Lucas Erceg,5818,KC,P,78,act,active,P,29,0,4,11,30.0,6,0,36,2.7,0.967
+2024,al,Chris Blessing,Erick Fedde,5121,StL,P,5,act,active,P,31,9,9,0,177.3,52,20,154,3.3,1.162
+2024,al,Chris Blessing,Daniel Lynch,6844,KC,P,43,act,active,P,2,1,0,0,4.7,3,0,5,0.0,1.5
 2024,al,Chris Blessing,Yennier Cano,7934,Bal,P,5,act,active,P,70,4,3,5,60.0,24,6,65,3.15,1.3
-2024,al,Chris Blessing,Colin Poche,6583,FA,P,1,rel,previously_active,,1,0,1,0,1.0,0,2,0,27.0,3.0
-2024,al,Chris Blessing,Drew Thorpe,8699,CWS,P,79,dis,previously_active,P,9,3,3,0,44.3,21,8,25,5.48,1.263
-2024,al,Chris Blessing,Joey Wentz,5819,Pit,P,0,rel,previously_active,,6,0,0,0,7.7,4,1,10,7.04,1.826
-2024,al,Chris Blessing,Keider Montero,8746,Det,P,7,rel,previously_active,,4,0,2,0,21.7,6,6,16,6.23,1.477
-2024,al,Chris Blessing,Cristian Javier,7089,Hou,P,8,rel,previously_active,,6,3,0,0,33.3,15,2,27,2.16,1.2
-2024,al,Chris Blessing,Zebby Matthews,9091,Min,P,219,res,previously_active,P,5,0,2,0,21.3,5,5,24,5.91,1.406
+2024,al,Chris Blessing,Joey Estes,8192,Oak,P,23,act,active,P,15,4,6,0,72.3,14,16,49,5.47,1.313
+2024,al,Chris Blessing,JP Sears,7892,Oak,P,4,act,active,P,32,11,13,0,180.7,49,28,137,4.38,1.223
+2024,al,Chris Blessing,Hunter Gaddis,8255,Cle,P,5,act,active,P,76,6,3,0,72.7,14,4,63,1.61,0.771
 2024,al,Chris Blessing,Nestor Cortes,5846,Mil,P,11,dis,previously_active,P,31,9,10,0,174.3,39,24,162,3.77,1.153
-2024,al,Chris Blessing,Roansy Contreras,7534,Bal,P,69,rel,previously_active,,8,0,1,1,8.0,2,0,9,1.13,0.75
-2024,al,Chris Blessing,Grayson Rodriguez,6606,Bal,P,23,dis,previously_active,P,19,13,4,0,110.7,33,15,123,4.07,1.274
-2024,al,Chris Blessing,Will Klein,8752,Oak,P,7,rel,previously_active,,1,0,0,0,1.0,0,0,1,0.0,0.0
-2024,al,Chris Blessing,Luis Garcia,4598,Bos,P,3,rel,previously_active,,9,0,0,1,8.7,3,0,7,3.12,1.269
-2024,al,Chris Blessing,Erik Swanson,6604,Tor,P,7,rel,previously_active,,16,1,2,0,12.7,4,5,9,9.95,1.816
-2024,al,Chris Blessing,Alec Marsh,7521,KC,P,49,rel,previously_active,,11,2,7,0,51.0,21,8,44,6.18,1.51
-2024,al,Chris Blessing,Cody Poteet,7486,ChC,P,59,rel,previously_active,,2,1,0,0,10.0,6,0,3,1.8,1.2
-2024,al,Chris Blessing,Chris Stratton,4489,KC,P,23,rel,previously_active,,10,0,0,0,8.7,7,1,8,4.15,1.962
-2024,al,Chris Blessing,Osvaldo Bido,8659,Oak,P,38,dis,previously_active,P,5,2,0,0,24.3,7,1,24,2.59,0.822
 2024,al,Chris Blessing,Dany Jimenez,7145,FA,P,11,rel,previously_active,,1,0,0,0,1.7,3,0,3,0.0,1.8
-2024,al,Chris Blessing,Zebby Matthews,9091,Min,P,219,res,reserved,P,3,0,2,0,11.3,6,5,14,9.53,2.382
-2024,al,Chris Blessing,Drew Thorpe,8699,CWS,P,79,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2024,al,Chris Blessing,Osvaldo Bido,8659,Oak,P,38,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2024,al,Chris Blessing,Osvaldo Bido,8659,Oak,P,38,dis,previously_active,P,5,2,0,0,24.3,7,1,24,2.59,0.822
+2024,al,Chris Blessing,Colin Poche,6583,FA,P,1,rel,previously_active,,1,0,1,0,1.0,0,2,0,27.0,3.0
+2024,al,Chris Blessing,Keider Montero,8746,Det,P,7,rel,previously_active,,4,0,2,0,21.7,6,6,16,6.23,1.477
+2024,al,Chris Blessing,Cody Poteet,7486,ChC,P,59,rel,previously_active,,2,1,0,0,10.0,6,0,3,1.8,1.2
+2024,al,Chris Blessing,Roansy Contreras,7534,Bal,P,69,rel,previously_active,,8,0,1,1,8.0,2,0,9,1.13,0.75
+2024,al,Chris Blessing,Drew Thorpe,8699,CWS,P,79,dis,previously_active,P,9,3,3,0,44.3,21,8,25,5.48,1.263
+2024,al,Chris Blessing,Chris Stratton,4489,KC,P,23,rel,previously_active,,10,0,0,0,8.7,7,1,8,4.15,1.962
+2024,al,Chris Blessing,Zebby Matthews,9091,Min,P,219,res,previously_active,P,5,0,2,0,21.3,5,5,24,5.91,1.406
+2024,al,Chris Blessing,Erik Swanson,6604,Tor,P,7,rel,previously_active,,16,1,2,0,12.7,4,5,9,9.95,1.816
+2024,al,Chris Blessing,Grayson Rodriguez,6606,Bal,P,23,dis,previously_active,P,19,13,4,0,110.7,33,15,123,4.07,1.274
+2024,al,Chris Blessing,Cristian Javier,7089,Hou,P,8,rel,previously_active,,6,3,0,0,33.3,15,2,27,2.16,1.2
+2024,al,Chris Blessing,Alec Marsh,7521,KC,P,49,rel,previously_active,,11,2,7,0,51.0,21,8,44,6.18,1.51
+2024,al,Chris Blessing,Will Klein,8752,Oak,P,7,rel,previously_active,,1,0,0,0,1.0,0,0,1,0.0,0.0
+2024,al,Chris Blessing,Joey Wentz,5819,Pit,P,0,rel,previously_active,,6,0,0,0,7.7,4,1,10,7.04,1.826
+2024,al,Chris Blessing,Luis Garcia,4598,Bos,P,3,rel,previously_active,,9,0,0,1,8.7,3,0,7,3.12,1.269
 2024,al,Chris Blessing,Grayson Rodriguez,6606,Bal,P,23,dis,reserved,P,1,0,0,0,6.0,3,0,7,0.0,0.667
 2024,al,Chris Blessing,Nestor Cortes,5846,Mil,P,11,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2024,al,Chris Blessing,Aaron Civale,7061,Mil,P,0,act,previously_reserved,P,6,3,0,0,33.0,13,4,26,2.73,1.152
-2024,al,Chris Blessing,Will Klein,8752,Oak,P,7,rel,previously_reserved,,1,0,0,0,0.3,3,0,0,135.0,15.0
-2024,al,Chris Blessing,Alec Marsh,7521,KC,P,49,rel,previously_reserved,,4,2,0,0,23.3,5,5,30,3.09,0.857
+2024,al,Chris Blessing,Osvaldo Bido,8659,Oak,P,38,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2024,al,Chris Blessing,Drew Thorpe,8699,CWS,P,79,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2024,al,Chris Blessing,Zebby Matthews,9091,Min,P,219,res,reserved,P,3,0,2,0,11.3,6,5,14,9.53,2.382
 2024,al,Chris Blessing,Erik Swanson,6604,Tor,P,7,rel,previously_reserved,,1,0,0,0,1.0,0,0,1,0.0,1.0
+2024,al,Chris Blessing,Aaron Civale,7061,Mil,P,0,act,previously_reserved,P,6,3,0,0,33.0,13,4,26,2.73,1.152
+2024,al,Chris Blessing,Alec Marsh,7521,KC,P,49,rel,previously_reserved,,4,2,0,0,23.3,5,5,30,3.09,0.857
 2024,al,Chris Blessing,Cristian Javier,7089,Hou,P,8,rel,previously_reserved,,1,0,1,0,1.3,4,2,0,47.25,6.75
-2024,al,Chris Blessing,J.P. France,7978,Hou,P,0,rel,previously_reserved,,5,0,3,0,25.3,12,5,22,7.46,1.697
 2024,al,Chris Blessing,Joey Wentz,5819,Pit,P,0,rel,previously_reserved,,4,0,0,0,5.0,1,2,5,14.4,2.2
+2024,al,Chris Blessing,Will Klein,8752,Oak,P,7,rel,previously_reserved,,1,0,0,0,0.3,3,0,0,135.0,15.0
 2024,al,Chris Blessing,Colin Poche,6583,FA,P,1,rel,previously_reserved,,9,0,0,2,8.3,3,1,6,4.32,1.44
+2024,al,Chris Blessing,J.P. France,7978,Hou,P,0,rel,previously_reserved,,5,0,3,0,25.3,12,5,22,7.46,1.697
 2024,al,Patrick Davitt,Bryan Woo,8437,Sea,P,11,act,active,P,22,9,3,0,121.3,13,14,101,2.89,0.898
-2024,al,Patrick Davitt,Tanner Bibee,8166,Cle,P,19,act,active,P,31,12,8,0,173.7,44,22,187,3.47,1.117
-2024,al,Patrick Davitt,Tommy Kahnle,4371,NYY,P,0,act,active,P,23,0,1,1,20.0,8,1,21,1.8,1.05
-2024,al,Patrick Davitt,Tim Herrin,8305,Cle,P,1,act,active,P,2,0,0,0,2.0,0,0,2,0.0,1.5
-2024,al,Patrick Davitt,Zack Littell,6301,TB,P,4,act,active,P,23,6,8,0,125.7,22,16,121,3.65,1.241
-2024,al,Patrick Davitt,Tanner Houck,6198,Bos,P,4,act,active,P,30,9,10,0,178.7,48,11,154,3.12,1.142
-2024,al,Patrick Davitt,Erik Sabrowski,9170,Cle,P,6,act,active,P,2,0,0,0,2.7,1,0,6,0.0,0.375
 2024,al,Patrick Davitt,Nathan Eovaldi,3809,Tex,P,7,act,active,P,28,12,7,0,165.3,36,23,160,3.76,1.077
+2024,al,Patrick Davitt,Erik Sabrowski,9170,Cle,P,6,act,active,P,2,0,0,0,2.7,1,0,6,0.0,0.375
+2024,al,Patrick Davitt,Zack Littell,6301,TB,P,4,act,active,P,23,6,8,0,125.7,22,16,121,3.65,1.241
+2024,al,Patrick Davitt,Tanner Bibee,8166,Cle,P,19,act,active,P,31,12,8,0,173.7,44,22,187,3.47,1.117
 2024,al,Patrick Davitt,Ryan Pepiot,7438,TB,P,9,act,active,P,22,7,6,0,108.7,42,11,120,3.48,1.077
-2024,al,Patrick Davitt,Matt Moore,3149,LAA,P,5,rel,previously_active,,16,0,1,0,14.7,8,4,16,7.36,1.636
-2024,al,Patrick Davitt,Craig Kimbrel,2633,FA,P,17,res,previously_active,P,55,7,5,23,50.7,28,7,68,4.09,1.243
-2024,al,Patrick Davitt,Jose Leclerc,5514,Tex,P,4,rel,previously_active,,18,2,1,0,19.7,8,3,28,3.2,1.119
-2024,al,Patrick Davitt,Tim Mayza,5983,FA,P,0,rel,previously_active,,13,0,0,0,9.0,5,1,7,4.0,1.778
-2024,al,Patrick Davitt,Caleb Thielbar,4229,ChC,P,0,rel,previously_active,,17,0,2,0,13.7,9,0,16,3.95,1.756
-2024,al,Patrick Davitt,Logan Allen,7705,Cle,P,0,rel,previously_active,,1,0,0,0,4.3,4,0,9,4.15,1.615
-2024,al,Patrick Davitt,Caleb Ferguson,6598,Pit,P,0,rel,previously_active,,4,0,0,0,3.3,3,1,3,10.8,1.8
-2024,al,Patrick Davitt,Greg Weissert,8276,Bos,P,0,rel,previously_active,,14,0,0,0,15.3,5,1,21,4.7,1.63
+2024,al,Patrick Davitt,Tanner Houck,6198,Bos,P,4,act,active,P,30,9,10,0,178.7,48,11,154,3.12,1.142
+2024,al,Patrick Davitt,Tim Herrin,8305,Cle,P,1,act,active,P,2,0,0,0,2.0,0,0,2,0.0,1.5
+2024,al,Patrick Davitt,Tommy Kahnle,4371,NYY,P,0,act,active,P,23,0,1,1,20.0,8,1,21,1.8,1.05
+2024,al,Patrick Davitt,Yimi Garcia,4688,Tor,P,0,dis,previously_active,P,36,3,0,5,35.7,12,6,44,3.79,0.953
 2024,al,Patrick Davitt,Alex Cobb,3431,Det,P,79,dis,previously_active,P,3,2,1,0,16.3,3,1,10,2.76,1.041
+2024,al,Patrick Davitt,Logan Allen,7705,Cle,P,0,rel,previously_active,,1,0,0,0,4.3,4,0,9,4.15,1.615
+2024,al,Patrick Davitt,Caleb Thielbar,4229,ChC,P,0,rel,previously_active,,17,0,2,0,13.7,9,0,16,3.95,1.756
+2024,al,Patrick Davitt,Zach Eflin,4105,Bal,P,20,rel,previously_active,,27,10,9,0,160.7,19,21,133,3.53,1.127
+2024,al,Patrick Davitt,Tim Mayza,5983,FA,P,0,rel,previously_active,,13,0,0,0,9.0,5,1,7,4.0,1.778
+2024,al,Patrick Davitt,Nick Anderson,6711,Bal,P,1,rel,previously_active,,1,0,0,0,1.0,0,0,0,0.0,1.0
+2024,al,Patrick Davitt,Matt Moore,3149,LAA,P,5,rel,previously_active,,16,0,1,0,14.7,8,4,16,7.36,1.636
+2024,al,Patrick Davitt,Luis Garcia,4598,Bos,P,2,rel,previously_active,,8,1,1,0,8.0,2,3,5,6.75,1.75
 2024,al,Patrick Davitt,Alex Wood,4113,Oak,P,0,rel,previously_active,,1,0,0,0,4.0,4,1,4,4.5,2.0
 2024,al,Patrick Davitt,Erik Swanson,6604,Tor,P,0,rel,previously_active,,2,0,0,0,2.0,0,0,4,0.0,0.0
-2024,al,Patrick Davitt,Yimi Garcia,4688,Tor,P,0,dis,previously_active,P,36,3,0,5,35.7,12,6,44,3.79,0.953
-2024,al,Patrick Davitt,Nick Anderson,6711,Bal,P,1,rel,previously_active,,1,0,0,0,1.0,0,0,0,0.0,1.0
-2024,al,Patrick Davitt,Zach Eflin,4105,Bal,P,20,rel,previously_active,,27,10,9,0,160.7,19,21,133,3.53,1.127
-2024,al,Patrick Davitt,Luis Garcia,4598,Bos,P,2,rel,previously_active,,8,1,1,0,8.0,2,3,5,6.75,1.75
-2024,al,Patrick Davitt,Yimi Garcia,4688,Tor,P,0,dis,reserved,P,3,0,0,0,3.3,0,0,5,0.0,0.3
+2024,al,Patrick Davitt,Craig Kimbrel,2633,FA,P,17,res,previously_active,P,55,7,5,23,50.7,28,7,68,4.09,1.243
+2024,al,Patrick Davitt,Caleb Ferguson,6598,Pit,P,0,rel,previously_active,,4,0,0,0,3.3,3,1,3,10.8,1.8
+2024,al,Patrick Davitt,Jose Leclerc,5514,Tex,P,4,rel,previously_active,,18,2,1,0,19.7,8,3,28,3.2,1.119
+2024,al,Patrick Davitt,Greg Weissert,8276,Bos,P,0,rel,previously_active,,14,0,0,0,15.3,5,1,21,4.7,1.63
 2024,al,Patrick Davitt,Craig Kimbrel,2633,FA,P,17,res,reserved,P,2,0,0,0,1.7,3,0,5,43.2,4.8
+2024,al,Patrick Davitt,Yimi Garcia,4688,Tor,P,0,dis,reserved,P,3,0,0,0,3.3,0,0,5,0.0,0.3
 2024,al,Patrick Davitt,Alex Cobb,3431,Det,P,79,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2024,al,Patrick Davitt,Caleb Ferguson,6598,Pit,P,0,rel,previously_reserved,,18,0,3,1,14.0,6,2,18,4.5,1.357
-2024,al,Patrick Davitt,Greg Weissert,8276,Bos,P,0,rel,previously_reserved,,7,0,1,1,8.0,5,1,6,7.88,2.0
-2024,al,Patrick Davitt,Jose Leclerc,5514,Tex,P,4,rel,previously_reserved,,7,0,0,0,7.0,1,2,11,5.14,1.143
-2024,al,Patrick Davitt,Caleb Thielbar,4229,ChC,P,0,rel,previously_reserved,,3,0,0,1,1.7,0,1,0,16.2,2.4
-2024,al,Patrick Davitt,Tommy Kahnle,4371,NYY,P,0,act,previously_reserved,P,4,0,0,0,3.3,2,0,1,0.0,0.9
-2024,al,Patrick Davitt,Tim Mayza,5983,FA,P,0,rel,previously_reserved,,15,0,1,0,11.7,5,1,8,5.4,1.2
-2024,al,Patrick Davitt,Matt Moore,3149,LAA,P,5,rel,previously_reserved,,5,1,1,0,4.0,3,1,6,4.5,1.75
-2024,al,Patrick Davitt,Nathan Eovaldi,3809,Tex,P,7,act,previously_reserved,P,1,0,1,0,5.3,6,0,6,5.06,2.063
-2024,al,Patrick Davitt,Luis Garcia,4598,Bos,P,2,rel,previously_reserved,,7,1,0,1,8.0,1,2,6,9.0,1.5
-2024,al,Patrick Davitt,Zack Littell,6301,TB,P,4,act,previously_reserved,P,6,2,2,0,30.7,9,6,20,3.52,1.272
-2024,al,Patrick Davitt,Nick Anderson,6711,Bal,P,1,rel,previously_reserved,,5,0,1,0,4.0,4,1,2,9.0,2.5
 2024,al,Patrick Davitt,Alex Wood,4113,Oak,P,0,rel,previously_reserved,,2,0,1,0,8.0,2,1,4,1.13,1.0
+2024,al,Patrick Davitt,Luis Garcia,4598,Bos,P,2,rel,previously_reserved,,7,1,0,1,8.0,1,2,6,9.0,1.5
+2024,al,Patrick Davitt,Tommy Kahnle,4371,NYY,P,0,act,previously_reserved,P,4,0,0,0,3.3,2,0,1,0.0,0.9
+2024,al,Patrick Davitt,Caleb Thielbar,4229,ChC,P,0,rel,previously_reserved,,3,0,0,1,1.7,0,1,0,16.2,2.4
+2024,al,Patrick Davitt,Nick Anderson,6711,Bal,P,1,rel,previously_reserved,,5,0,1,0,4.0,4,1,2,9.0,2.5
+2024,al,Patrick Davitt,Matt Moore,3149,LAA,P,5,rel,previously_reserved,,5,1,1,0,4.0,3,1,6,4.5,1.75
+2024,al,Patrick Davitt,Tim Mayza,5983,FA,P,0,rel,previously_reserved,,15,0,1,0,11.7,5,1,8,5.4,1.2
 2024,al,Patrick Davitt,Ryan Pepiot,7438,TB,P,9,act,previously_reserved,P,4,1,2,0,21.3,6,6,22,4.22,1.547
+2024,al,Patrick Davitt,Nathan Eovaldi,3809,Tex,P,7,act,previously_reserved,P,1,0,1,0,5.3,6,0,6,5.06,2.063
+2024,al,Patrick Davitt,Jose Leclerc,5514,Tex,P,4,rel,previously_reserved,,7,0,0,0,7.0,1,2,11,5.14,1.143
+2024,al,Patrick Davitt,Zack Littell,6301,TB,P,4,act,previously_reserved,P,6,2,2,0,30.7,9,6,20,3.52,1.272
+2024,al,Patrick Davitt,Greg Weissert,8276,Bos,P,0,rel,previously_reserved,,7,0,1,1,8.0,5,1,6,7.88,2.0
+2024,al,Patrick Davitt,Caleb Ferguson,6598,Pit,P,0,rel,previously_reserved,,18,0,3,1,14.0,6,2,18,4.5,1.357
 2024,al,Eric Samulski,Tarik Skubal,7077,Det,P,25,act,active,P,31,18,4,0,192.0,35,15,228,2.39,0.922
+2024,al,Eric Samulski,Davis Martin,8208,CWS,P,1,act,active,P,4,0,2,0,18.7,9,2,18,4.82,1.661
+2024,al,Eric Samulski,Mason Miller,8123,Oak,P,12,act,active,P,52,2,2,26,62.0,20,6,101,2.61,0.903
 2024,al,Eric Samulski,Cody Bradford,8422,Tex,P,47,act,active,P,10,2,3,0,52.0,11,9,46,4.5,1.154
 2024,al,Eric Samulski,Kirby Yates,4303,Tex,P,4,act,active,P,58,6,2,33,58.7,28,3,82,1.23,0.852
-2024,al,Eric Samulski,Simeon Woods-Richardson,6958,Min,P,61,act,active,P,21,3,5,0,98.7,39,14,86,4.65,1.358
 2024,al,Eric Samulski,Shane Baz,6189,TB,P,4,act,active,P,9,3,0,0,50.0,17,4,43,2.88,1.06
-2024,al,Eric Samulski,Mason Miller,8123,Oak,P,12,act,active,P,52,2,2,26,62.0,20,6,101,2.61,0.903
-2024,al,Eric Samulski,Davis Martin,8208,CWS,P,1,act,active,P,4,0,2,0,18.7,9,2,18,4.82,1.661
-2024,al,Eric Samulski,Andres Munoz,6749,Sea,P,22,act,active,P,60,3,7,22,59.3,26,6,77,2.12,0.961
 2024,al,Eric Samulski,Brayan Bello,7865,Bos,P,6,act,active,P,26,12,7,0,140.0,52,17,139,4.63,1.371
-2024,al,Eric Samulski,Triston McKenzie,5734,Cle,P,4,rel,previously_active,,10,2,3,0,51.7,33,13,48,4.35,1.471
+2024,al,Eric Samulski,Andres Munoz,6749,Sea,P,22,act,active,P,60,3,7,22,59.3,26,6,77,2.12,0.961
+2024,al,Eric Samulski,Simeon Woods-Richardson,6958,Min,P,61,act,active,P,21,3,5,0,98.7,39,14,86,4.65,1.358
+2024,al,Eric Samulski,Bowden Francis,7502,Tor,P,1,rel,previously_active,,1,0,0,0,2.0,2,0,2,13.5,2.5
+2024,al,Eric Samulski,Carlos Carrasco,1141,Cle,P,3,rel,previously_active,,1,0,0,0,5.0,1,0,3,5.4,1.4
+2024,al,Eric Samulski,Dean Kremer,6817,Bal,P,5,res,previously_active,P,20,6,9,0,106.7,45,15,98,4.47,1.294
+2024,al,Eric Samulski,Caleb Thielbar,4229,ChC,P,11,rel,previously_active,,4,0,0,0,3.7,0,0,4,2.45,1.364
+2024,al,Eric Samulski,Hunter Bigge,9108,TB,P,1,res,previously_active,P,5,0,0,0,4.7,0,2,8,3.86,1.071
 2024,al,Eric Samulski,Josh Sborz,6040,Tex,P,0,rel,previously_active,,4,1,0,0,3.7,1,0,4,2.45,1.364
 2024,al,Eric Samulski,Michael Lorenzen,4553,KC,P,51,dis,previously_active,P,4,2,0,0,18.7,8,2,12,1.93,1.125
-2024,al,Eric Samulski,Jorge Alcala,6483,Min,P,1,rel,previously_active,,4,0,0,0,3.3,0,0,2,0.0,0.0
-2024,al,Eric Samulski,Dean Kremer,6817,Bal,P,5,res,previously_active,P,20,6,9,0,106.7,45,15,98,4.47,1.294
-2024,al,Eric Samulski,Jonathan Cannon,7700,CWS,P,2,rel,previously_active,,4,1,3,0,21.0,11,3,16,6.43,1.81
-2024,al,Eric Samulski,Chris Paddack,5809,Min,P,2,rel,previously_active,,3,1,0,0,13.3,4,2,9,5.4,1.5
-2024,al,Eric Samulski,Hunter Harvey,4796,KC,P,19,trd,previously_active,,6,0,0,1,5.7,4,1,5,6.35,2.118
-2024,al,Eric Samulski,Brennan Bernardino,8245,Bos,P,1,rel,previously_active,,14,1,1,0,11.0,4,0,9,3.27,1.818
-2024,al,Eric Samulski,Shelby Miller,2839,FA,P,0,rel,previously_active,,15,3,4,0,16.3,6,2,15,4.41,1.041
-2024,al,Eric Samulski,Hunter Bigge,9108,TB,P,1,res,previously_active,P,5,0,0,0,4.7,0,2,8,3.86,1.071
-2024,al,Eric Samulski,Justin Slaten,8763,Bos,P,4,rel,previously_active,,9,2,1,0,15.0,4,0,10,2.4,1.067
-2024,al,Eric Samulski,Nick Nastrini,8472,CWS,P,1,rel,previously_active,,1,0,0,0,3.3,4,0,2,0.0,1.5
-2024,al,Eric Samulski,Chayce McDermott,8719,Bal,P,2,rel,previously_active,,1,0,0,0,4.0,2,1,3,6.75,1.75
-2024,al,Eric Samulski,Caleb Thielbar,4229,ChC,P,11,rel,previously_active,,4,0,0,0,3.7,0,0,4,2.45,1.364
-2024,al,Eric Samulski,Carlos Carrasco,1141,Cle,P,3,rel,previously_active,,1,0,0,0,5.0,1,0,3,5.4,1.4
-2024,al,Eric Samulski,Bowden Francis,7502,Tor,P,1,rel,previously_active,,1,0,0,0,2.0,2,0,2,13.5,2.5
-2024,al,Eric Samulski,Matt Manning,6031,Det,P,5,rel,previously_active,,2,0,0,0,10.7,4,0,6,5.91,2.156
-2024,al,Eric Samulski,Collin Snider,7882,Sea,P,1,rel,previously_active,,2,0,1,0,1.3,1,0,1,0.0,1.5
 2024,al,Eric Samulski,Luis Garcia,4598,Bos,P,9,rel,previously_active,,11,1,0,0,10.7,6,1,14,4.22,1.688
+2024,al,Eric Samulski,Matt Manning,6031,Det,P,5,rel,previously_active,,2,0,0,0,10.7,4,0,6,5.91,2.156
+2024,al,Eric Samulski,Brennan Bernardino,8245,Bos,P,1,rel,previously_active,,14,1,1,0,11.0,4,0,9,3.27,1.818
 2024,al,Eric Samulski,Andrew Chafin,4142,FA,P,1,rel,previously_active,,2,0,0,0,1.7,2,0,2,0.0,1.2
+2024,al,Eric Samulski,Justin Slaten,8763,Bos,P,4,rel,previously_active,,9,2,1,0,15.0,4,0,10,2.4,1.067
+2024,al,Eric Samulski,Chayce McDermott,8719,Bal,P,2,rel,previously_active,,1,0,0,0,4.0,2,1,3,6.75,1.75
+2024,al,Eric Samulski,Shelby Miller,2839,FA,P,0,rel,previously_active,,15,3,4,0,16.3,6,2,15,4.41,1.041
+2024,al,Eric Samulski,Chris Paddack,5809,Min,P,2,rel,previously_active,,3,1,0,0,13.3,4,2,9,5.4,1.5
+2024,al,Eric Samulski,Nick Nastrini,8472,CWS,P,1,rel,previously_active,,1,0,0,0,3.3,4,0,2,0.0,1.5
+2024,al,Eric Samulski,Triston McKenzie,5734,Cle,P,4,rel,previously_active,,10,2,3,0,51.7,33,13,48,4.35,1.471
+2024,al,Eric Samulski,Collin Snider,7882,Sea,P,1,rel,previously_active,,2,0,1,0,1.3,1,0,1,0.0,1.5
+2024,al,Eric Samulski,Jorge Alcala,6483,Min,P,1,rel,previously_active,,4,0,0,0,3.3,0,0,2,0.0,0.0
+2024,al,Eric Samulski,Jonathan Cannon,7700,CWS,P,2,rel,previously_active,,4,1,3,0,21.0,11,3,16,6.43,1.81
+2024,al,Eric Samulski,Hunter Harvey,4796,KC,P,19,trd,previously_active,,6,0,0,1,5.7,4,1,5,6.35,2.118
 2024,al,Eric Samulski,Hunter Bigge,9108,TB,P,1,res,reserved,P,5,0,0,1,4.3,1,0,7,4.15,1.154
 2024,al,Eric Samulski,Michael Lorenzen,4553,KC,P,51,dis,reserved,P,2,0,0,0,4.3,2,0,5,0.0,0.692
 2024,al,Eric Samulski,Dean Kremer,6817,Bal,P,5,res,reserved,P,4,2,1,0,23.0,6,3,25,2.35,1.0
-2024,al,Eric Samulski,Justin Slaten,8763,Bos,P,4,rel,previously_reserved,,3,0,1,0,3.3,0,0,6,13.5,2.4
 2024,al,Eric Samulski,Shane Baz,6189,TB,P,4,act,previously_reserved,P,5,1,3,0,29.3,10,5,26,3.38,1.057
-2024,al,Eric Samulski,Mason Miller,8123,Oak,P,12,act,previously_reserved,P,3,0,0,2,3.0,1,0,3,0.0,0.333
-2024,al,Eric Samulski,Brayan Bello,7865,Bos,P,6,act,previously_reserved,P,4,2,1,0,22.3,12,2,14,3.63,1.299
-2024,al,Eric Samulski,Matt Manning,6031,Det,P,5,rel,previously_reserved,,3,0,1,0,17.0,8,3,17,4.24,1.176
-2024,al,Eric Samulski,Triston McKenzie,5734,Cle,P,4,rel,previously_reserved,,6,1,2,0,24.0,16,6,26,6.75,1.75
-2024,al,Eric Samulski,Josh Sborz,6040,Tex,P,0,rel,previously_reserved,,2,0,0,0,1.7,0,0,1,0.0,1.2
-2024,al,Eric Samulski,Cody Bradford,8422,Tex,P,47,act,previously_reserved,P,1,1,0,0,5.0,0,0,7,1.8,1.0
 2024,al,Eric Samulski,Louie Varland,8283,Min,P,4,rel,previously_reserved,,4,0,4,0,16.7,9,6,18,9.18,2.16
-2024,al,Eric Samulski,Chris Paddack,5809,Min,P,2,rel,previously_reserved,,3,0,1,0,14.0,5,1,16,6.43,1.357
-2024,al,Eric Samulski,Jonathan Cannon,7700,CWS,P,2,rel,previously_reserved,,2,1,1,0,10.3,4,3,8,3.48,1.355
+2024,al,Eric Samulski,Josh Sborz,6040,Tex,P,0,rel,previously_reserved,,2,0,0,0,1.7,0,0,1,0.0,1.2
 2024,al,Eric Samulski,Simeon Woods-Richardson,6958,Min,P,61,act,previously_reserved,P,5,1,0,0,24.0,7,2,20,3.0,1.167
-2024,al,Rob Leibowitz,Chris Martin,4806,Tex,P,4,act,active,P,20,1,0,2,19.0,1,1,20,3.32,1.316
-2024,al,Rob Leibowitz,Kenley Jansen,2963,Bos,P,15,act,active,P,54,4,2,27,54.7,20,4,62,3.29,1.061
-2024,al,Rob Leibowitz,Hogan Harris,8322,Oak,P,17,act,active,P,17,4,4,0,52.0,25,5,43,3.12,1.442
-2024,al,Rob Leibowitz,Andrew Heaney,4146,Tex,P,3,act,active,P,30,3,14,0,151.7,40,23,151,4.51,1.273
-2024,al,Rob Leibowitz,Garrett Cleavinger,6239,TB,P,2,act,active,P,26,2,3,3,21.7,11,3,22,4.15,1.431
-2024,al,Rob Leibowitz,Yusei Kikuchi,6454,LAA,P,6,act,active,P,32,9,10,0,175.7,44,25,206,4.05,1.201
-2024,al,Rob Leibowitz,Framber Valdez,6407,Hou,P,26,act,active,P,28,15,7,0,176.3,55,13,169,2.91,1.106
+2024,al,Eric Samulski,Brayan Bello,7865,Bos,P,6,act,previously_reserved,P,4,2,1,0,22.3,12,2,14,3.63,1.299
+2024,al,Eric Samulski,Justin Slaten,8763,Bos,P,4,rel,previously_reserved,,3,0,1,0,3.3,0,0,6,13.5,2.4
+2024,al,Eric Samulski,Matt Manning,6031,Det,P,5,rel,previously_reserved,,3,0,1,0,17.0,8,3,17,4.24,1.176
+2024,al,Eric Samulski,Chris Paddack,5809,Min,P,2,rel,previously_reserved,,3,0,1,0,14.0,5,1,16,6.43,1.357
+2024,al,Eric Samulski,Triston McKenzie,5734,Cle,P,4,rel,previously_reserved,,6,1,2,0,24.0,16,6,26,6.75,1.75
+2024,al,Eric Samulski,Cody Bradford,8422,Tex,P,47,act,previously_reserved,P,1,1,0,0,5.0,0,0,7,1.8,1.0
+2024,al,Eric Samulski,Mason Miller,8123,Oak,P,12,act,previously_reserved,P,3,0,0,2,3.0,1,0,3,0.0,0.333
+2024,al,Eric Samulski,Jonathan Cannon,7700,CWS,P,2,rel,previously_reserved,,2,1,1,0,10.3,4,3,8,3.48,1.355
 2024,al,Rob Leibowitz,Chad Green,5625,Tor,P,1,act,active,P,50,4,6,17,50.3,12,8,44,3.4,1.033
+2024,al,Rob Leibowitz,Chris Martin,4806,Tex,P,4,act,active,P,20,1,0,2,19.0,1,1,20,3.32,1.316
+2024,al,Rob Leibowitz,Andrew Heaney,4146,Tex,P,3,act,active,P,30,3,14,0,151.7,40,23,151,4.51,1.273
+2024,al,Rob Leibowitz,Framber Valdez,6407,Hou,P,26,act,active,P,28,15,7,0,176.3,55,13,169,2.91,1.106
+2024,al,Rob Leibowitz,Kenley Jansen,2963,Bos,P,15,act,active,P,54,4,2,27,54.7,20,4,62,3.29,1.061
+2024,al,Rob Leibowitz,Yusei Kikuchi,6454,LAA,P,6,act,active,P,32,9,10,0,175.7,44,25,206,4.05,1.201
+2024,al,Rob Leibowitz,Hogan Harris,8322,Oak,P,17,act,active,P,17,4,4,0,52.0,25,5,43,3.12,1.442
 2024,al,Rob Leibowitz,Clarke Schmidt,6193,NYY,P,2,act,active,P,15,5,5,0,80.7,29,8,91,3.01,1.19
-2024,al,Rob Leibowitz,Trevor Rogers,6201,Bal,P,141,rel,previously_active,,3,0,1,0,14.7,7,1,9,6.14,1.773
-2024,al,Rob Leibowitz,Will Vest,7551,Det,P,3,res,previously_active,P,2,0,0,0,2.7,0,0,4,0.0,0.75
-2024,al,Rob Leibowitz,Dany Jimenez,7145,FA,P,0,rel,previously_active,,1,0,0,0,1.0,0,0,0,0.0,1.0
-2024,al,Rob Leibowitz,Reid Detmers,7335,LAA,P,5,rel,previously_active,,12,3,6,0,63.0,27,10,70,6.14,1.476
-2024,al,Rob Leibowitz,Shawn Armstrong,5059,Tex,P,4,rel,previously_active,,14,2,0,0,17.0,4,3,17,3.18,1.294
-2024,al,Rob Leibowitz,Alek Manoah,7036,Tor,P,2,rel,previously_active,,3,1,1,0,13.3,3,2,14,2.7,0.75
+2024,al,Rob Leibowitz,Garrett Cleavinger,6239,TB,P,2,act,active,P,26,2,3,3,21.7,11,3,22,4.15,1.431
 2024,al,Rob Leibowitz,Nick Nastrini,8472,CWS,P,23,rel,previously_active,,3,0,2,0,13.3,12,4,11,5.4,1.5
-2024,al,Rob Leibowitz,Jacob Webb,6698,Tex,P,2,res,previously_active,P,10,0,1,0,10.0,5,2,13,4.5,1.3
-2024,al,Rob Leibowitz,Austin Adams,5875,Oak,P,1,rel,previously_active,,5,0,0,0,4.0,1,0,4,4.5,1.75
-2024,al,Rob Leibowitz,John Brebbia,6181,Atl,P,5,rel,previously_active,,54,0,6,2,48.7,17,9,58,6.29,1.418
-2024,al,Rob Leibowitz,Mitch Spence,8495,Oak,P,7,rel,previously_active,,6,1,3,0,32.0,10,9,32,6.47,1.594
 2024,al,Rob Leibowitz,Daniel Coulombe,5043,FA,P,0,rel,previously_active,,18,0,0,1,16.0,2,2,19,2.25,0.438
-2024,al,Rob Leibowitz,Jacob Webb,6698,Tex,P,2,res,reserved,P,7,1,0,0,7.0,3,0,5,2.57,1.286
+2024,al,Rob Leibowitz,Reid Detmers,7335,LAA,P,5,rel,previously_active,,12,3,6,0,63.0,27,10,70,6.14,1.476
+2024,al,Rob Leibowitz,Trevor Rogers,6201,Bal,P,141,rel,previously_active,,3,0,1,0,14.7,7,1,9,6.14,1.773
+2024,al,Rob Leibowitz,Jacob Webb,6698,Tex,P,2,res,previously_active,P,10,0,1,0,10.0,5,2,13,4.5,1.3
+2024,al,Rob Leibowitz,Will Vest,7551,Det,P,3,res,previously_active,P,2,0,0,0,2.7,0,0,4,0.0,0.75
+2024,al,Rob Leibowitz,John Brebbia,6181,Atl,P,5,rel,previously_active,,54,0,6,2,48.7,17,9,58,6.29,1.418
+2024,al,Rob Leibowitz,Shawn Armstrong,5059,Tex,P,4,rel,previously_active,,14,2,0,0,17.0,4,3,17,3.18,1.294
+2024,al,Rob Leibowitz,Mitch Spence,8495,Oak,P,7,rel,previously_active,,6,1,3,0,32.0,10,9,32,6.47,1.594
+2024,al,Rob Leibowitz,Alek Manoah,7036,Tor,P,2,rel,previously_active,,3,1,1,0,13.3,3,2,14,2.7,0.75
+2024,al,Rob Leibowitz,Austin Adams,5875,Oak,P,1,rel,previously_active,,5,0,0,0,4.0,1,0,4,4.5,1.75
+2024,al,Rob Leibowitz,Dany Jimenez,7145,FA,P,0,rel,previously_active,,1,0,0,0,1.0,0,0,0,0.0,1.0
 2024,al,Rob Leibowitz,Will Vest,7551,Det,P,3,res,reserved,P,8,0,0,1,8.7,1,1,6,2.08,0.577
+2024,al,Rob Leibowitz,Jacob Webb,6698,Tex,P,2,res,reserved,P,7,1,0,0,7.0,3,0,5,2.57,1.286
 2024,al,Rob Leibowitz,Chris Martin,4806,Tex,P,4,act,previously_reserved,P,1,0,0,0,1.0,0,0,3,0.0,0.0
-2024,al,Rob Leibowitz,Daniel Coulombe,5043,FA,P,0,rel,previously_reserved,,11,1,0,0,10.0,1,1,9,2.7,0.9
-2024,al,Rob Leibowitz,Mitch Spence,8495,Oak,P,7,rel,previously_reserved,,1,1,0,0,5.3,3,0,3,3.38,1.5
-2024,al,Rob Leibowitz,Alek Manoah,7036,Tor,P,2,rel,previously_reserved,,2,0,1,0,11.0,5,3,12,4.91,1.364
-2024,al,Rob Leibowitz,Nick Nastrini,8472,CWS,P,23,rel,previously_reserved,,1,0,1,0,3.3,6,1,0,21.6,3.9
 2024,al,Rob Leibowitz,Andrew Heaney,4146,Tex,P,3,act,previously_reserved,P,2,2,0,0,8.3,1,0,8,0.0,0.84
-2024,al,Rob Leibowitz,Clarke Schmidt,6193,NYY,P,2,act,previously_reserved,P,1,0,0,0,4.7,1,0,2,0.0,1.071
 2024,al,Rob Leibowitz,Chad Green,5625,Tor,P,1,act,previously_reserved,P,3,0,0,0,3.0,2,0,2,0.0,1.0
-2024,al,Andy Andres,Corbin Burnes,6208,Ari,P,30,act,active,P,32,15,9,0,194.3,48,22,181,2.92,1.096
-2024,al,Andy Andres,Bowden Francis,7502,Tor,P,41,act,active,P,6,2,2,0,40.0,6,5,34,1.58,0.575
-2024,al,Andy Andres,Gerrit Cole,2660,NYY,P,12,act,active,P,17,8,5,0,95.0,29,11,99,3.41,1.126
+2024,al,Rob Leibowitz,Daniel Coulombe,5043,FA,P,0,rel,previously_reserved,,11,1,0,0,10.0,1,1,9,2.7,0.9
+2024,al,Rob Leibowitz,Nick Nastrini,8472,CWS,P,23,rel,previously_reserved,,1,0,1,0,3.3,6,1,0,21.6,3.9
+2024,al,Rob Leibowitz,Mitch Spence,8495,Oak,P,7,rel,previously_reserved,,1,1,0,0,5.3,3,0,3,3.38,1.5
+2024,al,Rob Leibowitz,Clarke Schmidt,6193,NYY,P,2,act,previously_reserved,P,1,0,0,0,4.7,1,0,2,0.0,1.071
+2024,al,Rob Leibowitz,Alek Manoah,7036,Tor,P,2,rel,previously_reserved,,2,0,1,0,11.0,5,3,12,4.91,1.364
 2024,al,Andy Andres,David Robertson,2132,FA,P,3,act,active,P,63,3,4,2,67.7,24,5,91,3.19,1.094
 2024,al,Andy Andres,George Kirby,7041,Sea,P,28,act,active,P,33,14,11,0,191.0,23,22,179,3.53,1.068
-2024,al,Andy Andres,Kumar Rocker,7075,Tex,P,29,act,active,P,2,0,2,0,7.7,4,0,7,4.7,1.696
-2024,al,Andy Andres,Ryan Pressly,4263,Hou,P,5,act,active,P,51,0,3,2,48.0,16,3,51,3.94,1.417
-2024,al,Andy Andres,Drew Rasmussen,7251,TB,P,0,act,active,P,14,0,2,1,25.7,6,0,32,2.1,1.052
-2024,al,Andy Andres,Edwin Uceta,7228,TB,P,11,act,active,P,17,2,0,5,19.0,5,1,30,1.89,1.053
-2024,al,Andy Andres,Luke Weaver,4987,NYY,P,11,act,active,P,41,3,3,3,53.7,19,6,69,2.85,0.969
+2024,al,Andy Andres,Bowden Francis,7502,Tor,P,41,act,active,P,6,2,2,0,40.0,6,5,34,1.58,0.575
 2024,al,Andy Andres,Prelander Berroa,7105,CWS,P,0,act,active,P,9,1,0,0,10.7,9,1,11,2.53,1.688
-2024,al,Andy Andres,James Paxton,3577,Bos,P,41,rel,previously_active,,3,1,1,0,11.0,2,1,9,4.09,1.364
-2024,al,Andy Andres,James McArthur,7897,KC,P,0,dis,previously_active,P,6,0,1,0,3.7,3,1,5,9.82,3.545
-2024,al,Andy Andres,Logan Allen,7705,Cle,P,1,rel,previously_active,,9,4,1,0,45.7,17,10,34,5.52,1.467
-2024,al,Andy Andres,Cade Povich,8454,Bal,P,111,rel,previously_active,,5,1,2,0,22.3,9,5,16,5.64,1.433
-2024,al,Andy Andres,Phil Maton,6036,NYM,P,0,rel,previously_active,,4,0,0,0,2.7,5,0,2,10.12,3.0
-2024,al,Andy Andres,Cooper Criswell,7821,Bos,P,0,rel,previously_active,,14,3,2,0,55.0,12,6,46,3.76,1.182
-2024,al,Andy Andres,Nate Pearson,6191,ChC,P,18,rel,previously_active,,28,0,1,2,26.0,10,6,32,6.58,1.615
-2024,al,Andy Andres,Scott Barlow,6321,FA,P,0,rel,previously_active,,28,3,3,0,24.0,14,1,31,4.13,1.542
+2024,al,Andy Andres,Ryan Pressly,4263,Hou,P,5,act,active,P,51,0,3,2,48.0,16,3,51,3.94,1.417
+2024,al,Andy Andres,Edwin Uceta,7228,TB,P,11,act,active,P,17,2,0,5,19.0,5,1,30,1.89,1.053
+2024,al,Andy Andres,Corbin Burnes,6208,Ari,P,30,act,active,P,32,15,9,0,194.3,48,22,181,2.92,1.096
+2024,al,Andy Andres,Kumar Rocker,7075,Tex,P,29,act,active,P,2,0,2,0,7.7,4,0,7,4.7,1.696
+2024,al,Andy Andres,Drew Rasmussen,7251,TB,P,0,act,active,P,14,0,2,1,25.7,6,0,32,2.1,1.052
+2024,al,Andy Andres,Gerrit Cole,2660,NYY,P,12,act,active,P,17,8,5,0,95.0,29,11,99,3.41,1.126
+2024,al,Andy Andres,Luke Weaver,4987,NYY,P,11,act,active,P,41,3,3,3,53.7,19,6,69,2.85,0.969
 2024,al,Andy Andres,Michael Tonkin,4230,Min,P,0,rel,previously_active,,14,1,1,0,17.7,8,4,20,4.58,1.132
 2024,al,Andy Andres,Josh Winckowski,7588,Bos,P,42,rel,previously_active,,2,0,0,0,6.0,3,2,5,6.0,1.667
-2024,al,Andy Andres,Joe Boyle,8226,TB,P,0,rel,previously_active,,1,0,0,0,0.3,3,0,0,81.0,9.0
-2024,al,Andy Andres,Ben Lively,4880,Cle,P,0,rel,previously_active,,17,9,6,0,94.0,29,15,71,4.12,1.234
-2024,al,Andy Andres,Carlos Carrasco,1141,Cle,P,0,rel,previously_active,,2,0,2,0,9.7,6,3,6,5.59,2.069
-2024,al,Andy Andres,Spencer Arrighetti,8577,Hou,P,11,rel,previously_active,,1,0,0,0,5.7,3,0,6,3.18,1.235
-2024,al,Andy Andres,Tyler Alexander,6149,FA,P,2,rel,previously_active,,10,2,3,0,51.3,12,13,44,6.84,1.422
-2024,al,Andy Andres,Michel Otanez,8465,Oak,P,0,rel,previously_active,,10,1,0,1,10.0,2,2,17,5.4,1.6
-2024,al,Andy Andres,Nick Burdi,4962,NYY,P,9,rel,previously_active,,5,0,0,0,5.0,4,0,6,0.0,1.2
-2024,al,Andy Andres,Garrett Whitlock,7546,Bos,P,5,rel,previously_active,,4,1,0,0,18.3,7,1,17,1.96,1.145
-2024,al,Andy Andres,Kyle Muller,6826,Oak,P,0,rel,previously_active,,3,0,0,0,6.3,1,1,2,2.84,1.579
 2024,al,Andy Andres,Trent Thornton,6406,Sea,P,12,rel,previously_active,,28,2,1,1,28.7,10,4,29,5.34,1.291
+2024,al,Andy Andres,Spencer Arrighetti,8577,Hou,P,11,rel,previously_active,,1,0,0,0,5.7,3,0,6,3.18,1.235
+2024,al,Andy Andres,Cade Povich,8454,Bal,P,111,rel,previously_active,,5,1,2,0,22.3,9,5,16,5.64,1.433
+2024,al,Andy Andres,Logan Allen,7705,Cle,P,1,rel,previously_active,,9,4,1,0,45.7,17,10,34,5.52,1.467
+2024,al,Andy Andres,Joe Boyle,8226,TB,P,0,rel,previously_active,,1,0,0,0,0.3,3,0,0,81.0,9.0
+2024,al,Andy Andres,Carlos Carrasco,1141,Cle,P,0,rel,previously_active,,2,0,2,0,9.7,6,3,6,5.59,2.069
+2024,al,Andy Andres,Scott Barlow,6321,FA,P,0,rel,previously_active,,28,3,3,0,24.0,14,1,31,4.13,1.542
+2024,al,Andy Andres,Kyle Muller,6826,Oak,P,0,rel,previously_active,,3,0,0,0,6.3,1,1,2,2.84,1.579
+2024,al,Andy Andres,James McArthur,7897,KC,P,0,dis,previously_active,P,6,0,1,0,3.7,3,1,5,9.82,3.545
+2024,al,Andy Andres,James Paxton,3577,Bos,P,41,rel,previously_active,,3,1,1,0,11.0,2,1,9,4.09,1.364
+2024,al,Andy Andres,Michel Otanez,8465,Oak,P,0,rel,previously_active,,10,1,0,1,10.0,2,2,17,5.4,1.6
+2024,al,Andy Andres,Garrett Whitlock,7546,Bos,P,5,rel,previously_active,,4,1,0,0,18.3,7,1,17,1.96,1.145
+2024,al,Andy Andres,Nick Burdi,4962,NYY,P,9,rel,previously_active,,5,0,0,0,5.0,4,0,6,0.0,1.2
+2024,al,Andy Andres,Tyler Alexander,6149,FA,P,2,rel,previously_active,,10,2,3,0,51.3,12,13,44,6.84,1.422
 2024,al,Andy Andres,Beau Brieske,7974,Det,P,0,rel,previously_active,,4,0,1,0,5.7,6,1,6,6.35,1.765
+2024,al,Andy Andres,Ben Lively,4880,Cle,P,0,rel,previously_active,,17,9,6,0,94.0,29,15,71,4.12,1.234
+2024,al,Andy Andres,Cooper Criswell,7821,Bos,P,0,rel,previously_active,,14,3,2,0,55.0,12,6,46,3.76,1.182
+2024,al,Andy Andres,Nate Pearson,6191,ChC,P,18,rel,previously_active,,28,0,1,2,26.0,10,6,32,6.58,1.615
+2024,al,Andy Andres,Phil Maton,6036,NYM,P,0,rel,previously_active,,4,0,0,0,2.7,5,0,2,10.12,3.0
 2024,al,Andy Andres,Liam Hendriks,3659,Bos,P,0,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
 2024,al,Andy Andres,James McArthur,7897,KC,P,0,dis,reserved,P,4,1,1,0,4.3,2,0,6,2.08,0.923
-2024,al,Andy Andres,David Robertson,2132,FA,P,3,act,previously_reserved,P,5,0,0,0,4.3,3,0,8,0.0,1.385
-2024,al,Andy Andres,Kyle Muller,6826,Oak,P,0,rel,previously_reserved,,1,0,0,0,1.0,0,0,0,9.0,2.0
-2024,al,Andy Andres,Trent Thornton,6406,Sea,P,12,rel,previously_reserved,,10,0,0,0,10.3,1,4,11,6.1,1.548
-2024,al,Andy Andres,Beau Brieske,7974,Det,P,0,rel,previously_reserved,,7,0,1,0,8.3,1,1,12,8.64,2.52
-2024,al,Andy Andres,Tyler Alexander,6149,FA,P,2,rel,previously_reserved,,1,0,0,0,5.3,1,0,4,0.0,0.562
-2024,al,Andy Andres,Spencer Arrighetti,8577,Hou,P,11,rel,previously_reserved,,1,0,1,0,5.0,3,3,4,9.0,2.2
-2024,al,Andy Andres,Ben Lively,4880,Cle,P,0,rel,previously_reserved,,5,2,2,0,25.3,11,6,18,4.97,1.5
-2024,al,Andy Andres,Ryan Pressly,4263,Hou,P,5,act,previously_reserved,P,8,2,0,2,8.7,2,1,7,1.04,0.923
-2024,al,Andy Andres,Scott Barlow,6321,FA,P,0,rel,previously_reserved,,7,0,0,1,6.0,5,1,11,3.0,1.5
+2024,al,Andy Andres,Luke Weaver,4987,NYY,P,11,act,previously_reserved,P,7,1,0,1,9.0,3,0,13,1.0,0.778
 2024,al,Andy Andres,Drew Rasmussen,7251,TB,P,0,act,previously_reserved,P,2,0,0,0,3.0,0,0,3,9.0,1.333
-2024,al,Andy Andres,Logan Allen,7705,Cle,P,1,rel,previously_reserved,,5,3,2,0,24.0,9,4,23,4.87,1.542
-2024,al,Andy Andres,Cade Povich,8454,Bal,P,111,rel,previously_reserved,,1,0,1,0,5.3,4,1,2,10.12,1.687
 2024,al,Andy Andres,Nate Pearson,6191,ChC,P,18,rel,previously_reserved,,4,0,0,0,4.3,3,0,7,0.0,0.923
 2024,al,Andy Andres,Cooper Criswell,7821,Bos,P,0,rel,previously_reserved,,6,2,0,0,25.0,14,2,16,4.32,1.64
-2024,al,Andy Andres,Luke Weaver,4987,NYY,P,11,act,previously_reserved,P,7,1,0,1,9.0,3,0,13,1.0,0.778
-2024,al,Larry Schechter,Chris Bassitt,4773,Tor,P,19,act,active,P,31,10,14,0,171.0,70,18,168,4.16,1.462
+2024,al,Andy Andres,Ben Lively,4880,Cle,P,0,rel,previously_reserved,,5,2,2,0,25.3,11,6,18,4.97,1.5
+2024,al,Andy Andres,Tyler Alexander,6149,FA,P,2,rel,previously_reserved,,1,0,0,0,5.3,1,0,4,0.0,0.562
+2024,al,Andy Andres,Beau Brieske,7974,Det,P,0,rel,previously_reserved,,7,0,1,0,8.3,1,1,12,8.64,2.52
+2024,al,Andy Andres,Spencer Arrighetti,8577,Hou,P,11,rel,previously_reserved,,1,0,1,0,5.0,3,3,4,9.0,2.2
+2024,al,Andy Andres,Ryan Pressly,4263,Hou,P,5,act,previously_reserved,P,8,2,0,2,8.7,2,1,7,1.04,0.923
+2024,al,Andy Andres,Trent Thornton,6406,Sea,P,12,rel,previously_reserved,,10,0,0,0,10.3,1,4,11,6.1,1.548
+2024,al,Andy Andres,Scott Barlow,6321,FA,P,0,rel,previously_reserved,,7,0,0,1,6.0,5,1,11,3.0,1.5
+2024,al,Andy Andres,Kyle Muller,6826,Oak,P,0,rel,previously_reserved,,1,0,0,0,1.0,0,0,0,9.0,2.0
+2024,al,Andy Andres,Logan Allen,7705,Cle,P,1,rel,previously_reserved,,5,3,2,0,24.0,9,4,23,4.87,1.542
+2024,al,Andy Andres,David Robertson,2132,FA,P,3,act,previously_reserved,P,5,0,0,0,4.3,3,0,8,0.0,1.385
+2024,al,Andy Andres,Cade Povich,8454,Bal,P,111,rel,previously_reserved,,1,0,1,0,5.3,4,1,2,10.12,1.687
 2024,al,Larry Schechter,Jose Berrios,4464,Tor,P,12,act,active,P,32,16,11,0,192.3,54,31,153,3.6,1.154
 2024,al,Larry Schechter,Matthew Boyd,5373,ChC,P,366,act,active,P,8,2,2,0,39.7,13,4,46,2.72,1.134
-2024,al,Larry Schechter,Bailey Ober,7533,Min,P,15,act,active,P,11,2,4,0,63.7,16,10,70,4.38,0.99
+2024,al,Larry Schechter,Jon Gray,4445,Tex,P,0,act,active,P,22,5,6,0,94.3,26,11,75,4.77,1.314
+2024,al,Larry Schechter,Jason Foley,7500,Det,P,1,act,active,P,69,3,6,28,60.0,20,5,46,3.15,1.183
 2024,al,Larry Schechter,Bryan Abreu,6708,Hou,P,22,act,active,P,60,2,2,1,59.3,21,5,75,2.88,1.079
 2024,al,Larry Schechter,Marcus Stroman,4137,NYY,P,9,act,active,P,30,10,9,1,154.7,60,19,113,4.31,1.468
-2024,al,Larry Schechter,Colin Poche,6583,FA,P,6,act,active,P,19,0,1,0,14.3,5,3,14,4.4,1.256
-2024,al,Larry Schechter,Jason Foley,7500,Det,P,1,act,active,P,69,3,6,28,60.0,20,5,46,3.15,1.183
+2024,al,Larry Schechter,Bailey Ober,7533,Min,P,15,act,active,P,11,2,4,0,63.7,16,10,70,4.38,0.99
 2024,al,Larry Schechter,Justin Verlander,504,SF,P,3,act,active,P,16,4,6,0,84.3,27,14,70,5.66,1.435
-2024,al,Larry Schechter,Jon Gray,4445,Tex,P,0,act,active,P,22,5,6,0,94.3,26,11,75,4.77,1.314
-2024,al,Larry Schechter,Jeffrey Springs,6429,Oak,P,0,dis,previously_active,P,7,2,2,0,33.0,11,5,37,3.27,1.364
-2024,al,Larry Schechter,Greg Weissert,8276,Bos,P,1,rel,previously_active,,4,0,0,0,3.7,0,1,3,4.91,1.091
+2024,al,Larry Schechter,Colin Poche,6583,FA,P,6,act,active,P,19,0,1,0,14.3,5,3,14,4.4,1.256
+2024,al,Larry Schechter,Chris Bassitt,4773,Tor,P,19,act,active,P,31,10,14,0,171.0,70,18,168,4.16,1.462
 2024,al,Larry Schechter,Emmanuel Clase,7033,Cle,P,23,trd,previously_active,,50,4,1,33,49.3,6,1,42,0.73,0.649
-2024,al,Larry Schechter,Ross Stripling,4624,Oak,P,9,rel,previously_active,,9,1,7,0,43.3,11,4,29,5.61,1.569
 2024,al,Larry Schechter,Joe Ryan,7276,Min,P,16,rel,previously_active,,23,7,7,0,135.0,23,19,147,3.6,0.985
+2024,al,Larry Schechter,Greg Weissert,8276,Bos,P,1,rel,previously_active,,4,0,0,0,3.7,0,1,3,4.91,1.091
+2024,al,Larry Schechter,Jeffrey Springs,6429,Oak,P,0,dis,previously_active,P,7,2,2,0,33.0,11,5,37,3.27,1.364
+2024,al,Larry Schechter,Ross Stripling,4624,Oak,P,9,rel,previously_active,,9,1,7,0,43.3,11,4,29,5.61,1.569
 2024,al,Larry Schechter,Patrick Sandoval,6641,Bos,P,1,rel,previously_active,,12,2,7,0,60.3,25,5,63,5.82,1.575
 2024,al,Larry Schechter,Jeffrey Springs,6429,Oak,P,0,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
 2024,al,Larry Schechter,Colin Poche,6583,FA,P,6,act,previously_reserved,P,6,0,0,0,5.0,2,1,6,3.6,1.0
-2024,al,Larry Schechter,Ross Stripling,4624,Oak,P,9,rel,previously_reserved,,6,1,4,0,30.7,5,3,12,5.87,1.37
-2024,al,Larry Schechter,Jon Gray,4445,Tex,P,0,act,previously_reserved,P,2,0,0,0,8.3,2,0,11,1.08,1.32
 2024,al,Larry Schechter,Justin Verlander,504,SF,P,3,act,previously_reserved,P,1,1,0,0,6.0,0,1,4,3.0,0.667
+2024,al,Larry Schechter,Jon Gray,4445,Tex,P,0,act,previously_reserved,P,2,0,0,0,8.3,2,0,11,1.08,1.32
+2024,al,Larry Schechter,Ross Stripling,4624,Oak,P,9,rel,previously_reserved,,6,1,4,0,30.7,5,3,12,5.87,1.37
 2024,al,Larry Schechter,Patrick Sandoval,6641,Bos,P,1,rel,previously_reserved,,4,0,1,0,19.3,10,3,18,2.79,1.293
-2024,al,Doug Dennis,Austin Voth,5006,FA,P,0,act,active,P,19,0,1,0,16.3,8,2,17,4.96,1.653
-2024,al,Doug Dennis,Jason Adam,3680,SD,P,6,act,active,P,74,7,2,4,73.7,23,5,81,1.95,0.855
 2024,al,Doug Dennis,Jake Cousins,7652,NYY,P,0,act,active,P,16,1,1,1,15.0,12,1,21,2.4,1.133
-2024,al,Doug Dennis,Justin Slaten,8763,Bos,P,0,act,active,P,11,1,0,1,11.0,0,2,11,1.64,1.091
-2024,al,Doug Dennis,Cole Sands,7888,Min,P,0,act,active,P,36,6,0,3,37.3,8,4,44,4.34,1.152
-2024,al,Doug Dennis,Jhoan Duran,6643,Min,P,24,act,active,P,58,6,9,23,54.3,15,4,66,3.64,1.16
 2024,al,Doug Dennis,Jose Quijada,6714,LAA,P,11,act,active,P,11,1,2,0,9.0,14,0,13,5.0,2.333
+2024,al,Doug Dennis,Jhoan Duran,6643,Min,P,24,act,active,P,58,6,9,23,54.3,15,4,66,3.64,1.16
+2024,al,Doug Dennis,Justin Slaten,8763,Bos,P,0,act,active,P,11,1,0,1,11.0,0,2,11,1.64,1.091
 2024,al,Doug Dennis,Jacob DeGrom,4563,Tex,P,2,act,active,P,3,0,0,0,10.7,1,1,14,1.69,1.125
+2024,al,Doug Dennis,Austin Voth,5006,FA,P,0,act,active,P,19,0,1,0,16.3,8,2,17,4.96,1.653
 2024,al,Doug Dennis,Tyler Holton,8201,Det,P,0,act,active,P,40,3,1,8,57.7,11,4,49,2.18,0.798
-2024,al,Doug Dennis,Kevin Kelly,8343,TB,P,2,rel,previously_active,,8,1,1,0,6.7,1,2,7,8.1,1.5
+2024,al,Doug Dennis,Jason Adam,3680,SD,P,6,act,active,P,74,7,2,4,73.7,23,5,81,1.95,0.855
+2024,al,Doug Dennis,Cole Sands,7888,Min,P,0,act,active,P,36,6,0,3,37.3,8,4,44,4.34,1.152
 2024,al,Doug Dennis,Peter Fairbanks,7030,TB,P,17,dis,previously_active,P,46,3,3,23,45.3,17,4,44,3.57,1.169
+2024,al,Doug Dennis,Gregory Santos,6241,Sea,P,0,rel,previously_active,,3,0,1,0,2.7,0,0,2,13.5,2.25
+2024,al,Doug Dennis,John Schreiber,7093,KC,P,0,rel,previously_active,,34,3,2,1,30.3,11,1,20,4.15,1.484
+2024,al,Doug Dennis,Will Vest,7551,Det,P,0,rel,previously_active,,7,1,0,0,7.7,3,0,5,2.35,1.174
 2024,al,Doug Dennis,Jorge Alcala,6483,Min,P,0,rel,previously_active,,9,1,0,0,8.3,2,4,4,9.72,1.56
 2024,al,Doug Dennis,Keegan Akin,6550,Bal,P,0,rel,previously_active,,6,0,0,0,3.7,1,1,5,14.73,2.182
-2024,al,Doug Dennis,Josh Winckowski,7588,Bos,P,0,rel,previously_active,,8,1,1,0,15.0,8,1,18,4.2,1.8
-2024,al,Doug Dennis,James McArthur,7897,KC,P,5,rel,previously_active,,39,4,4,17,41.3,8,7,32,5.44,1.452
-2024,al,Doug Dennis,Prelander Berroa,7105,CWS,P,2,rel,previously_active,,1,0,0,0,0.3,0,0,0,0.0,0.0
-2024,al,Doug Dennis,Will Smith,3082,KC,P,6,rel,previously_active,,23,0,3,1,21.3,8,4,16,5.91,1.547
-2024,al,Doug Dennis,Bryan Baker,6671,Bal,P,0,rel,previously_active,,1,0,1,0,0.7,2,0,2,40.5,4.5
 2024,al,Doug Dennis,Adam Cimber,6381,LAA,P,0,rel,previously_active,,3,0,0,0,3.0,2,0,2,12.0,1.333
-2024,al,Doug Dennis,Alex Faedo,6087,Det,P,0,rel,previously_active,,14,2,1,0,22.0,11,3,19,3.68,1.409
-2024,al,Doug Dennis,Gregory Santos,6241,Sea,P,0,rel,previously_active,,3,0,1,0,2.7,0,0,2,13.5,2.25
-2024,al,Doug Dennis,Shelby Miller,2839,FA,P,3,rel,previously_active,,4,1,1,0,4.0,0,1,2,4.5,0.5
-2024,al,Doug Dennis,Tim Herrin,8305,Cle,P,0,rel,previously_active,,41,3,0,0,33.7,16,2,32,2.94,1.099
-2024,al,Doug Dennis,John Schreiber,7093,KC,P,0,rel,previously_active,,34,3,2,1,30.3,11,1,20,4.15,1.484
+2024,al,Doug Dennis,Will Smith,3082,KC,P,6,rel,previously_active,,23,0,3,1,21.3,8,4,16,5.91,1.547
 2024,al,Doug Dennis,Sam Hentges,6704,Cle,P,0,rel,previously_active,,20,0,0,0,18.3,5,3,21,3.93,1.145
+2024,al,Doug Dennis,Prelander Berroa,7105,CWS,P,2,rel,previously_active,,1,0,0,0,0.3,0,0,0,0.0,0.0
+2024,al,Doug Dennis,Alex Faedo,6087,Det,P,0,rel,previously_active,,14,2,1,0,22.0,11,3,19,3.68,1.409
+2024,al,Doug Dennis,James McArthur,7897,KC,P,5,rel,previously_active,,39,4,4,17,41.3,8,7,32,5.44,1.452
+2024,al,Doug Dennis,Tim Herrin,8305,Cle,P,0,rel,previously_active,,41,3,0,0,33.7,16,2,32,2.94,1.099
+2024,al,Doug Dennis,Bryan Baker,6671,Bal,P,0,rel,previously_active,,1,0,1,0,0.7,2,0,2,40.5,4.5
+2024,al,Doug Dennis,Shelby Miller,2839,FA,P,3,rel,previously_active,,4,1,1,0,4.0,0,1,2,4.5,0.5
 2024,al,Doug Dennis,Roansy Contreras,7534,Bal,P,2,rel,previously_active,,2,0,1,0,1.7,1,1,0,21.6,3.6
-2024,al,Doug Dennis,Will Vest,7551,Det,P,0,rel,previously_active,,7,1,0,0,7.7,3,0,5,2.35,1.174
+2024,al,Doug Dennis,Josh Winckowski,7588,Bos,P,0,rel,previously_active,,8,1,1,0,15.0,8,1,18,4.2,1.8
 2024,al,Doug Dennis,Gabe Speier,5517,Sea,P,0,rel,previously_active,,22,0,2,0,16.7,12,1,21,5.94,1.5
+2024,al,Doug Dennis,Kevin Kelly,8343,TB,P,2,rel,previously_active,,8,1,1,0,6.7,1,2,7,8.1,1.5
 2024,al,Doug Dennis,Peter Fairbanks,7030,TB,P,17,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2024,al,Doug Dennis,Will Smith,3082,KC,P,6,rel,previously_reserved,,10,0,0,0,8.3,3,0,3,2.16,0.96
-2024,al,Doug Dennis,Justin Slaten,8763,Bos,P,0,act,previously_reserved,P,2,0,0,0,1.7,0,0,2,0.0,0.0
 2024,al,Doug Dennis,Roansy Contreras,7534,Bal,P,2,rel,previously_reserved,,2,0,0,0,3.7,3,0,2,0.0,1.091
+2024,al,Doug Dennis,Justin Slaten,8763,Bos,P,0,act,previously_reserved,P,2,0,0,0,1.7,0,0,2,0.0,0.0
 2024,al,Doug Dennis,Tim Herrin,8305,Cle,P,0,rel,previously_reserved,,2,0,0,0,1.3,0,0,1,0.0,2.25
+2024,al,Doug Dennis,Will Smith,3082,KC,P,6,rel,previously_reserved,,10,0,0,0,8.3,3,0,3,2.16,0.96
 2024,al,Doug Dennis,Sam Hentges,6704,Cle,P,0,rel,previously_reserved,,3,0,0,0,3.3,0,0,2,0.0,0.3
 2024,al,Doug Dennis,Tyler Holton,8201,Det,P,0,act,previously_reserved,P,4,0,0,0,6.0,1,0,5,0.0,0.5
-2024,al,Jason Collette,Reid Detmers,7335,LAA,P,4,act,active,P,5,1,3,0,24.3,11,8,39,8.14,1.767
-2024,al,Jason Collette,David Festa,8634,Min,P,151,act,active,P,12,1,6,0,54.3,19,8,69,4.8,1.288
-2024,al,Jason Collette,Mitch Spence,8495,Oak,P,3,act,active,P,7,1,1,0,35.7,9,4,29,4.29,1.542
-2024,al,Jason Collette,Joey Cantillo,7414,Cle,P,2,act,active,P,2,0,1,0,8.0,5,0,13,4.5,1.75
-2024,al,Jason Collette,Tyler Alexander,6149,FA,P,6,act,active,P,4,0,1,0,18.7,3,1,15,2.41,0.75
-2024,al,Jason Collette,Nick Pivetta,5888,Bos,P,14,act,active,P,26,6,11,0,141.7,35,25,171,3.94,1.101
-2024,al,Jason Collette,Manuel Rodriguez,7119,TB,P,3,act,active,P,20,2,2,2,17.7,5,1,15,2.04,1.075
-2024,al,Jason Collette,Kenta Maeda,4548,Det,P,5,act,active,P,20,2,7,0,78.0,27,16,70,6.69,1.513
 2024,al,Jason Collette,Cade Smith,8469,Cle,P,2,act,active,P,66,5,1,1,67.0,15,1,92,2.01,0.91
-2024,al,Jason Collette,Jose Leclerc,5514,Tex,P,9,rel,previously_active,,8,1,2,1,9.0,9,1,10,8.0,1.889
-2024,al,Jason Collette,Lucas Erceg,5818,KC,P,3,rel,previously_active,,12,0,1,1,12.0,3,1,15,4.5,1.333
-2024,al,Jason Collette,Jose Urena,4615,Tex,P,5,rel,previously_active,,7,1,0,1,17.0,10,2,13,2.65,1.353
+2024,al,Jason Collette,Kenta Maeda,4548,Det,P,5,act,active,P,20,2,7,0,78.0,27,16,70,6.69,1.513
+2024,al,Jason Collette,Manuel Rodriguez,7119,TB,P,3,act,active,P,20,2,2,2,17.7,5,1,15,2.04,1.075
+2024,al,Jason Collette,Nick Pivetta,5888,Bos,P,14,act,active,P,26,6,11,0,141.7,35,25,171,3.94,1.101
+2024,al,Jason Collette,Tyler Alexander,6149,FA,P,6,act,active,P,4,0,1,0,18.7,3,1,15,2.41,0.75
+2024,al,Jason Collette,Mitch Spence,8495,Oak,P,3,act,active,P,7,1,1,0,35.7,9,4,29,4.29,1.542
+2024,al,Jason Collette,Reid Detmers,7335,LAA,P,4,act,active,P,5,1,3,0,24.3,11,8,39,8.14,1.767
+2024,al,Jason Collette,Joey Cantillo,7414,Cle,P,2,act,active,P,2,0,1,0,8.0,5,0,13,4.5,1.75
+2024,al,Jason Collette,David Festa,8634,Min,P,151,act,active,P,12,1,6,0,54.3,19,8,69,4.8,1.288
 2024,al,Jason Collette,Garrett Cleavinger,6239,TB,P,27,rel,previously_active,,18,1,1,1,14.7,8,2,14,4.91,1.5
-2024,al,Jason Collette,Cole Irvin,6378,Min,P,0,rel,previously_active,,15,5,4,0,74.0,18,10,53,4.99,1.419
 2024,al,Jason Collette,Michael Lorenzen,4553,KC,P,51,trd,previously_active,,20,5,6,0,107.3,50,15,80,3.69,1.276
 2024,al,Jason Collette,Chris Paddack,5809,Min,P,2,trd,previously_active,,9,3,2,0,49.3,9,9,44,4.93,1.5
+2024,al,Jason Collette,Kevin Kelly,8343,TB,P,6,rel,previously_active,,4,0,0,0,3.0,2,1,2,6.0,2.667
 2024,al,Jason Collette,Mark Leiter,6164,NYY,P,0,rel,previously_active,,10,0,1,0,9.3,5,4,14,7.71,1.929
-2024,al,Jason Collette,Cooper Criswell,7821,Bos,P,6,rel,previously_active,,1,0,1,0,2.3,1,0,0,3.86,1.714
+2024,al,Jason Collette,Kris Bubic,6847,KC,P,3,rel,previously_active,,5,0,0,0,6.7,2,0,7,2.7,1.05
+2024,al,Jason Collette,Luis Castillo,5137,Sea,P,29,dis,previously_active,P,30,11,12,0,175.3,47,25,175,3.64,1.169
+2024,al,Jason Collette,Chris Flexen,5882,CWS,P,32,rel,previously_active,,2,0,1,0,8.7,2,2,9,10.38,1.962
 2024,al,Jason Collette,Brady Singer,6497,Cin,P,2,res,previously_active,P,31,9,12,0,173.7,51,21,165,3.73,1.278
 2024,al,Jason Collette,Jordan Romano,6417,Phi,P,20,rel,previously_active,,12,1,2,6,10.7,4,4,11,7.59,1.688
-2024,al,Jason Collette,Luis Castillo,5137,Sea,P,29,dis,previously_active,P,30,11,12,0,175.3,47,25,175,3.64,1.169
-2024,al,Jason Collette,Kevin Kelly,8343,TB,P,6,rel,previously_active,,4,0,0,0,3.0,2,1,2,6.0,2.667
-2024,al,Jason Collette,Brock Stewart,5811,Min,P,3,dis,previously_active,P,14,0,0,0,14.0,6,1,18,3.21,1.286
-2024,al,Jason Collette,Kris Bubic,6847,KC,P,3,rel,previously_active,,5,0,0,0,6.7,2,0,7,2.7,1.05
-2024,al,Jason Collette,Chris Flexen,5882,CWS,P,32,rel,previously_active,,2,0,1,0,8.7,2,2,9,10.38,1.962
-2024,al,Jason Collette,Andrew Chafin,4142,FA,P,19,rel,previously_active,,18,1,0,0,16.7,11,3,24,3.24,1.26
-2024,al,Jason Collette,Burch Smith,4533,Pit,P,0,rel,previously_active,,6,0,1,0,6.0,0,4,3,12.0,1.5
+2024,al,Jason Collette,Jose Urena,4615,Tex,P,5,rel,previously_active,,7,1,0,1,17.0,10,2,13,2.65,1.353
 2024,al,Jason Collette,Jake Bloss,9102,Tor,P,22,res,previously_active,P,1,0,1,0,4.0,1,4,5,11.25,1.75
+2024,al,Jason Collette,Jose Leclerc,5514,Tex,P,9,rel,previously_active,,8,1,2,1,9.0,9,1,10,8.0,1.889
+2024,al,Jason Collette,Brock Stewart,5811,Min,P,3,dis,previously_active,P,14,0,0,0,14.0,6,1,18,3.21,1.286
+2024,al,Jason Collette,Cooper Criswell,7821,Bos,P,6,rel,previously_active,,1,0,1,0,2.3,1,0,0,3.86,1.714
+2024,al,Jason Collette,Burch Smith,4533,Pit,P,0,rel,previously_active,,6,0,1,0,6.0,0,4,3,12.0,1.5
+2024,al,Jason Collette,Lucas Erceg,5818,KC,P,3,rel,previously_active,,12,0,1,1,12.0,3,1,15,4.5,1.333
+2024,al,Jason Collette,Andrew Chafin,4142,FA,P,19,rel,previously_active,,18,1,0,0,16.7,11,3,24,3.24,1.26
+2024,al,Jason Collette,Cole Irvin,6378,Min,P,0,rel,previously_active,,15,5,4,0,74.0,18,10,53,4.99,1.419
 2024,al,Jason Collette,Hunter Harvey,4796,KC,P,19,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
 2024,al,Jason Collette,Brady Singer,6497,Cin,P,2,res,reserved,P,1,0,1,0,6.0,3,1,5,3.0,1.167
 2024,al,Jason Collette,Luis Castillo,5137,Sea,P,29,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
 2024,al,Jason Collette,Brock Stewart,5811,Min,P,3,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
 2024,al,Jason Collette,Jake Bloss,9102,Tor,P,22,res,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2024,al,Jason Collette,Jordan Romano,6417,Phi,P,20,rel,previously_reserved,,3,0,0,2,3.0,0,0,2,3.0,0.667
-2024,al,Jason Collette,Nick Pivetta,5888,Bos,P,14,act,previously_reserved,P,1,0,1,0,4.0,1,3,1,11.25,2.0
-2024,al,Jason Collette,Cade Smith,8469,Cle,P,2,act,previously_reserved,P,7,1,0,0,6.3,1,0,6,1.42,0.947
-2024,al,Jason Collette,Kenta Maeda,4548,Det,P,5,act,previously_reserved,P,4,1,0,0,13.3,2,3,10,6.08,1.2
+2024,al,Jason Collette,Chris Paddack,5809,Min,P,2,trd,previously_reserved,,2,1,0,0,11.7,3,2,10,3.09,0.857
 2024,al,Jason Collette,Kris Bubic,6847,KC,P,3,rel,previously_reserved,,1,0,0,0,1.0,0,0,2,0.0,0.0
 2024,al,Jason Collette,Chris Flexen,5882,CWS,P,32,rel,previously_reserved,,1,0,0,0,4.7,2,1,2,7.71,1.5
-2024,al,Jason Collette,Jose Leclerc,5514,Tex,P,9,rel,previously_reserved,,10,2,1,0,9.7,7,1,14,5.59,1.448
+2024,al,Jason Collette,Garrett Cleavinger,6239,TB,P,27,rel,previously_reserved,,4,0,0,1,4.0,1,0,8,0.0,0.75
+2024,al,Jason Collette,Cade Smith,8469,Cle,P,2,act,previously_reserved,P,7,1,0,0,6.3,1,0,6,1.42,0.947
+2024,al,Jason Collette,Kenta Maeda,4548,Det,P,5,act,previously_reserved,P,4,1,0,0,13.3,2,3,10,6.08,1.2
 2024,al,Jason Collette,Lucas Erceg,5818,KC,P,3,rel,previously_reserved,,8,1,0,0,8.3,2,2,8,3.24,0.96
 2024,al,Jason Collette,David Festa,8634,Min,P,151,act,previously_reserved,P,1,0,0,0,5.0,3,0,6,1.8,1.4
-2024,al,Jason Collette,Garrett Cleavinger,6239,TB,P,27,rel,previously_reserved,,4,0,0,1,4.0,1,0,8,0.0,0.75
-2024,al,Jason Collette,Jose Urena,4615,Tex,P,5,rel,previously_reserved,,1,0,0,0,2.7,0,0,1,0.0,1.125
 2024,al,Jason Collette,Cole Irvin,6378,Min,P,0,rel,previously_reserved,,3,1,1,0,14.7,2,2,8,3.07,1.227
-2024,al,Jason Collette,Chris Paddack,5809,Min,P,2,trd,previously_reserved,,2,1,0,0,11.7,3,2,10,3.09,0.857
-2024,al,Jeff Erickson,Albert Suarez,3433,Bal,P,55,act,active,P,31,9,7,0,128.0,43,17,104,3.87,1.328
-2024,al,Jeff Erickson,Kutter Crawford,7833,Bos,P,11,act,active,P,32,8,16,0,176.0,51,34,168,4.4,1.125
-2024,al,Jeff Erickson,Griffin Canning,6578,NYM,P,25,act,active,P,4,1,1,0,21.0,10,6,17,6.43,1.524
-2024,al,Jeff Erickson,Michael Wacha,4080,KC,P,8,act,active,P,28,13,7,0,161.7,44,16,140,3.4,1.206
-2024,al,Jeff Erickson,Gavin Williams,7824,Cle,P,6,act,active,P,16,3,10,0,76.0,32,7,79,4.86,1.368
-2024,al,Jeff Erickson,Tyler Anderson,3678,LAA,P,0,act,active,P,31,10,15,0,179.3,73,24,142,3.81,1.288
-2024,al,Jeff Erickson,Carlos Estevez,5488,Phi,P,10,act,active,P,54,4,5,26,55.0,12,5,50,2.45,0.909
+2024,al,Jason Collette,Jordan Romano,6417,Phi,P,20,rel,previously_reserved,,3,0,0,2,3.0,0,0,2,3.0,0.667
+2024,al,Jason Collette,Jose Urena,4615,Tex,P,5,rel,previously_reserved,,1,0,0,0,2.7,0,0,1,0.0,1.125
+2024,al,Jason Collette,Nick Pivetta,5888,Bos,P,14,act,previously_reserved,P,1,0,1,0,4.0,1,3,1,11.25,2.0
+2024,al,Jason Collette,Jose Leclerc,5514,Tex,P,9,rel,previously_reserved,,10,2,1,0,9.7,7,1,14,5.59,1.448
 2024,al,Jeff Erickson,Emmanuel Clase,7033,Cle,P,23,act,active,P,24,0,1,14,25.0,4,1,24,0.36,0.68
+2024,al,Jeff Erickson,Michael Wacha,4080,KC,P,8,act,active,P,28,13,7,0,161.7,44,16,140,3.4,1.206
+2024,al,Jeff Erickson,Tyler Anderson,3678,LAA,P,0,act,active,P,31,10,15,0,179.3,73,24,142,3.81,1.288
 2024,al,Jeff Erickson,Luis Gil,7074,NYY,P,17,act,active,P,27,14,7,0,140.7,73,17,159,3.71,1.216
-2024,al,Jeff Erickson,Bowden Francis,7502,Tor,P,1,rel,previously_active,,3,1,2,0,10.7,6,4,15,11.81,1.969
-2024,al,Jeff Erickson,Bryan Abreu,6708,Hou,P,4,rel,previously_active,,16,1,1,0,16.7,11,4,22,4.32,1.56
-2024,al,Jeff Erickson,Zach Plesac,7027,FA,P,1,rel,previously_active,,1,0,0,0,2.7,4,0,3,6.75,1.875
-2024,al,Jeff Erickson,Angel Zerpa,7543,KC,P,0,rel,previously_active,,2,0,0,0,1.0,1,1,1,45.0,5.0
-2024,al,Jeff Erickson,Yariel Rodriguez,8918,Tor,P,77,rel,previously_active,,3,0,1,0,11.7,6,1,10,4.63,1.8
-2024,al,Jeff Erickson,Davis Daniel,7578,Atl,P,7,rel,previously_active,,1,0,1,0,3.7,0,1,3,17.18,2.182
-2024,al,Jeff Erickson,Jacob Webb,6698,Tex,P,3,rel,previously_active,,16,0,2,1,13.0,12,0,11,4.85,1.846
+2024,al,Jeff Erickson,Gavin Williams,7824,Cle,P,6,act,active,P,16,3,10,0,76.0,32,7,79,4.86,1.368
+2024,al,Jeff Erickson,Albert Suarez,3433,Bal,P,55,act,active,P,31,9,7,0,128.0,43,17,104,3.87,1.328
+2024,al,Jeff Erickson,Griffin Canning,6578,NYM,P,25,act,active,P,4,1,1,0,21.0,10,6,17,6.43,1.524
+2024,al,Jeff Erickson,Carlos Estevez,5488,Phi,P,10,act,active,P,54,4,5,26,55.0,12,5,50,2.45,0.909
+2024,al,Jeff Erickson,Kutter Crawford,7833,Bos,P,11,act,active,P,32,8,16,0,176.0,51,34,168,4.4,1.125
+2024,al,Jeff Erickson,Kevin Kelly,8343,TB,P,3,rel,previously_active,,4,0,0,0,4.7,0,0,4,0.0,0.643
+2024,al,Jeff Erickson,Bailey Ober,7533,Min,P,15,trd,previously_active,,20,10,5,0,115.0,27,17,121,3.76,1.009
 2024,al,Jeff Erickson,Shelby Miller,2839,FA,P,17,res,previously_active,P,10,1,1,0,9.0,3,2,7,8.0,1.556
+2024,al,Jeff Erickson,Jack Leiter,6947,Tex,P,17,res,previously_active,P,4,0,1,0,18.0,6,2,18,6.0,1.333
+2024,al,Jeff Erickson,Kyle Muller,6826,Oak,P,13,rel,previously_active,,2,0,1,0,5.0,1,1,1,1.8,1.4
+2024,al,Jeff Erickson,Jacob Webb,6698,Tex,P,3,rel,previously_active,,16,0,2,1,13.0,12,0,11,4.85,1.846
 2024,al,Jeff Erickson,Cody Bradford,8422,Tex,P,13,rel,previously_active,,2,2,0,0,14.3,1,0,11,0.63,0.558
-2024,al,Jeff Erickson,Josh Winckowski,7588,Bos,P,24,res,previously_active,P,3,0,0,0,5.7,2,0,5,4.76,1.412
+2024,al,Jeff Erickson,Kyle Bradish,7482,Bal,P,2,rel,previously_active,,8,2,0,0,39.3,15,2,53,2.75,1.068
+2024,al,Jeff Erickson,Bowden Francis,7502,Tor,P,1,rel,previously_active,,3,1,2,0,10.7,6,4,15,11.81,1.969
 2024,al,Jeff Erickson,Carlos Carrasco,1141,Cle,P,1,rel,previously_active,,2,0,0,0,11.0,2,3,11,4.91,1.091
+2024,al,Jeff Erickson,Tyler Wells,7545,Bal,P,1,rel,previously_active,,3,0,2,0,15.3,3,3,13,5.87,1.37
+2024,al,Jeff Erickson,Bryan Abreu,6708,Hou,P,4,rel,previously_active,,16,1,1,0,16.7,11,4,22,4.32,1.56
+2024,al,Jeff Erickson,Davis Daniel,7578,Atl,P,7,rel,previously_active,,1,0,1,0,3.7,0,1,3,17.18,2.182
 2024,al,Jeff Erickson,Scott Barlow,6321,FA,P,5,rel,previously_active,,3,0,0,0,3.3,0,0,2,0.0,0.3
 2024,al,Jeff Erickson,Kirby Yates,4303,Tex,P,1,rel,previously_active,,2,0,0,0,2.0,0,0,1,0.0,0.5
-2024,al,Jeff Erickson,Bailey Ober,7533,Min,P,15,trd,previously_active,,20,10,5,0,115.0,27,17,121,3.76,1.009
-2024,al,Jeff Erickson,Kyle Bradish,7482,Bal,P,2,rel,previously_active,,8,2,0,0,39.3,15,2,53,2.75,1.068
-2024,al,Jeff Erickson,Kevin Kelly,8343,TB,P,3,rel,previously_active,,4,0,0,0,4.7,0,0,4,0.0,0.643
-2024,al,Jeff Erickson,Kyle Muller,6826,Oak,P,13,rel,previously_active,,2,0,1,0,5.0,1,1,1,1.8,1.4
-2024,al,Jeff Erickson,Tyler Wells,7545,Bal,P,1,rel,previously_active,,3,0,2,0,15.3,3,3,13,5.87,1.37
-2024,al,Jeff Erickson,Jack Leiter,6947,Tex,P,17,res,previously_active,P,4,0,1,0,18.0,6,2,18,6.0,1.333
 2024,al,Jeff Erickson,Joey Estes,8192,Oak,P,7,rel,previously_active,,5,1,2,0,25.7,6,5,19,4.56,1.208
-2024,al,Jeff Erickson,Shelby Miller,2839,FA,P,17,res,reserved,P,7,0,1,0,9.0,2,1,10,1.0,0.778
+2024,al,Jeff Erickson,Zach Plesac,7027,FA,P,1,rel,previously_active,,1,0,0,0,2.7,4,0,3,6.75,1.875
+2024,al,Jeff Erickson,Yariel Rodriguez,8918,Tor,P,77,rel,previously_active,,3,0,1,0,11.7,6,1,10,4.63,1.8
+2024,al,Jeff Erickson,Josh Winckowski,7588,Bos,P,24,res,previously_active,P,3,0,0,0,5.7,2,0,5,4.76,1.412
+2024,al,Jeff Erickson,Angel Zerpa,7543,KC,P,0,rel,previously_active,,2,0,0,0,1.0,1,1,1,45.0,5.0
 2024,al,Jeff Erickson,Jack Leiter,6947,Tex,P,17,res,reserved,P,2,0,1,0,8.3,5,2,6,6.48,1.56
+2024,al,Jeff Erickson,Shelby Miller,2839,FA,P,17,res,reserved,P,7,0,1,0,9.0,2,1,10,1.0,0.778
 2024,al,Jeff Erickson,Josh Winckowski,7588,Bos,P,24,res,reserved,P,2,0,0,0,2.7,0,1,5,6.75,2.25
-2024,al,Jeff Erickson,Michael Wacha,4080,KC,P,8,act,previously_reserved,P,1,0,1,0,5.0,1,1,5,1.8,0.8
-2024,al,Jeff Erickson,Jacob Webb,6698,Tex,P,3,rel,previously_reserved,,5,1,1,0,6.3,2,0,3,1.42,0.632
 2024,al,Jeff Erickson,Kutter Crawford,7833,Bos,P,11,act,previously_reserved,P,1,1,0,0,7.7,0,0,7,3.52,1.043
-2024,al,Jeff Erickson,Bowden Francis,7502,Tor,P,1,rel,previously_reserved,,2,1,0,0,4.0,1,0,2,0.0,1.0
 2024,al,Jeff Erickson,Kevin Kelly,8343,TB,P,3,rel,previously_reserved,,7,0,0,0,7.3,2,0,5,0.0,0.682
+2024,al,Jeff Erickson,Bowden Francis,7502,Tor,P,1,rel,previously_reserved,,2,1,0,0,4.0,1,0,2,0.0,1.0
+2024,al,Jeff Erickson,Jacob Webb,6698,Tex,P,3,rel,previously_reserved,,5,1,1,0,6.3,2,0,3,1.42,0.632
+2024,al,Jeff Erickson,Michael Wacha,4080,KC,P,8,act,previously_reserved,P,1,0,1,0,5.0,1,1,5,1.8,0.8
 2024,al,Jeff Erickson,Scott Barlow,6321,FA,P,5,rel,previously_reserved,,8,0,0,0,5.0,6,1,6,10.8,2.4
 2024,al,Jeff Erickson,Luis Gil,7074,NYY,P,17,act,previously_reserved,P,2,1,0,0,11.0,4,1,12,0.82,0.909
 2024,al,Howard Bender,Hunter Brown,7592,Hou,P,14,act,active,P,24,10,8,0,131.3,46,12,134,3.49,1.325
 2024,al,Howard Bender,Phil Maton,6036,NYM,P,18,act,active,P,50,3,1,2,46.3,15,4,45,3.11,1.058
 2024,al,Howard Bender,Pablo Lopez,6227,Min,P,26,act,active,P,32,15,10,0,185.3,41,26,198,4.08,1.192
-2024,al,Howard Bender,Tayler Scott,6243,Hou,P,18,act,active,P,41,6,2,0,45.7,24,6,43,2.36,1.204
-2024,al,Howard Bender,Dane Dunning,5973,Tex,P,2,act,active,P,21,5,5,0,82.7,35,16,80,5.23,1.391
-2024,al,Howard Bender,Zack Kelly,7910,Bos,P,6,act,active,P,29,4,2,0,28.3,14,8,31,6.35,1.624
-2024,al,Howard Bender,Griffin Jax,4039,Min,P,1,act,active,P,72,5,5,10,71.0,15,4,95,2.03,0.873
 2024,al,Howard Bender,Cole Ragans,5800,KC,P,16,act,active,P,32,11,9,0,186.3,67,15,223,3.14,1.143
+2024,al,Howard Bender,Dane Dunning,5973,Tex,P,2,act,active,P,21,5,5,0,82.7,35,16,80,5.23,1.391
+2024,al,Howard Bender,Griffin Jax,4039,Min,P,1,act,active,P,72,5,5,10,71.0,15,4,95,2.03,0.873
 2024,al,Howard Bender,Clay Holmes,5889,NYM,P,19,act,active,P,67,3,5,30,63.0,22,4,68,3.14,1.302
+2024,al,Howard Bender,Tayler Scott,6243,Hou,P,18,act,active,P,41,6,2,0,45.7,24,6,43,2.36,1.204
 2024,al,Howard Bender,Paul Blackburn,5817,NYM,P,0,act,active,P,12,4,4,0,63.3,19,10,54,4.97,1.374
-2024,al,Howard Bender,Adam Cimber,6381,LAA,P,9,rel,previously_active,,8,0,0,0,5.3,8,0,2,18.56,3.0
-2024,al,Howard Bender,Reese Olson,8136,Det,P,4,dis,previously_active,P,19,4,8,0,103.0,31,6,92,3.23,1.184
+2024,al,Howard Bender,Zack Kelly,7910,Bos,P,6,act,active,P,29,4,2,0,28.3,14,8,31,6.35,1.624
 2024,al,Howard Bender,Mike Soroka,5400,Was,P,3,rel,previously_active,,5,0,2,0,23.7,14,4,18,4.94,1.394
+2024,al,Howard Bender,Chris Martin,4806,Tex,P,1,rel,previously_active,,11,1,1,0,11.3,2,2,12,5.56,1.5
+2024,al,Howard Bender,Nick Vespi,7992,Phi,P,6,res,previously_active,P,3,0,0,0,3.3,1,1,4,8.1,1.8
 2024,al,Howard Bender,Emerson Hancock,7333,Sea,P,22,rel,previously_active,,4,1,2,0,16.3,8,4,11,8.82,1.959
 2024,al,Howard Bender,Angel Zerpa,7543,KC,P,9,rel,previously_active,,3,0,0,0,2.7,2,0,0,3.38,1.875
-2024,al,Howard Bender,Nick Vespi,7992,Phi,P,6,res,previously_active,P,3,0,0,0,3.3,1,1,4,8.1,1.8
-2024,al,Howard Bender,Chris Martin,4806,Tex,P,1,rel,previously_active,,11,1,1,0,11.3,2,2,12,5.56,1.5
-2024,al,Howard Bender,Nick Vespi,7992,Phi,P,6,res,reserved,P,1,0,0,0,1.0,1,0,2,0.0,1.0
+2024,al,Howard Bender,Reese Olson,8136,Det,P,4,dis,previously_active,P,19,4,8,0,103.0,31,6,92,3.23,1.184
+2024,al,Howard Bender,Adam Cimber,6381,LAA,P,9,rel,previously_active,,8,0,0,0,5.3,8,0,2,18.56,3.0
 2024,al,Howard Bender,Reese Olson,8136,Det,P,4,dis,reserved,P,3,0,0,0,9.3,2,1,9,6.75,1.179
-2024,al,Howard Bender,Mike Soroka,5400,Was,P,3,rel,previously_reserved,,5,0,3,0,24.0,14,6,13,6.75,1.625
-2024,al,Howard Bender,Dane Dunning,5973,Tex,P,2,act,previously_reserved,P,5,0,2,0,12.3,5,2,11,5.84,1.784
+2024,al,Howard Bender,Nick Vespi,7992,Phi,P,6,res,reserved,P,1,0,0,0,1.0,1,0,2,0.0,1.0
 2024,al,Howard Bender,Paul Blackburn,5817,NYM,P,0,act,previously_reserved,P,2,1,0,0,12.0,2,2,5,3.0,0.833
-2024,al,Howard Bender,Chris Martin,4806,Tex,P,1,rel,previously_reserved,,9,1,0,0,9.0,0,0,10,0.0,0.222
 2024,al,Howard Bender,Chris Flexen,5882,CWS,P,0,rel,previously_reserved,,2,0,2,0,10.7,5,1,5,5.91,1.594
 2024,al,Howard Bender,Angel Zerpa,7543,KC,P,9,rel,previously_reserved,,3,0,0,0,2.3,1,0,1,7.71,2.571
-2024,al,Howard Bender,Hunter Brown,7592,Hou,P,14,act,previously_reserved,P,7,1,1,0,38.7,14,6,45,3.49,1.086
+2024,al,Howard Bender,Dane Dunning,5973,Tex,P,2,act,previously_reserved,P,5,0,2,0,12.3,5,2,11,5.84,1.784
 2024,al,Howard Bender,Emerson Hancock,7333,Sea,P,22,rel,previously_reserved,,3,2,1,0,18.0,3,2,12,2.0,0.722
+2024,al,Howard Bender,Hunter Brown,7592,Hou,P,14,act,previously_reserved,P,7,1,1,0,38.7,14,6,45,3.49,1.086
+2024,al,Howard Bender,Chris Martin,4806,Tex,P,1,rel,previously_reserved,,9,1,0,0,9.0,0,0,10,0.0,0.222
+2024,al,Howard Bender,Mike Soroka,5400,Was,P,3,rel,previously_reserved,,5,0,3,0,24.0,14,6,13,6.75,1.625
