@@ -431,6 +431,34 @@ test_that("T-22: All years zero variance produces NA denominator with warnings",
   expect_true(is.na(result$denominators[["HR"]]))
 })
 
+# T-22b: Category with all-NA values for one year -> zero valid rows -> no_rows_for_year warning
+test_that("T-22b: Year with all-NA category values emits no_rows_for_year warning; denominator from valid year", {
+  # AVG is all NA for 2022 (simulating a league that did not score AVG in that year).
+  # 2023 has valid AVG values, so the denominator should be finite and come from 2023.
+  ts <- data.frame(
+    year    = c(2022L, 2022L, 2022L, 2023L, 2023L, 2023L),
+    team_id = c("A", "B", "C", "A", "B", "C"),
+    HR      = c(150L, 180L, 210L, 170L, 195L, 220L),
+    AVG     = c(NA_real_, NA_real_, NA_real_, 0.265, 0.280, 0.295)
+  )
+  h <- list(team_season = ts)
+
+  expect_warning(
+    result <- sgp_denominators(
+      h,
+      scoring_categories = c("HR", "AVG"),
+      exclude_years      = integer(0)
+    ),
+    class = "rotostats_warning_empty_category_year"
+  )
+
+  # Function must not error; denominators must be returned.
+  expect_true(!is.null(result$denominators))
+
+  # HR has valid data in both years -> finite denominator.
+  expect_true(is.finite(result$denominators[["HR"]]))
+})
+
 # T-23: NA in category column — rows excluded, warning emitted
 test_that("T-23: NA in category emits warning and still returns finite denominator", {
   ts <- data.frame(

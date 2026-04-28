@@ -58,3 +58,6 @@ rsconnect/
 
 # Git worktrees
 .worktrees/
+
+# Build cache for team-season pipeline (regenerable; do not commit)
+data-raw/sources/cache/

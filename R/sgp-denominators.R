@@ -760,6 +760,24 @@ sgp_denominators <- function(
         n_y <- nrow(ts_y)
         n_y_i <- as.integer(n_y)
 
+        # Zero-rows guard: no valid data for this category in this year.
+        if (n_y == 0L) {
+          cli::cli_warn(
+            "Category {.val {cat}} has no valid rows for year {.val {y}}. Slope set to NA.",
+            class = "rotostats_warning_empty_category_year"
+          )
+          return(list(
+            year = y,
+            category = cat,
+            n_teams = 0L,
+            slope = NA_real_,
+            r_squared = NA_real_,
+            raw_weight = 0,
+            gap = NA_real_,
+            standings_pos_source = NA_character_
+          ))
+        }
+
         # Determine standings position source.
         pts_col <- paste0(cat, "_PTS")
         if (pts_col %in% names(ts_y)) {
