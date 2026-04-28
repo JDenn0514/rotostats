@@ -115,3 +115,34 @@
   .validate_tw_ts_columns(df, .tw_ts_pitcher_required_cols, path)
   df
 }
+
+.tw_ts_valid_sections <- c(
+  "active", "reserved", "previously_active", "previously_reserved"
+)
+
+.tw_ts_kept_sections <- c("active", "previously_active")
+
+#' Filter rows to roster sections that contributed to team standings totals.
+#'
+#' Keeps `active` and `previously_active`. Drops `reserved` and
+#' `previously_reserved`. See spec section "Section selection" for rationale.
+#'
+#' @param df Tibble with a `roster_section` column.
+#' @return Tibble filtered to kept sections.
+#' @keywords internal
+#' @noRd
+.filter_active_sections <- function(df) {
+  unknown <- setdiff(unique(df$roster_section), .tw_ts_valid_sections)
+  if (length(unknown) > 0L) {
+    valid <- .tw_ts_valid_sections
+    cli::cli_abort(
+      c(
+        "Unknown {.code roster_section} value(s).",
+        "i" = "Unknown: {.val {unknown}}",
+        "i" = "Expected one of: {.val {valid}}"
+      ),
+      class = "rotostats_error_team_season_unknown_section"
+    )
+  }
+  df[df$roster_section %in% .tw_ts_kept_sections, , drop = FALSE]
+}

@@ -47,3 +47,21 @@ test_that(".read_tw_batters errors if a required column is missing", {
     class = "rotostats_error_team_season_missing_column"
   )
 })
+
+test_that(".filter_active_sections keeps active and previously_active only", {
+  df <- tibble::tibble(
+    roster_section = c("active", "reserved", "previously_active",
+                       "previously_reserved", "active"),
+    val = 1:5
+  )
+  out <- rotostats:::.filter_active_sections(df)
+  expect_equal(out$val, c(1L, 3L, 5L))
+})
+
+test_that(".filter_active_sections errors on unknown section value", {
+  df <- tibble::tibble(roster_section = c("active", "weird"))
+  expect_error(
+    rotostats:::.filter_active_sections(df),
+    class = "rotostats_error_team_season_unknown_section"
+  )
+})
