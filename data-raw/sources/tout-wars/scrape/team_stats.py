@@ -56,3 +56,26 @@ PITCHER_COLUMNS = [
     "position", "salary", "status", "roster_section", "eligibility",
     "g", "w", "l", "sv", "ip", "bb", "hr", "so", "era", "whip",
 ]
+
+
+def parse_ip(text: str) -> float:
+    """Parse innings-pitched in either X.Y baseball convention or plain decimal.
+
+    .1 → 1/3 inning, .2 → 2/3 inning. Anything else parses as a normal float.
+    Empty / non-numeric input returns 0.0.
+    """
+    s = (text or "").strip()
+    if not s:
+        return 0.0
+    try:
+        whole_str, _, frac_str = s.partition(".")
+        whole = int(whole_str) if whole_str else 0
+        if frac_str == "" or frac_str == "0":
+            return float(whole)
+        if frac_str == "1":
+            return whole + 1 / 3
+        if frac_str == "2":
+            return whole + 2 / 3
+        return float(s)
+    except ValueError:
+        return 0.0
