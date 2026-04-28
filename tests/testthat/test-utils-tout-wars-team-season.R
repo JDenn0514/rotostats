@@ -125,6 +125,24 @@ test_that(".aggregate_team_pitching sums IP and reconstructs ER/H/BB", {
   expect_equal(out$h_pit_eq, 409L)
 })
 
+test_that(".aggregate_team_pitching drops ip=0 contamination rows", {
+  pit <- tibble::tibble(
+    year = 2024L, league = "al", team = "Owner1",
+    roster_section = "active",
+    ip   = c(200.0, 150.0, 0.0),    # third row is non-pitcher contamination
+    bb   = c( 50L,   40L, 42L),     # bb=42 from a position player
+    era  = c(3.60, 4.20, 0.00),
+    whip = c(1.20, 1.30, 0.00)
+  )
+  out <- rotostats:::.aggregate_team_pitching(pit)
+  expect_equal(out$ip, 350.0)
+  expect_equal(out$bb_pit, 90L)        # 42 BB from contamination row excluded
+  # ER_eq = round(200*3.60/9) + round(150*4.20/9) = 80 + 70 = 150
+  expect_equal(out$er_eq, 150L)
+  # h_pit_eq = (round(200*1.20) - 50) + (round(150*1.30) - 40) = 190 + 155 = 345
+  expect_equal(out$h_pit_eq, 345L)
+})
+
 test_that(".compute_team_residuals computes joined rates and tolerance flag", {
   joined <- tibble::tibble(
     year = 2024L, league = "al", team_id = "OWNER1",
@@ -156,6 +174,21 @@ test_that(".compute_team_residuals flags rows exceeding tolerance", {
   out <- rotostats:::.compute_team_residuals(joined)
   expect_true(out$flagged)
   expect_gt(abs(out$avg_resid), 0.005)
+})
+
+test_that(".compute_team_residuals NAs avg/obp when h_bat is 0 (missing source H)", {
+  joined <- tibble::tibble(
+    year = 2012L, league = "al", team_id = "OWNER1",
+    ab = 5500L, h_bat = 0L, bb_bat = 600L,  # source page lacked H column
+    ip = 1450, er_eq = 600L, h_pit_eq = 1300L, bb_pit = 450L,
+    AVG = 0.260, OBP = NA_real_,
+    ERA = 600 * 9 / 1450,
+    WHIP = (1300 + 450) / 1450
+  )
+  out <- rotostats:::.compute_team_residuals(joined)
+  expect_true(is.na(out$avg_resid))
+  expect_true(is.na(out$obp_resid))
+  expect_false(out$flagged)
 })
 
 test_that(".compute_team_residuals handles NA standings values gracefully", {
