@@ -111,3 +111,24 @@ def parse_player_name_and_id(name_cell: Tag) -> tuple[str, str]:
     raw_name = ANNOTATION_RE.sub("", link.get_text()).lstrip("#").strip()
     m = PLAYER_ID_RE.search(link["href"])
     return (raw_name, m.group(1) if m else "")
+
+
+def section_label_from_heading(heading_text: str) -> str | None:
+    """Map a section-heading string to one of four labels.
+
+    Returns None when the heading doesn't match any known section.
+    Ordering of checks matters: 'previously' must be tested before plain
+    'reserved'/'active'.
+    """
+    s = (heading_text or "").strip().lower()
+    if not s:
+        return None
+    if "previously active" in s:
+        return "previously_active"
+    if "previously reserved" in s:
+        return "previously_reserved"
+    if "reserved" in s:
+        return "reserved"
+    if "active" in s:
+        return "active"
+    return None

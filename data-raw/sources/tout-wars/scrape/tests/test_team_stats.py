@@ -83,3 +83,19 @@ def test_parse_player_name_and_id_no_link():
 def test_parse_player_name_and_id_blank():
     cell = _td("")
     assert team_stats.parse_player_name_and_id(cell) == ("", "")
+
+
+@pytest.mark.parametrize("heading,expected", [
+    ("Active Hitters",                          "active"),
+    ("Active Pitchers",                         "active"),
+    ("Reserved Hitters",                        "reserved"),
+    ("Reserved Pitchers",                       "reserved"),
+    ("stats of previously active hitters",      "previously_active"),
+    ("Stats Of Previously Active Pitchers",     "previously_active"),
+    ("stats of previously reserved hitters",    "previously_reserved"),
+    ("STATS OF PREVIOUSLY RESERVED PITCHERS",   "previously_reserved"),
+    ("Random unrelated heading",                None),
+    ("",                                        None),
+])
+def test_section_label_from_heading(heading, expected):
+    assert team_stats.section_label_from_heading(heading) == expected
