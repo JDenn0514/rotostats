@@ -1,21 +1,67 @@
 year,league,team,player_name,player_id,mlb_team,position,salary,status,roster_section,eligibility,ab,g,r,hr,rbi,sb,so,bb,avg,obp,slg,gp_dh,gp_c,gp_1b,gp_2b,gp_3b,gp_ss,gp_of
-2021,nl,Lenny Melnick,Josh Bell,3669,Was,1B,22,act,active,"1B,OF,CI,SW",478,138,71,27,86,0,94,62,0.353,0.542,0.49,5,0,119,0,0,0,10
+2021,nl,Fred Zinkie,Max Muncy,4851,LAD,1B,25,act,active,"3B,2B,1B,SW,CI,MI",497,144,95,36,94,2,120,83,0.368,0.429,0.527,1,0,122,39,7,0,0
+2021,nl,Fred Zinkie,Francisco Lindor,3668,NYM,MI,33,act,active,"SS,SW,MI",452,126,73,20,63,10,96,58,0.322,0.333,0.412,0,0,0,0,0,125,0
+2021,nl,Fred Zinkie,Frank Schwindel,6357,ChC,CI,150,act,active,1B,200,49,40,12,35,2,33,15,0.389,0.321,0.62,8,0,52,0,0,0,0
+2021,nl,Fred Zinkie,Freddy Galvis,3005,FA,2B,150,act,active,"SS,3B,MI,SW,2B",107,32,17,5,14,0,19,9,0.292,0.25,0.393,0,0,1,2,19,82,0
+2021,nl,Fred Zinkie,Brandon Crawford,3051,SF,SS,4,act,active,"SS,MI,SW",483,138,79,24,90,11,105,56,0.373,0.32,0.522,0,0,0,0,0,135,0
+2021,nl,Fred Zinkie,Evan Longoria,1489,SF,3B,7,act,active,"3B,SW,CI",174,52,31,9,34,1,45,21,0.338,0.095,0.483,0,0,0,0,78,0,0
+2021,nl,Fred Zinkie,Mike Yastrzemski,5314,SF,OF,20,act,active,"OF,SW",389,117,64,21,65,3,102,41,0.312,0.421,0.455,0,0,0,0,0,0,127
+2021,nl,Fred Zinkie,Tommy Edman,6447,StL,OF,18,act,active,"2B,OF,MI,3B,CI,SW,SS",641,159,91,11,56,30,95,38,0.308,0.278,0.387,0,0,0,130,0,4,41
+2021,nl,Fred Zinkie,Adam Duvall,4413,Atl,OF,5,act,active,"OF,SW",513,146,67,38,113,5,174,35,0.281,0.133,0.491,0,0,0,0,0,0,137
+2021,nl,Fred Zinkie,Fernando Tatis Jr.,5793,SD,OF,38,act,active,"OF,SS,MI,SW",463,127,94,38,90,24,151,62,0.358,0.238,0.579,1,0,0,0,0,102,24
+2021,nl,Fred Zinkie,Omar Narvaez,5605,Mil,C,3,act,active,"C,SW",388,122,54,11,49,0,83,40,0.342,0.125,0.405,1,111,0,1,0,0,0
+2021,nl,Fred Zinkie,Keibert Ruiz,6179,Was,C,60,act,active,"C,SW",67,19,7,2,13,0,4,6,0.324,0.353,0.373,0,23,0,0,0,0,0
+2021,nl,Fred Zinkie,David Bote,6286,ChC,UT,3,act,active,"3B,2B,SW,MI,CI",275,92,30,8,34,0,70,26,0.278,0.333,0.327,3,0,0,61,24,0,0
+2021,nl,Fred Zinkie,Andrew Romine,2457,ChC,MI,25,rel,previously_active,,18,6,0,0,0,0,8,1,0.158,0.0,0.111,0,0,0,2,0,16,0
+2021,nl,Fred Zinkie,Keston Hiura,6100,Mil,MI,20,trd,previously_active,,79,26,8,1,5,1,32,6,0.247,0.0,0.266,0,0,49,7,0,0,1
+2021,nl,Fred Zinkie,Andy Burns,4863,LAD,CI,11,rel,previously_active,,7,7,2,0,0,0,1,2,0.5,0.0,0.429,0,0,2,3,2,0,0
+2021,nl,Fred Zinkie,Garrett Cooper,6182,Mia,CI,3,rel,previously_active,,211,69,26,8,31,1,67,28,0.369,0.0,0.436,2,0,19,0,0,0,41
+2021,nl,Fred Zinkie,Ozzie Albies,5099,Atl,2B,27,trd,previously_active,,349,90,55,15,63,13,70,30,0.322,0.0,0.496,0,0,0,156,0,0,0
+2021,nl,Fred Zinkie,Jason Vosler,6402,SF,3B,0,rel,previously_active,,4,2,2,0,1,0,0,1,0.4,0.0,0.5,1,0,3,3,19,0,3
+2021,nl,Fred Zinkie,Wilmer Difo,5044,FA,3B,10,res,previously_active,"SS,2B,SW,MI,OF,3B",8,5,2,0,1,0,2,2,0.4,0.0,0.25,0,0,0,28,18,4,12
+2021,nl,Fred Zinkie,Austin Slater,6014,SF,OF,2,res,previously_active,"OF,SW",256,118,34,10,28,13,84,28,0.312,0.0,0.395,1,0,0,0,0,0,118
+2021,nl,Fred Zinkie,Jake Marisnick,3197,SD,OF,0,rel,previously_active,,9,6,1,0,0,1,4,2,0.364,0.0,0.222,0,0,0,0,0,0,72
+2021,nl,Fred Zinkie,Odubel Herrera,5084,Phi,OF,2,trd,previously_active,,5,2,0,0,0,0,1,0,0.0,0.0,0.0,0,0,0,0,0,0,120
+2021,nl,Fred Zinkie,Hoy Jun Park,7643,Pit,OF,70,rel,previously_active,,56,17,3,1,5,0,16,4,0.25,0.0,0.304,0,0,0,16,9,8,10
+2021,nl,Fred Zinkie,Zach McKinstry,7128,LAD,OF,112,rel,previously_active,,123,47,14,5,19,1,42,8,0.256,0.0,0.366,0,0,0,20,12,0,36
+2021,nl,Fred Zinkie,Alex Avila,2369,FA,C,1,rel,previously_active,,66,24,4,0,6,0,30,17,0.345,0.0,0.288,0,27,0,1,0,0,0
+2021,nl,Fred Zinkie,Riley Adams,7290,Was,C,22,res,previously_active,C,33,16,3,0,3,0,14,7,0.405,0.0,0.394,0,34,0,0,0,0,0
+2021,nl,Fred Zinkie,Michael Perez,4511,Pit,C,0,rel,previously_active,,21,7,2,1,2,0,5,2,0.174,0.0,0.238,0,58,1,0,0,0,0
+2021,nl,Fred Zinkie,Dom Nunez,5287,Col,C,5,rel,previously_active,,6,2,2,1,1,0,0,2,0.5,0.0,1.17,0,77,1,0,0,0,0
+2021,nl,Fred Zinkie,Matt Joyce,2074,FA,SW,5,rel,previously_active,,1,2,0,0,0,0,0,0,1.0,0.0,2.0,0,0,0,0,0,0,17
+2021,nl,Fred Zinkie,Andrew Knapp,5228,Cin,SW,0,rel,previously_active,,26,11,3,0,4,0,9,2,0.25,0.0,0.192,0,47,6,1,0,0,0
+2021,nl,Fred Zinkie,Wilmer Difo,5044,FA,3B,10,res,reserved,"SS,2B,SW,MI,OF,3B",68,39,8,1,8,1,12,5,0.342,0.375,0.368,0,0,0,28,18,4,12
+2021,nl,Fred Zinkie,Austin Slater,6014,SF,OF,2,res,reserved,"OF,SW",18,11,5,2,4,2,0,0,0.444,0.667,0.833,1,0,0,0,0,0,118
+2021,nl,Fred Zinkie,Riley Adams,7290,Was,C,22,res,reserved,C,5,5,0,0,0,0,4,4,0.5,0.4,0.0,0,34,0,0,0,0,0
+2021,nl,Fred Zinkie,Keston Hiura,6100,Mil,MI,20,trd,previously_reserved,,42,15,4,2,5,0,21,3,0.196,0.0,0.333,0,0,49,7,0,0,1
+2021,nl,Fred Zinkie,Garrett Cooper,6182,Mia,CI,3,rel,previously_reserved,,4,2,4,1,2,0,1,2,0.833,0.0,2.0,2,0,19,0,0,0,41
+2021,nl,Fred Zinkie,Evan Longoria,1489,SF,3B,7,act,previously_reserved,"3B,SW,CI",10,5,1,0,0,0,3,1,0.273,0.0,0.2,0,0,0,0,78,0,0
+2021,nl,Fred Zinkie,Odubel Herrera,5084,Phi,OF,2,trd,previously_reserved,,14,5,0,0,0,0,3,1,0.133,0.0,0.071,0,0,0,0,0,0,120
+2021,nl,Fred Zinkie,Jake Marisnick,3197,SD,OF,0,rel,previously_reserved,,4,2,1,0,1,0,3,0,0.25,0.0,0.25,0,0,0,0,0,0,72
+2021,nl,Fred Zinkie,Fernando Tatis Jr.,5793,SD,OF,38,act,previously_reserved,"OF,SS,MI,SW",15,3,5,4,7,1,2,0,0.6,0.0,1.6,1,0,0,0,0,102,24
+2021,nl,Fred Zinkie,Zach McKinstry,7128,LAD,OF,112,rel,previously_reserved,,6,3,0,0,0,0,3,0,0.0,0.0,0.0,0,0,0,20,12,0,36
+2021,nl,Fred Zinkie,Alex Avila,2369,FA,C,1,rel,previously_reserved,,1,1,0,0,0,0,0,0,0.0,0.0,0.0,0,27,0,1,0,0,0
+2021,nl,Fred Zinkie,Omar Narvaez,5605,Mil,C,3,act,previously_reserved,"C,SW",3,1,0,0,0,0,1,1,0.25,0.0,0.0,1,111,0,1,0,0,0
+2021,nl,Fred Zinkie,Keibert Ruiz,6179,Was,C,60,act,previously_reserved,"C,SW",14,4,2,0,1,0,0,0,0.467,0.0,0.5,0,23,0,0,0,0,0
+2021,nl,Fred Zinkie,David Bote,6286,ChC,UT,3,act,previously_reserved,"3B,2B,SW,MI,CI",16,5,2,0,1,0,3,1,0.235,0.0,0.375,3,0,0,61,24,0,0
+2021,nl,Fred Zinkie,Matt Joyce,2074,FA,SW,5,rel,previously_reserved,,2,2,0,0,0,0,0,2,0.5,0.0,0.0,0,0,0,0,0,0,17
 2021,nl,Lenny Melnick,Austin Riley,5688,Atl,CI,17,act,active,"3B,SW,CI,1B",590,160,91,33,107,0,168,52,0.367,0.318,0.531,0,0,10,0,156,0,1
-2021,nl,Lenny Melnick,Garrett Hampson,6277,Col,MI,17,act,active,"OF,SS,2B,MI,SW",453,147,69,11,33,17,118,33,0.289,0.071,0.38,0,0,0,47,2,5,91
-2021,nl,Lenny Melnick,Jonathan Villar,3345,FA,2B,10,act,active,"2B,SS,3B,SW,MI",454,142,63,18,42,14,132,46,0.322,0.304,0.416,0,0,0,9,97,26,0
-2021,nl,Lenny Melnick,Javier Baez,3804,Det,SS,20,act,active,"SS,MI,SW,2B",502,138,80,31,87,18,184,28,0.319,0.3,0.494,0,0,0,35,0,100,0
-2021,nl,Lenny Melnick,Manny Machado,3216,SD,3B,30,act,active,"3B,CI,SW",564,153,92,28,106,12,102,63,0.347,0.286,0.489,3,0,0,0,144,0,0
+2021,nl,Lenny Melnick,Josh Bell,3669,Was,1B,22,act,active,"1B,CI,OF,SW",478,138,71,27,86,0,94,62,0.353,0.542,0.49,5,0,119,0,0,0,10
+2021,nl,Lenny Melnick,Garrett Hampson,6277,Col,MI,17,act,active,"OF,2B,SS,SW,MI",453,147,69,11,33,17,118,33,0.289,0.071,0.38,0,0,0,47,2,5,91
+2021,nl,Lenny Melnick,Jonathan Villar,3345,FA,2B,10,act,active,"2B,SS,MI,3B,SW",454,142,63,18,42,14,132,46,0.322,0.304,0.416,0,0,0,9,97,26,0
+2021,nl,Lenny Melnick,Javier Baez,3804,Det,SS,20,act,active,"SS,MI,2B,SW",502,138,80,31,87,18,184,28,0.319,0.3,0.494,0,0,0,35,0,100,0
+2021,nl,Lenny Melnick,Manny Machado,3216,SD,3B,30,act,active,"3B,SW,CI",564,153,92,28,106,12,102,63,0.347,0.286,0.489,3,0,0,0,144,0,0
 2021,nl,Lenny Melnick,Odubel Herrera,5084,Phi,OF,2,act,active,OF,431,117,59,13,51,6,73,28,0.319,0.261,0.432,0,0,0,0,0,0,120
-2021,nl,Lenny Melnick,Magneuris Sierra,5233,LAA,OF,12,act,active,"OF,SW",65,39,6,0,1,5,16,5,0.243,0.231,0.215,0,0,0,0,0,0,77
-2021,nl,Lenny Melnick,Michael Conforto,4911,FA,OF,25,act,active,"OF,SW",406,126,52,14,55,1,104,59,0.344,0.455,0.384,1,0,0,0,0,0,118
 2021,nl,Lenny Melnick,LaMonte Wade,5773,SF,OF,21,act,active,"1B,OF,SW",293,92,44,14,49,5,75,26,0.316,0.167,0.468,0,0,31,0,0,0,80
-2021,nl,Lenny Melnick,Victor Caratini,4876,SD,C,11,act,active,"C,1B,SW",37,12,6,1,6,0,9,4,0.39,0.4,0.432,0,101,5,0,2,0,0
-2021,nl,Lenny Melnick,Tyler Stephenson,5388,Cin,C,4,act,active,"C,1B,SW",296,111,52,9,41,0,62,35,0.372,0.333,0.446,0,78,23,0,0,0,1
+2021,nl,Lenny Melnick,Michael Conforto,4911,FA,OF,25,act,active,"OF,SW",406,126,52,14,55,1,104,59,0.344,0.455,0.384,1,0,0,0,0,0,118
+2021,nl,Lenny Melnick,Magneuris Sierra,5233,LAA,OF,12,act,active,"OF,SW",65,39,6,0,1,5,16,5,0.243,0.231,0.215,0,0,0,0,0,0,77
+2021,nl,Lenny Melnick,Tyler Stephenson,5388,Cin,C,4,act,active,"C,SW,1B",296,111,52,9,41,0,62,35,0.372,0.333,0.446,0,78,23,0,0,0,1
+2021,nl,Lenny Melnick,Victor Caratini,4876,SD,C,11,act,active,"C,SW,1B",37,12,6,1,6,0,9,4,0.39,0.4,0.432,0,101,5,0,2,0,0
 2021,nl,Lenny Melnick,Lewis Brinson,4446,FA,UT,7,act,active,"OF,SW",192,55,19,6,25,1,45,11,0.26,0.222,0.359,0,0,0,0,0,0,79
 2021,nl,Lenny Melnick,Nicholas Castellanos,3217,FA,SW,24,act,active,"OF,SW",515,134,92,33,98,3,113,39,0.365,0.316,0.581,1,0,0,0,0,0,135
-2021,nl,Lenny Melnick,Ender Inciarte,4264,NYY,OF,2,rel,previously_active,,61,45,8,2,7,1,19,5,0.239,0.0,0.311,0,0,0,0,0,0,40
-2021,nl,Lenny Melnick,Andrew Stevenson,5723,Was,OF,1,res,previously_active,"OF,SW",132,72,16,3,13,0,43,7,0.261,0.0,0.303,0,0,0,0,0,0,62
 2021,nl,Lenny Melnick,Mike Yastrzemski,5314,SF,OF,20,trd,previously_active,,79,22,11,4,6,1,29,10,0.303,0.0,0.468,0,0,0,0,0,0,127
+2021,nl,Lenny Melnick,Andrew Stevenson,5723,Was,OF,1,res,previously_active,"OF,SW",132,72,16,3,13,0,43,7,0.261,0.0,0.303,0,0,0,0,0,0,62
+2021,nl,Lenny Melnick,Ender Inciarte,4264,NYY,OF,2,rel,previously_active,,61,45,8,2,7,1,19,5,0.239,0.0,0.311,0,0,0,0,0,0,40
 2021,nl,Lenny Melnick,Stephen Vogt,3569,FA,C,1,dis,previously_active,"C,SW",210,78,24,7,25,0,56,26,0.283,0.0,0.333,0,63,2,0,0,0,0
 2021,nl,Lenny Melnick,Dom Nunez,5287,Col,C,0,rel,previously_active,,84,31,11,1,11,0,39,15,0.25,0.0,0.238,0,77,1,0,0,0,0
 2021,nl,Lenny Melnick,Josh VanMeter,5912,Ari,UT,0,rel,previously_active,,32,18,3,1,5,0,13,5,0.282,0.0,0.312,0,0,1,52,25,0,2
@@ -23,53 +69,53 @@ year,league,team,player_name,player_id,mlb_team,position,salary,status,roster_se
 2021,nl,Lenny Melnick,Matt Carpenter,3510,FA,SW,1,rel,previously_active,,89,54,8,3,13,0,36,15,0.287,0.0,0.292,2,0,14,34,6,0,0
 2021,nl,Lenny Melnick,Andrew Stevenson,5723,Was,OF,1,res,reserved,"OF,SW",61,37,6,2,10,1,19,6,0.357,0.4,0.41,0,0,0,0,0,0,62
 2021,nl,Lenny Melnick,Stephen Vogt,3569,FA,C,1,dis,reserved,"C,SW",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,63,2,0,0,0,0
-2021,nl,Lenny Melnick,Josh Bell,3669,Was,1B,22,act,previously_reserved,"1B,OF,CI,SW",20,6,4,0,2,0,7,3,0.208,0.0,0.15,5,0,119,0,0,0,10
-2021,nl,Lenny Melnick,LaMonte Wade,5773,SF,OF,21,act,previously_reserved,"1B,OF,SW",6,3,2,1,2,0,1,1,0.429,0.0,0.833,0,0,31,0,0,0,80
+2021,nl,Lenny Melnick,Josh Bell,3669,Was,1B,22,act,previously_reserved,"1B,CI,OF,SW",20,6,4,0,2,0,7,3,0.208,0.0,0.15,5,0,119,0,0,0,10
 2021,nl,Lenny Melnick,Ender Inciarte,4264,NYY,OF,2,rel,previously_reserved,,18,7,3,0,3,0,3,2,0.4,0.0,0.333,0,0,0,0,0,0,40
 2021,nl,Lenny Melnick,Magneuris Sierra,5233,LAA,OF,12,act,previously_reserved,"OF,SW",13,5,2,0,3,1,6,0,0.385,0.0,0.462,0,0,0,0,0,0,77
-2021,nl,Lenny Melnick,Tyler Stephenson,5388,Cin,C,4,act,previously_reserved,"C,1B,SW",54,21,4,1,4,0,13,6,0.328,0.0,0.352,0,78,23,0,0,0,1
+2021,nl,Lenny Melnick,LaMonte Wade,5773,SF,OF,21,act,previously_reserved,"1B,OF,SW",6,3,2,1,2,0,1,1,0.429,0.0,0.833,0,0,31,0,0,0,80
+2021,nl,Lenny Melnick,Tyler Stephenson,5388,Cin,C,4,act,previously_reserved,"C,SW,1B",54,21,4,1,4,0,13,6,0.328,0.0,0.352,0,78,23,0,0,0,1
 2021,nl,Lenny Melnick,Dom Nunez,5287,Col,C,0,rel,previously_reserved,,74,25,10,4,13,0,29,9,0.313,0.0,0.486,0,77,1,0,0,0,0
 2021,nl,Lenny Melnick,Josh VanMeter,5912,Ari,UT,0,rel,previously_reserved,,37,19,7,0,2,0,10,6,0.279,0.0,0.216,0,0,1,52,25,0,2
 2021,nl,Lenny Melnick,Matt Carpenter,3510,FA,SW,1,rel,previously_reserved,,71,40,7,0,8,2,25,11,0.388,0.0,0.366,2,0,14,34,6,0,0
 2021,nl,Lenny Melnick,Nick Maton,7179,Phi,SW,35,rel,previously_reserved,,14,8,0,0,1,0,6,0,0.143,0.0,0.214,0,0,0,21,0,20,0
 2021,nl,Lenny Melnick,Nicholas Castellanos,3217,FA,SW,24,act,previously_reserved,"OF,SW",16,4,3,1,2,0,8,2,0.278,0.0,0.437,1,0,0,0,0,0,135
-2021,nl,Phil Hertz,Tommy La Stella,4099,SF,MI,12,act,active,"3B,2B,MI,SW,CI,1B",204,71,24,7,26,0,25,16,0.311,0.25,0.422,2,0,0,54,5,0,0
+2021,nl,Phil Hertz,Peter Alonso,6132,NYM,1B,27,act,active,"1B,CI,SW",561,153,81,37,94,3,127,60,0.344,0.414,0.519,3,0,149,0,0,0,0
+2021,nl,Phil Hertz,Tommy La Stella,4099,SF,MI,12,act,active,"3B,2B,SW,CI,1B,MI",204,71,24,7,26,0,25,16,0.311,0.25,0.422,2,0,0,54,5,0,0
 2021,nl,Phil Hertz,Ryan Zimmerman,1638,FA,CI,6,act,active,1B,166,76,13,7,23,0,49,10,0.264,0.417,0.41,3,0,54,0,0,0,0
-2021,nl,Phil Hertz,Peter Alonso,6132,NYM,1B,27,act,active,"1B,SW,CI",561,153,81,37,94,3,127,60,0.344,0.414,0.519,3,0,149,0,0,0,0
-2021,nl,Phil Hertz,Jeff McNeil,6617,NYM,2B,22,act,active,"2B,OF,MI,CI,SW,3B",386,121,48,7,35,3,58,29,0.317,0.333,0.358,2,0,0,80,2,0,28
-2021,nl,Phil Hertz,Chris Taylor,4604,LAD,SS,18,act,active,"OF,SS,2B,3B,MI,SW",507,148,92,20,73,13,167,63,0.344,0.429,0.438,0,0,0,46,11,23,89
+2021,nl,Phil Hertz,Jeff McNeil,6617,NYM,2B,22,act,active,"2B,OF,SW,3B,MI,CI",386,121,48,7,35,3,58,29,0.317,0.333,0.358,2,0,0,80,2,0,28
+2021,nl,Phil Hertz,Chris Taylor,4604,LAD,SS,18,act,active,"OF,SS,2B,SW,3B,MI",507,148,92,20,73,13,167,63,0.344,0.429,0.438,0,0,0,46,11,23,89
 2021,nl,Phil Hertz,Justin Turner,2415,LAD,3B,17,act,active,"3B,SW,CI",533,151,87,27,87,3,98,61,0.361,0.45,0.471,4,0,0,0,143,0,0
-2021,nl,Phil Hertz,Lane Thomas,6727,Was,OF,77,act,active,"OF,SW",163,39,29,7,25,3,45,22,0.328,0.276,0.454,0,0,0,2,0,0,63
 2021,nl,Phil Hertz,David Peralta,4980,Ari,OF,11,act,active,"OF,SW",487,150,57,8,63,2,92,46,0.325,0.357,0.402,1,0,0,0,0,0,137
-2021,nl,Phil Hertz,Starling Marte,2908,NYM,OF,26,act,active,"OF,SW",467,120,89,12,55,47,99,43,0.381,0.286,0.456,0,0,0,0,0,0,119
 2021,nl,Phil Hertz,Lorenzo Cain,2002,Mil,OF,138,act,active,"OF,SW",116,37,18,5,19,6,21,11,0.323,0.25,0.457,0,0,0,0,0,0,70
+2021,nl,Phil Hertz,Lane Thomas,6727,Was,OF,77,act,active,"OF,SW",163,39,29,7,25,3,45,22,0.328,0.276,0.454,0,0,0,2,0,0,63
+2021,nl,Phil Hertz,Starling Marte,2908,NYM,OF,26,act,active,"OF,SW",467,120,89,12,55,47,99,43,0.381,0.286,0.456,0,0,0,0,0,0,119
 2021,nl,Phil Hertz,Buster Posey,2187,SF,C,8,act,active,C,395,113,68,18,56,0,87,56,0.39,0.478,0.499,1,106,0,0,0,0,0
 2021,nl,Phil Hertz,Carson Kelly,4512,Ari,C,8,act,active,"C,SW",301,97,40,13,46,0,72,42,0.342,0.375,0.415,0,91,0,0,0,0,0
 2021,nl,Phil Hertz,Willy Adames,5094,Mil,UT,795,act,active,"SS,SW,MI",359,97,60,20,56,4,104,45,0.363,0.273,0.524,2,0,0,0,0,136,0
 2021,nl,Phil Hertz,Brandon Nimmo,3778,NYM,SW,19,act,active,"OF,SW",320,92,50,8,28,5,78,54,0.404,0.276,0.441,0,0,0,0,0,0,88
-2021,nl,Phil Hertz,Travis Shaw,4819,FA,1B,1,trd,previously_active,,173,54,15,6,26,0,48,19,0.281,0.0,0.335,4,0,31,0,48,0,0
-2021,nl,Phil Hertz,Matt Duffy,4893,FA,MI,24,res,previously_active,"3B,2B,SS",157,50,28,5,19,6,37,15,0.324,0.0,0.376,0,0,2,21,56,5,3
-2021,nl,Phil Hertz,Cole Tucker,5101,Pit,MI,63,rel,previously_active,,30,11,3,0,2,0,7,1,0.219,0.0,0.267,0,0,1,9,1,17,14
-2021,nl,Phil Hertz,Evan Longoria,1489,SF,CI,7,trd,previously_active,,69,24,13,4,12,0,20,13,0.39,0.0,0.522,0,0,0,0,78,0,0
 2021,nl,Phil Hertz,Connor Joe,5311,Col,CI,12,rel,previously_active,,37,16,1,0,4,0,10,5,0.333,0.0,0.297,3,0,14,0,0,0,32
+2021,nl,Phil Hertz,Cole Tucker,5101,Pit,MI,63,rel,previously_active,,30,11,3,0,2,0,7,1,0.219,0.0,0.267,0,0,1,9,1,17,14
+2021,nl,Phil Hertz,Travis Shaw,4819,FA,1B,1,trd,previously_active,,173,54,15,6,26,0,48,19,0.281,0.0,0.335,4,0,31,0,48,0,0
+2021,nl,Phil Hertz,Evan Longoria,1489,SF,CI,7,trd,previously_active,,69,24,13,4,12,0,20,13,0.39,0.0,0.522,0,0,0,0,78,0,0
+2021,nl,Phil Hertz,Matt Duffy,4893,FA,MI,24,res,previously_active,"3B,SS,2B",157,50,28,5,19,6,37,15,0.324,0.0,0.376,0,0,2,21,56,5,3
 2021,nl,Phil Hertz,Keston Hiura,6100,Mil,2B,20,rel,previously_active,,46,16,4,1,8,1,21,5,0.333,0.0,0.348,0,0,49,7,0,0,1
 2021,nl,Phil Hertz,Orlando Arcia,4503,Atl,SS,113,rel,previously_active,,46,17,4,2,9,1,14,3,0.24,0.0,0.348,0,0,0,1,3,5,14
+2021,nl,Phil Hertz,Abraham Almonte,4385,Mil,OF,17,rel,previously_active,,128,46,16,4,17,0,31,18,0.32,0.0,0.398,0,0,0,0,0,0,42
 2021,nl,Phil Hertz,Derek Fisher,4917,Min,OF,5,rel,previously_active,,1,1,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,0,0,0,3
 2021,nl,Phil Hertz,Nick Senzel,5674,Cin,OF,19,rel,previously_active,,111,36,18,1,8,2,16,12,0.323,0.0,0.315,0,0,0,8,3,0,29
-2021,nl,Phil Hertz,Abraham Almonte,4385,Mil,OF,17,rel,previously_active,,128,46,16,4,17,0,31,18,0.32,0.0,0.398,0,0,0,0,0,0,42
 2021,nl,Phil Hertz,Tomas Nido,5883,NYM,C,2,rel,previously_active,,74,26,10,2,8,0,19,2,0.312,0.0,0.419,0,52,0,0,1,0,0
 2021,nl,Phil Hertz,Michael Perez,4511,Pit,C,2,rel,previously_active,,11,5,0,0,0,0,2,0,0.0,0.0,0.0,0,58,1,0,0,0,0
-2021,nl,Phil Hertz,Andy Young,6834,Ari,UT,23,rel,previously_active,,13,6,2,0,1,0,6,2,0.375,0.0,0.462,1,0,0,21,2,0,1
-2021,nl,Phil Hertz,Isan Diaz,5464,Mia,UT,14,rel,previously_active,,19,6,2,0,1,0,9,6,0.4,0.0,0.263,0,0,0,35,37,0,0
 2021,nl,Phil Hertz,Ha-seong Kim,7554,SD,UT,33,res,previously_active,"SS,2B,3B",153,69,16,5,24,4,39,15,0.281,0.0,0.386,0,0,0,21,23,35,0
+2021,nl,Phil Hertz,Isan Diaz,5464,Mia,UT,14,rel,previously_active,,19,6,2,0,1,0,9,6,0.4,0.0,0.263,0,0,0,35,37,0,0
+2021,nl,Phil Hertz,Andy Young,6834,Ari,UT,23,rel,previously_active,,13,6,2,0,1,0,6,2,0.375,0.0,0.462,1,0,0,21,2,0,1
 2021,nl,Phil Hertz,Jorge Mateo,5119,Bal,SW,0,rel,previously_active,,57,33,7,1,4,3,16,0,0.175,0.0,0.246,0,0,0,19,9,18,24
 2021,nl,Phil Hertz,Mason Williams,3639,FA,SW,24,rel,previously_active,,33,17,3,1,1,0,9,4,0.297,0.0,0.333,0,0,0,0,0,0,16
 2021,nl,Phil Hertz,Brian O'Grady,6752,SD,SW,22,rel,previously_active,,9,6,2,0,0,0,4,2,0.182,0.0,0.0,0,0,1,0,0,0,16
-2021,nl,Phil Hertz,Matt Duffy,4893,FA,MI,24,res,reserved,"3B,2B,SS",107,31,15,0,8,2,22,8,0.41,0.481,0.411,0,0,2,21,56,5,3
+2021,nl,Phil Hertz,Matt Duffy,4893,FA,MI,24,res,reserved,"3B,SS,2B",107,31,15,0,8,2,22,8,0.41,0.481,0.411,0,0,2,21,56,5,3
 2021,nl,Phil Hertz,Ha-seong Kim,7554,SD,UT,33,res,reserved,"SS,2B,3B",51,21,5,2,5,1,16,4,0.268,0.231,0.373,0,0,0,21,23,35,0
-2021,nl,Phil Hertz,Cole Tucker,5101,Pit,MI,63,rel,previously_reserved,,4,3,0,0,0,0,0,1,0.2,0.0,0.0,0,0,1,9,1,17,14
 2021,nl,Phil Hertz,Ryan Zimmerman,1638,FA,CI,6,act,previously_reserved,1B,89,34,14,7,23,0,28,6,0.326,0.0,0.584,3,0,54,0,0,0,0
-2021,nl,Phil Hertz,Tommy La Stella,4099,SF,MI,12,act,previously_reserved,"3B,2B,MI,SW,CI,1B",16,5,2,0,1,0,1,2,0.278,0.0,0.187,2,0,0,54,5,0,0
+2021,nl,Phil Hertz,Tommy La Stella,4099,SF,MI,12,act,previously_reserved,"3B,2B,SW,CI,1B,MI",16,5,2,0,1,0,1,2,0.278,0.0,0.187,2,0,0,54,5,0,0
+2021,nl,Phil Hertz,Cole Tucker,5101,Pit,MI,63,rel,previously_reserved,,4,3,0,0,0,0,0,1,0.2,0.0,0.0,0,0,1,9,1,17,14
 2021,nl,Phil Hertz,Keston Hiura,6100,Mil,2B,20,rel,previously_reserved,,2,2,0,0,0,0,2,0,0.0,0.0,0.0,0,0,49,7,0,0,1
 2021,nl,Phil Hertz,Abraham Almonte,4385,Mil,OF,17,rel,previously_reserved,,7,8,0,0,0,0,3,2,0.222,0.0,0.0,0,0,0,0,0,0,42
 2021,nl,Phil Hertz,Carson Kelly,4512,Ari,C,8,act,previously_reserved,"C,SW",3,1,1,0,0,0,2,2,0.4,0.0,0.0,0,91,0,0,0,0,0
@@ -78,303 +124,303 @@ year,league,team,player_name,player_id,mlb_team,position,salary,status,roster_se
 2021,nl,Phil Hertz,Andy Young,6834,Ari,UT,23,rel,previously_reserved,,17,6,0,0,0,0,6,0,0.118,0.0,0.176,1,0,0,21,2,0,1
 2021,nl,Phil Hertz,Brandon Nimmo,3778,NYM,SW,19,act,previously_reserved,"OF,SW",5,1,1,0,0,0,1,0,0.2,0.0,0.2,0,0,0,0,0,0,88
 2021,nl,Phil Hertz,Jorge Mateo,5119,Bal,SW,0,rel,previously_reserved,,25,19,1,0,1,0,10,2,0.367,0.0,0.36,0,0,0,19,9,18,24
+2021,nl,Derek Carty,Jean Segura,3177,Phi,MI,20,act,active,"3B,2B,CI,MI,SW",212,54,34,8,22,2,30,16,0.325,0.083,0.42,0,0,0,128,0,1,0
 2021,nl,Derek Carty,Joey Votto,345,Cin,1B,16,act,active,"1B,CI,SW",448,129,73,36,99,1,127,77,0.375,0.286,0.562,3,0,123,0,0,0,0
-2021,nl,Derek Carty,Jean Segura,3177,Phi,MI,20,act,active,"3B,2B,CI,SW,MI",212,54,34,8,22,2,30,16,0.325,0.083,0.42,0,0,0,128,0,1,0
-2021,nl,Derek Carty,Lewin Diaz,5694,Mia,CI,31,act,active,"1B,SW,CI",72,19,10,5,8,0,20,4,0.289,0.222,0.514,0,0,32,0,0,0,0
-2021,nl,Derek Carty,Ketel Marte,4847,Ari,2B,23,act,active,"2B,MI,SW,OF",335,88,52,14,50,2,60,31,0.379,0.261,0.537,0,0,0,20,0,0,71
-2021,nl,Derek Carty,Miguel Rojas,4814,Mia,SS,9,act,active,"SS,MI,SW",481,130,66,9,48,13,71,37,0.328,0.235,0.399,0,0,0,0,0,128,0
+2021,nl,Derek Carty,Lewin Diaz,5694,Mia,CI,31,act,active,"1B,CI,SW",72,19,10,5,8,0,20,4,0.289,0.222,0.514,0,0,32,0,0,0,0
+2021,nl,Derek Carty,Ketel Marte,4847,Ari,2B,23,act,active,"2B,SW,OF,MI",335,88,52,14,50,2,60,31,0.379,0.261,0.537,0,0,0,20,0,0,71
+2021,nl,Derek Carty,Miguel Rojas,4814,Mia,SS,9,act,active,"SS,SW,MI",481,130,66,9,48,13,71,37,0.328,0.235,0.399,0,0,0,0,0,128,0
 2021,nl,Derek Carty,Eddy Alvarez,7205,Mia,3B,0,act,active,"2B,MI,SW,3B",20,7,3,0,1,1,6,3,0.375,0.375,0.35,0,0,0,4,17,0,0
-2021,nl,Derek Carty,Tommy Pham,5041,FA,OF,24,act,active,"OF,SW",475,155,74,15,49,14,128,78,0.34,0.222,0.383,3,0,0,0,0,0,124
-2021,nl,Derek Carty,Tyler O'Neill,5423,StL,OF,7,act,active,"OF,SW",470,134,85,31,76,15,164,37,0.353,0.45,0.549,1,0,0,0,0,0,131
-2021,nl,Derek Carty,Bryan Reynolds,6096,Pit,OF,11,act,active,"OF,SW",559,159,93,24,90,5,119,75,0.39,0.619,0.522,1,0,0,0,0,0,153
 2021,nl,Derek Carty,Avisail Garcia,3485,Mia,OF,11,act,active,"OF,SW",461,135,68,29,86,8,121,38,0.33,0.214,0.49,0,0,0,0,0,0,122
+2021,nl,Derek Carty,Tyler O'Neill,5423,StL,OF,7,act,active,"OF,SW",470,134,85,31,76,15,164,37,0.353,0.45,0.549,1,0,0,0,0,0,131
+2021,nl,Derek Carty,Tommy Pham,5041,FA,OF,24,act,active,"OF,SW",475,155,74,15,49,14,128,78,0.34,0.222,0.383,3,0,0,0,0,0,124
+2021,nl,Derek Carty,Bryan Reynolds,6096,Pit,OF,11,act,active,"OF,SW",559,159,93,24,90,5,119,75,0.39,0.619,0.522,1,0,0,0,0,0,153
 2021,nl,Derek Carty,Yan Gomes,3945,ChC,C,3,act,active,"C,SW",340,100,47,12,47,0,77,19,0.298,0.133,0.403,6,92,0,0,0,0,0
 2021,nl,Derek Carty,Tucker Barnhart,3911,Det,C,2,act,active,"C,SW",348,116,41,7,48,0,100,29,0.317,0.167,0.368,0,102,2,0,0,0,0
 2021,nl,Derek Carty,Jorge Soler,3918,FA,UT,787,act,active,"OF,SW",199,52,35,14,32,0,43,28,0.352,0.529,0.528,47,0,0,0,0,0,96
 2021,nl,Derek Carty,Kole Calhoun,3983,Tex,SW,11,act,active,"UT,OF,SW",101,34,10,3,9,1,29,9,0.291,0.2,0.356,3,0,0,0,0,0,39
+2021,nl,Derek Carty,Max Schrock,5731,Cin,CI,0,rel,previously_active,,4,1,2,1,3,0,1,0,0.75,0.0,2.25,0,0,5,8,9,0,24
 2021,nl,Derek Carty,Nick Ahmed,3807,Ari,MI,10,dis,previously_active,"SS,MI,SW",427,127,46,5,38,7,103,33,0.279,0.0,0.34,0,0,0,0,0,127,0
 2021,nl,Derek Carty,Jesus Aguilar,4118,Mia,CI,7,dis,previously_active,"1B,SW,CI",449,132,49,22,93,0,93,46,0.329,0.0,0.459,4,0,113,0,2,0,0
-2021,nl,Derek Carty,Max Schrock,5731,Cin,CI,0,rel,previously_active,,4,1,2,1,3,0,1,0,0.75,0.0,2.25,0,0,5,8,9,0,24
-2021,nl,Derek Carty,Alejo Lopez,7778,Cin,2B,0,rel,previously_active,,7,4,0,0,0,0,1,0,0.0,0.0,0.0,0,0,0,3,3,0,3
 2021,nl,Derek Carty,Wilmer Difo,5044,FA,2B,2,rel,previously_active,,41,21,7,2,6,0,10,5,0.34,0.0,0.463,0,0,0,28,18,4,12
+2021,nl,Derek Carty,Alejo Lopez,7778,Cin,2B,0,rel,previously_active,,7,4,0,0,0,0,1,0,0.0,0.0,0.0,0,0,0,3,3,0,3
 2021,nl,Derek Carty,Tucupita Marcano,6931,Pit,2B,0,rel,previously_active,,9,6,0,0,1,0,1,0,0.222,0.0,0.333,0,0,0,8,1,0,7
 2021,nl,Derek Carty,Jordy Mercer,3871,FA,SS,0,rel,previously_active,,23,8,1,0,0,0,7,0,0.087,0.0,0.13,1,0,2,21,14,6,1
 2021,nl,Derek Carty,Travis Shaw,4819,FA,3B,1,res,previously_active,"1B,3B,SW,CI",5,2,0,0,2,0,3,0,0.2,0.0,0.4,4,0,31,0,48,0,0
 2021,nl,Derek Carty,Phillip Evans,4091,FA,3B,5,rel,previously_active,,186,63,19,5,15,1,49,27,0.313,0.0,0.306,1,0,20,0,14,0,29
 2021,nl,Derek Carty,Daniel Robertson,4577,Min,3B,0,rel,previously_active,,14,8,2,0,0,0,5,2,0.294,0.0,0.214,0,0,3,9,24,8,0
 2021,nl,Derek Carty,Robinson Chirinos,3011,FA,C,2,rel,previously_active,,20,11,3,2,3,0,5,1,0.286,0.0,0.6,1,27,0,2,0,0,0
-2021,nl,Derek Carty,Mickey Moniak,5792,Phi,UT,0,rel,previously_active,,17,6,2,1,3,0,6,1,0.222,0.0,0.353,0,0,0,0,0,0,15
-2021,nl,Derek Carty,Aristides Aquino,5046,Cin,UT,1,res,previously_active,"OF,SW",48,27,7,4,10,1,23,9,0.305,0.0,0.5,0,0,0,0,0,0,71
 2021,nl,Derek Carty,Mike Freeman,4724,FA,UT,0,rel,previously_active,,4,4,0,0,1,0,1,1,0.2,0.0,0.0,1,0,9,2,7,12,4
+2021,nl,Derek Carty,Aristides Aquino,5046,Cin,UT,1,res,previously_active,"OF,SW",48,27,7,4,10,1,23,9,0.305,0.0,0.5,0,0,0,0,0,0,71
+2021,nl,Derek Carty,Mickey Moniak,5792,Phi,UT,0,rel,previously_active,,17,6,2,1,3,0,6,1,0.222,0.0,0.353,0,0,0,0,0,0,15
 2021,nl,Derek Carty,Ronald Torreyes,4056,Phi,SW,2,rel,previously_active,,62,17,6,2,9,0,6,1,0.222,0.0,0.371,0,0,0,10,50,44,1
-2021,nl,Derek Carty,Ben Gamel,5506,Pit,SW,12,res,previously_active,"OF,SW",153,54,19,4,14,2,42,27,0.372,0.0,0.438,0,0,4,0,0,0,103
-2021,nl,Derek Carty,Steven Souza,4623,FA,SW,1,rel,previously_active,,8,5,0,0,0,0,4,1,0.111,0.0,0.0,0,0,0,0,0,0,12
 2021,nl,Derek Carty,Justin Williams,4928,FA,SW,73,rel,previously_active,,119,51,10,4,11,0,46,17,0.27,0.0,0.261,0,0,0,0,0,0,39
+2021,nl,Derek Carty,Ben Gamel,5506,Pit,SW,12,res,previously_active,"OF,SW",153,54,19,4,14,2,42,27,0.372,0.0,0.438,0,0,4,0,0,0,103
 2021,nl,Derek Carty,Travis Jankowski,4479,Phi,SW,13,res,previously_active,"OF,SW",34,15,5,0,2,0,5,2,0.25,0.0,0.235,0,0,0,0,0,0,57
 2021,nl,Derek Carty,Harrison Bader,5366,StL,SW,10,trd,previously_active,,134,39,18,6,17,4,22,12,0.356,0.0,0.5,0,0,0,0,0,0,103
-2021,nl,Derek Carty,Nick Ahmed,3807,Ari,MI,10,dis,reserved,"SS,MI,SW",7,2,0,0,0,0,1,1,0.375,0.0,0.286,0,0,0,0,0,127,0
+2021,nl,Derek Carty,Steven Souza,4623,FA,SW,1,rel,previously_active,,8,5,0,0,0,0,4,1,0.111,0.0,0.0,0,0,0,0,0,0,12
 2021,nl,Derek Carty,Jesus Aguilar,4118,Mia,CI,7,dis,reserved,"1B,SW,CI",0,0,0,0,0,0,0,0,0.0,0.0,0.0,4,0,113,0,2,0,0
+2021,nl,Derek Carty,Nick Ahmed,3807,Ari,MI,10,dis,reserved,"SS,MI,SW",7,2,0,0,0,0,1,1,0.375,0.0,0.286,0,0,0,0,0,127,0
 2021,nl,Derek Carty,Travis Shaw,4819,FA,3B,1,res,reserved,"1B,3B,SW,CI",42,28,5,3,11,0,17,5,0.319,0.333,0.524,4,0,31,0,48,0,0
 2021,nl,Derek Carty,Aristides Aquino,5046,Cin,UT,1,res,reserved,"OF,SW",126,57,18,6,13,1,52,18,0.297,0.333,0.373,0,0,0,0,0,0,71
 2021,nl,Derek Carty,Ben Gamel,5506,Pit,SW,12,res,reserved,"OF,SW",143,46,20,4,12,1,46,19,0.355,0.364,0.399,0,0,4,0,0,0,103
 2021,nl,Derek Carty,Travis Jankowski,4479,Phi,SW,13,res,reserved,"OF,SW",97,61,19,1,8,5,24,20,0.398,0.667,0.392,0,0,0,0,0,0,57
-2021,nl,Derek Carty,Ketel Marte,4847,Ari,2B,23,act,previously_reserved,"2B,MI,SW,OF",5,2,0,0,0,0,0,0,0.2,0.0,0.2,0,0,0,20,0,0,71
-2021,nl,Derek Carty,Miguel Rojas,4814,Mia,SS,9,act,previously_reserved,"SS,MI,SW",14,3,0,0,0,0,3,0,0.071,0.0,0.143,0,0,0,0,0,128,0
+2021,nl,Derek Carty,Ketel Marte,4847,Ari,2B,23,act,previously_reserved,"2B,SW,OF,MI",5,2,0,0,0,0,0,0,0.2,0.0,0.2,0,0,0,20,0,0,71
+2021,nl,Derek Carty,Miguel Rojas,4814,Mia,SS,9,act,previously_reserved,"SS,SW,MI",14,3,0,0,0,0,3,0,0.071,0.0,0.143,0,0,0,0,0,128,0
+2021,nl,Derek Carty,Carter Kieboom,5799,Was,3B,7,rel,previously_reserved,,1,2,0,0,0,0,1,1,0.5,0.0,0.0,0,0,0,0,60,0,0
 2021,nl,Derek Carty,Daniel Robertson,4577,Min,3B,0,rel,previously_reserved,,4,3,1,1,1,0,1,0,0.25,0.0,1.0,0,0,3,9,24,8,0
 2021,nl,Derek Carty,Phillip Evans,4091,FA,3B,5,rel,previously_reserved,,9,5,2,0,0,0,1,0,0.5,0.0,0.444,1,0,20,0,14,0,29
-2021,nl,Derek Carty,Carter Kieboom,5799,Was,3B,7,rel,previously_reserved,,1,2,0,0,0,0,1,1,0.5,0.0,0.0,0,0,0,0,60,0,0
 2021,nl,Derek Carty,Tyler O'Neill,5423,StL,OF,7,act,previously_reserved,"OF,SW",12,4,4,3,4,0,4,1,0.308,0.0,1.0,1,0,0,0,0,0,131
 2021,nl,Derek Carty,Yan Gomes,3945,ChC,C,3,act,previously_reserved,"C,SW",9,3,2,2,5,0,1,0,0.444,0.0,1.11,6,92,0,0,0,0,0
 2021,nl,Derek Carty,Mickey Moniak,5792,Phi,UT,0,rel,previously_reserved,,0,2,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,0,0,0,15
-2021,nl,Derek Carty,Harrison Bader,5366,StL,SW,10,trd,previously_reserved,,27,7,3,3,10,2,7,3,0.3,0.0,0.556,0,0,0,0,0,0,103
 2021,nl,Derek Carty,Kole Calhoun,3983,Tex,SW,11,act,previously_reserved,"UT,OF,SW",65,17,7,2,8,0,12,6,0.306,0.0,0.4,3,0,0,0,0,0,39
 2021,nl,Derek Carty,Ronald Torreyes,4056,Phi,SW,2,rel,previously_reserved,,21,6,1,0,1,0,2,1,0.348,0.0,0.286,0,0,0,10,50,44,1
 2021,nl,Derek Carty,Steven Souza,4623,FA,SW,1,rel,previously_reserved,,5,4,1,0,0,0,2,0,0.2,0.0,0.2,0,0,0,0,0,0,12
-2021,nl,Grey Albright,Patrick Wisdom,4570,ChC,CI,62,act,active,"1B,OF,CI,SW,3B",241,69,36,17,42,2,110,24,0.295,0.0,0.469,0,0,13,0,77,0,18
-2021,nl,Grey Albright,Josh Rojas,6789,Ari,MI,4,act,active,"3B,2B,MI,SW,SS,OF",484,139,69,11,44,9,137,58,0.341,0.25,0.411,0,0,0,55,14,42,53
+2021,nl,Derek Carty,Harrison Bader,5366,StL,SW,10,trd,previously_reserved,,27,7,3,3,10,2,7,3,0.3,0.0,0.556,0,0,0,0,0,0,103
 2021,nl,Grey Albright,Anthony Rizzo,3156,FA,1B,25,act,active,"1B,SW,CI",496,141,73,22,61,6,87,52,0.344,0.28,0.44,0,0,139,1,0,0,0
-2021,nl,Grey Albright,Joe Panik,3800,Mia,2B,62,act,active,"3B,2B,CI,SW,1B,SS,MI",103,46,5,0,4,1,13,7,0.241,0.4,0.204,3,0,9,27,32,0,0
-2021,nl,Grey Albright,Trevor Story,4020,FA,SS,35,act,active,"SS,SW,MI",526,142,88,24,75,20,139,53,0.329,0.522,0.471,1,0,0,0,0,138,0
-2021,nl,Grey Albright,Carter Kieboom,5799,Was,3B,6,act,active,"3B,SW,CI",212,58,25,6,20,0,60,23,0.299,0.25,0.325,0,0,0,0,60,0,0
-2021,nl,Grey Albright,Trayce Thompson,3257,ChC,OF,51,act,active,OF,11,4,3,2,7,0,2,1,0.5,0.5,1.09,0,0,0,0,0,0,13
-2021,nl,Grey Albright,Juan Soto,6043,Was,OF,44,act,active,"OF,SW",502,151,111,29,95,9,93,145,0.465,0.321,0.534,2,0,0,0,0,0,144
+2021,nl,Grey Albright,Josh Rojas,6789,Ari,MI,4,act,active,"3B,2B,SS,SW,OF,MI",484,139,69,11,44,9,137,58,0.341,0.25,0.411,0,0,0,55,14,42,53
+2021,nl,Grey Albright,Patrick Wisdom,4570,ChC,CI,62,act,active,"1B,SW,3B,OF,CI",241,69,36,17,42,2,110,24,0.295,0.0,0.469,0,0,13,0,77,0,18
+2021,nl,Grey Albright,Joe Panik,3800,Mia,2B,62,act,active,"3B,2B,MI,1B,CI,SW,SS",103,46,5,0,4,1,13,7,0.241,0.4,0.204,3,0,9,27,32,0,0
+2021,nl,Grey Albright,Trevor Story,4020,FA,SS,35,act,active,"SS,MI,SW",526,142,88,24,75,20,139,53,0.329,0.522,0.471,1,0,0,0,0,138,0
+2021,nl,Grey Albright,Carter Kieboom,5799,Was,3B,6,act,active,"UT,3B,CI,SW",212,58,25,6,20,0,60,23,0.299,0.25,0.325,0,0,0,0,60,0,0
 2021,nl,Grey Albright,Yonathan Daza,6290,Col,OF,0,act,active,OF,284,101,24,2,29,2,57,21,0.334,0.4,0.356,0,0,0,0,0,0,79
 2021,nl,Grey Albright,Raimel Tapia,4798,Col,OF,16,act,active,"OF,SW",487,133,69,6,50,20,70,40,0.327,0.269,0.372,0,0,0,0,0,0,120
+2021,nl,Grey Albright,Juan Soto,6043,Was,OF,44,act,active,"OF,SW",502,151,111,29,95,9,93,145,0.465,0.321,0.534,2,0,0,0,0,0,144
+2021,nl,Grey Albright,Trayce Thompson,3257,ChC,OF,51,act,active,OF,11,4,3,2,7,0,2,1,0.5,0.5,1.09,0,0,0,0,0,0,13
 2021,nl,Grey Albright,Andrew Knizner,6049,StL,C,1,act,active,"C,SW",161,63,18,1,9,0,39,20,0.281,0.2,0.236,0,57,1,0,0,0,0
 2021,nl,Grey Albright,Elias Diaz,5078,Col,C,1,act,active,"C,SW",338,106,52,18,44,0,60,30,0.31,0.455,0.464,0,98,0,0,0,0,0
 2021,nl,Grey Albright,Colin Moran,4435,Pit,UT,10,act,active,"1B,SW,CI",306,95,29,10,49,1,83,35,0.338,0.345,0.392,3,0,84,0,1,0,0
 2021,nl,Grey Albright,Anthony Alford,4658,Pit,SW,7,act,active,"OF,SW",76,27,11,4,8,3,25,7,0.353,0.381,0.5,0,0,0,0,0,0,39
-2021,nl,Grey Albright,Jose Devers,6323,Mia,MI,12,dis,previously_active,"2B,SS",19,8,3,0,3,0,4,2,0.333,0.0,0.368,0,0,0,13,0,5,0
-2021,nl,Grey Albright,Pablo Reyes,6398,Mil,CI,3,rel,previously_active,,12,7,1,0,0,1,2,0,0.417,0.0,0.5,1,0,0,2,28,2,1
-2021,nl,Grey Albright,Geraldo Perdomo,6842,Ari,MI,47,rel,previously_active,,6,2,1,0,0,0,1,2,0.375,0.0,0.167,0,0,0,0,0,10,0
 2021,nl,Grey Albright,Sheldon Neuse,6105,LAD,MI,23,rel,previously_active,,56,27,6,3,4,0,20,1,0.193,0.0,0.357,1,0,0,13,8,0,5
 2021,nl,Grey Albright,Brandon Drury,4055,NYM,CI,6,rel,previously_active,,32,17,2,2,5,0,9,2,0.235,0.0,0.375,0,0,3,2,7,0,12
-2021,nl,Grey Albright,Jordy Mercer,3871,FA,MI,3,rel,previously_active,,15,8,3,1,3,0,5,2,0.353,0.0,0.467,1,0,2,21,14,6,1
 2021,nl,Grey Albright,Yoshitomo Tsutsugo,6952,Pit,CI,47,rel,previously_active,,23,8,2,0,2,0,12,3,0.231,0.0,0.13,9,0,31,0,0,0,30
-2021,nl,Grey Albright,Isan Diaz,5464,Mia,2B,11,res,previously_active,"2B,SW,MI,3B",90,34,14,2,6,1,25,8,0.276,0.0,0.333,0,0,0,35,37,0,0
-2021,nl,Grey Albright,Cristian Pache,6097,Atl,OF,4,rel,previously_active,,63,22,6,1,4,0,25,2,0.152,0.0,0.206,0,0,0,0,0,0,22
-2021,nl,Grey Albright,Billy McKinney,4849,Tex,OF,23,rel,previously_active,,158,66,21,8,18,2,51,17,0.273,0.0,0.418,0,0,10,0,0,0,73
+2021,nl,Grey Albright,Pablo Reyes,6398,Mil,CI,3,rel,previously_active,,12,7,1,0,0,1,2,0,0.417,0.0,0.5,1,0,0,2,28,2,1
+2021,nl,Grey Albright,Geraldo Perdomo,6842,Ari,MI,47,rel,previously_active,,6,2,1,0,0,0,1,2,0.375,0.0,0.167,0,0,0,0,0,10,0
+2021,nl,Grey Albright,Jordy Mercer,3871,FA,MI,3,rel,previously_active,,15,8,3,1,3,0,5,2,0.353,0.0,0.467,1,0,2,21,14,6,1
+2021,nl,Grey Albright,Jose Devers,6323,Mia,MI,12,dis,previously_active,"2B,SS",19,8,3,0,3,0,4,2,0.333,0.0,0.368,0,0,0,13,0,5,0
+2021,nl,Grey Albright,Isan Diaz,5464,Mia,2B,11,res,previously_active,"2B,SW,3B,MI",90,34,14,2,6,1,25,8,0.276,0.0,0.333,0,0,0,35,37,0,0
 2021,nl,Grey Albright,Michael Hermosillo,6029,ChC,OF,6,dis,previously_active,"OF,SW",26,11,4,2,5,0,7,1,0.259,0.0,0.538,0,0,0,0,0,0,12
 2021,nl,Grey Albright,Mike Tauchman,5642,FA,OF,123,rel,previously_active,,135,59,18,3,10,1,49,21,0.274,0.0,0.244,1,0,0,0,0,0,59
-2021,nl,Grey Albright,Cody Bellinger,4954,LAD,OF,36,dis,previously_active,"OF,1B,SW,CI",293,86,35,9,34,2,84,27,0.235,0.0,0.3,0,0,4,0,0,0,91
 2021,nl,Grey Albright,Greg Deichmann,6567,ChC,OF,61,rel,previously_active,,14,5,0,0,0,0,7,0,0.143,0.0,0.143,0,0,0,0,0,0,9
-2021,nl,Grey Albright,Orlando Arcia,4503,Atl,UT,4,rel,previously_active,,11,4,0,0,1,0,3,0,0.091,0.0,0.091,0,0,0,1,3,5,14
+2021,nl,Grey Albright,Cristian Pache,6097,Atl,OF,4,rel,previously_active,,63,22,6,1,4,0,25,2,0.152,0.0,0.206,0,0,0,0,0,0,22
+2021,nl,Grey Albright,Billy McKinney,4849,Tex,OF,23,rel,previously_active,,158,66,21,8,18,2,51,17,0.273,0.0,0.418,0,0,10,0,0,0,73
+2021,nl,Grey Albright,Cody Bellinger,4954,LAD,OF,36,dis,previously_active,"OF,CI,1B,SW",293,86,35,9,34,2,84,27,0.235,0.0,0.3,0,0,4,0,0,0,91
 2021,nl,Grey Albright,Matt Beaty,6433,LAD,UT,11,rel,previously_active,,5,4,0,0,0,0,2,1,0.333,0.0,0.2,2,0,21,0,5,0,46
-2021,nl,Grey Albright,Josh Fuentes,6707,FA,UT,4,res,previously_active,"3B,1B,SW,CI",263,90,30,7,32,0,63,12,0.261,0.0,0.357,0,0,32,0,60,0,2
 2021,nl,Grey Albright,Nick Heath,7126,Ari,UT,3,rel,previously_active,,23,10,3,0,1,0,10,3,0.192,0.0,0.13,0,0,0,0,0,0,18
+2021,nl,Grey Albright,Josh Fuentes,6707,FA,UT,4,res,previously_active,"3B,1B,CI,SW",263,90,30,7,32,0,63,12,0.261,0.0,0.357,0,0,32,0,60,0,2
+2021,nl,Grey Albright,Orlando Arcia,4503,Atl,UT,4,rel,previously_active,,11,4,0,0,1,0,3,0,0.091,0.0,0.091,0,0,0,1,3,5,14
 2021,nl,Grey Albright,Jose Barrero,6187,Cin,SW,12,rel,previously_active,,3,1,0,0,0,0,2,0,0.0,0.0,0.0,0,0,0,2,0,9,7
 2021,nl,Grey Albright,Jose Devers,6323,Mia,MI,12,dis,reserved,"2B,SS",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,13,0,5,0
-2021,nl,Grey Albright,Isan Diaz,5464,Mia,2B,11,res,reserved,"2B,SW,MI,3B",23,9,2,0,1,0,5,4,0.393,0.0,0.304,0,0,0,35,37,0,0
-2021,nl,Grey Albright,Cody Bellinger,4954,LAD,OF,36,dis,reserved,"OF,1B,SW,CI",22,9,4,1,2,1,10,4,0.308,0.308,0.318,0,0,4,0,0,0,91
+2021,nl,Grey Albright,Isan Diaz,5464,Mia,2B,11,res,reserved,"2B,SW,3B,MI",23,9,2,0,1,0,5,4,0.393,0.0,0.304,0,0,0,35,37,0,0
 2021,nl,Grey Albright,Michael Hermosillo,6029,ChC,OF,6,dis,reserved,"OF,SW",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,0,0,0,12
-2021,nl,Grey Albright,Josh Fuentes,6707,FA,UT,4,res,reserved,"3B,1B,SW,CI",8,5,0,0,1,0,2,0,0.125,0.0,0.125,0,0,32,0,60,0,2
+2021,nl,Grey Albright,Cody Bellinger,4954,LAD,OF,36,dis,reserved,"OF,CI,1B,SW",22,9,4,1,2,1,10,4,0.308,0.308,0.318,0,0,4,0,0,0,91
+2021,nl,Grey Albright,Josh Fuentes,6707,FA,UT,4,res,reserved,"3B,1B,CI,SW",8,5,0,0,1,0,2,0,0.125,0.0,0.125,0,0,32,0,60,0,2
 2021,nl,Grey Albright,Brandon Drury,4055,NYM,CI,6,rel,previously_reserved,,5,5,0,0,1,0,2,0,0.2,0.0,0.2,0,0,3,2,7,0,12
 2021,nl,Grey Albright,Yoshitomo Tsutsugo,6952,Pit,CI,47,rel,previously_reserved,,2,4,0,0,0,0,0,3,0.6,0.0,0.0,9,0,31,0,0,0,30
 2021,nl,Grey Albright,Jordy Mercer,3871,FA,MI,3,rel,previously_reserved,,11,4,3,0,2,0,2,3,0.571,0.0,0.636,1,0,2,21,14,6,1
-2021,nl,Grey Albright,Joe Panik,3800,Mia,2B,62,act,previously_reserved,"3B,2B,CI,SW,1B,SS,MI",10,4,1,0,1,0,4,0,0.1,0.0,0.1,3,0,9,27,32,0,0
-2021,nl,Grey Albright,Yonathan Daza,6290,Col,OF,0,act,previously_reserved,OF,17,6,2,0,1,0,3,0,0.294,0.0,0.353,0,0,0,0,0,0,79
+2021,nl,Grey Albright,Joe Panik,3800,Mia,2B,62,act,previously_reserved,"3B,2B,MI,1B,CI,SW,SS",10,4,1,0,1,0,4,0,0.1,0.0,0.1,3,0,9,27,32,0,0
 2021,nl,Grey Albright,Mike Tauchman,5642,FA,OF,123,rel,previously_reserved,,1,1,1,0,0,0,0,0,1.0,0.0,1.0,1,0,0,0,0,0,59
+2021,nl,Grey Albright,Yonathan Daza,6290,Col,OF,0,act,previously_reserved,OF,17,6,2,0,1,0,3,0,0.294,0.0,0.353,0,0,0,0,0,0,79
 2021,nl,Grey Albright,Colin Moran,4435,Pit,UT,10,act,previously_reserved,"1B,SW,CI",12,4,0,0,1,0,4,1,0.231,0.0,0.333,3,0,84,0,1,0,0
 2021,nl,Grey Albright,Nick Heath,7126,Ari,UT,3,rel,previously_reserved,,4,2,0,0,0,0,1,1,0.2,0.0,0.0,0,0,0,0,0,0,18
-2021,nl,Brian Walton,Edmundo Sosa,5463,StL,MI,25,act,active,"2B,SS,3B",214,73,26,6,25,2,47,14,0.333,0.25,0.397,0,0,0,25,9,71,1
 2021,nl,Brian Walton,Paul Goldschmidt,3159,StL,1B,25,act,active,"1B,CI,SW",603,158,102,31,99,12,136,67,0.365,0.353,0.514,4,0,153,0,0,0,0
-2021,nl,Brian Walton,Jurickson Profar,3198,SD,CI,10,act,active,"OF,2B,SW,1B,MI",162,74,17,3,16,1,26,19,0.335,0.273,0.377,0,0,20,10,0,0,81
-2021,nl,Brian Walton,Jake Cronenworth,6463,SD,2B,12,act,active,"2B,1B,SS,SW,CI,MI",567,152,94,21,71,4,90,55,0.34,0.217,0.46,0,0,24,94,0,41,0
-2021,nl,Brian Walton,Paul DeJong,5714,StL,SS,15,act,active,"SS,MI,SW",356,113,44,19,45,4,103,35,0.284,0.263,0.39,0,0,0,0,0,107,0
-2021,nl,Brian Walton,Kris Bryant,4434,FA,3B,23,act,active,"OF,3B,SW,CI,1B",513,144,86,25,73,10,135,62,0.353,0.35,0.481,0,0,12,0,55,1,93
+2021,nl,Brian Walton,Edmundo Sosa,5463,StL,MI,25,act,active,"2B,SS,3B",214,73,26,6,25,2,47,14,0.333,0.25,0.397,0,0,0,25,9,71,1
+2021,nl,Brian Walton,Jurickson Profar,3198,SD,CI,10,act,active,"OF,2B,1B,MI,SW",162,74,17,3,16,1,26,19,0.335,0.273,0.377,0,0,20,10,0,0,81
+2021,nl,Brian Walton,Jake Cronenworth,6463,SD,2B,12,act,active,"2B,SS,1B,SW,MI,CI",567,152,94,21,71,4,90,55,0.34,0.217,0.46,0,0,24,94,0,41,0
+2021,nl,Brian Walton,Paul DeJong,5714,StL,SS,15,act,active,"UT,SS,MI,SW",356,113,44,19,45,4,103,35,0.284,0.263,0.39,0,0,0,0,0,107,0
+2021,nl,Brian Walton,Kris Bryant,4434,FA,3B,23,act,active,"OF,3B,1B,CI,SW",513,144,86,25,73,10,135,62,0.353,0.35,0.481,0,0,12,0,55,1,93
 2021,nl,Brian Walton,Yadiel Hernandez,5664,Was,OF,85,act,active,"OF,SW",209,85,24,6,20,1,46,16,0.292,0.333,0.354,0,0,0,0,0,0,61
 2021,nl,Brian Walton,Trent Grisham,5285,SD,OF,25,act,active,"OF,SW",457,130,61,15,62,13,116,53,0.329,0.333,0.418,0,0,0,0,0,0,127
-2021,nl,Brian Walton,Kyle Schwarber,4901,Bos,OF,19,act,active,"OF,1B,SW",393,111,73,32,71,1,126,62,0.371,0.545,0.552,14,0,10,0,0,0,87
 2021,nl,Brian Walton,Charlie Blackmon,2620,Col,OF,21,act,active,"OF,SW",514,150,76,13,78,3,91,54,0.351,0.4,0.411,1,0,0,0,0,0,137
+2021,nl,Brian Walton,Kyle Schwarber,4901,Bos,OF,19,act,active,"OF,1B,SW",393,111,73,32,71,1,126,62,0.371,0.545,0.552,14,0,10,0,0,0,87
 2021,nl,Brian Walton,Yadier Molina,1404,StL,C,5,act,active,"C,SW",432,119,45,11,62,3,77,24,0.295,0.143,0.366,0,118,1,0,0,0,0
-2021,nl,Brian Walton,James McCann,3906,NYM,C,11,act,active,"C,1B,SW",372,120,29,10,46,1,114,32,0.296,0.263,0.352,1,107,6,0,0,0,0
+2021,nl,Brian Walton,James McCann,3906,NYM,C,11,act,active,"C,SW,1B",372,120,29,10,46,1,114,32,0.296,0.263,0.352,1,107,6,0,0,0,0
 2021,nl,Brian Walton,Daniel Vogelbach,4058,FA,UT,1,act,active,"1B,SW",188,78,23,6,16,0,50,40,0.355,0.455,0.356,3,0,59,0,0,0,0
-2021,nl,Brian Walton,Mauricio Dubon,5380,SF,CI,9,rel,previously_active,,134,56,16,5,14,2,32,7,0.266,0.0,0.366,0,0,0,20,12,21,27
-2021,nl,Brian Walton,Ehire Adrianza,2645,FA,MI,5,res,previously_active,"3B,2B,SS,MI,SW,CI,OF",142,79,24,3,21,0,34,16,0.319,0.0,0.38,1,0,0,7,16,5,20
-2021,nl,Brian Walton,J.D. Davis,5453,NYM,CI,8,dis,previously_active,"UT,3B,OF,SW,CI",172,71,18,5,22,1,65,24,0.387,0.0,0.442,1,0,0,0,50,0,0
 2021,nl,Brian Walton,Brandon Drury,4055,NYM,CI,57,rel,previously_active,,13,10,0,0,3,0,4,0,0.286,0.0,0.308,0,0,3,2,7,0,12
+2021,nl,Brian Walton,J.D. Davis,5453,NYM,CI,8,dis,previously_active,"UT,3B,CI,OF,SW",172,71,18,5,22,1,65,24,0.387,0.0,0.442,1,0,0,0,50,0,0
+2021,nl,Brian Walton,Luis Guillorme,5961,NYM,CI,1,res,previously_active,"2B,MI,3B,SS,SW",104,50,13,1,4,0,13,19,0.407,0.0,0.356,0,0,0,18,27,11,0
+2021,nl,Brian Walton,Ehire Adrianza,2645,FA,MI,5,res,previously_active,"3B,2B,SS,SW,MI,OF,CI",142,79,24,3,21,0,34,16,0.319,0.0,0.38,1,0,0,7,16,5,20
 2021,nl,Brian Walton,Alex Blandino,5045,SF,CI,12,rel,previously_active,,50,29,5,0,1,1,22,6,0.271,0.0,0.16,0,0,17,5,9,1,3
-2021,nl,Brian Walton,Luis Guillorme,5961,NYM,CI,1,res,previously_active,"2B,SW,SS,MI,3B",104,50,13,1,4,0,13,19,0.407,0.0,0.356,0,0,0,18,27,11,0
-2021,nl,Brian Walton,Dustin Fowler,5630,FA,OF,0,rel,previously_active,,41,18,3,0,2,1,20,3,0.239,0.0,0.195,0,0,0,0,0,0,13
+2021,nl,Brian Walton,Mauricio Dubon,5380,SF,CI,9,rel,previously_active,,134,56,16,5,14,2,32,7,0.266,0.0,0.366,0,0,0,20,12,21,27
 2021,nl,Brian Walton,Lane Thomas,6727,Was,OF,1,rel,previously_active,,6,3,0,0,0,0,2,0,0.167,0.0,0.167,0,0,0,2,0,0,63
 2021,nl,Brian Walton,Lars Nootbaar,7582,StL,OF,13,res,previously_active,OF,34,14,3,1,3,0,9,4,0.342,0.0,0.412,0,0,0,0,0,0,34
 2021,nl,Brian Walton,Lewis Brinson,4446,FA,OF,12,rel,previously_active,,2,2,0,0,0,0,1,0,0.0,0.0,0.0,0,0,0,0,0,0,79
+2021,nl,Brian Walton,Dustin Fowler,5630,FA,OF,0,rel,previously_active,,41,18,3,0,2,1,20,3,0.239,0.0,0.195,0,0,0,0,0,0,13
 2021,nl,Brian Walton,Sandy Leon,3901,Cle,C,2,rel,previously_active,,15,4,1,0,0,0,4,0,0.067,0.0,0.067,1,60,0,0,1,0,0
 2021,nl,Brian Walton,Andy Young,6834,Ari,UT,3,rel,previously_active,,6,6,1,1,3,0,2,0,0.333,0.0,0.833,1,0,0,21,2,0,1
 2021,nl,Brian Walton,Albert Almora,4126,FA,SW,23,rel,previously_active,,2,2,0,0,0,0,1,0,0.0,0.0,0.0,0,0,0,0,0,0,36
-2021,nl,Brian Walton,J.D. Davis,5453,NYM,CI,8,dis,reserved,"UT,3B,OF,SW,CI",7,2,0,0,1,0,3,0,0.286,0.0,0.286,1,0,0,0,50,0,0
-2021,nl,Brian Walton,Luis Guillorme,5961,NYM,CI,1,res,reserved,"2B,SW,SS,MI,3B",28,19,0,0,1,0,10,4,0.25,0.167,0.143,0,0,0,18,27,11,0
-2021,nl,Brian Walton,Ehire Adrianza,2645,FA,MI,5,res,reserved,"3B,2B,SS,MI,SW,CI,OF",36,26,6,1,4,0,8,5,0.341,0.3,0.361,1,0,0,7,16,5,20
+2021,nl,Brian Walton,Luis Guillorme,5961,NYM,CI,1,res,reserved,"2B,MI,3B,SS,SW",28,19,0,0,1,0,10,4,0.25,0.167,0.143,0,0,0,18,27,11,0
+2021,nl,Brian Walton,J.D. Davis,5453,NYM,CI,8,dis,reserved,"UT,3B,CI,OF,SW",7,2,0,0,1,0,3,0,0.286,0.0,0.286,1,0,0,0,50,0,0
+2021,nl,Brian Walton,Ehire Adrianza,2645,FA,MI,5,res,reserved,"3B,2B,SS,SW,MI,OF,CI",36,26,6,1,4,0,8,5,0.341,0.3,0.361,1,0,0,7,16,5,20
 2021,nl,Brian Walton,Lars Nootbaar,7582,StL,OF,13,res,reserved,OF,37,24,6,2,5,2,12,4,0.293,0.4,0.378,0,0,0,0,0,0,34
 2021,nl,Brian Walton,Mauricio Dubon,5380,SF,CI,9,rel,previously_reserved,,24,10,2,0,6,0,6,1,0.308,0.0,0.417,0,0,0,20,12,21,27
-2021,nl,Brian Walton,Jurickson Profar,3198,SD,CI,10,act,previously_reserved,"OF,2B,SW,1B,MI",2,3,0,0,0,0,1,1,0.333,0.0,0.0,0,0,20,10,0,0,81
+2021,nl,Brian Walton,Jurickson Profar,3198,SD,CI,10,act,previously_reserved,"OF,2B,1B,MI,SW",2,3,0,0,0,0,1,1,0.333,0.0,0.0,0,0,20,10,0,0,81
 2021,nl,Brian Walton,Brandon Drury,4055,NYM,CI,57,rel,previously_reserved,,10,9,0,0,0,0,4,0,0.1,0.0,0.1,0,0,3,2,7,0,12
 2021,nl,Brian Walton,Edmundo Sosa,5463,StL,MI,25,act,previously_reserved,"2B,SS,3B",43,19,5,0,1,1,9,1,0.283,0.0,0.256,0,0,0,25,9,71,1
-2021,nl,Brian Walton,Kyle Schwarber,4901,Bos,OF,19,act,previously_reserved,"OF,1B,SW",6,2,3,0,0,0,1,2,0.5,0.0,0.667,14,0,10,0,0,0,87
-2021,nl,Brian Walton,Lane Thomas,6727,Was,OF,1,rel,previously_reserved,,3,1,0,0,0,0,1,1,0.5,0.0,0.333,0,0,0,2,0,0,63
 2021,nl,Brian Walton,Yadiel Hernandez,5664,Was,OF,85,act,previously_reserved,"OF,SW",25,13,5,2,9,0,6,2,0.481,0.0,0.8,0,0,0,0,0,0,61
+2021,nl,Brian Walton,Kyle Schwarber,4901,Bos,OF,19,act,previously_reserved,"OF,1B,SW",6,2,3,0,0,0,1,2,0.5,0.0,0.667,14,0,10,0,0,0,87
 2021,nl,Brian Walton,Trent Grisham,5285,SD,OF,25,act,previously_reserved,"OF,SW",5,2,0,0,0,0,3,1,0.167,0.0,0.0,0,0,0,0,0,0,127
-2021,nl,Brian Walton,James McCann,3906,NYM,C,11,act,previously_reserved,"C,1B,SW",3,1,0,0,0,0,1,0,0.0,0.0,0.0,1,107,6,0,0,0,0
+2021,nl,Brian Walton,Lane Thomas,6727,Was,OF,1,rel,previously_reserved,,3,1,0,0,0,0,1,1,0.5,0.0,0.333,0,0,0,2,0,0,63
 2021,nl,Brian Walton,Yadier Molina,1404,StL,C,5,act,previously_reserved,"C,SW",8,2,0,0,4,0,2,0,0.375,0.0,0.625,0,118,1,0,0,0,0
+2021,nl,Brian Walton,James McCann,3906,NYM,C,11,act,previously_reserved,"C,SW,1B",3,1,0,0,0,0,1,0,0.0,0.0,0.0,1,107,6,0,0,0,0
 2021,nl,Brian Walton,Daniel Vogelbach,4058,FA,UT,1,act,previously_reserved,"1B,SW",27,15,7,3,8,0,7,3,0.3,0.0,0.556,3,0,59,0,0,0,0
-2021,nl,Peter Kreutzer,Brendan Rodgers,5254,Col,MI,3,act,active,"2B,MI,SW,SS",380,100,49,15,49,0,82,19,0.327,0.304,0.474,0,0,0,81,0,26,0
+2021,nl,Peter Kreutzer,Brendan Rodgers,5254,Col,MI,3,act,active,"2B,SS,MI,SW",380,100,49,15,49,0,82,19,0.327,0.304,0.474,0,0,0,81,0,26,0
+2021,nl,Peter Kreutzer,Albert Pujols,1411,FA,CI,0,act,active,"1B,SW,CI",5,3,1,0,0,0,2,0,0.2,0.2,0.2,2,0,76,0,1,0,0
 2021,nl,Peter Kreutzer,Freddie Freeman,2466,FA,1B,36,act,active,"1B,SW,CI",600,159,120,31,83,8,107,86,0.393,0.4,0.503,0,0,159,0,0,0,0
-2021,nl,Peter Kreutzer,Albert Pujols,1411,FA,CI,0,act,active,"1B,CI,SW",5,3,1,0,0,0,2,0,0.2,0.2,0.2,2,0,76,0,1,0,0
 2021,nl,Peter Kreutzer,Alcides Escobar,850,Was,2B,31,act,active,"SS,2B",280,66,48,4,23,3,49,16,0.343,0.464,0.404,0,0,0,17,0,61,0
 2021,nl,Peter Kreutzer,Dansby Swanson,5276,Atl,SS,23,act,active,"SS,SW,MI",588,160,78,27,88,9,167,52,0.311,0.444,0.449,0,0,0,0,0,159,0
-2021,nl,Peter Kreutzer,Nolan Arenado,3214,StL,3B,25,act,active,"3B,SW,CI",593,157,81,34,105,2,96,50,0.312,0.267,0.494,2,0,0,0,155,0,0
+2021,nl,Peter Kreutzer,Nolan Arenado,3214,StL,3B,25,act,active,"3B,CI,SW",593,157,81,34,105,2,96,50,0.312,0.267,0.494,2,0,0,0,155,0,0
+2021,nl,Peter Kreutzer,Hoy Jun Park,7643,Pit,OF,33,act,active,"2B,OF,3B,SS",49,20,10,1,8,1,12,12,0.371,0.308,0.388,0,0,0,16,9,8,10
 2021,nl,Peter Kreutzer,Henry Ramos,5356,Ari,OF,8,act,active,OF,36,13,2,0,4,0,8,4,0.244,0.214,0.194,0,0,0,0,0,0,12
 2021,nl,Peter Kreutzer,TJ Friedl,6751,Cin,OF,22,act,active,OF,15,6,2,0,0,0,2,3,0.278,0.278,0.2,0,0,0,0,0,0,11
-2021,nl,Peter Kreutzer,Hoy Jun Park,7643,Pit,OF,33,act,active,"2B,OF,SS,3B",49,20,10,1,8,1,12,12,0.371,0.308,0.388,0,0,0,16,9,8,10
-2021,nl,Peter Kreutzer,Mookie Betts,4670,LAD,OF,40,act,active,"UT,OF,SW,2B",458,120,91,22,57,10,83,66,0.367,0.333,0.485,0,0,0,7,0,0,116
-2021,nl,Peter Kreutzer,Will Smith,5805,LAD,C,17,act,active,"C,SW",414,130,71,25,76,3,101,58,0.365,0.2,0.495,3,117,1,0,1,0,0
+2021,nl,Peter Kreutzer,Mookie Betts,4670,LAD,OF,40,act,active,"UT,OF,2B,SW",458,120,91,22,57,10,83,66,0.367,0.333,0.485,0,0,0,7,0,0,116
 2021,nl,Peter Kreutzer,Nick Fortes,6902,Mia,C,2,act,active,C,28,12,5,3,5,1,8,2,0.3,0.083,0.571,3,7,0,0,0,0,0
-2021,nl,Peter Kreutzer,Jordy Mercer,3871,FA,UT,2,act,active,"2B,SS,MI,SW,3B",11,3,1,1,3,0,4,0,0.182,0.182,0.545,1,0,2,21,14,6,1
+2021,nl,Peter Kreutzer,Will Smith,5805,LAD,C,17,act,active,"C,SW",414,130,71,25,76,3,101,58,0.365,0.2,0.495,3,117,1,0,1,0,0
+2021,nl,Peter Kreutzer,Jordy Mercer,3871,FA,UT,2,act,active,"2B,SS,SW,MI,3B",11,3,1,1,3,0,4,0,0.182,0.182,0.545,1,0,2,21,14,6,1
 2021,nl,Peter Kreutzer,Ozzie Albies,5099,Atl,SW,27,act,active,"2B,MI,SW",280,66,48,15,43,7,58,17,0.296,0.286,0.479,0,0,0,156,0,0,0
-2021,nl,Peter Kreutzer,Kyle Farmer,4111,Cin,CI,6,rel,previously_active,,76,24,7,1,5,1,15,4,0.305,0.0,0.303,0,0,5,9,10,121,2
-2021,nl,Peter Kreutzer,Donovan Solano,3063,SF,CI,2,res,previously_active,"2B,SW,CI,MI,3B",202,65,21,4,20,1,38,14,0.318,0.0,0.361,0,0,0,91,0,2,0
-2021,nl,Peter Kreutzer,Hunter Owen,7654,Pit,CI,0,rel,previously_active,,1,1,0,0,0,0,1,0,0.0,0.0,0.0,0,0,0,0,0,0,1
-2021,nl,Peter Kreutzer,Drew Ellis,6217,Ari,CI,3,rel,previously_active,,19,10,1,0,1,0,7,3,0.292,0.0,0.158,0,0,0,4,17,0,0
 2021,nl,Peter Kreutzer,Jurickson Profar,3198,SD,CI,10,trd,previously_active,,189,60,30,1,17,9,38,29,0.324,0.0,0.275,0,0,20,10,0,0,81
-2021,nl,Peter Kreutzer,Dominic Smith,4549,NYM,CI,17,res,previously_active,"1B,OF,CI,SW",435,141,42,11,58,2,110,32,0.305,0.0,0.361,2,0,15,0,0,0,115
 2021,nl,Peter Kreutzer,Edwin Rios,6222,LAD,CI,2,rel,previously_active,,51,25,4,1,1,0,18,7,0.217,0.0,0.137,1,0,10,0,6,0,2
-2021,nl,Peter Kreutzer,Luke Williams,7180,Phi,OF,0,res,previously_active,"SS,OF,3B,1B,2B",50,24,4,0,2,1,9,5,0.309,0.0,0.3,0,0,6,8,8,5,25
+2021,nl,Peter Kreutzer,Hunter Owen,7654,Pit,CI,0,rel,previously_active,,1,1,0,0,0,0,1,0,0.0,0.0,0.0,0,0,0,0,0,0,1
+2021,nl,Peter Kreutzer,Kyle Farmer,4111,Cin,CI,6,rel,previously_active,,76,24,7,1,5,1,15,4,0.305,0.0,0.303,0,0,5,9,10,121,2
+2021,nl,Peter Kreutzer,Dominic Smith,4549,NYM,CI,17,res,previously_active,"1B,OF,CI,SW",435,141,42,11,58,2,110,32,0.305,0.0,0.361,2,0,15,0,0,0,115
+2021,nl,Peter Kreutzer,Drew Ellis,6217,Ari,CI,3,rel,previously_active,,19,10,1,0,1,0,7,3,0.292,0.0,0.158,0,0,0,4,17,0,0
+2021,nl,Peter Kreutzer,Donovan Solano,3063,SF,CI,2,res,previously_active,"2B,SW,CI,MI,3B",202,65,21,4,20,1,38,14,0.318,0.0,0.361,0,0,0,91,0,2,0
+2021,nl,Peter Kreutzer,Luke Williams,7180,Phi,OF,0,res,previously_active,"SS,3B,OF,1B,2B",50,24,4,0,2,1,9,5,0.309,0.0,0.3,0,0,6,8,8,5,25
+2021,nl,Peter Kreutzer,Lars Nootbaar,7582,StL,OF,43,rel,previously_active,,6,3,0,0,0,0,2,0,0.0,0.0,0.0,0,0,0,0,0,0,34
+2021,nl,Peter Kreutzer,Sam Hilliard,6107,Col,OF,9,rel,previously_active,,33,17,5,2,4,0,15,2,0.171,0.0,0.364,1,0,0,0,0,0,63
+2021,nl,Peter Kreutzer,Connor Joe,5311,Col,OF,8,dis,previously_active,"OF,1B",118,34,18,7,27,0,26,17,0.397,0.0,0.534,3,0,14,0,0,0,32
+2021,nl,Peter Kreutzer,Guillermo Heredia,5329,Atl,OF,37,rel,previously_active,,45,13,8,0,4,0,16,5,0.38,0.0,0.489,0,0,0,0,0,0,111
 2021,nl,Peter Kreutzer,Kevin Pillar,4578,NYM,OF,2,rel,previously_active,,283,104,37,13,41,4,70,11,0.274,0.0,0.41,0,0,0,0,0,0,108
 2021,nl,Peter Kreutzer,Jake Marisnick,3197,SD,OF,33,rel,previously_active,,93,48,11,4,12,1,30,3,0.245,0.0,0.409,0,0,0,0,0,0,72
 2021,nl,Peter Kreutzer,Tyler Naquin,4363,Cin,OF,13,dis,previously_active,"OF,SW",411,127,52,19,70,5,106,35,0.333,0.0,0.477,0,0,0,0,0,0,120
-2021,nl,Peter Kreutzer,Sam Hilliard,6107,Col,OF,9,rel,previously_active,,33,17,5,2,4,0,15,2,0.171,0.0,0.364,1,0,0,0,0,0,63
 2021,nl,Peter Kreutzer,Matt Vierling,7774,Phi,OF,2,rel,previously_active,,2,3,0,0,0,0,1,0,0.5,0.0,0.5,0,0,9,0,0,0,17
-2021,nl,Peter Kreutzer,Lars Nootbaar,7582,StL,OF,43,rel,previously_active,,6,3,0,0,0,0,2,0,0.0,0.0,0.0,0,0,0,0,0,0,34
-2021,nl,Peter Kreutzer,Guillermo Heredia,5329,Atl,OF,37,rel,previously_active,,45,13,8,0,4,0,16,5,0.38,0.0,0.489,0,0,0,0,0,0,111
-2021,nl,Peter Kreutzer,Connor Joe,5311,Col,OF,8,dis,previously_active,"OF,1B",118,34,18,7,27,0,26,17,0.397,0.0,0.534,3,0,14,0,0,0,32
-2021,nl,Peter Kreutzer,Victor Caratini,4876,SD,C,3,rel,previously_active,,268,102,27,6,33,2,72,31,0.303,0.0,0.313,0,101,5,0,2,0,0
 2021,nl,Peter Kreutzer,Rafael Marchan,7453,Phi,C,3,rel,previously_active,,7,3,0,0,0,0,1,0,0.0,0.0,0.0,0,17,1,0,0,0,0
+2021,nl,Peter Kreutzer,Victor Caratini,4876,SD,C,3,rel,previously_active,,268,102,27,6,33,2,72,31,0.303,0.0,0.313,0,101,5,0,2,0,0
+2021,nl,Peter Kreutzer,Ryan Vilade,6480,Col,UT,3,rel,previously_active,,2,2,0,0,0,0,1,0,0.0,0.0,0.0,0,0,0,0,0,0,2
 2021,nl,Peter Kreutzer,William Contreras,6423,Atl,UT,82,rel,previously_active,,139,43,16,7,20,0,50,12,0.273,0.0,0.388,0,49,0,0,0,0,0
 2021,nl,Peter Kreutzer,Jose Peraza,4468,NYY,UT,3,rel,previously_active,,96,32,14,5,15,0,17,5,0.252,0.0,0.396,0,0,0,36,9,1,1
-2021,nl,Peter Kreutzer,Ryan Vilade,6480,Col,UT,3,rel,previously_active,,2,2,0,0,0,0,1,0,0.0,0.0,0.0,0,0,0,0,0,0,2
 2021,nl,Peter Kreutzer,John Nogowski,7267,SF,UT,31,rel,previously_active,,80,25,8,1,9,0,14,7,0.25,0.0,0.287,0,0,32,0,0,0,1
 2021,nl,Peter Kreutzer,Anthony Alford,4658,Pit,SW,2,rel,previously_active,,24,11,2,0,0,1,16,4,0.241,0.0,0.083,0,0,0,0,0,0,39
-2021,nl,Peter Kreutzer,Dominic Smith,4549,NYM,CI,17,res,reserved,"1B,OF,CI,SW",11,5,1,0,0,0,2,0,0.273,0.273,0.455,2,0,15,0,0,0,115
 2021,nl,Peter Kreutzer,Donovan Solano,3063,SF,CI,2,res,reserved,"2B,SW,CI,MI,3B",105,36,14,3,11,1,20,11,0.392,0.385,0.486,0,0,0,91,0,2,0
-2021,nl,Peter Kreutzer,Connor Joe,5311,Col,OF,8,dis,reserved,"OF,1B",0,0,0,0,0,0,0,0,0.0,0.0,0.0,3,0,14,0,0,0,32
+2021,nl,Peter Kreutzer,Dominic Smith,4549,NYM,CI,17,res,reserved,"1B,OF,CI,SW",11,5,1,0,0,0,2,0,0.273,0.273,0.455,2,0,15,0,0,0,115
 2021,nl,Peter Kreutzer,Tyler Naquin,4363,Cin,OF,13,dis,reserved,"OF,SW",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,0,0,0,120
-2021,nl,Peter Kreutzer,Luke Williams,7180,Phi,OF,0,res,reserved,"SS,OF,3B,1B,2B",18,14,2,0,2,0,6,2,0.3,0.0,0.222,0,0,6,8,8,5,25
-2021,nl,Peter Kreutzer,Brendan Rodgers,5254,Col,MI,3,act,previously_reserved,"2B,MI,SW,SS",7,2,0,0,2,0,2,0,0.375,0.0,0.286,0,0,0,81,0,26,0
+2021,nl,Peter Kreutzer,Connor Joe,5311,Col,OF,8,dis,reserved,"OF,1B",0,0,0,0,0,0,0,0,0.0,0.0,0.0,3,0,14,0,0,0,32
+2021,nl,Peter Kreutzer,Luke Williams,7180,Phi,OF,0,res,reserved,"SS,3B,OF,1B,2B",18,14,2,0,2,0,6,2,0.3,0.0,0.222,0,0,6,8,8,5,25
+2021,nl,Peter Kreutzer,Brendan Rodgers,5254,Col,MI,3,act,previously_reserved,"2B,SS,MI,SW",7,2,0,0,2,0,2,0,0.375,0.0,0.286,0,0,0,81,0,26,0
 2021,nl,Peter Kreutzer,Travis Blankenhorn,6137,NYM,2B,13,rel,previously_reserved,,2,2,0,0,0,0,2,0,0.0,0.0,0.0,0,0,0,6,0,0,2
-2021,nl,Peter Kreutzer,Kevin Pillar,4578,NYM,OF,2,rel,previously_reserved,,31,15,2,2,4,0,9,0,0.273,0.0,0.419,0,0,0,0,0,0,108
 2021,nl,Peter Kreutzer,Jake Marisnick,3197,SD,OF,33,rel,previously_reserved,,26,14,2,0,3,1,9,3,0.31,0.0,0.231,0,0,0,0,0,0,72
-2021,nl,Peter Kreutzer,Sam Hilliard,6107,Col,OF,9,rel,previously_reserved,,4,3,1,0,0,0,4,0,0.0,0.0,0.0,1,0,0,0,0,0,63
-2021,nl,Peter Kreutzer,Mookie Betts,4670,LAD,OF,40,act,previously_reserved,"UT,OF,SW,2B",8,2,2,1,1,0,3,2,0.4,0.0,0.625,0,0,0,7,0,0,116
+2021,nl,Peter Kreutzer,Mookie Betts,4670,LAD,OF,40,act,previously_reserved,"UT,OF,2B,SW",8,2,2,1,1,0,3,2,0.4,0.0,0.625,0,0,0,7,0,0,116
 2021,nl,Peter Kreutzer,Lars Nootbaar,7582,StL,OF,43,rel,previously_reserved,,1,2,0,0,0,0,1,1,0.5,0.0,0.0,0,0,0,0,0,0,34
+2021,nl,Peter Kreutzer,Sam Hilliard,6107,Col,OF,9,rel,previously_reserved,,4,3,1,0,0,0,4,0,0.0,0.0,0.0,1,0,0,0,0,0,63
 2021,nl,Peter Kreutzer,Guillermo Heredia,5329,Atl,OF,37,rel,previously_reserved,,38,14,4,0,2,0,11,2,0.22,0.0,0.211,0,0,0,0,0,0,111
-2021,nl,Peter Kreutzer,Jose Peraza,4468,NYY,UT,3,rel,previously_reserved,,21,13,4,1,4,0,6,1,0.348,0.0,0.571,0,0,0,36,9,1,1
+2021,nl,Peter Kreutzer,Kevin Pillar,4578,NYM,OF,2,rel,previously_reserved,,31,15,2,2,4,0,9,0,0.273,0.0,0.419,0,0,0,0,0,0,108
 2021,nl,Peter Kreutzer,John Nogowski,7267,SF,UT,31,rel,previously_reserved,,3,1,0,0,0,0,1,1,0.25,0.0,0.0,0,0,32,0,0,0,1
-2021,nl,Steve Gardner,Ronald Torreyes,4056,Phi,MI,8,act,active,"3B,SS,MI,SW,2B",177,65,16,4,20,1,23,14,0.281,0.211,0.322,0,0,0,10,50,44,1
-2021,nl,Steve Gardner,Asdrubal Cabrera,400,Cin,CI,7,act,active,"3B,1B,SW,CI",302,106,33,7,39,1,77,36,0.314,0.0,0.361,2,0,19,0,65,1,0
+2021,nl,Peter Kreutzer,Jose Peraza,4468,NYY,UT,3,rel,previously_reserved,,21,13,4,1,4,0,6,1,0.348,0.0,0.571,0,0,0,36,9,1,1
+2021,nl,Steve Gardner,Asdrubal Cabrera,400,Cin,CI,7,act,active,"3B,1B,CI,SW",302,106,33,7,39,1,77,36,0.314,0.0,0.361,2,0,19,0,65,1,0
+2021,nl,Steve Gardner,Ronald Torreyes,4056,Phi,MI,8,act,active,"3B,SS,2B,SW,MI",177,65,16,4,20,1,23,14,0.281,0.211,0.322,0,0,0,10,50,44,1
 2021,nl,Steve Gardner,Eric Hosmer,2563,SD,1B,17,act,active,"1B,CI,SW",509,151,53,12,65,5,99,48,0.337,0.389,0.395,2,0,131,0,0,0,0
 2021,nl,Steve Gardner,Jonathan India,6595,Cin,2B,2,act,active,"2B,3B",532,150,98,21,69,12,141,71,0.376,0.364,0.459,0,0,0,148,0,0,0
 2021,nl,Steve Gardner,Trea Turner,4555,LAD,SS,37,act,active,"SS,MI,SW,2B",587,145,104,28,77,31,109,39,0.374,0.48,0.538,0,0,0,49,0,98,0
 2021,nl,Steve Gardner,Ke'Bryan Hayes,5397,Pit,3B,18,act,active,"3B,SW,CI",358,95,48,6,38,9,86,31,0.314,0.0,0.366,0,0,0,0,95,0,0
-2021,nl,Steve Gardner,Yoshitomo Tsutsugo,6952,Pit,OF,9,act,active,"1B,OF,3B,SW,CI",110,37,17,6,22,0,28,15,0.354,0.259,0.5,9,0,31,0,0,0,30
-2021,nl,Steve Gardner,Eddie Rosario,3889,FA,OF,600,act,active,"OF,SW",96,33,13,7,16,2,14,9,0.33,0.273,0.573,6,0,0,0,0,0,100
+2021,nl,Steve Gardner,Matt Beaty,6433,LAD,OF,78,act,active,"1B,CI,SW,3B,OF",176,102,30,6,29,2,37,14,0.338,0.8,0.392,2,0,21,0,5,0,46
+2021,nl,Steve Gardner,Yoshitomo Tsutsugo,6952,Pit,OF,9,act,active,"1B,OF,SW,3B,CI",110,37,17,6,22,0,28,15,0.354,0.259,0.5,9,0,31,0,0,0,30
 2021,nl,Steve Gardner,Adam Frazier,5555,Sea,OF,5,act,active,"2B,OF,MI,SW",577,155,83,5,43,10,69,48,0.368,0.286,0.411,1,0,0,140,0,0,12
-2021,nl,Steve Gardner,Matt Beaty,6433,LAD,OF,78,act,active,"1B,OF,3B,CI,SW",176,102,30,6,29,2,37,14,0.338,0.8,0.392,2,0,21,0,5,0,46
-2021,nl,Steve Gardner,Austin Barnes,4739,LAD,C,1,act,active,"C,2B,SW",200,77,28,6,23,1,56,20,0.299,0.2,0.345,1,52,0,7,0,0,0
+2021,nl,Steve Gardner,Eddie Rosario,3889,FA,OF,600,act,active,"OF,SW",96,33,13,7,16,2,14,9,0.33,0.273,0.573,6,0,0,0,0,0,100
+2021,nl,Steve Gardner,Austin Barnes,4739,LAD,C,1,act,active,"C,SW,2B",200,77,28,6,23,1,56,20,0.299,0.2,0.345,1,52,0,7,0,0,0
 2021,nl,Steve Gardner,Daulton Varsho,6326,Ari,C,9,act,active,"OF,C,SW",279,93,41,11,38,6,65,30,0.324,0.269,0.444,0,41,0,0,0,0,49
 2021,nl,Steve Gardner,Manny Pina,2391,Atl,UT,27,act,active,"C,SW",130,55,13,7,15,0,29,15,0.221,0.111,0.3,0,65,0,0,0,0,0
 2021,nl,Steve Gardner,A.J. Pollock,2837,LAD,SW,17,act,active,"OF,SW",384,117,53,21,69,9,80,30,0.355,0.318,0.536,0,0,0,0,0,0,108
-2021,nl,Steve Gardner,Rowdy Tellez,4892,Mil,CI,57,dis,previously_active,"1B,CI,SW",144,49,20,7,27,0,28,11,0.331,0.0,0.493,19,0,65,0,0,0,0
+2021,nl,Steve Gardner,Rowdy Tellez,4892,Mil,CI,57,dis,previously_active,"1B,SW,CI",144,49,20,7,27,0,28,11,0.331,0.0,0.493,19,0,65,0,0,0,0
 2021,nl,Steve Gardner,Will Craig,5367,FA,CI,83,rel,previously_active,,45,14,3,0,2,0,14,4,0.286,0.0,0.267,0,0,18,0,0,0,0
-2021,nl,Steve Gardner,Mike Moustakas,2004,Cin,MI,23,dis,previously_active,"3B,1B,MI,2B,CI,SW",172,59,19,6,20,0,43,16,0.275,0.0,0.36,0,0,11,1,44,0,0
-2021,nl,Steve Gardner,Marcell Ozuna,3280,Atl,OF,29,rel,previously_active,,188,48,21,7,26,0,46,19,0.288,0.0,0.356,0,0,0,0,0,0,48
+2021,nl,Steve Gardner,Mike Moustakas,2004,Cin,MI,23,dis,previously_active,"3B,1B,MI,CI,2B,SW",172,59,19,6,20,0,43,16,0.275,0.0,0.36,0,0,11,1,44,0,0
 2021,nl,Steve Gardner,Lane Thomas,6727,Was,OF,0,rel,previously_active,,21,10,1,0,0,0,11,3,0.167,0.0,0.095,0,0,0,2,0,0,63
 2021,nl,Steve Gardner,Jesse Winker,4483,Cin,OF,17,dis,previously_active,"OF,SW",420,109,77,24,71,1,75,53,0.395,0.0,0.56,5,0,0,0,0,0,102
+2021,nl,Steve Gardner,Marcell Ozuna,3280,Atl,OF,29,rel,previously_active,,188,48,21,7,26,0,46,19,0.288,0.0,0.356,0,0,0,0,0,0,48
 2021,nl,Steve Gardner,Luis Campusano,7096,SD,C,39,rel,previously_active,,27,9,0,0,1,0,8,3,0.167,0.0,0.074,0,9,0,0,0,0,0
+2021,nl,Steve Gardner,Starlin Castro,2724,FA,UT,5,rel,previously_active,,315,87,25,3,38,0,62,26,0.333,0.0,0.375,0,0,0,0,85,1,0
+2021,nl,Steve Gardner,Adam Haseley,6200,Phi,UT,0,rel,previously_active,,21,9,2,0,0,0,4,0,0.19,0.0,0.238,0,0,0,0,0,0,9
 2021,nl,Steve Gardner,Erik Gonzalez,4680,Mia,UT,47,rel,previously_active,,175,56,14,1,13,2,31,7,0.251,0.0,0.269,0,0,13,0,38,17,0
 2021,nl,Steve Gardner,Scott Kingery,5424,Phi,UT,5,rel,previously_active,,12,10,0,0,0,0,7,0,0.083,0.0,0.083,0,0,0,4,1,0,7
-2021,nl,Steve Gardner,Adam Haseley,6200,Phi,UT,0,rel,previously_active,,21,9,2,0,0,0,4,0,0.19,0.0,0.238,0,0,0,0,0,0,9
-2021,nl,Steve Gardner,Starlin Castro,2724,FA,UT,5,rel,previously_active,,315,87,25,3,38,0,62,26,0.333,0.0,0.375,0,0,0,0,85,1,0
-2021,nl,Steve Gardner,Mike Moustakas,2004,Cin,MI,23,dis,reserved,"3B,1B,MI,2B,CI,SW",11,3,2,0,2,0,3,2,0.385,0.0,0.545,0,0,11,1,44,0,0
-2021,nl,Steve Gardner,Rowdy Tellez,4892,Mil,CI,57,dis,reserved,"1B,CI,SW",6,2,2,0,1,0,1,1,0.429,0.429,0.667,19,0,65,0,0,0,0
+2021,nl,Steve Gardner,Mike Moustakas,2004,Cin,MI,23,dis,reserved,"3B,1B,MI,CI,2B,SW",11,3,2,0,2,0,3,2,0.385,0.0,0.545,0,0,11,1,44,0,0
+2021,nl,Steve Gardner,Rowdy Tellez,4892,Mil,CI,57,dis,reserved,"1B,SW,CI",6,2,2,0,1,0,1,1,0.429,0.429,0.667,19,0,65,0,0,0,0
 2021,nl,Steve Gardner,Jesse Winker,4483,Cin,OF,17,dis,reserved,"OF,SW",3,1,0,0,0,0,0,0,0.25,0.0,0.0,5,0,0,0,0,0,102
-2021,nl,Steve Gardner,Zach McKinstry,7128,LAD,OF,30,res,reserved,"3B,2B,SW,OF",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,20,12,0,36
+2021,nl,Steve Gardner,Zach McKinstry,7128,LAD,OF,30,res,reserved,"3B,2B,OF,SW",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,20,12,0,36
 2021,nl,Steve Gardner,Alfonso Rivas,7591,ChC,SW,35,dis,reserved,"1B,OF",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,5,0,0,0,10
-2021,nl,Steve Gardner,Asdrubal Cabrera,400,Cin,CI,7,act,previously_reserved,"3B,1B,SW,CI",7,4,1,0,3,0,3,0,0.25,0.0,0.571,2,0,19,0,65,1,0
+2021,nl,Steve Gardner,Asdrubal Cabrera,400,Cin,CI,7,act,previously_reserved,"3B,1B,CI,SW",7,4,1,0,3,0,3,0,0.25,0.0,0.571,2,0,19,0,65,1,0
 2021,nl,Steve Gardner,Trea Turner,4555,LAD,SS,37,act,previously_reserved,"SS,MI,SW,2B",8,3,3,0,0,1,1,2,0.4,0.0,0.375,0,0,0,49,0,98,0
 2021,nl,Steve Gardner,Ke'Bryan Hayes,5397,Pit,3B,18,act,previously_reserved,"3B,SW,CI",4,1,1,0,0,0,1,0,0.5,0.0,1.0,0,0,0,0,95,0,0
 2021,nl,Steve Gardner,Daulton Varsho,6326,Ari,C,9,act,previously_reserved,"OF,C,SW",5,2,0,0,0,0,2,0,0.0,0.0,0.0,0,41,0,0,0,0,49
 2021,nl,Steve Gardner,Manny Pina,2391,Atl,UT,27,act,previously_reserved,"C,SW",41,16,13,5,17,0,7,3,0.457,0.0,0.829,0,65,0,0,0,0,0
 2021,nl,Steve Gardner,Scott Kingery,5424,Phi,UT,5,rel,previously_reserved,,7,5,1,0,0,0,5,0,0.0,0.0,0.0,0,0,0,4,1,0,7
-2021,nl,Todd Zola,Brandon Belt,3336,SF,CI,17,act,active,"1B,CI,SW",261,79,52,23,50,3,85,38,0.386,0.0,0.613,0,0,93,0,0,0,0
-2021,nl,Todd Zola,Cole Tucker,5101,Pit,MI,33,act,active,"UT,OF,2B,SS,SW",41,13,7,2,8,0,13,5,0.326,0.292,0.439,0,0,1,9,1,17,14
-2021,nl,Todd Zola,Pavin Smith,6109,Ari,1B,1,act,active,"1B,OF,SW,CI",483,141,66,11,45,1,100,42,0.33,0.667,0.408,0,0,54,0,0,0,98
-2021,nl,Todd Zola,Ian Happ,5352,ChC,2B,23,act,active,"OF,2B,SW",456,146,61,24,64,9,154,62,0.323,0.444,0.428,1,0,0,8,2,0,123
-2021,nl,Todd Zola,Luis Urias,5831,Mil,SS,2,act,active,"2B,3B,SS,MI,SW,CI",490,150,77,23,75,5,116,63,0.345,0.412,0.445,0,0,0,25,68,68,0
-2021,nl,Todd Zola,Kyle Farmer,4111,Cin,3B,17,act,active,"2B,SS,3B,MI,SW,1B",330,92,46,12,47,1,65,13,0.333,0.364,0.461,0,0,5,9,10,121,2
-2021,nl,Todd Zola,Joc Pederson,4090,Atl,OF,14,act,active,"OF,SW",424,135,54,18,60,2,115,37,0.307,0.3,0.425,1,0,1,0,0,0,117
+2021,nl,Todd Zola,Brandon Belt,3336,SF,CI,17,act,active,"1B,SW,CI",261,79,52,23,50,3,85,38,0.386,0.0,0.613,0,0,93,0,0,0,0
+2021,nl,Todd Zola,Pavin Smith,6109,Ari,1B,1,act,active,"1B,OF,CI,SW",483,141,66,11,45,1,100,42,0.33,0.667,0.408,0,0,54,0,0,0,98
+2021,nl,Todd Zola,Cole Tucker,5101,Pit,MI,33,act,active,"UT,OF,SS,2B,SW",41,13,7,2,8,0,13,5,0.326,0.292,0.439,0,0,1,9,1,17,14
+2021,nl,Todd Zola,Ian Happ,5352,ChC,2B,23,act,active,"OF,SW,2B",456,146,61,24,64,9,154,62,0.323,0.444,0.428,1,0,0,8,2,0,123
+2021,nl,Todd Zola,Luis Urias,5831,Mil,SS,2,act,active,"2B,SS,3B,SW,MI,CI",490,150,77,23,75,5,116,63,0.345,0.412,0.445,0,0,0,25,68,68,0
+2021,nl,Todd Zola,Kyle Farmer,4111,Cin,3B,17,act,active,"2B,SS,SW,1B,MI,3B",330,92,46,12,47,1,65,13,0.333,0.364,0.461,0,0,5,9,10,121,2
 2021,nl,Todd Zola,Andrew McCutchen,1222,Phi,OF,20,act,active,"OF,SW",463,139,77,26,79,6,124,80,0.341,0.389,0.451,1,0,0,0,0,0,135
-2021,nl,Todd Zola,Jackie Bradley,3595,Bos,OF,14,act,active,"OF,SW",387,134,39,6,29,7,132,28,0.236,0.231,0.261,0,0,0,0,0,0,117
 2021,nl,Todd Zola,Harrison Bader,5366,StL,OF,10,act,active,"OF,SW",206,57,24,7,23,3,56,12,0.306,0.25,0.422,0,0,0,0,0,0,103
-2021,nl,Todd Zola,Michael Perez,4511,Pit,C,6,act,active,"C,SW",11,3,1,0,0,0,5,1,0.25,0.25,0.273,0,58,1,0,0,0,0
+2021,nl,Todd Zola,Jackie Bradley,3595,Bos,OF,14,act,active,"OF,SW",387,134,39,6,29,7,132,28,0.236,0.231,0.261,0,0,0,0,0,0,117
+2021,nl,Todd Zola,Joc Pederson,4090,Atl,OF,14,act,active,"UT,OF,SW",424,135,54,18,60,2,115,37,0.307,0.3,0.425,1,0,1,0,0,0,117
 2021,nl,Todd Zola,Travis D'Arnaud,2621,Atl,C,15,act,active,"C,SW",195,56,20,6,25,0,49,16,0.285,0.267,0.385,1,57,0,0,0,0,0
+2021,nl,Todd Zola,Michael Perez,4511,Pit,C,6,act,active,"C,SW",11,3,1,0,0,0,5,1,0.25,0.25,0.273,0,58,1,0,0,0,0
 2021,nl,Todd Zola,Tyrone Taylor,4506,Mil,UT,0,act,active,"OF,SW",145,47,18,5,20,1,30,12,0.325,0.421,0.421,0,0,0,0,0,0,77
 2021,nl,Todd Zola,Kolten Wong,3771,Mil,SW,16,act,active,"2B,SW,MI",419,110,64,12,46,12,75,30,0.334,0.2,0.437,0,0,0,113,0,0,0
-2021,nl,Todd Zola,Michael Chavis,5112,Pit,CI,117,dis,previously_active,"2B,1B,MI,CI,SW,OF",5,2,1,0,0,0,1,0,0.2,0.0,0.4,0,0,9,29,4,0,1
-2021,nl,Todd Zola,Daniel Robertson,4577,Min,CI,3,rel,previously_active,,6,5,1,0,1,0,2,1,0.444,0.0,0.333,0,0,3,9,24,8,0
-2021,nl,Todd Zola,Max Schrock,5731,Cin,MI,7,res,previously_active,"OF,2B,3B,MI,SW,1B",28,11,3,0,1,1,5,1,0.276,0.0,0.286,0,0,5,8,9,0,24
+2021,nl,Todd Zola,Max Schrock,5731,Cin,MI,7,res,previously_active,"OF,2B,1B,MI,3B,SW",28,11,3,0,1,1,5,1,0.276,0.0,0.286,0,0,5,8,9,0,24
 2021,nl,Todd Zola,Matt Adams,3755,FA,CI,17,rel,previously_active,,6,4,0,0,0,0,1,0,0.0,0.0,0.0,0,0,7,0,0,0,0
-2021,nl,Todd Zola,Patrick Wisdom,4570,ChC,3B,3,rel,previously_active,,75,27,15,10,16,1,35,7,0.337,0.0,0.693,0,0,13,0,77,0,18
-2021,nl,Todd Zola,Brian Anderson,5326,Mia,3B,16,dis,previously_active,"3B,SW,CI",222,65,20,5,24,5,62,24,0.335,0.0,0.356,0,0,0,0,65,1,0
+2021,nl,Todd Zola,Daniel Robertson,4577,Min,CI,3,rel,previously_active,,6,5,1,0,1,0,2,1,0.444,0.0,0.333,0,0,3,9,24,8,0
+2021,nl,Todd Zola,Michael Chavis,5112,Pit,CI,117,dis,previously_active,"2B,1B,CI,OF,MI,SW",5,2,1,0,0,0,1,0,0.2,0.0,0.4,0,0,9,29,4,0,1
+2021,nl,Todd Zola,Thairo Estrada,6305,SF,3B,3,res,previously_active,"2B,3B,OF,MI,CI,SW,SS",35,18,7,3,8,0,6,2,0.351,0.0,0.6,0,0,0,16,4,19,5
 2021,nl,Todd Zola,Todd Frazier,1979,Pit,3B,13,rel,previously_active,,9,6,1,0,2,0,1,3,0.385,0.0,0.222,3,0,4,0,3,0,0
-2021,nl,Todd Zola,Thairo Estrada,6305,SF,3B,3,res,previously_active,"2B,3B,SS,SW,CI,MI,OF",35,18,7,3,8,0,6,2,0.351,0.0,0.6,0,0,0,16,4,19,5
+2021,nl,Todd Zola,Brian Anderson,5326,Mia,3B,16,dis,previously_active,"UT,3B,CI,SW",222,65,20,5,24,5,62,24,0.335,0.0,0.356,0,0,0,0,65,1,0
+2021,nl,Todd Zola,Patrick Wisdom,4570,ChC,3B,3,rel,previously_active,,75,27,15,10,16,1,35,7,0.337,0.0,0.693,0,0,13,0,77,0,18
 2021,nl,Todd Zola,Josh Reddick,2163,FA,OF,3,rel,previously_active,,138,48,14,1,19,0,26,6,0.303,0.0,0.377,0,0,0,0,0,0,39
 2021,nl,Todd Zola,Ka'ai Tom,6482,SF,OF,63,rel,previously_active,,33,12,3,1,6,1,8,5,0.349,0.0,0.333,2,0,0,0,0,0,36
 2021,nl,Todd Zola,Austin Dean,4938,SF,OF,0,rel,previously_active,,10,10,1,0,1,0,4,4,0.333,0.0,0.1,0,0,0,0,0,0,9
-2021,nl,Todd Zola,Kevan Smith,4297,FA,C,3,rel,previously_active,,47,16,4,0,1,0,14,7,0.296,0.0,0.255,0,31,0,0,0,0,0
-2021,nl,Todd Zola,Tres Barrera,6883,Was,C,17,rel,previously_active,,41,13,1,0,3,0,9,7,0.36,0.0,0.244,0,29,0,0,0,0,0
 2021,nl,Todd Zola,Jacob Nottingham,5415,Bal,C,17,rel,previously_active,,10,4,0,0,1,0,6,0,0.1,0.0,0.2,5,3,4,0,0,0,0
-2021,nl,Todd Zola,Jacob Stallings,5554,Mia,C,2,dis,previously_active,"C,SW",363,109,35,8,53,0,83,47,0.329,0.0,0.366,0,104,1,0,0,0,0
 2021,nl,Todd Zola,Andrew Knapp,5228,Cin,C,0,rel,previously_active,,21,9,0,0,0,0,6,1,0.227,0.0,0.238,0,47,6,1,0,0,0
-2021,nl,Todd Zola,Seth Beer,5767,Ari,UT,17,dis,previously_active,1B,1,2,0,0,0,0,1,0,0.0,0.0,0.0,3,0,1,0,0,0,0
+2021,nl,Todd Zola,Kevan Smith,4297,FA,C,3,rel,previously_active,,47,16,4,0,1,0,14,7,0.296,0.0,0.255,0,31,0,0,0,0,0
+2021,nl,Todd Zola,Jacob Stallings,5554,Mia,C,2,dis,previously_active,"C,SW",363,109,35,8,53,0,83,47,0.329,0.0,0.366,0,104,1,0,0,0,0
+2021,nl,Todd Zola,Tres Barrera,6883,Was,C,17,rel,previously_active,,41,13,1,0,3,0,9,7,0.36,0.0,0.244,0,29,0,0,0,0,0
 2021,nl,Todd Zola,Jared Oliva,6966,Pit,UT,2,rel,previously_active,,23,11,3,0,1,2,5,3,0.269,0.0,0.261,0,0,0,0,0,0,18
 2021,nl,Todd Zola,Jake McCarthy,6977,Ari,UT,57,res,previously_active,OF,13,6,1,0,0,1,4,2,0.312,0.0,0.154,0,0,0,0,0,0,19
-2021,nl,Todd Zola,John Nogowski,7267,SF,UT,3,rel,previously_active,,5,6,1,0,0,0,0,1,0.429,0.0,0.2,0,0,32,0,0,0,1
 2021,nl,Todd Zola,Gregory Polanco,4166,Tor,UT,5,res,previously_active,"OF,SW",312,99,37,11,34,13,96,33,0.28,0.0,0.353,0,0,0,0,0,0,92
-2021,nl,Todd Zola,Jean Segura,3177,Phi,SW,20,trd,previously_active,,287,73,38,5,33,7,46,22,0.352,0.0,0.432,0,0,0,128,0,1,0
+2021,nl,Todd Zola,John Nogowski,7267,SF,UT,3,rel,previously_active,,5,6,1,0,0,0,0,1,0.429,0.0,0.2,0,0,32,0,0,0,1
+2021,nl,Todd Zola,Seth Beer,5767,Ari,UT,17,dis,previously_active,1B,1,2,0,0,0,0,1,0,0.0,0.0,0.0,3,0,1,0,0,0,0
 2021,nl,Todd Zola,Wilmer Difo,5044,FA,SW,3,rel,previously_active,,33,17,3,0,4,0,12,2,0.286,0.0,0.364,0,0,0,28,18,4,12
-2021,nl,Todd Zola,Max Schrock,5731,Cin,MI,7,res,reserved,"OF,2B,3B,MI,SW,1B",40,11,6,1,6,0,7,1,0.262,0.269,0.425,0,0,5,8,9,0,24
-2021,nl,Todd Zola,Michael Chavis,5112,Pit,CI,117,dis,reserved,"2B,1B,MI,CI,SW,OF",37,10,3,1,5,0,9,0,0.378,0.35,0.514,0,0,9,29,4,0,1
-2021,nl,Todd Zola,Thairo Estrada,6305,SF,3B,3,res,reserved,"2B,3B,SS,SW,CI,MI,OF",73,27,10,3,9,1,16,4,0.304,0.5,0.397,0,0,0,16,4,19,5
-2021,nl,Todd Zola,Brian Anderson,5326,Mia,3B,16,dis,reserved,"3B,SW,CI",11,3,4,2,4,0,3,2,0.385,0.0,0.818,0,0,0,0,65,1,0
+2021,nl,Todd Zola,Jean Segura,3177,Phi,SW,20,trd,previously_active,,287,73,38,5,33,7,46,22,0.352,0.0,0.432,0,0,0,128,0,1,0
+2021,nl,Todd Zola,Michael Chavis,5112,Pit,CI,117,dis,reserved,"2B,1B,CI,OF,MI,SW",37,10,3,1,5,0,9,0,0.378,0.35,0.514,0,0,9,29,4,0,1
+2021,nl,Todd Zola,Max Schrock,5731,Cin,MI,7,res,reserved,"OF,2B,1B,MI,3B,SW",40,11,6,1,6,0,7,1,0.262,0.269,0.425,0,0,5,8,9,0,24
+2021,nl,Todd Zola,Thairo Estrada,6305,SF,3B,3,res,reserved,"2B,3B,OF,MI,CI,SW,SS",73,27,10,3,9,1,16,4,0.304,0.5,0.397,0,0,0,16,4,19,5
+2021,nl,Todd Zola,Brian Anderson,5326,Mia,3B,16,dis,reserved,"UT,3B,CI,SW",11,3,4,2,4,0,3,2,0.385,0.0,0.818,0,0,0,0,65,1,0
 2021,nl,Todd Zola,Jacob Stallings,5554,Mia,C,2,dis,reserved,"C,SW",11,3,3,0,0,0,2,2,0.538,0.538,0.455,0,104,1,0,0,0,0
-2021,nl,Todd Zola,Gregory Polanco,4166,Tor,UT,5,res,reserved,"OF,SW",24,8,1,0,2,1,8,3,0.321,0.0,0.375,0,0,0,0,0,0,92
-2021,nl,Todd Zola,Jake McCarthy,6977,Ari,UT,57,res,reserved,OF,38,15,8,2,3,2,14,5,0.341,0.5,0.447,0,0,0,0,0,0,19
 2021,nl,Todd Zola,Seth Beer,5767,Ari,UT,17,dis,reserved,1B,0,0,0,0,0,0,0,0,0.0,0.0,0.0,3,0,1,0,0,0,0
-2021,nl,Todd Zola,Brandon Belt,3336,SF,CI,17,act,previously_reserved,"1B,CI,SW",64,18,13,6,9,0,18,10,0.347,0.0,0.531,0,0,93,0,0,0,0
+2021,nl,Todd Zola,Jake McCarthy,6977,Ari,UT,57,res,reserved,OF,38,15,8,2,3,2,14,5,0.341,0.5,0.447,0,0,0,0,0,0,19
+2021,nl,Todd Zola,Gregory Polanco,4166,Tor,UT,5,res,reserved,"OF,SW",24,8,1,0,2,1,8,3,0.321,0.0,0.375,0,0,0,0,0,0,92
 2021,nl,Todd Zola,Matt Adams,3755,FA,CI,17,rel,previously_reserved,,15,9,2,0,2,0,3,2,0.353,0.0,0.333,0,0,7,0,0,0,0
-2021,nl,Todd Zola,Pavin Smith,6109,Ari,1B,1,act,previously_reserved,"1B,OF,SW,CI",15,4,2,0,4,0,6,0,0.267,0.0,0.267,0,0,54,0,0,0,98
-2021,nl,Todd Zola,Ian Happ,5352,ChC,2B,23,act,previously_reserved,"OF,2B,SW",9,2,2,1,2,0,2,0,0.333,0.0,0.778,1,0,0,8,2,0,123
-2021,nl,Todd Zola,Kyle Farmer,4111,Cin,3B,17,act,previously_reserved,"2B,SS,3B,MI,SW,1B",22,6,2,1,4,0,7,1,0.348,0.0,0.545,0,0,5,9,10,121,2
-2021,nl,Todd Zola,Austin Dean,4938,SF,OF,0,rel,previously_reserved,,17,8,3,1,6,0,5,1,0.316,0.0,0.588,0,0,0,0,0,0,9
-2021,nl,Todd Zola,Joc Pederson,4090,Atl,OF,14,act,previously_reserved,"OF,SW",5,2,1,0,1,0,2,2,0.444,0.0,0.2,1,0,1,0,0,0,117
+2021,nl,Todd Zola,Pavin Smith,6109,Ari,1B,1,act,previously_reserved,"1B,OF,CI,SW",15,4,2,0,4,0,6,0,0.267,0.0,0.267,0,0,54,0,0,0,98
+2021,nl,Todd Zola,Brandon Belt,3336,SF,CI,17,act,previously_reserved,"1B,SW,CI",64,18,13,6,9,0,18,10,0.347,0.0,0.531,0,0,93,0,0,0,0
+2021,nl,Todd Zola,Ian Happ,5352,ChC,2B,23,act,previously_reserved,"OF,SW,2B",9,2,2,1,2,0,2,0,0.333,0.0,0.778,1,0,0,8,2,0,123
+2021,nl,Todd Zola,Kyle Farmer,4111,Cin,3B,17,act,previously_reserved,"2B,SS,SW,1B,MI,3B",22,6,2,1,4,0,7,1,0.348,0.0,0.545,0,0,5,9,10,121,2
+2021,nl,Todd Zola,Joc Pederson,4090,Atl,OF,14,act,previously_reserved,"UT,OF,SW",5,2,1,0,1,0,2,2,0.444,0.0,0.2,1,0,1,0,0,0,117
 2021,nl,Todd Zola,Josh Reddick,2163,FA,OF,3,rel,previously_reserved,,13,6,1,1,2,0,5,0,0.077,0.0,0.308,0,0,0,0,0,0,39
+2021,nl,Todd Zola,Austin Dean,4938,SF,OF,0,rel,previously_reserved,,17,8,3,1,6,0,5,1,0.316,0.0,0.588,0,0,0,0,0,0,9
 2021,nl,Todd Zola,Andrew McCutchen,1222,Phi,OF,20,act,previously_reserved,"OF,SW",19,5,1,1,1,0,8,1,0.15,0.0,0.263,1,0,0,0,0,0,135
 2021,nl,Todd Zola,Travis D'Arnaud,2621,Atl,C,15,act,previously_reserved,"C,SW",14,4,1,1,1,0,4,1,0.267,0.0,0.429,1,57,0,0,0,0,0
 2021,nl,Todd Zola,John Nogowski,7267,SF,UT,3,rel,previously_reserved,,9,9,1,0,0,0,1,0,0.0,0.0,0.0,0,0,32,0,0,0,1
 2021,nl,Todd Zola,Tyrone Taylor,4506,Mil,UT,0,act,previously_reserved,"OF,SW",87,37,14,6,19,4,24,6,0.281,0.0,0.471,0,0,0,0,0,0,77
 2021,nl,Todd Zola,Jared Oliva,6966,Pit,UT,2,rel,previously_reserved,,17,9,1,0,1,0,5,0,0.176,0.0,0.176,0,0,0,0,0,0,18
-2021,nl,Todd Zola,Kolten Wong,3771,Mil,SW,16,act,previously_reserved,"2B,SW,MI",26,6,6,2,4,0,8,1,0.357,0.0,0.615,0,0,0,113,0,0,0
 2021,nl,Todd Zola,Wilmer Difo,5044,FA,SW,3,rel,previously_reserved,,15,6,0,0,0,0,3,0,0.133,0.0,0.133,0,0,0,28,18,4,12
 2021,nl,Todd Zola,Jean Segura,3177,Phi,SW,20,trd,previously_reserved,,15,4,4,1,3,0,2,1,0.588,0.0,0.733,0,0,0,128,0,1,0
+2021,nl,Todd Zola,Kolten Wong,3771,Mil,SW,16,act,previously_reserved,"2B,SW,MI",26,6,6,2,4,0,8,1,0.357,0.0,0.615,0,0,0,113,0,0,0
+2021,nl,Craig Mish,Wilmer Flores,2527,SF,MI,7,act,active,"1B,2B,SW,3B,MI,CI",383,137,55,18,52,1,55,41,0.333,0.409,0.446,4,0,34,30,58,0,0
+2021,nl,Craig Mish,Nico Hoerner,6691,ChC,CI,8,act,active,"2B,SS,SW,3B,OF,MI,CI",138,41,13,0,15,5,25,17,0.411,0.0,0.399,0,0,0,30,1,12,5
 2021,nl,Craig Mish,C.J. Cron,3696,Col,1B,17,act,active,"1B,CI,SW",452,137,66,28,90,1,112,60,0.375,0.5,0.533,3,0,130,0,0,0,0
-2021,nl,Craig Mish,Nico Hoerner,6691,ChC,CI,8,act,active,"2B,SS,3B,CI,SW,MI,OF",138,41,13,0,15,5,25,17,0.411,0.0,0.399,0,0,0,30,1,12,5
-2021,nl,Craig Mish,Wilmer Flores,2527,SF,MI,7,act,active,"1B,2B,MI,SW,CI,3B",383,137,55,18,52,1,55,41,0.333,0.409,0.446,4,0,34,30,58,0,0
 2021,nl,Craig Mish,Luis Garcia,6213,Was,2B,0,act,active,"2B,SS,SW,MI",183,53,21,3,17,0,34,8,0.283,0.333,0.399,0,0,0,59,0,8,0
-2021,nl,Craig Mish,Kevin Newman,5393,Pit,SS,7,act,active,"UT,2B,SS,MI,SW",517,148,50,5,39,6,41,27,0.265,0.381,0.309,0,0,0,15,0,132,0
-2021,nl,Craig Mish,Sergio Alcantara,4665,ChC,3B,1,act,active,"3B,2B,SW,CI,SS,MI",198,77,28,4,15,3,70,27,0.295,0.25,0.318,0,0,0,22,3,55,0
-2021,nl,Craig Mish,Rafael Ortega,3646,ChC,OF,7,act,active,OF,248,79,39,10,29,11,57,25,0.371,0.52,0.484,0,0,0,0,0,0,93
+2021,nl,Craig Mish,Kevin Newman,5393,Pit,SS,7,act,active,"UT,SS,2B,MI,SW",517,148,50,5,39,6,41,27,0.265,0.381,0.309,0,0,0,15,0,132,0
+2021,nl,Craig Mish,Sergio Alcantara,4665,ChC,3B,1,act,active,"3B,2B,MI,CI,SW,SS",198,77,28,4,15,3,70,27,0.295,0.25,0.318,0,0,0,22,3,55,0
+2021,nl,Craig Mish,Bryce Harper,2628,Phi,OF,39,act,active,"UT,OF,SW",488,141,101,35,84,13,134,100,0.429,0.304,0.615,2,0,1,0,0,0,139
 2021,nl,Craig Mish,Darin Ruf,4191,SF,OF,1,act,active,"1B,OF,SW",262,117,41,16,43,2,87,46,0.385,0.333,0.519,2,0,44,0,0,0,36
-2021,nl,Craig Mish,Bryce Harper,2628,Phi,OF,39,act,active,"OF,SW",488,141,101,35,84,13,134,100,0.429,0.304,0.615,2,0,1,0,0,0,139
+2021,nl,Craig Mish,Rafael Ortega,3646,ChC,OF,7,act,active,OF,248,79,39,10,29,11,57,25,0.371,0.52,0.484,0,0,0,0,0,0,93
 2021,nl,Craig Mish,Guillermo Heredia,5329,Atl,OF,67,act,active,"OF,SW",180,79,22,2,12,0,43,18,0.278,0.125,0.278,0,0,0,0,0,0,111
 2021,nl,Craig Mish,Alex Jackson,4472,Mia,C,77,act,active,"C,SW",88,35,8,1,7,0,51,10,0.265,0.556,0.216,0,43,0,0,0,0,1
 2021,nl,Craig Mish,J.T. Realmuto,4028,Phi,C,19,act,active,"C,1B,CI,SW",476,134,64,17,73,13,129,48,0.343,0.059,0.439,3,118,16,0,0,0,0
@@ -383,148 +429,132 @@ year,league,team,player_name,player_id,mlb_team,position,salary,status,roster_se
 2021,nl,Craig Mish,Alan Trejo,7286,Col,MI,1,rel,previously_active,,21,12,5,0,2,0,7,2,0.292,0.0,0.286,0,0,0,10,0,9,0
 2021,nl,Craig Mish,Jason Vosler,6402,SF,CI,23,rel,previously_active,,26,12,4,1,4,1,4,2,0.321,0.0,0.5,1,0,3,3,19,0,3
 2021,nl,Craig Mish,Max Schrock,5731,Cin,2B,3,rel,previously_active,,2,2,1,0,0,0,2,0,0.0,0.0,0.0,0,0,5,8,9,0,24
-2021,nl,Craig Mish,Alec Bohm,6542,Phi,3B,24,res,previously_active,"3B,1B,SW,CI",371,111,46,7,47,4,108,31,0.302,0.0,0.342,0,0,7,0,103,0,0
-2021,nl,Craig Mish,Ronald Acuna,5737,Atl,OF,42,dis,previously_active,"OF,SW",297,82,72,24,52,17,85,49,0.394,0.0,0.596,0,0,0,0,0,0,81
+2021,nl,Craig Mish,Alec Bohm,6542,Phi,3B,24,res,previously_active,"3B,1B,CI,SW",371,111,46,7,47,4,108,31,0.302,0.0,0.342,0,0,7,0,103,0,0
 2021,nl,Craig Mish,Corey Dickerson,3661,FA,OF,10,rel,previously_active,,205,63,27,2,14,2,45,16,0.324,0.0,0.38,6,0,0,0,0,0,91
-2021,nl,Craig Mish,Gerardo Parra,2000,FA,OF,1,dis,previously_active,OF,93,50,12,2,10,1,30,6,0.284,0.0,0.333,0,0,0,0,0,0,27
+2021,nl,Craig Mish,Ronald Acuna,5737,Atl,OF,42,dis,previously_active,"OF,SW",297,82,72,24,52,17,85,49,0.394,0.0,0.596,0,0,0,0,0,0,81
 2021,nl,Craig Mish,Yadiel Hernandez,5664,Was,OF,2,rel,previously_active,,7,5,0,0,0,0,1,0,0.25,0.0,0.286,0,0,0,0,0,0,61
 2021,nl,Craig Mish,Lorenzo Cain,2002,Mil,OF,14,rel,previously_active,,103,31,16,3,9,4,24,14,0.322,0.0,0.35,0,0,0,0,0,0,70
+2021,nl,Craig Mish,Gerardo Parra,2000,FA,OF,1,dis,previously_active,OF,93,50,12,2,10,1,30,6,0.284,0.0,0.333,0,0,0,0,0,0,27
 2021,nl,Craig Mish,Magneuris Sierra,5233,LAA,OF,21,rel,previously_active,,12,9,2,0,0,1,3,3,0.267,0.0,0.083,0,0,0,0,0,0,77
 2021,nl,Craig Mish,Joey Bart,6596,SF,C,1,rel,previously_active,,6,2,1,0,1,0,2,0,0.333,0.0,0.333,0,1,0,0,0,0,0
 2021,nl,Craig Mish,Johneshwy Fargas,7160,FA,UT,5,rel,previously_active,,1,1,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,0,0,0,16
 2021,nl,Craig Mish,Troy Stokes,6527,FA,UT,12,rel,previously_active,,14,7,2,0,2,1,5,1,0.25,0.0,0.214,0,0,0,0,0,0,4
 2021,nl,Craig Mish,Johan Camargo,4869,Phi,SW,9,rel,previously_active,,1,2,1,0,0,0,1,1,0.5,0.0,0.0,0,0,1,1,1,0,0
-2021,nl,Craig Mish,Alec Bohm,6542,Phi,3B,24,res,reserved,"3B,1B,SW,CI",9,4,0,0,0,0,3,0,0.4,0.4,0.333,0,0,7,0,103,0,0
+2021,nl,Craig Mish,Alec Bohm,6542,Phi,3B,24,res,reserved,"3B,1B,CI,SW",9,4,0,0,0,0,3,0,0.4,0.4,0.333,0,0,7,0,103,0,0
 2021,nl,Craig Mish,Gerardo Parra,2000,FA,OF,1,dis,reserved,OF,2,2,0,0,0,0,0,0,0.5,0.5,0.5,0,0,0,0,0,0,27
 2021,nl,Craig Mish,Ronald Acuna,5737,Atl,OF,42,dis,reserved,"OF,SW",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,0,0,0,81
+2021,nl,Craig Mish,Wilmer Flores,2527,SF,MI,7,act,previously_reserved,"1B,2B,SW,3B,MI,CI",6,2,2,0,1,0,1,0,0.5,0.0,0.5,4,0,34,30,58,0,0
+2021,nl,Craig Mish,Nico Hoerner,6691,ChC,CI,8,act,previously_reserved,"2B,SS,SW,3B,OF,MI,CI",11,3,0,0,1,0,0,0,0.0,0.0,0.0,0,0,0,30,1,12,5
 2021,nl,Craig Mish,C.J. Cron,3696,Col,1B,17,act,previously_reserved,"1B,CI,SW",18,5,4,0,2,0,5,0,0.368,0.0,0.444,3,0,130,0,0,0,0
-2021,nl,Craig Mish,Nico Hoerner,6691,ChC,CI,8,act,previously_reserved,"2B,SS,3B,CI,SW,MI,OF",11,3,0,0,1,0,0,0,0.0,0.0,0.0,0,0,0,30,1,12,5
-2021,nl,Craig Mish,Wilmer Flores,2527,SF,MI,7,act,previously_reserved,"1B,2B,MI,SW,CI,3B",6,2,2,0,1,0,1,0,0.5,0.0,0.5,4,0,34,30,58,0,0
 2021,nl,Craig Mish,Luis Garcia,6213,Was,2B,0,act,previously_reserved,"2B,SS,SW,MI",53,17,8,3,5,0,9,3,0.25,0.0,0.453,0,0,0,59,0,8,0
-2021,nl,Craig Mish,Sergio Alcantara,4665,ChC,3B,1,act,previously_reserved,"3B,2B,SW,CI,SS,MI",21,11,2,1,2,0,4,3,0.385,0.0,0.429,0,0,0,22,3,55,0
+2021,nl,Craig Mish,Sergio Alcantara,4665,ChC,3B,1,act,previously_reserved,"3B,2B,MI,CI,SW,SS",21,11,2,1,2,0,4,3,0.385,0.0,0.429,0,0,0,22,3,55,0
 2021,nl,Craig Mish,Jaylin Davis,7085,SF,OF,0,rel,previously_reserved,,6,4,1,0,0,0,1,0,0.167,0.0,0.333,0,0,0,0,0,0,3
+2021,nl,Craig Mish,Corey Dickerson,3661,FA,OF,10,rel,previously_reserved,,18,6,1,0,3,1,0,2,0.35,0.0,0.389,6,0,0,0,0,0,91
 2021,nl,Craig Mish,Rafael Ortega,3646,ChC,OF,7,act,previously_reserved,OF,21,14,3,0,2,0,6,2,0.391,0.0,0.476,0,0,0,0,0,0,93
 2021,nl,Craig Mish,Lorenzo Cain,2002,Mil,OF,14,rel,previously_reserved,,19,5,5,0,6,1,2,1,0.476,0.0,0.474,0,0,0,0,0,0,70
-2021,nl,Craig Mish,Corey Dickerson,3661,FA,OF,10,rel,previously_reserved,,18,6,1,0,3,1,0,2,0.35,0.0,0.389,6,0,0,0,0,0,91
-2021,nl,Tristan H. Cockcroft,Colton Welker,6106,Col,CI,20,act,active,3B,23,14,4,0,1,0,7,2,0.24,0.375,0.217,0,0,2,0,5,0,0
+2021,nl,Tristan H. Cockcroft,Ryan McMahon,4613,Col,1B,13,act,active,"3B,2B,MI,1B,CI,SW",528,151,80,23,86,6,147,59,0.331,0.296,0.449,0,0,0,52,113,0,0
 2021,nl,Tristan H. Cockcroft,Didi Gregorius,3599,Phi,MI,16,act,active,"SS,MI,SW",361,101,34,12,53,3,65,24,0.267,0.167,0.36,0,0,0,0,0,101,0
-2021,nl,Tristan H. Cockcroft,Ryan McMahon,4613,Col,1B,13,act,active,"3B,2B,CI,SW,1B,MI",528,151,80,23,86,6,147,59,0.331,0.296,0.449,0,0,0,52,113,0,0
-2021,nl,Tristan H. Cockcroft,Gavin Lux,6141,LAD,2B,15,act,active,"OF,2B,SW,SS,MI",283,86,43,6,36,4,69,34,0.321,0.375,0.36,0,0,0,27,1,59,17
+2021,nl,Tristan H. Cockcroft,Colton Welker,6106,Col,CI,20,act,active,3B,23,14,4,0,1,0,7,2,0.24,0.375,0.217,0,0,2,0,5,0,0
+2021,nl,Tristan H. Cockcroft,Gavin Lux,6141,LAD,2B,15,act,active,"OF,2B,MI,SW,SS",283,86,43,6,36,4,69,34,0.321,0.375,0.36,0,0,0,27,1,59,17
 2021,nl,Tristan H. Cockcroft,Corey Seager,4154,Tex,SS,26,act,active,"SS,SW,MI",348,94,54,16,57,1,66,48,0.394,0.52,0.523,0,0,0,0,0,92,0
-2021,nl,Tristan H. Cockcroft,Josh Harrison,3747,FA,3B,0,act,active,"3B,OF,2B,SW,CI,SS,MI",483,132,56,7,55,9,75,29,0.334,0.077,0.389,0,0,0,102,23,8,22
-2021,nl,Tristan H. Cockcroft,Wil Myers,3153,SD,OF,21,act,active,"OF,SW",440,145,56,17,62,8,140,53,0.335,0.278,0.436,1,0,0,0,0,0,128
-2021,nl,Tristan H. Cockcroft,Sam Hilliard,6107,Col,OF,1,act,active,"OF,SW",172,58,26,12,30,5,67,21,0.32,0.36,0.488,1,0,0,0,0,0,63
+2021,nl,Tristan H. Cockcroft,Josh Harrison,3747,FA,3B,0,act,active,"3B,2B,OF,SS,SW,CI,MI",483,132,56,7,55,9,75,29,0.334,0.077,0.389,0,0,0,102,23,8,22
 2021,nl,Tristan H. Cockcroft,Jesus Sanchez,6068,Mia,OF,1,act,active,"OF,SW",205,59,26,13,34,0,69,20,0.328,0.308,0.502,0,0,0,0,0,0,62
 2021,nl,Tristan H. Cockcroft,Delino DeShields,3357,FA,OF,0,act,active,"OF,SW",38,21,4,1,4,2,7,9,0.404,0.267,0.447,1,0,0,0,0,0,20
-2021,nl,Tristan H. Cockcroft,Curt Casali,3905,SF,C,1,act,active,"C,SW",197,76,19,5,26,0,66,26,0.317,0.25,0.355,0,64,3,0,0,0,0
+2021,nl,Tristan H. Cockcroft,Sam Hilliard,6107,Col,OF,1,act,active,"OF,SW",172,58,26,12,30,5,67,21,0.32,0.36,0.488,1,0,0,0,0,0,63
+2021,nl,Tristan H. Cockcroft,Wil Myers,3153,SD,OF,21,act,active,"OF,SW",440,145,56,17,62,8,140,53,0.335,0.278,0.436,1,0,0,0,0,0,128
 2021,nl,Tristan H. Cockcroft,William Contreras,6423,Atl,C,0,act,active,"C,SW",6,2,1,1,2,0,1,2,0.5,0.5,0.833,0,49,0,0,0,0,0
+2021,nl,Tristan H. Cockcroft,Curt Casali,3905,SF,C,1,act,active,"C,SW",197,76,19,5,26,0,66,26,0.317,0.25,0.355,0,64,3,0,0,0,0
 2021,nl,Tristan H. Cockcroft,Alex Dickerson,4061,FA,UT,10,act,active,"OF,SW",267,105,36,13,37,1,72,22,0.302,0.5,0.423,5,0,0,0,0,0,82
-2021,nl,Tristan H. Cockcroft,Eric Sogard,3034,FA,MI,15,rel,previously_active,,166,76,16,1,12,3,30,9,0.288,0.0,0.319,0,0,1,43,10,4,0
 2021,nl,Tristan H. Cockcroft,Lewin Diaz,5694,Mia,CI,15,rel,previously_active,,13,7,1,1,2,0,4,0,0.077,0.0,0.308,0,0,32,0,0,0,0
-2021,nl,Tristan H. Cockcroft,Rhys Hoskins,5321,Phi,CI,24,dis,previously_active,"1B,SW,CI",386,106,62,25,69,3,108,46,0.33,0.0,0.513,1,0,103,0,0,0,0
+2021,nl,Tristan H. Cockcroft,Eric Sogard,3034,FA,MI,15,rel,previously_active,,166,76,16,1,12,3,30,9,0.288,0.0,0.319,0,0,1,43,10,4,0
+2021,nl,Tristan H. Cockcroft,Rhys Hoskins,5321,Phi,CI,24,dis,previously_active,"1B,CI,SW",386,106,62,25,69,3,108,46,0.33,0.0,0.513,1,0,103,0,0,0,0
 2021,nl,Tristan H. Cockcroft,Rio Ruiz,4504,FA,2B,1,rel,previously_active,,14,13,0,0,2,0,4,1,0.25,0.0,0.214,1,0,1,20,17,0,2
-2021,nl,Tristan H. Cockcroft,Jon Berti,5574,Mia,3B,13,dis,previously_active,"3B,2B,OF,CI,SW,MI",233,85,35,4,19,8,61,32,0.311,0.0,0.313,0,0,0,27,46,2,12
+2021,nl,Tristan H. Cockcroft,Jon Berti,5574,Mia,3B,13,dis,previously_active,"3B,2B,OF,SW,CI,MI",233,85,35,4,19,8,61,32,0.311,0.0,0.313,0,0,0,27,46,2,12
+2021,nl,Tristan H. Cockcroft,Roman Quinn,4018,FA,OF,1,rel,previously_active,,44,24,6,0,2,4,16,5,0.269,0.0,0.25,0,0,0,0,0,0,27
+2021,nl,Tristan H. Cockcroft,Cameron Maybin,573,FA,OF,8,rel,previously_active,,12,5,2,0,0,0,3,2,0.312,0.0,0.083,0,0,0,0,0,0,9
 2021,nl,Tristan H. Cockcroft,Victor Robles,5309,Was,OF,24,res,previously_active,"OF,SW",295,100,33,2,18,6,80,30,0.312,0.0,0.302,0,0,0,0,0,0,104
 2021,nl,Tristan H. Cockcroft,Magneuris Sierra,5233,LAA,OF,0,rel,previously_active,,69,32,6,0,0,2,13,7,0.342,0.0,0.319,0,0,0,0,0,0,77
-2021,nl,Tristan H. Cockcroft,Roman Quinn,4018,FA,OF,1,rel,previously_active,,44,24,6,0,2,4,16,5,0.269,0.0,0.25,0,0,0,0,0,0,27
 2021,nl,Tristan H. Cockcroft,Connor Joe,5311,Col,OF,0,rel,previously_active,,3,3,0,0,0,0,0,0,0.333,0.0,0.333,3,0,14,0,0,0,32
-2021,nl,Tristan H. Cockcroft,Cameron Maybin,573,FA,OF,8,rel,previously_active,,12,5,2,0,0,0,3,2,0.312,0.0,0.083,0,0,0,0,0,0,9
-2021,nl,Tristan H. Cockcroft,Chad Wallach,5153,LAA,C,0,rel,previously_active,,28,10,0,0,3,0,18,2,0.25,0.0,0.286,0,19,0,0,0,0,0
-2021,nl,Tristan H. Cockcroft,Jorge Alfaro,4004,SD,C,4,dis,previously_active,"C,OF,SW",295,92,22,4,30,8,99,11,0.283,0.0,0.342,0,61,3,0,0,0,21
 2021,nl,Tristan H. Cockcroft,Robinson Chirinos,3011,FA,C,0,dis,previously_active,"C,SW",2,1,0,0,0,0,1,0,0.0,0.0,0.0,1,27,0,2,0,0,0
+2021,nl,Tristan H. Cockcroft,Jorge Alfaro,4004,SD,C,4,dis,previously_active,"C,SW,OF",295,92,22,4,30,8,99,11,0.283,0.0,0.342,0,61,3,0,0,0,21
 2021,nl,Tristan H. Cockcroft,Sandy Leon,3901,Cle,C,0,rel,previously_active,,10,4,0,0,0,0,3,0,0.2,0.0,0.2,1,60,0,0,1,0,0
-2021,nl,Tristan H. Cockcroft,Albert Almora,4126,FA,UT,0,rel,previously_active,,24,17,1,0,0,0,7,1,0.16,0.0,0.167,0,0,0,0,0,0,36
+2021,nl,Tristan H. Cockcroft,Chad Wallach,5153,LAA,C,0,rel,previously_active,,28,10,0,0,3,0,18,2,0.25,0.0,0.286,0,19,0,0,0,0,0
 2021,nl,Tristan H. Cockcroft,Matt Carpenter,3510,FA,UT,1,rel,previously_active,,22,19,1,0,0,0,9,2,0.167,0.0,0.182,2,0,14,34,6,0,0
-2021,nl,Tristan H. Cockcroft,Patrick Mazeika,6223,NYM,UT,0,rel,previously_active,,5,2,1,0,0,0,0,0,0.0,0.0,0.0,1,24,1,0,0,0,0
 2021,nl,Tristan H. Cockcroft,Andy Young,6834,Ari,UT,21,rel,previously_active,,16,10,2,0,0,0,10,1,0.111,0.0,0.0,1,0,0,21,2,0,1
-2021,nl,Tristan H. Cockcroft,Rodolfo Castro,7383,Pit,SW,79,res,previously_active,3B,66,23,3,0,1,0,23,4,0.239,0.0,0.212,0,0,0,20,5,0,0
-2021,nl,Tristan H. Cockcroft,Rhys Hoskins,5321,Phi,CI,24,dis,reserved,"1B,SW,CI",3,1,2,2,2,0,0,1,0.75,0.0,2.67,1,0,103,0,0,0,0
-2021,nl,Tristan H. Cockcroft,Jon Berti,5574,Mia,3B,13,dis,reserved,"3B,2B,OF,CI,SW,MI",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,27,46,2,12
+2021,nl,Tristan H. Cockcroft,Patrick Mazeika,6223,NYM,UT,0,rel,previously_active,,5,2,1,0,0,0,0,0,0.0,0.0,0.0,1,24,1,0,0,0,0
+2021,nl,Tristan H. Cockcroft,Albert Almora,4126,FA,UT,0,rel,previously_active,,24,17,1,0,0,0,7,1,0.16,0.0,0.167,0,0,0,0,0,0,36
+2021,nl,Tristan H. Cockcroft,Rodolfo Castro,7383,Pit,SW,79,res,previously_active,"UT,3B",66,23,3,0,1,0,23,4,0.239,0.0,0.212,0,0,0,20,5,0,0
+2021,nl,Tristan H. Cockcroft,Rhys Hoskins,5321,Phi,CI,24,dis,reserved,"1B,CI,SW",3,1,2,2,2,0,0,1,0.75,0.0,2.67,1,0,103,0,0,0,0
+2021,nl,Tristan H. Cockcroft,Jon Berti,5574,Mia,3B,13,dis,reserved,"3B,2B,OF,SW,CI,MI",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,27,46,2,12
 2021,nl,Tristan H. Cockcroft,Victor Robles,5309,Was,OF,24,res,reserved,"OF,SW",20,7,4,0,1,2,5,3,0.28,0.0,0.2,0,0,0,0,0,0,104
 2021,nl,Tristan H. Cockcroft,Robinson Chirinos,3011,FA,C,0,dis,reserved,"C,SW",0,0,0,0,0,0,0,0,0.0,0.0,0.0,1,27,0,2,0,0,0
-2021,nl,Tristan H. Cockcroft,Jorge Alfaro,4004,SD,C,4,dis,reserved,"C,OF,SW",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,61,3,0,0,0,21
-2021,nl,Tristan H. Cockcroft,Rodolfo Castro,7383,Pit,SW,79,res,reserved,3B,7,2,2,2,3,0,0,0,0.286,0.0,1.14,0,0,0,20,5,0,0
+2021,nl,Tristan H. Cockcroft,Jorge Alfaro,4004,SD,C,4,dis,reserved,"C,SW,OF",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,61,3,0,0,0,21
+2021,nl,Tristan H. Cockcroft,Rodolfo Castro,7383,Pit,SW,79,res,reserved,"UT,3B",7,2,2,2,3,0,0,0,0.286,0.0,1.14,0,0,0,20,5,0,0
 2021,nl,Tristan H. Cockcroft,Eric Sogard,3034,FA,MI,15,rel,previously_reserved,,3,2,0,0,0,0,0,0,0.0,0.0,0.0,0,0,1,43,10,4,0
-2021,nl,Tristan H. Cockcroft,Lewin Diaz,5694,Mia,CI,15,rel,previously_reserved,,8,2,2,1,2,0,1,2,0.4,0.0,0.625,0,0,32,0,0,0,0
 2021,nl,Tristan H. Cockcroft,Didi Gregorius,3599,Phi,MI,16,act,previously_reserved,"SS,MI,SW",7,2,1,1,1,0,2,1,0.375,0.0,0.857,0,0,0,0,0,101,0
+2021,nl,Tristan H. Cockcroft,Lewin Diaz,5694,Mia,CI,15,rel,previously_reserved,,8,2,2,1,2,0,1,2,0.4,0.0,0.625,0,0,32,0,0,0,0
 2021,nl,Tristan H. Cockcroft,Rio Ruiz,4504,FA,2B,1,rel,previously_reserved,,3,4,0,0,0,0,0,0,0.0,0.0,0.0,1,0,1,20,17,0,2
-2021,nl,Tristan H. Cockcroft,Gavin Lux,6141,LAD,2B,15,act,previously_reserved,"OF,2B,SW,SS,MI",52,16,6,1,10,0,14,7,0.367,0.0,0.385,0,0,0,27,1,59,17
+2021,nl,Tristan H. Cockcroft,Gavin Lux,6141,LAD,2B,15,act,previously_reserved,"OF,2B,MI,SW,SS",52,16,6,1,10,0,14,7,0.367,0.0,0.385,0,0,0,27,1,59,17
 2021,nl,Tristan H. Cockcroft,Corey Seager,4154,Tex,SS,26,act,previously_reserved,"SS,SW,MI",5,1,0,0,0,0,0,0,0.4,0.0,0.4,0,0,0,0,0,92,0
-2021,nl,Tristan H. Cockcroft,Josh Harrison,3747,FA,3B,0,act,previously_reserved,"3B,OF,2B,SW,CI,SS,MI",22,6,2,1,5,0,0,2,0.5,0.0,0.636,0,0,0,102,23,8,22
-2021,nl,Tristan H. Cockcroft,Wil Myers,3153,SD,OF,21,act,previously_reserved,"OF,SW",2,1,0,0,1,0,1,1,0.25,0.0,0.0,1,0,0,0,0,0,128
-2021,nl,Tristan H. Cockcroft,Roman Quinn,4018,FA,OF,1,rel,previously_reserved,,8,4,2,0,0,0,3,1,0.5,0.0,0.5,0,0,0,0,0,0,27
+2021,nl,Tristan H. Cockcroft,Josh Harrison,3747,FA,3B,0,act,previously_reserved,"3B,2B,OF,SS,SW,CI,MI",22,6,2,1,5,0,0,2,0.5,0.0,0.636,0,0,0,102,23,8,22
 2021,nl,Tristan H. Cockcroft,Jesus Sanchez,6068,Mia,OF,1,act,previously_reserved,"OF,SW",22,5,1,1,2,0,9,0,0.227,0.0,0.364,0,0,0,0,0,0,62
+2021,nl,Tristan H. Cockcroft,Roman Quinn,4018,FA,OF,1,rel,previously_reserved,,8,4,2,0,0,0,3,1,0.5,0.0,0.5,0,0,0,0,0,0,27
+2021,nl,Tristan H. Cockcroft,Wil Myers,3153,SD,OF,21,act,previously_reserved,"OF,SW",2,1,0,0,1,0,1,1,0.25,0.0,0.0,1,0,0,0,0,0,128
 2021,nl,Tristan H. Cockcroft,Curt Casali,3905,SF,C,1,act,previously_reserved,"C,SW",3,1,1,0,0,0,0,0,0.0,0.0,0.0,0,64,3,0,0,0,0
-2021,nl,Tristan H. Cockcroft,Albert Almora,4126,FA,UT,0,rel,previously_reserved,,5,3,0,0,0,0,1,0,0.4,0.0,0.8,0,0,0,0,0,0,36
 2021,nl,Tristan H. Cockcroft,Alex Dickerson,4061,FA,UT,10,act,previously_reserved,"OF,SW",16,6,1,0,1,0,4,1,0.353,0.0,0.375,5,0,0,0,0,0,82
-2021,nl,Scott Wilderman,Christian Walker,4521,Ari,1B,16,act,active,"1B,CI,SW",391,113,55,10,43,0,105,38,0.317,0.435,0.386,1,0,107,0,0,0,0
-2021,nl,Scott Wilderman,Jace Peterson,4427,Mil,MI,18,act,active,"UT,OF,SW,1B,2B,3B",222,78,32,6,26,9,54,31,0.364,0.176,0.405,0,0,26,35,11,1,27
-2021,nl,Scott Wilderman,Eduardo Escobar,3138,NYM,CI,16,act,active,"3B,2B,1B,SW,CI",539,143,75,28,90,1,122,46,0.308,0.389,0.469,0,0,18,42,99,1,0
+2021,nl,Tristan H. Cockcroft,Albert Almora,4126,FA,UT,0,rel,previously_reserved,,5,3,0,0,0,0,1,0,0.4,0.0,0.8,0,0,0,0,0,0,36
+2021,nl,Scott Wilderman,Jace Peterson,4427,Mil,MI,18,act,active,"UT,OF,SW,2B,3B,1B",222,78,32,6,26,9,54,31,0.364,0.176,0.405,0,0,26,35,11,1,27
+2021,nl,Scott Wilderman,Eduardo Escobar,3138,NYM,CI,16,act,active,"3B,SW,2B,1B,CI",539,143,75,28,90,1,122,46,0.308,0.389,0.469,0,0,18,42,99,1,0
+2021,nl,Scott Wilderman,Christian Walker,4521,Ari,1B,16,act,active,"1B,SW,CI",391,113,55,10,43,0,105,38,0.317,0.435,0.386,1,0,107,0,0,0,0
 2021,nl,Scott Wilderman,Jazz Chisholm,6130,Mia,2B,4,act,active,"2B,SS,SW,MI",446,120,65,17,52,22,143,34,0.3,0.286,0.417,0,0,0,91,0,37,0
-2021,nl,Scott Wilderman,Eugenio Suarez,4330,Cin,SS,27,act,active,"3B,CI,SW,SS",505,145,71,31,79,0,171,56,0.286,0.52,0.428,0,0,0,0,104,34,0
-2021,nl,Scott Wilderman,Brad Miller,4310,FA,3B,1,act,active,"1B,3B,OF,2B,SW,CI",321,135,53,20,49,3,104,44,0.328,0.375,0.467,3,0,58,14,7,0,20
+2021,nl,Scott Wilderman,Eugenio Suarez,4330,Cin,SS,27,act,active,"3B,SW,SS,CI",505,145,71,31,79,0,171,56,0.286,0.52,0.428,0,0,0,0,104,34,0
+2021,nl,Scott Wilderman,Brad Miller,4310,FA,3B,1,act,active,"1B,3B,OF,CI,SW,2B",321,135,53,20,49,3,104,44,0.328,0.375,0.467,3,0,58,14,7,0,20
+2021,nl,Scott Wilderman,Steven Duggar,6013,SF,OF,47,act,active,"OF,SW",238,96,40,8,30,7,77,24,0.33,0.222,0.433,0,0,0,0,0,0,94
 2021,nl,Scott Wilderman,Christian Yelich,3314,Mil,OF,38,act,active,"OF,SW",391,114,69,9,51,9,108,69,0.367,0.437,0.381,4,0,0,0,0,0,107
 2021,nl,Scott Wilderman,Dylan Carlson,6519,StL,OF,18,act,active,"OF,SW",534,147,78,18,65,2,149,57,0.345,0.5,0.44,0,0,0,0,0,0,145
-2021,nl,Scott Wilderman,Steven Duggar,6013,SF,OF,47,act,active,"OF,SW",238,96,40,8,30,7,77,24,0.33,0.222,0.433,0,0,0,0,0,0,94
 2021,nl,Scott Wilderman,Bryan De La Cruz,7602,Mia,OF,112,act,active,OF,189,55,17,5,19,1,51,17,0.365,0.2,0.444,0,0,0,0,0,0,56
-2021,nl,Scott Wilderman,Willson Contreras,5435,ChC,C,17,act,active,"C,SW",409,126,60,21,57,5,136,51,0.341,0.462,0.443,0,116,0,0,1,0,1
 2021,nl,Scott Wilderman,Austin Nola,4740,SD,C,10,act,active,"C,SW",169,54,15,2,29,0,19,12,0.34,0.0,0.385,0,48,1,4,0,0,0
+2021,nl,Scott Wilderman,Willson Contreras,5435,ChC,C,17,act,active,"UT,C,SW",409,126,60,21,57,5,136,51,0.341,0.462,0.443,0,116,0,0,1,0,1
 2021,nl,Scott Wilderman,Matt Vierling,7774,Phi,UT,7,act,active,"OF,1B",51,23,8,2,4,1,13,3,0.321,0.231,0.412,0,0,9,0,0,0,17
-2021,nl,Scott Wilderman,Chris Owings,3271,FA,MI,1,dis,previously_active,"OF,MI,SW,2B",39,20,9,1,5,2,12,7,0.457,0.0,0.692,1,0,0,3,1,1,7
-2021,nl,Scott Wilderman,Wyatt Mathisen,4868,SF,1B,79,rel,previously_active,,25,11,2,1,6,0,11,1,0.207,0.0,0.24,0,0,13,0,4,0,2
+2021,nl,Scott Wilderman,Chris Owings,3271,FA,MI,1,dis,previously_active,"UT,OF,2B,SW,MI",39,20,9,1,5,2,12,7,0.457,0.0,0.692,1,0,0,3,1,1,7
 2021,nl,Scott Wilderman,Domingo Leyba,4906,SD,MI,0,rel,previously_active,,13,9,0,0,0,0,4,2,0.133,0.0,0.0,0,0,0,21,10,0,0
+2021,nl,Scott Wilderman,Wyatt Mathisen,4868,SF,1B,79,rel,previously_active,,25,11,2,1,6,0,11,1,0.207,0.0,0.24,0,0,13,0,4,0,2
 2021,nl,Scott Wilderman,Jose Devers,6323,Mia,SS,38,rel,previously_active,,6,4,1,0,1,0,1,0,0.143,0.0,0.167,0,0,0,13,0,5,0
-2021,nl,Scott Wilderman,Jason Heyward,1968,ChC,OF,12,dis,previously_active,"OF,SW",311,101,35,8,30,5,66,27,0.287,0.0,0.357,0,0,0,0,0,0,97
 2021,nl,Scott Wilderman,Tim Locastro,6280,FA,OF,2,dis,previously_active,"OF,SW",100,41,10,1,4,5,22,6,0.277,0.0,0.24,0,0,0,0,0,0,47
+2021,nl,Scott Wilderman,Jason Heyward,1968,ChC,OF,12,dis,previously_active,"OF,SW",311,101,35,8,30,5,66,27,0.287,0.0,0.357,0,0,0,0,0,0,97
 2021,nl,Scott Wilderman,Robinson Chirinos,3011,FA,C,23,rel,previously_active,,39,12,6,0,7,0,14,1,0.256,0.0,0.256,1,27,0,2,0,0,0
 2021,nl,Scott Wilderman,Webster Rivas,6468,SD,C,1,rel,previously_active,,43,15,2,1,3,0,8,6,0.286,0.0,0.302,0,24,0,0,0,0,0
 2021,nl,Scott Wilderman,Alex Jackson,4472,Mia,C,3,rel,previously_active,,15,7,1,0,0,0,8,1,0.222,0.0,0.067,0,43,0,0,0,0,1
 2021,nl,Scott Wilderman,Ha-seong Kim,7554,SD,UT,9,rel,previously_active,,54,22,6,1,4,1,14,3,0.288,0.0,0.296,0,0,0,21,23,35,0
 2021,nl,Scott Wilderman,Albert Pujols,1411,FA,UT,245,rel,previously_active,,146,63,16,10,31,1,27,9,0.304,0.0,0.486,2,0,76,0,1,0,0
 2021,nl,Scott Wilderman,Billy McKinney,4849,Tex,UT,1,rel,previously_active,,63,28,7,0,6,0,22,10,0.257,0.0,0.19,0,0,10,0,0,0,73
-2021,nl,Scott Wilderman,Ka'ai Tom,6482,SF,SW,34,rel,previously_active,,35,17,4,0,2,0,15,6,0.233,0.0,0.114,2,0,0,0,0,0,36
-2021,nl,Scott Wilderman,Isan Diaz,5464,Mia,SW,24,rel,previously_active,,34,13,1,1,5,0,11,2,0.189,0.0,0.206,0,0,0,35,37,0,0
-2021,nl,Scott Wilderman,Lewis Brinson,4446,FA,SW,7,rel,previously_active,,20,10,0,0,0,0,4,0,0.2,0.0,0.25,0,0,0,0,0,0,79
-2021,nl,Scott Wilderman,Pablo Sandoval,2182,Cle,SW,0,rel,previously_active,,44,35,8,3,8,0,15,7,0.365,0.0,0.455,6,0,2,0,1,0,0
 2021,nl,Scott Wilderman,Michael Perez,4511,Pit,SW,0,rel,previously_active,,4,1,0,0,0,0,1,0,0.0,0.0,0.0,0,58,1,0,0,0,0
-2021,nl,Scott Wilderman,Matt Joyce,2074,FA,SW,0,rel,previously_active,,9,6,2,1,4,0,3,1,0.2,0.0,0.444,0,0,0,0,0,0,17
-2021,nl,Scott Wilderman,Shogo Akiyama,5766,Cin,SW,2,dis,previously_active,"OF,SW",100,55,10,0,7,1,27,10,0.306,0.0,0.29,0,0,0,0,0,0,61
+2021,nl,Scott Wilderman,Lewis Brinson,4446,FA,SW,7,rel,previously_active,,20,10,0,0,0,0,4,0,0.2,0.0,0.25,0,0,0,0,0,0,79
 2021,nl,Scott Wilderman,Luke Raley,6663,LAD,SW,39,rel,previously_active,,20,9,1,0,0,0,10,1,0.292,0.0,0.15,0,0,0,0,0,0,27
-2021,nl,Scott Wilderman,Chris Owings,3271,FA,MI,1,dis,reserved,"OF,MI,SW,2B",4,1,0,0,0,0,3,0,0.0,0.0,0.0,1,0,0,3,1,1,7
+2021,nl,Scott Wilderman,Shogo Akiyama,5766,Cin,SW,2,dis,previously_active,"OF,SW",100,55,10,0,7,1,27,10,0.306,0.0,0.29,0,0,0,0,0,0,61
+2021,nl,Scott Wilderman,Matt Joyce,2074,FA,SW,0,rel,previously_active,,9,6,2,1,4,0,3,1,0.2,0.0,0.444,0,0,0,0,0,0,17
+2021,nl,Scott Wilderman,Ka'ai Tom,6482,SF,SW,34,rel,previously_active,,35,17,4,0,2,0,15,6,0.233,0.0,0.114,2,0,0,0,0,0,36
+2021,nl,Scott Wilderman,Pablo Sandoval,2182,Cle,SW,0,rel,previously_active,,44,35,8,3,8,0,15,7,0.365,0.0,0.455,6,0,2,0,1,0,0
+2021,nl,Scott Wilderman,Isan Diaz,5464,Mia,SW,24,rel,previously_active,,34,13,1,1,5,0,11,2,0.189,0.0,0.206,0,0,0,35,37,0,0
+2021,nl,Scott Wilderman,Chris Owings,3271,FA,MI,1,dis,reserved,"UT,OF,2B,SW,MI",4,1,0,0,0,0,3,0,0.0,0.0,0.0,1,0,0,3,1,1,7
 2021,nl,Scott Wilderman,Stuart Fairchild,6341,Ari,OF,0,res,reserved,OF,4,2,1,0,2,0,0,0,0.4,0.0,0.5,0,0,0,0,0,0,8
-2021,nl,Scott Wilderman,Jason Heyward,1968,ChC,OF,12,dis,reserved,"OF,SW",12,3,0,0,0,0,2,0,0.083,0.0,0.083,0,0,0,0,0,0,97
 2021,nl,Scott Wilderman,Tim Locastro,6280,FA,OF,2,dis,reserved,"OF,SW",39,23,5,1,3,0,11,1,0.227,0.0,0.282,0,0,0,0,0,0,47
+2021,nl,Scott Wilderman,Jason Heyward,1968,ChC,OF,12,dis,reserved,"OF,SW",12,3,0,0,0,0,2,0,0.083,0.0,0.083,0,0,0,0,0,0,97
 2021,nl,Scott Wilderman,Shogo Akiyama,5766,Cin,SW,2,dis,reserved,"OF,SW",62,33,6,0,5,1,13,4,0.243,0.0,0.194,0,0,0,0,0,0,61
-2021,nl,Scott Wilderman,Jace Peterson,4427,Mil,MI,18,act,previously_reserved,"UT,OF,SW,1B,2B,3B",5,3,0,0,0,0,2,0,0.0,0.0,0.0,0,0,26,35,11,1,27
-2021,nl,Scott Wilderman,Eduardo Escobar,3138,NYM,CI,16,act,previously_reserved,"3B,2B,1B,SW,CI",10,3,2,0,0,0,2,2,0.583,0.0,0.6,0,0,18,42,99,1,0
-2021,nl,Scott Wilderman,Christian Walker,4521,Ari,1B,16,act,previously_reserved,"1B,CI,SW",10,2,0,0,3,0,1,0,0.2,0.0,0.2,1,0,107,0,0,0,0
+2021,nl,Scott Wilderman,Christian Walker,4521,Ari,1B,16,act,previously_reserved,"1B,SW,CI",10,2,0,0,3,0,1,0,0.2,0.0,0.2,1,0,107,0,0,0,0
+2021,nl,Scott Wilderman,Jace Peterson,4427,Mil,MI,18,act,previously_reserved,"UT,OF,SW,2B,3B,1B",5,3,0,0,0,0,2,0,0.0,0.0,0.0,0,0,26,35,11,1,27
+2021,nl,Scott Wilderman,Eduardo Escobar,3138,NYM,CI,16,act,previously_reserved,"3B,SW,2B,1B,CI",10,3,2,0,0,0,2,2,0.583,0.0,0.6,0,0,18,42,99,1,0
 2021,nl,Scott Wilderman,Jazz Chisholm,6130,Mia,2B,4,act,previously_reserved,"2B,SS,SW,MI",18,5,5,1,1,1,2,0,0.389,0.0,0.611,0,0,0,91,0,37,0
-2021,nl,Scott Wilderman,Brad Miller,4310,FA,3B,1,act,previously_reserved,"1B,3B,OF,2B,SW,CI",10,5,0,0,0,0,8,1,0.091,0.0,0.0,3,0,58,14,7,0,20
+2021,nl,Scott Wilderman,Brad Miller,4310,FA,3B,1,act,previously_reserved,"1B,3B,OF,CI,SW,2B",10,5,0,0,0,0,8,1,0.091,0.0,0.0,3,0,58,14,7,0,20
+2021,nl,Scott Wilderman,Dylan Carlson,6519,StL,OF,18,act,previously_reserved,"OF,SW",8,2,1,0,0,0,3,0,0.222,0.0,0.25,0,0,0,0,0,0,145
 2021,nl,Scott Wilderman,Steven Duggar,6013,SF,OF,47,act,previously_reserved,"OF,SW",4,1,1,0,2,0,1,0,0.25,0.0,0.75,0,0,0,0,0,0,94
 2021,nl,Scott Wilderman,Christian Yelich,3314,Mil,OF,38,act,previously_reserved,"OF,SW",8,3,1,0,0,0,5,1,0.111,0.0,0.0,4,0,0,0,0,0,107
-2021,nl,Scott Wilderman,Dylan Carlson,6519,StL,OF,18,act,previously_reserved,"OF,SW",8,2,1,0,0,0,3,0,0.222,0.0,0.25,0,0,0,0,0,0,145
-2021,nl,Scott Wilderman,Austin Nola,4740,SD,C,10,act,previously_reserved,"C,SW",4,2,0,0,0,0,0,2,0.333,0.0,0.0,0,48,1,4,0,0,0
+2021,nl,Scott Wilderman,Willson Contreras,5435,ChC,C,17,act,previously_reserved,"UT,C,SW",4,2,1,0,0,0,2,1,0.2,0.0,0.0,0,116,0,0,1,0,1
 2021,nl,Scott Wilderman,Alex Jackson,4472,Mia,C,3,rel,previously_reserved,,8,3,1,0,0,0,5,1,0.2,0.0,0.0,0,43,0,0,0,0,1
-2021,nl,Scott Wilderman,Willson Contreras,5435,ChC,C,17,act,previously_reserved,"C,SW",4,2,1,0,0,0,2,1,0.2,0.0,0.0,0,116,0,0,1,0,1
+2021,nl,Scott Wilderman,Austin Nola,4740,SD,C,10,act,previously_reserved,"C,SW",4,2,0,0,0,0,0,2,0.333,0.0,0.0,0,48,1,4,0,0,0
 2021,nl,Scott Wilderman,Billy McKinney,4849,Tex,UT,1,rel,previously_reserved,,3,2,1,1,1,0,0,0,0.5,0.0,1.33,0,0,10,0,0,0,73
 2021,nl,Scott Wilderman,Luke Raley,6663,LAD,SW,39,rel,previously_reserved,,7,5,1,0,0,0,3,0,0.125,0.0,0.0,0,0,0,0,0,0,27
-2021,nl,Scott Wilderman,Matt Joyce,2074,FA,SW,0,rel,previously_reserved,,12,9,1,1,2,0,4,2,0.2,0.0,0.333,0,0,0,0,0,0,17
-2021,nl,Scott Wilderman,Isan Diaz,5464,Mia,SW,24,rel,previously_reserved,,15,6,1,0,0,0,6,5,0.3,0.0,0.067,0,0,0,35,37,0,0
 2021,nl,Scott Wilderman,Lewis Brinson,4446,FA,SW,7,rel,previously_reserved,,5,2,0,0,0,0,1,0,0.2,0.0,0.4,0,0,0,0,0,0,79
+2021,nl,Scott Wilderman,Isan Diaz,5464,Mia,SW,24,rel,previously_reserved,,15,6,1,0,0,0,6,5,0.3,0.0,0.067,0,0,0,35,37,0,0
 2021,nl,Scott Wilderman,Pablo Sandoval,2182,Cle,SW,0,rel,previously_reserved,,19,23,1,0,1,0,6,3,0.217,0.0,0.053,6,0,2,0,1,0,0
-2021,nl,Dean Peterson,Pete Kozma,2112,StL,MI,0,act,active,,72,26,11,2,14,2,19,7,0.383,0.383,0.569,0,0,0,1,0,25,0
-2021,nl,Dean Peterson,Paul Goldschmidt,3159,Ari,1B,18,act,active,,514,145,82,20,82,18,130,60,0.359,0.359,0.49,0,0,139,0,0,0,0
-2021,nl,Dean Peterson,Matt McBride,2682,Col,CI,0,act,active,,78,31,8,2,11,0,17,1,0.222,0.222,0.308,0,0,8,0,0,0,12
-2021,nl,Dean Peterson,Danny Espinosa,2765,Was,2B,18,act,active,,594,160,82,17,56,20,189,46,0.315,0.315,0.402,0,0,0,126,0,36,0
-2021,nl,Dean Peterson,Joaquin Arias,1517,SF,SS,1,act,active,,319,112,30,5,34,5,44,13,0.304,0.304,0.389,0,0,0,4,74,50,0
-2021,nl,Dean Peterson,Ryan Zimmerman,1638,Was,3B,29,act,active,,578,145,93,25,95,5,116,57,0.346,0.346,0.478,0,0,0,0,145,0,0
-2021,nl,Dean Peterson,Adam Eaton,3588,Ari,OF,20,act,active,,85,22,19,2,5,2,15,14,0.382,0.382,0.412,0,0,0,0,0,0,21
-2021,nl,Dean Peterson,Bryan Petersen,3101,Mia,OF,0,act,active,,241,84,29,0,17,8,58,25,0.272,0.272,0.257,0,0,0,0,0,0,72
-2021,nl,Dean Peterson,Chris Young,40,Oak,OF,22,act,active,,325,101,36,14,41,8,79,36,0.311,0.311,0.434,2,0,0,0,0,0,87
-2021,nl,Dean Peterson,Andrew M. Brown,3753,NYM,OF,0,act,active,,112,46,14,5,11,2,34,12,0.302,0.302,0.429,0,0,0,0,0,0,33
-2021,nl,Dean Peterson,Geovany Soto,281,Tex,C,13,act,active,,324,99,45,11,39,1,76,30,0.27,0.27,0.343,1,96,0,0,0,0,0
-2021,nl,Dean Peterson,Jordan Pacheco,3116,Col,C,4,act,active,,475,132,51,5,54,7,61,22,0.341,0.341,0.421,0,5,43,0,82,0,0
-2021,nl,Dean Peterson,Ryan Wheeler,3187,Col,UT,30,act,active,,109,50,11,1,10,1,22,9,0.294,0.294,0.339,0,0,4,0,23,0,0
-2021,nl,Dean Peterson,Troy Tulowitzki,461,Col,SS,37,dis,reserved,,181,47,33,8,27,2,19,19,0.36,0.36,0.486,0,0,0,0,0,47,0
-2021,nl,Dean Peterson,Josh Harrison,3747,Pit,OF,0,res,reserved,,249,104,34,3,16,7,37,10,0.279,0.279,0.345,1,0,0,28,14,25,13
-2021,nl,Dean Peterson,Eric Young Jr.,2059,Col,OF,7,dis,reserved,,174,98,36,4,15,14,31,13,0.377,0.377,0.448,1,0,0,0,0,0,34
+2021,nl,Scott Wilderman,Matt Joyce,2074,FA,SW,0,rel,previously_reserved,,12,9,1,1,2,0,4,2,0.2,0.0,0.333,0,0,0,0,0,0,17

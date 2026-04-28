@@ -188,6 +188,48 @@ def test_is_empty_team_page_false(html_2025_al_team1):
 
 
 @pytest.fixture
+def html_2024_al_team0_champion():
+    return (FIXTURE_DIR / "team_stats_2024_al_team0_champion.html").read_text()
+
+
+@pytest.fixture
+def html_2024_al_team_placeholder():
+    return (FIXTURE_DIR / "team_stats_2024_al_team_placeholder.html").read_text()
+
+
+def test_parse_team_page_champion_at_idx_zero(html_2024_al_team0_champion):
+    """Onroto serves the champion at team_idx=0 (its dropdown is 0-indexed).
+
+    Regression: prior versions of scrape_league_year started iteration at
+    team_idx=1 and dropped this team silently.
+    """
+    result = team_stats.parse_team_page(
+        html_2024_al_team0_champion, year=2024, league_short="al"
+    )
+    assert result.team_name == "Mike Podhorzer"
+    assert len(result.batter_rows) > 0
+    assert len(result.pitcher_rows) > 0
+
+
+def test_parse_team_indexes_from_real_page(html_2024_al_team0_champion):
+    """The changeTeam dropdown enumerates every team_idx in the league."""
+    indexes = team_stats.parse_team_indexes(html_2024_al_team0_champion)
+    # 2024 AL has 12 teams, 0-indexed
+    assert indexes == list(range(12))
+
+
+def test_parse_team_indexes_from_placeholder(html_2024_al_team_placeholder):
+    """The dropdown is present even on past-the-end placeholder pages."""
+    indexes = team_stats.parse_team_indexes(html_2024_al_team_placeholder)
+    assert indexes == list(range(12))
+
+
+def test_parse_team_indexes_no_dropdown():
+    """Returns [] when the changeTeam select is missing."""
+    assert team_stats.parse_team_indexes("<html><body>nope</body></html>") == []
+
+
+@pytest.fixture
 def html_rosters_2025_al():
     return (FIXTURE_DIR / "rosters_2025_al.html").read_text()
 
@@ -293,9 +335,11 @@ def test_warn_high_salaries_empty():
 
 
 def test_scrape_league_year_with_mocked_fetchers(
-    html_rosters_2025_al, html_2025_al_team1, html_2025_al_team_empty
+    html_rosters_2025_al, html_2024_al_team0_champion, html_2025_al_team1
 ):
-    """Run the orchestrator with two team pages then an empty page."""
+    """Iteration is dropdown-driven: every index listed by idx=0's
+    changeTeam select must be fetched, including idx=0 itself.
+    """
     fetched = []
 
     def fake_fetch_rosters(session, sid, code, year):
@@ -304,9 +348,13 @@ def test_scrape_league_year_with_mocked_fetchers(
 
     def fake_fetch_team_stats(session, sid, code, idx, year):
         fetched.append(("team", code, idx, year))
-        if idx == 1 or idx == 2:
-            return html_2025_al_team1
-        return html_2025_al_team_empty
+        # idx=0 carries the dropdown enumerating the league.  Use the real
+        # 2024 champion fixture (which has the dropdown intact) for both
+        # idx=0 and the rest, since we only care about iteration behaviour
+        # not unique row content here.
+        if idx == 0:
+            return html_2024_al_team0_champion
+        return html_2025_al_team1
 
     bat_df, pit_df = team_stats.scrape_league_year(
         session=None, sid="guest",
@@ -316,10 +364,11 @@ def test_scrape_league_year_with_mocked_fetchers(
         sleep_seconds=0,
     )
     assert ("rosters", "toutal", 2025) in fetched
-    assert ("team", "toutal", 1, 2025) in fetched
-    assert ("team", "toutal", 3, 2025) in fetched  # iteration kept going
-    # Stopped at idx=3 (the empty fixture)
-    assert ("team", "toutal", 4, 2025) not in fetched
+    # idx=0 is fetched (the champion that the old code missed)
+    assert ("team", "toutal", 0, 2025) in fetched
+    # All 12 teams from the dropdown were fetched
+    fetched_team_indexes = sorted({t[2] for t in fetched if t[0] == "team"})
+    assert fetched_team_indexes == list(range(12))
     assert len(bat_df) > 0
     assert len(pit_df) > 0
     assert list(bat_df.columns) == team_stats.BATTER_COLUMNS
@@ -327,3 +376,49 @@ def test_scrape_league_year_with_mocked_fetchers(
     # Eligibility joined for at least some active rows
     active_bats = bat_df[bat_df["roster_section"] == "active"]
     assert (active_bats["eligibility"] != "").sum() > 0
+
+
+def test_scrape_league_year_raises_on_dropdown_promised_empty(
+    html_rosters_2025_al, html_2024_al_team0_champion, html_2025_al_team_empty
+):
+    """If a team_idx listed in the dropdown returns no players, raise.
+
+    This is the safety net the previous loop lacked: a future Onroto DOM
+    change that broke parse_team_page on one team would silently truncate
+    rosters; now it raises loudly.
+    """
+    def fake_fetch_rosters(session, sid, code, year):
+        return html_rosters_2025_al
+
+    def fake_fetch_team_stats(session, sid, code, idx, year):
+        if idx == 0:
+            return html_2024_al_team0_champion
+        # idx 1+ are listed in the dropdown but parse to empty
+        return html_2025_al_team_empty
+
+    with pytest.raises(RuntimeError, match="empty team page"):
+        team_stats.scrape_league_year(
+            session=None, sid="guest",
+            league_code="toutal", league_short="al", year=2025,
+            fetch_rosters_fn=fake_fetch_rosters,
+            fetch_team_stats_fn=fake_fetch_team_stats,
+            sleep_seconds=0,
+        )
+
+
+def test_scrape_league_year_raises_when_dropdown_missing(html_rosters_2025_al):
+    """If idx=0 has no dropdown, the league size is unknown — raise."""
+    def fake_fetch_rosters(session, sid, code, year):
+        return html_rosters_2025_al
+
+    def fake_fetch_team_stats(session, sid, code, idx, year):
+        return "<html><body>no dropdown</body></html>"
+
+    with pytest.raises(RuntimeError, match="could not parse team dropdown"):
+        team_stats.scrape_league_year(
+            session=None, sid="guest",
+            league_code="toutal", league_short="al", year=2025,
+            fetch_rosters_fn=fake_fetch_rosters,
+            fetch_team_stats_fn=fake_fetch_team_stats,
+            sleep_seconds=0,
+        )

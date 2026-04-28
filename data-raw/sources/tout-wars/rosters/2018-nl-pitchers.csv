@@ -1,437 +1,461 @@
 year,league,team,player_name,player_id,mlb_team,position,salary,status,roster_section,eligibility,g,w,l,sv,ip,bb,hr,so,era,whip
+2018,nl,Steve Gardner,Chris Stratton,4489,SF,P,39,act,active,P,7,2,3,0,37.7,13,5,29,4.3,1.168
+2018,nl,Steve Gardner,Rich Hill,264,LAD,P,15,act,active,P,25,11,5,0,132.7,41,20,150,3.66,1.123
+2018,nl,Steve Gardner,Madison Bumgarner,2053,SF,P,27,act,active,P,21,6,7,0,129.7,43,14,109,3.26,1.242
+2018,nl,Steve Gardner,Josh Hader,4656,Mil,P,4,act,active,P,55,6,1,12,81.3,30,9,143,2.43,0.811
+2018,nl,Steve Gardner,Kyle Freeland,4950,Col,P,22,act,active,P,27,16,4,0,170.0,58,12,144,2.65,1.229
+2018,nl,Steve Gardner,Brad Hand,3496,Cle,P,15,act,active,P,69,2,5,32,72.0,28,8,106,2.75,1.111
+2018,nl,Steve Gardner,Walker Buehler,5327,LAD,P,6,act,active,P,22,7,4,0,130.3,33,11,143,2.42,0.944
+2018,nl,Steve Gardner,Matt Koch,5479,Ari,P,1,act,active,P,1,0,0,0,4.3,3,1,2,2.08,1.846
+2018,nl,Steve Gardner,Aaron Nola,4916,Phi,P,22,act,active,P,33,17,6,0,212.3,58,17,224,2.37,0.975
+2018,nl,Steve Gardner,Craig Stammen,2813,SD,P,2,act,active,P,50,5,3,0,52.7,11,2,59,3.08,1.063
+2018,nl,Steve Gardner,Michael Feliz,4841,Pit,P,12,rel,previously_active,,7,0,1,0,5.7,5,3,8,17.47,2.824
+2018,nl,Steve Gardner,Brad Ziegler,1090,Ari,P,4,res,previously_active,P,16,1,0,0,15.3,6,2,7,2.93,1.37
+2018,nl,Steve Gardner,Ryan Madson,1113,LAD,P,2,res,previously_active,P,8,0,0,0,7.3,2,1,11,4.91,1.227
+2018,nl,Steve Gardner,Luis Perdomo,5524,SD,P,0,rel,previously_active,,4,1,2,0,14.0,9,1,17,8.36,2.5
+2018,nl,Steve Gardner,Kyle Crick,4068,Pit,P,0,rel,previously_active,,45,2,2,2,42.0,20,1,41,2.79,1.286
+2018,nl,Steve Gardner,Homer Bailey,313,Cin,P,6,rel,previously_active,,8,1,4,0,38.3,16,13,22,8.69,2.087
+2018,nl,Steve Gardner,Sam Dyson,4155,SF,P,37,rel,previously_active,,3,0,1,1,2.7,1,1,1,6.75,1.875
+2018,nl,Steve Gardner,Steven Brault,5551,Pit,P,9,rel,previously_active,,9,1,1,0,33.3,19,3,24,4.86,1.35
+2018,nl,Steve Gardner,Jordan Hicks,6366,StL,P,29,rel,previously_active,,43,3,2,2,47.7,25,1,41,3.59,1.217
+2018,nl,Steve Gardner,Tommy Hunter,2152,Phi,P,15,res,previously_active,P,2,0,0,0,3.0,1,0,0,3.0,1.667
+2018,nl,Steve Gardner,*Luke Gregerson,2593,StL,P,4,rel,previously_active,,11,0,0,0,7.7,3,2,8,9.39,1.435
+2018,nl,Steve Gardner,Dominic Leone,4769,StL,P,2,rel,previously_active,,16,1,2,0,13.0,3,3,15,4.15,1.385
+2018,nl,Steve Gardner,Tony Cingrani,4054,LAD,P,12,rel,previously_active,,12,0,0,0,8.3,1,1,15,2.16,0.6
+2018,nl,Steve Gardner,Tommy Hunter,2152,Phi,P,15,res,reserved,P,6,1,2,0,5.0,3,1,7,7.2,2.0
+2018,nl,Steve Gardner,*Brandon Morrow,1342,ChC,P,2,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2018,nl,Steve Gardner,Ryan Madson,1113,LAD,P,2,res,reserved,P,11,0,1,0,10.7,0,3,12,7.59,1.031
+2018,nl,Steve Gardner,Brad Ziegler,1090,Ari,P,4,res,reserved,P,34,1,1,1,26.3,9,1,21,2.05,0.987
+2018,nl,Steve Gardner,Kyle Freeland,4950,Col,P,22,act,previously_reserved,P,1,0,0,0,5.3,1,0,4,1.69,1.313
+2018,nl,Steve Gardner,Sam Dyson,4155,SF,P,37,rel,previously_reserved,,7,0,0,0,9.7,4,0,7,1.86,0.828
+2018,nl,Steve Gardner,Jordan Hicks,6366,StL,P,29,rel,previously_reserved,,10,0,1,1,10.7,3,0,6,0.84,1.031
+2018,nl,Steve Gardner,Steven Brault,5551,Pit,P,9,rel,previously_reserved,,14,3,1,0,21.0,15,2,24,4.29,1.476
+2018,nl,Steve Gardner,Craig Stammen,2813,SD,P,2,act,previously_reserved,P,6,2,0,0,5.3,2,0,7,1.69,1.125
+2018,nl,Steve Gardner,*Luke Gregerson,2593,StL,P,4,rel,previously_reserved,,5,0,0,0,4.0,2,0,3,0.0,1.5
+2018,nl,Steve Gardner,Dominic Leone,4769,StL,P,2,rel,previously_reserved,,1,0,0,0,1.0,0,0,0,0.0,0.0
+2018,nl,Steve Gardner,Walker Buehler,5327,LAD,P,6,act,previously_reserved,P,2,1,1,0,7.0,4,1,8,6.43,1.286
+2018,nl,Steve Gardner,Tony Cingrani,4054,LAD,P,12,rel,previously_reserved,,18,1,2,0,14.3,5,1,21,6.28,1.395
+2018,nl,Steve Gardner,Michael Feliz,4841,Pit,P,12,rel,previously_reserved,,2,0,0,0,3.0,2,1,3,6.0,1.333
+2018,nl,Steve Gardner,Kyle Crick,4068,Pit,P,0,rel,previously_reserved,,5,0,0,0,4.7,1,0,7,1.93,1.5
+2018,nl,Tristan H. Cockcroft,Corey Knebel,4845,Mil,P,16,act,active,P,41,4,3,14,39.3,19,6,59,4.58,1.246
+2018,nl,Tristan H. Cockcroft,German Marquez,5513,Col,P,4,act,active,P,31,12,11,0,180.3,56,21,213,3.94,1.264
+2018,nl,Tristan H. Cockcroft,Anibal Sanchez,556,Atl,P,2,act,active,P,17,5,5,0,94.0,32,11,97,3.26,1.128
+2018,nl,Tristan H. Cockcroft,Kevin Gausman,4053,Atl,P,187,act,active,P,9,5,2,0,54.7,16,5,42,2.63,1.098
 2018,nl,Tristan H. Cockcroft,Kenley Jansen,2963,LAD,P,26,act,active,P,69,1,5,38,71.7,17,13,82,3.01,0.991
 2018,nl,Tristan H. Cockcroft,Matt Harvey,2672,Cin,P,2,act,active,P,25,5,9,0,132.7,30,24,112,4.95,1.296
-2018,nl,Tristan H. Cockcroft,Anibal Sanchez,556,Atl,P,2,act,active,P,17,5,5,0,94.0,32,11,97,3.26,1.128
-2018,nl,Tristan H. Cockcroft,Jameson Taillon,3202,Pit,P,12,act,active,P,32,14,10,0,191.0,46,20,179,3.2,1.178
 2018,nl,Tristan H. Cockcroft,Jack Flaherty,5103,StL,P,4,act,active,P,28,8,9,0,151.0,59,20,182,3.34,1.106
+2018,nl,Tristan H. Cockcroft,Jameson Taillon,3202,Pit,P,12,act,active,P,32,14,10,0,191.0,46,20,179,3.2,1.178
 2018,nl,Tristan H. Cockcroft,Adam Conley,4351,Mia,P,0,act,active,P,1,0,0,0,1.3,0,0,2,0.0,0.75
-2018,nl,Tristan H. Cockcroft,Corey Knebel,4845,Mil,P,16,act,active,P,41,4,3,14,39.3,19,6,59,4.58,1.246
-2018,nl,Tristan H. Cockcroft,Kevin Gausman,4053,Atl,P,187,act,active,P,9,5,2,0,54.7,16,5,42,2.63,1.098
-2018,nl,Tristan H. Cockcroft,German Marquez,5513,Col,P,4,act,active,P,31,12,11,0,180.3,56,21,213,3.94,1.264
-2018,nl,Tristan H. Cockcroft,Dakota Hudson,6093,StL,P,5,rel,previously_active,,3,2,0,0,5.0,1,0,2,0.0,0.4
-2018,nl,Tristan H. Cockcroft,Jordan Hicks,6366,StL,P,0,rel,previously_active,,1,0,0,0,2.0,1,0,3,0.0,1.0
-2018,nl,Tristan H. Cockcroft,Tyson Ross,2330,StL,P,25,res,previously_active,P,23,7,7,0,121.3,52,14,104,4.08,1.286
-2018,nl,Tristan H. Cockcroft,Adam Morgan,4337,Phi,P,0,rel,previously_active,,4,0,0,0,1.7,2,0,1,10.8,3.0
-2018,nl,Tristan H. Cockcroft,Jeremy Hellickson,2071,Was,P,3,rel,previously_active,,13,5,2,0,64.0,9,8,47,2.39,0.922
-2018,nl,Tristan H. Cockcroft,Reyes Moronta,5892,SF,P,1,rel,previously_active,,5,1,0,0,4.7,1,0,2,0.0,0.214
 2018,nl,Tristan H. Cockcroft,*Mike Soroka,5400,Atl,P,0,dis,previously_active,P,5,2,1,0,25.7,7,1,21,3.51,1.442
-2018,nl,Tristan H. Cockcroft,A.J. Cole,3287,NYY,P,25,rel,previously_active,,2,0,1,0,9.0,5,4,9,12.0,2.0
-2018,nl,Tristan H. Cockcroft,C. J. Edwards,4609,ChC,P,1,rel,previously_active,,23,2,1,0,23.0,12,2,35,3.13,1.261
-2018,nl,Tristan H. Cockcroft,Jarlin Garcia,5342,Mia,P,7,rel,previously_active,,8,1,1,0,39.0,17,10,24,4.38,1.231
-2018,nl,Tristan H. Cockcroft,Joe Musgrove,5406,Pit,P,3,rel,previously_active,,18,5,9,0,108.3,23,12,93,4.32,1.209
-2018,nl,Tristan H. Cockcroft,Corey Oswalt,6303,NYM,P,0,res,previously_active,P,1,0,0,0,4.0,3,0,4,2.25,1.75
-2018,nl,Tristan H. Cockcroft,Robbie Erlin,3681,SD,P,2,rel,previously_active,,1,0,1,0,4.0,0,2,2,13.5,1.75
-2018,nl,Tristan H. Cockcroft,Robert Stephenson,4096,Cin,P,0,dis,previously_active,P,3,0,1,0,7.7,7,2,7,10.57,2.739
-2018,nl,Tristan H. Cockcroft,Sal Romano,5477,Cin,P,0,rel,previously_active,,11,2,5,0,54.7,26,9,40,5.93,1.573
 2018,nl,Tristan H. Cockcroft,Phil Maton,6036,SD,P,0,rel,previously_active,,4,0,1,0,3.3,1,0,4,5.4,0.6
-2018,nl,Tristan H. Cockcroft,Tyson Ross,2330,StL,P,25,res,reserved,P,6,0,1,0,16.3,7,1,9,3.86,1.469
-2018,nl,Tristan H. Cockcroft,*Luiz Gohara,4587,Atl,P,32,dis,reserved,P,2,0,0,0,4.0,0,1,5,2.25,0.25
+2018,nl,Tristan H. Cockcroft,Reyes Moronta,5892,SF,P,1,rel,previously_active,,5,1,0,0,4.7,1,0,2,0.0,0.214
+2018,nl,Tristan H. Cockcroft,Tyson Ross,2330,StL,P,25,res,previously_active,P,23,7,7,0,121.3,52,14,104,4.08,1.286
+2018,nl,Tristan H. Cockcroft,Joe Musgrove,5406,Pit,P,3,rel,previously_active,,18,5,9,0,108.3,23,12,93,4.32,1.209
+2018,nl,Tristan H. Cockcroft,Dakota Hudson,6093,StL,P,5,rel,previously_active,,3,2,0,0,5.0,1,0,2,0.0,0.4
+2018,nl,Tristan H. Cockcroft,Sal Romano,5477,Cin,P,0,rel,previously_active,,11,2,5,0,54.7,26,9,40,5.93,1.573
+2018,nl,Tristan H. Cockcroft,Jeremy Hellickson,2071,Was,P,3,rel,previously_active,,13,5,2,0,64.0,9,8,47,2.39,0.922
+2018,nl,Tristan H. Cockcroft,Corey Oswalt,6303,NYM,P,0,res,previously_active,P,1,0,0,0,4.0,3,0,4,2.25,1.75
+2018,nl,Tristan H. Cockcroft,Jarlin Garcia,5342,Mia,P,7,rel,previously_active,,8,1,1,0,39.0,17,10,24,4.38,1.231
+2018,nl,Tristan H. Cockcroft,Robbie Erlin,3681,SD,P,2,rel,previously_active,,1,0,1,0,4.0,0,2,2,13.5,1.75
+2018,nl,Tristan H. Cockcroft,Jordan Hicks,6366,StL,P,0,rel,previously_active,,1,0,0,0,2.0,1,0,3,0.0,1.0
+2018,nl,Tristan H. Cockcroft,Robert Stephenson,4096,Cin,P,0,dis,previously_active,P,3,0,1,0,7.7,7,2,7,10.57,2.739
+2018,nl,Tristan H. Cockcroft,C. J. Edwards,4609,ChC,P,1,rel,previously_active,,23,2,1,0,23.0,12,2,35,3.13,1.261
+2018,nl,Tristan H. Cockcroft,Adam Morgan,4337,Phi,P,0,rel,previously_active,,4,0,0,0,1.7,2,0,1,10.8,3.0
+2018,nl,Tristan H. Cockcroft,A.J. Cole,3287,NYY,P,25,rel,previously_active,,2,0,1,0,9.0,5,4,9,12.0,2.0
 2018,nl,Tristan H. Cockcroft,Corey Oswalt,6303,NYM,P,0,res,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
 2018,nl,Tristan H. Cockcroft,Robert Stephenson,4096,Cin,P,0,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2018,nl,Tristan H. Cockcroft,Tyson Ross,2330,StL,P,25,res,reserved,P,6,0,1,0,16.3,7,1,9,3.86,1.469
+2018,nl,Tristan H. Cockcroft,*Luiz Gohara,4587,Atl,P,32,dis,reserved,P,2,0,0,0,4.0,0,1,5,2.25,0.25
 2018,nl,Tristan H. Cockcroft,*Mike Soroka,5400,Atl,P,0,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2018,nl,Tristan H. Cockcroft,Phil Maton,6036,SD,P,0,rel,previously_reserved,,3,0,1,0,3.0,1,0,2,3.0,1.333
-2018,nl,Tristan H. Cockcroft,Anibal Sanchez,556,Atl,P,2,act,previously_reserved,P,5,1,1,0,28.7,4,3,24,2.2,0.872
-2018,nl,Tristan H. Cockcroft,Sal Romano,5477,Cin,P,0,rel,previously_reserved,,9,3,3,0,49.3,15,10,34,4.38,1.277
 2018,nl,Tristan H. Cockcroft,Matt Harvey,2672,Cin,P,2,act,previously_reserved,P,7,2,0,0,22.3,7,3,19,4.84,1.343
-2018,nl,Tristan H. Cockcroft,Joe Musgrove,5406,Pit,P,3,rel,previously_reserved,,1,1,0,0,7.0,0,0,7,0.0,0.714
-2018,nl,Tristan H. Cockcroft,A.J. Cole,3287,NYY,P,25,rel,previously_reserved,,3,1,0,0,3.3,2,2,2,8.1,2.7
-2018,nl,Tristan H. Cockcroft,Jarlin Garcia,5342,Mia,P,7,rel,previously_reserved,,3,0,0,0,6.0,2,3,2,9.0,1.833
 2018,nl,Tristan H. Cockcroft,C. J. Edwards,4609,ChC,P,1,rel,previously_reserved,,6,0,0,0,5.0,1,0,13,1.8,0.8
+2018,nl,Tristan H. Cockcroft,A.J. Cole,3287,NYY,P,25,rel,previously_reserved,,3,1,0,0,3.3,2,2,2,8.1,2.7
+2018,nl,Tristan H. Cockcroft,Sal Romano,5477,Cin,P,0,rel,previously_reserved,,9,3,3,0,49.3,15,10,34,4.38,1.277
 2018,nl,Tristan H. Cockcroft,Jeremy Hellickson,2071,Was,P,3,rel,previously_reserved,,4,0,1,0,17.3,8,3,10,6.75,1.5
-2018,nl,Tristan H. Cockcroft,Reyes Moronta,5892,SF,P,1,rel,previously_reserved,,9,1,0,0,6.7,5,1,11,1.35,1.2
+2018,nl,Tristan H. Cockcroft,Anibal Sanchez,556,Atl,P,2,act,previously_reserved,P,5,1,1,0,28.7,4,3,24,2.2,0.872
+2018,nl,Tristan H. Cockcroft,Jarlin Garcia,5342,Mia,P,7,rel,previously_reserved,,3,0,0,0,6.0,2,3,2,9.0,1.833
 2018,nl,Tristan H. Cockcroft,Corey Knebel,4845,Mil,P,16,act,previously_reserved,P,16,0,0,2,16.0,3,1,29,1.12,0.688
-2018,nl,Tristan H. Cockcroft,German Marquez,5513,Col,P,4,act,previously_reserved,P,2,2,0,0,15.7,1,3,17,1.72,0.511
 2018,nl,Tristan H. Cockcroft,Jordan Hicks,6366,StL,P,0,rel,previously_reserved,,2,0,0,0,2.0,2,0,2,9.0,2.0
-2018,nl,Grey Albright,Cole Hamels,1108,ChC,P,581,act,active,P,12,4,3,0,76.3,23,6,74,2.36,1.1
-2018,nl,Grey Albright,Hyun-Jin Ryu,2609,LAD,P,6,act,active,P,15,7,3,0,82.3,15,9,89,1.97,1.008
-2018,nl,Grey Albright,Mike Foltynewicz,3222,Atl,P,4,act,active,P,31,13,10,0,183.0,68,17,202,2.85,1.082
+2018,nl,Tristan H. Cockcroft,German Marquez,5513,Col,P,4,act,previously_reserved,P,2,2,0,0,15.7,1,3,17,1.72,0.511
+2018,nl,Tristan H. Cockcroft,Joe Musgrove,5406,Pit,P,3,rel,previously_reserved,,1,1,0,0,7.0,0,0,7,0.0,0.714
+2018,nl,Tristan H. Cockcroft,Phil Maton,6036,SD,P,0,rel,previously_reserved,,3,0,1,0,3.0,1,0,2,3.0,1.333
+2018,nl,Tristan H. Cockcroft,Reyes Moronta,5892,SF,P,1,rel,previously_reserved,,9,1,0,0,6.7,5,1,11,1.35,1.2
 2018,nl,Grey Albright,Jon Gray,4445,Col,P,12,act,active,P,30,11,9,0,165.0,51,27,177,5.29,1.37
-2018,nl,Grey Albright,Austin Gomber,5593,StL,P,11,act,active,P,7,3,2,0,31.7,9,4,28,6.25,1.737
 2018,nl,Grey Albright,Sean Doolittle,2332,Was,P,13,act,active,P,42,3,3,25,44.3,6,3,59,1.62,0.609
-2018,nl,Grey Albright,Jacob Nix,6383,SD,P,54,act,active,P,2,0,2,0,4.7,5,2,1,17.36,3.214
-2018,nl,Grey Albright,John Gant,5475,StL,P,21,act,active,P,15,5,3,0,70.7,41,7,54,3.44,1.358
+2018,nl,Grey Albright,Cole Hamels,1108,ChC,P,581,act,active,P,12,4,3,0,76.3,23,6,74,2.36,1.1
 2018,nl,Grey Albright,Nick Pivetta,5888,Phi,P,1,act,active,P,33,7,14,0,164.0,51,24,188,4.77,1.305
-2018,nl,Grey Albright,Adam Conley,4351,Mia,P,11,rel,previously_active,,8,0,2,1,8.0,4,2,5,9.0,1.875
-2018,nl,Grey Albright,Tommy Milone,3642,Was,P,11,rel,previously_active,,4,1,1,0,21.3,1,7,17,5.91,1.406
-2018,nl,Grey Albright,Will Smith,3082,SF,P,21,res,previously_active,P,29,2,3,14,29.3,6,3,39,2.15,0.92
-2018,nl,Grey Albright,Enyel De Los Santos,5469,Phi,P,4,rel,previously_active,,2,1,0,0,10.7,4,2,8,6.75,1.5
+2018,nl,Grey Albright,John Gant,5475,StL,P,21,act,active,P,15,5,3,0,70.7,41,7,54,3.44,1.358
+2018,nl,Grey Albright,Austin Gomber,5593,StL,P,11,act,active,P,7,3,2,0,31.7,9,4,28,6.25,1.737
+2018,nl,Grey Albright,Mike Foltynewicz,3222,Atl,P,4,act,active,P,31,13,10,0,183.0,68,17,202,2.85,1.082
+2018,nl,Grey Albright,Hyun-Jin Ryu,2609,LAD,P,6,act,active,P,15,7,3,0,82.3,15,9,89,1.97,1.008
+2018,nl,Grey Albright,Jacob Nix,6383,SD,P,54,act,active,P,2,0,2,0,4.7,5,2,1,17.36,3.214
 2018,nl,Grey Albright,*Jeff Samardzija,275,SF,P,17,dis,previously_active,P,6,0,2,0,29.0,16,5,20,7.14,1.621
-2018,nl,Grey Albright,Jeremy Jeffress,2063,Mil,P,1,rel,previously_active,,4,0,0,0,3.7,0,0,4,0.0,0.273
-2018,nl,Grey Albright,Bryse Wilson,6520,Atl,P,11,rel,previously_active,,1,0,0,0,1.0,3,0,0,27.0,5.0
-2018,nl,Grey Albright,*Brent Suter,5835,Mil,P,0,rel,previously_active,,12,6,4,0,63.7,10,13,57,4.95,1.178
 2018,nl,Grey Albright,Matt Andriese,4565,Ari,P,2,rel,previously_active,,3,0,1,0,4.0,0,2,3,6.75,1.75
-2018,nl,Grey Albright,*Michael Wacha,4080,StL,P,12,dis,previously_active,P,15,8,2,0,84.3,36,9,71,3.2,1.233
 2018,nl,Grey Albright,Yoshihisa Hirano,6281,Ari,P,1,rel,previously_active,,6,0,0,0,5.3,1,0,6,0.0,0.937
-2018,nl,Grey Albright,Yimi Garcia,4688,LAD,P,1,rel,previously_active,,1,0,1,0,1.0,1,1,0,27.0,3.0
+2018,nl,Grey Albright,Jeremy Jeffress,2063,Mil,P,1,rel,previously_active,,4,0,0,0,3.7,0,0,4,0.0,0.273
 2018,nl,Grey Albright,Hunter Strickland,2873,SF,P,0,res,previously_active,P,34,3,3,11,32.7,14,4,28,3.03,1.316
-2018,nl,Grey Albright,Edubray Ramos,5508,Phi,P,33,rel,previously_active,,18,1,1,0,14.7,5,0,11,3.07,1.295
-2018,nl,Grey Albright,Koda Glover,5756,Was,P,17,rel,previously_active,,6,1,0,0,4.7,4,0,2,1.93,1.286
-2018,nl,Grey Albright,Jared Hughes,3831,Cin,P,1,res,previously_active,P,22,1,1,2,22.3,8,2,20,2.42,0.985
-2018,nl,Grey Albright,Chris Stratton,4489,SF,P,5,rel,previously_active,,13,6,4,0,71.3,24,4,48,3.91,1.318
+2018,nl,Grey Albright,Yimi Garcia,4688,LAD,P,1,rel,previously_active,,1,0,1,0,1.0,1,1,0,27.0,3.0
+2018,nl,Grey Albright,*Michael Wacha,4080,StL,P,12,dis,previously_active,P,15,8,2,0,84.3,36,9,71,3.2,1.233
+2018,nl,Grey Albright,Bryse Wilson,6520,Atl,P,11,rel,previously_active,,1,0,0,0,1.0,3,0,0,27.0,5.0
 2018,nl,Grey Albright,Jeurys Familia,3269,Oak,P,7,trd,previously_active,,5,0,0,4,6.0,3,0,6,0.0,0.833
+2018,nl,Grey Albright,Tommy Milone,3642,Was,P,11,rel,previously_active,,4,1,1,0,21.3,1,7,17,5.91,1.406
 2018,nl,Grey Albright,Phil Maton,6036,SD,P,1,rel,previously_active,,5,0,0,0,6.0,1,0,5,0.0,1.333
-2018,nl,Grey Albright,Hunter Strickland,2873,SF,P,0,res,reserved,P,15,0,2,3,12.7,7,1,9,6.39,1.658
-2018,nl,Grey Albright,*Michael Wacha,4080,StL,P,12,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2018,nl,Grey Albright,Jared Hughes,3831,Cin,P,1,res,reserved,P,15,1,0,0,14.7,5,1,9,3.07,0.955
+2018,nl,Grey Albright,Will Smith,3082,SF,P,21,res,previously_active,P,29,2,3,14,29.3,6,3,39,2.15,0.92
+2018,nl,Grey Albright,Adam Conley,4351,Mia,P,11,rel,previously_active,,8,0,2,1,8.0,4,2,5,9.0,1.875
+2018,nl,Grey Albright,Jared Hughes,3831,Cin,P,1,res,previously_active,P,22,1,1,2,22.3,8,2,20,2.42,0.985
+2018,nl,Grey Albright,Enyel De Los Santos,5469,Phi,P,4,rel,previously_active,,2,1,0,0,10.7,4,2,8,6.75,1.5
+2018,nl,Grey Albright,Koda Glover,5756,Was,P,17,rel,previously_active,,6,1,0,0,4.7,4,0,2,1.93,1.286
+2018,nl,Grey Albright,Chris Stratton,4489,SF,P,5,rel,previously_active,,13,6,4,0,71.3,24,4,48,3.91,1.318
+2018,nl,Grey Albright,*Brent Suter,5835,Mil,P,0,rel,previously_active,,12,6,4,0,63.7,10,13,57,4.95,1.178
+2018,nl,Grey Albright,Edubray Ramos,5508,Phi,P,33,rel,previously_active,,18,1,1,0,14.7,5,0,11,3.07,1.295
 2018,nl,Grey Albright,Will Smith,3082,SF,P,21,res,reserved,P,2,0,0,0,2.0,2,0,2,22.5,4.0
+2018,nl,Grey Albright,Jared Hughes,3831,Cin,P,1,res,reserved,P,15,1,0,0,14.7,5,1,9,3.07,0.955
 2018,nl,Grey Albright,*Dennis Santana,6298,LAD,P,11,dis,reserved,P,0,0,0,0,0.0,0,0,0,-0.0,-0.0
 2018,nl,Grey Albright,*Jeff Samardzija,275,SF,P,17,dis,reserved,P,4,1,3,0,15.7,10,1,10,4.6,1.66
-2018,nl,Grey Albright,*Brent Suter,5835,Mil,P,0,rel,previously_reserved,,8,2,3,0,37.7,9,5,27,3.58,1.221
-2018,nl,Grey Albright,Brandon Finnegan,4971,Cin,P,86,rel,previously_reserved,,5,0,3,0,20.7,15,5,14,7.4,2.032
+2018,nl,Grey Albright,Hunter Strickland,2873,SF,P,0,res,reserved,P,15,0,2,3,12.7,7,1,9,6.39,1.658
+2018,nl,Grey Albright,*Michael Wacha,4080,StL,P,12,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2018,nl,Grey Albright,Phil Maton,6036,SD,P,1,rel,previously_reserved,,2,0,0,0,1.7,1,0,1,10.8,3.0
 2018,nl,Grey Albright,Adam Conley,4351,Mia,P,11,rel,previously_reserved,,5,0,0,0,4.0,3,0,4,2.25,1.5
-2018,nl,Grey Albright,Enyel De Los Santos,5469,Phi,P,4,rel,previously_reserved,,1,0,0,0,1.3,1,0,1,0.0,3.0
 2018,nl,Grey Albright,Edubray Ramos,5508,Phi,P,33,rel,previously_reserved,,1,1,0,0,0.7,0,0,0,0.0,0.0
 2018,nl,Grey Albright,Chris Stratton,4489,SF,P,5,rel,previously_reserved,,7,2,3,0,29.7,17,10,31,9.4,2.124
-2018,nl,Grey Albright,Phil Maton,6036,SD,P,1,rel,previously_reserved,,2,0,0,0,1.7,1,0,1,10.8,3.0
-2018,nl,Grey Albright,Austin Gomber,5593,StL,P,11,act,previously_reserved,P,3,2,0,0,17.0,9,0,16,1.59,1.294
+2018,nl,Grey Albright,Enyel De Los Santos,5469,Phi,P,4,rel,previously_reserved,,1,0,0,0,1.3,1,0,1,0.0,3.0
+2018,nl,Grey Albright,*Brent Suter,5835,Mil,P,0,rel,previously_reserved,,8,2,3,0,37.7,9,5,27,3.58,1.221
+2018,nl,Grey Albright,Sean Doolittle,2332,Was,P,13,act,previously_reserved,P,1,0,0,0,0.7,0,0,1,0.0,0.0
+2018,nl,Grey Albright,Jon Gray,4445,Col,P,12,act,previously_reserved,P,1,1,0,0,7.3,1,0,6,1.23,0.818
 2018,nl,Grey Albright,Matt Andriese,4565,Ari,P,2,rel,previously_reserved,,3,0,0,0,3.0,1,0,3,0.0,1.0
 2018,nl,Grey Albright,Jacob Nix,6383,SD,P,54,act,previously_reserved,P,6,1,3,0,31.7,6,6,16,6.82,1.389
-2018,nl,Grey Albright,Sean Doolittle,2332,Was,P,13,act,previously_reserved,P,1,0,0,0,0.7,0,0,1,0.0,0.0
+2018,nl,Grey Albright,Austin Gomber,5593,StL,P,11,act,previously_reserved,P,3,2,0,0,17.0,9,0,16,1.59,1.294
 2018,nl,Grey Albright,John Gant,5475,StL,P,21,act,previously_reserved,P,3,1,1,0,16.7,7,1,13,2.16,1.2
-2018,nl,Grey Albright,Jon Gray,4445,Col,P,12,act,previously_reserved,P,1,1,0,0,7.3,1,0,6,1.23,0.818
-2018,nl,Phil Hertz,Felipe Vazquez,4249,Pit,P,16,act,active,P,23,0,0,14,25.3,6,2,26,2.13,1.184
-2018,nl,Phil Hertz,Erick Fedde,5121,Was,P,17,act,active,P,7,2,1,0,32.3,17,7,33,6.12,1.515
-2018,nl,Phil Hertz,Shelby Miller,2839,Ari,P,1,act,active,P,3,0,3,0,14.0,5,4,18,9.0,1.786
-2018,nl,Phil Hertz,Hector Neris,5009,Phi,P,0,act,active,P,17,0,0,1,15.0,5,0,29,2.4,1.067
-2018,nl,Phil Hertz,Michael Lorenzen,4553,Cin,P,17,act,active,P,3,1,1,0,13.7,5,1,5,2.63,1.463
-2018,nl,Phil Hertz,Bud Norris,2113,StL,P,2,act,active,P,24,0,3,11,19.0,13,4,17,4.74,1.684
+2018,nl,Grey Albright,Brandon Finnegan,4971,Cin,P,86,rel,previously_reserved,,5,0,3,0,20.7,15,5,14,7.4,2.032
 2018,nl,Phil Hertz,Cody Reed,4854,Cin,P,0,act,active,P,4,1,2,0,19.3,6,1,13,4.66,1.552
 2018,nl,Phil Hertz,Jeurys Familia,3269,Oak,P,7,act,active,P,62,6,6,14,62.0,24,3,74,3.48,1.258
+2018,nl,Phil Hertz,Felipe Vazquez,4249,Pit,P,16,act,active,P,23,0,0,14,25.3,6,2,26,2.13,1.184
 2018,nl,Phil Hertz,Andrew Suarez,6009,SF,P,113,act,active,P,19,4,8,0,101.3,32,14,81,4.97,1.431
-2018,nl,Phil Hertz,Robert Gsellman,5504,NYM,P,21,rel,previously_active,,55,3,3,12,60.7,23,7,51,5.04,1.5
-2018,nl,Phil Hertz,Victor Arano,5963,Phi,P,5,rel,previously_active,,2,0,0,0,2.3,1,0,3,7.71,2.143
-2018,nl,Phil Hertz,Tommy Hunter,2152,Phi,P,16,rel,previously_active,,6,0,0,0,5.7,2,1,3,3.18,1.412
-2018,nl,Phil Hertz,*Clay Buchholz,154,Ari,P,124,rel,previously_active,,15,7,1,0,87.3,21,7,76,2.06,1.111
-2018,nl,Phil Hertz,Ross Stripling,4624,LAD,P,0,trd,previously_active,,21,8,3,0,96.3,9,14,109,2.8,1.1
-2018,nl,Phil Hertz,Randall Delgado,2725,Ari,P,1,rel,previously_active,,4,1,0,0,4.7,3,2,1,5.79,1.5
-2018,nl,Phil Hertz,Ryan Madson,1113,LAD,P,2,rel,previously_active,,17,0,3,2,16.0,6,2,17,6.75,1.938
-2018,nl,Phil Hertz,John Brebbia,6181,StL,P,1,rel,previously_active,,2,0,0,0,2.3,0,0,1,7.71,1.714
-2018,nl,Phil Hertz,Zack Greinke,660,Ari,P,24,trd,previously_active,,9,3,2,0,54.7,7,7,58,3.46,1.006
-2018,nl,Phil Hertz,Stephen Strasburg,2528,Was,P,32,trd,previously_active,,10,5,4,0,67.0,17,10,75,3.36,1.06
-2018,nl,Phil Hertz,Adam Morgan,4337,Phi,P,1,rel,previously_active,,9,0,0,0,6.3,6,1,7,4.26,1.737
-2018,nl,Phil Hertz,Corey Oswalt,6303,NYM,P,8,rel,previously_active,,1,1,0,0,6.0,1,4,2,6.0,1.667
+2018,nl,Phil Hertz,Erick Fedde,5121,Was,P,17,act,active,P,7,2,1,0,32.3,17,7,33,6.12,1.515
+2018,nl,Phil Hertz,Michael Lorenzen,4553,Cin,P,17,act,active,P,3,1,1,0,13.7,5,1,5,2.63,1.463
+2018,nl,Phil Hertz,Shelby Miller,2839,Ari,P,1,act,active,P,3,0,3,0,14.0,5,4,18,9.0,1.786
+2018,nl,Phil Hertz,Bud Norris,2113,StL,P,2,act,active,P,24,0,3,11,19.0,13,4,17,4.74,1.684
+2018,nl,Phil Hertz,Hector Neris,5009,Phi,P,0,act,active,P,17,0,0,1,15.0,5,0,29,2.4,1.067
 2018,nl,Phil Hertz,Chad Bettis,3961,Col,P,37,trd,previously_active,,6,2,1,0,37.3,11,3,24,2.65,1.045
-2018,nl,Phil Hertz,Steve Cishek,3368,ChC,P,1,rel,previously_active,,5,1,0,0,5.3,2,0,5,1.69,0.75
-2018,nl,Phil Hertz,Josh Fields,2526,LAD,P,0,rel,previously_active,,12,2,1,1,11.3,4,2,14,3.18,1.235
-2018,nl,Phil Hertz,Joakim Soria,671,Mil,P,12,rel,previously_active,,15,1,1,0,12.7,4,1,15,6.39,1.421
-2018,nl,Phil Hertz,*Brandon Morrow,1342,ChC,P,13,rel,previously_active,,11,0,0,8,10.0,2,2,10,2.7,1.2
-2018,nl,Phil Hertz,*Luiz Gohara,4587,Atl,P,32,trd,previously_active,,4,0,1,1,11.0,6,1,11,2.45,1.091
-2018,nl,Phil Hertz,Ty Blach,4749,SF,P,14,rel,previously_active,,3,1,1,0,15.3,8,0,6,4.11,1.63
-2018,nl,Phil Hertz,Edgar Santana,5946,Pit,P,0,rel,previously_active,,2,0,0,0,1.7,0,0,2,5.4,1.8
-2018,nl,Phil Hertz,Homer Bailey,313,Cin,P,0,rel,previously_active,,4,0,4,0,19.7,3,5,14,7.32,2.034
-2018,nl,Phil Hertz,Daniel Winkler,4973,Atl,P,33,rel,previously_active,,37,1,0,2,34.0,8,2,37,3.18,1.176
+2018,nl,Phil Hertz,Corey Oswalt,6303,NYM,P,8,rel,previously_active,,1,1,0,0,6.0,1,4,2,6.0,1.667
 2018,nl,Phil Hertz,Matt Albers,98,Mil,P,48,rel,previously_active,,6,1,1,1,6.3,0,1,7,2.84,1.105
-2018,nl,Phil Hertz,Matt Wisler,4486,Cin,P,34,rel,previously_active,,1,0,0,0,5.0,3,1,0,7.2,2.4
-2018,nl,Phil Hertz,Amir Garrett,4991,Cin,P,1,trd,previously_active,,41,0,1,0,44.0,14,5,52,3.48,1.091
-2018,nl,Phil Hertz,Brad Boxberger,3185,Ari,P,4,res,previously_active,P,19,1,4,8,15.0,11,3,20,7.8,1.8
-2018,nl,Phil Hertz,C. J. Edwards,4609,ChC,P,8,rel,previously_active,,4,1,0,0,4.0,3,0,3,0.0,1.25
-2018,nl,Phil Hertz,Tayron Guerrero,5069,Mia,P,7,rel,previously_active,,5,0,1,0,4.0,2,1,1,6.75,1.5
-2018,nl,Phil Hertz,Tyler Glasnow,4597,TB,P,24,rel,previously_active,,31,1,2,0,50.0,30,5,67,4.86,1.54
-2018,nl,Phil Hertz,Jesse Chavez,1202,ChC,P,7,rel,previously_active,,6,0,1,0,8.7,1,1,10,2.08,1.038
+2018,nl,Phil Hertz,*Brandon Morrow,1342,ChC,P,13,rel,previously_active,,11,0,0,8,10.0,2,2,10,2.7,1.2
 2018,nl,Phil Hertz,Jordan Lyles,2695,Mil,P,335,rel,previously_active,,5,1,1,0,18.3,8,4,15,8.84,1.909
+2018,nl,Phil Hertz,Tyler Glasnow,4597,TB,P,24,rel,previously_active,,31,1,2,0,50.0,30,5,67,4.86,1.54
+2018,nl,Phil Hertz,*Clay Buchholz,154,Ari,P,124,rel,previously_active,,15,7,1,0,87.3,21,7,76,2.06,1.111
+2018,nl,Phil Hertz,Tommy Hunter,2152,Phi,P,16,rel,previously_active,,6,0,0,0,5.7,2,1,3,3.18,1.412
+2018,nl,Phil Hertz,Adam Morgan,4337,Phi,P,1,rel,previously_active,,9,0,0,0,6.3,6,1,7,4.26,1.737
+2018,nl,Phil Hertz,Steve Cishek,3368,ChC,P,1,rel,previously_active,,5,1,0,0,5.3,2,0,5,1.69,0.75
+2018,nl,Phil Hertz,Matt Wisler,4486,Cin,P,34,rel,previously_active,,1,0,0,0,5.0,3,1,0,7.2,2.4
+2018,nl,Phil Hertz,*Luiz Gohara,4587,Atl,P,32,trd,previously_active,,4,0,1,1,11.0,6,1,11,2.45,1.091
 2018,nl,Phil Hertz,Arodys Vizcaino,3150,Atl,P,3,res,previously_active,P,5,0,0,1,4.7,2,2,5,5.79,1.5
-2018,nl,Phil Hertz,Arodys Vizcaino,3150,Atl,P,3,res,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2018,nl,Phil Hertz,Joakim Soria,671,Mil,P,12,rel,previously_active,,15,1,1,0,12.7,4,1,15,6.39,1.421
+2018,nl,Phil Hertz,Robert Gsellman,5504,NYM,P,21,rel,previously_active,,55,3,3,12,60.7,23,7,51,5.04,1.5
+2018,nl,Phil Hertz,Daniel Winkler,4973,Atl,P,33,rel,previously_active,,37,1,0,2,34.0,8,2,37,3.18,1.176
+2018,nl,Phil Hertz,Zack Greinke,660,Ari,P,24,trd,previously_active,,9,3,2,0,54.7,7,7,58,3.46,1.006
+2018,nl,Phil Hertz,Ryan Madson,1113,LAD,P,2,rel,previously_active,,17,0,3,2,16.0,6,2,17,6.75,1.938
+2018,nl,Phil Hertz,Tayron Guerrero,5069,Mia,P,7,rel,previously_active,,5,0,1,0,4.0,2,1,1,6.75,1.5
+2018,nl,Phil Hertz,Amir Garrett,4991,Cin,P,1,trd,previously_active,,41,0,1,0,44.0,14,5,52,3.48,1.091
+2018,nl,Phil Hertz,John Brebbia,6181,StL,P,1,rel,previously_active,,2,0,0,0,2.3,0,0,1,7.71,1.714
+2018,nl,Phil Hertz,Edgar Santana,5946,Pit,P,0,rel,previously_active,,2,0,0,0,1.7,0,0,2,5.4,1.8
+2018,nl,Phil Hertz,Victor Arano,5963,Phi,P,5,rel,previously_active,,2,0,0,0,2.3,1,0,3,7.71,2.143
+2018,nl,Phil Hertz,Jesse Chavez,1202,ChC,P,7,rel,previously_active,,6,0,1,0,8.7,1,1,10,2.08,1.038
+2018,nl,Phil Hertz,Ty Blach,4749,SF,P,14,rel,previously_active,,3,1,1,0,15.3,8,0,6,4.11,1.63
+2018,nl,Phil Hertz,C. J. Edwards,4609,ChC,P,8,rel,previously_active,,4,1,0,0,4.0,3,0,3,0.0,1.25
+2018,nl,Phil Hertz,Brad Boxberger,3185,Ari,P,4,res,previously_active,P,19,1,4,8,15.0,11,3,20,7.8,1.8
+2018,nl,Phil Hertz,Ross Stripling,4624,LAD,P,0,trd,previously_active,,21,8,3,0,96.3,9,14,109,2.8,1.1
+2018,nl,Phil Hertz,Homer Bailey,313,Cin,P,0,rel,previously_active,,4,0,4,0,19.7,3,5,14,7.32,2.034
+2018,nl,Phil Hertz,Stephen Strasburg,2528,Was,P,32,trd,previously_active,,10,5,4,0,67.0,17,10,75,3.36,1.06
+2018,nl,Phil Hertz,Randall Delgado,2725,Ari,P,1,rel,previously_active,,4,1,0,0,4.7,3,2,1,5.79,1.5
+2018,nl,Phil Hertz,Josh Fields,2526,LAD,P,0,rel,previously_active,,12,2,1,1,11.3,4,2,14,3.18,1.235
 2018,nl,Phil Hertz,Brad Boxberger,3185,Ari,P,4,res,reserved,P,3,1,0,0,3.0,3,0,2,3.0,2.0
-2018,nl,Phil Hertz,Andrew Suarez,6009,SF,P,113,act,previously_reserved,P,7,2,4,0,41.3,11,6,31,3.92,1.113
+2018,nl,Phil Hertz,Arodys Vizcaino,3150,Atl,P,3,res,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2018,nl,Phil Hertz,Chad Bettis,3961,Col,P,37,trd,previously_reserved,,3,0,0,0,16.7,3,4,11,9.18,1.8
+2018,nl,Phil Hertz,Corey Oswalt,6303,NYM,P,8,rel,previously_reserved,,5,1,0,0,7.7,4,2,6,15.26,2.609
+2018,nl,Phil Hertz,Matt Albers,98,Mil,P,48,rel,previously_reserved,,2,0,0,0,2.0,0,0,1,0.0,0.5
+2018,nl,Phil Hertz,*Brandon Morrow,1342,ChC,P,13,rel,previously_reserved,,1,0,0,0,0.3,0,0,0,0.0,3.0
 2018,nl,Phil Hertz,Jordan Lyles,2695,Mil,P,335,rel,previously_reserved,,6,0,2,0,19.3,3,3,15,3.72,1.345
+2018,nl,Phil Hertz,*Luiz Gohara,4587,Atl,P,32,trd,previously_reserved,,3,0,0,0,4.7,2,1,2,17.36,2.357
+2018,nl,Phil Hertz,Erick Fedde,5121,Was,P,17,act,previously_reserved,P,3,0,2,0,12.3,4,1,7,4.38,1.703
+2018,nl,Phil Hertz,Joakim Soria,671,Mil,P,12,rel,previously_reserved,,3,0,0,0,2.3,0,1,5,3.86,0.857
+2018,nl,Phil Hertz,Shelby Miller,2839,Ari,P,1,act,previously_reserved,P,2,0,1,0,2.0,3,1,1,22.5,3.5
+2018,nl,Phil Hertz,Andrew Suarez,6009,SF,P,113,act,previously_reserved,P,7,2,4,0,41.3,11,6,31,3.92,1.113
+2018,nl,Phil Hertz,Jeurys Familia,3269,Oak,P,7,act,previously_reserved,P,3,2,0,0,4.0,1,0,3,2.25,1.25
+2018,nl,Phil Hertz,Robert Gsellman,5504,NYM,P,21,rel,previously_reserved,,8,2,0,1,13.3,3,1,10,2.02,0.525
+2018,nl,Phil Hertz,Daniel Winkler,4973,Atl,P,33,rel,previously_reserved,,8,1,0,0,5.7,4,1,4,11.12,2.471
+2018,nl,Phil Hertz,Ryan Madson,1113,LAD,P,2,rel,previously_reserved,,15,2,0,1,12.7,3,1,13,1.42,0.789
 2018,nl,Phil Hertz,Tayron Guerrero,5069,Mia,P,7,rel,previously_reserved,,3,0,0,0,3.0,1,0,1,0.0,1.0
 2018,nl,Phil Hertz,Amir Garrett,4991,Cin,P,1,trd,previously_reserved,,1,0,0,0,0.7,1,0,2,0.0,1.5
-2018,nl,Phil Hertz,C. J. Edwards,4609,ChC,P,8,rel,previously_reserved,,9,0,1,0,8.3,4,0,5,1.08,1.2
-2018,nl,Phil Hertz,Erick Fedde,5121,Was,P,17,act,previously_reserved,P,3,0,2,0,12.3,4,1,7,4.38,1.703
-2018,nl,Phil Hertz,Matt Albers,98,Mil,P,48,rel,previously_reserved,,2,0,0,0,2.0,0,0,1,0.0,0.5
-2018,nl,Phil Hertz,Ty Blach,4749,SF,P,14,rel,previously_reserved,,1,0,1,0,5.0,1,0,3,5.4,1.6
 2018,nl,Phil Hertz,Bud Norris,2113,StL,P,2,act,previously_reserved,P,2,0,1,0,1.0,2,0,1,9.0,5.0
-2018,nl,Phil Hertz,*Luiz Gohara,4587,Atl,P,32,trd,previously_reserved,,3,0,0,0,4.7,2,1,2,17.36,2.357
-2018,nl,Phil Hertz,Daniel Winkler,4973,Atl,P,33,rel,previously_reserved,,8,1,0,0,5.7,4,1,4,11.12,2.471
-2018,nl,Phil Hertz,Homer Bailey,313,Cin,P,0,rel,previously_reserved,,1,0,1,0,5.0,2,2,5,5.4,2.2
-2018,nl,Phil Hertz,*Brandon Morrow,1342,ChC,P,13,rel,previously_reserved,,1,0,0,0,0.3,0,0,0,0.0,3.0
-2018,nl,Phil Hertz,Joakim Soria,671,Mil,P,12,rel,previously_reserved,,3,0,0,0,2.3,0,1,5,3.86,0.857
-2018,nl,Phil Hertz,Josh Fields,2526,LAD,P,0,rel,previously_reserved,,5,0,0,0,5.0,1,1,0,1.8,1.0
-2018,nl,Phil Hertz,Corey Oswalt,6303,NYM,P,8,rel,previously_reserved,,5,1,0,0,7.7,4,2,6,15.26,2.609
-2018,nl,Phil Hertz,Chad Bettis,3961,Col,P,37,trd,previously_reserved,,3,0,0,0,16.7,3,4,11,9.18,1.8
-2018,nl,Phil Hertz,Jeurys Familia,3269,Oak,P,7,act,previously_reserved,P,3,2,0,0,4.0,1,0,3,2.25,1.25
+2018,nl,Phil Hertz,Ty Blach,4749,SF,P,14,rel,previously_reserved,,1,0,1,0,5.0,1,0,3,5.4,1.6
+2018,nl,Phil Hertz,C. J. Edwards,4609,ChC,P,8,rel,previously_reserved,,9,0,1,0,8.3,4,0,5,1.08,1.2
 2018,nl,Phil Hertz,Ross Stripling,4624,LAD,P,0,trd,previously_reserved,,6,0,0,0,7.7,6,0,10,1.17,1.565
-2018,nl,Phil Hertz,Ryan Madson,1113,LAD,P,2,rel,previously_reserved,,15,2,0,1,12.7,3,1,13,1.42,0.789
-2018,nl,Phil Hertz,Shelby Miller,2839,Ari,P,1,act,previously_reserved,P,2,0,1,0,2.0,3,1,1,22.5,3.5
-2018,nl,Phil Hertz,Robert Gsellman,5504,NYM,P,21,rel,previously_reserved,,8,2,0,1,13.3,3,1,10,2.02,0.525
-2018,nl,Scott Wilderman,Seung-hwan Oh,4614,Col,P,5,act,active,P,5,1,0,0,4.7,2,1,4,3.86,0.857
-2018,nl,Scott Wilderman,Pedro Strop,446,ChC,P,3,act,active,P,58,5,1,13,57.0,20,4,55,2.37,0.965
+2018,nl,Phil Hertz,Homer Bailey,313,Cin,P,0,rel,previously_reserved,,1,0,1,0,5.0,2,2,5,5.4,2.2
+2018,nl,Phil Hertz,Josh Fields,2526,LAD,P,0,rel,previously_reserved,,5,0,0,0,5.0,1,1,0,1.8,1.0
 2018,nl,Scott Wilderman,Wei-Yin Chen,3151,Mia,P,115,act,active,P,16,3,8,0,80.0,31,13,70,5.4,1.362
-2018,nl,Scott Wilderman,Dan Straily,4151,Mia,P,4,act,active,P,21,4,6,0,113.3,45,17,93,3.97,1.262
-2018,nl,Scott Wilderman,Wade Davis,1479,Col,P,14,act,active,P,69,3,6,43,65.3,26,8,78,4.13,1.056
-2018,nl,Scott Wilderman,Sean Newcomb,4958,Atl,P,6,act,active,P,31,12,9,0,164.0,81,18,160,3.9,1.329
 2018,nl,Scott Wilderman,Miles Mikolas,3895,StL,P,8,act,active,P,32,18,4,0,200.7,29,16,146,2.83,1.071
-2018,nl,Scott Wilderman,Jon Lester,160,ChC,P,15,act,active,P,32,18,6,0,181.7,64,24,149,3.32,1.31
+2018,nl,Scott Wilderman,Sean Newcomb,4958,Atl,P,6,act,active,P,31,12,9,0,164.0,81,18,160,3.9,1.329
 2018,nl,Scott Wilderman,Tanner Roark,4325,Was,P,7,act,active,P,31,9,15,0,180.3,50,24,146,4.34,1.281
-2018,nl,Scott Wilderman,Tyler Lyons,4356,StL,P,3,rel,previously_active,,9,0,0,0,6.7,3,1,8,5.4,1.65
-2018,nl,Scott Wilderman,Trevor Williams,4867,Pit,P,0,res,previously_active,P,12,7,3,0,71.7,20,3,55,1.38,1.074
-2018,nl,Scott Wilderman,Bud Norris,2113,StL,P,2,trd,previously_active,,38,3,2,17,37.7,6,4,49,2.87,0.929
-2018,nl,Scott Wilderman,Cory Gearrin,3374,Oak,P,0,rel,previously_active,,6,0,0,0,6.0,1,1,5,3.0,1.167
-2018,nl,Scott Wilderman,Homer Bailey,313,Cin,P,0,rel,previously_active,,1,0,1,0,6.0,3,0,3,1.5,1.167
+2018,nl,Scott Wilderman,Dan Straily,4151,Mia,P,4,act,active,P,21,4,6,0,113.3,45,17,93,3.97,1.262
+2018,nl,Scott Wilderman,Jon Lester,160,ChC,P,15,act,active,P,32,18,6,0,181.7,64,24,149,3.32,1.31
+2018,nl,Scott Wilderman,Pedro Strop,446,ChC,P,3,act,active,P,58,5,1,13,57.0,20,4,55,2.37,0.965
+2018,nl,Scott Wilderman,Wade Davis,1479,Col,P,14,act,active,P,69,3,6,43,65.3,26,8,78,4.13,1.056
+2018,nl,Scott Wilderman,Seung-hwan Oh,4614,Col,P,5,act,active,P,5,1,0,0,4.7,2,1,4,3.86,0.857
 2018,nl,Scott Wilderman,Shawn Kelley,2407,Oak,P,0,rel,previously_active,,2,0,0,0,0.3,0,1,1,27.0,3.0
 2018,nl,Scott Wilderman,Kyle Hendricks,4620,ChC,P,17,trd,previously_active,,5,2,1,0,29.0,7,5,24,3.1,1.172
-2018,nl,Scott Wilderman,Adam Cimber,6381,Cle,P,0,rel,previously_active,,18,1,3,0,18.3,4,2,15,3.44,1.036
+2018,nl,Scott Wilderman,Trevor Williams,4867,Pit,P,0,res,previously_active,P,12,7,3,0,71.7,20,3,55,1.38,1.074
+2018,nl,Scott Wilderman,Homer Bailey,313,Cin,P,0,rel,previously_active,,1,0,1,0,6.0,3,0,3,1.5,1.167
+2018,nl,Scott Wilderman,Tyler Lyons,4356,StL,P,3,rel,previously_active,,9,0,0,0,6.7,3,1,8,5.4,1.65
 2018,nl,Scott Wilderman,Amir Garrett,4991,Cin,P,1,rel,previously_active,,3,0,0,0,3.0,1,1,2,6.0,1.0
+2018,nl,Scott Wilderman,Bud Norris,2113,StL,P,2,trd,previously_active,,38,3,2,17,37.7,6,4,49,2.87,0.929
+2018,nl,Scott Wilderman,Cory Gearrin,3374,Oak,P,0,rel,previously_active,,6,0,0,0,6.0,1,1,5,3.0,1.167
+2018,nl,Scott Wilderman,Adam Cimber,6381,Cle,P,0,rel,previously_active,,18,1,3,0,18.3,4,2,15,3.44,1.036
 2018,nl,Scott Wilderman,Trevor Williams,4867,Pit,P,0,res,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2018,nl,Scott Wilderman,Wei-Yin Chen,3151,Mia,P,115,act,previously_reserved,P,9,2,4,0,48.0,14,5,38,4.13,1.313
 2018,nl,Scott Wilderman,Shawn Kelley,2407,Oak,P,0,rel,previously_reserved,,2,0,0,0,1.0,1,0,1,0.0,1.0
-2018,nl,Scott Wilderman,Seung-hwan Oh,4614,Col,P,5,act,previously_reserved,P,15,1,0,0,11.7,4,2,18,3.09,1.114
-2018,nl,Scott Wilderman,Dan Straily,4151,Mia,P,4,act,previously_reserved,P,2,1,0,0,9.0,7,3,6,6.0,1.778
-2018,nl,Scott Wilderman,Adam Cimber,6381,Cle,P,0,rel,previously_reserved,,5,0,0,0,2.7,3,0,0,10.13,3.0
 2018,nl,Scott Wilderman,Tyler Lyons,4356,StL,P,3,rel,previously_reserved,,5,0,0,0,2.3,1,0,3,7.71,2.143
-2018,nl,Derek Carty,Trevor Richards,6451,Mia,P,1,act,active,P,20,3,7,0,101.0,46,13,103,4.46,1.386
-2018,nl,Derek Carty,Mark Melancon,1022,SF,P,9,act,active,P,26,1,3,3,25.0,10,1,20,2.88,1.6
-2018,nl,Derek Carty,Anthony DeSclafani,4732,Cin,P,1,act,active,P,15,4,6,0,82.0,19,17,82,4.83,1.256
+2018,nl,Scott Wilderman,Seung-hwan Oh,4614,Col,P,5,act,previously_reserved,P,15,1,0,0,11.7,4,2,18,3.09,1.114
+2018,nl,Scott Wilderman,Adam Cimber,6381,Cle,P,0,rel,previously_reserved,,5,0,0,0,2.7,3,0,0,10.13,3.0
+2018,nl,Scott Wilderman,Wei-Yin Chen,3151,Mia,P,115,act,previously_reserved,P,9,2,4,0,48.0,14,5,38,4.13,1.313
+2018,nl,Scott Wilderman,Dan Straily,4151,Mia,P,4,act,previously_reserved,P,2,1,0,0,9.0,7,3,6,6.0,1.778
 2018,nl,Derek Carty,Jose Quintana,3839,ChC,P,21,act,active,P,32,13,11,0,174.3,68,25,158,4.03,1.319
-2018,nl,Derek Carty,Antonio Senzatela,5237,Col,P,1,act,active,P,3,1,0,0,17.7,5,2,13,1.53,1.019
-2018,nl,Derek Carty,Jacob DeGrom,4563,NYM,P,26,act,active,P,32,10,9,0,217.0,46,10,269,1.7,0.912
-2018,nl,Derek Carty,Tony Watson,3418,SF,P,0,act,active,P,45,3,4,0,38.0,9,3,38,3.08,1.026
+2018,nl,Derek Carty,Trevor Richards,6451,Mia,P,1,act,active,P,20,3,7,0,101.0,46,13,103,4.46,1.386
 2018,nl,Derek Carty,Zack Wheeler,2831,NYM,P,0,act,active,P,29,12,7,0,182.3,55,14,179,3.31,1.124
+2018,nl,Derek Carty,Mark Melancon,1022,SF,P,9,act,active,P,26,1,3,3,25.0,10,1,20,2.88,1.6
+2018,nl,Derek Carty,Jacob DeGrom,4563,NYM,P,26,act,active,P,32,10,9,0,217.0,46,10,269,1.7,0.912
+2018,nl,Derek Carty,Antonio Senzatela,5237,Col,P,1,act,active,P,3,1,0,0,17.7,5,2,13,1.53,1.019
 2018,nl,Derek Carty,Joey Lucchesi,6279,SD,P,42,act,active,P,22,6,8,0,111.7,40,20,124,4.11,1.307
-2018,nl,Derek Carty,*Johnny Cueto,354,SF,P,10,rel,previously_active,,8,3,1,0,48.0,11,6,36,2.62,0.979
-2018,nl,Derek Carty,*Wilmer Font,2854,TB,P,3,rel,previously_active,,9,0,2,0,16.0,3,9,14,12.38,2.062
-2018,nl,Derek Carty,Jason Vargas,942,NYM,P,0,rel,previously_active,,1,0,1,0,5.0,1,0,4,3.6,1.2
-2018,nl,Derek Carty,Scott Alexander,4729,LAD,P,0,rel,previously_active,,10,0,0,0,10.7,7,1,11,5.91,1.5
-2018,nl,Derek Carty,*Alexander Reyes,4797,StL,P,6,rel,previously_active,,1,0,0,0,4.0,2,0,2,0.0,1.25
-2018,nl,Derek Carty,Andrew Chafin,4142,Ari,P,0,rel,previously_active,,8,1,0,0,7.7,3,0,11,0.0,0.783
-2018,nl,Derek Carty,*Caleb Smith,5905,Mia,P,0,dis,previously_active,P,16,5,6,0,77.3,33,10,88,4.19,1.241
-2018,nl,Derek Carty,*Brock Stewart,5811,LAD,P,2,dis,previously_active,P,8,0,0,0,17.7,8,4,14,5.6,1.642
+2018,nl,Derek Carty,Tony Watson,3418,SF,P,0,act,active,P,45,3,4,0,38.0,9,3,38,3.08,1.026
+2018,nl,Derek Carty,Anthony DeSclafani,4732,Cin,P,1,act,active,P,15,4,6,0,82.0,19,17,82,4.83,1.256
 2018,nl,Derek Carty,Brett Cecil,2077,StL,P,0,rel,previously_active,,11,0,1,0,8.3,9,1,5,7.56,2.52
-2018,nl,Derek Carty,Anthony Swarzak,2033,NYM,P,0,res,previously_active,P,19,0,1,2,18.0,8,4,20,6.5,1.611
+2018,nl,Derek Carty,Scott Alexander,4729,LAD,P,0,rel,previously_active,,10,0,0,0,10.7,7,1,11,5.91,1.5
 2018,nl,Derek Carty,Justin Wilson,3462,ChC,P,0,res,previously_active,P,47,3,3,0,37.0,22,4,48,2.92,1.351
+2018,nl,Derek Carty,Anthony Swarzak,2033,NYM,P,0,res,previously_active,P,19,0,1,2,18.0,8,4,20,6.5,1.611
+2018,nl,Derek Carty,*Wilmer Font,2854,TB,P,3,rel,previously_active,,9,0,2,0,16.0,3,9,14,12.38,2.062
+2018,nl,Derek Carty,*Johnny Cueto,354,SF,P,10,rel,previously_active,,8,3,1,0,48.0,11,6,36,2.62,0.979
+2018,nl,Derek Carty,*Caleb Smith,5905,Mia,P,0,dis,previously_active,P,16,5,6,0,77.3,33,10,88,4.19,1.241
 2018,nl,Derek Carty,Jerry Blevins,1043,NYM,P,0,rel,previously_active,,11,1,0,0,3.3,3,0,3,0.0,1.2
-2018,nl,Derek Carty,*Brock Stewart,5811,LAD,P,2,dis,reserved,P,1,0,1,0,0.0,1,0,0,0.0,0.0
+2018,nl,Derek Carty,*Brock Stewart,5811,LAD,P,2,dis,previously_active,P,8,0,0,0,17.7,8,4,14,5.6,1.642
+2018,nl,Derek Carty,Andrew Chafin,4142,Ari,P,0,rel,previously_active,,8,1,0,0,7.7,3,0,11,0.0,0.783
+2018,nl,Derek Carty,Jason Vargas,942,NYM,P,0,rel,previously_active,,1,0,1,0,5.0,1,0,4,3.6,1.2
+2018,nl,Derek Carty,*Alexander Reyes,4797,StL,P,6,rel,previously_active,,1,0,0,0,4.0,2,0,2,0.0,1.25
 2018,nl,Derek Carty,*Caleb Smith,5905,Mia,P,0,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2018,nl,Derek Carty,*Brock Stewart,5811,LAD,P,2,dis,reserved,P,1,0,1,0,0.0,1,0,0,0.0,0.0
 2018,nl,Derek Carty,Justin Wilson,3462,ChC,P,0,res,reserved,P,7,0,1,0,4.3,1,0,5,10.38,2.308
 2018,nl,Derek Carty,Anthony Swarzak,2033,NYM,P,0,res,reserved,P,10,0,1,2,8.3,6,2,11,5.4,1.56
-2018,nl,Derek Carty,Scott Alexander,4729,LAD,P,0,rel,previously_reserved,,15,1,0,0,14.0,5,0,6,3.86,1.5
+2018,nl,Derek Carty,Brett Cecil,2077,StL,P,0,rel,previously_reserved,,2,0,0,0,1.7,0,0,2,0.0,0.0
 2018,nl,Derek Carty,*Wilmer Font,2854,TB,P,3,rel,previously_reserved,,1,0,0,0,1.0,2,1,2,18.0,3.0
+2018,nl,Derek Carty,Anthony DeSclafani,4732,Cin,P,1,act,previously_reserved,P,6,3,2,0,33.0,11,7,26,5.18,1.364
+2018,nl,Derek Carty,*Johnny Cueto,354,SF,P,10,rel,previously_reserved,,1,0,1,0,5.0,2,2,2,9.0,2.4
+2018,nl,Derek Carty,Antonio Senzatela,5237,Col,P,1,act,previously_reserved,P,8,2,4,0,42.3,16,5,36,4.89,1.559
+2018,nl,Derek Carty,Scott Alexander,4729,LAD,P,0,rel,previously_reserved,,15,1,0,0,14.0,5,0,6,3.86,1.5
+2018,nl,Derek Carty,Trevor Richards,6451,Mia,P,1,act,previously_reserved,P,3,1,1,0,17.0,4,1,20,2.12,1.0
+2018,nl,Derek Carty,Jerry Blevins,1043,NYM,P,0,rel,previously_reserved,,8,0,0,0,5.0,2,0,3,9.0,1.6
+2018,nl,Derek Carty,Mark Melancon,1022,SF,P,9,act,previously_reserved,P,15,0,1,0,14.0,4,1,11,3.86,1.571
 2018,nl,Derek Carty,Jason Vargas,942,NYM,P,0,rel,previously_reserved,,3,0,2,0,11.7,5,6,8,10.03,1.886
 2018,nl,Derek Carty,Tony Watson,3418,SF,P,0,act,previously_reserved,P,6,0,0,0,7.0,0,0,10,1.29,0.571
-2018,nl,Derek Carty,*Johnny Cueto,354,SF,P,10,rel,previously_reserved,,1,0,1,0,5.0,2,2,2,9.0,2.4
-2018,nl,Derek Carty,Joey Lucchesi,6279,SD,P,42,act,previously_reserved,P,3,2,1,0,13.7,3,3,20,3.29,1.098
-2018,nl,Derek Carty,Jerry Blevins,1043,NYM,P,0,rel,previously_reserved,,8,0,0,0,5.0,2,0,3,9.0,1.6
-2018,nl,Derek Carty,Trevor Richards,6451,Mia,P,1,act,previously_reserved,P,3,1,1,0,17.0,4,1,20,2.12,1.0
-2018,nl,Derek Carty,Brett Cecil,2077,StL,P,0,rel,previously_reserved,,2,0,0,0,1.7,0,0,2,0.0,0.0
-2018,nl,Derek Carty,Mark Melancon,1022,SF,P,9,act,previously_reserved,P,15,0,1,0,14.0,4,1,11,3.86,1.571
-2018,nl,Derek Carty,Anthony DeSclafani,4732,Cin,P,1,act,previously_reserved,P,6,3,2,0,33.0,11,7,26,5.18,1.364
 2018,nl,Derek Carty,Andrew Chafin,4142,Ari,P,0,rel,previously_reserved,,12,0,2,0,8.7,2,0,7,2.08,0.808
-2018,nl,Derek Carty,Antonio Senzatela,5237,Col,P,1,act,previously_reserved,P,8,2,4,0,42.3,16,5,36,4.89,1.559
-2018,nl,Mike Gianella,Jeremy Jeffress,2063,Mil,P,38,act,active,P,4,0,0,3,4.3,0,0,5,0.0,0.231
-2018,nl,Mike Gianella,A.J. Minter,5992,Atl,P,2,act,active,P,65,4,3,15,61.3,22,3,69,3.23,1.288
-2018,nl,Mike Gianella,Seth Lugo,5417,NYM,P,0,act,active,P,24,2,2,1,49.3,16,6,49,3.47,1.155
-2018,nl,Mike Gianella,Adam Ottavino,1424,Col,P,156,act,active,P,64,3,4,6,66.0,34,5,89,2.73,1.091
-2018,nl,Mike Gianella,Clayton Kershaw,1961,LAD,P,39,act,active,P,26,9,5,0,161.3,29,17,155,2.73,1.041
-2018,nl,Mike Gianella,Jose Urena,4615,Mia,P,1,act,active,P,18,5,8,0,99.7,32,14,81,4.97,1.324
+2018,nl,Derek Carty,Joey Lucchesi,6279,SD,P,42,act,previously_reserved,P,3,2,1,0,13.7,3,3,20,3.29,1.098
 2018,nl,Mike Gianella,Ross Stripling,4624,LAD,P,0,act,active,P,5,0,3,0,17.7,7,4,17,5.09,1.472
-2018,nl,Mike Gianella,Jhoulys Chacin,2123,Mil,P,2,act,active,P,31,12,8,0,170.7,62,16,136,3.69,1.166
-2018,nl,Mike Gianella,Kyle Hendricks,4620,ChC,P,17,act,active,P,28,12,10,0,170.0,37,17,137,3.49,1.141
 2018,nl,Mike Gianella,Kirby Yates,4303,SD,P,1,act,active,P,45,4,3,10,42.7,11,5,63,2.11,0.891
+2018,nl,Mike Gianella,Adam Ottavino,1424,Col,P,156,act,active,P,64,3,4,6,66.0,34,5,89,2.73,1.091
+2018,nl,Mike Gianella,Jeremy Jeffress,2063,Mil,P,38,act,active,P,4,0,0,3,4.3,0,0,5,0.0,0.231
+2018,nl,Mike Gianella,Jhoulys Chacin,2123,Mil,P,2,act,active,P,31,12,8,0,170.7,62,16,136,3.69,1.166
+2018,nl,Mike Gianella,A.J. Minter,5992,Atl,P,2,act,active,P,65,4,3,15,61.3,22,3,69,3.23,1.288
+2018,nl,Mike Gianella,Jose Urena,4615,Mia,P,1,act,active,P,18,5,8,0,99.7,32,14,81,4.97,1.324
+2018,nl,Mike Gianella,Seth Lugo,5417,NYM,P,0,act,active,P,24,2,2,1,49.3,16,6,49,3.47,1.155
+2018,nl,Mike Gianella,Clayton Kershaw,1961,LAD,P,39,act,active,P,26,9,5,0,161.3,29,17,155,2.73,1.041
+2018,nl,Mike Gianella,Kyle Hendricks,4620,ChC,P,17,act,active,P,28,12,10,0,170.0,37,17,137,3.49,1.141
+2018,nl,Mike Gianella,Trevor Williams,4867,Pit,P,1,rel,previously_active,,17,5,7,0,88.0,31,11,63,4.81,1.273
+2018,nl,Mike Gianella,Chad Bettis,3961,Col,P,37,rel,previously_active,,3,1,0,0,15.0,9,3,12,5.4,1.533
+2018,nl,Mike Gianella,Matt Albers,98,Mil,P,3,rel,previously_active,,3,0,0,0,4.0,1,1,4,2.25,0.75
+2018,nl,Mike Gianella,Felipe Vazquez,4249,Pit,P,16,trd,previously_active,,47,4,2,23,44.7,18,2,63,3.02,1.276
+2018,nl,Mike Gianella,Daniel Poncedeleon,5595,StL,P,23,rel,previously_active,,1,0,0,0,2.0,1,0,1,0.0,1.0
 2018,nl,Mike Gianella,Jordan Hicks,6366,StL,P,20,rel,previously_active,,6,0,0,1,5.0,6,0,9,1.8,2.6
 2018,nl,Mike Gianella,Brandon Kintzler,3364,ChC,P,0,rel,previously_active,,1,0,0,0,1.0,0,0,1,0.0,0.0
-2018,nl,Mike Gianella,Felipe Vazquez,4249,Pit,P,16,trd,previously_active,,47,4,2,23,44.7,18,2,63,3.02,1.276
-2018,nl,Mike Gianella,Chad Bettis,3961,Col,P,37,rel,previously_active,,3,1,0,0,15.0,9,3,12,5.4,1.533
-2018,nl,Mike Gianella,*Clayton Richard,2141,SD,P,17,rel,previously_active,,20,6,6,0,120.3,40,14,76,5.09,1.238
+2018,nl,Mike Gianella,Jason Vargas,942,NYM,P,2,rel,previously_active,,2,0,2,0,8.3,5,5,8,16.2,3.0
 2018,nl,Mike Gianella,Dillon Peters,5965,Mia,P,0,rel,previously_active,,3,1,2,0,13.3,10,4,10,10.12,1.95
-2018,nl,Mike Gianella,Junior Guerra,5382,Mil,P,60,rel,previously_active,,20,4,7,0,102.0,44,12,101,3.88,1.461
 2018,nl,Mike Gianella,Zach Davies,4919,Mil,P,22,res,previously_active,P,2,0,0,0,10.0,2,1,9,2.7,1.2
-2018,nl,Mike Gianella,Trevor Williams,4867,Pit,P,1,rel,previously_active,,17,5,7,0,88.0,31,11,63,4.81,1.273
-2018,nl,Mike Gianella,Daniel Poncedeleon,5595,StL,P,23,rel,previously_active,,1,0,0,0,2.0,1,0,1,0.0,1.0
 2018,nl,Mike Gianella,Tommy Hunter,2152,Phi,P,23,rel,previously_active,,2,1,0,0,1.3,0,0,0,6.75,3.0
 2018,nl,Mike Gianella,Joe Ross,4023,Was,P,65,res,previously_active,P,2,0,1,0,11.0,3,0,3,4.09,1.364
-2018,nl,Mike Gianella,Matt Albers,98,Mil,P,3,rel,previously_active,,3,0,0,0,4.0,1,1,4,2.25,0.75
 2018,nl,Mike Gianella,Seranthony Dominguez,6307,Phi,P,18,res,previously_active,P,47,2,5,14,52.0,21,4,66,3.29,1.019
-2018,nl,Mike Gianella,Jason Vargas,942,NYM,P,2,rel,previously_active,,2,0,2,0,8.3,5,5,8,16.2,3.0
-2018,nl,Mike Gianella,Joe Ross,4023,Was,P,65,res,reserved,P,1,0,1,0,5.0,1,3,4,7.2,1.2
-2018,nl,Mike Gianella,Seranthony Dominguez,6307,Phi,P,18,res,reserved,P,2,0,0,2,2.0,1,0,3,0.0,0.5
+2018,nl,Mike Gianella,*Clayton Richard,2141,SD,P,17,rel,previously_active,,20,6,6,0,120.3,40,14,76,5.09,1.238
+2018,nl,Mike Gianella,Junior Guerra,5382,Mil,P,60,rel,previously_active,,20,4,7,0,102.0,44,12,101,3.88,1.461
 2018,nl,Mike Gianella,Zach Davies,4919,Mil,P,22,res,reserved,P,3,0,2,0,13.0,2,0,9,4.85,1.077
-2018,nl,Mike Gianella,Brandon Kintzler,3364,ChC,P,0,rel,previously_reserved,,3,0,2,0,3.0,4,1,2,21.0,3.333
-2018,nl,Mike Gianella,Jhoulys Chacin,2123,Mil,P,2,act,previously_reserved,P,4,3,0,0,22.0,9,2,20,2.05,1.136
-2018,nl,Mike Gianella,Kirby Yates,4303,SD,P,1,act,previously_reserved,P,20,1,0,2,20.3,6,1,27,2.21,0.984
-2018,nl,Mike Gianella,Ross Stripling,4624,LAD,P,0,act,previously_reserved,P,1,0,0,0,0.3,0,0,0,0.0,3.0
-2018,nl,Mike Gianella,Junior Guerra,5382,Mil,P,60,rel,previously_reserved,,5,1,2,0,27.7,9,7,23,6.18,1.446
-2018,nl,Mike Gianella,Chad Bettis,3961,Col,P,37,rel,previously_reserved,,4,0,1,0,19.7,13,5,16,10.53,1.932
-2018,nl,Mike Gianella,*Clayton Richard,2141,SD,P,17,rel,previously_reserved,,6,1,4,0,34.3,16,4,26,5.24,1.689
-2018,nl,Mike Gianella,Adam Ottavino,1424,Col,P,156,act,previously_reserved,P,2,0,0,0,2.0,1,0,3,0.0,1.0
-2018,nl,Mike Gianella,Seth Lugo,5417,NYM,P,0,act,previously_reserved,P,30,1,2,2,52.0,12,3,54,1.9,1.0
+2018,nl,Mike Gianella,Seranthony Dominguez,6307,Phi,P,18,res,reserved,P,2,0,0,2,2.0,1,0,3,0.0,0.5
+2018,nl,Mike Gianella,Joe Ross,4023,Was,P,65,res,reserved,P,1,0,1,0,5.0,1,3,4,7.2,1.2
 2018,nl,Mike Gianella,Tommy Hunter,2152,Phi,P,23,rel,previously_reserved,,3,0,0,0,2.7,1,0,2,6.75,1.875
-2018,nl,Mike Gianella,Trevor Williams,4867,Pit,P,1,rel,previously_reserved,,1,1,0,0,6.0,1,1,5,1.5,0.833
-2018,nl,Mike Gianella,Jose Urena,4615,Mia,P,1,act,previously_reserved,P,13,4,4,0,74.3,19,5,49,2.66,0.996
+2018,nl,Mike Gianella,Jhoulys Chacin,2123,Mil,P,2,act,previously_reserved,P,4,3,0,0,22.0,9,2,20,2.05,1.136
+2018,nl,Mike Gianella,*Clayton Richard,2141,SD,P,17,rel,previously_reserved,,6,1,4,0,34.3,16,4,26,5.24,1.689
+2018,nl,Mike Gianella,Junior Guerra,5382,Mil,P,60,rel,previously_reserved,,5,1,2,0,27.7,9,7,23,6.18,1.446
+2018,nl,Mike Gianella,Adam Ottavino,1424,Col,P,156,act,previously_reserved,P,2,0,0,0,2.0,1,0,3,0.0,1.0
+2018,nl,Mike Gianella,Brandon Kintzler,3364,ChC,P,0,rel,previously_reserved,,3,0,2,0,3.0,4,1,2,21.0,3.333
+2018,nl,Mike Gianella,Kirby Yates,4303,SD,P,1,act,previously_reserved,P,20,1,0,2,20.3,6,1,27,2.21,0.984
 2018,nl,Mike Gianella,Jason Vargas,942,NYM,P,2,rel,previously_reserved,,1,0,1,0,4.0,2,0,1,9.0,2.0
-2018,nl,Craig Mish,Zach Eflin,4105,Phi,P,3,act,active,P,23,11,8,0,122.0,37,15,119,4.5,1.344
-2018,nl,Craig Mish,Archie Bradley,3684,Ari,P,10,act,active,P,76,4,5,3,71.7,20,9,75,3.64,1.144
+2018,nl,Mike Gianella,Ross Stripling,4624,LAD,P,0,act,previously_reserved,P,1,0,0,0,0.3,0,0,0,0.0,3.0
+2018,nl,Mike Gianella,Trevor Williams,4867,Pit,P,1,rel,previously_reserved,,1,1,0,0,6.0,1,1,5,1.5,0.833
+2018,nl,Mike Gianella,Chad Bettis,3961,Col,P,37,rel,previously_reserved,,4,0,1,0,19.7,13,5,16,10.53,1.932
+2018,nl,Mike Gianella,Seth Lugo,5417,NYM,P,0,act,previously_reserved,P,30,1,2,2,52.0,12,3,54,1.9,1.0
+2018,nl,Mike Gianella,Jose Urena,4615,Mia,P,1,act,previously_reserved,P,13,4,4,0,74.3,19,5,49,2.66,0.996
 2018,nl,Craig Mish,Jeff Brigham,6687,Mia,P,1,act,active,P,3,0,3,0,13.3,9,2,10,5.4,1.575
-2018,nl,Craig Mish,Drew Steckenrider,5878,Mia,P,4,act,active,P,69,4,4,5,63.3,27,7,73,3.98,1.295
-2018,nl,Craig Mish,Max Scherzer,19,Was,P,40,act,active,P,33,18,7,0,220.7,51,23,300,2.53,0.911
-2018,nl,Craig Mish,Noah Syndergaard,4002,NYM,P,29,act,active,P,25,13,4,0,154.3,39,9,155,3.03,1.212
 2018,nl,Craig Mish,Vincent Velasquez,4897,Phi,P,2,act,active,P,31,9,12,0,146.7,59,16,161,4.85,1.343
+2018,nl,Craig Mish,Noah Syndergaard,4002,NYM,P,29,act,active,P,25,13,4,0,154.3,39,9,155,3.03,1.212
 2018,nl,Craig Mish,Yoshihisa Hirano,6281,Ari,P,2,act,active,P,52,4,2,3,44.0,16,5,38,3.27,1.159
+2018,nl,Craig Mish,Zach Eflin,4105,Phi,P,3,act,active,P,23,11,8,0,122.0,37,15,119,4.5,1.344
+2018,nl,Craig Mish,Max Scherzer,19,Was,P,40,act,active,P,33,18,7,0,220.7,51,23,300,2.53,0.911
+2018,nl,Craig Mish,Archie Bradley,3684,Ari,P,10,act,active,P,76,4,5,3,71.7,20,9,75,3.64,1.144
 2018,nl,Craig Mish,Julio Teheran,2098,Atl,P,8,act,active,P,29,7,9,0,162.7,79,26,145,4.26,1.223
-2018,nl,Craig Mish,*A.J. Ramos,3941,NYM,P,2,rel,previously_active,,22,1,1,0,15.0,14,2,17,5.4,1.467
+2018,nl,Craig Mish,Drew Steckenrider,5878,Mia,P,4,act,active,P,69,4,4,5,63.3,27,7,73,3.98,1.295
 2018,nl,Craig Mish,Shane Carle,5638,Atl,P,2,rel,previously_active,,18,1,0,0,24.3,10,2,16,4.44,1.233
 2018,nl,Craig Mish,Drew Hutchison,3693,Tex,P,6,rel,previously_active,,1,0,0,0,5.0,1,1,5,1.8,0.8
-2018,nl,Craig Mish,Jerry Blevins,1043,NYM,P,5,rel,previously_active,,3,0,0,0,1.3,0,1,2,6.75,1.5
-2018,nl,Craig Mish,Kazuhisa Makita,6359,SD,P,8,rel,previously_active,,6,0,0,0,6.0,3,1,7,7.5,1.5
-2018,nl,Craig Mish,*Pablo Lopez,6227,Mia,P,71,rel,previously_active,,9,1,4,0,52.7,17,6,41,4.27,1.272
 2018,nl,Craig Mish,Tyler Chatwood,3080,ChC,P,10,rel,previously_active,,16,3,5,0,78.3,72,6,75,5.29,1.838
+2018,nl,Craig Mish,Kazuhisa Makita,6359,SD,P,8,rel,previously_active,,6,0,0,0,6.0,3,1,7,7.5,1.5
+2018,nl,Craig Mish,*A.J. Ramos,3941,NYM,P,2,rel,previously_active,,22,1,1,0,15.0,14,2,17,5.4,1.467
+2018,nl,Craig Mish,Jerry Blevins,1043,NYM,P,5,rel,previously_active,,3,0,0,0,1.3,0,1,2,6.75,1.5
+2018,nl,Craig Mish,*Pablo Lopez,6227,Mia,P,71,rel,previously_active,,9,1,4,0,52.7,17,6,41,4.27,1.272
 2018,nl,Craig Mish,Mitch Keller,5144,Pit,P,1,res,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
 2018,nl,Craig Mish,Tyler Chatwood,3080,ChC,P,10,rel,previously_reserved,,4,1,0,0,16.7,14,3,7,3.24,1.5
 2018,nl,Craig Mish,Kazuhisa Makita,6359,SD,P,8,rel,previously_reserved,,3,0,0,0,4.0,1,2,4,13.5,2.0
-2018,nl,Craig Mish,Jerry Blevins,1043,NYM,P,5,rel,previously_reserved,,4,0,0,0,4.3,1,2,5,4.15,0.692
-2018,nl,Craig Mish,Julio Teheran,2098,Atl,P,8,act,previously_reserved,P,2,2,0,0,13.0,5,0,17,0.0,0.538
-2018,nl,Craig Mish,Yoshihisa Hirano,6281,Ari,P,2,act,previously_reserved,P,8,0,1,0,9.3,2,1,8,1.93,0.857
-2018,nl,Craig Mish,Shane Carle,5638,Atl,P,2,rel,previously_reserved,,5,1,0,0,5.0,2,0,5,1.8,1.4
 2018,nl,Craig Mish,Drew Steckenrider,5878,Mia,P,4,act,previously_reserved,P,2,0,0,0,1.3,0,0,1,0.0,0.0
+2018,nl,Craig Mish,Shane Carle,5638,Atl,P,2,rel,previously_reserved,,5,1,0,0,5.0,2,0,5,1.8,1.4
+2018,nl,Craig Mish,Julio Teheran,2098,Atl,P,8,act,previously_reserved,P,2,2,0,0,13.0,5,0,17,0.0,0.538
+2018,nl,Craig Mish,Jerry Blevins,1043,NYM,P,5,rel,previously_reserved,,4,0,0,0,4.3,1,2,5,4.15,0.692
+2018,nl,Craig Mish,Yoshihisa Hirano,6281,Ari,P,2,act,previously_reserved,P,8,0,1,0,9.3,2,1,8,1.93,0.857
 2018,nl,Craig Mish,*A.J. Ramos,3941,NYM,P,2,rel,previously_reserved,,6,1,1,0,4.7,1,1,5,9.64,2.143
-2018,nl,Brian Walton,Alex Wood,4113,LAD,P,15,act,active,P,33,9,7,0,151.7,40,14,135,3.68,1.207
-2018,nl,Brian Walton,Tyler Anderson,3678,Col,P,3,act,active,P,28,7,7,0,156.0,55,27,145,4.56,1.276
-2018,nl,Brian Walton,Touki Toussaint,4904,Atl,P,25,act,active,P,6,1,1,0,23.0,19,1,28,4.7,1.522
-2018,nl,Brian Walton,Sandy Alcantara,5706,Mia,P,0,act,active,P,5,1,3,0,29.0,18,3,28,3.72,1.379
-2018,nl,Brian Walton,Freddy Peralta,5521,Mil,P,6,act,active,P,14,5,4,0,71.7,37,8,81,4.65,1.186
-2018,nl,Brian Walton,Chase Anderson,4253,Mil,P,12,act,active,P,30,9,8,0,158.0,57,30,128,3.93,1.19
 2018,nl,Brian Walton,Carlos Martinez,3606,StL,P,25,act,active,P,31,7,6,5,115.7,58,5,114,3.19,1.357
+2018,nl,Brian Walton,Chase Anderson,4253,Mil,P,12,act,active,P,30,9,8,0,158.0,57,30,128,3.93,1.19
+2018,nl,Brian Walton,Sandy Alcantara,5706,Mia,P,0,act,active,P,5,1,3,0,29.0,18,3,28,3.72,1.379
+2018,nl,Brian Walton,Touki Toussaint,4904,Atl,P,25,act,active,P,6,1,1,0,23.0,19,1,28,4.7,1.522
 2018,nl,Brian Walton,Raisel Iglesias,4929,Cin,P,14,act,active,P,65,2,5,29,70.7,25,12,79,2.42,1.047
 2018,nl,Brian Walton,Chris Archer,2797,Pit,P,329,act,active,P,9,3,3,0,48.0,14,7,54,4.13,1.25
-2018,nl,Brian Walton,Luis Garcia,4598,Phi,P,12,rel,previously_active,,2,0,0,0,0.7,0,0,1,27.0,3.0
-2018,nl,Brian Walton,Nick Kingham,4634,Pit,P,33,res,previously_active,P,11,4,5,0,53.3,19,12,48,5.57,1.406
-2018,nl,Brian Walton,Brandon Woodruff,5857,Mil,P,2,rel,previously_active,,5,0,0,0,13.0,4,1,12,2.77,1.154
+2018,nl,Brian Walton,Tyler Anderson,3678,Col,P,3,act,active,P,28,7,7,0,156.0,55,27,145,4.56,1.276
+2018,nl,Brian Walton,Freddy Peralta,5521,Mil,P,6,act,active,P,14,5,4,0,71.7,37,8,81,4.65,1.186
+2018,nl,Brian Walton,Alex Wood,4113,LAD,P,15,act,active,P,33,9,7,0,151.7,40,14,135,3.68,1.207
 2018,nl,Brian Walton,David Hernandez,2224,Cin,P,2,rel,previously_active,,5,1,0,0,6.3,2,0,5,0.0,0.474
-2018,nl,Brian Walton,Kelvin Herrera,3790,Was,P,101,dis,previously_active,P,16,0,2,3,14.0,7,3,13,4.5,2.0
-2018,nl,Brian Walton,Victor Arano,5963,Phi,P,45,rel,previously_active,,18,0,2,1,17.0,5,3,18,3.71,1.353
 2018,nl,Brian Walton,Greg Holland,3343,Was,P,2,rel,previously_active,,16,0,2,0,12.3,14,1,9,7.3,2.27
-2018,nl,Brian Walton,Jacob Barnes,5498,Mil,P,2,rel,previously_active,,10,0,1,1,13.3,8,0,13,1.35,1.275
-2018,nl,Brian Walton,Tommy Hunter,2152,Phi,P,2,rel,previously_active,,4,0,0,0,3.7,0,0,2,4.91,1.636
-2018,nl,Brian Walton,Richard Rodriguez,5954,Pit,P,15,rel,previously_active,,17,1,1,0,16.3,5,2,16,3.86,1.163
-2018,nl,Brian Walton,Keone Kela,4940,Pit,P,15,rel,previously_active,,13,0,1,0,12.3,4,2,19,3.65,0.973
-2018,nl,Brian Walton,Luke Weaver,4987,StL,P,14,res,previously_active,P,30,7,11,0,136.3,54,19,121,4.95,1.496
 2018,nl,Brian Walton,*Chad Kuhl,5552,Pit,P,1,dis,previously_active,P,16,5,5,0,85.0,33,14,81,4.55,1.435
-2018,nl,Brian Walton,Kelvin Herrera,3790,Was,P,101,dis,reserved,P,2,0,0,0,1.7,0,0,1,0.0,0.6
-2018,nl,Brian Walton,Nick Kingham,4634,Pit,P,33,res,reserved,P,6,0,2,0,15.7,7,6,12,6.32,1.851
-2018,nl,Brian Walton,Luke Weaver,4987,StL,P,14,res,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2018,nl,Brian Walton,Luis Garcia,4598,Phi,P,12,rel,previously_active,,2,0,0,0,0.7,0,0,1,27.0,3.0
+2018,nl,Brian Walton,Richard Rodriguez,5954,Pit,P,15,rel,previously_active,,17,1,1,0,16.3,5,2,16,3.86,1.163
+2018,nl,Brian Walton,Kelvin Herrera,3790,Was,P,101,dis,previously_active,P,16,0,2,3,14.0,7,3,13,4.5,2.0
+2018,nl,Brian Walton,Keone Kela,4940,Pit,P,15,rel,previously_active,,13,0,1,0,12.3,4,2,19,3.65,0.973
+2018,nl,Brian Walton,Tommy Hunter,2152,Phi,P,2,rel,previously_active,,4,0,0,0,3.7,0,0,2,4.91,1.636
+2018,nl,Brian Walton,Brandon Woodruff,5857,Mil,P,2,rel,previously_active,,5,0,0,0,13.0,4,1,12,2.77,1.154
+2018,nl,Brian Walton,Nick Kingham,4634,Pit,P,33,res,previously_active,P,11,4,5,0,53.3,19,12,48,5.57,1.406
+2018,nl,Brian Walton,Jacob Barnes,5498,Mil,P,2,rel,previously_active,,10,0,1,1,13.3,8,0,13,1.35,1.275
+2018,nl,Brian Walton,Luke Weaver,4987,StL,P,14,res,previously_active,P,30,7,11,0,136.3,54,19,121,4.95,1.496
+2018,nl,Brian Walton,Victor Arano,5963,Phi,P,45,rel,previously_active,,18,0,2,1,17.0,5,3,18,3.71,1.353
 2018,nl,Brian Walton,*Chad Kuhl,5552,Pit,P,1,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2018,nl,Brian Walton,Tyler Anderson,3678,Col,P,3,act,previously_reserved,P,4,0,2,0,20.0,4,3,19,4.5,1.25
-2018,nl,Brian Walton,Tommy Hunter,2152,Phi,P,2,rel,previously_reserved,,2,0,0,0,1.7,0,0,1,0.0,0.6
-2018,nl,Brian Walton,Richard Rodriguez,5954,Pit,P,15,rel,previously_reserved,,7,0,0,0,8.3,3,0,7,3.24,1.08
+2018,nl,Brian Walton,Luke Weaver,4987,StL,P,14,res,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2018,nl,Brian Walton,Nick Kingham,4634,Pit,P,33,res,reserved,P,6,0,2,0,15.7,7,6,12,6.32,1.851
+2018,nl,Brian Walton,Kelvin Herrera,3790,Was,P,101,dis,reserved,P,2,0,0,0,1.7,0,0,1,0.0,0.6
 2018,nl,Brian Walton,Raisel Iglesias,4929,Cin,P,14,act,previously_reserved,P,1,0,0,1,1.3,0,0,1,0.0,2.25
+2018,nl,Brian Walton,Tommy Hunter,2152,Phi,P,2,rel,previously_reserved,,2,0,0,0,1.7,0,0,1,0.0,0.6
 2018,nl,Brian Walton,Brandon Woodruff,5857,Mil,P,2,rel,previously_reserved,,7,2,0,0,17.0,7,3,19,6.35,1.294
-2018,nl,Brian Walton,Carlos Martinez,3606,StL,P,25,act,previously_reserved,P,2,1,0,0,3.0,2,0,3,0.0,1.0
+2018,nl,Brian Walton,Tyler Anderson,3678,Col,P,3,act,previously_reserved,P,4,0,2,0,20.0,4,3,19,4.5,1.25
 2018,nl,Brian Walton,Freddy Peralta,5521,Mil,P,6,act,previously_reserved,P,1,0,0,0,1.0,1,0,2,0.0,1.0
+2018,nl,Brian Walton,Carlos Martinez,3606,StL,P,25,act,previously_reserved,P,2,1,0,0,3.0,2,0,3,0.0,1.0
+2018,nl,Brian Walton,Richard Rodriguez,5954,Pit,P,15,rel,previously_reserved,,7,0,0,0,8.3,3,0,7,3.24,1.08
 2018,nl,Brian Walton,Sandy Alcantara,5706,Mia,P,0,act,previously_reserved,P,1,1,0,0,5.0,5,0,2,1.8,1.6
-2018,nl,Andy Behrens,Jesse Chavez,1202,ChC,P,3,act,active,P,20,2,0,3,21.7,3,1,21,0.83,0.738
-2018,nl,Andy Behrens,Mike Montgomery,2678,ChC,P,1,act,active,P,32,5,6,0,115.0,36,9,84,3.99,1.357
 2018,nl,Andy Behrens,Patrick Corbin,3339,Ari,P,8,act,active,P,33,11,7,0,200.0,48,15,246,3.15,1.05
+2018,nl,Andy Behrens,Jesse Chavez,1202,ChC,P,3,act,active,P,20,2,0,3,21.7,3,1,21,0.83,0.738
 2018,nl,Andy Behrens,Max Fried,4194,Atl,P,111,act,active,P,5,0,1,0,8.0,5,0,10,4.5,1.625
 2018,nl,Andy Behrens,Justin Miller,3879,Was,P,56,act,active,P,44,4,1,2,43.3,17,10,43,4.36,1.338
 2018,nl,Andy Behrens,Ivan Nova,2293,Pit,P,2,act,active,P,28,8,9,0,155.3,33,26,106,4.29,1.288
-2018,nl,Andy Behrens,Kenta Maeda,4548,LAD,P,11,act,active,P,39,8,10,2,125.3,43,13,153,3.81,1.261
-2018,nl,Andy Behrens,Wade Miley,2622,Mil,P,41,act,active,P,8,3,1,0,40.3,8,1,28,2.9,1.19
 2018,nl,Andy Behrens,Steve Cishek,3368,ChC,P,0,act,active,P,52,3,3,3,44.3,15,5,49,2.44,1.015
+2018,nl,Andy Behrens,Mike Montgomery,2678,ChC,P,1,act,active,P,32,5,6,0,115.0,36,9,84,3.99,1.357
+2018,nl,Andy Behrens,Wade Miley,2622,Mil,P,41,act,active,P,8,3,1,0,40.3,8,1,28,2.9,1.19
+2018,nl,Andy Behrens,Kenta Maeda,4548,LAD,P,11,act,active,P,39,8,10,2,125.3,43,13,153,3.81,1.261
 2018,nl,Andy Behrens,*Brandon McCarthy,1505,Atl,P,2,dis,previously_active,P,15,6,3,0,78.7,21,15,65,4.92,1.462
+2018,nl,Andy Behrens,Kyle Barraclough,5426,Mia,P,2,res,previously_active,P,53,0,5,10,49.3,32,6,53,4.2,1.338
+2018,nl,Andy Behrens,Brad Ziegler,1090,Ari,P,6,rel,previously_active,,28,0,5,9,27.7,7,5,18,6.83,1.59
 2018,nl,Andy Behrens,*Yu Darvish,2044,ChC,P,25,dis,previously_active,P,8,1,3,0,40.0,21,7,49,4.95,1.425
 2018,nl,Andy Behrens,Pedro Baez,2054,LAD,P,0,rel,previously_active,,6,2,0,0,7.0,3,0,6,2.57,1.286
-2018,nl,Andy Behrens,Craig Stammen,2813,SD,P,2,rel,previously_active,,4,0,0,0,6.0,0,0,7,4.5,0.833
-2018,nl,Andy Behrens,Brad Ziegler,1090,Ari,P,6,rel,previously_active,,28,0,5,9,27.7,7,5,18,6.83,1.59
-2018,nl,Andy Behrens,Josh Fields,2526,LAD,P,0,rel,previously_active,,6,0,1,0,4.3,1,0,1,6.23,0.923
 2018,nl,Andy Behrens,Scott Alexander,4729,LAD,P,1,res,previously_active,P,29,1,1,3,24.7,7,1,21,2.92,1.095
-2018,nl,Andy Behrens,Kyle Barraclough,5426,Mia,P,2,res,previously_active,P,53,0,5,10,49.3,32,6,53,4.2,1.338
-2018,nl,Andy Behrens,Kazuhisa Makita,6359,SD,P,2,rel,previously_active,,1,0,0,0,1.3,1,0,0,0.0,0.75
 2018,nl,Andy Behrens,Taylor Williams,5104,Mil,P,1,rel,previously_active,,9,0,1,0,8.3,3,0,5,6.48,1.92
+2018,nl,Andy Behrens,Craig Stammen,2813,SD,P,2,rel,previously_active,,4,0,0,0,6.0,0,0,7,4.5,0.833
+2018,nl,Andy Behrens,Kazuhisa Makita,6359,SD,P,2,rel,previously_active,,1,0,0,0,1.3,1,0,0,0.0,0.75
+2018,nl,Andy Behrens,Josh Fields,2526,LAD,P,0,rel,previously_active,,6,0,1,0,4.3,1,0,1,6.23,0.923
 2018,nl,Andy Behrens,Hector Neris,5009,Phi,P,10,rel,previously_active,,33,1,3,10,30.0,11,11,41,6.9,1.533
-2018,nl,Andy Behrens,Kyle Barraclough,5426,Mia,P,2,res,reserved,P,8,1,1,0,6.3,2,2,7,4.26,1.263
-2018,nl,Andy Behrens,*Brandon McCarthy,1505,Atl,P,2,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
 2018,nl,Andy Behrens,*Yu Darvish,2044,ChC,P,25,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2018,nl,Andy Behrens,*Brandon McCarthy,1505,Atl,P,2,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2018,nl,Andy Behrens,Kyle Barraclough,5426,Mia,P,2,res,reserved,P,8,1,1,0,6.3,2,2,7,4.26,1.263
 2018,nl,Andy Behrens,Scott Alexander,4729,LAD,P,1,res,reserved,P,5,0,0,0,1.3,1,1,3,20.25,3.75
-2018,nl,Andy Behrens,Tyler Chatwood,3080,ChC,P,33,rel,previously_reserved,,1,0,0,0,2.0,2,0,0,9.0,1.5
-2018,nl,Andy Behrens,Ivan Nova,2293,Pit,P,2,act,previously_reserved,P,1,1,0,0,5.7,2,0,8,1.59,1.059
-2018,nl,Andy Behrens,Craig Stammen,2813,SD,P,2,rel,previously_reserved,,2,0,0,0,1.3,0,1,1,6.75,2.25
-2018,nl,Andy Behrens,Max Fried,4194,Atl,P,111,act,previously_reserved,P,3,0,1,0,8.0,5,0,10,2.25,1.25
 2018,nl,Andy Behrens,Mike Montgomery,2678,ChC,P,1,act,previously_reserved,P,6,0,0,0,9.0,3,1,2,4.0,1.556
-2018,nl,Todd Zola,Dereck Rodriguez,6415,SF,P,13,act,active,P,18,5,4,0,103.0,30,8,75,2.88,1.117
-2018,nl,Todd Zola,Jason Vargas,942,NYM,P,3,act,active,P,5,3,1,0,27.3,7,4,29,2.96,0.951
+2018,nl,Andy Behrens,Tyler Chatwood,3080,ChC,P,33,rel,previously_reserved,,1,0,0,0,2.0,2,0,0,9.0,1.5
+2018,nl,Andy Behrens,Max Fried,4194,Atl,P,111,act,previously_reserved,P,3,0,1,0,8.0,5,0,10,2.25,1.25
+2018,nl,Andy Behrens,Craig Stammen,2813,SD,P,2,rel,previously_reserved,,2,0,0,0,1.3,0,1,1,6.75,2.25
+2018,nl,Andy Behrens,Ivan Nova,2293,Pit,P,2,act,previously_reserved,P,1,1,0,0,5.7,2,0,8,1.59,1.059
 2018,nl,Todd Zola,Bryan Mitchell,4372,SD,P,7,act,active,P,8,2,3,0,44.3,25,5,22,3.45,1.511
-2018,nl,Todd Zola,Brett Kennedy,6382,SD,P,13,act,active,P,5,1,1,0,22.7,12,3,15,5.56,1.632
+2018,nl,Todd Zola,Jason Vargas,942,NYM,P,3,act,active,P,5,3,1,0,27.3,7,4,29,2.96,0.951
 2018,nl,Todd Zola,Adam Wainwright,1400,StL,P,3,act,active,P,4,1,1,0,22.3,4,3,25,4.84,1.164
+2018,nl,Todd Zola,Dereck Rodriguez,6415,SF,P,13,act,active,P,18,5,4,0,103.0,30,8,75,2.88,1.117
 2018,nl,Todd Zola,Tyler Mahle,5916,Cin,P,1,act,active,P,22,7,9,0,109.0,50,21,105,4.95,1.56
-2018,nl,Todd Zola,Luis Castillo,5137,Cin,P,17,act,active,P,31,10,12,0,169.7,49,28,165,4.3,1.22
 2018,nl,Todd Zola,Robbie Ray,3685,Ari,P,23,act,active,P,24,6,2,0,123.7,70,19,165,3.93,1.35
+2018,nl,Todd Zola,Brett Kennedy,6382,SD,P,13,act,active,P,5,1,1,0,22.7,12,3,15,5.56,1.632
+2018,nl,Todd Zola,Luis Castillo,5137,Cin,P,17,act,active,P,31,10,12,0,169.7,49,28,165,4.3,1.22
 2018,nl,Todd Zola,Robbie Erlin,3681,SD,P,0,act,active,P,9,2,4,0,44.3,5,5,34,5.48,1.421
-2018,nl,Todd Zola,Zach Davies,4919,Mil,P,5,rel,previously_active,,7,2,4,0,39.0,15,7,29,4.85,1.385
-2018,nl,Todd Zola,Luis Perdomo,5524,SD,P,57,rel,previously_active,,4,0,4,0,20.0,8,3,13,9.0,1.9
-2018,nl,Todd Zola,Corbin Burnes,6208,Mil,P,17,rel,previously_active,,10,3,0,0,10.0,3,1,10,5.4,1.4
-2018,nl,Todd Zola,Arodys Vizcaino,3150,Atl,P,10,rel,previously_active,,31,2,2,15,30.7,12,2,34,1.76,1.141
-2018,nl,Todd Zola,Casey Kelly,2743,SF,P,17,rel,previously_active,,3,0,2,0,11.7,3,2,6,3.09,1.8
 2018,nl,Todd Zola,*Brandon Morrow,1342,ChC,P,13,trd,previously_active,,23,0,0,14,20.3,7,0,21,0.89,0.984
-2018,nl,Todd Zola,*Taijuan Walker,3796,Ari,P,11,rel,previously_active,,3,0,0,0,13.0,5,1,9,3.46,1.538
-2018,nl,Todd Zola,Jared Hughes,3831,Cin,P,7,rel,previously_active,,15,1,0,4,18.3,5,0,11,0.49,1.036
-2018,nl,Todd Zola,Kyle Freeland,4950,Col,P,7,rel,previously_active,,4,0,3,0,20.0,9,5,17,5.85,1.55
-2018,nl,Todd Zola,Jacob Barnes,5498,Mil,P,17,rel,previously_active,,2,0,0,0,2.0,1,0,1,9.0,3.0
-2018,nl,Todd Zola,Taylor Williams,5104,Mil,P,0,rel,previously_active,,4,0,0,0,3.7,2,0,3,4.91,1.909
-2018,nl,Todd Zola,Jeremy Jeffress,2063,Mil,P,77,rel,previously_active,,49,6,1,10,52.7,23,5,63,1.37,1.101
-2018,nl,Todd Zola,Michael Lorenzen,4553,Cin,P,17,rel,previously_active,,33,1,1,0,49.7,24,4,37,3.26,1.51
+2018,nl,Todd Zola,Elieser Hernandez,6333,Mia,P,33,rel,previously_active,,3,0,1,0,5.0,3,3,1,9.0,2.0
 2018,nl,Todd Zola,Matt Strahm,5494,SD,P,17,res,previously_active,P,16,2,1,0,28.3,7,2,36,1.91,0.812
+2018,nl,Todd Zola,Arodys Vizcaino,3150,Atl,P,10,rel,previously_active,,31,2,2,15,30.7,12,2,34,1.76,1.141
+2018,nl,Todd Zola,Michael Lorenzen,4553,Cin,P,17,rel,previously_active,,33,1,1,0,49.7,24,4,37,3.26,1.51
+2018,nl,Todd Zola,Brad Boxberger,3185,Ari,P,4,trd,previously_active,,38,1,3,24,35.3,18,6,49,3.06,1.217
+2018,nl,Todd Zola,*Taijuan Walker,3796,Ari,P,11,rel,previously_active,,3,0,0,0,13.0,5,1,9,3.46,1.538
+2018,nl,Todd Zola,Casey Kelly,2743,SF,P,17,rel,previously_active,,3,0,2,0,11.7,3,2,6,3.09,1.8
+2018,nl,Todd Zola,Corbin Burnes,6208,Mil,P,17,rel,previously_active,,10,3,0,0,10.0,3,1,10,5.4,1.4
 2018,nl,Todd Zola,Caleb Ferguson,6598,LAD,P,23,rel,previously_active,,3,1,0,1,9.0,1,0,10,1.0,1.0
+2018,nl,Todd Zola,Luis Perdomo,5524,SD,P,57,rel,previously_active,,4,0,4,0,20.0,8,3,13,9.0,1.9
+2018,nl,Todd Zola,Jared Hughes,3831,Cin,P,7,rel,previously_active,,15,1,0,4,18.3,5,0,11,0.49,1.036
+2018,nl,Todd Zola,Taylor Williams,5104,Mil,P,0,rel,previously_active,,4,0,0,0,3.7,2,0,3,4.91,1.909
 2018,nl,Todd Zola,Sal Romano,5477,Cin,P,0,rel,previously_active,,4,1,1,0,14.0,8,1,12,8.36,1.786
 2018,nl,Todd Zola,Jefry Rodriguez,6318,Was,P,3,res,previously_active,P,2,0,1,0,8.7,10,2,9,11.42,2.192
-2018,nl,Todd Zola,Elieser Hernandez,6333,Mia,P,33,rel,previously_active,,3,0,1,0,5.0,3,3,1,9.0,2.0
+2018,nl,Todd Zola,Kyle Freeland,4950,Col,P,7,rel,previously_active,,4,0,3,0,20.0,9,5,17,5.85,1.55
+2018,nl,Todd Zola,Jeremy Jeffress,2063,Mil,P,77,rel,previously_active,,49,6,1,10,52.7,23,5,63,1.37,1.101
+2018,nl,Todd Zola,Zach Davies,4919,Mil,P,5,rel,previously_active,,7,2,4,0,39.0,15,7,29,4.85,1.385
 2018,nl,Todd Zola,T.J. McFarland,4258,Ari,P,7,rel,previously_active,,4,0,0,0,6.7,2,0,2,0.0,0.9
+2018,nl,Todd Zola,Jacob Barnes,5498,Mil,P,17,rel,previously_active,,2,0,0,0,2.0,1,0,1,9.0,3.0
 2018,nl,Todd Zola,Adam Cimber,6381,Cle,P,37,rel,previously_active,,11,1,1,0,12.7,3,0,13,4.26,1.421
-2018,nl,Todd Zola,Brad Boxberger,3185,Ari,P,4,trd,previously_active,,38,1,3,24,35.3,18,6,49,3.06,1.217
-2018,nl,Todd Zola,Jefry Rodriguez,6318,Was,P,3,res,reserved,P,4,1,1,0,7.7,7,1,4,4.7,1.304
 2018,nl,Todd Zola,Matt Strahm,5494,SD,P,17,res,reserved,P,19,0,2,0,24.0,11,3,28,2.25,1.167
-2018,nl,Todd Zola,Caleb Ferguson,6598,LAD,P,23,rel,previously_reserved,,2,1,0,0,4.0,0,1,6,2.25,0.75
-2018,nl,Todd Zola,Michael Lorenzen,4553,Cin,P,17,rel,previously_reserved,,2,1,0,0,5.0,0,0,2,1.8,0.8
-2018,nl,Todd Zola,Sal Romano,5477,Cin,P,0,rel,previously_reserved,,2,0,0,0,2.0,1,0,2,0.0,0.5
-2018,nl,Todd Zola,Tyler Mahle,5916,Cin,P,1,act,previously_reserved,P,1,0,0,0,3.0,3,1,5,6.0,2.667
-2018,nl,Todd Zola,Jeremy Jeffress,2063,Mil,P,77,rel,previously_reserved,,4,0,0,0,4.0,0,0,5,4.5,1.5
-2018,nl,Todd Zola,Arodys Vizcaino,3150,Atl,P,10,rel,previously_reserved,,2,0,0,0,2.0,0,0,0,0.0,1.0
-2018,nl,Todd Zola,Bryan Mitchell,4372,SD,P,7,act,previously_reserved,P,3,0,1,0,12.3,9,3,9,8.76,2.189
+2018,nl,Todd Zola,Jefry Rodriguez,6318,Was,P,3,res,reserved,P,4,1,1,0,7.7,7,1,4,4.7,1.304
 2018,nl,Todd Zola,Zach Davies,4919,Mil,P,5,rel,previously_reserved,,1,0,1,0,4.0,2,0,2,9.0,2.0
+2018,nl,Todd Zola,Jeremy Jeffress,2063,Mil,P,77,rel,previously_reserved,,4,0,0,0,4.0,0,0,5,4.5,1.5
+2018,nl,Todd Zola,Sal Romano,5477,Cin,P,0,rel,previously_reserved,,2,0,0,0,2.0,1,0,2,0.0,0.5
+2018,nl,Todd Zola,Caleb Ferguson,6598,LAD,P,23,rel,previously_reserved,,2,1,0,0,4.0,0,1,6,2.25,0.75
+2018,nl,Todd Zola,Bryan Mitchell,4372,SD,P,7,act,previously_reserved,P,3,0,1,0,12.3,9,3,9,8.76,2.189
+2018,nl,Todd Zola,Michael Lorenzen,4553,Cin,P,17,rel,previously_reserved,,2,1,0,0,5.0,0,0,2,1.8,0.8
+2018,nl,Todd Zola,Arodys Vizcaino,3150,Atl,P,10,rel,previously_reserved,,2,0,0,0,2.0,0,0,0,0.0,1.0
+2018,nl,Todd Zola,Tyler Mahle,5916,Cin,P,1,act,previously_reserved,P,1,0,0,0,3.0,3,1,5,6.0,2.667
 2018,nl,Todd Zola,Dereck Rodriguez,6415,SF,P,13,act,previously_reserved,P,1,0,0,0,6.0,3,0,4,3.0,1.0
-2018,nl,Lenny Melnick,Stephen Strasburg,2528,Was,P,32,act,active,P,12,5,3,0,63.0,21,8,81,4.14,1.349
+2018,nl,Lenny Melnick,Derek Holland,2390,SF,P,31,act,active,P,35,7,8,0,166.3,64,19,165,3.52,1.293
+2018,nl,Lenny Melnick,Ty Blach,4749,SF,P,67,act,active,P,24,2,3,0,63.7,21,5,42,4.66,1.414
+2018,nl,Lenny Melnick,Eric Lauer,5798,SD,P,9,act,active,P,19,5,5,0,93.7,33,13,80,4.23,1.452
+2018,nl,Lenny Melnick,Zack Godley,5283,Ari,P,18,act,active,P,33,15,11,0,178.3,81,16,185,4.74,1.447
 2018,nl,Lenny Melnick,Zack Greinke,660,Ari,P,24,act,active,P,24,12,9,0,153.0,36,21,141,3.12,1.105
 2018,nl,Lenny Melnick,Jake Arrieta,2080,Phi,P,17,act,active,P,31,10,11,0,172.7,57,21,138,3.96,1.286
-2018,nl,Lenny Melnick,Steven Matz,4541,NYM,P,2,act,active,P,29,5,11,0,149.0,56,25,144,4.11,1.255
-2018,nl,Lenny Melnick,Zack Godley,5283,Ari,P,18,act,active,P,33,15,11,0,178.3,81,16,185,4.74,1.447
 2018,nl,Lenny Melnick,Gio Gonzalez,1084,Mil,P,10,act,active,P,32,10,11,0,171.0,80,17,148,4.21,1.444
-2018,nl,Lenny Melnick,Derek Holland,2390,SF,P,31,act,active,P,35,7,8,0,166.3,64,19,165,3.52,1.293
-2018,nl,Lenny Melnick,Eric Lauer,5798,SD,P,9,act,active,P,19,5,5,0,93.7,33,13,80,4.23,1.452
-2018,nl,Lenny Melnick,Ty Blach,4749,SF,P,67,act,active,P,24,2,3,0,63.7,21,5,42,4.66,1.414
+2018,nl,Lenny Melnick,Steven Matz,4541,NYM,P,2,act,active,P,29,5,11,0,149.0,56,25,144,4.11,1.255
+2018,nl,Lenny Melnick,Stephen Strasburg,2528,Was,P,32,act,active,P,12,5,3,0,63.0,21,8,81,4.14,1.349
 2018,nl,Lenny Melnick,Ben Lively,4880,KC,P,1,rel,previously_active,,5,0,2,0,23.7,10,4,22,6.85,1.859
-2018,nl,Lenny Melnick,Kolby Allard,5368,Atl,P,2,res,previously_active,P,1,1,0,0,5.0,2,1,1,7.2,2.2
-2018,nl,Lenny Melnick,Sam Dyson,4155,SF,P,1,rel,previously_active,,3,0,0,0,2.3,0,1,2,3.86,1.714
-2018,nl,Lenny Melnick,Adam Wainwright,1400,StL,P,1,rel,previously_active,,3,1,2,0,15.7,8,2,12,3.45,1.532
-2018,nl,Lenny Melnick,Greg Holland,3343,Was,P,2,res,previously_active,P,11,0,0,0,8.7,7,0,7,8.31,2.308
-2018,nl,Lenny Melnick,Max Fried,4194,Atl,P,18,rel,previously_active,,2,0,0,0,3.0,1,1,4,3.0,1.0
-2018,nl,Lenny Melnick,Jose Castillo,6311,SD,P,2,rel,previously_active,,4,0,1,0,3.3,2,1,3,5.4,1.2
-2018,nl,Lenny Melnick,Steve Cishek,3368,ChC,P,10,rel,previously_active,,10,0,0,0,7.7,7,0,8,3.52,1.696
-2018,nl,Lenny Melnick,Matt Koch,5479,Ari,P,61,rel,previously_active,,9,4,4,0,52.7,12,12,25,4.61,1.234
-2018,nl,Lenny Melnick,Victor Arano,5963,Phi,P,2,rel,previously_active,,1,0,0,0,2.0,1,1,2,4.5,1.5
-2018,nl,Lenny Melnick,Tyler Lyons,4356,StL,P,1,rel,previously_active,,1,0,0,0,1.0,0,1,0,18.0,2.0
 2018,nl,Lenny Melnick,Eddie Butler,4535,Tex,P,19,rel,previously_active,,4,0,0,0,7.7,2,1,5,3.52,1.043
 2018,nl,Lenny Melnick,Tony Watson,3418,SF,P,0,rel,previously_active,,9,1,1,0,9.7,3,0,13,0.93,0.931
-2018,nl,Lenny Melnick,Pat Neshek,883,Phi,P,1,res,reserved,P,30,3,2,5,24.3,5,2,15,2.59,1.151
-2018,nl,Lenny Melnick,Kolby Allard,5368,Atl,P,2,res,reserved,P,2,0,1,0,3.0,2,2,2,21.0,4.0
+2018,nl,Lenny Melnick,Jose Castillo,6311,SD,P,2,rel,previously_active,,4,0,1,0,3.3,2,1,3,5.4,1.2
+2018,nl,Lenny Melnick,Victor Arano,5963,Phi,P,2,rel,previously_active,,1,0,0,0,2.0,1,1,2,4.5,1.5
+2018,nl,Lenny Melnick,Steve Cishek,3368,ChC,P,10,rel,previously_active,,10,0,0,0,7.7,7,0,8,3.52,1.696
+2018,nl,Lenny Melnick,Matt Koch,5479,Ari,P,61,rel,previously_active,,9,4,4,0,52.7,12,12,25,4.61,1.234
+2018,nl,Lenny Melnick,Tyler Lyons,4356,StL,P,1,rel,previously_active,,1,0,0,0,1.0,0,1,0,18.0,2.0
+2018,nl,Lenny Melnick,Sam Dyson,4155,SF,P,1,rel,previously_active,,3,0,0,0,2.3,0,1,2,3.86,1.714
+2018,nl,Lenny Melnick,Greg Holland,3343,Was,P,2,res,previously_active,P,11,0,0,0,8.7,7,0,7,8.31,2.308
+2018,nl,Lenny Melnick,Adam Wainwright,1400,StL,P,1,rel,previously_active,,3,1,2,0,15.7,8,2,12,3.45,1.532
+2018,nl,Lenny Melnick,Kolby Allard,5368,Atl,P,2,res,previously_active,P,1,1,0,0,5.0,2,1,1,7.2,2.2
+2018,nl,Lenny Melnick,Max Fried,4194,Atl,P,18,rel,previously_active,,2,0,0,0,3.0,1,1,4,3.0,1.0
 2018,nl,Lenny Melnick,Greg Holland,3343,Was,P,2,res,reserved,P,27,2,0,3,24.3,10,1,30,0.74,0.822
-2018,nl,Lenny Melnick,Sam Dyson,4155,SF,P,1,rel,previously_reserved,,19,2,0,0,19.0,8,1,14,2.84,1.053
+2018,nl,Lenny Melnick,Kolby Allard,5368,Atl,P,2,res,reserved,P,2,0,1,0,3.0,2,2,2,21.0,4.0
+2018,nl,Lenny Melnick,Pat Neshek,883,Phi,P,1,res,reserved,P,30,3,2,5,24.3,5,2,15,2.59,1.151
+2018,nl,Lenny Melnick,Steve Cishek,3368,ChC,P,10,rel,previously_reserved,,5,0,0,1,5.7,2,0,6,0.0,0.706
+2018,nl,Lenny Melnick,Steven Matz,4541,NYM,P,2,act,previously_reserved,P,1,0,0,0,5.0,2,0,8,0.0,1.0
+2018,nl,Lenny Melnick,Eddie Butler,4535,Tex,P,19,rel,previously_reserved,,4,1,0,0,4.0,5,0,1,9.0,3.0
+2018,nl,Lenny Melnick,Tony Watson,3418,SF,P,0,rel,previously_reserved,,3,0,0,0,3.0,0,0,1,0.0,1.333
 2018,nl,Lenny Melnick,Adam Wainwright,1400,StL,P,1,rel,previously_reserved,,1,0,1,0,2.3,6,0,3,7.71,3.857
 2018,nl,Lenny Melnick,Eric Lauer,5798,SD,P,9,act,previously_reserved,P,4,1,2,0,18.3,13,2,20,4.91,2.018
 2018,nl,Lenny Melnick,Matt Koch,5479,Ari,P,61,rel,previously_reserved,,1,0,0,0,5.0,1,3,2,9.0,1.8
-2018,nl,Lenny Melnick,Steve Cishek,3368,ChC,P,10,rel,previously_reserved,,5,0,0,1,5.7,2,0,6,0.0,0.706
 2018,nl,Lenny Melnick,Ty Blach,4749,SF,P,67,act,previously_reserved,P,18,3,1,0,28.7,8,2,20,3.45,1.465
-2018,nl,Lenny Melnick,Eddie Butler,4535,Tex,P,19,rel,previously_reserved,,4,1,0,0,4.0,5,0,1,9.0,3.0
-2018,nl,Lenny Melnick,Tony Watson,3418,SF,P,0,rel,previously_reserved,,3,0,0,0,3.0,0,0,1,0.0,1.333
-2018,nl,Lenny Melnick,Steven Matz,4541,NYM,P,2,act,previously_reserved,P,1,0,0,0,5.0,2,0,8,0.0,1.0
-2018,nl,Dean Peterson,Ernesto Frieri,1225,LAA,P,0,act,active,,67,5,2,23,66.0,30,9,98,2.32,0.985
-2018,nl,Dean Peterson,Wade Miley,2622,Ari,P,3,act,active,,32,16,11,0,194.7,37,14,144,3.33,1.182
-2018,nl,Dean Peterson,Jorge De La Rosa,658,Col,P,0,act,active,,3,0,2,0,10.7,2,5,6,9.28,1.781
-2018,nl,Dean Peterson,Tyler Cloyd,4069,Phi,P,5,act,active,,6,2,2,0,33.0,7,8,30,4.91,1.212
-2018,nl,Dean Peterson,Bud Norris,2113,Hou,P,10,act,active,,29,7,13,0,168.3,66,23,165,4.65,1.372
-2018,nl,Dean Peterson,Jeremy Guthrie,108,KC,P,3,act,active,,33,8,12,0,181.7,50,30,101,4.76,1.409
-2018,nl,Dean Peterson,Chris Volstad,588,FA,P,0,act,active,,21,3,12,0,111.3,43,16,61,6.31,1.617
-2018,nl,Dean Peterson,Brandon League,1560,LAD,P,22,act,active,,74,2,6,15,72.0,33,1,54,3.12,1.361
-2018,nl,Dean Peterson,Jenrry Mejia,2722,NYM,P,0,act,active,,5,1,2,0,16.0,9,2,8,5.62,1.812
-2018,nl,Dean Peterson,Clayton Richard,2141,SD,P,1,act,active,,33,14,14,0,218.7,42,31,107,3.99,1.235
-2018,nl,Dean Peterson,David Hernandez,2224,Ari,P,4,res,reserved,,72,2,3,4,68.3,22,4,98,2.5,1.024
-2018,nl,Dean Peterson,John Axford,2909,Mil,P,18,res,reserved,,75,5,8,35,69.3,39,10,93,4.67,1.442
-2018,nl,Dean Peterson,Kyle Weiland,3096,Hou,P,1,dis,reserved,,3,0,3,0,17.7,7,5,13,6.62,1.755
-2018,nl,Dean Peterson,Mike Leake,2714,Cin,P,5,res,reserved,,30,8,9,0,179.0,41,26,116,4.58,1.352
+2018,nl,Lenny Melnick,Sam Dyson,4155,SF,P,1,rel,previously_reserved,,19,2,0,0,19.0,8,1,14,2.84,1.053

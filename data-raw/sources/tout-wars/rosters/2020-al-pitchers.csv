@@ -1,299 +1,329 @@
 year,league,team,player_name,player_id,mlb_team,position,salary,status,roster_section,eligibility,g,w,l,sv,ip,bb,hr,so,era,whip
-2020,al,Rick Wolf/Glenn Colton,Dean Kremer,6817,Bal,P,56,act,active,P,3,0,1,0,12.7,9,0,15,6.39,1.816
-2020,al,Rick Wolf/Glenn Colton,Dylan Cease,5708,CWS,P,7,act,active,P,12,5,4,0,58.3,34,12,44,4.01,1.44
-2020,al,Rick Wolf/Glenn Colton,Justus Sheffield,5115,Sea,P,1,act,active,P,9,4,2,0,52.3,16,2,46,3.1,1.223
-2020,al,Rick Wolf/Glenn Colton,Andrew Heaney,4146,LAA,P,10,act,active,P,12,4,3,0,66.7,19,9,70,4.46,1.23
-2020,al,Rick Wolf/Glenn Colton,Trevor Rosenthal,3933,FA,P,1,act,active,P,23,1,0,11,23.7,8,2,38,1.9,0.845
+2020,al,Chris Liss,John Means,6692,Bal,P,4,act,active,P,4,0,3,0,20.0,3,6,17,3.6,0.9
+2020,al,Chris Liss,Dylan Bundy,3751,LAA,P,9,act,active,P,11,6,3,0,65.7,17,5,72,3.29,1.036
+2020,al,Chris Liss,Rafael Dolis,2938,Tor,P,177,act,active,P,20,2,1,5,20.3,11,1,30,0.44,1.033
+2020,al,Chris Liss,Hunter Harvey,4796,Bal,P,4,act,active,P,9,0,2,0,8.0,1,2,6,3.38,1.0
+2020,al,Chris Liss,Jake Diekman,3843,Oak,P,1,act,active,P,8,2,0,0,8.3,3,1,11,1.08,0.6
+2020,al,Chris Liss,Yusei Kikuchi,6454,Sea,P,3,act,active,P,9,2,4,0,47.0,20,3,47,5.17,1.298
+2020,al,Chris Liss,Brad Hand,3496,Was,P,17,act,active,P,14,2,0,9,14.3,0,0,17,0.63,0.488
+2020,al,Chris Liss,Gerrit Cole,2660,NYY,P,37,act,active,P,12,7,3,0,73.0,17,14,94,2.84,0.959
+2020,al,Chris Liss,Greg Holland,3343,KC,P,289,act,active,P,22,3,0,5,22.3,5,1,24,2.01,0.985
+2020,al,Chris Liss,Jonathan Hernandez,6315,Tex,P,155,rel,previously_active,,24,5,1,0,27.7,5,1,28,2.6,0.976
+2020,al,Chris Liss,Justin Verlander,504,Hou,P,28,dis,previously_active,P,1,1,0,0,6.0,1,2,7,3.0,0.667
+2020,al,Chris Liss,Andre Scrubb,7083,Hou,P,9,rel,previously_active,,1,0,0,0,1.3,1,0,1,6.75,1.5
+2020,al,Chris Liss,Chris Devenski,5543,Ari,P,23,rel,previously_active,,2,0,1,0,2.0,1,0,4,13.5,2.5
+2020,al,Chris Liss,Shohei Ohtani-Pitcher,4198,LAA,P,7,rel,previously_active,,2,0,1,0,1.7,8,0,3,37.8,6.6
+2020,al,Chris Liss,Dan Altavilla,5839,SD,P,3,rel,previously_active,,2,0,0,0,1.0,1,1,0,18.0,4.0
+2020,al,Chris Liss,Nate Pearson,6191,Tor,P,3,dis,previously_active,P,4,0,0,0,16.3,12,5,14,6.61,1.531
+2020,al,Chris Liss,Adam Plutko,5607,Cle,P,23,rel,previously_active,,4,0,2,0,11.0,3,2,5,9.0,1.727
+2020,al,Chris Liss,Homer Bailey,313,FA,P,1,dis,previously_active,P,1,1,0,0,5.0,2,1,4,3.6,1.2
+2020,al,Chris Liss,Austin Pruitt,5836,Hou,P,0,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2020,al,Chris Liss,Justin Verlander,504,Hou,P,28,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2020,al,Chris Liss,Clarke Schmidt,6193,NYY,P,88,res,reserved,P,3,0,1,0,6.3,5,0,7,7.11,1.895
+2020,al,Chris Liss,Nate Pearson,6191,Tor,P,3,dis,reserved,P,1,1,0,0,1.7,1,0,2,0.0,1.2
+2020,al,Chris Liss,Carl Edwards,4609,Atl,P,155,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2020,al,Chris Liss,Homer Bailey,313,FA,P,1,dis,reserved,P,1,0,0,0,3.0,1,0,3,3.0,1.0
+2020,al,Chris Liss,John Means,6692,Bal,P,4,act,previously_reserved,P,6,2,1,0,23.7,4,6,25,5.32,1.056
+2020,al,Chris Liss,Rafael Dolis,2938,Tor,P,177,act,previously_reserved,P,2,0,1,0,1.7,1,0,0,10.8,2.4
+2020,al,Chris Liss,Hunter Harvey,4796,Bal,P,4,act,previously_reserved,P,1,0,0,0,0.7,1,0,0,13.5,3.0
+2020,al,Chris Liss,Andre Scrubb,7083,Hou,P,9,rel,previously_reserved,,2,0,0,0,2.7,3,0,3,0.0,1.125
+2020,al,Chris Liss,Dan Altavilla,5839,SD,P,3,rel,previously_reserved,,1,0,0,0,1.0,0,0,2,0.0,1.0
+2020,al,Chris Liss,Greg Holland,3343,KC,P,289,act,previously_reserved,P,4,0,0,0,4.0,0,0,4,2.25,0.75
 2020,al,Rick Wolf/Glenn Colton,Bryan Garcia,7101,Det,P,56,act,active,P,5,0,1,2,4.3,4,0,5,2.08,2.077
-2020,al,Rick Wolf/Glenn Colton,Kyle Gibson,2705,Tex,P,4,act,active,P,10,1,5,0,52.7,24,10,46,5.98,1.576
-2020,al,Rick Wolf/Glenn Colton,Lance McCullers,3814,Hou,P,10,act,active,P,11,3,3,0,55.0,20,5,56,3.93,1.164
 2020,al,Rick Wolf/Glenn Colton,Michael Pineda,3175,Min,P,76,act,active,P,5,2,0,0,26.7,7,0,25,3.37,1.2
-2020,al,Rick Wolf/Glenn Colton,Carl Edwards,4609,Atl,P,0,rel,previously_active,,2,0,0,0,2.0,1,0,2,4.5,1.5
-2020,al,Rick Wolf/Glenn Colton,Joe Jimenez,5304,Det,P,12,res,previously_active,,13,1,1,5,11.0,5,4,11,10.64,1.727
-2020,al,Rick Wolf/Glenn Colton,Miguel Castro,5143,NYM,P,176,rel,previously_active,,2,0,0,0,1.7,0,2,4,21.6,4.2
-2020,al,Rick Wolf/Glenn Colton,Ian Kennedy,990,FA,P,13,dis,previously_active,P,3,0,1,0,4.3,0,2,5,4.15,0.462
+2020,al,Rick Wolf/Glenn Colton,Dean Kremer,6817,Bal,P,56,act,active,P,3,0,1,0,12.7,9,0,15,6.39,1.816
+2020,al,Rick Wolf/Glenn Colton,Trevor Rosenthal,3933,FA,P,1,act,active,P,23,1,0,11,23.7,8,2,38,1.9,0.845
+2020,al,Rick Wolf/Glenn Colton,Lance McCullers,3814,Hou,P,10,act,active,P,11,3,3,0,55.0,20,5,56,3.93,1.164
+2020,al,Rick Wolf/Glenn Colton,Justus Sheffield,5115,Sea,P,1,act,active,P,9,4,2,0,52.3,16,2,46,3.1,1.223
+2020,al,Rick Wolf/Glenn Colton,Dylan Cease,5708,CWS,P,7,act,active,P,12,5,4,0,58.3,34,12,44,4.01,1.44
+2020,al,Rick Wolf/Glenn Colton,Andrew Heaney,4146,LAA,P,10,act,active,P,12,4,3,0,66.7,19,9,70,4.46,1.23
+2020,al,Rick Wolf/Glenn Colton,Kyle Gibson,2705,Tex,P,4,act,active,P,10,1,5,0,52.7,24,10,46,5.98,1.576
 2020,al,Rick Wolf/Glenn Colton,Nick Margevicius,6798,Sea,P,76,res,previously_active,P,2,0,1,0,9.7,6,2,9,9.31,1.759
-2020,al,Rick Wolf/Glenn Colton,Asher Wojciechowski,3671,NYY,P,0,rel,previously_active,,1,0,1,0,5.0,2,3,7,7.2,1.2
-2020,al,Rick Wolf/Glenn Colton,Trent Thornton,6406,Tor,P,0,dis,previously_active,P,1,0,0,0,4.0,2,0,3,2.25,2.5
-2020,al,Rick Wolf/Glenn Colton,Zack Godley,5283,Bos,P,2,rel,previously_active,,1,0,0,0,4.7,1,2,3,9.64,1.929
-2020,al,Rick Wolf/Glenn Colton,Jimmy Cordero,5433,CWS,P,0,rel,previously_active,,2,0,0,0,1.0,0,0,0,18.0,2.0
 2020,al,Rick Wolf/Glenn Colton,Kolby Allard,5368,Tex,P,21,rel,previously_active,,4,0,3,0,10.3,9,2,13,15.68,2.516
+2020,al,Rick Wolf/Glenn Colton,Jimmy Cordero,5433,CWS,P,0,rel,previously_active,,2,0,0,0,1.0,0,0,0,18.0,2.0
+2020,al,Rick Wolf/Glenn Colton,Miguel Castro,5143,NYM,P,176,rel,previously_active,,2,0,0,0,1.7,0,2,4,21.6,4.2
+2020,al,Rick Wolf/Glenn Colton,Zack Godley,5283,Bos,P,2,rel,previously_active,,1,0,0,0,4.7,1,2,3,9.64,1.929
+2020,al,Rick Wolf/Glenn Colton,Carl Edwards,4609,Atl,P,0,rel,previously_active,,2,0,0,0,2.0,1,0,2,4.5,1.5
+2020,al,Rick Wolf/Glenn Colton,Asher Wojciechowski,3671,NYY,P,0,rel,previously_active,,1,0,1,0,5.0,2,3,7,7.2,1.2
+2020,al,Rick Wolf/Glenn Colton,Ian Kennedy,990,FA,P,13,dis,previously_active,P,3,0,1,0,4.3,0,2,5,4.15,0.462
+2020,al,Rick Wolf/Glenn Colton,Joe Jimenez,5304,Det,P,12,res,previously_active,,13,1,1,5,11.0,5,4,11,10.64,1.727
 2020,al,Rick Wolf/Glenn Colton,Ljay Newsome,6373,Sea,P,16,res,previously_active,P,1,0,0,0,1.3,0,0,2,6.75,1.5
 2020,al,Rick Wolf/Glenn Colton,Brandon Bielak,6780,Hou,P,52,rel,previously_active,,4,1,2,0,13.0,9,6,10,9.0,1.846
-2020,al,Rick Wolf/Glenn Colton,Joe Jimenez,5304,Det,P,12,res,reserved,,12,0,2,0,11.7,1,3,11,3.86,1.029
+2020,al,Rick Wolf/Glenn Colton,Trent Thornton,6406,Tor,P,0,dis,previously_active,P,1,0,0,0,4.0,2,0,3,2.25,2.5
 2020,al,Rick Wolf/Glenn Colton,Nick Margevicius,6798,Sea,P,76,res,reserved,P,1,1,0,0,6.0,3,0,4,0.0,1.0
 2020,al,Rick Wolf/Glenn Colton,Ian Kennedy,990,FA,P,13,dis,reserved,P,12,0,1,0,9.7,5,5,10,11.17,2.379
+2020,al,Rick Wolf/Glenn Colton,Joe Jimenez,5304,Det,P,12,res,reserved,,12,0,2,0,11.7,1,3,11,3.86,1.029
 2020,al,Rick Wolf/Glenn Colton,Trent Thornton,6406,Tor,P,0,dis,reserved,P,2,0,0,0,1.7,1,0,3,32.4,4.8
 2020,al,Rick Wolf/Glenn Colton,Ljay Newsome,6373,Sea,P,16,res,reserved,P,2,0,1,0,7.3,1,2,2,7.36,1.773
-2020,al,Rick Wolf/Glenn Colton,Miguel Castro,5143,NYM,P,176,rel,previously_reserved,,6,1,0,0,6.0,1,1,9,4.5,1.167
-2020,al,Rick Wolf/Glenn Colton,Carl Edwards,4609,Atl,P,0,rel,previously_reserved,,1,0,0,0,0.7,0,0,1,0.0,0.0
+2020,al,Rick Wolf/Glenn Colton,Kyle Gibson,2705,Tex,P,4,act,previously_reserved,P,2,1,1,0,14.7,6,2,12,3.07,1.364
 2020,al,Rick Wolf/Glenn Colton,Justus Sheffield,5115,Sea,P,1,act,previously_reserved,P,1,0,1,0,3.0,4,0,2,12.0,2.667
+2020,al,Rick Wolf/Glenn Colton,Carl Edwards,4609,Atl,P,0,rel,previously_reserved,,1,0,0,0,0.7,0,0,1,0.0,0.0
+2020,al,Rick Wolf/Glenn Colton,Miguel Castro,5143,NYM,P,176,rel,previously_reserved,,6,1,0,0,6.0,1,1,9,4.5,1.167
 2020,al,Rick Wolf/Glenn Colton,Jimmy Cordero,5433,CWS,P,0,rel,previously_reserved,,5,0,1,0,4.3,2,0,4,2.08,1.385
 2020,al,Rick Wolf/Glenn Colton,Kolby Allard,5368,Tex,P,21,rel,previously_reserved,,3,0,3,0,15.3,7,2,13,5.87,1.174
-2020,al,Rick Wolf/Glenn Colton,Kyle Gibson,2705,Tex,P,4,act,previously_reserved,P,2,1,1,0,14.7,6,2,12,3.07,1.364
-2020,al,Jeff Erickson,Anthony Bass,3754,Mia,P,227,act,active,P,21,2,3,6,21.0,8,2,18,3.43,1.143
-2020,al,Jeff Erickson,Dane Dunning,5973,Tex,P,237,act,active,P,5,2,0,0,24.7,11,3,21,4.38,1.257
+2020,al,Jeff Erickson,Jesus Luzardo,6224,Oak,P,14,act,active,P,12,3,2,0,59.0,17,9,59,4.12,1.271
+2020,al,Jeff Erickson,Nick Anderson,6711,TB,P,15,act,active,P,18,2,1,5,15.3,2,1,25,0.59,0.457
 2020,al,Jeff Erickson,Josh Fleming,7275,TB,P,67,act,active,P,5,3,0,0,22.0,5,4,16,3.27,1.182
+2020,al,Jeff Erickson,Reynaldo Lopez,5047,CWS,P,0,act,active,P,2,0,1,0,6.3,5,3,6,9.95,1.895
+2020,al,Jeff Erickson,Anthony Bass,3754,Mia,P,227,act,active,P,21,2,3,6,21.0,8,2,18,3.43,1.143
+2020,al,Jeff Erickson,Ryan Yarbrough,5149,TB,P,8,act,active,P,10,1,3,0,53.0,11,5,43,3.06,1.113
 2020,al,Jeff Erickson,Zach Plesac,7027,Cle,P,1,act,active,P,7,3,2,0,49.3,6,7,51,2.37,0.811
 2020,al,Jeff Erickson,Tyler Duffey,5127,Min,P,1,act,active,P,22,1,1,0,24.0,6,2,31,1.88,0.792
 2020,al,Jeff Erickson,Shane Bieber,6086,Cle,P,30,act,active,P,12,8,1,0,77.3,21,7,122,1.63,0.866
-2020,al,Jeff Erickson,Reynaldo Lopez,5047,CWS,P,0,act,active,P,2,0,1,0,6.3,5,3,6,9.95,1.895
-2020,al,Jeff Erickson,Jesus Luzardo,6224,Oak,P,14,act,active,P,12,3,2,0,59.0,17,9,59,4.12,1.271
-2020,al,Jeff Erickson,Ryan Yarbrough,5149,TB,P,8,act,active,P,10,1,3,0,53.0,11,5,43,3.06,1.113
-2020,al,Jeff Erickson,Nick Anderson,6711,TB,P,15,act,active,P,18,2,1,5,15.3,2,1,25,0.59,0.457
-2020,al,Jeff Erickson,Joely Rodriguez,4677,Tex,P,7,rel,previously_active,,3,0,0,0,3.3,0,0,6,5.4,1.2
-2020,al,Jeff Erickson,Tyler Glasnow,4597,TB,P,23,trd,previously_active,,5,0,1,0,21.0,13,4,35,6.0,1.524
+2020,al,Jeff Erickson,Dane Dunning,5973,Tex,P,237,act,active,P,5,2,0,0,24.7,11,3,21,4.38,1.257
 2020,al,Jeff Erickson,Dan Altavilla,5839,SD,P,5,rel,previously_active,,2,0,0,0,1.7,2,0,2,16.2,3.0
-2020,al,Jeff Erickson,Blake Taylor,7112,Hou,P,53,rel,previously_active,,11,0,1,1,8.0,6,1,5,2.25,1.375
-2020,al,Jeff Erickson,Scott Barlow,6321,KC,P,1,res,previously_active,P,10,1,0,0,9.0,3,2,12,7.0,1.556
-2020,al,Jeff Erickson,Chad Green,5625,NYY,P,4,res,previously_active,P,9,1,2,1,8.7,3,4,11,8.31,1.269
-2020,al,Jeff Erickson,Shun Yamaguchi,7146,Tor,P,1,rel,previously_active,,1,0,1,0,0.0,1,0,0,0.0,0.0
 2020,al,Jeff Erickson,Matt Andriese,4565,Bos,P,5,rel,previously_active,,2,0,1,0,7.3,4,0,6,4.91,1.5
-2020,al,Jeff Erickson,Brad Peacock,3746,FA,P,1,dis,reserved,P,3,0,0,0,2.3,1,0,3,7.71,1.714
-2020,al,Jeff Erickson,Scott Barlow,6321,KC,P,1,res,reserved,P,8,0,0,1,7.0,1,1,9,5.14,1.143
+2020,al,Jeff Erickson,Scott Barlow,6321,KC,P,1,res,previously_active,P,10,1,0,0,9.0,3,2,12,7.0,1.556
+2020,al,Jeff Erickson,Blake Taylor,7112,Hou,P,53,rel,previously_active,,11,0,1,1,8.0,6,1,5,2.25,1.375
+2020,al,Jeff Erickson,Tyler Glasnow,4597,TB,P,23,trd,previously_active,,5,0,1,0,21.0,13,4,35,6.0,1.524
+2020,al,Jeff Erickson,Chad Green,5625,NYY,P,4,res,previously_active,P,9,1,2,1,8.7,3,4,11,8.31,1.269
+2020,al,Jeff Erickson,Joely Rodriguez,4677,Tex,P,7,rel,previously_active,,3,0,0,0,3.3,0,0,6,5.4,1.2
+2020,al,Jeff Erickson,Shun Yamaguchi,7146,Tor,P,1,rel,previously_active,,1,0,1,0,0.0,1,0,0,0.0,0.0
 2020,al,Jeff Erickson,Chad Green,5625,NYY,P,4,res,reserved,P,4,0,1,0,4.3,1,1,4,2.08,0.923
+2020,al,Jeff Erickson,Scott Barlow,6321,KC,P,1,res,reserved,P,8,0,0,1,7.0,1,1,9,5.14,1.143
+2020,al,Jeff Erickson,Brad Peacock,3746,FA,P,1,dis,reserved,P,3,0,0,0,2.3,1,0,3,7.71,1.714
+2020,al,Jeff Erickson,Anthony Bass,3754,Mia,P,227,act,previously_reserved,P,3,0,0,1,2.3,1,0,2,7.71,0.857
 2020,al,Jeff Erickson,Ryan Yarbrough,5149,TB,P,8,act,previously_reserved,P,1,0,1,0,2.7,1,0,1,13.5,2.625
-2020,al,Jeff Erickson,Nick Anderson,6711,TB,P,15,act,previously_reserved,P,1,0,0,1,1.0,1,0,1,0.0,1.0
-2020,al,Jeff Erickson,Matt Andriese,4565,Bos,P,5,rel,previously_reserved,,3,0,0,0,7.7,2,2,9,9.39,1.435
 2020,al,Jeff Erickson,Shun Yamaguchi,7146,Tor,P,1,rel,previously_reserved,,1,0,1,0,1.0,2,0,2,27.0,4.0
 2020,al,Jeff Erickson,Zach Plesac,7027,Cle,P,1,act,previously_reserved,P,1,1,0,0,6.0,0,1,6,1.5,0.667
-2020,al,Jeff Erickson,Anthony Bass,3754,Mia,P,227,act,previously_reserved,P,3,0,0,1,2.3,1,0,2,7.71,0.857
-2020,al,Mike Gianella,Tanner Scott,5757,Bal,P,50,act,active,P,13,0,0,0,9.7,5,0,9,0.0,1.345
+2020,al,Jeff Erickson,Nick Anderson,6711,TB,P,15,act,previously_reserved,P,1,0,0,1,1.0,1,0,1,0.0,1.0
+2020,al,Jeff Erickson,Matt Andriese,4565,Bos,P,5,rel,previously_reserved,,3,0,0,0,7.7,2,2,9,9.39,1.435
 2020,al,Mike Gianella,Sergio Romo,2061,FA,P,1,act,active,P,24,1,2,5,20.0,7,3,23,4.05,1.15
+2020,al,Mike Gianella,Oliver Drake,3844,TB,P,0,act,active,P,8,0,2,2,8.0,5,1,5,5.63,1.25
 2020,al,Mike Gianella,Nick Wittgren,4738,Cle,P,2,act,active,P,23,2,0,0,21.7,6,4,26,3.74,1.062
 2020,al,Mike Gianella,Adam Ottavino,1424,Bos,P,2,act,active,P,24,2,3,0,18.3,9,2,25,5.89,1.582
+2020,al,Mike Gianella,Zach Britton,3134,NYY,P,1,act,active,P,17,1,2,8,16.0,4,0,15,1.12,0.75
+2020,al,Mike Gianella,Tanner Scott,5757,Bal,P,50,act,active,P,13,0,0,0,9.7,5,0,9,0.0,1.345
 2020,al,Mike Gianella,Trevor May,3192,NYM,P,1,act,active,P,24,1,0,2,23.3,7,5,38,3.86,1.157
 2020,al,Mike Gianella,Yohan Ramirez,7144,Sea,P,0,act,active,P,8,0,0,2,7.7,6,1,5,2.35,1.304
-2020,al,Mike Gianella,Zach Britton,3134,NYY,P,1,act,active,P,17,1,2,8,16.0,4,0,15,1.12,0.75
-2020,al,Mike Gianella,Oliver Drake,3844,TB,P,0,act,active,P,8,0,2,2,8.0,5,1,5,5.63,1.25
 2020,al,Mike Gianella,Liam Hendriks,3659,CWS,P,16,act,active,P,24,3,1,14,25.3,3,1,37,1.78,0.671
-2020,al,Mike Gianella,Jose Cisnero,4225,Det,P,50,rel,previously_active,,6,0,1,0,5.0,2,0,7,3.6,1.2
-2020,al,Mike Gianella,Roberto Osuna,4172,FA,P,19,dis,previously_active,P,4,0,0,1,4.3,0,0,3,2.08,0.692
-2020,al,Mike Gianella,Jake Diekman,3843,Oak,P,0,rel,previously_active,,4,0,0,0,4.7,4,0,7,0.0,1.5
-2020,al,Mike Gianella,Jesse Hahn,4527,KC,P,18,rel,previously_active,,9,0,0,0,8.0,3,0,6,1.12,0.75
-2020,al,Mike Gianella,Bryan Abreu,6708,Hou,P,0,rel,previously_active,,2,0,0,0,2.3,5,0,2,3.86,2.571
-2020,al,Mike Gianella,John Curtiss,6259,TB,P,25,rel,previously_active,,1,0,0,0,1.0,0,0,2,0.0,0.0
 2020,al,Mike Gianella,Jose Alvarado,5898,Phi,P,1,dis,previously_active,P,9,0,0,0,9.0,6,2,13,6.0,1.667
+2020,al,Mike Gianella,Roberto Osuna,4172,FA,P,19,dis,previously_active,P,4,0,0,1,4.3,0,0,3,2.08,0.692
+2020,al,Mike Gianella,John Curtiss,6259,TB,P,25,rel,previously_active,,1,0,0,0,1.0,0,0,2,0.0,0.0
+2020,al,Mike Gianella,Jose Cisnero,4225,Det,P,50,rel,previously_active,,6,0,1,0,5.0,2,0,7,3.6,1.2
 2020,al,Mike Gianella,Andre Scrubb,7083,Hou,P,0,rel,previously_active,,2,0,0,0,2.0,3,0,2,0.0,2.0
-2020,al,Mike Gianella,Roberto Osuna,4172,FA,P,19,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2020,al,Mike Gianella,Jose Leclerc,5514,Tex,P,1,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2020,al,Mike Gianella,Jake Diekman,3843,Oak,P,0,rel,previously_active,,4,0,0,0,4.7,4,0,7,0.0,1.5
+2020,al,Mike Gianella,Bryan Abreu,6708,Hou,P,0,rel,previously_active,,2,0,0,0,2.3,5,0,2,3.86,2.571
+2020,al,Mike Gianella,Jesse Hahn,4527,KC,P,18,rel,previously_active,,9,0,0,0,8.0,3,0,6,1.12,0.75
 2020,al,Mike Gianella,Jose Alvarado,5898,Phi,P,1,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2020,al,Mike Gianella,Roberto Osuna,4172,FA,P,19,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
 2020,al,Mike Gianella,Corey Kluber,3382,NYY,P,1,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2020,al,Mike Gianella,Nick Wittgren,4738,Cle,P,2,act,previously_reserved,P,2,0,0,0,2.0,0,0,2,0.0,0.5
-2020,al,Mike Gianella,Oliver Drake,3844,TB,P,0,act,previously_reserved,P,3,0,0,0,3.0,1,1,2,6.0,1.0
-2020,al,Mike Gianella,Bryan Abreu,6708,Hou,P,0,rel,previously_reserved,,2,0,0,0,1.0,2,0,1,0.0,2.0
+2020,al,Mike Gianella,Jose Leclerc,5514,Tex,P,1,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
 2020,al,Mike Gianella,Zach Britton,3134,NYY,P,1,act,previously_reserved,P,3,0,0,0,3.0,3,0,1,6.0,2.333
-2020,al,Patrick Davitt,Sean Manaea,4443,Oak,P,10,act,active,P,11,4,3,0,54.0,8,7,45,4.5,1.204
-2020,al,Patrick Davitt,Lucas Giolito,4040,CWS,P,24,act,active,P,12,4,3,0,72.3,28,8,97,3.48,1.037
-2020,al,Patrick Davitt,Tarik Skubal,7077,Det,P,0,act,active,P,7,1,3,0,30.0,10,8,36,4.8,1.033
-2020,al,Patrick Davitt,Mychal Givens,3256,Col,P,9,act,active,P,22,1,1,1,22.3,10,5,25,3.63,1.164
-2020,al,Patrick Davitt,Jordan Romano,6417,Tor,P,0,act,active,P,8,1,1,2,7.7,2,2,11,2.35,1.304
-2020,al,Patrick Davitt,Alex Colome,3154,FA,P,11,act,active,P,21,2,0,12,22.3,8,0,16,0.81,0.94
-2020,al,Patrick Davitt,Hyun-Jin Ryu,2609,Tor,P,19,act,active,P,12,5,2,0,67.0,17,6,72,2.69,1.149
+2020,al,Mike Gianella,Nick Wittgren,4738,Cle,P,2,act,previously_reserved,P,2,0,0,0,2.0,0,0,2,0.0,0.5
+2020,al,Mike Gianella,Bryan Abreu,6708,Hou,P,0,rel,previously_reserved,,2,0,0,0,1.0,2,0,1,0.0,2.0
+2020,al,Mike Gianella,Oliver Drake,3844,TB,P,0,act,previously_reserved,P,3,0,0,0,3.0,1,1,2,6.0,1.0
 2020,al,Patrick Davitt,Phil Maton,6036,Cle,P,0,act,active,P,15,2,3,0,13.7,6,0,20,6.59,1.537
+2020,al,Patrick Davitt,Lucas Giolito,4040,CWS,P,24,act,active,P,12,4,3,0,72.3,28,8,97,3.48,1.037
+2020,al,Patrick Davitt,Alex Colome,3154,FA,P,11,act,active,P,21,2,0,12,22.3,8,0,16,0.81,0.94
 2020,al,Patrick Davitt,Aaron Bummer,5986,CWS,P,3,act,active,P,9,1,0,0,9.3,5,0,14,0.96,1.071
+2020,al,Patrick Davitt,Sean Manaea,4443,Oak,P,10,act,active,P,11,4,3,0,54.0,8,7,45,4.5,1.204
+2020,al,Patrick Davitt,Tarik Skubal,7077,Det,P,0,act,active,P,7,1,3,0,30.0,10,8,36,4.8,1.033
+2020,al,Patrick Davitt,Jordan Romano,6417,Tor,P,0,act,active,P,8,1,1,2,7.7,2,2,11,2.35,1.304
+2020,al,Patrick Davitt,Hyun-Jin Ryu,2609,Tor,P,19,act,active,P,12,5,2,0,67.0,17,6,72,2.69,1.149
+2020,al,Patrick Davitt,Mychal Givens,3256,Col,P,9,act,active,P,22,1,1,1,22.3,10,5,25,3.63,1.164
 2020,al,Patrick Davitt,Josh James,6603,Hou,P,7,dis,previously_active,P,7,0,0,0,10.7,14,4,13,10.97,2.438
-2020,al,Patrick Davitt,Trevor Richards,6451,TB,P,0,rel,previously_active,,7,0,0,0,24.3,7,4,20,5.92,1.644
-2020,al,Patrick Davitt,Wes Benjamin,7422,Tex,P,0,rel,previously_active,,1,0,0,0,5.0,1,1,3,5.4,1.6
 2020,al,Patrick Davitt,J.B. Wendelken,5485,Oak,P,0,dis,previously_active,P,4,0,0,0,4.3,3,1,5,4.15,1.385
+2020,al,Patrick Davitt,Wes Benjamin,7422,Tex,P,0,rel,previously_active,,1,0,0,0,5.0,1,1,3,5.4,1.6
 2020,al,Patrick Davitt,Gio Gonzalez,1084,FA,P,1,rel,previously_active,,8,1,1,0,27.7,16,4,30,4.55,1.843
 2020,al,Patrick Davitt,Luis Cessa,5422,NYY,P,99,rel,previously_active,,7,0,0,1,8.3,2,0,5,0.0,0.84
+2020,al,Patrick Davitt,Trevor Richards,6451,TB,P,0,rel,previously_active,,7,0,0,0,24.3,7,4,20,5.92,1.644
+2020,al,Patrick Davitt,J.B. Wendelken,5485,Oak,P,0,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
 2020,al,Patrick Davitt,Josh James,6603,Hou,P,7,dis,reserved,P,6,1,0,0,6.7,3,0,8,1.35,0.9
 2020,al,Patrick Davitt,Matt Manning,6031,Det,P,1,res,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2020,al,Patrick Davitt,J.B. Wendelken,5485,Oak,P,0,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
 2020,al,Patrick Davitt,Tarik Skubal,7077,Det,P,0,act,previously_reserved,P,1,0,1,0,2.0,1,1,1,18.0,4.0
-2020,al,Patrick Davitt,Trevor Richards,6451,TB,P,0,rel,previously_reserved,,1,0,0,0,4.3,2,0,3,2.08,1.846
 2020,al,Patrick Davitt,Andrew Kittredge,5927,TB,P,0,rel,previously_reserved,,1,0,0,0,2.0,2,0,1,0.0,2.5
+2020,al,Patrick Davitt,Trevor Richards,6451,TB,P,0,rel,previously_reserved,,1,0,0,0,4.3,2,0,3,2.08,1.846
 2020,al,Patrick Davitt,Gio Gonzalez,1084,FA,P,1,rel,previously_reserved,,1,0,0,0,2.0,3,0,2,0.0,2.0
-2020,al,Larry Schechter,Marco Gonzales,4628,Sea,P,7,act,active,P,11,7,2,0,69.7,7,8,64,3.1,0.947
 2020,al,Larry Schechter,Aaron Loup,4158,NYM,P,2,act,active,P,9,0,1,0,8.0,1,1,10,2.25,0.75
+2020,al,Larry Schechter,Carlos Carrasco,1141,NYM,P,17,act,active,P,12,3,4,0,68.0,27,8,82,2.91,1.206
+2020,al,Larry Schechter,Marco Gonzales,4628,Sea,P,7,act,active,P,11,7,2,0,69.7,7,8,64,3.1,0.947
 2020,al,Larry Schechter,Codi Heuer,7194,CWS,P,1,act,active,P,3,0,0,0,3.3,1,0,4,0.0,0.6
-2020,al,Larry Schechter,Ty Buttrey,6284,LAA,P,0,act,active,P,23,2,3,4,21.0,8,4,17,6.43,1.571
-2020,al,Larry Schechter,Jaime Barria,6297,LAA,P,51,act,active,P,2,1,0,0,8.3,0,1,8,4.32,1.08
 2020,al,Larry Schechter,Matt Barnes,3665,Bos,P,2,act,active,P,24,1,3,9,23.0,14,4,31,4.3,1.391
 2020,al,Larry Schechter,Buck Farmer,5015,Det,P,0,act,active,P,14,0,0,0,13.0,2,3,12,4.85,1.231
+2020,al,Larry Schechter,Jaime Barria,6297,LAA,P,51,act,active,P,2,1,0,0,8.3,0,1,8,4.32,1.08
+2020,al,Larry Schechter,Ty Buttrey,6284,LAA,P,0,act,active,P,23,2,3,4,21.0,8,4,17,6.43,1.571
 2020,al,Larry Schechter,Dallas Keuchel,4149,CWS,P,8,act,active,P,11,6,2,0,63.3,17,2,42,1.99,1.089
-2020,al,Larry Schechter,Carlos Carrasco,1141,NYM,P,17,act,active,P,12,3,4,0,68.0,27,8,82,2.91,1.206
 2020,al,Larry Schechter,Ryan Pressly,4263,Hou,P,3,trd,previously_active,,9,1,1,3,7.7,4,0,9,5.87,1.957
-2020,al,Larry Schechter,Tanner Roark,4325,Tor,P,0,rel,previously_active,,7,2,1,0,31.3,16,8,28,5.74,1.787
-2020,al,Larry Schechter,Corey Kluber,3382,NYY,P,21,rel,previously_active,,1,0,0,0,1.0,1,0,1,0.0,1.0
-2020,al,Larry Schechter,Brad Hand,3496,Was,P,17,trd,previously_active,,9,0,1,7,7.7,4,0,12,4.7,1.304
-2020,al,Larry Schechter,Nick Goody,4369,Tex,P,82,rel,previously_active,,1,0,0,0,0.3,1,0,0,0.0,3.0
-2020,al,Larry Schechter,Jake Junis,5833,KC,P,3,rel,previously_active,,3,0,2,0,10.7,1,5,6,10.12,1.781
-2020,al,Larry Schechter,Richard Bleier,2799,Mia,P,4,rel,previously_active,,1,0,0,0,1.3,0,0,2,0.0,0.0
 2020,al,Larry Schechter,Mike Fiers,3833,FA,P,3,res,previously_active,P,10,6,2,0,54.0,15,8,34,4.67,1.389
+2020,al,Larry Schechter,Jake Junis,5833,KC,P,3,rel,previously_active,,3,0,2,0,10.7,1,5,6,10.12,1.781
+2020,al,Larry Schechter,Nick Goody,4369,Tex,P,82,rel,previously_active,,1,0,0,0,0.3,1,0,0,0.0,3.0
+2020,al,Larry Schechter,Corey Kluber,3382,NYY,P,21,rel,previously_active,,1,0,0,0,1.0,1,0,1,0.0,1.0
+2020,al,Larry Schechter,Tanner Roark,4325,Tor,P,0,rel,previously_active,,7,2,1,0,31.3,16,8,28,5.74,1.787
+2020,al,Larry Schechter,Brad Hand,3496,Was,P,17,trd,previously_active,,9,0,1,7,7.7,4,0,12,4.7,1.304
+2020,al,Larry Schechter,Richard Bleier,2799,Mia,P,4,rel,previously_active,,1,0,0,0,1.3,0,0,2,0.0,0.0
 2020,al,Larry Schechter,Mike Fiers,3833,FA,P,3,res,reserved,P,1,0,1,0,5.0,1,1,3,3.6,1.2
+2020,al,Larry Schechter,Ty Buttrey,6284,LAA,P,0,act,previously_reserved,P,4,0,0,1,5.3,1,0,1,3.38,0.75
 2020,al,Larry Schechter,Buck Farmer,5015,Det,P,0,act,previously_reserved,P,9,1,0,0,8.3,3,0,2,2.16,1.08
 2020,al,Larry Schechter,Jake Junis,5833,KC,P,3,rel,previously_reserved,,3,0,0,0,12.7,5,2,10,4.26,1.579
-2020,al,Larry Schechter,Ty Buttrey,6284,LAA,P,0,act,previously_reserved,P,4,0,0,1,5.3,1,0,1,3.38,0.75
 2020,al,Larry Schechter,Nick Goody,4369,Tex,P,82,rel,previously_reserved,,6,0,0,0,4.3,2,1,5,10.38,1.846
-2020,al,Larry Schechter,Tanner Roark,4325,Tor,P,0,rel,previously_reserved,,2,0,1,0,8.0,5,6,7,9.0,1.625
 2020,al,Larry Schechter,Aaron Loup,4158,NYM,P,2,act,previously_reserved,P,3,0,0,0,3.7,1,0,2,0.0,0.545
-2020,al,Mike Podhorzer,Matthew Boyd,5373,Det,P,14,act,active,P,1,1,0,0,6.0,2,1,3,4.5,1.167
-2020,al,Mike Podhorzer,Brady Singer,6497,KC,P,93,act,active,P,9,4,4,0,50.3,19,5,47,3.58,1.132
-2020,al,Mike Podhorzer,Chase Anderson,4253,FA,P,0,act,active,P,7,1,2,0,24.0,7,9,31,9.0,1.75
+2020,al,Larry Schechter,Tanner Roark,4325,Tor,P,0,rel,previously_reserved,,2,0,1,0,8.0,5,6,7,9.0,1.625
 2020,al,Mike Podhorzer,Masahiro Tanaka,4450,NYY,P,13,act,active,P,9,3,3,0,45.3,7,9,41,3.57,1.125
-2020,al,Mike Podhorzer,Rich Hill,264,FA,P,1,act,active,P,7,2,1,0,36.0,14,2,30,2.25,1.056
-2020,al,Mike Podhorzer,Mike Mayers,5215,LAA,P,1,act,active,P,10,1,0,2,14.7,5,1,20,1.23,0.614
+2020,al,Mike Podhorzer,Brady Singer,6497,KC,P,93,act,active,P,9,4,4,0,50.3,19,5,47,3.58,1.132
 2020,al,Mike Podhorzer,Griffin Canning,6578,LAA,P,1,act,active,P,10,2,3,0,50.7,22,8,51,3.91,1.362
+2020,al,Mike Podhorzer,Matthew Boyd,5373,Det,P,14,act,active,P,1,1,0,0,6.0,2,1,3,4.5,1.167
+2020,al,Mike Podhorzer,Chase Anderson,4253,FA,P,0,act,active,P,7,1,2,0,24.0,7,9,31,9.0,1.75
+2020,al,Mike Podhorzer,Rich Hill,264,FA,P,1,act,active,P,7,2,1,0,36.0,14,2,30,2.25,1.056
 2020,al,Mike Podhorzer,Martin Perez,2676,Bos,P,0,act,active,P,5,0,4,0,24.7,9,4,16,5.84,1.378
 2020,al,Mike Podhorzer,Taijuan Walker,3796,FA,P,1,act,active,P,10,3,3,0,47.3,16,8,46,3.04,1.162
-2020,al,Mike Podhorzer,Taylor Rogers,5129,Min,P,20,res,previously_active,P,19,1,4,9,17.7,4,2,22,4.58,1.528
-2020,al,Mike Podhorzer,Brandon Workman,3672,FA,P,11,rel,previously_active,,18,1,2,9,18.0,13,2,20,4.5,2.222
-2020,al,Mike Podhorzer,Taylor Williams,5104,SD,P,53,rel,previously_active,,12,1,1,5,11.7,7,1,15,6.17,1.457
-2020,al,Mike Podhorzer,Edinson Volquez,332,FA,P,22,rel,previously_active,,3,1,1,0,2.3,2,0,1,15.43,2.143
+2020,al,Mike Podhorzer,Mike Mayers,5215,LAA,P,1,act,active,P,10,1,0,2,14.7,5,1,20,1.23,0.614
 2020,al,Mike Podhorzer,Anthony Misiewicz,7236,Sea,P,0,res,previously_active,P,5,0,1,0,3.7,1,1,4,7.36,1.909
+2020,al,Mike Podhorzer,Brandon Workman,3672,FA,P,11,rel,previously_active,,18,1,2,9,18.0,13,2,20,4.5,2.222
+2020,al,Mike Podhorzer,Edinson Volquez,332,FA,P,22,rel,previously_active,,3,1,1,0,2.3,2,0,1,15.43,2.143
+2020,al,Mike Podhorzer,Taylor Williams,5104,SD,P,53,rel,previously_active,,12,1,1,5,11.7,7,1,15,6.17,1.457
 2020,al,Mike Podhorzer,Cole Sulser,6351,Bal,P,53,rel,previously_active,,11,1,4,4,13.3,13,2,12,5.4,1.425
 2020,al,Mike Podhorzer,Patrick Sandoval,6641,LAA,P,1,rel,previously_active,,3,0,2,0,10.7,5,4,6,9.28,2.062
+2020,al,Mike Podhorzer,Taylor Rogers,5129,Min,P,20,res,previously_active,P,19,1,4,9,17.7,4,2,22,4.58,1.528
 2020,al,Mike Podhorzer,Taylor Rogers,5129,Min,P,20,res,reserved,P,2,1,0,0,2.3,0,0,2,0.0,1.286
 2020,al,Mike Podhorzer,Anthony Misiewicz,7236,Sea,P,0,res,reserved,P,2,0,0,0,1.7,1,0,2,0.0,1.2
-2020,al,Mike Podhorzer,Masahiro Tanaka,4450,NYY,P,13,act,previously_reserved,P,1,0,0,0,2.7,1,0,3,3.37,1.875
-2020,al,Mike Podhorzer,Chase Anderson,4253,FA,P,0,act,previously_reserved,P,3,0,0,0,9.7,3,2,7,2.79,1.345
-2020,al,Mike Podhorzer,Rich Hill,264,FA,P,1,act,previously_reserved,P,1,0,1,0,2.7,3,1,1,13.5,2.625
+2020,al,Mike Podhorzer,Griffin Canning,6578,LAA,P,1,act,previously_reserved,P,1,0,0,0,5.7,1,0,5,4.76,1.412
 2020,al,Mike Podhorzer,Cole Sulser,6351,Bal,P,53,rel,previously_reserved,,2,0,0,0,2.3,1,0,2,11.57,2.571
+2020,al,Mike Podhorzer,Rich Hill,264,FA,P,1,act,previously_reserved,P,1,0,1,0,2.7,3,1,1,13.5,2.625
+2020,al,Mike Podhorzer,Chase Anderson,4253,FA,P,0,act,previously_reserved,P,3,0,0,0,9.7,3,2,7,2.79,1.345
+2020,al,Mike Podhorzer,Martin Perez,2676,Bos,P,0,act,previously_reserved,P,7,3,1,0,37.3,19,4,30,3.62,1.312
+2020,al,Mike Podhorzer,Masahiro Tanaka,4450,NYY,P,13,act,previously_reserved,P,1,0,0,0,2.7,1,0,3,3.37,1.875
+2020,al,Mike Podhorzer,Brandon Workman,3672,FA,P,11,rel,previously_reserved,,2,0,1,0,1.3,0,1,2,20.25,2.25
+2020,al,Mike Podhorzer,Edinson Volquez,332,FA,P,22,rel,previously_reserved,,1,1,0,0,0.3,0,0,1,0.0,3.0
 2020,al,Mike Podhorzer,Brady Singer,6497,KC,P,93,act,previously_reserved,P,2,0,1,0,9.0,2,3,7,7.0,1.444
 2020,al,Mike Podhorzer,Patrick Sandoval,6641,LAA,P,1,rel,previously_reserved,,2,0,2,0,12.0,3,2,9,4.5,1.083
-2020,al,Mike Podhorzer,Edinson Volquez,332,FA,P,22,rel,previously_reserved,,1,1,0,0,0.3,0,0,1,0.0,3.0
 2020,al,Mike Podhorzer,Taijuan Walker,3796,FA,P,1,act,previously_reserved,P,1,1,0,0,6.0,3,0,4,0.0,1.167
-2020,al,Mike Podhorzer,Brandon Workman,3672,FA,P,11,rel,previously_reserved,,2,0,1,0,1.3,0,1,2,20.25,2.25
-2020,al,Mike Podhorzer,Martin Perez,2676,Bos,P,0,act,previously_reserved,P,7,3,1,0,37.3,19,4,30,3.62,1.312
-2020,al,Mike Podhorzer,Griffin Canning,6578,LAA,P,1,act,previously_reserved,P,1,0,0,0,5.7,1,0,5,4.76,1.412
-2020,al,Howard Bender,Randy Dobnak,7094,Min,P,0,act,active,P,10,6,4,0,46.7,13,3,27,4.05,1.35
 2020,al,Howard Bender,*Mike Clevinger,4528,SD,P,30,act,active,P,7,3,2,0,35.7,13,5,34,3.03,1.093
 2020,al,Howard Bender,Aaron Civale,7061,Cle,P,7,act,active,P,12,4,6,0,74.0,16,11,69,4.74,1.324
+2020,al,Howard Bender,J.A. Happ,1109,Min,P,5,act,active,P,9,2,2,0,49.3,15,8,42,3.47,1.054
+2020,al,Howard Bender,Diego Castillo,6313,TB,P,3,act,active,P,22,3,0,4,21.7,11,3,23,1.66,1.062
+2020,al,Howard Bender,Randy Dobnak,7094,Min,P,0,act,active,P,10,6,4,0,46.7,13,3,27,4.05,1.35
+2020,al,Howard Bender,James Karinchak,7024,Cle,P,2,act,active,P,27,1,2,1,27.0,16,1,53,2.67,1.111
 2020,al,Howard Bender,Casey Mize,6499,Det,P,2,act,active,P,7,0,3,0,28.3,13,7,26,6.99,1.482
 2020,al,Howard Bender,Robbie Ray,3685,Tor,P,527,act,active,P,3,1,1,0,13.3,10,1,16,4.05,1.65
 2020,al,Howard Bender,Jose Berrios,4464,Min,P,22,act,active,P,12,5,4,0,63.0,26,8,68,4.0,1.317
-2020,al,Howard Bender,Diego Castillo,6313,TB,P,3,act,active,P,22,3,0,4,21.7,11,3,23,1.66,1.062
 2020,al,Howard Bender,T.J. McFarland,4258,FA,P,2,act,active,P,10,0,0,0,9.0,4,4,5,9.0,2.333
-2020,al,Howard Bender,James Karinchak,7024,Cle,P,2,act,active,P,27,1,2,1,27.0,16,1,53,2.67,1.111
-2020,al,Howard Bender,J.A. Happ,1109,Min,P,5,act,active,P,9,2,2,0,49.3,15,8,42,3.47,1.054
-2020,al,Howard Bender,Evan Marshall,3903,CWS,P,27,res,previously_active,P,10,1,1,0,9.7,4,1,12,3.72,1.448
 2020,al,Howard Bender,Ken Giles,4717,FA,P,22,dis,previously_active,P,2,0,0,1,1.7,4,0,3,10.8,3.0
+2020,al,Howard Bender,Evan Marshall,3903,CWS,P,27,res,previously_active,P,10,1,1,0,9.7,4,1,12,3.72,1.448
 2020,al,Howard Bender,Jordan Lyles,2695,Tex,P,4,res,previously_active,P,6,1,3,0,24.3,13,5,16,9.25,1.89
 2020,al,Howard Bender,Ken Giles,4717,FA,P,22,dis,reserved,P,2,0,0,0,2.0,0,2,3,9.0,1.5
-2020,al,Howard Bender,Jordan Lyles,2695,Tex,P,4,res,reserved,P,6,0,3,0,33.3,10,7,20,5.4,1.32
 2020,al,Howard Bender,Jorge Lopez,5434,Bal,P,0,res,reserved,P,10,2,2,0,39.0,12,7,28,6.69,1.487
 2020,al,Howard Bender,Evan Marshall,3903,CWS,P,27,res,reserved,P,8,1,0,0,8.3,1,0,10,2.16,0.72
+2020,al,Howard Bender,Jordan Lyles,2695,Tex,P,4,res,reserved,P,6,0,3,0,33.3,10,7,20,5.4,1.32
 2020,al,Howard Bender,*Mike Clevinger,4528,SD,P,30,act,previously_reserved,P,1,0,0,0,6.0,1,1,6,3.0,1.5
-2020,al,Rob Leibowitz,Lance Lynn,2919,CWS,P,19,act,active,P,13,6,3,0,84.0,25,13,89,3.32,1.06
 2020,al,Rob Leibowitz,Mike Minor,2833,KC,P,253,act,active,P,3,1,1,0,17.0,5,2,23,3.71,0.882
-2020,al,Rob Leibowitz,Triston McKenzie,5734,Cle,P,378,act,active,P,7,1,1,0,27.3,8,5,32,3.62,0.988
-2020,al,Rob Leibowitz,Justin Dunn,6000,Sea,P,1,act,active,P,9,4,1,0,42.7,28,9,36,4.22,1.359
-2020,al,Rob Leibowitz,Spencer Turnbull,5111,Det,P,2,act,active,P,11,4,4,0,56.7,29,2,51,3.97,1.341
-2020,al,Rob Leibowitz,Aroldis Chapman,2894,NYY,P,20,act,active,P,13,1,1,3,11.7,4,2,22,3.09,0.857
 2020,al,Rob Leibowitz,Brad Keller,6330,KC,P,2,act,active,P,8,4,3,0,49.7,15,2,28,2.72,1.027
-2020,al,Rob Leibowitz,Blake Snell,4366,SD,P,22,act,active,P,11,4,2,0,50.0,18,10,63,3.24,1.2
+2020,al,Rob Leibowitz,Lance Lynn,2919,CWS,P,19,act,active,P,13,6,3,0,84.0,25,13,89,3.32,1.06
+2020,al,Rob Leibowitz,Spencer Turnbull,5111,Det,P,2,act,active,P,11,4,4,0,56.7,29,2,51,3.97,1.341
+2020,al,Rob Leibowitz,Justin Dunn,6000,Sea,P,1,act,active,P,9,4,1,0,42.7,28,9,36,4.22,1.359
 2020,al,Rob Leibowitz,Joakim Soria,671,FA,P,0,act,active,P,19,2,2,2,19.3,10,0,19,2.33,1.241
+2020,al,Rob Leibowitz,Blake Snell,4366,SD,P,22,act,active,P,11,4,2,0,50.0,18,10,63,3.24,1.2
+2020,al,Rob Leibowitz,Aroldis Chapman,2894,NYY,P,20,act,active,P,13,1,1,3,11.7,4,2,22,3.09,0.857
+2020,al,Rob Leibowitz,Triston McKenzie,5734,Cle,P,378,act,active,P,7,1,1,0,27.3,8,5,32,3.62,0.988
+2020,al,Rob Leibowitz,Julio Teheran,2098,FA,P,5,rel,previously_active,,4,0,2,0,15.0,7,5,10,9.6,1.8
 2020,al,Rob Leibowitz,Jonathan Loaisiga,6304,NYY,P,2,res,previously_active,P,7,1,0,0,14.0,2,2,16,2.57,1.071
+2020,al,Rob Leibowitz,Cam Bedrosian,3326,LAA,P,0,rel,previously_active,,4,0,0,0,4.7,3,0,5,3.86,1.714
+2020,al,Rob Leibowitz,Tyler Clippard,1612,FA,P,0,res,previously_active,P,11,1,0,0,11.7,1,1,12,1.54,0.771
 2020,al,Rob Leibowitz,Kendall Graveman,5031,Sea,P,32,rel,previously_active,,2,0,2,0,8.7,5,2,10,8.31,1.615
 2020,al,Rob Leibowitz,Tommy Kahnle,4371,LAD,P,0,dis,previously_active,P,1,0,0,0,1.0,1,0,3,0.0,2.0
-2020,al,Rob Leibowitz,Julio Teheran,2098,FA,P,5,rel,previously_active,,4,0,2,0,15.0,7,5,10,9.6,1.8
-2020,al,Rob Leibowitz,Tyler Clippard,1612,FA,P,0,res,previously_active,P,11,1,0,0,11.7,1,1,12,1.54,0.771
-2020,al,Rob Leibowitz,Cam Bedrosian,3326,LAA,P,0,rel,previously_active,,4,0,0,0,4.7,3,0,5,3.86,1.714
-2020,al,Rob Leibowitz,Jonathan Loaisiga,6304,NYY,P,2,res,reserved,P,5,2,0,0,9.0,5,1,6,5.0,1.444
-2020,al,Rob Leibowitz,A.J. Puk,5675,Oak,P,5,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2020,al,Rob Leibowitz,Tyler Clippard,1612,FA,P,0,res,reserved,P,14,1,1,0,13.3,2,1,13,4.05,0.975
 2020,al,Rob Leibowitz,Tommy Kahnle,4371,LAD,P,0,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2020,al,Rob Leibowitz,A.J. Puk,5675,Oak,P,5,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
+2020,al,Rob Leibowitz,Jonathan Loaisiga,6304,NYY,P,2,res,reserved,P,5,2,0,0,9.0,5,1,6,5.0,1.444
+2020,al,Rob Leibowitz,Tyler Clippard,1612,FA,P,0,res,reserved,P,14,1,1,0,13.3,2,1,13,4.05,0.975
+2020,al,Rob Leibowitz,Kendall Graveman,5031,Sea,P,32,rel,previously_reserved,,7,0,1,0,6.7,1,0,3,5.4,0.9
 2020,al,Rob Leibowitz,Brad Keller,6330,KC,P,2,act,previously_reserved,P,1,1,0,0,5.0,2,0,7,0.0,1.0
+2020,al,Rob Leibowitz,Cam Bedrosian,3326,LAA,P,0,rel,previously_reserved,,4,0,0,0,7.0,1,0,6,2.57,0.714
 2020,al,Rob Leibowitz,Joakim Soria,671,FA,P,0,act,previously_reserved,P,3,0,0,0,3.0,0,1,5,6.0,1.333
 2020,al,Rob Leibowitz,Justin Dunn,6000,Sea,P,1,act,previously_reserved,P,1,0,0,0,3.0,3,1,2,6.0,1.333
-2020,al,Rob Leibowitz,Cam Bedrosian,3326,LAA,P,0,rel,previously_reserved,,4,0,0,0,7.0,1,0,6,2.57,0.714
 2020,al,Rob Leibowitz,Julio Teheran,2098,FA,P,5,rel,previously_reserved,,4,0,1,0,14.3,5,5,7,8.16,1.395
-2020,al,Rob Leibowitz,Kendall Graveman,5031,Sea,P,32,rel,previously_reserved,,7,0,1,0,6.7,1,0,3,5.4,0.9
-2020,al,Jason Collette,Peter Fairbanks,7030,TB,P,14,act,active,P,14,3,2,0,14.3,7,1,18,1.88,1.395
-2020,al,Jason Collette,Chris Bassitt,4773,Oak,P,2,act,active,P,11,5,2,0,63.0,17,6,55,2.29,1.159
-2020,al,Jason Collette,Charlie Morton,61,Atl,P,23,act,active,P,9,2,2,0,38.0,10,4,42,4.74,1.395
 2020,al,Jason Collette,Jordan Montgomery,5837,NYY,P,6,act,active,P,10,2,3,0,44.0,9,7,47,5.11,1.295
-2020,al,Jason Collette,Tyler Glasnow,4597,TB,P,23,act,active,P,6,5,0,0,36.3,9,7,56,2.97,0.908
 2020,al,Jason Collette,Gregory Soto,6294,Det,P,63,act,active,P,18,0,1,2,14.7,7,2,20,4.3,1.295
+2020,al,Jason Collette,Chris Bassitt,4773,Oak,P,2,act,active,P,11,5,2,0,63.0,17,6,55,2.29,1.159
+2020,al,Jason Collette,Tyler Glasnow,4597,TB,P,23,act,active,P,6,5,0,0,36.3,9,7,56,2.97,0.908
 2020,al,Jason Collette,Kenta Maeda,4548,Min,P,13,act,active,P,11,6,1,0,66.7,10,9,80,2.7,0.75
 2020,al,Jason Collette,Ryan Pressly,4263,Hou,P,3,act,active,P,14,0,2,9,13.3,3,2,20,2.02,0.975
 2020,al,Jason Collette,Nathan Eovaldi,3809,Bos,P,3,act,active,P,8,4,2,0,45.3,7,7,48,3.77,1.213
+2020,al,Jason Collette,Peter Fairbanks,7030,TB,P,14,act,active,P,14,3,2,0,14.3,7,1,18,1.88,1.395
+2020,al,Jason Collette,Charlie Morton,61,Atl,P,23,act,active,P,9,2,2,0,38.0,10,4,42,4.74,1.395
 2020,al,Jason Collette,Deivi Garcia,6910,NYY,P,62,act,active,P,4,2,2,0,21.3,6,5,21,7.17,1.5
 2020,al,Jason Collette,Mike King,6856,NYY,P,83,res,previously_active,P,5,0,2,0,17.0,7,3,19,8.47,1.471
-2020,al,Jason Collette,Jose Leclerc,5514,Tex,P,12,rel,previously_active,,2,0,0,1,2.0,2,0,3,4.5,2.0
-2020,al,Jason Collette,Matt Magill,4227,Sea,P,4,rel,previously_active,,8,0,1,0,7.7,5,1,8,5.87,1.435
-2020,al,Jason Collette,Ryan Borucki,5899,Tor,P,34,rel,previously_active,,6,0,1,0,4.3,6,0,5,6.23,2.538
-2020,al,Jason Collette,Jake Odorizzi,2653,FA,P,14,dis,previously_active,P,2,0,1,0,7.0,0,2,7,9.0,1.429
-2020,al,Jason Collette,Jalen Beeks,6237,TB,P,5,rel,previously_active,,7,1,1,0,13.0,3,1,16,4.85,1.615
-2020,al,Jason Collette,Anthony Kay,6098,Tor,P,3,rel,previously_active,,4,1,0,0,5.7,4,1,4,12.71,1.941
 2020,al,Jason Collette,Chad Green,5625,NYY,P,4,trd,previously_active,,9,2,0,0,12.7,4,0,17,0.71,0.474
-2020,al,Jason Collette,Julian Merryweather,6174,Tor,P,13,dis,previously_active,P,6,0,0,0,9.7,4,0,9,5.59,1.448
+2020,al,Jason Collette,Matt Magill,4227,Sea,P,4,rel,previously_active,,8,0,1,0,7.7,5,1,8,5.87,1.435
+2020,al,Jason Collette,Anthony Kay,6098,Tor,P,3,rel,previously_active,,4,1,0,0,5.7,4,1,4,12.71,1.941
+2020,al,Jason Collette,Ryan Borucki,5899,Tor,P,34,rel,previously_active,,6,0,1,0,4.3,6,0,5,6.23,2.538
+2020,al,Jason Collette,Jalen Beeks,6237,TB,P,5,rel,previously_active,,7,1,1,0,13.0,3,1,16,4.85,1.615
+2020,al,Jason Collette,Jose Leclerc,5514,Tex,P,12,rel,previously_active,,2,0,0,1,2.0,2,0,3,4.5,2.0
 2020,al,Jason Collette,Lewis Thorpe,4856,Min,P,0,rel,previously_active,,4,0,1,0,8.7,6,2,4,6.23,2.077
-2020,al,Jason Collette,Jake Odorizzi,2653,FA,P,14,dis,reserved,P,2,0,0,0,6.7,3,2,5,4.05,1.35
+2020,al,Jason Collette,Jake Odorizzi,2653,FA,P,14,dis,previously_active,P,2,0,1,0,7.0,0,2,7,9.0,1.429
+2020,al,Jason Collette,Julian Merryweather,6174,Tor,P,13,dis,previously_active,P,6,0,0,0,9.7,4,0,9,5.59,1.448
 2020,al,Jason Collette,Mike King,6856,NYY,P,83,res,reserved,P,4,1,0,0,9.7,4,2,7,6.52,1.655
+2020,al,Jason Collette,Jake Odorizzi,2653,FA,P,14,dis,reserved,P,2,0,0,0,6.7,3,2,5,4.05,1.35
 2020,al,Jason Collette,Julian Merryweather,6174,Tor,P,13,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2020,al,Jason Collette,Ryan Borucki,5899,Tor,P,34,rel,previously_reserved,,2,0,0,0,1.3,0,0,1,0.0,2.25
-2020,al,Jason Collette,Matt Magill,4227,Sea,P,4,rel,previously_reserved,,3,0,0,0,2.7,1,2,3,6.75,1.5
-2020,al,Jason Collette,Deivi Garcia,6910,NYY,P,62,act,previously_reserved,P,1,1,0,0,7.0,0,1,6,2.57,0.714
-2020,al,Jason Collette,Nathan Eovaldi,3809,Bos,P,3,act,previously_reserved,P,1,0,0,0,3.0,0,1,4,3.0,1.0
 2020,al,Jason Collette,Gregory Soto,6294,Det,P,63,act,previously_reserved,P,4,0,0,0,2.7,5,0,1,13.5,3.0
 2020,al,Jason Collette,Jalen Beeks,6237,TB,P,5,rel,previously_reserved,,4,0,0,1,4.3,1,0,5,0.0,0.692
+2020,al,Jason Collette,Ryan Borucki,5899,Tor,P,34,rel,previously_reserved,,2,0,0,0,1.3,0,0,1,0.0,2.25
+2020,al,Jason Collette,Matt Magill,4227,Sea,P,4,rel,previously_reserved,,3,0,0,0,2.7,1,2,3,6.75,1.5
 2020,al,Jason Collette,Anthony Kay,6098,Tor,P,3,rel,previously_reserved,,3,0,0,0,3.0,2,0,5,0.0,2.0
-2020,al,Doug Dennis,Matt Wisler,4486,SF,P,0,act,active,P,12,0,0,1,16.0,8,1,22,1.12,1.25
-2020,al,Doug Dennis,Garrett Crochet,7365,CWS,P,0,act,active,P,3,0,0,0,4.0,0,0,6,0.0,0.5
-2020,al,Doug Dennis,Felix Pena,5612,LAA,P,3,act,active,P,25,3,0,2,26.7,8,2,29,4.05,1.312
-2020,al,Doug Dennis,Josh Staumont,5739,KC,P,0,act,active,P,19,2,1,0,18.0,13,1,23,3.0,1.556
-2020,al,Doug Dennis,Yoshihisa Hirano,6281,FA,P,7,act,active,P,10,0,1,2,9.3,7,1,7,4.82,2.25
-2020,al,Doug Dennis,Cristian Javier,7089,Hou,P,0,act,active,P,11,5,2,0,53.3,18,11,53,3.54,0.994
-2020,al,Doug Dennis,Rafael Montero,4316,Sea,P,1,act,active,P,15,0,1,6,15.7,6,2,17,4.6,1.149
-2020,al,Doug Dennis,Jose Urquidy,6783,Hou,P,11,act,active,P,1,0,0,0,7.0,0,2,5,2.57,1.0
+2020,al,Jason Collette,Nathan Eovaldi,3809,Bos,P,3,act,previously_reserved,P,1,0,0,0,3.0,0,1,4,3.0,1.0
+2020,al,Jason Collette,Deivi Garcia,6910,NYY,P,62,act,previously_reserved,P,1,1,0,0,7.0,0,1,6,2.57,0.714
 2020,al,Doug Dennis,John Curtiss,6259,TB,P,0,act,active,P,5,0,0,1,7.3,1,1,7,2.45,1.091
-2020,al,Doug Dennis,Andrew Kittredge,5927,TB,P,0,rel,previously_active,,5,0,0,1,5.0,0,0,2,0.0,0.4
-2020,al,Doug Dennis,Jesse Chavez,1202,FA,P,0,rel,previously_active,,6,0,0,0,5.7,0,2,4,6.35,1.412
+2020,al,Doug Dennis,Rafael Montero,4316,Sea,P,1,act,active,P,15,0,1,6,15.7,6,2,17,4.6,1.149
+2020,al,Doug Dennis,Cristian Javier,7089,Hou,P,0,act,active,P,11,5,2,0,53.3,18,11,53,3.54,0.994
+2020,al,Doug Dennis,Josh Staumont,5739,KC,P,0,act,active,P,19,2,1,0,18.0,13,1,23,3.0,1.556
+2020,al,Doug Dennis,Matt Wisler,4486,SF,P,0,act,active,P,12,0,0,1,16.0,8,1,22,1.12,1.25
+2020,al,Doug Dennis,Jose Urquidy,6783,Hou,P,11,act,active,P,1,0,0,0,7.0,0,2,5,2.57,1.0
+2020,al,Doug Dennis,Garrett Crochet,7365,CWS,P,0,act,active,P,3,0,0,0,4.0,0,0,6,0.0,0.5
+2020,al,Doug Dennis,Yoshihisa Hirano,6281,FA,P,7,act,active,P,10,0,1,2,9.3,7,1,7,4.82,2.25
+2020,al,Doug Dennis,Felix Pena,5612,LAA,P,3,act,active,P,25,3,0,2,26.7,8,2,29,4.05,1.312
+2020,al,Doug Dennis,Michael Fulmer,3808,Det,P,1,rel,previously_active,,2,0,0,0,5.3,3,5,4,11.81,2.437
 2020,al,Doug Dennis,Matthew Boyd,5373,Det,P,16,rel,previously_active,,5,0,3,0,23.7,9,7,23,9.13,1.859
-2020,al,Doug Dennis,Mike Minor,2833,KC,P,13,rel,previously_active,,7,0,5,0,30.3,10,9,29,7.12,1.418
 2020,al,Doug Dennis,Carlos Hernandez,7124,KC,P,8,rel,previously_active,,3,0,0,0,9.3,2,3,6,3.86,1.071
 2020,al,Doug Dennis,Frankie Montas,4524,Oak,P,16,res,previously_active,P,7,2,3,0,32.7,18,4,33,6.06,1.561
-2020,al,Doug Dennis,Brandon Brennan,5484,Sea,P,61,rel,previously_active,,1,0,0,0,1.3,2,0,0,6.75,3.0
-2020,al,Doug Dennis,Matt Foster,7118,CWS,P,7,rel,previously_active,,12,3,0,0,13.3,4,2,13,3.37,1.125
-2020,al,Doug Dennis,Carlos Rodon,4437,CWS,P,1,rel,previously_active,,1,0,0,0,2.0,0,0,1,4.5,1.5
+2020,al,Doug Dennis,Jesse Chavez,1202,FA,P,0,rel,previously_active,,6,0,0,0,5.7,0,2,4,6.35,1.412
 2020,al,Doug Dennis,Yonny Chirinos,6314,TB,P,10,rel,previously_active,,2,0,0,0,8.7,4,1,7,1.04,1.5
-2020,al,Doug Dennis,Michael Fulmer,3808,Det,P,1,rel,previously_active,,2,0,0,0,5.3,3,5,4,11.81,2.437
 2020,al,Doug Dennis,Keynan Middleton,5876,Sea,P,61,rel,previously_active,,6,0,0,0,5.3,1,2,6,5.06,2.063
-2020,al,Doug Dennis,Frankie Montas,4524,Oak,P,16,res,reserved,P,4,1,2,0,20.3,5,6,27,4.87,1.426
+2020,al,Doug Dennis,Andrew Kittredge,5927,TB,P,0,rel,previously_active,,5,0,0,1,5.0,0,0,2,0.0,0.4
+2020,al,Doug Dennis,Carlos Rodon,4437,CWS,P,1,rel,previously_active,,1,0,0,0,2.0,0,0,1,4.5,1.5
+2020,al,Doug Dennis,Matt Foster,7118,CWS,P,7,rel,previously_active,,12,3,0,0,13.3,4,2,13,3.37,1.125
+2020,al,Doug Dennis,Brandon Brennan,5484,Sea,P,61,rel,previously_active,,1,0,0,0,1.3,2,0,0,6.75,3.0
+2020,al,Doug Dennis,Mike Minor,2833,KC,P,13,rel,previously_active,,7,0,5,0,30.3,10,9,29,7.12,1.418
 2020,al,Doug Dennis,Austin Adams,5875,SD,P,61,res,reserved,P,3,0,0,0,4.0,2,1,7,4.5,1.25
-2020,al,Doug Dennis,Keynan Middleton,5876,Sea,P,61,rel,previously_reserved,,4,0,1,0,3.7,3,0,2,4.91,0.818
-2020,al,Doug Dennis,Michael Fulmer,3808,Det,P,1,rel,previously_reserved,,3,0,0,0,9.0,4,1,7,7.0,1.667
-2020,al,Doug Dennis,Matt Wisler,4486,SF,P,0,act,previously_reserved,P,1,0,0,0,2.0,1,0,3,0.0,0.5
-2020,al,Doug Dennis,Cristian Javier,7089,Hou,P,0,act,previously_reserved,P,1,0,0,0,1.0,0,0,1,0.0,1.0
-2020,al,Doug Dennis,Yonny Chirinos,6314,TB,P,10,rel,previously_reserved,,1,0,0,0,2.7,0,1,3,6.75,1.875
-2020,al,Doug Dennis,Brandon Brennan,5484,Sea,P,61,rel,previously_reserved,,2,0,0,0,4.0,1,1,4,2.25,1.0
-2020,al,Doug Dennis,Yoshihisa Hirano,6281,FA,P,7,act,previously_reserved,P,3,0,0,2,3.0,1,1,4,9.0,1.667
-2020,al,Doug Dennis,Mike Minor,2833,KC,P,13,rel,previously_reserved,,1,0,0,0,6.0,3,0,6,0.0,1.167
+2020,al,Doug Dennis,Frankie Montas,4524,Oak,P,16,res,reserved,P,4,1,2,0,20.3,5,6,27,4.87,1.426
 2020,al,Doug Dennis,Jose Urquidy,6783,Hou,P,11,act,previously_reserved,P,4,1,1,0,22.7,8,2,12,2.78,1.015
-2020,al,Doug Dennis,Matthew Boyd,5373,Det,P,16,rel,previously_reserved,,4,1,3,0,20.0,6,6,26,5.85,1.3
-2020,al,Doug Dennis,Rafael Montero,4316,Sea,P,1,act,previously_reserved,P,2,0,0,2,2.0,0,0,2,0.0,0.0
 2020,al,Doug Dennis,Jesse Chavez,1202,FA,P,0,rel,previously_reserved,,1,0,0,0,0.0,0,1,0,0.0,0.0
-2020,al,Ryan Bloomfield,Yusmeiro Petit,16,FA,P,2,act,active,P,18,2,0,0,14.7,3,2,13,1.84,1.159
+2020,al,Doug Dennis,Matthew Boyd,5373,Det,P,16,rel,previously_reserved,,4,1,3,0,20.0,6,6,26,5.85,1.3
+2020,al,Doug Dennis,Michael Fulmer,3808,Det,P,1,rel,previously_reserved,,3,0,0,0,9.0,4,1,7,7.0,1.667
+2020,al,Doug Dennis,Yoshihisa Hirano,6281,FA,P,7,act,previously_reserved,P,3,0,0,2,3.0,1,1,4,9.0,1.667
+2020,al,Doug Dennis,Cristian Javier,7089,Hou,P,0,act,previously_reserved,P,1,0,0,0,1.0,0,0,1,0.0,1.0
+2020,al,Doug Dennis,Keynan Middleton,5876,Sea,P,61,rel,previously_reserved,,4,0,1,0,3.7,3,0,2,4.91,0.818
+2020,al,Doug Dennis,Yonny Chirinos,6314,TB,P,10,rel,previously_reserved,,1,0,0,0,2.7,0,1,3,6.75,1.875
+2020,al,Doug Dennis,Rafael Montero,4316,Sea,P,1,act,previously_reserved,P,2,0,0,2,2.0,0,0,2,0.0,0.0
+2020,al,Doug Dennis,Matt Wisler,4486,SF,P,0,act,previously_reserved,P,1,0,0,0,2.0,1,0,3,0.0,0.5
+2020,al,Doug Dennis,Mike Minor,2833,KC,P,13,rel,previously_reserved,,1,0,0,0,6.0,3,0,6,0.0,1.167
+2020,al,Doug Dennis,Brandon Brennan,5484,Sea,P,61,rel,previously_reserved,,2,0,0,0,4.0,1,1,4,2.25,1.0
 2020,al,Ryan Bloomfield,Keegan Akin,6550,Bal,P,71,act,active,P,4,1,2,0,12.7,3,2,20,7.11,1.737
+2020,al,Ryan Bloomfield,Ryan Brasier,2445,Bos,P,0,act,active,P,1,0,0,0,1.0,1,0,1,18.0,4.0
 2020,al,Ryan Bloomfield,Kris Bubic,6847,KC,P,108,act,active,P,7,1,3,0,38.3,15,6,42,3.76,1.33
 2020,al,Ryan Bloomfield,Tyler Alexander,6149,Det,P,114,act,active,P,10,1,3,0,28.7,8,7,21,4.71,1.5
-2020,al,Ryan Bloomfield,Zack Greinke,660,Hou,P,25,act,active,P,12,3,3,0,67.0,9,6,67,4.03,1.134
 2020,al,Ryan Bloomfield,Ross Stripling,4624,Tor,P,105,act,active,P,4,0,1,1,11.3,5,1,9,6.35,1.5
-2020,al,Ryan Bloomfield,Ryan Brasier,2445,Bos,P,0,act,active,P,1,0,0,0,1.0,1,0,1,18.0,4.0
-2020,al,Ryan Bloomfield,Danny Duffy,2662,KC,P,0,act,active,P,11,4,4,0,50.7,21,8,51,4.97,1.322
 2020,al,Ryan Bloomfield,Framber Valdez,6407,Hou,P,62,act,active,P,11,5,3,0,70.7,16,5,76,3.57,1.118
+2020,al,Ryan Bloomfield,Zack Greinke,660,Hou,P,25,act,active,P,12,3,3,0,67.0,9,6,67,4.03,1.134
+2020,al,Ryan Bloomfield,Yusmeiro Petit,16,FA,P,2,act,active,P,18,2,0,0,14.7,3,2,13,1.84,1.159
+2020,al,Ryan Bloomfield,Danny Duffy,2662,KC,P,0,act,active,P,11,4,4,0,50.7,21,8,51,4.97,1.322
+2020,al,Ryan Bloomfield,Asher Wojciechowski,3671,NYY,P,52,rel,previously_active,,4,0,1,0,14.7,6,3,12,7.36,1.909
+2020,al,Ryan Bloomfield,Reynaldo Lopez,5047,CWS,P,5,rel,previously_active,,2,0,1,0,5.7,4,2,6,4.76,2.471
+2020,al,Ryan Bloomfield,James Paxton,3577,NYY,P,14,dis,previously_active,P,5,1,1,0,20.3,7,4,26,6.64,1.475
+2020,al,Ryan Bloomfield,Matt Shoemaker,3979,FA,P,4,dis,previously_active,P,5,0,1,0,25.7,7,8,25,4.91,1.013
 2020,al,Ryan Bloomfield,Tommy Milone,3642,FA,P,47,dis,previously_active,P,4,0,1,0,15.0,3,6,15,10.8,1.933
 2020,al,Ryan Bloomfield,Steve Cishek,3368,FA,P,42,rel,previously_active,,1,0,0,0,1.0,0,1,0,9.0,1.0
-2020,al,Ryan Bloomfield,Ivan Nova,2293,Phi,P,47,rel,previously_active,,1,0,0,0,5.7,0,0,3,3.18,1.412
-2020,al,Ryan Bloomfield,James Paxton,3577,NYY,P,14,dis,previously_active,P,5,1,1,0,20.3,7,4,26,6.64,1.475
-2020,al,Ryan Bloomfield,Alex Cobb,3431,LAA,P,98,res,previously_active,P,6,0,3,0,30.0,12,4,18,4.8,1.433
 2020,al,Ryan Bloomfield,Zack Godley,5283,Bos,P,31,rel,previously_active,,1,0,1,0,3.0,2,3,3,24.0,4.0
-2020,al,Ryan Bloomfield,Reynaldo Lopez,5047,CWS,P,5,rel,previously_active,,2,0,1,0,5.7,4,2,6,4.76,2.471
-2020,al,Ryan Bloomfield,Matt Shoemaker,3979,FA,P,4,dis,previously_active,P,5,0,1,0,25.7,7,8,25,4.91,1.013
 2020,al,Ryan Bloomfield,Hansel Robles,4252,Min,P,15,rel,previously_active,,9,0,1,1,8.3,5,3,10,14.04,2.28
-2020,al,Ryan Bloomfield,Asher Wojciechowski,3671,NYY,P,52,rel,previously_active,,4,0,1,0,14.7,6,3,12,7.36,1.909
+2020,al,Ryan Bloomfield,Ivan Nova,2293,Phi,P,47,rel,previously_active,,1,0,0,0,5.7,0,0,3,3.18,1.412
+2020,al,Ryan Bloomfield,Alex Cobb,3431,LAA,P,98,res,previously_active,P,6,0,3,0,30.0,12,4,18,4.8,1.433
 2020,al,Ryan Bloomfield,Matt Shoemaker,3979,FA,P,4,dis,reserved,P,1,0,0,0,3.0,2,0,1,3.0,1.667
+2020,al,Ryan Bloomfield,Tommy Milone,3642,FA,P,47,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
 2020,al,Ryan Bloomfield,James Paxton,3577,NYY,P,14,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
 2020,al,Ryan Bloomfield,Alex Cobb,3431,LAA,P,98,res,reserved,P,3,1,2,0,17.0,6,3,14,4.24,1.353
-2020,al,Ryan Bloomfield,Tommy Milone,3642,FA,P,47,dis,reserved,P,0,0,0,0,0.0,0,0,0,0.0,0.0
-2020,al,Ryan Bloomfield,Hansel Robles,4252,Min,P,15,rel,previously_reserved,,4,0,0,0,2.7,3,0,4,10.12,1.875
-2020,al,Ryan Bloomfield,Danny Duffy,2662,KC,P,0,act,previously_reserved,P,1,0,0,0,5.7,1,2,6,4.76,1.412
-2020,al,Ryan Bloomfield,Asher Wojciechowski,3671,NYY,P,52,rel,previously_reserved,,2,0,0,0,3.7,3,3,2,17.18,2.727
-2020,al,Ryan Bloomfield,Reynaldo Lopez,5047,CWS,P,5,rel,previously_reserved,,2,0,1,0,4.0,4,1,4,13.5,2.0
-2020,al,Ryan Bloomfield,Kris Bubic,6847,KC,P,108,act,previously_reserved,P,2,0,2,0,7.7,6,1,4,7.04,2.478
-2020,al,Ryan Bloomfield,Ivan Nova,2293,Phi,P,47,rel,previously_reserved,,1,1,0,0,5.0,3,0,3,9.0,1.8
 2020,al,Ryan Bloomfield,Steve Cishek,3368,FA,P,42,rel,previously_reserved,,3,0,0,0,2.0,1,0,3,4.5,2.0
 2020,al,Ryan Bloomfield,Yusmeiro Petit,16,FA,P,2,act,previously_reserved,P,8,0,1,0,7.0,2,1,4,1.29,1.0
+2020,al,Ryan Bloomfield,Danny Duffy,2662,KC,P,0,act,previously_reserved,P,1,0,0,0,5.7,1,2,6,4.76,1.412
+2020,al,Ryan Bloomfield,Hansel Robles,4252,Min,P,15,rel,previously_reserved,,4,0,0,0,2.7,3,0,4,10.12,1.875
+2020,al,Ryan Bloomfield,Kris Bubic,6847,KC,P,108,act,previously_reserved,P,2,0,2,0,7.7,6,1,4,7.04,2.478
+2020,al,Ryan Bloomfield,Ivan Nova,2293,Phi,P,47,rel,previously_reserved,,1,1,0,0,5.0,3,0,3,9.0,1.8
+2020,al,Ryan Bloomfield,Asher Wojciechowski,3671,NYY,P,52,rel,previously_reserved,,2,0,0,0,3.7,3,3,2,17.18,2.727
+2020,al,Ryan Bloomfield,Reynaldo Lopez,5047,CWS,P,5,rel,previously_reserved,,2,0,1,0,4.0,4,1,4,13.5,2.0

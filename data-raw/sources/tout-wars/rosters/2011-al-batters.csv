@@ -1,190 +1,219 @@
 year,league,team,player_name,player_id,mlb_team,position,salary,status,roster_section,eligibility,ab,g,r,hr,rbi,sb,so,bb,avg,obp,slg,gp_dh,gp_c,gp_1b,gp_2b,gp_3b,gp_ss,gp_of
+2011,al,Larry Schechter,David Cooper,2425,Cle,CI,1,act,active,1B,19,7,2,0,3,0,2,0,0.158,0.4,0.263,9,0,15,0,0,0,0
+2011,al,Larry Schechter,Adam Lind,1587,Mil,1B,17,act,active,"1B,OF",499,125,56,26,87,1,107,32,0.295,0.0,0.439,16,0,109,0,0,0,0
+2011,al,Larry Schechter,Orlando Cabrera,231,SF,MI,8,act,active,"2B,SS,MI,3B",450,130,39,5,51,8,57,17,0.267,0.0,0.307,0,0,0,85,5,39,0
+2011,al,Larry Schechter,Mike McCoy,2911,Bos,2B,1,act,active,"OF,2B,SS,3B",80,22,12,1,5,5,12,5,0.224,0.25,0.25,5,0,0,10,16,26,20
+2011,al,Larry Schechter,Alexei Ramirez,236,CWS,SS,22,act,active,"SS,MI",216,55,24,6,27,3,25,15,0.321,0.417,0.403,1,0,0,0,0,155,0
+2011,al,Larry Schechter,Robert Andino,562,Pit,3B,3,act,active,"2B,MI,SS,3B",145,38,19,3,18,6,24,12,0.306,0.167,0.359,0,0,0,94,22,30,3
+2011,al,Larry Schechter,Craig Gentry,2904,Oak,OF,5,act,active,OF,23,10,7,1,3,2,6,2,0.393,0.0,0.435,0,0,0,0,0,0,60
+2011,al,Larry Schechter,Darnell McDonald,922,ChC,OF,3,act,active,OF,143,72,23,6,22,2,30,12,0.314,0.5,0.434,5,0,0,0,0,0,67
+2011,al,Larry Schechter,Alex Rios,1588,KC,OF,26,act,active,OF,68,19,12,5,10,1,12,4,0.324,0.0,0.529,2,0,0,0,0,0,143
+2011,al,Larry Schechter,Jacoby Ellsbury,186,NYY,OF,29,act,active,OF,660,158,119,32,105,39,98,52,0.376,0.333,0.552,3,0,0,0,0,0,154
+2011,al,Larry Schechter,Jeff Francoeur,86,Phi,OF,6,act,active,OF,601,153,77,20,87,22,123,37,0.329,0.0,0.476,0,0,0,0,0,0,153
+2011,al,Larry Schechter,Brayan Pena,74,Cin,C,2,act,active,C,24,8,2,0,0,0,2,1,0.2,0.0,0.167,0,69,0,0,0,0,0
+2011,al,Larry Schechter,Miguel Olivo,675,FA,C,4,act,active,C,477,130,54,19,62,6,140,20,0.253,0.333,0.388,2,127,0,0,0,0,0
+2011,al,Larry Schechter,Jarrod Dyson,2961,KC,UT,0,act,active,OF,12,3,1,0,1,2,4,1,0.286,0.286,0.25,1,0,0,0,0,0,17
+2011,al,Larry Schechter,Omar Vizquel,1309,FA,CI,1,rel,previously_active,,13,7,3,0,0,0,0,3,0.375,0.0,0.308,3,0,1,16,29,9,0
+2011,al,Larry Schechter,Michael Cuddyer,901,NYM,CI,16,trd,previously_active,,324,88,43,13,44,7,51,38,0.371,0.0,0.463,8,0,46,17,0,0,77
+2011,al,Larry Schechter,Brendan Ryan,1412,NYY,MI,1,rel,previously_active,,436,123,51,3,39,13,87,34,0.313,0.0,0.326,0,0,0,0,0,123,0
+2011,al,Larry Schechter,Derrek Lee,285,FA,1B,14,trd,previously_active,,352,90,41,14,44,2,88,25,0.303,0.0,0.42,0,0,113,0,0,0,0
+2011,al,Larry Schechter,Ryan Adams,3554,LAD,2B,10,rel,previously_active,,37,12,2,0,2,0,12,3,0.3,0.0,0.243,0,0,0,26,0,0,0
+2011,al,Larry Schechter,Mark Reynolds,34,StL,3B,19,trd,previously_active,,415,122,61,27,63,5,146,61,0.316,0.0,0.46,0,0,44,0,114,0,0
+2011,al,Larry Schechter,Franklin Gutierrez,408,Sea,OF,14,rel,previously_active,,318,91,26,1,19,13,56,16,0.264,0.0,0.277,0,0,0,0,0,0,92
+2011,al,Larry Schechter,Hideki Matsui,1017,FA,OF,12,trd,previously_active,,321,91,37,9,52,1,57,39,0.331,0.0,0.399,109,0,0,0,0,0,27
+2011,al,Larry Schechter,Jason Kubel,904,FA,OF,14,rel,previously_active,,366,99,37,12,58,1,86,32,0.332,0.0,0.434,37,0,0,0,0,0,58
+2011,al,Larry Schechter,J.P. Arencibia,2422,Bal,C,5,trd,previously_active,,347,97,38,19,57,0,107,28,0.277,0.0,0.435,4,122,0,0,0,0,0
+2011,al,Larry Schechter,Chris Getz,251,Tor,UT,5,res,previously_active,"2B,MI",361,106,48,0,25,19,39,29,0.31,0.0,0.28,3,0,0,110,0,4,0
+2011,al,Larry Schechter,Chris Getz,251,Tor,UT,5,res,reserved,"2B,MI",19,12,2,0,1,2,6,1,0.381,0.0,0.421,3,0,0,110,0,4,0
+2011,al,Larry Schechter,Darnell McDonald,922,ChC,OF,3,act,previously_reserved,OF,11,5,3,0,2,0,2,1,0.167,0.0,0.091,5,0,0,0,0,0,67
+2011,al,Larry Schechter,Craig Gentry,2904,Oak,OF,5,act,previously_reserved,OF,26,11,4,0,4,5,6,0,0.296,0.0,0.385,0,0,0,0,0,0,60
+2011,al,Larry Schechter,Franklin Gutierrez,408,Sea,OF,14,rel,previously_reserved,,4,1,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,0,0,0,92
 2011,al,Jeff Erickson,Lonnie Chisenhall,2627,Cle,CI,1,act,active,"UT,3B",165,54,19,4,15,1,41,8,0.286,0.25,0.388,4,0,0,0,58,0,1
-2011,al,Jeff Erickson,Maicer Izturis,738,Tor,MI,11,act,active,"2B,3B,SS,MI,CI",449,122,51,5,38,9,65,33,0.334,0.167,0.388,12,0,0,49,37,16,0
+2011,al,Jeff Erickson,Maicer Izturis,738,Tor,MI,11,act,active,"2B,3B,CI,MI,SS",449,122,51,5,38,9,65,33,0.334,0.167,0.388,12,0,0,49,37,16,0
 2011,al,Jeff Erickson,Miguel Cabrera,509,Det,1B,35,act,active,"1B,CI",572,161,111,30,105,2,89,108,0.448,0.5,0.586,7,0,152,0,0,0,0
 2011,al,Jeff Erickson,Eduardo Nunez,1033,Min,2B,0,act,active,"2B,3B,SS,CI",236,79,28,3,19,14,33,17,0.311,0.5,0.369,8,0,0,16,40,50,4
 2011,al,Jeff Erickson,Erick Aybar,735,LAA,SS,14,act,active,"SS,MI",556,143,71,10,59,30,68,31,0.322,0.5,0.421,0,0,0,0,0,142,0
 2011,al,Jeff Erickson,Adrian Beltre,1355,Tex,3B,24,act,active,"3B,CI",471,120,79,32,101,1,50,24,0.333,0.385,0.571,11,0,0,0,112,0,0
-2011,al,Jeff Erickson,Austin Jackson,1039,Sea,OF,18,act,active,OF,591,153,90,10,45,22,181,56,0.317,0.3,0.374,1,0,0,0,0,0,152
-2011,al,Jeff Erickson,Alejandro De Aza,570,Bal,OF,19,act,active,OF,144,51,28,3,21,12,33,17,0.414,0.583,0.521,3,0,0,0,0,0,48
-2011,al,Jeff Erickson,Don Kelly,44,Mia,OF,3,act,active,"1B,3B,OF,CI",125,57,20,3,14,0,12,8,0.313,0.556,0.376,2,1,15,0,45,0,58
+2011,al,Jeff Erickson,Don Kelly,44,Mia,OF,3,act,active,"1B,OF,3B,CI",125,57,20,3,14,0,12,8,0.313,0.556,0.376,2,1,15,0,45,0,58
 2011,al,Jeff Erickson,Jason Repko,802,Bos,OF,2,act,active,OF,87,42,14,2,7,5,27,6,0.305,0.0,0.322,3,0,0,0,0,0,55
+2011,al,Jeff Erickson,Austin Jackson,1039,Sea,OF,18,act,active,OF,591,153,90,10,45,22,181,56,0.317,0.3,0.374,1,0,0,0,0,0,152
 2011,al,Jeff Erickson,Brandon Guyer,2683,TB,OF,5,act,active,OF,26,10,4,1,1,0,5,1,0.259,1.0,0.385,1,0,0,0,0,0,14
+2011,al,Jeff Erickson,Alejandro De Aza,570,Bal,OF,19,act,active,OF,144,51,28,3,21,12,33,17,0.414,0.583,0.521,3,0,0,0,0,0,48
 2011,al,Jeff Erickson,Russell Martin,787,Tor,C,5,act,active,C,417,125,57,18,65,8,81,50,0.324,0.333,0.408,0,125,0,1,3,0,0
 2011,al,Jeff Erickson,A.J. Pierzynski,230,Atl,C,10,act,active,C,454,126,38,8,47,0,32,23,0.329,0.364,0.412,7,120,0,0,0,0,0
 2011,al,Jeff Erickson,Trevor Crowe,428,FA,UT,0,act,active,OF,17,11,2,0,1,1,5,1,0.222,0.0,0.235,0,0,0,0,0,0,14
-2011,al,Jeff Erickson,Dallas McPherson,565,LAD,CI,7,rel,previously_active,,7,6,0,0,0,0,4,0,0.0,0.0,0.0,0,0,6,0,5,0,0
-2011,al,Jeff Erickson,David Cooper,2425,Cle,CI,12,rel,previously_active,,23,10,3,1,4,0,4,3,0.214,0.0,0.261,9,0,15,0,0,0,0
 2011,al,Jeff Erickson,Adam Rosales,2178,Tex,MI,0,rel,previously_active,,5,2,0,0,0,0,2,0,0.0,0.0,0.0,0,0,5,3,6,7,2
+2011,al,Jeff Erickson,David Cooper,2425,Cle,CI,12,rel,previously_active,,23,10,3,1,4,0,4,3,0.214,0.0,0.261,9,0,15,0,0,0,0
+2011,al,Jeff Erickson,Dallas McPherson,565,LAD,CI,7,rel,previously_active,,7,6,0,0,0,0,4,0,0.0,0.0,0.0,0,0,6,0,5,0,0
 2011,al,Jeff Erickson,Robert Andino,562,Pit,2B,1,rel,previously_active,,6,3,1,0,0,0,0,2,0.5,0.0,0.333,0,0,0,94,22,30,3
 2011,al,Jeff Erickson,Cord Phelps,3349,Phi,2B,0,res,previously_active,"UT,SS",8,6,1,0,0,0,5,0,0.0,0.0,0.0,8,0,0,20,0,0,0
-2011,al,Jeff Erickson,Matt Tolbert,900,Phi,2B,5,rel,previously_active,,30,12,0,0,0,0,3,1,0.25,0.0,0.2,3,0,0,36,6,31,0
 2011,al,Jeff Erickson,Alexi Casilla,893,TB,2B,12,dis,previously_active,"2B,SS,MI",320,96,52,2,21,15,45,28,0.322,0.0,0.369,3,0,0,56,0,36,0
+2011,al,Jeff Erickson,Matt Tolbert,900,Phi,2B,5,rel,previously_active,,30,12,0,0,0,0,3,1,0.25,0.0,0.2,3,0,0,36,6,31,0
 2011,al,Jeff Erickson,Brandon Laird,3123,Was,3B,3,rel,previously_active,,0,1,0,0,0,0,0,0,0.0,0.0,0.0,0,0,3,0,9,0,0
 2011,al,Jeff Erickson,Josh Bell,2016,SD,3B,1,rel,previously_active,,18,5,2,0,5,0,8,3,0.333,0.0,0.222,2,0,0,0,21,0,2
-2011,al,Jeff Erickson,Jose Bautista,1184,Tor,OF,27,trd,previously_active,,160,45,43,20,36,5,28,45,0.498,0.0,0.788,9,0,0,0,25,0,116
-2011,al,Jeff Erickson,Michael Brantley,2212,Cle,OF,10,rel,previously_active,,451,114,63,7,46,13,76,34,0.318,0.0,0.384,3,0,0,0,0,0,111
-2011,al,Jeff Erickson,Brennan Boesch,2952,Cin,OF,1,rel,previously_active,,428,115,75,16,54,5,83,35,0.341,0.0,0.458,10,0,0,0,0,0,101
 2011,al,Jeff Erickson,Ryan Sweeney,1080,ChC,OF,0,res,previously_active,OF,264,108,34,1,25,1,48,33,0.346,0.0,0.341,2,0,0,0,0,0,92
 2011,al,Jeff Erickson,Lastings Milledge,1647,CWS,OF,1,rel,previously_active,,4,2,1,0,0,0,1,0,0.25,0.0,0.5,0,0,0,0,0,0,2
+2011,al,Jeff Erickson,Jose Bautista,1184,Tor,OF,27,trd,previously_active,,160,45,43,20,36,5,28,45,0.498,0.0,0.788,9,0,0,0,25,0,116
+2011,al,Jeff Erickson,Brennan Boesch,2952,Cin,OF,1,rel,previously_active,,428,115,75,16,54,5,83,35,0.341,0.0,0.458,10,0,0,0,0,0,101
+2011,al,Jeff Erickson,Michael Brantley,2212,Cle,OF,10,rel,previously_active,,451,114,63,7,46,13,76,34,0.318,0.0,0.384,3,0,0,0,0,0,111
 2011,al,Jeff Erickson,Hank Conger,758,Hou,C,7,res,previously_active,C,11,4,1,0,1,0,2,0,0.182,0.0,0.273,1,56,0,0,0,0,0
-2011,al,Jeff Erickson,Victor Martinez,394,Det,C,22,trd,previously_active,,282,77,37,6,50,1,30,23,0.362,0.0,0.457,112,26,6,0,0,0,0
 2011,al,Jeff Erickson,Lou Marson,1150,Cin,C,0,rel,previously_active,,8,2,0,0,1,0,5,0,0.111,0.0,0.125,1,78,0,0,0,0,0
-2011,al,Jeff Erickson,Cord Phelps,3349,Phi,2B,0,res,reserved,"UT,SS",8,7,3,0,1,0,0,0,0.25,0.5,0.375,8,0,0,20,0,0,0
+2011,al,Jeff Erickson,Victor Martinez,394,Det,C,22,trd,previously_active,,282,77,37,6,50,1,30,23,0.362,0.0,0.457,112,26,6,0,0,0,0
 2011,al,Jeff Erickson,Alexi Casilla,893,TB,2B,12,dis,reserved,"2B,SS,MI",3,1,0,0,0,0,0,0,0.333,0.0,0.333,3,0,0,56,0,36,0
+2011,al,Jeff Erickson,Cord Phelps,3349,Phi,2B,0,res,reserved,"UT,SS",8,7,3,0,1,0,0,0,0.25,0.5,0.375,8,0,0,20,0,0,0
 2011,al,Jeff Erickson,Ryan Sweeney,1080,ChC,OF,0,res,reserved,OF,0,0,0,0,0,0,0,0,0.0,0.0,0.0,2,0,0,0,0,0,92
 2011,al,Jeff Erickson,Hank Conger,758,Hou,C,7,res,reserved,C,8,4,1,1,2,0,2,0,0.25,0.0,0.625,1,56,0,0,0,0,0
-2011,al,Jeff Erickson,Adam Rosales,2178,Tex,MI,0,rel,previously_reserved,,28,10,3,2,5,0,7,2,0.226,0.0,0.357,0,0,5,3,6,7,2
 2011,al,Jeff Erickson,Lonnie Chisenhall,2627,Cle,CI,1,act,previously_reserved,"UT,3B",47,12,8,3,7,0,8,0,0.277,0.0,0.511,4,0,0,0,58,0,1
-2011,al,Jeff Erickson,Eduardo Nunez,1033,Min,2B,0,act,previously_reserved,"2B,3B,SS,CI",29,9,4,1,4,2,1,3,0.375,0.0,0.483,8,0,0,16,40,50,4
+2011,al,Jeff Erickson,Adam Rosales,2178,Tex,MI,0,rel,previously_reserved,,28,10,3,2,5,0,7,2,0.226,0.0,0.357,0,0,5,3,6,7,2
 2011,al,Jeff Erickson,Matt Tolbert,900,Phi,2B,5,rel,previously_reserved,,15,6,1,0,0,1,3,0,0.2,0.0,0.267,3,0,0,36,6,31,0
+2011,al,Jeff Erickson,Eduardo Nunez,1033,Min,2B,0,act,previously_reserved,"2B,3B,SS,CI",29,9,4,1,4,2,1,3,0.375,0.0,0.483,8,0,0,16,40,50,4
 2011,al,Jeff Erickson,Adrian Beltre,1355,Tex,3B,24,act,previously_reserved,"3B,CI",16,4,3,0,4,0,3,1,0.278,0.0,0.25,11,0,0,0,112,0,0
-2011,al,Jeff Erickson,Don Kelly,44,Mia,OF,3,act,previously_reserved,"1B,3B,OF,CI",71,30,8,4,11,0,11,4,0.237,0.0,0.423,2,1,15,0,45,0,58
 2011,al,Jeff Erickson,Jason Repko,802,Bos,OF,2,act,previously_reserved,OF,44,22,7,0,4,2,10,0,0.205,0.0,0.227,3,0,0,0,0,0,55
-2011,al,Jeff Erickson,A.J. Pierzynski,230,Atl,C,10,act,previously_reserved,C,10,3,0,0,1,0,1,0,0.091,0.0,0.1,7,120,0,0,0,0,0
+2011,al,Jeff Erickson,Don Kelly,44,Mia,OF,3,act,previously_reserved,"1B,OF,3B,CI",71,30,8,4,11,0,11,4,0.237,0.0,0.423,2,1,15,0,45,0,58
 2011,al,Jeff Erickson,Lou Marson,1150,Cin,C,0,rel,previously_reserved,,15,5,2,0,1,1,1,1,0.312,0.0,0.4,1,78,0,0,0,0,0
+2011,al,Jeff Erickson,A.J. Pierzynski,230,Atl,C,10,act,previously_reserved,C,10,3,0,0,1,0,1,0,0.091,0.0,0.1,7,120,0,0,0,0,0
 2011,al,Jeff Erickson,Trevor Crowe,428,FA,UT,0,act,previously_reserved,OF,11,4,4,0,1,2,4,3,0.429,0.0,0.273,0,0,0,0,0,0,14
-2011,al,Jason Grey,Howie Kendrick,739,LAD,1B,19,act,active,"1B,2B,CI,OF,MI",530,138,86,18,63,14,118,33,0.341,0.286,0.47,0,0,17,108,0,0,23
-2011,al,Jason Grey,Justin Smoak,2117,Tor,CI,12,act,active,"1B,CI",415,120,37,15,55,0,101,55,0.323,0.182,0.398,12,0,108,0,0,0,0
+2011,al,Jason Grey,Howie Kendrick,739,LAD,1B,19,act,active,"1B,2B,OF,CI,MI",530,138,86,18,63,14,118,33,0.341,0.286,0.47,0,0,17,108,0,0,23
 2011,al,Jason Grey,Jason Kipnis,2727,Cle,MI,3,act,active,2B,136,36,24,7,19,5,34,11,0.333,0.154,0.507,0,0,0,36,0,0,0
+2011,al,Jason Grey,Justin Smoak,2117,Tor,CI,12,act,active,"1B,CI",415,120,37,15,55,0,101,55,0.323,0.182,0.398,12,0,108,0,0,0,0
 2011,al,Jason Grey,Jemile Weeks,2333,Bos,2B,27,act,active,2B,385,91,47,2,34,22,61,20,0.339,0.231,0.413,0,0,0,96,0,0,0
 2011,al,Jason Grey,Derek Jeter,1010,FA,SS,21,act,active,"SS,MI",195,47,34,2,25,5,32,16,0.401,0.25,0.446,10,0,0,0,0,122,0
 2011,al,Jason Grey,Danny Valencia,2398,Tor,3B,13,act,active,"3B,CI",540,148,62,15,71,2,95,39,0.295,0.333,0.387,4,0,0,0,147,0,0
 2011,al,Jason Grey,Leonys Martin,3737,Tex,OF,6,act,active,OF,8,8,2,0,0,0,1,0,0.375,0.0,0.5,0,0,0,0,0,0,8
-2011,al,Jason Grey,B.J. Upton,1476,Atl,OF,29,act,active,OF,560,153,82,23,81,36,161,71,0.331,0.471,0.429,0,0,0,0,0,0,151
 2011,al,Jason Grey,Peter Bourjos,2154,StL,OF,15,act,active,OF,477,138,67,12,39,19,117,31,0.331,0.25,0.444,0,0,0,0,0,0,147
-2011,al,Jason Grey,Nick Markakis,134,Atl,OF,22,act,active,OF,359,92,44,10,47,8,44,41,0.377,0.385,0.462,1,0,3,0,0,0,157
 2011,al,Jason Grey,Eric Thames,2895,FA,OF,26,act,active,"UT,OF",344,89,54,12,35,2,80,21,0.308,0.214,0.453,13,0,0,0,0,0,79
-2011,al,Jason Grey,Carlos Santana,2181,Cle,C,19,act,active,"1B,C",552,155,84,27,79,5,133,97,0.351,0.333,0.457,1,95,66,0,0,0,0
+2011,al,Jason Grey,B.J. Upton,1476,Atl,OF,29,act,active,OF,560,153,82,23,81,36,161,71,0.331,0.471,0.429,0,0,0,0,0,0,151
+2011,al,Jason Grey,Nick Markakis,134,Atl,OF,22,act,active,OF,359,92,44,10,47,8,44,41,0.377,0.385,0.462,1,0,3,0,0,0,157
 2011,al,Jason Grey,Jason Varitek,175,Bos,C,2,act,active,C,222,68,32,11,36,0,67,21,0.3,0.0,0.423,0,68,0,0,0,0,0
-2011,al,Jason Grey,Adam Kennedy,1409,FA,UT,0,act,active,"3B,1B,2B,CI,MI",296,87,27,5,32,7,52,18,0.275,0.333,0.345,17,0,36,34,27,0,0
+2011,al,Jason Grey,Carlos Santana,2181,Cle,C,19,act,active,"1B,C",552,155,84,27,79,5,133,97,0.351,0.333,0.457,1,95,66,0,0,0,0
+2011,al,Jason Grey,Adam Kennedy,1409,FA,UT,0,act,active,"3B,2B,1B,CI,MI",296,87,27,5,32,7,52,18,0.275,0.333,0.345,17,0,36,34,27,0,0
+2011,al,Jason Grey,Mike Aviles,708,Cle,MI,13,trd,previously_active,,169,47,12,5,30,10,25,9,0.257,0.0,0.391,2,0,0,27,46,14,5
 2011,al,Jason Grey,Mitch Moreland,3033,Tex,CI,14,trd,previously_active,,277,81,39,12,27,2,54,23,0.325,0.0,0.444,8,0,99,0,0,0,34
 2011,al,Jason Grey,Elliot Johnson,1468,Cle,MI,1,rel,previously_active,,36,19,5,1,4,1,11,2,0.211,0.0,0.306,0,0,2,9,0,52,2
-2011,al,Jason Grey,Mike Aviles,708,Cle,MI,13,trd,previously_active,,169,47,12,5,30,10,25,9,0.257,0.0,0.391,2,0,0,27,46,14,5
 2011,al,Jason Grey,Alexei Ramirez,236,CWS,SS,22,trd,previously_active,,398,103,57,9,43,4,59,36,0.333,0.0,0.397,1,0,0,0,0,155,0
-2011,al,Jason Grey,Michael Saunders,2161,Tor,OF,4,rel,previously_active,,94,28,10,1,6,2,27,7,0.225,0.0,0.255,0,0,0,0,0,0,56
+2011,al,Jason Grey,Don Kelly,44,Mia,OF,0,rel,previously_active,,17,8,1,0,0,1,3,1,0.278,0.0,0.412,2,1,15,0,45,0,58
 2011,al,Jason Grey,Grady Sizemore,410,Phi,OF,12,trd,previously_active,,216,57,31,9,28,0,67,17,0.315,0.0,0.472,11,0,0,0,0,0,56
 2011,al,Jason Grey,Josh Willingham,576,FA,OF,8,trd,previously_active,,277,78,38,13,54,4,84,35,0.33,0.0,0.43,36,0,0,0,0,0,96
-2011,al,Jason Grey,Don Kelly,44,Mia,OF,0,rel,previously_active,,17,8,1,0,0,1,3,1,0.278,0.0,0.412,2,1,15,0,45,0,58
-2011,al,Jason Grey,Reid Brignac,1486,Mia,UT,12,trd,previously_active,,130,46,11,1,8,1,33,4,0.2,0.0,0.2,0,0,0,0,0,91,0
-2011,al,Jason Grey,Cord Phelps,3349,Phi,UT,3,rel,previously_active,,21,8,3,1,4,0,5,3,0.292,0.0,0.381,8,0,0,20,0,0,0
+2011,al,Jason Grey,Michael Saunders,2161,Tor,OF,4,rel,previously_active,,94,28,10,1,6,2,27,7,0.225,0.0,0.255,0,0,0,0,0,0,56
 2011,al,Jason Grey,Francisco Cervelli,1004,Pit,UT,1,res,previously_active,C,11,3,3,2,3,0,0,0,0.333,0.0,0.818,0,41,0,1,2,0,0
-2011,al,Jason Grey,DeWayne Wise,1953,FA,UT,1,res,previously_active,OF,10,6,0,0,0,1,5,0,0.0,0.0,0.0,0,0,0,0,0,0,50
+2011,al,Jason Grey,Reid Brignac,1486,Mia,UT,12,trd,previously_active,,130,46,11,1,8,1,33,4,0.2,0.0,0.2,0,0,0,0,0,91,0
 2011,al,Jason Grey,Luis Valbuena,2200,Hou,UT,3,rel,previously_active,,3,1,1,0,0,0,0,1,0.25,0.0,0.0,2,0,0,11,0,1,2
-2011,al,Jason Grey,Francisco Cervelli,1004,Pit,UT,1,res,reserved,C,7,2,1,1,1,0,3,0,0.143,0.0,0.571,0,41,0,1,2,0,0
+2011,al,Jason Grey,Cord Phelps,3349,Phi,UT,3,rel,previously_active,,21,8,3,1,4,0,5,3,0.292,0.0,0.381,8,0,0,20,0,0,0
+2011,al,Jason Grey,DeWayne Wise,1953,FA,UT,1,res,previously_active,OF,10,6,0,0,0,1,5,0,0.0,0.0,0.0,0,0,0,0,0,0,50
 2011,al,Jason Grey,DeWayne Wise,1953,FA,UT,1,res,reserved,OF,5,7,1,1,1,0,1,0,0.2,0.0,0.8,0,0,0,0,0,0,50
-2011,al,Jason Grey,Mike Aviles,708,Cle,MI,13,trd,previously_reserved,,16,7,2,0,1,0,2,0,0.312,0.0,0.437,2,0,0,27,46,14,5
-2011,al,Jason Grey,Howie Kendrick,739,LAD,1B,19,act,previously_reserved,"1B,2B,CI,OF,MI",7,2,0,0,0,0,1,0,0.125,0.0,0.0,0,0,17,108,0,0,23
+2011,al,Jason Grey,Francisco Cervelli,1004,Pit,UT,1,res,reserved,C,7,2,1,1,1,0,3,0,0.143,0.0,0.571,0,41,0,1,2,0,0
 2011,al,Jason Grey,Justin Smoak,2117,Tor,CI,12,act,previously_reserved,"1B,CI",12,3,1,0,0,0,4,0,0.333,0.0,0.333,12,0,108,0,0,0,0
+2011,al,Jason Grey,Mike Aviles,708,Cle,MI,13,trd,previously_reserved,,16,7,2,0,1,0,2,0,0.312,0.0,0.437,2,0,0,27,46,14,5
 2011,al,Jason Grey,Elliot Johnson,1468,Cle,MI,1,rel,previously_reserved,,3,2,0,0,0,0,3,0,0.0,0.0,0.0,0,0,2,9,0,52,2
+2011,al,Jason Grey,Howie Kendrick,739,LAD,1B,19,act,previously_reserved,"1B,2B,OF,CI,MI",7,2,0,0,0,0,1,0,0.125,0.0,0.0,0,0,17,108,0,0,23
 2011,al,Jason Grey,Danny Valencia,2398,Tor,3B,13,act,previously_reserved,"3B,CI",24,6,1,0,1,0,7,1,0.28,0.0,0.292,4,0,0,0,147,0,0
-2011,al,Jason Grey,Josh Willingham,576,FA,OF,8,trd,previously_reserved,,20,5,2,2,4,0,5,0,0.45,0.0,0.85,36,0,0,0,0,0,96
-2011,al,Jason Grey,Don Kelly,44,Mia,OF,0,rel,previously_reserved,,13,4,2,0,1,0,1,0,0.231,0.0,0.308,2,1,15,0,45,0,58
-2011,al,Jason Grey,Eric Thames,2895,FA,OF,26,act,previously_reserved,"UT,OF",5,1,2,0,0,0,1,0,0.4,0.0,0.8,13,0,0,0,0,0,79
-2011,al,Jason Grey,Peter Bourjos,2154,StL,OF,15,act,previously_reserved,OF,25,9,5,0,4,3,7,1,0.25,0.0,0.32,0,0,0,0,0,0,147
 2011,al,Jason Grey,Grady Sizemore,410,Phi,OF,12,trd,previously_reserved,,16,4,1,1,1,0,8,0,0.125,0.0,0.375,11,0,0,0,0,0,56
-2011,al,Jason Grey,Adam Kennedy,1409,FA,UT,0,act,previously_reserved,"3B,1B,2B,CI,MI",84,27,9,2,6,1,15,4,0.281,0.0,0.393,17,0,36,34,27,0,0
+2011,al,Jason Grey,Eric Thames,2895,FA,OF,26,act,previously_reserved,"UT,OF",5,1,2,0,0,0,1,0,0.4,0.0,0.8,13,0,0,0,0,0,79
+2011,al,Jason Grey,Don Kelly,44,Mia,OF,0,rel,previously_reserved,,13,4,2,0,1,0,1,0,0.231,0.0,0.308,2,1,15,0,45,0,58
+2011,al,Jason Grey,Peter Bourjos,2154,StL,OF,15,act,previously_reserved,OF,25,9,5,0,4,3,7,1,0.25,0.0,0.32,0,0,0,0,0,0,147
+2011,al,Jason Grey,Josh Willingham,576,FA,OF,8,trd,previously_reserved,,20,5,2,2,4,0,5,0,0.45,0.0,0.85,36,0,0,0,0,0,96
 2011,al,Jason Grey,Cord Phelps,3349,Phi,UT,3,rel,previously_reserved,,25,11,3,0,1,1,6,5,0.333,0.0,0.28,8,0,0,20,0,0,0
 2011,al,Jason Grey,Reid Brignac,1486,Mia,UT,12,trd,previously_reserved,,14,7,2,0,1,1,2,5,0.474,0.0,0.357,0,0,0,0,0,91,0
+2011,al,Jason Grey,Adam Kennedy,1409,FA,UT,0,act,previously_reserved,"3B,2B,1B,CI,MI",84,27,9,2,6,1,15,4,0.281,0.0,0.393,17,0,36,34,27,0,0
 2011,al,Matthew Berry,Mark Reynolds,34,StL,CI,19,act,active,"1B,3B,CI",119,33,23,10,23,1,50,14,0.346,0.417,0.563,0,0,44,0,114,0,0
-2011,al,Matthew Berry,Aaron Hill,1578,Ari,MI,19,act,active,"UT,2B,MI",520,137,61,8,61,21,72,35,0.299,0.364,0.356,0,0,0,137,0,0,0
 2011,al,Matthew Berry,Derrek Lee,285,FA,1B,14,act,active,"1B,CI",74,21,12,4,9,0,22,8,0.388,0.462,0.5,0,0,113,0,0,0,0
+2011,al,Matthew Berry,Aaron Hill,1578,Ari,MI,19,act,active,"UT,2B,MI",520,137,61,8,61,21,72,35,0.299,0.364,0.356,0,0,0,137,0,0,0
 2011,al,Matthew Berry,Dustin Pedroia,182,Bos,2B,28,act,active,"2B,MI",635,159,102,21,91,26,85,86,0.387,0.667,0.474,0,0,0,159,0,0,0
-2011,al,Matthew Berry,Elvis Andrus,1543,Tex,SS,19,act,active,"UT,SS,MI",587,150,96,5,60,37,74,56,0.347,0.5,0.361,1,0,0,0,0,147,0
+2011,al,Matthew Berry,Elvis Andrus,1543,Tex,SS,19,act,active,"SS,MI",587,150,96,5,60,37,74,56,0.347,0.5,0.361,1,0,0,0,0,147,0
 2011,al,Matthew Berry,Jhonny Peralta,404,StL,3B,15,act,active,"3B,SS,CI,MI",525,146,68,21,86,0,95,40,0.345,0.125,0.478,0,0,1,0,0,145,0
-2011,al,Matthew Berry,Vernon Wells,1590,FA,OF,19,act,active,OF,488,126,57,25,66,8,83,18,0.245,0.1,0.418,7,0,0,0,0,0,122
-2011,al,Matthew Berry,David Murphy,1531,Cle,OF,9,act,active,OF,146,41,18,6,25,5,20,9,0.346,0.4,0.493,9,0,0,0,0,0,109
 2011,al,Matthew Berry,Brandon Allen,2235,NYM,OF,25,act,active,"1B,OF",140,39,16,3,10,2,53,11,0.25,0.2,0.343,0,0,51,0,0,0,0
+2011,al,Matthew Berry,David Murphy,1531,Cle,OF,9,act,active,OF,146,41,18,6,25,5,20,9,0.346,0.4,0.493,9,0,0,0,0,0,109
 2011,al,Matthew Berry,Ichiro Suzuki,1368,Mia,OF,26,act,active,OF,677,161,80,5,47,40,69,39,0.31,0.25,0.335,10,0,0,0,0,0,151
+2011,al,Matthew Berry,Vernon Wells,1590,FA,OF,19,act,active,OF,488,126,57,25,66,8,83,18,0.245,0.1,0.418,7,0,0,0,0,0,122
 2011,al,Matthew Berry,Nolan Reimold,2013,Bal,OF,0,act,active,OF,267,87,40,13,45,7,57,28,0.328,0.375,0.453,6,0,0,0,0,0,76
-2011,al,Matthew Berry,Alex Avila,2369,Det,C,2,act,active,C,464,141,63,19,82,3,131,73,0.389,0.417,0.506,4,133,0,0,1,0,0
 2011,al,Matthew Berry,Ryan Lavarnway,2852,Bal,C,4,act,active,C,24,13,3,2,6,0,7,2,0.231,0.222,0.458,8,8,0,0,0,0,0
+2011,al,Matthew Berry,Alex Avila,2369,Det,C,2,act,active,C,464,141,63,19,82,3,131,73,0.389,0.417,0.506,4,133,0,0,1,0,0
 2011,al,Matthew Berry,Kevin Youkilis,183,NYY,UT,29,act,active,"3B,1B,CI",423,118,68,17,80,3,97,68,0.379,0.0,0.468,4,0,6,0,112,0,0
-2011,al,Matthew Berry,Mike McCoy,2911,Bos,CI,1,trd,previously_active,,4,4,0,0,0,0,1,0,0.0,0.0,0.0,5,0,0,10,16,26,20
-2011,al,Matthew Berry,Luke Hughes,2275,Tor,1B,0,res,previously_active,"3B,2B,1B,CI",196,66,22,7,27,1,56,19,0.304,0.0,0.372,3,0,36,37,13,0,0
+2011,al,Matthew Berry,Luke Hughes,2275,Tor,1B,0,res,previously_active,"3B,CI,2B,1B",196,66,22,7,27,1,56,19,0.304,0.0,0.372,3,0,36,37,13,0,0
 2011,al,Matthew Berry,Trevor Plouffe,2276,Min,MI,9,rel,previously_active,,50,15,7,2,9,0,12,6,0.276,0.0,0.32,4,0,1,17,0,45,13
-2011,al,Matthew Berry,Jack Hannahan,1068,FA,CI,0,rel,previously_active,,1,2,0,0,0,0,1,0,0.0,0.0,0.0,0,0,8,0,104,0,0
-2011,al,Matthew Berry,Jayson Nix,458,FA,CI,2,rel,previously_active,,68,23,6,4,11,2,20,6,0.267,0.0,0.426,1,0,0,4,41,0,1
 2011,al,Matthew Berry,Dan Johnson,1069,Hou,CI,7,rel,previously_active,,70,22,5,1,3,0,15,5,0.197,0.0,0.186,3,0,21,0,3,0,0
-2011,al,Matthew Berry,Felix Pie,293,Pit,OF,2,rel,previously_active,,164,85,15,0,7,3,32,10,0.264,0.0,0.28,3,0,0,0,0,0,73
-2011,al,Matthew Berry,Ryan Langerhans,1644,Tor,OF,3,rel,previously_active,,43,17,5,2,5,0,17,11,0.333,0.0,0.302,1,0,0,0,0,0,17
+2011,al,Matthew Berry,Mike McCoy,2911,Bos,CI,1,trd,previously_active,,4,4,0,0,0,0,1,0,0.0,0.0,0.0,5,0,0,10,16,26,20
+2011,al,Matthew Berry,Jayson Nix,458,FA,CI,2,rel,previously_active,,68,23,6,4,11,2,20,6,0.267,0.0,0.426,1,0,0,4,41,0,1
+2011,al,Matthew Berry,Jack Hannahan,1068,FA,CI,0,rel,previously_active,,1,2,0,0,0,0,1,0,0.0,0.0,0.0,0,0,8,0,104,0,0
 2011,al,Matthew Berry,Justin Ruggiano,1475,Sea,OF,2,res,previously_active,OF,91,36,10,4,13,1,21,2,0.277,0.0,0.44,3,0,0,0,0,0,36
-2011,al,Matthew Berry,Travis Buck,1074,SD,OF,3,rel,previously_active,,8,2,2,0,0,0,1,0,0.25,0.0,0.375,6,0,0,0,0,0,40
 2011,al,Matthew Berry,J.D. Drew,185,FA,OF,11,dis,previously_active,OF,233,77,23,4,21,0,56,33,0.317,0.0,0.305,0,0,0,0,0,0,76
-2011,al,Matthew Berry,Ramon Castro,945,FA,C,2,dis,previously_active,C,68,23,6,4,10,0,23,7,0.307,0.0,0.456,1,21,0,0,0,0,0
+2011,al,Matthew Berry,Ryan Langerhans,1644,Tor,OF,3,rel,previously_active,,43,17,5,2,5,0,17,11,0.333,0.0,0.302,1,0,0,0,0,0,17
+2011,al,Matthew Berry,Travis Buck,1074,SD,OF,3,rel,previously_active,,8,2,2,0,0,0,1,0,0.25,0.0,0.375,6,0,0,0,0,0,40
+2011,al,Matthew Berry,Felix Pie,293,Pit,OF,2,rel,previously_active,,164,85,15,0,7,3,32,10,0.264,0.0,0.28,3,0,0,0,0,0,73
 2011,al,Matthew Berry,Drew Butera,915,LAA,C,0,rel,previously_active,,43,17,4,1,3,0,11,2,0.174,0.0,0.209,0,93,0,0,0,0,0
+2011,al,Matthew Berry,Ramon Castro,945,FA,C,2,dis,previously_active,C,68,23,6,4,10,0,23,7,0.307,0.0,0.456,1,21,0,0,0,0,0
 2011,al,Matthew Berry,Eric Sogard,3034,Oak,UT,1,rel,previously_active,,12,5,1,0,0,0,3,0,0.083,0.0,0.083,0,0,0,3,10,14,0
-2011,al,Matthew Berry,Luke Hughes,2275,Tor,1B,0,res,reserved,"3B,2B,1B,CI",69,22,5,0,2,2,16,3,0.216,0.167,0.217,3,0,36,37,13,0,0
 2011,al,Matthew Berry,Jorge Vazquez,2864,NYY,CI,1,res,reserved,1B,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,0,0,0,0
+2011,al,Matthew Berry,Luke Hughes,2275,Tor,1B,0,res,reserved,"3B,CI,2B,1B",69,22,5,0,2,2,16,3,0.216,0.167,0.217,3,0,36,37,13,0,0
 2011,al,Matthew Berry,Justin Ruggiano,1475,Sea,OF,2,res,reserved,OF,11,8,0,0,0,0,4,0,0.182,0.0,0.182,3,0,0,0,0,0,36
 2011,al,Matthew Berry,J.D. Drew,185,FA,OF,11,dis,reserved,OF,15,4,0,0,1,0,2,0,0.267,0.3,0.267,0,0,0,0,0,0,76
 2011,al,Matthew Berry,Ramon Castro,945,FA,C,2,dis,reserved,C,0,0,0,0,0,0,0,0,0.0,0.0,0.0,1,21,0,0,0,0,0
-2011,al,Matthew Berry,Jayson Nix,458,FA,CI,2,rel,previously_reserved,,68,23,9,0,5,2,22,6,0.224,0.0,0.191,1,0,0,4,41,0,1
 2011,al,Matthew Berry,Dan Johnson,1069,Hou,CI,7,rel,previously_reserved,,8,3,0,0,0,0,2,0,0.0,0.0,0.0,3,0,21,0,3,0,0
+2011,al,Matthew Berry,Jayson Nix,458,FA,CI,2,rel,previously_reserved,,68,23,9,0,5,2,22,6,0.224,0.0,0.191,1,0,0,4,41,0,1
 2011,al,Matthew Berry,Derrek Lee,285,FA,1B,14,act,previously_reserved,"1B,CI",9,2,2,1,6,0,0,0,0.667,0.0,1.0,0,0,113,0,0,0,0
-2011,al,Matthew Berry,Vernon Wells,1590,FA,OF,19,act,previously_reserved,OF,17,5,3,0,0,1,3,2,0.316,0.0,0.235,7,0,0,0,0,0,122
 2011,al,Matthew Berry,Travis Buck,1074,SD,OF,3,rel,previously_reserved,,11,4,1,0,0,0,4,0,0.167,0.0,0.182,6,0,0,0,0,0,40
-2011,al,Matthew Berry,Kevin Youkilis,183,NYY,UT,29,act,previously_reserved,"3B,1B,CI",8,2,0,0,0,0,3,0,0.0,0.0,0.0,4,0,6,0,112,0,0
+2011,al,Matthew Berry,Vernon Wells,1590,FA,OF,19,act,previously_reserved,OF,17,5,3,0,0,1,3,2,0.316,0.0,0.235,7,0,0,0,0,0,122
 2011,al,Matthew Berry,Eric Sogard,3034,Oak,UT,1,rel,previously_reserved,,7,4,1,1,1,0,0,0,0.286,0.0,0.714,0,0,0,3,10,14,0
-2011,al,Rick Wolf/Glenn Colton,Mark Teixeira,81,NYY,1B,30,act,active,"1B,CI",589,156,90,39,111,4,110,76,0.341,0.5,0.494,9,0,147,0,0,0,0
+2011,al,Matthew Berry,Kevin Youkilis,183,NYY,UT,29,act,previously_reserved,"3B,1B,CI",8,2,0,0,0,0,3,0,0.0,0.0,0.0,4,0,6,0,112,0,0
 2011,al,Rick Wolf/Glenn Colton,Kyle Seager,3774,Sea,CI,10,act,active,"3B,SS",125,36,18,2,10,3,20,8,0.316,0.167,0.424,0,0,0,3,42,10,0
-2011,al,Rick Wolf/Glenn Colton,Ramon Santiago,515,Tor,MI,0,act,active,"3B,SS,2B,MI",106,37,15,3,17,0,10,6,0.339,0.2,0.462,0,0,0,75,5,27,0
+2011,al,Rick Wolf/Glenn Colton,Mark Teixeira,81,NYY,1B,30,act,active,"1B,CI",589,156,90,39,111,4,110,76,0.341,0.5,0.494,9,0,147,0,0,0,0
+2011,al,Rick Wolf/Glenn Colton,Ramon Santiago,515,Tor,MI,0,act,active,"3B,2B,SS,MI",106,37,15,3,17,0,10,6,0.339,0.2,0.462,0,0,0,75,5,27,0
 2011,al,Rick Wolf/Glenn Colton,Carlos Guillen,510,Sea,2B,2,act,active,"2B,MI",82,22,5,2,11,1,15,5,0.247,0.0,0.329,1,0,1,25,0,0,0
-2011,al,Rick Wolf/Glenn Colton,Sean Rodriguez,743,Pit,SS,14,act,active,"3B,2B,OF,1B,SS,MI",373,131,45,8,36,11,87,38,0.323,0.444,0.357,0,0,5,48,30,60,2
+2011,al,Rick Wolf/Glenn Colton,Sean Rodriguez,743,Pit,SS,14,act,active,"3B,2B,MI,1B,SS,OF",373,131,45,8,36,11,87,38,0.323,0.444,0.357,0,0,5,48,30,60,2
 2011,al,Rick Wolf/Glenn Colton,Evan Longoria,1489,TB,3B,33,act,active,"3B,CI",483,133,78,31,99,3,93,80,0.355,0.733,0.495,3,0,0,0,130,0,0
-2011,al,Rick Wolf/Glenn Colton,Ezequiel Carrera,2982,Tor,OF,1,act,active,OF,167,53,22,0,10,6,28,12,0.278,0.182,0.293,3,0,0,0,0,0,64
 2011,al,Rick Wolf/Glenn Colton,Adam Jones,133,Bal,OF,21,act,active,OF,567,151,68,25,83,12,113,29,0.319,0.308,0.466,2,0,0,0,0,0,148
-2011,al,Rick Wolf/Glenn Colton,Rene Tosoni,2865,Mil,OF,5,act,active,OF,97,33,13,2,13,0,18,8,0.308,0.333,0.381,9,0,0,0,0,0,42
 2011,al,Rick Wolf/Glenn Colton,Melky Cabrera,1014,CWS,OF,3,act,active,OF,658,155,102,18,87,20,94,35,0.339,0.667,0.47,2,0,0,0,0,0,153
 2011,al,Rick Wolf/Glenn Colton,Carl Crawford,1472,LAD,OF,38,act,active,OF,506,130,65,11,56,18,104,23,0.289,0.154,0.405,2,0,0,0,0,0,127
-2011,al,Rick Wolf/Glenn Colton,Salvador Perez,3457,KC,C,6,act,active,C,133,35,18,3,20,0,18,7,0.373,0.333,0.489,0,39,0,0,0,0,0
+2011,al,Rick Wolf/Glenn Colton,Rene Tosoni,2865,Mil,OF,5,act,active,OF,97,33,13,2,13,0,18,8,0.308,0.333,0.381,9,0,0,0,0,0,42
+2011,al,Rick Wolf/Glenn Colton,Ezequiel Carrera,2982,Tor,OF,1,act,active,OF,167,53,22,0,10,6,28,12,0.278,0.182,0.293,3,0,0,0,0,0,64
 2011,al,Rick Wolf/Glenn Colton,Jose Lobaton,2296,Was,C,1,act,active,C,15,7,0,0,0,0,4,3,0.316,0.0,0.133,0,14,0,0,0,0,0
+2011,al,Rick Wolf/Glenn Colton,Salvador Perez,3457,KC,C,6,act,active,C,133,35,18,3,20,0,18,7,0.373,0.333,0.489,0,39,0,0,0,0,0
 2011,al,Rick Wolf/Glenn Colton,Adam Dunn,348,FA,UT,30,act,active,"1B,CI",105,32,8,1,4,0,43,19,0.274,0.286,0.2,81,0,35,0,0,0,2
-2011,al,Rick Wolf/Glenn Colton,Chris Davis,1544,Bal,CI,3,rel,previously_active,,26,12,4,2,3,0,9,2,0.321,0.0,0.5,2,0,31,0,26,0,0
-2011,al,Rick Wolf/Glenn Colton,Andy LaRoche,794,CWS,MI,0,rel,previously_active,,71,34,8,0,4,0,12,8,0.358,0.0,0.38,0,0,1,8,27,9,0
-2011,al,Rick Wolf/Glenn Colton,Ramiro Pena,2403,SD,MI,6,rel,previously_active,,15,9,1,0,0,0,1,1,0.118,0.0,0.0,0,0,0,7,13,4,0
-2011,al,Rick Wolf/Glenn Colton,Brian Dinkelman,3023,Min,MI,0,rel,previously_active,,3,1,0,0,0,0,0,1,0.75,0.0,0.667,2,0,0,11,0,0,10
-2011,al,Rick Wolf/Glenn Colton,Matt Tolbert,900,Phi,MI,0,rel,previously_active,,28,14,5,0,1,0,3,0,0.179,0.0,0.286,3,0,0,36,6,31,0
 2011,al,Rick Wolf/Glenn Colton,Jack Hannahan,1068,FA,CI,13,rel,previously_active,,220,73,24,4,20,2,53,29,0.305,0.0,0.332,0,0,8,0,104,0,0
-2011,al,Rick Wolf/Glenn Colton,Eric Chavez,1065,Ari,CI,0,res,previously_active,3B,92,32,11,1,15,0,17,10,0.333,0.0,0.359,7,0,3,0,42,0,0
+2011,al,Rick Wolf/Glenn Colton,Matt Tolbert,900,Phi,MI,0,rel,previously_active,,28,14,5,0,1,0,3,0,0.179,0.0,0.286,3,0,0,36,6,31,0
+2011,al,Rick Wolf/Glenn Colton,Chris Davis,1544,Bal,CI,3,rel,previously_active,,26,12,4,2,3,0,9,2,0.321,0.0,0.5,2,0,31,0,26,0,0
+2011,al,Rick Wolf/Glenn Colton,Brian Dinkelman,3023,Min,MI,0,rel,previously_active,,3,1,0,0,0,0,0,1,0.75,0.0,0.667,2,0,0,11,0,0,10
 2011,al,Rick Wolf/Glenn Colton,Bill Hall,852,FA,MI,2,rel,previously_active,,2,1,0,0,0,0,1,1,0.333,0.0,0.0,1,0,0,51,0,0,1
+2011,al,Rick Wolf/Glenn Colton,Ramiro Pena,2403,SD,MI,6,rel,previously_active,,15,9,1,0,0,0,1,1,0.118,0.0,0.0,0,0,0,7,13,4,0
 2011,al,Rick Wolf/Glenn Colton,Robert Andino,562,Pit,MI,2,rel,previously_active,,36,12,5,1,1,1,9,8,0.4,0.0,0.361,0,0,0,94,22,30,3
+2011,al,Rick Wolf/Glenn Colton,Eric Chavez,1065,Ari,CI,0,res,previously_active,3B,92,32,11,1,15,0,17,10,0.333,0.0,0.359,7,0,3,0,42,0,0
+2011,al,Rick Wolf/Glenn Colton,Andy LaRoche,794,CWS,MI,0,rel,previously_active,,71,34,8,0,4,0,12,8,0.358,0.0,0.38,0,0,1,8,27,9,0
 2011,al,Rick Wolf/Glenn Colton,Yunel Escobar,76,Was,SS,15,dis,previously_active,"UT,SS,MI",513,133,77,11,48,3,70,61,0.369,0.0,0.413,1,0,0,0,0,132,0
-2011,al,Rick Wolf/Glenn Colton,Craig Gentry,2904,Oak,OF,4,rel,previously_active,,4,2,0,0,0,0,1,0,0.0,0.0,0.0,0,0,0,0,0,0,60
-2011,al,Rick Wolf/Glenn Colton,Alex Rios,1588,KC,OF,26,trd,previously_active,,368,99,43,6,24,8,44,22,0.253,0.0,0.296,2,0,0,0,0,0,143
 2011,al,Rick Wolf/Glenn Colton,Shelley Duncan,1016,Cin,OF,3,rel,previously_active,,15,5,5,1,3,0,2,1,0.437,0.0,0.667,23,0,7,0,0,0,39
 2011,al,Rick Wolf/Glenn Colton,Sam Fuld,290,Oak,OF,0,res,previously_active,OF,287,90,39,3,24,20,47,29,0.318,0.0,0.376,2,0,0,0,0,0,87
-2011,al,Rick Wolf/Glenn Colton,Josh Bard,1245,FA,C,0,rel,previously_active,,12,4,2,1,1,0,1,0,0.25,0.0,0.667,1,25,0,0,0,0,0
+2011,al,Rick Wolf/Glenn Colton,Craig Gentry,2904,Oak,OF,4,rel,previously_active,,4,2,0,0,0,0,1,0,0.0,0.0,0.0,0,0,0,0,0,0,60
+2011,al,Rick Wolf/Glenn Colton,Alex Rios,1588,KC,OF,26,trd,previously_active,,368,99,43,6,24,8,44,22,0.253,0.0,0.296,2,0,0,0,0,0,143
 2011,al,Rick Wolf/Glenn Colton,Kelly Shoppach,395,Cle,C,2,rel,previously_active,,193,76,18,7,18,0,69,17,0.257,0.0,0.29,0,86,0,0,0,0,0
-2011,al,Rick Wolf/Glenn Colton,Jose Molina,1005,FA,C,1,rel,previously_active,,18,6,3,0,2,0,4,2,0.4,0.0,0.5,4,48,0,0,0,0,0
 2011,al,Rick Wolf/Glenn Colton,Taylor Teagarden,1541,ChC,C,1,rel,previously_active,,22,6,3,0,2,0,8,1,0.348,0.0,0.409,0,14,0,0,0,0,0
+2011,al,Rick Wolf/Glenn Colton,Josh Bard,1245,FA,C,0,rel,previously_active,,12,4,2,1,1,0,1,0,0.25,0.0,0.667,1,25,0,0,0,0,0
+2011,al,Rick Wolf/Glenn Colton,Jose Molina,1005,FA,C,1,rel,previously_active,,18,6,3,0,2,0,4,2,0.4,0.0,0.5,4,48,0,0,0,0,0
+2011,al,Rick Wolf/Glenn Colton,Jarrod Dyson,2961,KC,UT,3,rel,previously_active,,2,2,0,0,0,0,1,0,0.0,0.0,0.0,1,0,0,0,0,0,17
 2011,al,Rick Wolf/Glenn Colton,Jeff Mathis,732,Mia,UT,1,rel,previously_active,,124,39,11,2,11,1,35,9,0.244,0.0,0.298,2,91,0,0,0,0,0
 2011,al,Rick Wolf/Glenn Colton,Chris Dickerson,347,Cle,UT,2,rel,previously_active,,10,23,3,0,0,0,6,0,0.2,0.0,0.3,1,0,0,0,0,0,52
-2011,al,Rick Wolf/Glenn Colton,Jarrod Dyson,2961,KC,UT,3,rel,previously_active,,2,2,0,0,0,0,1,0,0.0,0.0,0.0,1,0,0,0,0,0,17
 2011,al,Rick Wolf/Glenn Colton,Eric Chavez,1065,Ari,CI,0,res,reserved,3B,67,25,5,1,11,0,17,4,0.306,0.333,0.358,7,0,3,0,42,0,0
 2011,al,Rick Wolf/Glenn Colton,Yunel Escobar,76,Was,SS,15,dis,reserved,"UT,SS,MI",0,0,0,0,0,0,0,0,0.0,0.0,0.0,1,0,0,0,0,132,0
 2011,al,Rick Wolf/Glenn Colton,Sam Fuld,290,Oak,OF,0,res,reserved,OF,18,13,2,0,3,0,1,2,0.25,1.0,0.167,2,0,0,0,0,0,87
-2011,al,Rick Wolf/Glenn Colton,Chris Davis,1544,Bal,CI,3,rel,previously_reserved,,22,8,2,1,1,0,8,3,0.32,0.0,0.455,2,0,31,0,26,0,0
 2011,al,Rick Wolf/Glenn Colton,Andy LaRoche,794,CWS,MI,0,rel,previously_reserved,,22,6,2,0,1,0,7,0,0.182,0.0,0.182,0,0,1,8,27,9,0
-2011,al,Rick Wolf/Glenn Colton,Robert Andino,562,Pit,MI,2,rel,previously_reserved,,5,2,0,0,0,0,0,0,0.4,0.0,0.4,0,0,0,94,22,30,3
 2011,al,Rick Wolf/Glenn Colton,Kyle Seager,3774,Sea,CI,10,act,previously_reserved,"3B,SS",45,13,4,1,3,0,13,3,0.327,0.0,0.333,0,0,0,3,42,10,0
+2011,al,Rick Wolf/Glenn Colton,Robert Andino,562,Pit,MI,2,rel,previously_reserved,,5,2,0,0,0,0,0,0,0.4,0.0,0.4,0,0,0,94,22,30,3
+2011,al,Rick Wolf/Glenn Colton,Chris Davis,1544,Bal,CI,3,rel,previously_reserved,,22,8,2,1,1,0,8,3,0.32,0.0,0.455,2,0,31,0,26,0,0
 2011,al,Rick Wolf/Glenn Colton,Jack Hannahan,1068,FA,CI,13,rel,previously_reserved,,9,3,0,0,0,0,3,0,0.111,0.0,0.111,0,0,8,0,104,0,0
 2011,al,Rick Wolf/Glenn Colton,Carlos Guillen,510,Sea,2B,2,act,previously_reserved,"2B,MI",13,6,3,1,2,0,1,0,0.385,0.0,0.615,1,0,1,25,0,0,0
-2011,al,Rick Wolf/Glenn Colton,Ezequiel Carrera,2982,Tor,OF,1,act,previously_reserved,OF,25,8,4,0,3,4,4,4,0.483,0.0,0.48,3,0,0,0,0,0,64
 2011,al,Rick Wolf/Glenn Colton,Craig Gentry,2904,Oak,OF,4,rel,previously_reserved,,25,16,7,0,1,4,4,2,0.357,0.0,0.36,0,0,0,0,0,0,60
+2011,al,Rick Wolf/Glenn Colton,Ezequiel Carrera,2982,Tor,OF,1,act,previously_reserved,OF,25,8,4,0,3,4,4,4,0.483,0.0,0.48,3,0,0,0,0,0,64
 2011,al,Rick Wolf/Glenn Colton,Kelly Shoppach,395,Cle,C,2,rel,previously_reserved,,4,3,1,1,1,0,2,2,0.667,0.0,1.25,0,86,0,0,0,0,0
 2011,al,Rick Wolf/Glenn Colton,Chris Dickerson,347,Cle,UT,2,rel,previously_reserved,,2,5,1,0,0,1,0,0,0.0,0.0,0.0,1,0,0,0,0,0,52
 2011,al,Rick Wolf/Glenn Colton,Jeff Mathis,732,Mia,UT,1,rel,previously_reserved,,18,6,2,0,0,0,4,0,0.222,0.0,0.278,2,91,0,0,0,0,0
+2011,al,Jason Collette,Billy Butler,677,Oak,CI,23,act,active,"1B,CI",597,159,74,19,95,2,95,66,0.361,0.429,0.461,142,0,11,0,0,0,0
 2011,al,Jason Collette,Adrian Gonzalez,1250,LAD,1B,33,act,active,"1B,CI",630,159,108,27,117,1,119,74,0.41,0.643,0.548,2,0,156,0,0,0,2
 2011,al,Jason Collette,Reid Brignac,1486,Mia,MI,1,act,active,"SS,MI,2B",61,23,3,0,5,0,16,1,0.21,0.375,0.23,0,0,0,0,0,91,0
-2011,al,Jason Collette,Billy Butler,677,Oak,CI,23,act,active,"1B,CI",597,159,74,19,95,2,95,66,0.361,0.429,0.461,142,0,11,0,0,0,0
 2011,al,Jason Collette,Tsuyoshi Nishioka,3445,FA,2B,14,act,active,"2B,SS",181,57,13,0,16,2,38,15,0.299,0.0,0.265,1,0,0,6,0,60,0
-2011,al,Jason Collette,Brandon Wood,744,SD,SS,1,act,active,"3B,SS,MI,CI,1B",241,100,23,6,28,0,69,16,0.264,0.0,0.332,1,0,10,3,61,24,0
+2011,al,Jason Collette,Brandon Wood,744,SD,SS,1,act,active,"3B,SS,CI,MI,1B",241,100,23,6,28,0,69,16,0.264,0.0,0.332,1,0,10,3,61,24,0
 2011,al,Jason Collette,Edwin Encarnacion,339,Tor,3B,17,act,active,"1B,3B,CI",481,134,70,17,55,8,77,43,0.334,0.0,0.453,70,0,25,0,36,0,0
 2011,al,Jason Collette,Ben Zobrist,1470,Oak,OF,20,act,active,"2B,OF,MI",588,156,99,20,91,19,128,77,0.353,0.429,0.469,3,0,0,131,0,0,38
-2011,al,Jason Collette,Matt Joyce,2074,LAA,OF,10,act,active,OF,462,141,69,19,75,13,106,49,0.347,0.273,0.478,1,0,0,0,0,0,136
 2011,al,Jason Collette,Bobby Abreu,1013,FA,OF,21,act,active,OF,502,142,54,8,60,21,113,78,0.353,0.167,0.365,108,0,0,0,0,0,28
 2011,al,Jason Collette,David DeJesus,689,TB,OF,13,act,active,OF,442,131,60,10,46,4,86,45,0.323,0.5,0.376,3,0,0,0,0,0,122
+2011,al,Jason Collette,Matt Joyce,2074,LAA,OF,10,act,active,OF,462,141,69,19,75,13,106,49,0.347,0.273,0.478,1,0,0,0,0,0,136
 2011,al,Jason Collette,Johnny Damon,1015,FA,OF,9,act,active,OF,582,150,79,16,73,19,92,51,0.326,0.357,0.418,135,0,1,0,0,0,16
 2011,al,Jason Collette,Joe Mauer,889,Min,C,23,act,active,"1B,C",296,82,38,3,30,0,38,32,0.36,0.0,0.368,14,52,18,0,0,0,1
 2011,al,Jason Collette,Victor Martinez,394,Det,C,22,act,active,"1B,C",258,68,39,6,53,0,21,23,0.399,0.75,0.484,112,26,6,0,0,0,0
@@ -194,17 +223,17 @@ year,league,team,player_name,player_id,mlb_team,position,salary,status,roster_se
 2011,al,Jason Collette,Elliot Johnson,1468,Cle,SS,4,rel,previously_active,,112,43,13,3,13,4,37,10,0.268,0.0,0.348,0,0,2,9,0,52,2
 2011,al,Jason Collette,Brandon Allen,2235,NYM,OF,25,trd,previously_active,,6,2,2,0,1,0,2,0,0.5,0.0,0.667,0,0,51,0,0,0,0
 2011,al,Jason Collette,Greg Halman,2307,Sea,OF,6,rel,previously_active,,79,33,6,2,4,5,29,2,0.244,0.0,0.316,0,0,0,0,0,0,35
-2011,al,Jason Collette,Adam Moore,2408,Cle,C,1,rel,previously_active,,6,2,0,0,0,0,2,0,0.167,0.0,0.333,0,2,0,0,0,0,0
-2011,al,Jason Collette,Landon Powell,1062,NYM,C,0,rel,previously_active,,18,5,1,0,0,0,9,1,0.158,0.0,0.111,0,33,1,0,0,0,0
 2011,al,Jason Collette,Steve Holm,1322,Mia,C,0,rel,previously_active,,10,3,0,0,0,0,3,1,0.091,0.0,0.0,0,6,0,0,0,0,0
-2011,al,Jason Collette,Drew Butera,915,LAA,C,1,rel,previously_active,,78,26,3,0,5,0,14,2,0.136,0.0,0.141,0,93,0,0,0,0,0
+2011,al,Jason Collette,Landon Powell,1062,NYM,C,0,rel,previously_active,,18,5,1,0,0,0,9,1,0.158,0.0,0.111,0,33,1,0,0,0,0
 2011,al,Jason Collette,Robinson Chirinos,3011,Tex,C,5,res,previously_active,C,33,13,2,1,7,0,8,2,0.314,0.0,0.394,0,19,1,0,0,0,0
+2011,al,Jason Collette,Adam Moore,2408,Cle,C,1,rel,previously_active,,6,2,0,0,0,0,2,0,0.167,0.0,0.333,0,2,0,0,0,0,0
+2011,al,Jason Collette,Drew Butera,915,LAA,C,1,rel,previously_active,,78,26,3,0,5,0,14,2,0.136,0.0,0.141,0,93,0,0,0,0,0
 2011,al,Jason Collette,Francisco Cervelli,1004,Pit,C,4,rel,previously_active,,55,20,4,0,8,3,15,4,0.295,0.0,0.273,0,41,0,1,2,0,0
 2011,al,Jason Collette,Drew Sutton,2258,Bos,UT,6,rel,previously_active,,16,10,1,0,2,0,4,0,0.312,0.0,0.375,1,0,5,7,8,4,3
 2011,al,Jason Collette,Robinson Chirinos,3011,Tex,C,5,res,reserved,C,4,1,0,0,0,0,1,0,0.0,0.0,0.0,0,19,1,0,0,0,0
 2011,al,Jason Collette,Omar Vizquel,1309,FA,MI,2,rel,previously_reserved,,51,17,7,0,3,0,9,2,0.278,0.0,0.294,3,0,1,16,29,9,0
 2011,al,Jason Collette,Tsuyoshi Nishioka,3445,FA,2B,14,act,previously_reserved,"2B,SS",40,11,1,0,3,0,5,0,0.175,0.0,0.175,1,0,0,6,0,60,0
-2011,al,Jason Collette,Brandon Wood,744,SD,SS,1,act,previously_reserved,"3B,SS,MI,CI,1B",9,5,3,1,3,0,4,3,0.417,0.0,0.556,1,0,10,3,61,24,0
+2011,al,Jason Collette,Brandon Wood,744,SD,SS,1,act,previously_reserved,"3B,SS,CI,MI,1B",9,5,3,1,3,0,4,3,0.417,0.0,0.556,1,0,10,3,61,24,0
 2011,al,Jason Collette,Landon Powell,1062,NYM,C,0,rel,previously_reserved,,25,8,3,1,2,0,8,4,0.276,0.0,0.28,0,33,1,0,0,0,0
 2011,al,Jason Collette,Francisco Cervelli,1004,Pit,C,4,rel,previously_reserved,,29,10,6,0,2,1,7,5,0.382,0.0,0.345,0,41,0,1,2,0,0
 2011,al,Jason Collette,Drew Sutton,2258,Bos,UT,6,rel,previously_reserved,,17,14,6,0,2,0,5,3,0.524,0.0,0.529,1,0,5,7,8,4,3
@@ -213,207 +242,207 @@ year,league,team,player_name,player_id,mlb_team,position,salary,status,roster_se
 2011,al,Todd Zola,Kelly Johnson,78,Atl,MI,17,act,active,"2B,MI",102,29,15,3,9,3,26,13,0.371,0.333,0.451,0,0,0,141,0,0,0
 2011,al,Todd Zola,Ian Kinsler,1520,Det,2B,29,act,active,"2B,MI",620,155,121,32,77,30,71,89,0.355,0.5,0.477,11,0,0,144,0,0,0
 2011,al,Todd Zola,Marco Scutaro,1584,FA,SS,12,act,active,"2B,SS,MI",371,108,52,7,52,3,35,37,0.354,0.417,0.415,0,0,0,2,0,109,0
-2011,al,Todd Zola,Wilson Betemit,1007,TB,3B,3,act,active,"UT,3B,CI",323,97,40,8,46,4,105,31,0.343,0.625,0.452,3,0,3,1,87,0,0
+2011,al,Todd Zola,Wilson Betemit,1007,TB,3B,3,act,active,"3B,CI",323,97,40,8,46,4,105,31,0.343,0.625,0.452,3,0,3,1,87,0,0
+2011,al,Todd Zola,Grady Sizemore,410,Phi,OF,12,act,active,OF,36,10,2,0,3,0,10,1,0.158,0.0,0.139,11,0,0,0,0,0,56
 2011,al,Todd Zola,Torii Hunter,749,Min,OF,19,act,active,OF,580,156,80,23,82,5,125,62,0.336,0.25,0.429,19,0,0,0,0,0,137
+2011,al,Todd Zola,Andruw Jones,798,FA,OF,2,act,active,OF,162,65,21,9,27,0,52,24,0.342,0.25,0.457,16,0,0,0,0,0,57
 2011,al,Todd Zola,Josh Willingham,576,FA,OF,8,act,active,OF,191,53,29,14,40,0,61,21,0.324,0.182,0.508,36,0,0,0,0,0,96
 2011,al,Todd Zola,Magglio Ordonez,520,FA,OF,11,act,active,OF,329,92,33,5,32,2,41,23,0.303,0.667,0.331,21,0,0,0,0,0,69
-2011,al,Todd Zola,Grady Sizemore,410,Phi,OF,12,act,active,OF,36,10,2,0,3,0,10,1,0.158,0.0,0.139,11,0,0,0,0,0,56
-2011,al,Todd Zola,Andruw Jones,798,FA,OF,2,act,active,OF,162,65,21,9,27,0,52,24,0.342,0.25,0.457,16,0,0,0,0,0,57
 2011,al,Todd Zola,Jorge Posada,1006,NYY,C,12,act,active,"C,1B",344,115,34,14,44,0,76,39,0.315,0.1,0.398,90,1,14,1,0,0,0
 2011,al,Todd Zola,J.P. Arencibia,2422,Bal,C,5,act,active,C,96,32,9,4,21,1,26,8,0.299,0.417,0.448,4,122,0,0,0,0,0
 2011,al,Todd Zola,Kosuke Fukudome,289,FA,UT,25,act,active,OF,227,56,26,5,21,2,51,14,0.306,0.167,0.379,1,0,0,0,0,0,141
-2011,al,Todd Zola,Daric Barton,1064,Tor,CI,14,rel,previously_active,,119,34,12,0,15,2,22,18,0.321,0.0,0.244,0,0,65,0,0,0,0
-2011,al,Todd Zola,Kila Ka'aihue,2168,Was,CI,9,rel,previously_active,,82,23,6,2,6,0,26,12,0.295,0.0,0.317,4,0,19,0,0,0,0
-2011,al,Todd Zola,Luis Rodriguez,1257,LAA,MI,0,rel,previously_active,,9,3,1,0,0,0,1,1,0.3,0.0,0.333,0,0,1,7,11,23,0
 2011,al,Todd Zola,Robert Andino,562,Pit,MI,3,trd,previously_active,,225,71,36,1,16,6,40,16,0.324,0.0,0.342,0,0,0,94,22,30,3
 2011,al,Todd Zola,Mike McCoy,2911,Bos,MI,1,rel,previously_active,,14,6,1,0,0,2,4,5,0.421,0.0,0.214,5,0,0,10,16,26,20
-2011,al,Todd Zola,Austin Kearns,1643,Mia,OF,1,rel,previously_active,,40,13,6,0,1,0,15,5,0.244,0.0,0.225,1,0,0,0,0,0,54
+2011,al,Todd Zola,Luis Rodriguez,1257,LAA,MI,0,rel,previously_active,,9,3,1,0,0,0,1,1,0.3,0.0,0.333,0,0,1,7,11,23,0
+2011,al,Todd Zola,Daric Barton,1064,Tor,CI,14,rel,previously_active,,119,34,12,0,15,2,22,18,0.321,0.0,0.244,0,0,65,0,0,0,0
+2011,al,Todd Zola,Kila Ka'aihue,2168,Was,CI,9,rel,previously_active,,82,23,6,2,6,0,26,12,0.295,0.0,0.317,4,0,19,0,0,0,0
+2011,al,Todd Zola,Michael Saunders,2161,Tor,OF,10,rel,previously_active,,26,13,1,0,0,2,13,2,0.214,0.0,0.154,0,0,0,0,0,0,56
 2011,al,Todd Zola,Shin-Soo Choo,405,Tex,OF,30,res,previously_active,OF,305,82,35,8,36,12,76,35,0.347,0.0,0.397,0,0,0,0,0,0,85
 2011,al,Todd Zola,Corey Patterson,372,NYY,OF,0,res,previously_active,OF,290,96,40,4,25,10,59,11,0.266,0.0,0.345,2,0,0,0,0,0,114
-2011,al,Todd Zola,Michael Saunders,2161,Tor,OF,10,rel,previously_active,,26,13,1,0,0,2,13,2,0.214,0.0,0.154,0,0,0,0,0,0,56
 2011,al,Todd Zola,Luke Scott,137,TB,OF,15,rel,previously_active,,209,64,24,9,22,1,54,24,0.301,0.0,0.402,4,0,12,0,0,0,45
+2011,al,Todd Zola,Austin Kearns,1643,Mia,OF,1,rel,previously_active,,40,13,6,0,1,0,15,5,0.244,0.0,0.225,1,0,0,0,0,0,54
 2011,al,Todd Zola,Mike McKenry,2104,Col,C,1,res,previously_active,C,148,44,13,2,9,0,39,8,0.28,0.0,0.345,0,58,0,0,1,0,0
 2011,al,Todd Zola,Brayan Pena,74,Cin,C,2,trd,previously_active,,144,47,11,3,19,0,13,10,0.285,0.0,0.354,0,69,0,0,0,0,0
-2011,al,Todd Zola,Derek Jeter,1010,FA,UT,21,trd,previously_active,,351,84,50,4,36,11,49,30,0.33,0.0,0.356,10,0,0,0,0,122,0
 2011,al,Todd Zola,Chris Gimenez,2245,Tex,UT,0,rel,previously_active,,2,1,0,0,0,0,2,0,0.0,0.0,0.0,0,20,2,0,0,0,3
-2011,al,Todd Zola,Corey Patterson,372,NYY,OF,0,res,reserved,OF,78,37,9,2,11,3,18,6,0.298,1.0,0.41,2,0,0,0,0,0,114
+2011,al,Todd Zola,Derek Jeter,1010,FA,UT,21,trd,previously_active,,351,84,50,4,36,11,49,30,0.33,0.0,0.356,10,0,0,0,0,122,0
 2011,al,Todd Zola,Shin-Soo Choo,405,Tex,OF,30,res,reserved,OF,8,3,2,0,0,0,2,1,0.222,0.0,0.125,0,0,0,0,0,0,85
+2011,al,Todd Zola,Corey Patterson,372,NYY,OF,0,res,reserved,OF,78,37,9,2,11,3,18,6,0.298,1.0,0.41,2,0,0,0,0,0,114
 2011,al,Todd Zola,Mike McKenry,2104,Col,C,1,res,reserved,C,32,14,4,0,2,0,10,6,0.256,0.5,0.219,0,58,0,0,1,0,0
 2011,al,Todd Zola,Mike Aviles,708,Cle,CI,13,act,previously_reserved,"SS,2B,OF,3B,MI",44,14,6,0,1,2,7,1,0.304,0.0,0.341,2,0,0,27,46,14,5
 2011,al,Todd Zola,Mike McCoy,2911,Bos,MI,1,rel,previously_reserved,,41,18,4,1,2,2,13,3,0.295,0.0,0.341,5,0,0,10,16,26,20
 2011,al,Todd Zola,Marco Scutaro,1584,FA,SS,12,act,previously_reserved,"2B,SS,MI",24,5,7,0,2,1,1,1,0.44,0.0,0.542,0,0,0,2,0,109,0
-2011,al,Todd Zola,Austin Kearns,1643,Mia,OF,1,rel,previously_reserved,,42,15,3,0,1,0,14,4,0.333,0.0,0.333,1,0,0,0,0,0,54
 2011,al,Todd Zola,Andruw Jones,798,FA,OF,2,act,previously_reserved,OF,28,12,6,4,6,0,10,5,0.429,0.0,0.714,16,0,0,0,0,0,57
+2011,al,Todd Zola,Austin Kearns,1643,Mia,OF,1,rel,previously_reserved,,42,15,3,0,1,0,14,4,0.333,0.0,0.333,1,0,0,0,0,0,54
 2011,al,Todd Zola,Brayan Pena,74,Cin,C,2,trd,previously_reserved,,54,17,4,0,5,0,9,1,0.333,0.0,0.37,0,69,0,0,0,0,0
 2011,al,Todd Zola,Chris Gimenez,2245,Tex,UT,0,rel,previously_reserved,,0,1,0,0,0,0,0,0,0.0,0.0,0.0,0,20,2,0,0,0,3
+2011,al,Ron Shandler,Eric Hosmer,2563,KC,CI,1,act,active,1B,514,125,65,19,77,10,80,31,0.33,0.077,0.465,0,0,127,0,0,0,0
 2011,al,Ron Shandler,J.J. Hardy,853,Bal,MI,18,act,active,"SS,MI",502,123,74,28,73,0,90,29,0.303,0.462,0.484,0,0,0,0,0,129,0
 2011,al,Ron Shandler,Mark Trumbo,2262,Ari,1B,4,act,active,"OF,1B,CI",539,149,65,29,87,9,120,25,0.291,0.0,0.477,0,0,149,0,0,0,11
-2011,al,Ron Shandler,Eric Hosmer,2563,KC,CI,1,act,active,1B,514,125,65,19,77,10,80,31,0.33,0.077,0.465,0,0,127,0,0,0,0
 2011,al,Ron Shandler,Johnny Giavotella,2750,LAA,2B,1,act,active,2B,178,46,20,2,21,5,32,6,0.273,0.308,0.376,0,0,0,46,0,0,0
 2011,al,Ron Shandler,Alcides Escobar,850,KC,SS,17,act,active,"SS,MI",548,158,69,4,46,26,73,25,0.29,0.455,0.343,0,0,0,0,0,158,0
-2011,al,Ron Shandler,Jed Lowrie,201,Hou,3B,10,act,active,"UT,SS,3B,MI,2B",309,88,40,6,36,1,60,23,0.303,0.2,0.382,2,0,4,1,33,50,0
-2011,al,Ron Shandler,Ryan Raburn,521,Cle,OF,17,act,active,"OF,2B,MI",339,107,45,13,42,1,106,20,0.288,0.556,0.419,2,0,2,56,4,0,72
+2011,al,Ron Shandler,Jed Lowrie,201,Hou,3B,10,act,active,"UT,SS,2B,MI,3B",309,88,40,6,36,1,60,23,0.303,0.2,0.382,2,0,4,1,33,50,0
 2011,al,Ron Shandler,Josh Reddick,2163,Oak,OF,5,act,active,OF,210,72,31,7,24,0,46,15,0.319,0.0,0.467,2,0,0,0,0,0,80
-2011,al,Ron Shandler,Trevor Plouffe,2276,Min,OF,7,act,active,"UT,SS,2B,MI,OF",183,50,28,4,19,1,48,14,0.3,0.308,0.393,4,0,1,17,0,45,13
-2011,al,Ron Shandler,Mike Carp,2062,Was,OF,10,act,active,"1B,OF,CI",282,76,27,12,46,0,79,16,0.319,0.083,0.468,19,0,34,0,0,0,28
+2011,al,Ron Shandler,Ryan Raburn,521,Cle,OF,17,act,active,"OF,2B,MI",339,107,45,13,42,1,106,20,0.288,0.556,0.419,2,0,2,56,4,0,72
 2011,al,Ron Shandler,Brett Gardner,1038,NYY,OF,22,act,active,OF,510,159,87,7,36,49,93,60,0.345,0.444,0.369,0,0,0,0,0,0,156
+2011,al,Ron Shandler,Trevor Plouffe,2276,Min,OF,7,act,active,"UT,SS,2B,OF,MI",183,50,28,4,19,1,48,14,0.3,0.308,0.393,4,0,1,17,0,45,13
+2011,al,Ron Shandler,Mike Carp,2062,Was,OF,10,act,active,"1B,CI,OF",282,76,27,12,46,0,79,16,0.319,0.083,0.468,19,0,34,0,0,0,28
 2011,al,Ron Shandler,Jesus Montero,1027,Sea,C,3,act,active,UT,51,15,7,4,12,0,15,7,0.414,0.0,0.647,14,3,0,0,0,0,0
 2011,al,Ron Shandler,Mike Napoli,733,Bos,C,16,act,active,"1B,C,CI",369,113,72,30,75,4,85,58,0.414,0.417,0.631,19,61,35,0,0,0,0
 2011,al,Ron Shandler,Vladimir Guerrero,747,FA,UT,19,act,active,OF,533,138,56,11,59,1,52,17,0.314,0.308,0.405,137,0,0,0,0,0,0
 2011,al,Ron Shandler,Adam Dunn,348,FA,1B,30,trd,previously_active,,310,90,28,10,38,0,134,56,0.298,0.0,0.303,81,0,35,0,0,0,2
-2011,al,Ron Shandler,Adam Everett,894,FA,3B,1,rel,previously_active,,11,6,0,0,0,0,5,0,0.091,0.0,0.182,5,0,0,8,16,4,0
-2011,al,Ron Shandler,Josh Bell,2016,SD,3B,7,rel,previously_active,,13,6,1,0,0,0,6,1,0.071,0.0,0.0,2,0,0,0,21,0,2
 2011,al,Ron Shandler,Brandon Inge,512,FA,3B,5,rel,previously_active,,203,67,18,1,15,1,57,17,0.246,0.0,0.246,1,0,0,0,99,0,0
-2011,al,Ron Shandler,Julio Borbon,1525,Bal,OF,11,rel,previously_active,,89,32,10,0,11,6,9,3,0.305,0.0,0.348,0,0,0,0,0,0,32
-2011,al,Ron Shandler,Casper Wells,2252,ChC,OF,1,res,previously_active,OF,199,89,28,10,25,3,64,16,0.32,0.0,0.447,8,0,0,0,0,0,83
-2011,al,Ron Shandler,Alex Rios,1588,KC,OF,26,trd,previously_active,,61,17,5,1,5,2,7,1,0.254,0.0,0.393,2,0,0,0,0,0,143
+2011,al,Ron Shandler,Josh Bell,2016,SD,3B,7,rel,previously_active,,13,6,1,0,0,0,6,1,0.071,0.0,0.0,2,0,0,0,21,0,2
+2011,al,Ron Shandler,Adam Everett,894,FA,3B,1,rel,previously_active,,11,6,0,0,0,0,5,0,0.091,0.0,0.182,5,0,0,8,16,4,0
 2011,al,Ron Shandler,Shelley Duncan,1016,Cin,OF,5,rel,previously_active,,55,21,4,1,14,0,13,1,0.259,0.0,0.364,23,0,7,0,0,0,39
-2011,al,Ron Shandler,Tyler Flowers,2355,CWS,C,3,res,previously_active,C,68,22,8,3,10,0,23,9,0.342,0.0,0.471,1,31,3,0,0,0,0
+2011,al,Ron Shandler,Alex Rios,1588,KC,OF,26,trd,previously_active,,61,17,5,1,5,2,7,1,0.254,0.0,0.393,2,0,0,0,0,0,143
+2011,al,Ron Shandler,Casper Wells,2252,ChC,OF,1,res,previously_active,OF,199,89,28,10,25,3,64,16,0.32,0.0,0.447,8,0,0,0,0,0,83
+2011,al,Ron Shandler,Julio Borbon,1525,Bal,OF,11,rel,previously_active,,89,32,10,0,11,6,9,3,0.305,0.0,0.348,0,0,0,0,0,0,32
 2011,al,Ron Shandler,Jose Molina,1005,FA,C,0,rel,previously_active,,97,29,11,1,7,2,26,10,0.361,0.0,0.412,4,48,0,0,0,0,0
+2011,al,Ron Shandler,Tyler Flowers,2355,CWS,C,3,res,previously_active,C,68,22,8,3,10,0,23,9,0.342,0.0,0.471,1,31,3,0,0,0,0
 2011,al,Ron Shandler,Rene Rivera,818,TB,C,0,rel,previously_active,,12,6,0,0,1,0,4,1,0.154,0.0,0.083,0,44,0,0,0,0,0
-2011,al,Ron Shandler,Daric Barton,1064,Tor,UT,14,trd,previously_active,,85,24,11,0,5,0,20,18,0.34,0.0,0.259,0,0,65,0,0,0,0
 2011,al,Ron Shandler,Eric Sogard,3034,Oak,UT,4,rel,previously_active,,9,4,1,0,2,0,1,2,0.364,0.0,0.333,0,0,0,3,10,14,0
+2011,al,Ron Shandler,Daric Barton,1064,Tor,UT,14,trd,previously_active,,85,24,11,0,5,0,20,18,0.34,0.0,0.259,0,0,65,0,0,0,0
 2011,al,Ron Shandler,Casper Wells,2252,ChC,OF,1,res,reserved,OF,16,6,2,1,2,0,7,2,0.278,0.0,0.375,8,0,0,0,0,0,83
 2011,al,Ron Shandler,Tyler Flowers,2355,CWS,C,3,res,reserved,C,42,16,5,2,6,0,15,5,0.26,0.364,0.31,1,31,3,0,0,0,0
 2011,al,Ron Shandler,Eric Hosmer,2563,KC,CI,1,act,previously_reserved,1B,9,3,1,0,1,1,2,3,0.5,0.0,0.444,0,0,127,0,0,0,0
 2011,al,Ron Shandler,J.J. Hardy,853,Bal,MI,18,act,previously_reserved,"SS,MI",25,6,2,2,7,0,2,2,0.444,0.0,0.64,0,0,0,0,0,129,0
 2011,al,Ron Shandler,Brandon Inge,512,FA,3B,5,rel,previously_reserved,,12,3,0,0,2,0,3,0,0.167,0.0,0.167,1,0,0,0,99,0,0
-2011,al,Ron Shandler,Shelley Duncan,1016,Cin,OF,5,rel,previously_reserved,,26,8,1,1,3,0,9,1,0.222,0.0,0.385,23,0,7,0,0,0,39
-2011,al,Ron Shandler,Trevor Plouffe,2276,Min,OF,7,act,previously_reserved,"UT,SS,2B,MI,OF",43,13,7,1,2,1,11,3,0.319,0.0,0.395,4,0,1,17,0,45,13
-2011,al,Ron Shandler,Alex Rios,1588,KC,OF,26,trd,previously_reserved,,40,10,4,1,5,0,5,0,0.293,0.0,0.45,2,0,0,0,0,0,143
-2011,al,Ron Shandler,Ryan Raburn,521,Cle,OF,17,act,previously_reserved,"OF,2B,MI",48,14,8,1,7,0,8,1,0.367,0.0,0.521,2,0,2,56,4,0,72
 2011,al,Ron Shandler,Josh Reddick,2163,Oak,OF,5,act,previously_reserved,OF,36,13,8,0,1,0,2,3,0.325,0.0,0.389,2,0,0,0,0,0,80
+2011,al,Ron Shandler,Ryan Raburn,521,Cle,OF,17,act,previously_reserved,"OF,2B,MI",48,14,8,1,7,0,8,1,0.367,0.0,0.521,2,0,2,56,4,0,72
+2011,al,Ron Shandler,Alex Rios,1588,KC,OF,26,trd,previously_reserved,,40,10,4,1,5,0,5,0,0.293,0.0,0.45,2,0,0,0,0,0,143
+2011,al,Ron Shandler,Shelley Duncan,1016,Cin,OF,5,rel,previously_reserved,,26,8,1,1,3,0,9,1,0.222,0.0,0.385,23,0,7,0,0,0,39
+2011,al,Ron Shandler,Trevor Plouffe,2276,Min,OF,7,act,previously_reserved,"UT,SS,2B,OF,MI",43,13,7,1,2,1,11,3,0.319,0.0,0.395,4,0,1,17,0,45,13
 2011,al,Ron Shandler,Jesus Montero,1027,Sea,C,3,act,previously_reserved,UT,10,3,2,0,0,0,2,0,0.364,0.0,0.3,14,3,0,0,0,0,0
 2011,al,Ron Shandler,Vladimir Guerrero,747,FA,UT,19,act,previously_reserved,OF,29,7,4,2,4,1,4,0,0.367,0.0,0.621,137,0,0,0,0,0,0
 2011,al,Ron Shandler,Daric Barton,1064,Tor,UT,14,trd,previously_reserved,,32,9,4,0,1,0,5,3,0.297,0.0,0.375,0,0,65,0,0,0,0
-2011,al,Steve Moyer,Michael Young,1523,Tex,MI,20,act,active,"3B,2B,1B,CI",631,159,88,11,106,6,78,47,0.38,0.385,0.474,69,0,36,14,40,1,0
-2011,al,Steve Moyer,Casey Kotchman,740,FA,1B,1,act,active,"1B,CI",500,146,44,10,48,2,66,48,0.378,0.4,0.422,0,0,146,0,0,0,0
 2011,al,Steve Moyer,Mike Moustakas,2004,KC,CI,6,act,active,3B,255,66,18,4,22,2,36,14,0.283,0.5,0.349,0,0,0,0,89,0,0
+2011,al,Steve Moyer,Michael Young,1523,Tex,MI,20,act,active,"3B,1B,CI,2B",631,159,88,11,106,6,78,47,0.38,0.385,0.474,69,0,36,14,40,1,0
+2011,al,Steve Moyer,Casey Kotchman,740,FA,1B,1,act,active,"1B,CI",500,146,44,10,48,2,66,48,0.378,0.4,0.422,0,0,146,0,0,0,0
 2011,al,Steve Moyer,Mark Ellis,1067,FA,2B,7,act,active,"2B,MI",480,132,55,7,41,14,75,22,0.288,0.385,0.346,0,0,2,123,0,0,0
-2011,al,Steve Moyer,John McDonald,1580,LAA,SS,0,act,active,"3B,SS,2B,MI,CI",59,19,2,0,2,0,9,4,0.222,0.0,0.203,0,0,0,21,26,38,0
+2011,al,Steve Moyer,John McDonald,1580,LAA,SS,0,act,active,"3B,2B,SS,MI,CI",59,19,2,0,2,0,9,4,0.222,0.0,0.203,0,0,0,21,26,38,0
 2011,al,Steve Moyer,Jose Bautista,1184,Tor,3B,27,act,active,"OF,3B,CI",353,104,62,23,67,4,83,87,0.424,0.462,0.527,9,0,0,0,25,0,116
-2011,al,Steve Moyer,Delmon Young,908,Bal,OF,19,act,active,OF,458,120,53,12,62,1,83,23,0.297,0.5,0.382,7,0,0,0,0,0,115
 2011,al,Steve Moyer,Denard Span,907,Was,OF,17,act,active,OF,271,67,35,2,16,6,35,27,0.332,0.4,0.354,1,0,0,0,0,0,67
-2011,al,Steve Moyer,Colby Rasmus,1436,Hou,OF,78,act,active,OF,104,28,11,3,10,0,28,4,0.211,0.0,0.346,0,0,0,0,0,0,127
+2011,al,Steve Moyer,Delmon Young,908,Bal,OF,19,act,active,OF,458,120,53,12,62,1,83,23,0.297,0.5,0.382,7,0,0,0,0,0,115
 2011,al,Steve Moyer,Juan Rivera,751,Ari,OF,10,act,active,"1B,OF",466,132,46,11,74,5,76,43,0.319,0.077,0.382,19,0,38,0,0,0,72
 2011,al,Steve Moyer,Juan Pierre,801,FA,OF,22,act,active,OF,639,158,80,2,50,27,41,43,0.329,0.077,0.327,2,0,0,0,0,0,155
-2011,al,Steve Moyer,Jake Fox,280,Tor,C,6,act,active,"C,1B,OF",56,25,7,2,6,0,8,4,0.306,0.0,0.446,2,10,6,0,0,0,5
+2011,al,Steve Moyer,Colby Rasmus,1436,Hou,OF,78,act,active,OF,104,28,11,3,10,0,28,4,0.211,0.0,0.346,0,0,0,0,0,0,127
 2011,al,Steve Moyer,Yorvit Torrealba,452,ChC,C,7,act,active,C,396,113,40,7,37,0,65,20,0.306,0.0,0.399,13,98,0,0,0,0,0
+2011,al,Steve Moyer,Jake Fox,280,Tor,C,6,act,active,"C,1B,OF",56,25,7,2,6,0,8,4,0.306,0.0,0.446,2,10,6,0,0,0,5
 2011,al,Steve Moyer,David Ortiz,190,Bos,UT,17,act,active,UT,525,146,84,29,96,1,83,78,0.398,0.467,0.554,136,0,2,0,0,0,0
+2011,al,Steve Moyer,Brett Lawrie,2186,Oak,MI,0,dis,previously_active,3B,139,40,24,8,23,7,29,16,0.367,0.0,0.568,0,0,0,0,43,0,0
 2011,al,Steve Moyer,Eduardo Nunez,1033,Min,CI,0,trd,previously_active,,44,24,6,1,7,6,3,2,0.283,0.0,0.409,8,0,0,16,40,50,4
-2011,al,Steve Moyer,Brett Lawrie,2186,Oak,MI,0,dis,previously_active,"UT,3B",139,40,24,8,23,7,29,16,0.367,0.0,0.568,0,0,0,0,43,0,0
 2011,al,Steve Moyer,Ryan Adams,3554,LAD,2B,0,rel,previously_active,,19,8,2,0,1,0,5,1,0.286,0.0,0.211,0,0,0,26,0,0,0
 2011,al,Steve Moyer,Brian Roberts,130,FA,2B,15,rel,previously_active,,163,39,18,3,19,6,21,12,0.273,0.0,0.331,0,0,0,39,0,0,0
 2011,al,Steve Moyer,Felipe Lopez,1634,Mil,SS,2,rel,previously_active,,141,48,12,2,11,1,35,8,0.247,0.0,0.277,2,0,6,11,24,0,0
 2011,al,Steve Moyer,Milton Bradley,1526,FA,OF,5,rel,previously_active,,101,28,12,2,13,4,31,13,0.313,0.0,0.356,1,0,0,0,0,0,26
+2011,al,Steve Moyer,Mitch Maier,692,KC,OF,0,rel,previously_active,,28,14,6,0,0,1,8,4,0.344,0.0,0.357,3,0,0,0,0,0,29
 2011,al,Steve Moyer,Mike Trout,2844,LAA,OF,22,res,previously_active,OF,86,29,13,4,14,2,23,5,0.269,0.0,0.407,0,0,0,0,0,0,35
 2011,al,Steve Moyer,Austin Kearns,1643,Mia,OF,0,rel,previously_active,,54,23,7,2,4,0,12,8,0.333,0.0,0.333,1,0,0,0,0,0,54
-2011,al,Steve Moyer,Mitch Maier,692,KC,OF,0,rel,previously_active,,28,14,6,0,0,1,8,4,0.344,0.0,0.357,3,0,0,0,0,0,29
-2011,al,Steve Moyer,Lou Marson,1150,Cin,C,0,rel,previously_active,,90,33,13,1,5,1,28,14,0.321,0.0,0.311,1,78,0,0,0,0,0
 2011,al,Steve Moyer,Drew Butera,915,LAA,C,0,rel,previously_active,,4,2,0,0,1,0,1,0,0.25,0.0,0.25,0,93,0,0,0,0,0
-2011,al,Steve Moyer,Brett Lawrie,2186,Oak,MI,0,dis,reserved,"UT,3B",11,3,2,1,2,0,2,0,0.455,0.0,0.727,0,0,0,0,43,0,0
+2011,al,Steve Moyer,Lou Marson,1150,Cin,C,0,rel,previously_active,,90,33,13,1,5,1,28,14,0.321,0.0,0.311,1,78,0,0,0,0,0
+2011,al,Steve Moyer,Brett Lawrie,2186,Oak,MI,0,dis,reserved,3B,11,3,2,1,2,0,2,0,0.455,0.0,0.727,0,0,0,0,43,0,0
 2011,al,Steve Moyer,Mike Trout,2844,LAA,OF,22,res,reserved,OF,28,8,5,1,2,2,6,3,0.344,0.5,0.429,0,0,0,0,0,0,35
 2011,al,Steve Moyer,Mike Moustakas,2004,KC,CI,6,act,previously_reserved,3B,83,23,8,1,8,0,15,8,0.385,0.0,0.422,0,0,0,0,89,0,0
-2011,al,Steve Moyer,Mitch Maier,692,KC,OF,0,rel,previously_reserved,,16,6,1,0,0,0,5,1,0.176,0.0,0.125,3,0,0,0,0,0,29
-2011,al,Steve Moyer,Colby Rasmus,1436,Hou,OF,78,act,previously_reserved,OF,13,3,2,0,1,0,5,0,0.154,0.0,0.231,0,0,0,0,0,0,127
 2011,al,Steve Moyer,Denard Span,907,Was,OF,17,act,previously_reserved,OF,13,3,2,0,0,0,1,0,0.231,0.0,0.462,1,0,0,0,0,0,67
 2011,al,Steve Moyer,Delmon Young,908,Bal,OF,19,act,previously_reserved,OF,15,4,1,0,2,0,2,0,0.467,0.0,0.733,7,0,0,0,0,0,115
+2011,al,Steve Moyer,Colby Rasmus,1436,Hou,OF,78,act,previously_reserved,OF,13,3,2,0,1,0,5,0,0.154,0.0,0.231,0,0,0,0,0,0,127
+2011,al,Steve Moyer,Mitch Maier,692,KC,OF,0,rel,previously_reserved,,16,6,1,0,0,0,5,1,0.176,0.0,0.125,3,0,0,0,0,0,29
 2011,al,Steve Moyer,Jake Fox,280,Tor,C,6,act,previously_reserved,"C,1B,OF",5,2,1,0,0,0,0,0,0.4,0.0,0.4,2,10,6,0,0,0,5
-2011,al,Dean Peterson,Alex Liddi,2780,KC,CI,5,act,active,"UT,3B",8,3,0,0,0,0,2,1,0.333,0.333,0.5,0,0,0,0,14,0,0
 2011,al,Dean Peterson,Paul Konerko,234,FA,1B,23,act,active,"1B,CI",543,149,69,31,105,1,89,77,0.388,0.0,0.517,37,0,111,0,0,0,0
 2011,al,Dean Peterson,Brian Dinkelman,3023,Min,MI,5,act,active,"2B,OF",5,2,0,0,0,0,2,0,0.0,0.0,0.0,2,0,0,11,0,0,10
+2011,al,Dean Peterson,Alex Liddi,2780,KC,CI,5,act,active,3B,8,3,0,0,0,0,2,1,0.333,0.333,0.5,0,0,0,0,14,0,0
 2011,al,Dean Peterson,Gordon Beckham,2356,CWS,2B,18,act,active,"2B,MI",499,150,60,10,44,5,111,35,0.296,0.455,0.337,1,0,0,149,0,0,0
 2011,al,Dean Peterson,Cliff Pennington,2037,Ari,SS,13,act,active,"UT,SS,MI",515,148,57,8,58,14,104,42,0.319,0.0,0.369,0,0,0,0,0,147,0
 2011,al,Dean Peterson,Chris Davis,1544,Bal,3B,2,act,active,"1B,3B,CI",121,31,15,2,11,0,34,2,0.276,0.5,0.372,2,0,31,0,26,0,0
-2011,al,Dean Peterson,Ben Revere,2085,Phi,OF,0,act,active,OF,433,113,52,0,28,33,40,25,0.307,0.154,0.305,1,0,0,0,0,0,106
-2011,al,Dean Peterson,Trayvon Robinson,2966,SD,OF,12,act,active,OF,143,44,12,2,14,1,61,8,0.25,0.143,0.336,1,0,0,0,0,0,41
 2011,al,Dean Peterson,Nelson Cruz,1529,Sea,OF,32,act,active,"UT,OF",465,121,64,29,87,9,110,33,0.316,0.231,0.518,8,0,0,0,0,0,115
+2011,al,Dean Peterson,Trayvon Robinson,2966,SD,OF,12,act,active,OF,143,44,12,2,14,1,61,8,0.25,0.143,0.336,1,0,0,0,0,0,41
+2011,al,Dean Peterson,Ben Revere,2085,Phi,OF,0,act,active,OF,433,113,52,0,28,33,40,25,0.307,0.154,0.305,1,0,0,0,0,0,106
 2011,al,Dean Peterson,Chris Parmelee,2040,Bal,OF,10,act,active,1B,59,16,8,4,11,0,10,9,0.441,0.583,0.644,0,0,20,0,0,0,0
 2011,al,Dean Peterson,Matt Angle,3070,Mia,OF,5,act,active,OF,29,13,4,0,2,6,1,3,0.303,0.5,0.241,0,0,0,0,0,0,29
 2011,al,Dean Peterson,Jarrod Saltalamacchia,1516,Mia,C,7,act,active,C,358,103,52,16,56,1,119,24,0.288,0.0,0.45,0,101,0,0,0,0,0
 2011,al,Dean Peterson,Kurt Suzuki,1063,Min,C,14,act,active,C,460,134,54,14,44,2,64,38,0.301,0.125,0.385,4,129,0,0,0,0,0
 2011,al,Dean Peterson,Travis Hafner,412,NYY,UT,3,act,active,UT,302,88,40,13,54,0,74,33,0.364,0.286,0.464,85,0,0,0,0,0,0
-2011,al,Dean Peterson,John McDonald,1580,LAA,CI,0,rel,previously_active,,11,4,1,0,2,0,0,0,0.273,0.0,0.273,0,0,0,21,26,38,0
-2011,al,Dean Peterson,Adam Rosales,2178,Tex,MI,0,rel,previously_active,,5,2,1,0,0,0,0,1,0.167,0.0,0.0,0,0,5,3,6,7,2
-2011,al,Dean Peterson,Elliot Johnson,1468,Cle,MI,4,rel,previously_active,,3,3,1,0,0,0,0,1,0.5,0.0,0.667,0,0,2,9,0,52,2
-2011,al,Dean Peterson,Ramon Santiago,515,Tor,MI,0,rel,previously_active,,75,27,7,1,5,0,18,5,0.235,0.0,0.28,0,0,0,75,5,27,0
 2011,al,Dean Peterson,Reid Brignac,1486,Mia,MI,12,rel,previously_active,,43,15,2,0,1,1,11,0,0.233,0.0,0.233,0,0,0,0,0,91,0
+2011,al,Dean Peterson,Mike McCoy,2911,Bos,CI,0,rel,previously_active,,10,7,2,0,1,0,0,4,0.429,0.0,0.2,5,0,0,10,16,26,20
+2011,al,Dean Peterson,Adam Rosales,2178,Tex,MI,0,rel,previously_active,,5,2,1,0,0,0,0,1,0.167,0.0,0.0,0,0,5,3,6,7,2
+2011,al,Dean Peterson,John McDonald,1580,LAA,CI,0,rel,previously_active,,11,4,1,0,2,0,0,0,0.273,0.0,0.273,0,0,0,21,26,38,0
 2011,al,Dean Peterson,Matt LaPorta,867,Bal,CI,10,res,previously_active,"1B,CI",326,100,31,11,49,1,81,22,0.3,0.0,0.414,8,0,97,0,0,0,0
 2011,al,Dean Peterson,Cesar Izturis,1408,FA,MI,0,rel,previously_active,,9,7,0,0,1,0,4,2,0.273,0.0,0.111,1,0,0,3,1,12,0
-2011,al,Dean Peterson,Mike McCoy,2911,Bos,CI,0,rel,previously_active,,10,7,2,0,1,0,0,4,0.429,0.0,0.2,5,0,0,10,16,26,20
-2011,al,Dean Peterson,Blake Davis,2414,Bal,MI,0,rel,previously_active,,3,2,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,18,1,2,0
+2011,al,Dean Peterson,Ramon Santiago,515,Tor,MI,0,rel,previously_active,,75,27,7,1,5,0,18,5,0.235,0.0,0.28,0,0,0,75,5,27,0
+2011,al,Dean Peterson,Elliot Johnson,1468,Cle,MI,4,rel,previously_active,,3,3,1,0,0,0,0,1,0.5,0.0,0.667,0,0,2,9,0,52,2
 2011,al,Dean Peterson,Yamaico Navarro,2669,NYY,MI,0,rel,previously_active,,28,9,4,0,4,0,7,3,0.355,0.0,0.357,0,0,0,0,16,4,3
-2011,al,Dean Peterson,Jack Hannahan,1068,FA,3B,0,rel,previously_active,,50,14,6,3,11,0,12,1,0.404,0.0,0.64,0,0,8,0,104,0,0
+2011,al,Dean Peterson,Blake Davis,2414,Bal,MI,0,rel,previously_active,,3,2,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,18,1,2,0
 2011,al,Dean Peterson,Mark Teahen,693,FA,3B,5,rel,previously_active,,115,50,11,3,11,0,27,12,0.283,0.0,0.313,6,0,18,0,32,0,15
-2011,al,Dean Peterson,Nick Markakis,134,Atl,OF,22,trd,previously_active,,282,68,28,5,26,4,31,21,0.316,0.0,0.333,1,0,3,0,0,0,157
+2011,al,Dean Peterson,Jack Hannahan,1068,FA,3B,0,rel,previously_active,,50,14,6,3,11,0,12,1,0.404,0.0,0.64,0,0,8,0,104,0,0
 2011,al,Dean Peterson,Carlos Quentin,242,SD,OF,16,res,previously_active,OF,419,117,53,24,77,1,83,34,0.341,0.0,0.501,15,0,0,0,0,0,102
-2011,al,Dean Peterson,Travis Snider,1606,Bal,OF,14,rel,previously_active,,187,49,23,3,30,9,56,11,0.269,0.0,0.348,1,0,0,0,0,0,48
-2011,al,Dean Peterson,David Murphy,1531,Cle,OF,9,trd,previously_active,,210,63,18,4,16,5,32,23,0.308,0.0,0.324,9,0,0,0,0,0,109
 2011,al,Dean Peterson,Craig Gentry,2904,Oak,OF,1,rel,previously_active,,18,9,0,0,2,0,7,1,0.25,0.0,0.222,0,0,0,0,0,0,60
 2011,al,Dean Peterson,Endy Chavez,957,Sea,OF,3,res,previously_active,OF,229,74,35,3,23,10,28,9,0.338,0.0,0.428,0,0,0,0,0,0,75
+2011,al,Dean Peterson,Nick Markakis,134,Atl,OF,22,trd,previously_active,,282,68,28,5,26,4,31,21,0.316,0.0,0.333,1,0,3,0,0,0,157
+2011,al,Dean Peterson,David Murphy,1531,Cle,OF,9,trd,previously_active,,210,63,18,4,16,5,32,23,0.308,0.0,0.324,9,0,0,0,0,0,109
+2011,al,Dean Peterson,Travis Snider,1606,Bal,OF,14,rel,previously_active,,187,49,23,3,30,9,56,11,0.269,0.0,0.348,1,0,0,0,0,0,48
 2011,al,Dean Peterson,Shelley Duncan,1016,Cin,OF,5,rel,previously_active,,54,17,11,6,14,0,11,5,0.377,0.0,0.704,23,0,7,0,0,0,39
-2011,al,Dean Peterson,Michael Taylor,2603,CWS,UT,10,rel,previously_active,,14,5,3,0,0,0,4,2,0.375,0.0,0.286,0,0,0,0,0,0,11
 2011,al,Dean Peterson,Matt Tolbert,900,Phi,UT,0,rel,previously_active,,27,11,6,0,4,1,3,3,0.387,0.0,0.519,3,0,0,36,6,31,0
+2011,al,Dean Peterson,Michael Taylor,2603,CWS,UT,10,rel,previously_active,,14,5,3,0,0,0,4,2,0.375,0.0,0.286,0,0,0,0,0,0,11
 2011,al,Dean Peterson,Matt LaPorta,867,Bal,CI,10,res,reserved,"1B,CI",26,7,3,0,4,0,6,1,0.286,0.429,0.385,8,0,97,0,0,0,0
 2011,al,Dean Peterson,Carlos Quentin,242,SD,OF,16,res,reserved,OF,2,1,0,0,0,0,1,0,0.0,0.0,0.0,15,0,0,0,0,0,102
 2011,al,Dean Peterson,Endy Chavez,957,Sea,OF,3,res,reserved,OF,18,7,2,2,4,0,1,1,0.3,0.0,0.611,0,0,0,0,0,0,75
-2011,al,Dean Peterson,Ramon Santiago,515,Tor,MI,0,rel,previously_reserved,,38,20,3,0,2,0,8,4,0.326,0.0,0.237,0,0,0,75,5,27,0
 2011,al,Dean Peterson,Cesar Izturis,1408,FA,MI,0,rel,previously_reserved,,17,7,3,0,0,0,5,0,0.235,0.0,0.235,1,0,0,3,1,12,0
+2011,al,Dean Peterson,Ramon Santiago,515,Tor,MI,0,rel,previously_reserved,,38,20,3,0,2,0,8,4,0.326,0.0,0.237,0,0,0,75,5,27,0
 2011,al,Dean Peterson,Mike McCoy,2911,Bos,CI,0,rel,previously_reserved,,17,8,2,0,1,0,3,5,0.364,0.0,0.294,5,0,0,10,16,26,20
-2011,al,Dean Peterson,Mark Teahen,693,FA,3B,5,rel,previously_reserved,,4,2,0,0,0,0,1,0,0.0,0.0,0.0,6,0,18,0,32,0,15
 2011,al,Dean Peterson,Chris Davis,1544,Bal,3B,2,act,previously_reserved,"1B,3B,CI",26,7,3,0,4,1,11,4,0.367,0.0,0.385,2,0,31,0,26,0,0
-2011,al,Dean Peterson,Ben Revere,2085,Phi,OF,0,act,previously_reserved,OF,17,4,4,0,2,1,1,1,0.389,0.0,0.412,1,0,0,0,0,0,106
+2011,al,Dean Peterson,Mark Teahen,693,FA,3B,5,rel,previously_reserved,,4,2,0,0,0,0,1,0,0.0,0.0,0.0,6,0,18,0,32,0,15
 2011,al,Dean Peterson,Nelson Cruz,1529,Sea,OF,32,act,previously_reserved,"UT,OF",10,3,0,0,0,0,6,0,0.1,0.0,0.1,8,0,0,0,0,0,115
-2011,al,Dean Peterson,Craig Gentry,2904,Oak,OF,1,rel,previously_reserved,,15,5,2,0,0,3,2,4,0.368,0.0,0.2,0,0,0,0,0,0,60
 2011,al,Dean Peterson,David Murphy,1531,Cle,OF,9,trd,previously_reserved,,48,16,10,1,5,1,9,1,0.367,0.0,0.458,9,0,0,0,0,0,109
 2011,al,Dean Peterson,Matt Angle,3070,Mia,OF,5,act,previously_reserved,OF,35,13,6,1,4,4,8,7,0.31,0.0,0.314,0,0,0,0,0,0,29
+2011,al,Dean Peterson,Craig Gentry,2904,Oak,OF,1,rel,previously_reserved,,15,5,2,0,0,3,2,4,0.368,0.0,0.2,0,0,0,0,0,0,60
+2011,al,Dean Peterson,Ben Revere,2085,Phi,OF,0,act,previously_reserved,OF,17,4,4,0,2,1,1,1,0.389,0.0,0.412,1,0,0,0,0,0,106
 2011,al,Dean Peterson,Michael Taylor,2603,CWS,UT,10,rel,previously_reserved,,6,3,1,1,1,0,3,2,0.375,0.0,0.667,0,0,0,0,0,0,11
 2011,al,Dean Peterson,Travis Hafner,412,NYY,UT,3,act,previously_reserved,UT,23,6,1,0,3,0,4,3,0.333,0.0,0.261,85,0,0,0,0,0,0
 2011,al,Dean Peterson,Matt Tolbert,900,Phi,UT,0,rel,previously_reserved,,57,20,4,0,5,0,10,4,0.21,0.0,0.175,3,0,0,36,6,31,0
+2011,al,Mike Siano,Mitch Moreland,3033,Tex,1B,14,act,active,"1B,OF,CI",187,53,21,4,24,0,38,16,0.312,0.167,0.369,8,0,99,0,0,0,34
 2011,al,Mike Siano,Scott Sizemore,533,Mia,MI,1,act,active,"3B,2B,MI",344,103,48,10,51,4,107,51,0.334,0.5,0.384,0,0,0,18,91,0,0
 2011,al,Mike Siano,Alex Rodriguez,1012,NYY,CI,33,act,active,"3B,CI",373,99,67,16,62,4,80,47,0.362,0.375,0.461,10,0,0,0,89,0,0
-2011,al,Mike Siano,Mitch Moreland,3033,Tex,1B,14,act,active,"1B,OF,CI",187,53,21,4,24,0,38,16,0.312,0.167,0.369,8,0,99,0,0,0,34
 2011,al,Mike Siano,Robinson Cano,1008,Sea,2B,30,act,active,"2B,MI",623,159,104,28,118,8,96,38,0.349,0.25,0.533,7,0,0,157,0,0,0
-2011,al,Mike Siano,Jason Donald,2150,Tex,SS,5,act,active,"UT,SS,2B,MI",130,38,13,1,8,3,33,6,0.364,0.4,0.408,0,0,0,19,4,16,0
+2011,al,Mike Siano,Jason Donald,2150,Tex,SS,5,act,active,"UT,2B,SS,MI",130,38,13,1,8,3,33,6,0.364,0.4,0.408,0,0,0,19,4,16,0
 2011,al,Mike Siano,Brent Morel,2794,Pit,3B,10,act,active,"3B,CI",413,126,44,10,41,5,57,22,0.287,0.0,0.366,0,0,0,0,125,0,0
-2011,al,Mike Siano,Michael Cuddyer,901,NYM,OF,16,act,active,"OF,1B,CI,2B",205,51,27,7,26,4,44,10,0.304,0.375,0.454,8,0,46,17,0,0,77
-2011,al,Mike Siano,Andy Dirks,3484,Tor,OF,10,act,active,OF,199,72,28,6,24,5,31,9,0.294,0.333,0.397,2,0,0,0,0,0,71
 2011,al,Mike Siano,Shelley Duncan,1016,Cin,OF,1,act,active,"1B,OF",11,3,0,0,1,0,4,1,0.167,0.167,0.182,23,0,7,0,0,0,39
-2011,al,Mike Siano,Curtis Granderson,517,NYM,OF,23,act,active,OF,583,156,136,41,119,25,169,85,0.364,0.091,0.552,1,0,0,0,0,0,155
 2011,al,Mike Siano,Desmond Jennings,2005,TB,OF,3,act,active,OF,241,61,42,10,24,18,58,29,0.339,0.176,0.427,1,0,0,0,0,0,60
+2011,al,Mike Siano,Michael Cuddyer,901,NYM,OF,16,act,active,"OF,1B,2B,CI",205,51,27,7,26,4,44,10,0.304,0.375,0.454,8,0,46,17,0,0,77
+2011,al,Mike Siano,Andy Dirks,3484,Tor,OF,10,act,active,OF,199,72,28,6,24,5,31,9,0.294,0.333,0.397,2,0,0,0,0,0,71
+2011,al,Mike Siano,Curtis Granderson,517,NYM,OF,23,act,active,OF,583,156,136,41,119,25,169,85,0.364,0.091,0.552,1,0,0,0,0,0,155
 2011,al,Mike Siano,Bobby Wilson,734,TB,C,0,act,active,"C,1B",48,22,4,1,4,0,7,3,0.231,0.333,0.292,2,47,6,0,0,0,0
 2011,al,Mike Siano,Lou Marson,1150,Cin,C,0,act,active,C,13,4,4,0,1,0,5,2,0.333,0.286,0.308,1,78,0,0,0,0,0
 2011,al,Mike Siano,Lorenzo Cain,2002,KC,UT,9,act,active,OF,11,3,1,0,1,0,2,0,0.273,0.273,0.273,0,0,0,0,0,0,6
-2011,al,Mike Siano,Don Kelly,44,Mia,1B,1,rel,previously_active,,11,5,1,0,1,1,2,0,0.333,0.0,0.273,2,1,15,0,45,0,58
-2011,al,Mike Siano,Brandon Snyder,2036,Bos,1B,5,rel,previously_active,,2,1,0,0,0,0,1,1,0.333,0.0,0.0,1,0,5,0,0,0,0
-2011,al,Mike Siano,Russell Branyan,1707,Cle,1B,13,res,previously_active,"1B,CI",48,27,6,3,8,1,14,11,0.356,0.0,0.437,13,0,25,0,2,0,0
 2011,al,Mike Siano,Brandon Inge,512,FA,CI,10,res,previously_active,"3B,CI",48,28,9,1,4,0,12,7,0.357,0.0,0.375,1,0,0,0,99,0,0
+2011,al,Mike Siano,Brandon Snyder,2036,Bos,1B,5,rel,previously_active,,2,1,0,0,0,0,1,1,0.333,0.0,0.0,1,0,5,0,0,0,0
+2011,al,Mike Siano,Don Kelly,44,Mia,1B,1,rel,previously_active,,11,5,1,0,1,1,2,0,0.333,0.0,0.273,2,1,15,0,45,0,58
+2011,al,Mike Siano,Russell Branyan,1707,Cle,1B,13,res,previously_active,"1B,CI",48,27,6,3,8,1,14,11,0.356,0.0,0.437,13,0,25,0,2,0,0
 2011,al,Mike Siano,Blake Davis,2414,Bal,SS,1,rel,previously_active,,35,16,2,0,1,0,9,5,0.3,0.0,0.257,0,0,0,18,1,2,0
-2011,al,Mike Siano,John McDonald,1580,LAA,SS,0,rel,previously_active,,92,30,9,2,10,1,12,5,0.204,0.0,0.261,0,0,0,21,26,38,0
 2011,al,Mike Siano,Andres Blanco,303,Phi,SS,0,rel,previously_active,,2,1,0,0,0,0,1,1,0.333,0.0,0.0,0,0,0,5,6,23,1
+2011,al,Mike Siano,John McDonald,1580,LAA,SS,0,rel,previously_active,,92,30,9,2,10,1,12,5,0.204,0.0,0.261,0,0,0,21,26,38,0
 2011,al,Mike Siano,Danny Worth,3290,Ari,3B,5,rel,previously_active,,27,16,2,0,3,0,7,1,0.357,0.0,0.407,0,0,0,15,13,0,0
 2011,al,Mike Siano,Mitch Maier,692,KC,OF,0,rel,previously_active,,9,6,4,0,2,0,2,2,0.545,0.0,0.778,3,0,0,0,0,0,29
+2011,al,Mike Siano,Brent Lillibridge,95,Tex,OF,4,dis,previously_active,"UT,2B,OF,MI,1B",159,85,34,11,25,10,57,16,0.335,0.0,0.472,6,0,22,6,0,0,59
+2011,al,Mike Siano,Manny Ramirez,188,ChC,OF,13,rel,previously_active,,17,5,0,0,1,0,4,0,0.059,0.0,0.059,4,0,0,0,0,0,0
+2011,al,Mike Siano,Rajai Davis,1311,Det,OF,20,dis,previously_active,OF,320,95,44,1,29,34,63,15,0.273,0.0,0.35,1,0,0,0,0,0,91
+2011,al,Mike Siano,Jack Cust,1081,Bal,OF,6,rel,previously_active,,185,56,16,2,19,0,65,40,0.358,0.0,0.319,63,0,0,0,0,0,0
+2011,al,Mike Siano,Travis Buck,1074,SD,OF,5,rel,previously_active,,120,41,14,2,16,1,23,8,0.277,0.0,0.342,6,0,0,0,0,0,40
+2011,al,Mike Siano,Mark Teahen,693,FA,OF,0,rel,previously_active,,19,15,1,0,1,0,9,1,0.2,0.0,0.211,6,0,18,0,32,0,15
+2011,al,Mike Siano,Michael Wilson,2308,Cin,OF,10,rel,previously_active,,19,6,0,0,2,0,5,1,0.2,0.0,0.211,1,0,0,0,0,0,7
 2011,al,Mike Siano,Chris Carter,2028,Hou,OF,10,res,previously_active,"1B,OF",29,9,1,0,0,0,14,2,0.194,0.0,0.138,4,0,11,0,0,0,0
 2011,al,Mike Siano,Jarrod Dyson,2961,KC,OF,0,rel,previously_active,,21,15,6,0,0,9,7,4,0.32,0.0,0.19,1,0,0,0,0,0,17
-2011,al,Mike Siano,Michael Wilson,2308,Cin,OF,10,rel,previously_active,,19,6,0,0,2,0,5,1,0.2,0.0,0.211,1,0,0,0,0,0,7
-2011,al,Mike Siano,Rajai Davis,1311,Det,OF,20,dis,previously_active,OF,320,95,44,1,29,34,63,15,0.273,0.0,0.35,1,0,0,0,0,0,91
-2011,al,Mike Siano,Mark Teahen,693,FA,OF,0,rel,previously_active,,19,15,1,0,1,0,9,1,0.2,0.0,0.211,6,0,18,0,32,0,15
-2011,al,Mike Siano,Jack Cust,1081,Bal,OF,6,rel,previously_active,,185,56,16,2,19,0,65,40,0.358,0.0,0.319,63,0,0,0,0,0,0
-2011,al,Mike Siano,Brent Lillibridge,95,Tex,OF,4,dis,previously_active,"UT,2B,OF,1B,MI",159,85,34,11,25,10,57,16,0.335,0.0,0.472,6,0,22,6,0,0,59
-2011,al,Mike Siano,Manny Ramirez,188,ChC,OF,13,rel,previously_active,,17,5,0,0,1,0,4,0,0.059,0.0,0.059,4,0,0,0,0,0,0
-2011,al,Mike Siano,Travis Buck,1074,SD,OF,5,rel,previously_active,,120,41,14,2,16,1,23,8,0.277,0.0,0.342,6,0,0,0,0,0,40
-2011,al,Mike Siano,Josh Bard,1245,FA,C,0,rel,previously_active,,42,14,3,1,7,0,11,4,0.283,0.0,0.286,1,25,0,0,0,0,0
-2011,al,Mike Siano,Hank Conger,758,Hou,C,4,rel,previously_active,,154,50,12,5,16,0,33,17,0.297,0.0,0.357,1,56,0,0,0,0,0
 2011,al,Mike Siano,Matt Treanor,561,Cle,C,1,rel,previously_active,,182,64,23,2,17,2,50,30,0.335,0.0,0.28,0,72,0,0,0,0,0
+2011,al,Mike Siano,Hank Conger,758,Hou,C,4,rel,previously_active,,154,50,12,5,16,0,33,17,0.297,0.0,0.357,1,56,0,0,0,0,0
 2011,al,Mike Siano,Manuel Pina,2391,Det,C,1,rel,previously_active,,3,1,0,0,0,0,0,1,0.25,0.0,0.0,0,4,0,0,0,0,0
+2011,al,Mike Siano,Josh Bard,1245,FA,C,0,rel,previously_active,,42,14,3,1,7,0,11,4,0.283,0.0,0.286,1,25,0,0,0,0,0
 2011,al,Mike Siano,Francisco Cervelli,1004,Pit,UT,0,rel,previously_active,,5,2,0,0,1,0,2,0,0.2,0.0,0.2,0,41,0,1,2,0,0
 2011,al,Mike Siano,Russell Branyan,1707,Cle,1B,13,res,reserved,"1B,CI",6,6,1,1,3,0,2,0,0.167,0.0,0.667,13,0,25,0,2,0,0
 2011,al,Mike Siano,Brandon Inge,512,FA,CI,10,res,reserved,"3B,CI",1,2,1,0,0,0,1,0,0.0,0.0,0.0,1,0,0,0,99,0,0
 2011,al,Mike Siano,Chris Carter,2028,Hou,OF,10,res,reserved,"1B,OF",14,5,1,0,0,0,6,0,0.143,0.167,0.143,4,0,11,0,0,0,0
 2011,al,Mike Siano,Rajai Davis,1311,Det,OF,20,dis,reserved,OF,0,0,0,0,0,0,0,0,0.0,0.0,0.0,1,0,0,0,0,0,91
-2011,al,Mike Siano,Brent Lillibridge,95,Tex,OF,4,dis,reserved,"UT,2B,OF,1B,MI",27,12,4,2,4,0,5,1,0.367,0.0,0.704,6,0,22,6,0,0,59
-2011,al,Mike Siano,Brandon Snyder,2036,Bos,1B,5,rel,previously_reserved,,4,1,1,0,1,0,1,1,0.4,0.0,0.25,1,0,5,0,0,0,0
+2011,al,Mike Siano,Brent Lillibridge,95,Tex,OF,4,dis,reserved,"UT,2B,OF,MI,1B",27,12,4,2,4,0,5,1,0.367,0.0,0.704,6,0,22,6,0,0,59
 2011,al,Mike Siano,Scott Sizemore,533,Mia,MI,1,act,previously_reserved,"3B,2B,MI",24,7,2,1,5,1,5,2,0.462,0.0,0.625,0,0,0,18,91,0,0
+2011,al,Mike Siano,Brandon Snyder,2036,Bos,1B,5,rel,previously_reserved,,4,1,1,0,1,0,1,1,0.4,0.0,0.25,1,0,5,0,0,0,0
 2011,al,Mike Siano,John McDonald,1580,LAA,SS,0,rel,previously_reserved,,4,3,0,0,0,0,0,0,0.25,0.0,0.5,0,0,0,21,26,38,0
 2011,al,Mike Siano,Danny Worth,3290,Ari,3B,5,rel,previously_reserved,,1,1,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,15,13,0,0
 2011,al,Mike Siano,Jarrod Dyson,2961,KC,OF,0,rel,previously_reserved,,3,2,0,0,0,0,1,0,0.0,0.0,0.0,1,0,0,0,0,0,17
@@ -421,26 +450,26 @@ year,league,team,player_name,player_id,mlb_team,position,salary,status,roster_se
 2011,al,Mike Siano,Andy Dirks,3484,Tor,OF,10,act,previously_reserved,OF,20,6,6,1,4,0,5,2,0.318,0.0,0.5,2,0,0,0,0,0,71
 2011,al,Mike Siano,Matt Treanor,561,Cle,C,1,rel,previously_reserved,,5,4,0,0,1,0,2,1,0.143,0.0,0.0,0,72,0,0,0,0,0
 2011,al,Mike Siano,Lorenzo Cain,2002,KC,UT,9,act,previously_reserved,OF,11,3,3,0,0,0,2,1,0.333,0.0,0.364,0,0,0,0,0,0,6
-2011,al,Lawr Michaels,Chone Figgins,737,FA,MI,19,act,active,"3B,MI,2B",288,81,24,1,15,11,42,21,0.241,0.0,0.243,0,0,0,0,80,0,2
-2011,al,Lawr Michaels,Justin Morneau,898,Col,CI,20,act,active,"1B,CI",264,69,19,4,30,0,44,19,0.285,0.0,0.333,13,0,56,0,0,0,0
 2011,al,Lawr Michaels,Alex Gordon,681,KC,1B,13,act,active,"OF,1B",611,151,101,23,87,17,139,67,0.376,0.0,0.502,0,0,7,0,0,0,148
-2011,al,Lawr Michaels,Dustin Ackley,2586,Sea,2B,8,act,active,"UT,2B",333,90,39,6,36,6,79,40,0.348,0.167,0.417,2,0,1,86,0,0,0
-2011,al,Lawr Michaels,Asdrubal Cabrera,400,TB,SS,15,act,active,"SS,MI",604,151,87,25,92,17,119,44,0.332,0.25,0.46,0,0,0,0,0,151,0
+2011,al,Lawr Michaels,Justin Morneau,898,Col,CI,20,act,active,"1B,CI",264,69,19,4,30,0,44,19,0.285,0.0,0.333,13,0,56,0,0,0,0
+2011,al,Lawr Michaels,Chone Figgins,737,FA,MI,19,act,active,"3B,2B,MI",288,81,24,1,15,11,42,21,0.241,0.0,0.243,0,0,0,0,80,0,2
+2011,al,Lawr Michaels,Dustin Ackley,2586,Sea,2B,8,act,active,2B,333,90,39,6,36,6,79,40,0.348,0.167,0.417,2,0,1,86,0,0,0
+2011,al,Lawr Michaels,Asdrubal Cabrera,400,TB,SS,15,act,active,"UT,SS,MI",604,151,87,25,92,17,119,44,0.332,0.25,0.46,0,0,0,0,0,151,0
 2011,al,Lawr Michaels,Alberto Callaspo,678,Atl,3B,5,act,active,"3B,CI",475,141,54,6,46,8,48,58,0.366,0.3,0.375,0,0,0,0,129,0,0
-2011,al,Lawr Michaels,Dayan Viciedo,2126,FA,OF,9,act,active,"OF,3B,CI",99,28,9,0,3,1,22,8,0.312,0.182,0.273,6,0,4,0,0,0,21
-2011,al,Lawr Michaels,Hideki Matsui,1017,FA,OF,12,act,active,OF,196,50,21,3,20,0,27,17,0.304,0.364,0.337,109,0,0,0,0,0,27
+2011,al,Lawr Michaels,Dayan Viciedo,2126,FA,OF,9,act,active,"OF,CI,3B",99,28,9,0,3,1,22,8,0.312,0.182,0.273,6,0,4,0,0,0,21
 2011,al,Lawr Michaels,Coco Crisp,184,Oak,OF,18,act,active,OF,531,136,69,8,54,49,65,41,0.314,0.167,0.379,2,0,0,0,0,0,133
 2011,al,Lawr Michaels,Josh Hamilton,1530,LAA,OF,29,act,active,OF,487,121,80,25,94,8,93,39,0.346,0.231,0.536,9,0,0,0,0,0,112
+2011,al,Lawr Michaels,Hideki Matsui,1017,FA,OF,12,act,active,OF,196,50,21,3,20,0,27,17,0.304,0.364,0.337,109,0,0,0,0,0,27
 2011,al,Lawr Michaels,Nick Swisher,243,Cle,OF,20,act,active,"OF,1B",526,150,81,23,85,2,125,95,0.374,0.375,0.449,5,0,11,0,0,0,141
-2011,al,Lawr Michaels,John Jaso,1461,TB,C,5,act,active,"UT,C",240,87,26,5,24,1,36,25,0.297,1.0,0.354,0,82,0,0,0,0,0
 2011,al,Lawr Michaels,Matt Wieters,146,Bal,C,17,act,active,C,500,139,72,22,68,1,84,48,0.328,0.308,0.45,3,132,1,0,0,0,0
+2011,al,Lawr Michaels,John Jaso,1461,TB,C,5,act,active,"UT,C",240,87,26,5,24,1,36,25,0.297,1.0,0.354,0,82,0,0,0,0,0
 2011,al,Lawr Michaels,Jim Thome,244,Cle,UT,4,act,active,UT,275,91,32,15,49,0,91,46,0.36,0.6,0.476,78,0,0,0,1,0,0
-2011,al,Lawr Michaels,Kevin Kouzmanoff,1254,FA,CI,11,rel,previously_active,,129,44,13,4,16,2,27,7,0.241,0.0,0.341,0,0,0,0,71,0,0
 2011,al,Lawr Michaels,Jack Wilson,1189,FA,MI,0,rel,previously_active,,177,65,24,0,11,5,25,9,0.287,0.0,0.299,0,0,0,45,4,26,0
+2011,al,Lawr Michaels,Kevin Kouzmanoff,1254,FA,CI,11,rel,previously_active,,129,44,13,4,16,2,27,7,0.241,0.0,0.341,0,0,0,0,71,0,0
 2011,al,Lawr Michaels,Mike Cameron,859,Was,OF,3,res,previously_active,OF,183,60,20,6,17,1,52,17,0.252,0.0,0.311,2,0,0,0,0,0,69
-2011,al,Lawr Michaels,Reggie Willits,752,LAA,OF,0,rel,previously_active,,4,4,0,0,0,0,2,0,0.0,0.0,0.0,0,0,0,0,0,0,20
 2011,al,Lawr Michaels,Jack Cust,1081,Bal,OF,10,trd,previously_active,,28,7,2,0,0,0,15,1,0.207,0.0,0.25,63,0,0,0,0,0,0
 2011,al,Lawr Michaels,Carlos Peguero,3289,Tex,OF,7,res,previously_active,OF,123,38,13,5,18,0,46,7,0.261,0.0,0.382,2,0,0,0,0,0,43
+2011,al,Lawr Michaels,Reggie Willits,752,LAA,OF,0,rel,previously_active,,4,4,0,0,0,0,2,0,0.0,0.0,0.0,0,0,0,0,0,0,20
 2011,al,Lawr Michaels,Landon Powell,1062,NYM,C,0,rel,previously_active,,8,3,0,0,0,0,2,0,0.0,0.0,0.0,0,33,1,0,0,0,0
 2011,al,Lawr Michaels,Jeff Mathis,732,Mia,C,0,rel,previously_active,,9,4,0,0,0,0,4,0,0.0,0.0,0.0,2,91,0,0,0,0,0
 2011,al,Lawr Michaels,Rene Tosoni,2865,Mil,UT,5,rel,previously_active,,20,10,2,1,2,0,9,0,0.19,0.0,0.3,9,0,0,0,0,0,42
@@ -449,8 +478,8 @@ year,league,team,player_name,player_id,mlb_team,position,salary,status,roster_se
 2011,al,Lawr Michaels,Carlos Peguero,3289,Tex,OF,7,res,reserved,OF,9,3,1,1,1,0,3,1,0.2,0.0,0.444,2,0,0,0,0,0,43
 2011,al,Lawr Michaels,Mike Cameron,859,Was,OF,3,res,reserved,OF,54,18,7,3,10,0,7,11,0.385,0.0,0.519,2,0,0,0,0,0,69
 2011,al,Lawr Michaels,Kevin Kouzmanoff,1254,FA,CI,11,rel,previously_reserved,,7,2,0,0,1,0,0,1,0.625,0.0,0.571,0,0,0,0,71,0,0
-2011,al,Lawr Michaels,Dayan Viciedo,2126,FA,OF,9,act,previously_reserved,"OF,3B,CI",3,1,2,1,3,0,1,1,0.75,0.0,1.67,6,0,4,0,0,0,21
-2011,al,Lawr Michaels,Landon Powell,1062,NYM,C,0,rel,previously_reserved,,22,7,3,0,2,0,5,5,0.407,0.0,0.364,0,33,1,0,0,0,0
+2011,al,Lawr Michaels,Dayan Viciedo,2126,FA,OF,9,act,previously_reserved,"OF,CI,3B",3,1,2,1,3,0,1,1,0.75,0.0,1.67,6,0,4,0,0,0,21
 2011,al,Lawr Michaels,John Jaso,1461,TB,C,5,act,previously_reserved,"UT,C",6,2,0,0,3,0,0,0,0.333,0.0,0.333,0,82,0,0,0,0,0
-2011,al,Lawr Michaels,Jim Thome,244,Cle,UT,4,act,previously_reserved,UT,2,2,0,0,1,0,1,0,0.5,0.0,0.5,78,0,0,0,1,0,0
+2011,al,Lawr Michaels,Landon Powell,1062,NYM,C,0,rel,previously_reserved,,22,7,3,0,2,0,5,5,0.407,0.0,0.364,0,33,1,0,0,0,0
 2011,al,Lawr Michaels,Alexi Amarista,3084,SD,UT,10,rel,previously_reserved,,15,5,1,0,0,0,0,1,0.25,0.0,0.2,0,0,0,14,0,1,8
+2011,al,Lawr Michaels,Jim Thome,244,Cle,UT,4,act,previously_reserved,UT,2,2,0,0,1,0,1,0,0.5,0.0,0.5,78,0,0,0,1,0,0
