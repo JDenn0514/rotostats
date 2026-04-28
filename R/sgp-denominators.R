@@ -764,7 +764,7 @@ sgp_denominators <- function(
         if (n_y == 0L) {
           cli::cli_warn(
             "Category {.val {cat}} has no valid rows for year {.val {y}}. Slope set to NA.",
-            class = "rotostats_warning_no_rows_for_year"
+            class = "rotostats_warning_empty_category_year"
           )
           return(list(
             year = y,

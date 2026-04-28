@@ -449,7 +449,7 @@ test_that("T-22b: Year with all-NA category values emits no_rows_for_year warnin
       scoring_categories = c("HR", "AVG"),
       exclude_years      = integer(0)
     ),
-    class = "rotostats_warning_no_rows_for_year"
+    class = "rotostats_warning_empty_category_year"
   )
 
   # Function must not error; denominators must be returned.
