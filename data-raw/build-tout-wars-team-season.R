@@ -71,7 +71,7 @@ team_pit$team_id <- vapply(
 joined <- dplyr::left_join(
   standings,
   dplyr::select(team_bat, .data$year, .data$league, .data$team_id,
-                .data$ab, .data$bb_bat, .data$so_bat, .data$h_bat_eq),
+                .data$ab, .data$h_bat, .data$bb_bat, .data$so_bat),
   by = c("year", "league", "team_id")
 )
 joined <- dplyr::left_join(
@@ -97,6 +97,17 @@ if (nrow(unmatched) > 0L) {
 # ---- 7. Reconciliation ------------------------------------------------------
 joined <- rotostats:::.compute_team_residuals(joined)
 
+# Write per-team residual diagnostics first so they're available even if the
+# reconciliation gate aborts below.
+residuals_df <- dplyr::select(
+  joined,
+  .data$year, .data$league, .data$team_id,
+  .data$avg_resid, .data$obp_resid,
+  .data$era_resid, .data$whip_resid,
+  .data$flagged
+)
+readr::write_csv(residuals_df, file.path(cache_dir, "team-season-residuals.csv"))
+
 flag_rate_by_ly <- dplyr::summarise(
   dplyr::group_by(joined, .data$year, .data$league),
   n = dplyr::n(),
@@ -116,16 +127,6 @@ if (nrow(bad_ly) > 0L) {
     class = "rotostats_error_team_season_reconciliation"
   )
 }
-
-# Write per-team residual diagnostics for inspection
-residuals_df <- dplyr::select(
-  joined,
-  .data$year, .data$league, .data$team_id,
-  .data$avg_resid, .data$obp_resid,
-  .data$era_resid, .data$whip_resid,
-  .data$flagged
-)
-readr::write_csv(residuals_df, file.path(cache_dir, "team-season-residuals.csv"))
 
 # ---- 8. Sanity bounds -------------------------------------------------------
 oob <- joined[joined$ab < 3500 | joined$ab > 6500 |

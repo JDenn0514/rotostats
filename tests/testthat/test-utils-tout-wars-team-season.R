@@ -6,14 +6,14 @@ test_that(".read_tw_batters reads a per-team batter CSV with expected columns", 
 
   required <- c("year", "league", "team", "player_name", "player_id",
                 "mlb_team", "position", "salary", "status", "roster_section",
-                "eligibility", "ab", "g", "r", "hr", "rbi", "sb", "so",
-                "bb", "avg", "obp", "slg")
+                "eligibility", "ab", "h", "g", "r", "hr", "rbi", "sb", "so",
+                "bb", "obp", "slg")
   expect_true(all(required %in% names(out)))
   expect_type(out$year, "integer")
   expect_type(out$league, "character")
   expect_type(out$team, "character")
   expect_type(out$ab, "integer")
-  expect_type(out$avg, "double")
+  expect_type(out$h, "integer")
   expect_type(out$obp, "double")
   expect_type(out$roster_section, "character")
   expect_true(nrow(out) > 0)
@@ -66,25 +66,23 @@ test_that(".filter_active_sections errors on unknown section value", {
   )
 })
 
-test_that(".aggregate_team_batting sums AB and reconstructs H/BB/SO per team", {
+test_that(".aggregate_team_batting sums AB, H, BB, SO per team", {
   bat <- tibble::tibble(
     year = 2024L, league = "al", team = "Owner1",
     roster_section = "active",
-    ab  = c(500L, 400L, 300L),
-    bb  = c( 50L,  40L,  20L),
-    so  = c(120L,  90L,  60L),
-    avg = c(0.300, 0.250, 0.200),
-    obp = c(0.380, 0.320, 0.260)
+    ab = c(500L, 400L, 300L),
+    h  = c(150L, 100L,  60L),
+    bb = c( 50L,  40L,  20L),
+    so = c(120L,  90L,  60L)
   )
   out <- rotostats:::.aggregate_team_batting(bat)
   expect_equal(out$year, 2024L)
   expect_equal(out$league, "al")
   expect_equal(out$team, "Owner1")
   expect_equal(out$ab, 1200L)
+  expect_equal(out$h_bat, 310L)
   expect_equal(out$bb_bat, 110L)
   expect_equal(out$so_bat, 270L)
-  # H_eq = round(500*.300) + round(400*.250) + round(300*.200) = 150+100+60 = 310
-  expect_equal(out$h_bat_eq, 310L)
 })
 
 test_that(".aggregate_team_batting groups by (year, league, team)", {
@@ -93,9 +91,9 @@ test_that(".aggregate_team_batting groups by (year, league, team)", {
     league = c("al", "al", "al"),
     team = c("A", "A", "B"),
     roster_section = "active",
-    ab  = c(500L, 400L, 100L),
-    bb  = 0L, so = 0L,
-    avg = 0.300, obp = 0.380
+    ab = c(500L, 400L, 100L),
+    h  = c(150L, 100L,  30L),
+    bb = 0L, so = 0L
   )
   out <- rotostats:::.aggregate_team_batting(bat)
   expect_equal(nrow(out), 2L)
@@ -130,7 +128,7 @@ test_that(".aggregate_team_pitching sums IP and reconstructs ER/H/BB", {
 test_that(".compute_team_residuals computes joined rates and tolerance flag", {
   joined <- tibble::tibble(
     year = 2024L, league = "al", team_id = "OWNER1",
-    ab = 5500L, h_bat_eq = 1500L, bb_bat = 600L,
+    ab = 5500L, h_bat = 1500L, bb_bat = 600L,
     ip = 1450, er_eq = 600L, h_pit_eq = 1300L, bb_pit = 450L,
     AVG = 1500 / 5500,        # exact match
     OBP = (1500 + 600) / (5500 + 600),
@@ -148,7 +146,7 @@ test_that(".compute_team_residuals computes joined rates and tolerance flag", {
 test_that(".compute_team_residuals flags rows exceeding tolerance", {
   joined <- tibble::tibble(
     year = 2024L, league = "al", team_id = "OWNER1",
-    ab = 5500L, h_bat_eq = 1700L, bb_bat = 600L,  # AVG inflated
+    ab = 5500L, h_bat = 1700L, bb_bat = 600L,  # AVG inflated
     ip = 1450, er_eq = 600L, h_pit_eq = 1300L, bb_pit = 450L,
     AVG = 0.270,
     OBP = 0.340,
@@ -163,7 +161,7 @@ test_that(".compute_team_residuals flags rows exceeding tolerance", {
 test_that(".compute_team_residuals handles NA standings values gracefully", {
   joined <- tibble::tibble(
     year = 2024L, league = "al", team_id = "OWNER1",
-    ab = 5500L, h_bat_eq = 1500L, bb_bat = 600L,
+    ab = 5500L, h_bat = 1500L, bb_bat = 600L,
     ip = 1450, er_eq = 600L, h_pit_eq = 1300L, bb_pit = 450L,
     AVG = NA_real_,             # league didn't score AVG that year
     OBP = (1500 + 600) / (5500 + 600),

@@ -5,8 +5,8 @@
 .tw_ts_batter_required_cols <- c(
   "year", "league", "team", "player_name", "player_id",
   "mlb_team", "position", "salary", "status", "roster_section",
-  "eligibility", "ab", "g", "r", "hr", "rbi", "sb", "so",
-  "bb", "avg", "obp", "slg"
+  "eligibility", "ab", "h", "g", "r", "hr", "rbi", "sb", "so",
+  "bb", "obp", "slg"
 )
 
 .tw_ts_pitcher_required_cols <- c(
@@ -59,6 +59,7 @@
       roster_section = readr::col_character(),
       eligibility    = readr::col_character(),
       ab             = readr::col_integer(),
+      h              = readr::col_integer(),
       g              = readr::col_integer(),
       r              = readr::col_integer(),
       hr             = readr::col_integer(),
@@ -66,7 +67,6 @@
       sb             = readr::col_integer(),
       so             = readr::col_integer(),
       bb             = readr::col_integer(),
-      avg            = readr::col_double(),
       obp            = readr::col_double(),
       slg            = readr::col_double(),
       .default       = readr::col_character()
@@ -149,26 +149,22 @@
 
 #' Aggregate batter rows to per-team-season totals.
 #'
-#' Sums AB, BB, SO directly. Reconstructs hits via per-player
-#' `round(ab * avg)` then sums, matching Onroto's three-digit AVG display
-#' precision. Output columns: year, league, team, ab, bb_bat, so_bat,
-#' h_bat_eq.
+#' Sums AB, H, BB, SO directly from the per-player stats. Output columns:
+#' year, league, team, ab, h_bat, bb_bat, so_bat.
 #'
 #' @param df Tibble of batter rows (one per player-team-season).
 #' @return Tibble grouped by (year, league, team).
 #' @keywords internal
 #' @noRd
 .aggregate_team_batting <- function(df) {
-  df$h_eq_row <- as.integer(round(df$ab * df$avg))
-  out <- dplyr::summarise(
+  dplyr::summarise(
     dplyr::group_by(df, .data$year, .data$league, .data$team),
-    ab        = sum(.data$ab),
-    bb_bat    = sum(.data$bb),
-    so_bat    = sum(.data$so),
-    h_bat_eq  = sum(.data$h_eq_row),
-    .groups   = "drop"
+    ab     = sum(.data$ab),
+    h_bat  = sum(.data$h),
+    bb_bat = sum(.data$bb),
+    so_bat = sum(.data$so),
+    .groups = "drop"
   )
-  out
 }
 
 #' Aggregate pitcher rows to per-team-season totals.
@@ -209,7 +205,7 @@
 #'
 #' Operates on a joined frame that already carries both the standings rate
 #' columns (`AVG`, `OBP`, `ERA`, `WHIP`; uppercase to match the standings
-#' schema) and the per-team aggregated counters (`ab`, `h_bat_eq`, `bb_bat`,
+#' schema) and the per-team aggregated counters (`ab`, `h_bat`, `bb_bat`,
 #' `ip`, `er_eq`, `h_pit_eq`, `bb_pit`).
 #'
 #' OBP reconciliation runs in degraded mode (no HBP / SF available from the
@@ -228,8 +224,8 @@
 #' @keywords internal
 #' @noRd
 .compute_team_residuals <- function(joined) {
-  joined_avg  <- joined$h_bat_eq / joined$ab
-  joined_obp  <- (joined$h_bat_eq + joined$bb_bat) / (joined$ab + joined$bb_bat)
+  joined_avg  <- joined$h_bat / joined$ab
+  joined_obp  <- (joined$h_bat + joined$bb_bat) / (joined$ab + joined$bb_bat)
   joined_era  <- joined$er_eq * 9 / joined$ip
   joined_whip <- (joined$bb_pit + joined$h_pit_eq) / joined$ip
 
