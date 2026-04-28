@@ -172,3 +172,16 @@ def test_total_row_check_detects_synthetic_mismatch():
     })
     warnings = team_stats.check_section_totals(result)
     assert any("ab" in w.lower() for w in warnings), warnings
+
+
+@pytest.fixture
+def html_2025_al_team_empty():
+    return (FIXTURE_DIR / "team_stats_2025_al_team_empty.html").read_text()
+
+
+def test_is_empty_team_page_true(html_2025_al_team_empty):
+    assert team_stats.is_empty_team_page(html_2025_al_team_empty) is True
+
+
+def test_is_empty_team_page_false(html_2025_al_team1):
+    assert team_stats.is_empty_team_page(html_2025_al_team1) is False

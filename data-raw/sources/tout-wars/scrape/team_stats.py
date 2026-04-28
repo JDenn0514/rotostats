@@ -547,3 +547,11 @@ def check_section_totals(result: TeamPageResult) -> list[str]:
                     f"rows summed to {summed}, TOTAL row says {total[stat]}"
                 )
     return warnings
+
+
+def is_empty_team_page(html: str) -> bool:
+    """Return True when display_team_stats.pl has no team data
+    (i.e. team_idx is past the last team in the league).
+    """
+    result = parse_team_page(html, year=0, league_short="")
+    return not result.batter_rows and not result.pitcher_rows and not result.totals
