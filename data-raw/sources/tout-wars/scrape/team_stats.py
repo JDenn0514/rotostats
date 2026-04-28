@@ -797,3 +797,36 @@ def scrape_league_year(
     bat_df = pd.DataFrame(all_batters, columns=BATTER_COLUMNS)
     pit_df = pd.DataFrame(all_pitchers, columns=PITCHER_COLUMNS)
     return bat_df, pit_df
+
+
+def main() -> None:
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
+    session, sid = guest_session()
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    for league_code, league_short, years in LEAGUES:
+        for year in years:
+            print(f"Fetching {league_short} {year}...")
+            try:
+                bat_df, pit_df = scrape_league_year(
+                    session, sid, league_code, league_short, year
+                )
+            except requests.HTTPError as e:
+                print(f"  WARN: HTTP error for {league_short} {year}: {e}")
+                continue
+
+            if bat_df.empty and pit_df.empty:
+                print(f"  WARN: no data for {league_short} {year}")
+                continue
+
+            bat_path = OUT_DIR / f"{year}-{league_short}-batters.csv"
+            pit_path = OUT_DIR / f"{year}-{league_short}-pitchers.csv"
+            bat_df.to_csv(bat_path, index=False)
+            pit_df.to_csv(pit_path, index=False)
+            n_teams = bat_df["team"].nunique() if not bat_df.empty else pit_df["team"].nunique()
+            print(f"  -> {bat_path.name} ({len(bat_df)} batter rows), "
+                  f"{pit_path.name} ({len(pit_df)} pitcher rows), {n_teams} teams")
+
+
+if __name__ == "__main__":
+    main()
