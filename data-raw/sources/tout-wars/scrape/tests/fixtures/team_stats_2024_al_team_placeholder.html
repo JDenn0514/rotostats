@@ -1,0 +1,865 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title> OnRoto - toutal </title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<link rel='icon' href='/favicon.ico' type='image/x-icon'>
+<link rel="stylesheet" type="text/css" href="/css/menu_styles_side_red.css">
+<link rel="stylesheet" type="text/css" href="/css/page_styles_red.css">
+<link rel="stylesheet" type="text/css" href="/css/jquery-ui-1.8.16.custom.css">
+
+<!--[if IE]>
+<style type="text/css" media="screen">
+#menu ul li {float: left; width: 100%;}
+</style>
+<![endif]-->
+<!--[if lt IE 7]>
+<style type="text/css" media="screen">
+body {
+behavior: url(/css/csshover.htc);
+font-size: 100%;
+} 
+#menu ul li {float: left; width: 100%;}
+#menu ul li a {height: 1%;} 
+
+#menu a, #menu h2, #menu h1, #menu h4 {
+font: bold 0.8em/1.6em arial, helvetica, sans-serif;
+} 
+</style>
+<![endif]-->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="https://onroto.fangraphs.com/baseball/webnew/javascript/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="https://onroto.fangraphs.com/baseball/webnew/javascript/touch_device.js"></script>
+<!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-G0RN1B30CD"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-G0RN1B30CD'); </script>
+
+
+<script language="JavaScript">
+<!--
+function changeTeams(selection) {
+ var selectedURL="";
+ selectedURL = "https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+" + selection.options[selection.selectedIndex].value + "+2024&session_id=guest";
+ document.location.href = selectedURL;
+}
+// -->
+</script>
+<script type='text/javascript' src='javascript/popup.js'></script>
+<script type="text/javascript">
+var a = Math.floor(Math.random()*9999999999+1);
+var random_number = a;
+
+function clear_psearch()
+{		
+	if(document.forms.player_search_form.psearch.value== "Player Search (use first init + last name)")
+	{
+		document.forms.player_search_form.psearch.value="";
+	}
+}	
+function blur_psearch()
+{		
+	if(document.forms.player_search_form.psearch.value == "")
+	{
+		document.forms.player_search_form.psearch.value="Player Search (use first init + last name)";
+	}
+}	
+</script> 
+</head>
+<body marginwidth="0" marginheight="0" onLoad="document.forms.player_search_form.psearch.blur()" align=center>
+<table width='1020' align='center' border=0 cellpadding=0 cellspacing=0>
+<tr>
+
+
+<!--  Logo, top left  -->
+<td class='nav_header_bg' width=180 height=120 rowspan=2 align="center" valign="middle" bgcolor="#cccccc">
+<a href="https://www.toutwars.com/" target="_blank"><img src="/images/Tout_Wars.jpg" border=0 width=114 height=94 alt=""></a>
+<div class=visit><em>Tout Wars Expert League Draft 3/14, 3/15</em></div>
+</td>
+
+<!--  Banner/league name, top center  -->
+<td class='nav_header_bg' width=840 align="center" height=100 valign="middle" bgcolor="#cccccc">
+
+<!-- PLACE THIS SECTION INSIDE OF YOUR BODY TAGS -->
+<!-- Tag ID: ads-fangraphs_728 -->
+<div align="center" id="ads-fangraphs_728">
+  <script src="https://yield-manager-deployment.assertive.workers.dev/tRW2xasmrSZrN7QWk"></script>
+</div>
+</td>
+</tr>
+<tr>
+
+<td class=nav_header_bg width=840 align="center" valign="middle"  class="league_name">
+<form method=post name="player_search_form" id="player_search_form" action="https://onroto.fangraphs.com/baseball/webnew/player_search.pl?toutal+0&session_id=guest">
+<table width="100%" cellpadding=0 cellspacing=0 border=0 bgcolor=cccccc>
+<tr>
+<td class='nav_header_bg' bgcolor=cccccc align=left>Tout Wars -- AL</td>
+<td class='nav_header_bg' align=right bgcolor=cccccc>
+<input class="input10b" size=40 name="psearch" type="text" value="Player Search (use first init + last name)" id="psearch" onBlur="blur_psearch()" onfocus="clear_psearch()"> 
+&nbsp; 
+<input class="input10b_grey" type=submit name=psearch_submit value="Go">
+</td></tr>
+</table>
+</form>
+</td>
+</tr>
+</table>
+<table width='1020' align='center' cellspacing=0 cellpadding=0 border=0>
+<tr>
+ <td class='nav_header_bg' bgcolor="#cccccc" valign=top align=center height=1200 width=180>
+<div id = "menu">
+<ul>
+  <li> <h2> OnRoto Site Navigation </h2>
+    <ul>
+      <li> <a href="https://onroto.fangraphs.com/index.pl?toutal+0&session_id=guest"> My OnRoto Account </a> </li>
+      <li> <a href="https://onroto.fangraphs.com/baseball/webnew/site_map.pl?toutal+0&session_id=guest"> League Site Map</a> </li>
+      <li> <a href="https://onroto.fangraphs.com/baseball/webnew/updates.pl?toutal+0&session_id=guest"> Updates from OnRoto </a> </li>
+      <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_LFO.pl?toutal+0&session_id=guest">Leagues Needing Owners</a> </li>
+      <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_tributes.pl?toutal+0&session_id=guest"> Member Tributes </a> </li>
+    </ul>
+  </li>
+</ul>
+<div class='stats_darker_grey'>
+&nbsp;<br>
+</div>
+<ul>
+  <li> <h2> League Pages </h2>
+    <ul>
+      <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_front_office&session_id=guest"> Front Office </a> 
+        <ul>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_uploads.pl?toutal+0&session_id=guest"> Constitution, etc </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_owner_info.pl?toutal+0&session_id=guest"> Owner Info </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_specs.pl?toutal+0+basic&session_id=guest"> League Rules </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_specs.pl?toutal+0+basic&session_id=guest"> Basic Set Up </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_specs.pl?toutal+0+line_ups&session_id=guest"> Line-ups and Rosters </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_specs.pl?toutal+0+categories&session_id=guest"> Scoring Categories </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_specs.pl?toutal+0+aux_categories&session_id=guest"> Display Categories </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_specs.pl?toutal+0+transactions&session_id=guest"> Transactions </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans_timeline.pl?toutal+0&session_id=guest"> Transaction Timeline </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_specs.pl?toutal+0+trades&session_id=guest"> Trades </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_specs.pl?toutal+0+free_agents&session_id=guest"> Free Agents </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_specs.pl?toutal+0+bid_meister&session_id=guest"> Bid Meister </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_specs.pl?toutal+0+misc&session_id=guest"> Miscellany </a> </li>
+            </ul>
+          </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_overrides.pl?toutal+0&session_id=guest"> Special Player Statuses  </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_stat_cor.pl?toutal+0&session_id=guest"> Stat Corrections </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_faab_summary.pl?toutal+0&session_id=guest"> FAAB Summary </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/payment_history.pl?toutal+0&session_id=guest"> Payment History </a> </li>
+        </ul>
+      </li>
+      <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_stand.pl?toutal+0&session_id=guest"> League Standings </a> 
+        <ul>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_stand.pl?toutal+0&session_id=guest"> Standings </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_alt_stand.pl?toutal+0&session_id=guest"> Alt Format Standings </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_league_summary.pl?toutal+0&session_id=guest"> League Stat Summary </a> </li>
+        </ul>
+      </li>
+      <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_team_stats&session_id=guest"> Team Stats </a> 
+        <ul>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_0&session_id=guest"> My Team </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_0&session_id=guest"> Team by Team </a> 
+            <ul>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_0&session_id=guest"> Larry Schechter</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_1&session_id=guest"> Jeff Erickson</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_2&session_id=guest"> DJ Short</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_3&session_id=guest"> Ian Kahn</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_4&session_id=guest"> Doug Dennis</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_5&session_id=guest"> Jason Collette</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_6&session_id=guest"> Rick Wolf/Glenn Colton</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_7&session_id=guest"> Rob Leibowitz</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_8&session_id=guest"> Andy Andres</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_9&session_id=guest"> Raphael Rabe</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_10&session_id=guest"> Mike Podhorzer</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_11&session_id=guest"> Jeff Winick</a> </li>
+            </ul>
+</li>
+        </ul>
+      </li>
+      <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_last_night's_boxes&session_id=guest"> Last Night's Boxes </a> 
+        <ul>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_box.pl?toutal+0+0&session_id=guest"> My Team </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_box.pl?toutal+0+tot&session_id=guest"> All Teams </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_box.pl?toutal+0+0&session_id=guest"> Team by Team </a> 
+            <ul>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_box.pl?toutal+0+0&session_id=guest"> Larry Schechter</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_box.pl?toutal+0+1&session_id=guest"> Jeff Erickson</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_box.pl?toutal+0+2&session_id=guest"> DJ Short</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_box.pl?toutal+0+3&session_id=guest"> Ian Kahn</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_box.pl?toutal+0+4&session_id=guest"> Doug Dennis</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_box.pl?toutal+0+5&session_id=guest"> Jason Collette</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_box.pl?toutal+0+6&session_id=guest"> Rick Wolf/Glenn Colton</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_box.pl?toutal+0+7&session_id=guest"> Rob Leibowitz</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_box.pl?toutal+0+8&session_id=guest"> Andy Andres</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_box.pl?toutal+0+9&session_id=guest"> Raphael Rabe</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_box.pl?toutal+0+10&session_id=guest"> Mike Podhorzer</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_box.pl?toutal+0+11&session_id=guest"> Jeff Winick</a> </li>
+            </ul>
+</li>
+        </ul>
+      </li>
+      <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_live_scoring&session_id=guest"> Live Scoring </a> 
+        <ul>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_live_scoring.pl?toutal+0&session_id=guest" target=_blank> My Team </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_live_scoring.pl?toutal+0+all&session_id=guest" target=_blank> All Team Summary </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_live_scoring.pl?toutal+0+0&session_id=guest"> Team by Team </a> 
+            <ul>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_live_scoring.pl?toutal+0+0&session_id=guest"> Larry Schechter</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_live_scoring.pl?toutal+0+1&session_id=guest"> Jeff Erickson</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_live_scoring.pl?toutal+0+2&session_id=guest"> DJ Short</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_live_scoring.pl?toutal+0+3&session_id=guest"> Ian Kahn</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_live_scoring.pl?toutal+0+4&session_id=guest"> Doug Dennis</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_live_scoring.pl?toutal+0+5&session_id=guest"> Jason Collette</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_live_scoring.pl?toutal+0+6&session_id=guest"> Rick Wolf/Glenn Colton</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_live_scoring.pl?toutal+0+7&session_id=guest"> Rob Leibowitz</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_live_scoring.pl?toutal+0+8&session_id=guest"> Andy Andres</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_live_scoring.pl?toutal+0+9&session_id=guest"> Raphael Rabe</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_live_scoring.pl?toutal+0+10&session_id=guest"> Mike Podhorzer</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_live_scoring.pl?toutal+0+11&session_id=guest"> Jeff Winick</a> </li>
+            </ul>
+</li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_live_scoring.pl?toutal+0+stand&session_id=guest" target=_blank> Live Standings </a> </li>
+        </ul>
+      </li>
+      <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_MLB_scoreboard.pl?toutal+0&session_id=guest"> Live MLB Boxes </a> </li>
+      <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_old_live_scoring&session_id=guest"> Old Live Scoring </a> 
+        <ul>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/livebox.cgi?toutal+0" target=_blank> My Team </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/livebox.cgi?toutal+all" target=_blank> All Team Summary </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/livebox.cgi?toutal+stand" target=_blank> Live Standings </a> </li>
+        </ul>
+      </li>
+      <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_team_rosters&session_id=guest"> Team Rosters </a> 
+        <ul>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+0&session_id=guest"> My Team </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+all+today&session_id=guest"> All Teams </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+all+today&session_id=guest"> Current </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+all&session_id=guest"> Upcoming </a> </li>
+            </ul>
+          </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_short_roster.pl?toutal+0&session_id=guest"> On Single Page </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_short_roster.pl?toutal+0&session_id=guest"> All Players </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_short_roster.pl?toutal+0+actives_only&session_id=guest"> Actives Only </a> </li>
+            </ul>
+          </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_print_ros.pl?toutal+0&session_id=guest"> Printable Rosters </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+0&session_id=guest"> Team by Team </a> 
+            <ul>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+0&session_id=guest"> Larry Schechter</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+1&session_id=guest"> Jeff Erickson</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+2&session_id=guest"> DJ Short</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+3&session_id=guest"> Ian Kahn</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+4&session_id=guest"> Doug Dennis</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+5&session_id=guest"> Jason Collette</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+6&session_id=guest"> Rick Wolf/Glenn Colton</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+7&session_id=guest"> Rob Leibowitz</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+8&session_id=guest"> Andy Andres</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+9&session_id=guest"> Raphael Rabe</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+10&session_id=guest"> Mike Podhorzer</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+11&session_id=guest"> Jeff Winick</a> </li>
+            </ul>
+</li>
+        </ul>
+      </li>
+      <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_available_players&session_id=guest"> Available Players </a> 
+        <ul>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_new_multi_stats.pl?toutal+0+freeagent+hitters&session_id=guest"> Free Agent Hitters </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_new_multi_stats.pl?toutal+0+freeagent+hitters&session_id=guest"> Sortable </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_multi_stats.pl?toutal+0+freeagent+hitters+no_weekly&session_id=guest"> YTD Stats Only </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_multi_stats.pl?toutal+0+freeagent+hitters+no_weekly+OLD&session_id=guest"> 2025 YTD Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_multi_stats.pl?toutal+0+freeagent+hitters+sortable+OLD&session_id=guest"> Sortable 2025 Stats </a> </li>
+            </ul>
+          </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_new_multi_stats.pl?toutal+0+freeagent+pitchers&session_id=guest"> Free Agent Pitchers </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_new_multi_stats.pl?toutal+0+freeagent+pitchers&session_id=guest"> Sortable </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_multi_stats.pl?toutal+0+freeagent+pitchers+no_weekly&session_id=guest"> YTD Stats Only </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_multi_stats.pl?toutal+0+freeagent+pitchers+no_weekly+OLD&session_id=guest"> 2025 YTD Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_multi_stats.pl?toutal+0+freeagent+pitchers+sortable+OLD&session_id=guest"> Sortable 2025 Stats </a> </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_mlb_player_data&session_id=guest"> MLB Player Data </a> 
+        <ul>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_new_multi_stats.pl?toutal+0+stats+hitters&session_id=guest"> Hitter Stats </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_new_multi_stats.pl?toutal+0+stats+hitters&session_id=guest"> Sortable Hitters </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_multi_stats.pl?toutal+0+stats+hitters+no_weekly&session_id=guest"> Printable Hitters </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_multi_stats.pl?toutal+0+leaders+hitters+no_weekly+OLD&session_id=guest"> 2025 YTD Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_multi_stats.pl?toutal+0+leaders+hitters+sortable+OLD&session_id=guest"> Sortable 2025 YTD Stats </a> </li>
+            </ul>
+          </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_new_multi_stats.pl?toutal+0+stats+pitchers&session_id=guest"> Pitcher Stats </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_new_multi_stats.pl?toutal+0+stats+pitchers&session_id=guest"> Sortable Pitchers </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_multi_stats.pl?toutal+0+stats+pitchers+no_weekly&session_id=guest"> Printable Pitchers </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_multi_stats.pl?toutal+0+leaders+pitchers+no_weekly+OLD&session_id=guest"> 2025 YTD Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_multi_stats.pl?toutal+0+leaders+pitchers+sortable+OLD&session_id=guest"> Sortable 2025 YTD Stats </a> </li>
+            </ul>
+          </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_elig_pos.pl?toutal+0+all&session_id=guest"> Position Eligibility </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_mlb_trans.pl?toutal+0+new&session_id=guest"> MLB Transactions </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_mlb_trans.pl?toutal+0&session_id=guest"> YTD </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_mlb_trans.pl?toutal+0+new&session_id=guest"> Yesterday </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_mlb_trans.pl?toutal+0+7&session_id=guest"> Last 7 days </a> </li>
+            </ul>
+          </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_mlb_rosters.pl?toutal+0&session_id=guest"> MLB Rosters </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_mlb_rosters.pl?toutal+0&session_id=guest"> All MLB Rosters </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_mlb_rosters.pl?toutal+0+MLB40&session_id=guest"> All MLB 40 Man Rosters </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_mlb_rosters.pl?toutal+0&session_id=guest"> League Pool MLB Rosters </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_mlb_rosters.pl?toutal+0+40&session_id=guest"> League Pool 40 Man Rosters </a> </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_transaction_logs&session_id=guest"> Transaction Logs </a> 
+        <ul>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_reports.pl?toutal+0&session_id=guest"> View Bid-Meister Results </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_exposed_bids.pl?toutal+0&session_id=guest"> View Bid-Meister Bids </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+0+YTD&session_id=guest"> YTD, My Team </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+week&session_id=guest"> Current Period, All Teams </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+0+YTD&session_id=guest"> YTD, Team by Team  </a> 
+            <ul>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+0+YTD&session_id=guest"> Larry Schechter</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+1+YTD&session_id=guest"> Jeff Erickson</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+2+YTD&session_id=guest"> DJ Short</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+3+YTD&session_id=guest"> Ian Kahn</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+4+YTD&session_id=guest"> Doug Dennis</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+5+YTD&session_id=guest"> Jason Collette</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+6+YTD&session_id=guest"> Rick Wolf/Glenn Colton</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+7+YTD&session_id=guest"> Rob Leibowitz</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+8+YTD&session_id=guest"> Andy Andres</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+9+YTD&session_id=guest"> Raphael Rabe</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+10+YTD&session_id=guest"> Mike Podhorzer</a> </li>
+              <li><a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+11+YTD&session_id=guest"> Jeff Winick</a> </li>
+            </ul>
+</li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+YTD&session_id=guest"> YTD, All Teams </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+by_week&session_id=guest"> All Teams, by Period </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_FAAB_trade_log.pl?toutal+0&session_id=guest"> FAAB Trade Log </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_FA_acquisitions.pl?toutal+0&session_id=guest"> Free Agent Acquisitions </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trades.pl?toutal+0&session_id=guest"> All League Trades </a> </li>
+        </ul>
+      </li>
+      <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_print_reports&session_id=guest"> Print Reports </a> 
+        <ul>
+          <li> <a href="https://onroto.fangraphs.com/baseball/toutal/report.pdf" target=_blank> Full Report </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/toutal/stand.pdf" target=_blank> Standings </a> </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/toutal/team08.pdf" target=_blank> My Team Report </a> </li>
+        </ul>
+      </li>
+      <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_past_results&session_id=guest"> Past Years' Results </a> 
+        <ul>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_2010_results&session_id=guest"> 2010 Results </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_stand.pl?toutal+0+2010&session_id=guest"> Standings </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_0+2010&session_id=guest"> Team Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_run_old_roto.pl?toutal+0+2010&session_id=guest"> Select Report Date </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/toutal/2010/report.pdf" target=_blank> Print Report </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+hitters+2010&session_id=guest"> MLB Hitter Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+pitchers+2010&session_id=guest"> MLB Pitcher Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+by_week+2010&session_id=guest"> Transactions </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trades.pl?toutal+0+2010&session_id=guest"> All League Trades </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_reports.pl?toutal+0+2010&session_id=guest"> Bid-Meister Results </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_logs.pl?toutal+0+2010&session_id=guest"> Bid-Meister Logs </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+all+2010&session_id=guest"> Final Rosters </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_faab_summary.pl?toutal+0+2010&session_id=guest"> FAAB Summary </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_FA_acquisitions.pl?toutal+0+2010&session_id=guest"> Free Agent Acquisitions </a> </li>
+            </ul>
+          </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_2011_results&session_id=guest"> 2011 Results </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_stand.pl?toutal+0+2011&session_id=guest"> Standings </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_0+2011&session_id=guest"> Team Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_run_old_roto.pl?toutal+0+2011&session_id=guest"> Select Report Date </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/toutal/2011/report.pdf" target=_blank> Print Report </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+hitters+2011&session_id=guest"> MLB Hitter Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+pitchers+2011&session_id=guest"> MLB Pitcher Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+by_week+2011&session_id=guest"> Transactions </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trades.pl?toutal+0+2011&session_id=guest"> All League Trades </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_reports.pl?toutal+0+2011&session_id=guest"> Bid-Meister Results </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_logs.pl?toutal+0+2011&session_id=guest"> Bid-Meister Logs </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+all+2011&session_id=guest"> Final Rosters </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_faab_summary.pl?toutal+0+2011&session_id=guest"> FAAB Summary </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_FA_acquisitions.pl?toutal+0+2011&session_id=guest"> Free Agent Acquisitions </a> </li>
+            </ul>
+          </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_2012_results&session_id=guest"> 2012 Results </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_stand.pl?toutal+0+2012&session_id=guest"> Standings </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_0+2012&session_id=guest"> Team Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_run_old_roto.pl?toutal+0+2012&session_id=guest"> Select Report Date </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/toutal/2012/report.pdf" target=_blank> Print Report </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+hitters+2012&session_id=guest"> MLB Hitter Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+pitchers+2012&session_id=guest"> MLB Pitcher Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+by_week+2012&session_id=guest"> Transactions (by week) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+YTD+2012&session_id=guest"> Transactions (by team) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trades.pl?toutal+0+2012&session_id=guest"> All League Trades </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_reports.pl?toutal+0+2012&session_id=guest"> Bid-Meister Results </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_logs.pl?toutal+0+2012&session_id=guest"> Bid-Meister Logs </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+all+2012&session_id=guest"> Final Rosters </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_faab_summary.pl?toutal+0+2012&session_id=guest"> FAAB Summary </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_FA_acquisitions.pl?toutal+0+2012&session_id=guest"> Free Agent Acquisitions </a> </li>
+            </ul>
+          </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_2013_results&session_id=guest"> 2013 Results </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_stand.pl?toutal+0+2013&session_id=guest"> Standings </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_0+2013&session_id=guest"> Team Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_run_old_roto.pl?toutal+0+2013&session_id=guest"> Select Report Date </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/toutal/2013/report.pdf" target=_blank> Print Report </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+hitters+2013&session_id=guest"> MLB Hitter Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+pitchers+2013&session_id=guest"> MLB Pitcher Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+by_week+2013&session_id=guest"> Transactions (by week) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+YTD+2013&session_id=guest"> Transactions (by team) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trades.pl?toutal+0+2013&session_id=guest"> All League Trades </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_reports.pl?toutal+0+2013&session_id=guest"> Bid-Meister Results </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_logs.pl?toutal+0+2013&session_id=guest"> Bid-Meister Logs </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+all+2013&session_id=guest"> Final Rosters </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_faab_summary.pl?toutal+0+2013&session_id=guest"> FAAB Summary </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_FA_acquisitions.pl?toutal+0+2013&session_id=guest"> Free Agent Acquisitions </a> </li>
+            </ul>
+          </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_2014_results&session_id=guest"> 2014 Results </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_stand.pl?toutal+0+2014&session_id=guest"> Standings </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_0+2014&session_id=guest"> Team Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_run_old_roto.pl?toutal+0+2014&session_id=guest"> Select Report Date </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/toutal/2014/report.pdf" target=_blank> Print Report </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+hitters+2014&session_id=guest"> MLB Hitter Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+pitchers+2014&session_id=guest"> MLB Pitcher Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+by_week+2014&session_id=guest"> Transactions (by week) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+YTD+2014&session_id=guest"> Transactions (by team) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trades.pl?toutal+0+2014&session_id=guest"> All League Trades </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_FAAB_trade_log.pl?toutal+0+2014&session_id=guest"> FAAB Trade Log </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_reports.pl?toutal+0+2014&session_id=guest"> Bid-Meister Results </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_logs.pl?toutal+0+2014&session_id=guest"> Bid-Meister Logs </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+all+2014&session_id=guest"> Final Rosters </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_faab_summary.pl?toutal+0+2014&session_id=guest"> FAAB Summary </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_FA_acquisitions.pl?toutal+0+2014&session_id=guest"> Free Agent Acquisitions </a> </li>
+            </ul>
+          </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_2015_results&session_id=guest"> 2015 Results </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_stand.pl?toutal+0+2015&session_id=guest"> Standings </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_0+2015&session_id=guest"> Team Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_run_old_roto.pl?toutal+0+2015&session_id=guest"> Select Report Date </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/toutal/2015/report.pdf" target=_blank> Print Report </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+hitters+2015&session_id=guest"> MLB Hitter Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+pitchers+2015&session_id=guest"> MLB Pitcher Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+by_week+2015&session_id=guest"> Transactions (by week) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+YTD+2015&session_id=guest"> Transactions (by team) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trades.pl?toutal+0+2015&session_id=guest"> All League Trades </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_FAAB_trade_log.pl?toutal+0+2015&session_id=guest"> FAAB Trade Log </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_reports.pl?toutal+0+2015&session_id=guest"> Bid-Meister Results </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_logs.pl?toutal+0+2015&session_id=guest"> Bid-Meister Logs </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+all+2015&session_id=guest"> Final Rosters </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_faab_summary.pl?toutal+0+2015&session_id=guest"> FAAB Summary </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_FA_acquisitions.pl?toutal+0+2015&session_id=guest"> Free Agent Acquisitions </a> </li>
+            </ul>
+          </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_2016_results&session_id=guest"> 2016 Results </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_stand.pl?toutal+0+2016&session_id=guest"> Standings </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_0+2016&session_id=guest"> Team Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_run_old_roto.pl?toutal+0+2016&session_id=guest"> Select Report Date </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/toutal/2016/report.pdf" target=_blank> Print Report </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+hitters+2016&session_id=guest"> MLB Hitter Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+pitchers+2016&session_id=guest"> MLB Pitcher Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+by_week+2016&session_id=guest"> Transactions (by week) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+YTD+2016&session_id=guest"> Transactions (by team) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trades.pl?toutal+0+2016&session_id=guest"> All League Trades </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_FAAB_trade_log.pl?toutal+0+2016&session_id=guest"> FAAB Trade Log </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_reports.pl?toutal+0+2016&session_id=guest"> Bid-Meister Results </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_logs.pl?toutal+0+2016&session_id=guest"> Bid-Meister Logs </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+all+2016&session_id=guest"> Final Rosters </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_faab_summary.pl?toutal+0+2016&session_id=guest"> FAAB Summary </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_FA_acquisitions.pl?toutal+0+2016&session_id=guest"> Free Agent Acquisitions </a> </li>
+            </ul>
+          </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_2017_results&session_id=guest"> 2017 Results </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_stand.pl?toutal+0+2017&session_id=guest"> Standings </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_0+2017&session_id=guest"> Team Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_run_old_roto.pl?toutal+0+2017&session_id=guest"> Select Report Date </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/toutal/2017/report.pdf" target=_blank> Print Report </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+hitters+2017&session_id=guest"> MLB Hitter Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+pitchers+2017&session_id=guest"> MLB Pitcher Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+by_week+2017&session_id=guest"> Transactions (by week) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+YTD+2017&session_id=guest"> Transactions (by team) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trades.pl?toutal+0+2017&session_id=guest"> All League Trades </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_FAAB_trade_log.pl?toutal+0+2017&session_id=guest"> FAAB Trade Log </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_reports.pl?toutal+0+2017&session_id=guest"> Bid-Meister Results </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_logs.pl?toutal+0+2017&session_id=guest"> Bid-Meister Logs </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+all+2017&session_id=guest"> Final Rosters </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_faab_summary.pl?toutal+0+2017&session_id=guest"> FAAB Summary </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_FA_acquisitions.pl?toutal+0+2017&session_id=guest"> Free Agent Acquisitions </a> </li>
+            </ul>
+          </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_2018_results&session_id=guest"> 2018 Results </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_stand.pl?toutal+0+2018&session_id=guest"> Standings </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_0+2018&session_id=guest"> Team Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_run_old_roto.pl?toutal+0+2018&session_id=guest"> Select Report Date </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/toutal/2018/report.pdf" target=_blank> Print Report </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+hitters+2018&session_id=guest"> MLB Hitter Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+pitchers+2018&session_id=guest"> MLB Pitcher Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+by_week+2018&session_id=guest"> Transactions (by week) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+YTD+2018&session_id=guest"> Transactions (by team) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trades.pl?toutal+0+2018&session_id=guest"> All League Trades </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_FAAB_trade_log.pl?toutal+0+2018&session_id=guest"> FAAB Trade Log </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_reports.pl?toutal+0+2018&session_id=guest"> Bid-Meister Results </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_logs.pl?toutal+0+2018&session_id=guest"> Bid-Meister Logs </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+all+2018&session_id=guest"> Final Rosters </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_faab_summary.pl?toutal+0+2018&session_id=guest"> FAAB Summary </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_FA_acquisitions.pl?toutal+0+2018&session_id=guest"> Free Agent Acquisitions </a> </li>
+            </ul>
+          </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_2019_results&session_id=guest"> 2019 Results </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_stand.pl?toutal+0+2019&session_id=guest"> Standings </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_0+2019&session_id=guest"> Team Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_run_old_roto.pl?toutal+0+2019&session_id=guest"> Select Report Date </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/toutal/2019/report.pdf" target=_blank> Print Report </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+hitters+2019&session_id=guest"> MLB Hitter Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+pitchers+2019&session_id=guest"> MLB Pitcher Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+by_week+2019&session_id=guest"> Transactions (by week) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+YTD+2019&session_id=guest"> Transactions (by team) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trades.pl?toutal+0+2019&session_id=guest"> All League Trades </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_FAAB_trade_log.pl?toutal+0+2019&session_id=guest"> FAAB Trade Log </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_reports.pl?toutal+0+2019&session_id=guest"> Bid-Meister Results </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_logs.pl?toutal+0+2019&session_id=guest"> Bid-Meister Logs </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+all+2019&session_id=guest"> Final Rosters </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_faab_summary.pl?toutal+0+2019&session_id=guest"> FAAB Summary </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_FA_acquisitions.pl?toutal+0+2019&session_id=guest"> Free Agent Acquisitions </a> </li>
+            </ul>
+          </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_2020_results&session_id=guest"> 2020 Results </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_stand.pl?toutal+0+2020&session_id=guest"> Standings </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_0+2020&session_id=guest"> Team Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_run_old_roto.pl?toutal+0+2020&session_id=guest"> Select Report Date </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/toutal/2020/report.pdf" target=_blank> Print Report </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+hitters+2020&session_id=guest"> MLB Hitter Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+pitchers+2020&session_id=guest"> MLB Pitcher Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+by_week+2020&session_id=guest"> Transactions (by week) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+YTD+2020&session_id=guest"> Transactions (by team) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trades.pl?toutal+0+2020&session_id=guest"> All League Trades </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_FAAB_trade_log.pl?toutal+0+2020&session_id=guest"> FAAB Trade Log </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_reports.pl?toutal+0+2020&session_id=guest"> Bid-Meister Results </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_logs.pl?toutal+0+2020&session_id=guest"> Bid-Meister Logs </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+all+2020&session_id=guest"> Final Rosters </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_faab_summary.pl?toutal+0+2020&session_id=guest"> FAAB Summary </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_FA_acquisitions.pl?toutal+0+2020&session_id=guest"> Free Agent Acquisitions </a> </li>
+            </ul>
+          </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_2021_results&session_id=guest"> 2021 Results </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_stand.pl?toutal+0+2021&session_id=guest"> Standings </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_0+2021&session_id=guest"> Team Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_run_old_roto.pl?toutal+0+2021&session_id=guest"> Select Report Date </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/toutal/2021/report.pdf" target=_blank> Print Report </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+hitters+2021&session_id=guest"> MLB Hitter Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+pitchers+2021&session_id=guest"> MLB Pitcher Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+by_week+2021&session_id=guest"> Transactions (by week) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+YTD+2021&session_id=guest"> Transactions (by team) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trades.pl?toutal+0+2021&session_id=guest"> All League Trades </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_FAAB_trade_log.pl?toutal+0+2021&session_id=guest"> FAAB Trade Log </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_reports.pl?toutal+0+2021&session_id=guest"> Bid-Meister Results </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_logs.pl?toutal+0+2021&session_id=guest"> Bid-Meister Logs </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+all+2021&session_id=guest"> Final Rosters </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_faab_summary.pl?toutal+0+2021&session_id=guest"> FAAB Summary </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_FA_acquisitions.pl?toutal+0+2021&session_id=guest"> Free Agent Acquisitions </a> </li>
+            </ul>
+          </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_2022_results&session_id=guest"> 2022 Results </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_stand.pl?toutal+0+2022&session_id=guest"> Standings </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_0+2022&session_id=guest"> Team Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_run_old_roto.pl?toutal+0+2022&session_id=guest"> Select Report Date </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/toutal/2022/report.pdf" target=_blank> Print Report </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+hitters+2022&session_id=guest"> MLB Hitter Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+pitchers+2022&session_id=guest"> MLB Pitcher Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+by_week+2022&session_id=guest"> Transactions (by week) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+YTD+2022&session_id=guest"> Transactions (by team) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trades.pl?toutal+0+2022&session_id=guest"> All League Trades </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_FAAB_trade_log.pl?toutal+0+2022&session_id=guest"> FAAB Trade Log </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_reports.pl?toutal+0+2022&session_id=guest"> Bid-Meister Results </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_logs.pl?toutal+0+2022&session_id=guest"> Bid-Meister Logs </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+all+2022&session_id=guest"> Final Rosters </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_faab_summary.pl?toutal+0+2022&session_id=guest"> FAAB Summary </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_FA_acquisitions.pl?toutal+0+2022&session_id=guest"> Free Agent Acquisitions </a> </li>
+            </ul>
+          </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_2023_results&session_id=guest"> 2023 Results </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_stand.pl?toutal+0+2023&session_id=guest"> Standings </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_0+2023&session_id=guest"> Team Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_run_old_roto.pl?toutal+0+2023&session_id=guest"> Select Report Date </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/toutal/2023/report.pdf" target=_blank> Print Report </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+hitters+2023&session_id=guest"> MLB Hitter Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+pitchers+2023&session_id=guest"> MLB Pitcher Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+by_week+2023&session_id=guest"> Transactions (by week) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+YTD+2023&session_id=guest"> Transactions (by team) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trades.pl?toutal+0+2023&session_id=guest"> All League Trades </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_FAAB_trade_log.pl?toutal+0+2023&session_id=guest"> FAAB Trade Log </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_reports.pl?toutal+0+2023&session_id=guest"> Bid-Meister Results </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_logs.pl?toutal+0+2023&session_id=guest"> Bid-Meister Logs </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+all+2023&session_id=guest"> Final Rosters </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_faab_summary.pl?toutal+0+2023&session_id=guest"> FAAB Summary </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_FA_acquisitions.pl?toutal+0+2023&session_id=guest"> Free Agent Acquisitions </a> </li>
+            </ul>
+          </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_2024_results&session_id=guest"> 2024 Results </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_stand.pl?toutal+0+2024&session_id=guest"> Standings </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_0+2024&session_id=guest"> Team Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_run_old_roto.pl?toutal+0+2024&session_id=guest"> Select Report Date </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/toutal/2024/report.pdf" target=_blank> Print Report </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+hitters+2024&session_id=guest"> MLB Hitter Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+pitchers+2024&session_id=guest"> MLB Pitcher Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+by_week+2024&session_id=guest"> Transactions (by week) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+YTD+2024&session_id=guest"> Transactions (by team) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trades.pl?toutal+0+2024&session_id=guest"> All League Trades </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_FAAB_trade_log.pl?toutal+0+2024&session_id=guest"> FAAB Trade Log </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_reports.pl?toutal+0+2024&session_id=guest"> Bid-Meister Results </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_logs.pl?toutal+0+2024&session_id=guest"> Bid-Meister Logs </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+all+2024&session_id=guest"> Final Rosters </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_faab_summary.pl?toutal+0+2024&session_id=guest"> FAAB Summary </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_FA_acquisitions.pl?toutal+0+2024&session_id=guest"> Free Agent Acquisitions </a> </li>
+            </ul>
+          </li>
+          <li> <a href="https://onroto.fangraphs.com/baseball/webnew/mini_site_map.pl?toutal+0+league_2025_results&session_id=guest"> 2025 Results </a> 
+            <ul>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_stand.pl?toutal+0+2025&session_id=guest"> Standings </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+SORT_0+2025&session_id=guest"> Team Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_run_old_roto.pl?toutal+0+2025&session_id=guest"> Select Report Date </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/toutal/2025/report.pdf" target=_blank> Print Report </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+hitters+2025&session_id=guest"> MLB Hitter Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_player_stats.pl?toutal+0+pitchers+2025&session_id=guest"> MLB Pitcher Stats </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+by_week+2025&session_id=guest"> Transactions (by week) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trans.pl?toutal+0+all+YTD+2025&session_id=guest"> Transactions (by team) </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_trades.pl?toutal+0+2025&session_id=guest"> All League Trades </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/team_FAAB_trade_log.pl?toutal+0+2025&session_id=guest"> FAAB Trade Log </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_reports.pl?toutal+0+2025&session_id=guest"> Bid-Meister Results </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_bid_logs.pl?toutal+0+2025&session_id=guest"> Bid-Meister Logs </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_roster.pl?toutal+0+all+2025&session_id=guest"> Final Rosters </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_faab_summary.pl?toutal+0+2025&session_id=guest"> FAAB Summary </a> </li>
+              <li> <a href="https://onroto.fangraphs.com/baseball/webnew/display_FA_acquisitions.pl?toutal+0+2025&session_id=guest"> Free Agent Acquisitions </a> </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<div class='stats_darker_grey'>
+&nbsp;<br>
+</div>
+
+</div>
+ </td>
+ <td rowspan=2 valign=top align=center width=840>
+
+<script>
+  var class1,class2;
+  $(document).ready(function() {
+    var no_teams = 12;
+    var pos_order = [];
+    class1 = "class='stats_light_grey11'".split("class='")[1];
+    class1 = class1.substr(0,class1.length - 1);
+    class2 = "class='stats_dark_grey11'".split("class='")[1];
+    class2 = class2.substr(0,class2.length - 1);
+
+    pos_order.push('1B');
+    pos_order.push('2B');
+    pos_order.push('SS');
+    pos_order.push('3B');
+    pos_order.push('OF');
+    pos_order.push('C');
+    pos_order.push('UT');
+    pos_order.push('INF');
+    pos_order.push('SW');
+    pos_order.push('P');
+    var stat_order = ["res","dis","DL","min"];
+    var prev_stat_order = ["act","rel","wai","trd"];
+    var which_type = ["Hitters","Pitchers","Hitters_prev","Pitchers_prev"];
+
+    for (var i = 0; i < which_type.length; ++i) {
+      var type = which_type[i]; 
+      var trs = $('.Reserved_'+type);
+      var stat_arr = (type.search("prev") !== -1) ? prev_stat_order : stat_order;
+      trs.sort(function(a,b){
+        //position order is the positions idx in the array
+        var a_pos = $.inArray($.trim($(a).find("td:nth-child(1)").text()), pos_order);
+        var b_pos = $.inArray($.trim($(b).find("td:nth-child(1)").text()),pos_order);
+        var a_stat = $.inArray($.trim($(a).find("td#stat").text()),stat_arr);
+        var b_stat = $.inArray($.trim($(b).find("td#stat").text()),stat_arr);
+        if (a_stat < b_stat) {
+          return -1;
+        } else if (a_stat > b_stat) {
+          return 1;
+        } else {
+          if (a_pos < b_pos) {
+            return -1;
+          } else {
+            return 1;
+          }
+        }
+      });
+      //console.log(trs);
+      if (1) {
+        var hitters = (type.search("Hitters") !== -1) ? "Hitters" : "Pitchers";
+        $(trs).remove();
+        if (type.search("prev") !== -1) {
+          $("#Reserved_"+hitters+"_divider").after($(trs));
+        } else {
+          $("#Reserved_"+hitters+"_divider").before($(trs));
+        }
+        //the css is messed up so fix here
+        
+        $("#Reserved_"+hitters+"_table tr:nth-child(odd) td").removeClass().addClass(class1);
+        $("#Reserved_"+hitters+"_table tr:nth-child(even) td").removeClass().addClass(class2);
+      }
+    }
+    
+  });
+</script>
+<p><table align=center cellpadding=1  cellspacing=1>
+<tr><td colspan=100% align=center class='black_on_white12'>2024 Final Stats</td></tr>
+<tr>
+<td rowspan=2 align=left class='black_on_white12'>Team 13 <br> owned by (not registered) &nbsp;
+</td><td align=right class='black_on_white11'><form method=post>
+Select a different team: &nbsp;</font><select class='select11' name=changeTeam OnChange="changeTeams(this)">
+<option value=0>Mike Podhorzer
+<option value=1>Rick Wolf/Glenn Colton
+<option value=2>Chris Blessing
+<option value=3>Patrick Davitt
+<option value=4>Eric Samulski
+<option value=5>Rob Leibowitz
+<option value=6>Andy Andres
+<option value=7>Larry Schechter
+<option value=8>Doug Dennis
+<option value=9>Jason Collette
+<option value=10>Jeff Erickson
+<option value=11>Howard Bender
+</select>
+</form>
+</td></tr>
+<tr>
+<td><form method=post  name=new_period action="https://onroto.fangraphs.com/baseball/webnew/display_team_stats.pl?toutal+0+12++++2024&session_id=guest"><input class=input10b_grey type=submit name=0 value="Team and Week"><input class=input10b_grey type=submit name=1 value="Week Only"><input class=input10b_grey type=submit name=2 value="Team Only"><input class=input10b_grey type=submit name=3 value="MLB YTD"></form></td></tr></table><div align=center class='black_on_white11'><p>
+Accumulated </b></font> and
+        <font color = #990000> <b> Current Week's</b> </font> Stats for Active Hitters </div><p>
+<table border='0' cellpadding=1 cellspacing=1 id='Active_Hitters_table'><tr><th class='white_on_grey11' rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++2024&session_id=guest">Pos</a></th> <th class='white_on_grey11' rowspan=2>Name </th> <th class='white_on_grey11' rowspan=2>Tm</th>
+<th class='white_on_grey11'  rowspan=2>Sal</th>
+<th class='white_on_grey11' rowspan=2>Sta</th><th class='white_on_grey11' colspan = 7>2024 Games by Position</th> <th class='white_on_grey11' align = center nowrap rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++AB++2024&session_id=guest">AB</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++G++2024&session_id=guest">G</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++R++2024&session_id=guest">R</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++HR++2024&session_id=guest">HR</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++RBI++2024&session_id=guest">RBI</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++SB++2024&session_id=guest">SB</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++SO++2024&session_id=guest">SO</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++BB++2024&session_id=guest">BB</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++AVG++2024&session_id=guest">AVG</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++OBP++2024&session_id=guest">OBP</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++SLG++2024&session_id=guest">SLG</font></a></th>    </tr>
+<tr>	
+          <th class='white_on_grey11' id='skip' align=center>&nbsp;DH&nbsp;</font>  </th>
+          <th class='white_on_grey11' align=center>&nbsp;C&nbsp;</font>  </th>
+          <th class='white_on_grey11' align=center>&nbsp;1B&nbsp;</font>  </th>
+          <th class='white_on_grey11' align=center>&nbsp;2B&nbsp;</font>  </th>
+          <th class='white_on_grey11' align=center>&nbsp;3B&nbsp;</font>  </th>
+          <th class='white_on_grey11' align=center>&nbsp;SS&nbsp;</font>  </th>
+          <th class='white_on_grey11' align=center>&nbsp;OF&nbsp;</font>  </th>    </tr><tr id='Active_Hitters_divider'> <td id='stats_Hitters_Active' class='stats_light_grey10' align = left colspan = 23> <i> stats of previously active hitters -----> </i></td></tr>
+<tr> <td id='tot_Active_Hitters' class='stats_dark_grey' align = left colspan = 12> <b> TOTAL: </b> </td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>.0000</b></font><br><font  color =#990000> &nbsp;.0000</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>.0000</b></font><br><font  color =#990000> &nbsp;.0000</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>.0000</b></font><br><font  color =#990000> &nbsp;.0000</font></td>
+</tr></table>
+<div align=center class='black_on_white11'><p>
+Accumulated </b></font> and
+        <font color = #990000> <b> Current Week's</b> </font> Stats for Reserved Hitters </div><p>
+<table border='0' cellpadding=1 cellspacing=1 id='Reserved_Hitters_table'><tr><th class='white_on_grey11' rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++2024&session_id=guest">Pos</a></th> <th class='white_on_grey11' rowspan=2>Name </th> <th class='white_on_grey11' rowspan=2>Tm</th>
+<th class='white_on_grey11'  rowspan=2>Sal</th>
+<th class='white_on_grey11' rowspan=2>Sta</th><th class='white_on_grey11' colspan = 7>2024 Games by Position</th> <th class='white_on_grey11' align = center nowrap rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++AB++2024&session_id=guest">AB</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++G++2024&session_id=guest">G</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++R++2024&session_id=guest">R</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++HR++2024&session_id=guest">HR</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++RBI++2024&session_id=guest">RBI</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++SB++2024&session_id=guest">SB</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++SO++2024&session_id=guest">SO</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++BB++2024&session_id=guest">BB</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++AVG++2024&session_id=guest">AVG</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++OBP++2024&session_id=guest">OBP</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=2><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++SLG++2024&session_id=guest">SLG</font></a></th>    </tr>
+<tr>	
+          <th class='white_on_grey11' id='skip' align=center>&nbsp;DH&nbsp;</font>  </th>
+          <th class='white_on_grey11' align=center>&nbsp;C&nbsp;</font>  </th>
+          <th class='white_on_grey11' align=center>&nbsp;1B&nbsp;</font>  </th>
+          <th class='white_on_grey11' align=center>&nbsp;2B&nbsp;</font>  </th>
+          <th class='white_on_grey11' align=center>&nbsp;3B&nbsp;</font>  </th>
+          <th class='white_on_grey11' align=center>&nbsp;SS&nbsp;</font>  </th>
+          <th class='white_on_grey11' align=center>&nbsp;OF&nbsp;</font>  </th>    </tr><tr id='Reserved_Hitters_divider'> <td id='stats_Hitters_Reserved' class='stats_light_grey10' align = left colspan = 23> <i> stats of previously reserved hitters -----> </i></td></tr>
+<tr> <td id='tot_Reserved_Hitters' class='stats_dark_grey' align = left colspan = 12> <b> TOTAL: </b> </td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>.0000</b></font><br><font  color =#990000> &nbsp;.0000</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>.0000</b></font><br><font  color =#990000> &nbsp;.0000</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>.0000</b></font><br><font  color =#990000> &nbsp;.0000</font></td>
+</tr></table>
+<div align=center class='black_on_white11'><p>
+Accumulated </b></font> and
+        <font color = #990000> <b> Current Week's</b> </font> Stats for Active Pitchers </div><p>
+<table border='0' cellpadding=1 cellspacing=1 id='Active_Pitchers_table'><tr><th class='white_on_grey11' rowspan=1><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++2024&session_id=guest">Pos</a></th> <th class='white_on_grey11' rowspan=1>Name </th> <th class='white_on_grey11' rowspan=1>Tm</th>
+<th class='white_on_grey11'  rowspan=1>Sal</th>
+<th class='white_on_grey11' rowspan=1>Sta</th><th class='white_on_grey11' align = center nowrap rowspan=1><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12+++G+2024&session_id=guest">G</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=1><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12+++W+2024&session_id=guest">W</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=1><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12+++L+2024&session_id=guest">L</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=1><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12+++SV+2024&session_id=guest">SV</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=1><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12+++IP+2024&session_id=guest">IP</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=1><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12+++BB+2024&session_id=guest">BB</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=1><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12+++HR+2024&session_id=guest">HR</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=1><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12+++SO+2024&session_id=guest">SO</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=1><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12+++ERA+2024&session_id=guest">ERA</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=1><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12+++WHIP+2024&session_id=guest">WHIP</font></a></th>    </tr>
+<tr id='Active_Pitchers_divider'> <td id='stats_Pitchers_Active' class='stats_light_grey10' align = left colspan = 22> <i> stats of previously active pitchers -----> </i></td></tr>
+<tr> <td id='tot_Active_Pitchers' class='stats_dark_grey' align = left colspan = 5> <b> TOTAL: </b> </td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0.0</b></font><br><font  color =#990000> &nbsp;0.0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0.00</b></font><br><font  color =#990000> &nbsp;0.00</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0.000</b></font><br><font  color =#990000> &nbsp;0.000</font></td>
+</tr></table>
+<div align=center class='black_on_white11'><p>
+Accumulated </b></font> and
+        <font color = #990000> <b> Current Week's</b> </font> Stats for Reserved Pitchers </div><p>
+<table border='0' cellpadding=1 cellspacing=1 id='Reserved_Pitchers_table'><tr><th class='white_on_grey11' rowspan=1><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12++2024&session_id=guest">Pos</a></th> <th class='white_on_grey11' rowspan=1>Name </th> <th class='white_on_grey11' rowspan=1>Tm</th>
+<th class='white_on_grey11'  rowspan=1>Sal</th>
+<th class='white_on_grey11' rowspan=1>Sta</th><th class='white_on_grey11' align = center nowrap rowspan=1><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12+++G+2024&session_id=guest">G</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=1><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12+++W+2024&session_id=guest">W</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=1><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12+++L+2024&session_id=guest">L</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=1><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12+++SV+2024&session_id=guest">SV</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=1><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12+++IP+2024&session_id=guest">IP</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=1><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12+++BB+2024&session_id=guest">BB</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=1><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12+++HR+2024&session_id=guest">HR</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=1><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12+++SO+2024&session_id=guest">SO</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=1><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12+++ERA+2024&session_id=guest">ERA</font></a></th><th class='white_on_grey11' align = center nowrap rowspan=1><a class='white_on_grey11' href ="display_team_stats.pl?toutal+0+12+++WHIP+2024&session_id=guest">WHIP</font></a></th>    </tr>
+<tr id='Reserved_Pitchers_divider'> <td id='stats_Pitchers_Reserved' class='stats_light_grey10' align = left colspan = 22> <i> stats of previously reserved pitchers -----> </i></td></tr>
+<tr> <td id='tot_Reserved_Pitchers' class='stats_dark_grey' align = left colspan = 5> <b> TOTAL: </b> </td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0.0</b></font><br><font  color =#990000> &nbsp;0.0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0</b></font><br><font  color =#990000> &nbsp;0</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0.00</b></font><br><font  color =#990000> &nbsp;0.00</font></td>
+<td class='stats_dark_grey' align=right nowrap><font  color = #000000> &nbsp; <b>0.000</b></font><br><font  color =#990000> &nbsp;0.000</font></td>
+</tr></table>
+</td></tr><tr><td class='nav_header_bg' bgcolor="#cccccc" valign=top align=center width=180></td></tr></table>
+<div style="text-align: center;" class=black_on_white10>
+<a href="https://www.fangraphs.com/about/privacy-policy" target="_blank"> Privacy Policy </a> &nbsp;
+<a href="https://www.fangraphs.com/tos.aspx" target="_blank"> Terms of Service </a> &nbsp;
+<a href="https://onroto.fangraphs.com/refund_policy.pl" target="_blank"> Refund Policy </a> &nbsp;
+</div>
+<pre>
+
+
+
+
+
+
+
+</pre>
+</body>
+</html>

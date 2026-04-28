@@ -1,366 +1,406 @@
 year,league,team,player_name,player_id,mlb_team,position,salary,status,roster_section,eligibility,ab,g,r,hr,rbi,sb,so,bb,avg,obp,slg,gp_dh,gp_c,gp_1b,gp_2b,gp_3b,gp_ss,gp_of
+2022,al,Doug Dennis,Giovanny Urshela,5061,Min,CI,2,act,active,"3B,SS,SW,CI,MI",501,144,61,13,64,1,96,41,0.338,0.455,0.429,4,0,0,0,136,2,0
+2022,al,Doug Dennis,Cavan Biggio,6063,Tor,1B,12,act,active,"OF,SW,2B,3B,1B,CI",156,58,23,2,13,0,54,22,0.322,0.333,0.333,3,0,33,49,1,0,9
+2022,al,Doug Dennis,Jeremy Pena,7200,Hou,MI,3,act,active,SS,517,135,71,22,63,11,132,22,0.289,0.333,0.426,0,0,0,0,0,134,0
+2022,al,Doug Dennis,Marcus Semien,4300,Tex,2B,25,act,active,"2B,SS,SW,MI",657,161,101,26,83,25,120,53,0.304,0.118,0.429,0,0,0,148,0,17,0
+2022,al,Doug Dennis,Isiah Kiner-Falefa,6317,NYY,SS,11,act,active,"SS,SW,3B,MI",483,142,66,4,48,22,72,35,0.314,0.3,0.327,0,0,0,0,6,138,0
+2022,al,Doug Dennis,Jose Ramirez,4602,Cle,3B,43,act,active,"3B,SW,CI",601,157,91,29,126,20,82,69,0.355,0.5,0.514,30,0,0,0,127,0,0
+2022,al,Doug Dennis,Taylor Ward,5398,LAA,OF,8,act,active,"OF,SW",489,133,71,22,64,4,118,56,0.354,0.154,0.466,2,0,0,0,2,0,132
+2022,al,Doug Dennis,Harold Ramirez,4883,TB,OF,8,act,active,"OF,SW,1B",382,115,43,5,55,3,70,19,0.338,0.0,0.393,52,0,32,0,0,0,29
+2022,al,Doug Dennis,George Springer,3575,Tor,OF,33,act,active,"OF,SW",513,133,89,25,76,14,100,54,0.342,0.0,0.472,40,0,0,0,0,0,89
+2022,al,Doug Dennis,Aaron Judge,4601,NYY,OF,31,act,active,"OF,SW",570,157,133,62,131,16,175,111,0.425,0.273,0.686,25,0,0,0,0,0,129
+2022,al,Doug Dennis,Jonah Heim,5632,Tex,C,22,act,active,"C,SW",391,123,45,14,40,2,86,39,0.291,0.375,0.384,7,111,0,0,0,0,0
+2022,al,Doug Dennis,Adley Rutschman,6876,Bal,C,7,act,active,C,390,111,69,13,42,4,85,64,0.361,0.429,0.444,23,93,0,0,0,0,0
+2022,al,Doug Dennis,Jonathan Aranda,7905,TB,UT,104,act,active,"1B,3B,2B",38,14,4,1,1,0,15,5,0.163,0.0,0.132,1,0,11,13,6,0,1
+2022,al,Doug Dennis,Oswald Peraza,7536,NYY,SW,141,act,active,SS,24,7,4,1,2,2,4,3,0.429,0.437,0.458,0,0,0,4,0,12,0
+2022,al,Doug Dennis,Nick Pratto,6202,KC,1B,203,res,previously_active,"1B,OF",133,42,17,6,18,0,59,18,0.266,0.0,0.361,0,0,43,0,0,0,8
+2022,al,Doug Dennis,Josh Lowe,6072,TB,OF,5,res,previously_active,"OF,SW",136,39,15,1,7,3,53,10,0.272,0.0,0.309,7,0,0,0,0,0,44
+2022,al,Doug Dennis,Jake Lamb,4537,FA,OF,41,rel,previously_active,,5,2,0,0,0,0,3,1,0.167,0.0,0.0,15,0,4,0,4,0,20
+2022,al,Doug Dennis,*Eli White,6872,Tex,OF,41,dis,previously_active,"OF,SW",71,26,9,2,7,8,29,8,0.237,0.0,0.239,1,0,0,0,0,0,42
+2022,al,Doug Dennis,D.J. Stewart,5315,Bal,OF,0,rel,previously_active,,1,1,0,0,0,0,1,0,0.0,0.0,0.0,0,0,0,0,0,0,0
+2022,al,Doug Dennis,Robinson Chirinos,3011,Bal,C,0,rel,previously_active,,83,29,4,1,6,0,30,10,0.242,0.0,0.205,0,66,0,0,0,0,0
+2022,al,Doug Dennis,Kevin Plawecki,4517,Tex,C,2,rel,previously_active,,10,4,1,0,1,0,4,1,0.167,0.0,0.1,0,61,0,0,0,0,0
+2022,al,Doug Dennis,*Emmanuel Rivera,6532,Ari,UT,191,res,previously_active,"3B,1B,SW,CI",199,57,22,7,21,1,54,14,0.28,0.0,0.372,8,0,5,0,86,0,0
+2022,al,Doug Dennis,Jarren Duran,6946,Bos,SW,39,rel,previously_active,,143,44,14,2,11,3,52,10,0.242,0.0,0.308,1,0,0,0,0,0,56
+2022,al,Doug Dennis,Harold Castro,6431,Det,SW,0,rel,previously_active,,15,5,2,0,1,0,5,2,0.278,0.0,0.2,9,0,50,14,25,19,4
+2022,al,Doug Dennis,Mark Mathias,5749,Tex,SW,29,res,previously_active,2B,16,6,1,0,1,1,9,4,0.25,0.0,0.062,14,0,3,6,2,0,4
+2022,al,Doug Dennis,Miguel Cabrera,509,Det,SW,5,rel,previously_active,,342,97,23,4,37,1,90,25,0.315,0.0,0.325,109,0,0,0,0,0,0
+2022,al,Doug Dennis,Nick Pratto,6202,KC,1B,203,res,reserved,"1B,OF",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,43,0,0,0,8
+2022,al,Doug Dennis,Josh Lowe,6072,TB,OF,5,res,reserved,"OF,SW",45,13,9,1,6,0,13,5,0.32,0.0,0.444,7,0,0,0,0,0,44
+2022,al,Doug Dennis,*Eli White,6872,Tex,OF,41,dis,reserved,"OF,SW",17,7,2,1,2,2,6,0,0.353,0.0,0.529,1,0,0,0,0,0,42
+2022,al,Doug Dennis,*Emmanuel Rivera,6532,Ari,UT,191,res,reserved,"3B,1B,SW,CI",81,26,14,2,10,0,19,5,0.322,0.0,0.42,8,0,5,0,86,0,0
+2022,al,Doug Dennis,Mark Mathias,5749,Tex,SW,29,res,reserved,2B,28,11,5,3,7,1,12,4,0.312,0.0,0.571,14,0,3,6,2,0,4
+2022,al,Doug Dennis,Cavan Biggio,6063,Tor,1B,12,act,previously_reserved,"OF,SW,2B,3B,1B,CI",101,39,20,4,11,2,31,16,0.311,0.0,0.376,3,0,33,49,1,0,9
+2022,al,Doug Dennis,Jeremy Pena,7200,Hou,MI,3,act,previously_reserved,SS,4,1,1,0,0,0,3,0,0.25,0.0,0.5,0,0,0,0,0,134,0
+2022,al,Doug Dennis,Taylor Ward,5398,LAA,OF,8,act,previously_reserved,"OF,SW",6,2,2,1,1,1,2,4,0.7,0.0,1.0,2,0,0,0,2,0,132
+2022,al,Doug Dennis,Harold Ramirez,4883,TB,OF,8,act,previously_reserved,"OF,SW,1B",21,5,3,1,3,0,2,0,0.429,0.0,0.619,52,0,32,0,0,0,29
+2022,al,Doug Dennis,D.J. Stewart,5315,Bal,OF,0,rel,previously_reserved,,2,2,0,0,0,0,1,0,0.0,0.0,0.0,0,0,0,0,0,0,0
+2022,al,Doug Dennis,Adley Rutschman,6876,Bal,C,7,act,previously_reserved,C,8,2,1,0,0,0,1,1,0.4,0.0,0.5,23,93,0,0,0,0,0
+2022,al,Doug Dennis,Oswald Peraza,7536,NYY,SW,141,act,previously_reserved,SS,4,4,1,0,0,0,1,0,0.5,0.0,0.75,0,0,0,4,0,12,0
+2022,al,Doug Dennis,Jarren Duran,6946,Bos,SW,39,rel,previously_reserved,,53,12,8,1,6,4,10,4,0.386,0.0,0.491,1,0,0,0,0,0,56
+2022,al,Doug Dennis,Miguel Cabrera,509,Det,SW,5,rel,previously_reserved,,8,2,0,0,0,0,2,0,0.0,0.0,0.0,109,0,0,0,0,0,0
+2022,al,Mike Podhorzer,Nate Lowe,6652,Tex,1B,15,act,active,"1B,CI,SW",593,157,74,27,76,2,147,48,0.358,0.417,0.492,4,0,153,0,0,0,0
 2022,al,Mike Podhorzer,Jose Miranda,6559,Min,CI,1,act,active,"3B,1B",422,119,41,12,60,1,83,27,0.324,0.4,0.408,21,0,77,0,34,0,0
 2022,al,Mike Podhorzer,Ryan Kreidler,7947,Det,MI,2,act,active,"UT,SS,3B",43,16,4,0,4,0,12,3,0.208,0.222,0.14,0,0,0,2,13,13,1
-2022,al,Mike Podhorzer,Nate Lowe,6652,Tex,1B,15,act,active,"1B,CI,SW",593,157,74,27,76,2,147,48,0.358,0.417,0.492,4,0,153,0,0,0,0
 2022,al,Mike Podhorzer,Whit Merrifield,4419,Tor,2B,28,act,active,"2B,OF,MI,SW",473,131,64,8,50,16,76,37,0.293,0.4,0.349,5,0,2,83,0,0,62
-2022,al,Mike Podhorzer,Luis Rengifo,6622,LAA,SS,17,act,active,"3B,SS,MI,SW,OF,2B",489,126,44,17,52,6,79,16,0.293,0.167,0.429,0,0,0,99,39,19,5
+2022,al,Mike Podhorzer,Luis Rengifo,6622,LAA,SS,17,act,active,"3B,SS,MI,SW,2B,OF",489,126,44,17,52,6,79,16,0.293,0.167,0.429,0,0,0,99,39,19,5
 2022,al,Mike Podhorzer,Alex Bregman,4907,Hou,3B,22,act,active,"3B,CI,SW",548,155,93,23,93,1,77,87,0.366,0.364,0.454,0,0,0,0,154,0,0
-2022,al,Mike Podhorzer,*Sam Haggerty,6912,Sea,OF,22,act,active,"OF,SW",88,43,14,2,11,8,29,13,0.305,0.75,0.273,6,0,0,4,0,0,70
-2022,al,Mike Podhorzer,Conner Capel,6479,Oak,OF,0,act,active,OF,17,8,2,0,2,1,7,2,0.3,0.375,0.235,2,0,0,0,0,0,20
 2022,al,Mike Podhorzer,Cedric Mullins,6128,Bal,OF,26,act,active,"OF,SW",104,27,17,3,13,5,23,5,0.279,0.143,0.375,4,0,0,0,0,0,150
 2022,al,Mike Podhorzer,Seth Brown,7100,Oak,OF,7,act,active,"OF,1B,SW",474,142,50,21,68,10,140,48,0.297,0.357,0.416,2,0,84,0,0,0,77
+2022,al,Mike Podhorzer,*Sam Haggerty,6912,Sea,OF,22,act,active,"OF,SW",88,43,14,2,11,8,29,13,0.305,0.75,0.273,6,0,0,4,0,0,70
+2022,al,Mike Podhorzer,Conner Capel,6479,Oak,OF,0,act,active,OF,17,8,2,0,2,1,7,2,0.3,0.375,0.235,2,0,0,0,0,0,20
+2022,al,Mike Podhorzer,Matt Thaiss,5814,LAA,C,0,act,active,"C,1B,CI,SW",14,6,3,0,3,0,1,4,0.389,0.5,0.286,0,14,11,0,3,0,0
 2022,al,Mike Podhorzer,Martin Maldonado,2347,Hou,C,0,act,active,"C,SW",114,39,16,4,12,0,39,11,0.242,0.167,0.281,0,113,0,0,0,0,0
-2022,al,Mike Podhorzer,Matt Thaiss,5814,LAA,C,0,act,active,"C,1B,SW,CI",14,6,3,0,3,0,1,4,0.389,0.5,0.286,0,14,11,0,3,0,0
 2022,al,Mike Podhorzer,Dermis Garcia,4993,Oak,UT,0,act,active,1B,45,14,4,1,3,0,20,1,0.152,0.0,0.222,2,0,35,0,0,0,1
 2022,al,Mike Podhorzer,Drew Waters,6537,KC,SW,67,act,active,OF,77,26,10,5,15,0,35,8,0.306,0.167,0.519,0,0,0,0,0,0,31
 2022,al,Mike Podhorzer,Kody Clemens,7016,Det,MI,0,rel,previously_active,,24,10,5,2,6,0,6,4,0.345,0.0,0.542,6,0,13,9,17,0,8
-2022,al,Mike Podhorzer,*Adalberto Mondesi,4431,KC,MI,21,rel,previously_active,,50,15,3,0,3,5,20,4,0.204,0.0,0.14,0,0,0,0,0,15,0
-2022,al,Mike Podhorzer,Anthony Rizzo,3156,NYY,1B,22,trd,previously_active,,414,117,71,30,71,6,93,55,0.339,0.0,0.493,9,0,120,0,0,0,0
-2022,al,Mike Podhorzer,*Ramon Urias,6726,Bal,MI,3,dis,previously_active,"3B,2B,SS,SW,MI",403,118,50,16,51,1,98,30,0.305,0.0,0.414,2,0,0,21,98,8,0
 2022,al,Mike Podhorzer,Ernie Clement,6888,Oak,MI,1,rel,previously_active,,5,2,0,0,1,0,0,1,0.5,0.0,0.6,6,0,5,15,30,1,12
+2022,al,Mike Podhorzer,Anthony Rizzo,3156,NYY,1B,22,trd,previously_active,,414,117,71,30,71,6,93,55,0.339,0.0,0.493,9,0,120,0,0,0,0
+2022,al,Mike Podhorzer,*Ramon Urias,6726,Bal,MI,3,dis,previously_active,"3B,SS,2B,MI,SW",403,118,50,16,51,1,98,30,0.305,0.0,0.414,2,0,0,21,98,8,0
+2022,al,Mike Podhorzer,*Adalberto Mondesi,4431,KC,MI,21,rel,previously_active,,50,15,3,0,3,5,20,4,0.204,0.0,0.14,0,0,0,0,0,15,0
 2022,al,Mike Podhorzer,Michael Stefanic,7914,LAA,2B,12,rel,previously_active,,35,12,4,0,0,0,6,4,0.317,0.0,0.229,0,0,0,22,0,0,0
-2022,al,Mike Podhorzer,Stephen Piscotty,4095,Cin,OF,0,rel,previously_active,,116,39,11,4,12,2,47,8,0.25,0.0,0.319,8,0,0,0,0,0,32
+2022,al,Mike Podhorzer,Ryan O'Hearn,5940,KC,OF,26,rel,previously_active,,14,6,1,1,3,0,5,0,0.286,0.0,0.5,15,0,13,0,0,0,13
 2022,al,Mike Podhorzer,*Jesse Winker,4483,Sea,OF,18,res,previously_active,"OF,SW",447,133,48,13,50,0,101,82,0.343,0.0,0.34,17,0,0,0,0,0,118
 2022,al,Mike Podhorzer,Gavin Sheets,6582,CWS,OF,1,rel,previously_active,,123,40,9,4,10,0,33,8,0.265,0.0,0.341,15,0,13,0,0,0,88
-2022,al,Mike Podhorzer,Manuel Margot,4858,TB,OF,8,rel,previously_active,,179,50,21,3,27,5,35,17,0.365,0.0,0.425,16,0,0,0,0,0,70
-2022,al,Mike Podhorzer,Ryan O'Hearn,5940,KC,OF,26,rel,previously_active,,14,6,1,1,3,0,5,0,0.286,0.0,0.5,15,0,13,0,0,0,13
 2022,al,Mike Podhorzer,Skye Bolt,6718,Oak,OF,28,rel,previously_active,,86,32,10,4,13,4,23,5,0.266,0.0,0.36,0,0,0,0,0,0,41
+2022,al,Mike Podhorzer,Stephen Piscotty,4095,Cin,OF,0,rel,previously_active,,116,39,11,4,12,2,47,8,0.25,0.0,0.319,8,0,0,0,0,0,32
+2022,al,Mike Podhorzer,Manuel Margot,4858,TB,OF,8,rel,previously_active,,179,50,21,3,27,5,35,17,0.365,0.0,0.425,16,0,0,0,0,0,70
 2022,al,Mike Podhorzer,Justin Upton,39,FA,OF,23,rel,previously_active,,26,9,1,1,3,0,13,3,0.267,0.0,0.269,11,0,0,0,0,0,6
+2022,al,Mike Podhorzer,*Mitch Garver,5025,Tex,C,16,rel,previously_active,,185,53,23,10,24,1,52,22,0.299,0.0,0.411,36,14,0,0,0,0,0
 2022,al,Mike Podhorzer,Kyle Higashioka,3107,NYY,C,0,rel,previously_active,,113,42,12,6,20,0,25,5,0.258,0.0,0.407,1,82,0,0,0,0,0
+2022,al,Mike Podhorzer,*Zack Collins,5728,Pit,C,23,rel,previously_active,,42,13,3,2,6,0,20,3,0.217,0.0,0.31,13,13,9,0,0,0,0
 2022,al,Mike Podhorzer,Luis Torrens,5151,Sea,C,53,rel,previously_active,,76,28,5,1,6,0,25,4,0.272,0.0,0.276,9,42,0,2,0,0,0
 2022,al,Mike Podhorzer,Sam Huff,6998,Tex,C,32,rel,previously_active,,8,2,2,0,2,1,3,0,0.625,0.0,0.625,4,29,6,0,0,0,0
-2022,al,Mike Podhorzer,*Mitch Garver,5025,Tex,C,16,rel,previously_active,,185,53,23,10,24,1,52,22,0.299,0.0,0.411,36,14,0,0,0,0,0
-2022,al,Mike Podhorzer,*Zack Collins,5728,Pit,C,23,rel,previously_active,,42,13,3,2,6,0,20,3,0.217,0.0,0.31,13,13,9,0,0,0,0
 2022,al,Mike Podhorzer,Taylor Trammell,6079,Sea,UT,23,rel,previously_active,,80,31,13,3,9,2,23,10,0.319,0.0,0.462,2,0,0,0,0,0,41
-2022,al,Mike Podhorzer,Matt Davidson,2700,Oak,UT,23,rel,previously_active,,7,3,1,1,1,0,2,0,0.143,0.0,0.571,2,0,1,0,9,0,0
-2022,al,Mike Podhorzer,Nolan Jones,6075,Cle,UT,0,rel,previously_active,,76,25,9,1,9,0,29,5,0.259,0.0,0.303,4,0,0,0,0,0,22
-2022,al,Mike Podhorzer,*Miguel Sano,3148,Min,UT,14,rel,previously_active,,60,20,1,1,3,1,25,9,0.211,0.0,0.133,2,0,19,0,0,0,0
-2022,al,Mike Podhorzer,Billy Hamilton,3576,Min,UT,0,rel,previously_active,,2,4,0,0,0,0,0,0,0.0,0.0,0.0,5,0,0,3,1,0,17
 2022,al,Mike Podhorzer,Luis Barrera,6717,Oak,UT,27,rel,previously_active,,47,17,2,0,3,2,11,2,0.26,0.0,0.298,0,0,0,0,0,0,28
+2022,al,Mike Podhorzer,Billy Hamilton,3576,Min,UT,0,rel,previously_active,,2,4,0,0,0,0,0,0,0.0,0.0,0.0,5,0,0,3,1,0,17
+2022,al,Mike Podhorzer,Matt Davidson,2700,Oak,UT,23,rel,previously_active,,7,3,1,1,1,0,2,0,0.143,0.0,0.571,2,0,1,0,9,0,0
+2022,al,Mike Podhorzer,*Miguel Sano,3148,Min,UT,14,rel,previously_active,,60,20,1,1,3,1,25,9,0.211,0.0,0.133,2,0,19,0,0,0,0
+2022,al,Mike Podhorzer,Nolan Jones,6075,Cle,UT,0,rel,previously_active,,76,25,9,1,9,0,29,5,0.259,0.0,0.303,4,0,0,0,0,0,22
 2022,al,Mike Podhorzer,Mike Ford,6337,LAA,SW,23,rel,previously_active,,14,8,1,0,1,0,6,5,0.421,0.0,0.286,12,0,29,0,0,0,0
-2022,al,Mike Podhorzer,*Ramon Urias,6726,Bal,MI,3,dis,reserved,"3B,2B,SS,SW,MI",0,0,0,0,0,0,0,0,0.0,0.0,0.0,2,0,0,21,98,8,0
+2022,al,Mike Podhorzer,*Ramon Urias,6726,Bal,MI,3,dis,reserved,"3B,SS,2B,MI,SW",0,0,0,0,0,0,0,0,0.0,0.0,0.0,2,0,0,21,98,8,0
 2022,al,Mike Podhorzer,*Jesse Winker,4483,Sea,OF,18,res,reserved,"OF,SW",9,3,3,1,3,0,2,2,0.364,0.0,0.556,17,0,0,0,0,0,118
-2022,al,Mike Podhorzer,Ernie Clement,6888,Oak,MI,1,rel,previously_reserved,,1,2,2,0,0,0,0,0,0.0,0.0,0.0,6,0,5,15,30,1,12
 2022,al,Mike Podhorzer,Jose Miranda,6559,Min,CI,1,act,previously_reserved,"3B,1B",22,6,4,3,6,0,8,1,0.348,0.0,0.773,21,0,77,0,34,0,0
 2022,al,Mike Podhorzer,Ryan Kreidler,7947,Det,MI,2,act,previously_reserved,"UT,SS,3B",3,2,1,0,0,0,1,0,0.0,0.0,0.0,0,0,0,2,13,13,1
+2022,al,Mike Podhorzer,Ernie Clement,6888,Oak,MI,1,rel,previously_reserved,,1,2,2,0,0,0,0,0,0.0,0.0,0.0,6,0,5,15,30,1,12
 2022,al,Mike Podhorzer,Whit Merrifield,4419,Tor,2B,28,act,previously_reserved,"2B,OF,MI,SW",31,8,6,3,8,0,9,1,0.375,0.0,0.774,5,0,2,83,0,0,62
 2022,al,Mike Podhorzer,Michael Stefanic,7914,LAA,2B,12,rel,previously_reserved,,4,3,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,22,0,0,0
-2022,al,Mike Podhorzer,Skye Bolt,6718,Oak,OF,28,rel,previously_reserved,,10,6,0,0,0,0,3,2,0.333,0.0,0.3,0,0,0,0,0,0,41
-2022,al,Mike Podhorzer,Manuel Margot,4858,TB,OF,8,rel,previously_reserved,,3,1,0,0,0,0,0,0,0.333,0.0,0.333,16,0,0,0,0,0,70
-2022,al,Mike Podhorzer,Gavin Sheets,6582,CWS,OF,1,rel,previously_reserved,,14,4,0,0,0,0,1,3,0.294,0.0,0.214,15,0,13,0,0,0,88
-2022,al,Mike Podhorzer,Ryan O'Hearn,5940,KC,OF,26,rel,previously_reserved,,7,4,0,0,0,0,4,0,0.143,0.0,0.143,15,0,13,0,0,0,13
-2022,al,Mike Podhorzer,*Sam Haggerty,6912,Sea,OF,22,act,previously_reserved,"OF,SW",67,28,11,3,10,4,20,5,0.405,0.0,0.582,6,0,0,4,0,0,70
 2022,al,Mike Podhorzer,Seth Brown,7100,Oak,OF,7,act,previously_reserved,"OF,1B,SW",26,8,5,4,5,1,6,3,0.448,0.0,0.962,2,0,84,0,0,0,77
+2022,al,Mike Podhorzer,Skye Bolt,6718,Oak,OF,28,rel,previously_reserved,,10,6,0,0,0,0,3,2,0.333,0.0,0.3,0,0,0,0,0,0,41
 2022,al,Mike Podhorzer,Stephen Piscotty,4095,Cin,OF,0,rel,previously_reserved,,10,3,1,1,2,0,1,1,0.273,0.0,0.6,8,0,0,0,0,0,32
+2022,al,Mike Podhorzer,Manuel Margot,4858,TB,OF,8,rel,previously_reserved,,3,1,0,0,0,0,0,0,0.333,0.0,0.333,16,0,0,0,0,0,70
+2022,al,Mike Podhorzer,*Sam Haggerty,6912,Sea,OF,22,act,previously_reserved,"OF,SW",67,28,11,3,10,4,20,5,0.405,0.0,0.582,6,0,0,4,0,0,70
+2022,al,Mike Podhorzer,Ryan O'Hearn,5940,KC,OF,26,rel,previously_reserved,,7,4,0,0,0,0,4,0,0.143,0.0,0.143,15,0,13,0,0,0,13
+2022,al,Mike Podhorzer,Gavin Sheets,6582,CWS,OF,1,rel,previously_reserved,,14,4,0,0,0,0,1,3,0.294,0.0,0.214,15,0,13,0,0,0,88
 2022,al,Mike Podhorzer,*Mitch Garver,5025,Tex,C,16,rel,previously_reserved,,3,1,0,0,0,0,1,1,0.25,0.0,0.0,36,14,0,0,0,0,0
-2022,al,Mike Podhorzer,Billy Hamilton,3576,Min,UT,0,rel,previously_reserved,,3,4,1,0,0,0,2,0,0.0,0.0,0.0,5,0,0,3,1,0,17
+2022,al,Mike Podhorzer,Nolan Jones,6075,Cle,UT,0,rel,previously_reserved,,10,3,1,1,4,0,2,3,0.615,0.0,0.9,4,0,0,0,0,0,22
 2022,al,Mike Podhorzer,Luis Barrera,6717,Oak,UT,27,rel,previously_reserved,,18,8,0,0,0,0,4,1,0.263,0.0,0.278,0,0,0,0,0,0,28
 2022,al,Mike Podhorzer,Taylor Trammell,6079,Sea,UT,23,rel,previously_reserved,,15,8,1,1,1,0,6,1,0.125,0.0,0.267,2,0,0,0,0,0,41
-2022,al,Mike Podhorzer,Nolan Jones,6075,Cle,UT,0,rel,previously_reserved,,10,3,1,1,4,0,2,3,0.615,0.0,0.9,4,0,0,0,0,0,22
-2022,al,Larry Schechter,Eugenio Suarez,4330,Sea,MI,17,act,active,"3B,CI,MI,SS,SW",543,150,76,31,87,0,196,73,0.332,0.214,0.459,19,0,0,0,130,0,0
-2022,al,Larry Schechter,Dylan Moore,6696,Sea,CI,1,act,active,"2B,OF,1B,SW,SS,MI",168,80,33,4,18,16,60,29,0.38,0.625,0.387,2,0,8,12,2,26,61
-2022,al,Larry Schechter,Jose Abreu,4038,CWS,1B,22,act,active,"1B,CI,SW",601,157,85,15,75,0,110,62,0.378,0.5,0.446,29,0,128,0,0,0,0
+2022,al,Mike Podhorzer,Billy Hamilton,3576,Min,UT,0,rel,previously_reserved,,3,4,1,0,0,0,2,0,0.0,0.0,0.0,5,0,0,3,1,0,17
+2022,al,Larry Schechter,Eugenio Suarez,4330,Sea,MI,17,act,active,"3B,MI,SW,SS,CI",543,150,76,31,87,0,196,73,0.332,0.214,0.459,19,0,0,0,130,0,0
+2022,al,Larry Schechter,Jose Abreu,4038,CWS,1B,22,act,active,"1B,SW,CI",601,157,85,15,75,0,110,62,0.378,0.5,0.446,29,0,128,0,0,0,0
+2022,al,Larry Schechter,Dylan Moore,6696,Sea,CI,1,act,active,"2B,OF,SW,SS,1B,MI",168,80,33,4,18,16,60,29,0.38,0.625,0.387,2,0,8,12,2,26,61
 2022,al,Larry Schechter,Michael Massey,8221,KC,2B,60,act,active,2B,150,45,13,4,15,2,43,8,0.298,0.167,0.373,2,0,0,48,1,0,0
 2022,al,Larry Schechter,J.P. Crawford,4534,Sea,SS,6,act,active,"SS,MI,SW",518,145,57,6,42,3,80,68,0.339,0.222,0.336,0,0,0,0,0,144,0
-2022,al,Larry Schechter,Vimael Machin,7143,Oak,3B,12,act,active,"3B,SW,SS,MI",151,49,20,0,10,1,36,20,0.303,0.0,0.278,1,0,0,1,68,1,0
-2022,al,Larry Schechter,Raimel Tapia,4798,Tor,OF,320,act,active,"OF,SW",384,122,43,6,50,6,75,16,0.297,0.417,0.383,1,0,0,0,0,0,124
+2022,al,Larry Schechter,Vimael Machin,7143,Oak,3B,12,act,active,"3B,MI,SS,SW",151,49,20,0,10,1,36,20,0.303,0.0,0.278,1,0,0,1,68,1,0
 2022,al,Larry Schechter,Randy Arozarena,6129,TB,OF,27,act,active,"OF,SW",586,153,72,20,89,32,156,46,0.327,0.286,0.445,27,0,0,0,0,0,126
+2022,al,Larry Schechter,Raimel Tapia,4798,Tor,OF,320,act,active,"OF,SW",384,122,43,6,50,6,75,16,0.297,0.417,0.383,1,0,0,0,0,0,124
 2022,al,Larry Schechter,Michael Taylor,4060,KC,OF,5,act,active,"OF,SW",414,124,49,9,43,4,109,35,0.313,0.0,0.357,1,0,0,0,0,0,123
 2022,al,Larry Schechter,Jake Cave,3729,Min,OF,1,act,active,"OF,SW",103,30,12,2,10,1,33,7,0.252,0.154,0.33,0,0,0,0,0,0,51
 2022,al,Larry Schechter,Reese McGuire,4631,Bos,C,0,act,active,"C,SW",61,23,8,2,8,1,14,5,0.348,0.286,0.492,1,84,0,0,0,0,0
 2022,al,Larry Schechter,Ryan Jeffers,7271,Min,C,5,act,active,"C,SW",212,67,25,7,27,0,62,23,0.285,0.167,0.363,7,59,0,0,0,0,0
 2022,al,Larry Schechter,Shohei Ohtani-Hitter,6322,LAA,UT,34,act,active,"UT,SW",586,157,90,34,95,11,161,72,0.356,0.286,0.519,152,0,0,0,0,0,0
-2022,al,Larry Schechter,Jonathan Villar,3345,Sea,CI,317,rel,previously_active,,39,10,5,0,2,1,13,2,0.22,0.0,0.179,1,0,0,29,28,2,0
-2022,al,Larry Schechter,Jonathan Schoop,4005,Det,MI,9,res,previously_active,"2B,1B,SW,MI,CI",448,122,44,11,38,5,101,16,0.235,0.0,0.33,1,0,2,129,0,0,0
 2022,al,Larry Schechter,D.J. LeMahieu,3275,NYY,CI,16,trd,previously_active,,281,77,48,8,34,4,41,42,0.367,0.0,0.399,7,0,35,41,47,0,0
 2022,al,Larry Schechter,David Fletcher,6027,LAA,MI,6,res,previously_active,"2B,SS,MI,SW",179,51,17,2,13,1,14,7,0.291,0.0,0.335,0,0,0,44,0,36,0
+2022,al,Larry Schechter,Jonathan Schoop,4005,Det,MI,9,res,previously_active,"2B,MI,CI,1B,SW",448,122,44,11,38,5,101,16,0.235,0.0,0.33,1,0,2,129,0,0,0
+2022,al,Larry Schechter,Jonathan Villar,3345,Sea,CI,317,rel,previously_active,,39,10,5,0,2,1,13,2,0.22,0.0,0.179,1,0,0,29,28,2,0
 2022,al,Larry Schechter,Terrin Vavra,7064,Bal,OF,15,rel,previously_active,,29,13,4,0,5,0,11,2,0.182,0.0,0.207,8,0,0,15,0,0,12
 2022,al,Larry Schechter,Jake Meyers,7399,Hou,OF,0,rel,previously_active,,117,39,11,1,13,0,40,5,0.248,0.0,0.316,0,0,0,0,0,0,51
-2022,al,Larry Schechter,Jackie Bradley,3595,Tor,OF,1,rel,previously_active,,242,80,17,1,23,2,52,17,0.259,0.0,0.302,0,0,0,0,0,0,131
 2022,al,Larry Schechter,*Jorge Soler,3918,Mia,OF,14,trd,previously_active,,254,67,31,13,34,0,82,30,0.306,0.0,0.421,14,0,0,0,0,0,57
-2022,al,Larry Schechter,Kevin Plawecki,4517,Tex,C,1,rel,previously_active,,40,15,4,0,4,0,6,1,0.341,0.0,0.4,0,61,0,0,0,0,0
-2022,al,Larry Schechter,Connor Wong,7229,Bos,C,1,res,previously_active,"C,SW",14,9,3,0,2,0,5,0,0.286,0.0,0.429,1,20,0,2,1,0,0
-2022,al,Larry Schechter,Yasmani Grandal,3311,CWS,C,21,rel,previously_active,,310,94,14,5,26,1,75,44,0.304,0.0,0.274,25,71,5,0,0,0,0
-2022,al,Larry Schechter,Robinson Chirinos,3011,Bal,C,6,rel,previously_active,,21,7,1,0,0,0,10,0,0.217,0.0,0.143,0,66,0,0,0,0,0
+2022,al,Larry Schechter,Jackie Bradley,3595,Tor,OF,1,rel,previously_active,,242,80,17,1,23,2,52,17,0.259,0.0,0.302,0,0,0,0,0,0,131
 2022,al,Larry Schechter,Caleb Hamilton,7445,Min,C,0,rel,previously_active,,4,2,0,0,0,0,4,0,0.0,0.0,0.0,0,11,6,0,0,0,0
 2022,al,Larry Schechter,Rene Pinto,7320,TB,C,7,rel,previously_active,,3,1,0,0,0,0,1,0,0.333,0.0,0.333,0,25,0,0,0,0,0
+2022,al,Larry Schechter,Yasmani Grandal,3311,CWS,C,21,rel,previously_active,,310,94,14,5,26,1,75,44,0.304,0.0,0.274,25,71,5,0,0,0,0
+2022,al,Larry Schechter,Connor Wong,7229,Bos,C,1,res,previously_active,"C,SW",14,9,3,0,2,0,5,0,0.286,0.0,0.429,1,20,0,2,1,0,0
+2022,al,Larry Schechter,Kevin Plawecki,4517,Tex,C,1,rel,previously_active,,40,15,4,0,4,0,6,1,0.341,0.0,0.4,0,61,0,0,0,0,0
+2022,al,Larry Schechter,Robinson Chirinos,3011,Bal,C,6,rel,previously_active,,21,7,1,0,0,0,10,0,0.217,0.0,0.143,0,66,0,0,0,0,0
 2022,al,Larry Schechter,Jose Siri,6249,TB,UT,0,rel,previously_active,,9,6,0,0,1,0,4,0,0.1,0.0,0.0,2,0,0,0,0,0,100
 2022,al,Larry Schechter,Elier Hernandez,3789,Tex,SW,47,rel,previously_active,,6,2,0,0,1,0,3,0,0.167,0.0,0.333,5,0,1,0,0,0,8
-2022,al,Larry Schechter,Jonathan Schoop,4005,Det,MI,9,res,reserved,"2B,1B,SW,MI,CI",33,9,4,0,0,0,6,3,0.289,0.308,0.212,1,0,2,129,0,0,0
+2022,al,Larry Schechter,Jonathan Schoop,4005,Det,MI,9,res,reserved,"2B,MI,CI,1B,SW",33,9,4,0,0,0,6,3,0.289,0.308,0.212,1,0,2,129,0,0,0
 2022,al,Larry Schechter,David Fletcher,6027,LAA,MI,6,res,reserved,"2B,SS,MI,SW",37,10,3,0,4,0,2,0,0.27,0.167,0.324,0,0,0,44,0,36,0
 2022,al,Larry Schechter,Connor Wong,7229,Bos,C,1,res,reserved,"C,SW",21,11,3,0,2,0,8,2,0.208,0.667,0.143,1,20,0,2,1,0,0
-2022,al,Larry Schechter,Dylan Moore,6696,Sea,CI,1,act,previously_reserved,"2B,OF,1B,SW,SS,MI",37,24,8,2,6,5,15,5,0.311,0.0,0.378,2,0,8,12,2,26,61
+2022,al,Larry Schechter,Dylan Moore,6696,Sea,CI,1,act,previously_reserved,"2B,OF,SW,SS,1B,MI",37,24,8,2,6,5,15,5,0.311,0.0,0.378,2,0,8,12,2,26,61
 2022,al,Larry Schechter,Jonathan Villar,3345,Sea,CI,317,rel,previously_reserved,,7,2,1,1,1,0,2,1,0.25,0.0,0.571,1,0,0,29,28,2,0
-2022,al,Larry Schechter,Vimael Machin,7143,Oak,3B,12,act,previously_reserved,"3B,SW,SS,MI",28,10,3,0,1,0,4,3,0.387,0.0,0.357,1,0,0,1,68,1,0
-2022,al,Larry Schechter,Raimel Tapia,4798,Tor,OF,320,act,previously_reserved,"OF,SW",27,6,4,1,2,2,6,0,0.222,0.0,0.333,1,0,0,0,0,0,124
+2022,al,Larry Schechter,Vimael Machin,7143,Oak,3B,12,act,previously_reserved,"3B,MI,SS,SW",28,10,3,0,1,0,4,3,0.387,0.0,0.357,1,0,0,1,68,1,0
 2022,al,Larry Schechter,Terrin Vavra,7064,Bal,OF,15,rel,previously_reserved,,1,3,0,0,0,0,0,0,1.0,0.0,1.0,8,0,0,15,0,0,12
 2022,al,Larry Schechter,Jake Meyers,7399,Hou,OF,0,rel,previously_reserved,,22,8,0,0,1,1,10,2,0.292,0.0,0.227,0,0,0,0,0,0,51
+2022,al,Larry Schechter,Raimel Tapia,4798,Tor,OF,320,act,previously_reserved,"OF,SW",27,6,4,1,2,2,6,0,0.222,0.0,0.333,1,0,0,0,0,0,124
 2022,al,Larry Schechter,Jackie Bradley,3595,Tor,OF,1,rel,previously_reserved,,29,12,4,2,6,0,6,0,0.241,0.0,0.483,0,0,0,0,0,0,131
-2022,al,Larry Schechter,Kevin Plawecki,4517,Tex,C,1,rel,previously_reserved,,17,5,2,0,2,0,3,2,0.316,0.0,0.294,0,61,0,0,0,0,0
 2022,al,Larry Schechter,Reese McGuire,4631,Bos,C,0,act,previously_reserved,"C,SW",5,2,1,1,1,0,2,0,0.667,0.0,1.2,1,84,0,0,0,0,0
+2022,al,Larry Schechter,Kevin Plawecki,4517,Tex,C,1,rel,previously_reserved,,17,5,2,0,2,0,3,2,0.316,0.0,0.294,0,61,0,0,0,0,0
 2022,al,Larry Schechter,Jose Siri,6249,TB,UT,0,rel,previously_reserved,,121,39,18,3,8,6,41,9,0.26,0.0,0.339,2,0,0,0,0,0,100
 2022,al,Larry Schechter,Elier Hernandez,3789,Tex,SW,47,rel,previously_reserved,,13,6,2,0,1,0,4,1,0.2,0.0,0.231,5,0,1,0,0,0,8
 2022,al,Rob Leibowitz,Josh Jung,6979,Tex,CI,252,act,active,3B,86,23,7,4,13,1,33,4,0.233,0.286,0.395,1,0,0,0,25,0,0
-2022,al,Rob Leibowitz,Christian Arroyo,4872,Bos,MI,0,act,active,"2B,SS,OF,MI,3B,1B,SW",257,79,28,5,31,5,46,11,0.306,0.5,0.389,5,0,9,40,10,14,17
+2022,al,Rob Leibowitz,Christian Arroyo,4872,Bos,MI,0,act,active,"2B,MI,SW,OF,1B,SS,3B",257,79,28,5,31,5,46,11,0.306,0.5,0.389,5,0,9,40,10,14,17
 2022,al,Rob Leibowitz,Carlos Santana,2181,Sea,1B,10,act,active,"1B,SW,CI",428,130,51,19,60,0,87,69,0.315,0.467,0.379,50,0,76,0,0,0,1
-2022,al,Rob Leibowitz,Jose Altuve,3776,Hou,2B,24,act,active,"2B,MI,SW",527,141,103,28,57,18,87,66,0.387,0.6,0.533,2,0,0,135,0,0,0
+2022,al,Rob Leibowitz,Jose Altuve,3776,Hou,2B,24,act,active,"2B,SW,MI",527,141,103,28,57,18,87,66,0.387,0.6,0.533,2,0,0,135,0,0,0
 2022,al,Rob Leibowitz,Livan Soto,6932,LAA,SS,0,act,active,"UT,SS",29,9,4,0,5,0,4,0,0.433,0.333,0.621,0,0,0,0,1,18,0
 2022,al,Rob Leibowitz,Bobby Witt,6904,KC,3B,16,act,active,"SS,3B",591,150,82,20,80,30,135,30,0.294,0.231,0.428,2,0,0,0,55,98,0
+2022,al,Rob Leibowitz,Steven Kwan,7878,Cle,OF,1,act,active,OF,563,147,89,6,52,19,60,62,0.373,0.286,0.4,6,0,0,0,0,0,137
+2022,al,Rob Leibowitz,Franmil Reyes,5308,ChC,OF,24,act,active,"OF,SW",408,111,40,12,42,2,144,30,0.269,0.417,0.348,100,0,0,0,0,0,14
 2022,al,Rob Leibowitz,Jarred Kelenic,6602,Sea,OF,15,act,active,"OF,SW",157,52,18,6,15,5,59,15,0.213,0.235,0.287,2,0,0,0,0,0,50
 2022,al,Rob Leibowitz,David Peralta,4980,TB,OF,687,act,active,"OF,SW",157,46,10,0,18,0,40,14,0.318,0.75,0.338,11,0,0,0,0,0,113
-2022,al,Rob Leibowitz,Franmil Reyes,5308,ChC,OF,24,act,active,"OF,SW",408,111,40,12,42,2,144,30,0.269,0.417,0.348,100,0,0,0,0,0,14
-2022,al,Rob Leibowitz,Steven Kwan,7878,Cle,OF,1,act,active,OF,563,147,89,6,52,19,60,62,0.373,0.286,0.4,6,0,0,0,0,0,137
-2022,al,Rob Leibowitz,Alejandro Kirk,6935,Tor,C,9,act,active,"C,SW",470,139,59,14,63,0,58,63,0.372,0.0,0.415,50,78,0,0,0,0,0
 2022,al,Rob Leibowitz,MJ Melendez,6478,KC,C,1,act,active,"OF,C",460,129,57,18,62,2,131,66,0.313,0.0,0.393,23,78,0,0,0,0,38
+2022,al,Rob Leibowitz,Alejandro Kirk,6935,Tor,C,9,act,active,"C,SW",470,139,59,14,63,0,58,63,0.372,0.0,0.415,50,78,0,0,0,0,0
 2022,al,Rob Leibowitz,Mitch Haniger,4480,Sea,UT,18,act,active,"OF,SW",218,55,30,11,34,0,63,18,0.301,0.462,0.427,12,0,0,0,0,0,47
 2022,al,Rob Leibowitz,Giancarlo Stanton,2378,NYY,SW,23,act,active,"OF,SW",385,106,53,31,75,0,133,48,0.298,0.625,0.47,65,0,0,0,0,0,38
+2022,al,Rob Leibowitz,Kody Clemens,7016,Det,MI,6,rel,previously_active,,3,1,0,0,0,0,1,0,0.0,0.0,0.0,6,0,13,9,17,0,8
 2022,al,Rob Leibowitz,Mike Ford,6337,LAA,CI,7,rel,previously_active,,4,4,0,0,0,0,1,1,0.4,0.0,0.25,12,0,29,0,0,0,0
+2022,al,Rob Leibowitz,Marwin Gonzalez,3884,NYY,1B,7,rel,previously_active,,7,3,1,0,0,0,3,1,0.25,0.0,0.143,2,0,14,3,12,20,36
+2022,al,Rob Leibowitz,Ernie Clement,6888,Oak,MI,0,rel,previously_active,,22,9,4,0,1,0,3,1,0.217,0.0,0.182,6,0,5,15,30,1,12
+2022,al,Rob Leibowitz,Anthony Rendon,3205,LAA,CI,20,rel,previously_active,,151,42,15,5,23,2,31,21,0.331,0.0,0.397,0,0,0,0,47,0,0
+2022,al,Rob Leibowitz,Sheldon Neuse,6105,Oak,CI,38,rel,previously_active,,25,8,1,1,2,0,10,2,0.148,0.0,0.2,9,0,13,23,44,2,0
+2022,al,Rob Leibowitz,Jed Lowrie,201,FA,MI,1,rel,previously_active,,142,43,13,3,16,1,37,13,0.255,0.0,0.282,39,0,3,2,0,0,0
+2022,al,Rob Leibowitz,*Nick Solak,6442,Tex,MI,73,rel,previously_active,,10,7,1,1,1,0,1,1,0.333,0.0,0.5,11,0,0,1,0,0,22
 2022,al,Rob Leibowitz,Jonah Bride,7895,Oak,MI,34,rel,previously_active,,101,34,11,1,4,1,20,12,0.314,0.0,0.248,2,0,5,32,21,0,0
 2022,al,Rob Leibowitz,Ryan O'Hearn,5940,KC,CI,0,rel,previously_active,,6,5,0,0,1,0,1,2,0.25,0.0,0.0,15,0,13,0,0,0,13
-2022,al,Rob Leibowitz,Marwin Gonzalez,3884,NYY,1B,7,rel,previously_active,,7,3,1,0,0,0,3,1,0.25,0.0,0.143,2,0,14,3,12,20,36
-2022,al,Rob Leibowitz,Anthony Rendon,3205,LAA,CI,20,rel,previously_active,,151,42,15,5,23,2,31,21,0.331,0.0,0.397,0,0,0,0,47,0,0
-2022,al,Rob Leibowitz,*Nick Solak,6442,Tex,MI,73,rel,previously_active,,10,7,1,1,1,0,1,1,0.333,0.0,0.5,11,0,0,1,0,0,22
-2022,al,Rob Leibowitz,Ernie Clement,6888,Oak,MI,0,rel,previously_active,,22,9,4,0,1,0,3,1,0.217,0.0,0.182,6,0,5,15,30,1,12
-2022,al,Rob Leibowitz,Kody Clemens,7016,Det,MI,6,rel,previously_active,,3,1,0,0,0,0,1,0,0.0,0.0,0.0,6,0,13,9,17,0,8
-2022,al,Rob Leibowitz,Jed Lowrie,201,FA,MI,1,rel,previously_active,,142,43,13,3,16,1,37,13,0.255,0.0,0.282,39,0,3,2,0,0,0
-2022,al,Rob Leibowitz,Sheldon Neuse,6105,Oak,CI,38,rel,previously_active,,25,8,1,1,2,0,10,2,0.148,0.0,0.2,9,0,13,23,44,2,0
-2022,al,Rob Leibowitz,Leury Garcia,4245,CWS,SS,28,rel,previously_active,,287,93,38,3,20,2,62,7,0.243,0.0,0.279,5,0,0,47,6,19,23
 2022,al,Rob Leibowitz,Nick Allen,7152,Oak,SS,0,res,previously_active,"SS,2B",136,46,12,1,5,1,27,7,0.238,0.0,0.257,0,0,0,43,0,60,0
-2022,al,Rob Leibowitz,Steven Souza,4623,Sea,OF,78,rel,previously_active,,8,3,0,0,0,0,4,0,0.125,0.0,0.125,1,0,0,0,0,0,5
-2022,al,Rob Leibowitz,Kyle Lewis,5726,Sea,OF,6,res,previously_active,"OF,SW",49,15,5,3,5,0,18,2,0.192,0.0,0.327,11,0,0,0,0,0,4
+2022,al,Rob Leibowitz,Leury Garcia,4245,CWS,SS,28,rel,previously_active,,287,93,38,3,20,2,62,7,0.243,0.0,0.279,5,0,0,47,6,19,23
 2022,al,Rob Leibowitz,Bradley Zimmer,4122,Tor,OF,0,rel,previously_active,,12,16,2,0,0,0,7,3,0.312,0.0,0.167,1,0,0,0,0,0,99
-2022,al,Rob Leibowitz,Kyle Isbel,6916,KC,OF,0,rel,previously_active,,211,87,23,3,18,9,62,13,0.241,0.0,0.284,2,0,0,0,0,0,101
+2022,al,Rob Leibowitz,Kyle Lewis,5726,Sea,OF,6,res,previously_active,"OF,SW",49,15,5,3,5,0,18,2,0.192,0.0,0.327,11,0,0,0,0,0,4
 2022,al,Rob Leibowitz,Ryan McKenna,6819,Bal,OF,3,rel,previously_active,,48,28,9,1,3,2,21,2,0.26,0.0,0.333,5,0,0,0,0,0,86
+2022,al,Rob Leibowitz,Kyle Isbel,6916,KC,OF,0,rel,previously_active,,211,87,23,3,18,9,62,13,0.241,0.0,0.284,2,0,0,0,0,0,101
+2022,al,Rob Leibowitz,Steven Souza,4623,Sea,OF,78,rel,previously_active,,8,3,0,0,0,0,4,0,0.125,0.0,0.125,1,0,0,0,0,0,5
 2022,al,Rob Leibowitz,Stephen Vogt,3569,Oak,C,17,rel,previously_active,,14,6,3,1,1,0,6,1,0.133,0.0,0.286,26,19,17,0,0,0,0
 2022,al,Rob Leibowitz,Jose Trevino,5991,NYY,C,0,rel,previously_active,,6,3,0,0,0,0,1,1,0.143,0.0,0.0,1,112,0,0,0,0,0
 2022,al,Rob Leibowitz,Nick Allen,7152,Oak,SS,0,res,reserved,"SS,2B",149,49,18,3,14,2,34,11,0.278,0.25,0.322,0,0,0,43,0,60,0
 2022,al,Rob Leibowitz,Kyle Lewis,5726,Sea,OF,6,res,reserved,"OF,SW",7,3,1,0,0,0,1,3,0.4,0.0,0.143,11,0,0,0,0,0,4
+2022,al,Rob Leibowitz,Carlos Santana,2181,Sea,1B,10,act,previously_reserved,"1B,SW,CI",3,1,1,0,0,0,1,2,0.4,0.0,0.0,50,0,76,0,0,0,1
+2022,al,Rob Leibowitz,Anthony Rendon,3205,LAA,CI,20,rel,previously_reserved,,11,3,0,0,1,0,1,2,0.231,0.0,0.182,0,0,0,0,47,0,0
 2022,al,Rob Leibowitz,Jed Lowrie,201,FA,MI,1,rel,previously_reserved,,25,7,1,0,0,0,2,2,0.185,0.0,0.16,39,0,3,2,0,0,0
 2022,al,Rob Leibowitz,Jonah Bride,7895,Oak,MI,34,rel,previously_reserved,,14,4,1,0,2,0,4,2,0.375,0.0,0.429,2,0,5,32,21,0,0
-2022,al,Rob Leibowitz,Anthony Rendon,3205,LAA,CI,20,rel,previously_reserved,,11,3,0,0,1,0,1,2,0.231,0.0,0.182,0,0,0,0,47,0,0
-2022,al,Rob Leibowitz,Carlos Santana,2181,Sea,1B,10,act,previously_reserved,"1B,SW,CI",3,1,1,0,0,0,1,2,0.4,0.0,0.0,50,0,76,0,0,0,1
-2022,al,Rob Leibowitz,Christian Arroyo,4872,Bos,MI,0,act,previously_reserved,"2B,SS,OF,MI,3B,1B,SW",23,8,4,1,5,0,3,2,0.481,0.0,0.696,5,0,9,40,10,14,17
+2022,al,Rob Leibowitz,Christian Arroyo,4872,Bos,MI,0,act,previously_reserved,"2B,MI,SW,OF,1B,SS,3B",23,8,4,1,5,0,3,2,0.481,0.0,0.696,5,0,9,40,10,14,17
 2022,al,Rob Leibowitz,Leury Garcia,4245,CWS,SS,28,rel,previously_reserved,,5,2,0,0,0,0,1,0,0.0,0.0,0.0,5,0,0,47,6,19,23
 2022,al,Rob Leibowitz,Jarred Kelenic,6602,Sea,OF,15,act,previously_reserved,"OF,SW",6,2,2,1,2,0,2,1,0.429,0.0,1.0,2,0,0,0,0,0,50
 2022,al,Rob Leibowitz,Kyle Isbel,6916,KC,OF,0,rel,previously_reserved,,23,9,5,1,7,0,6,1,0.4,0.0,0.696,2,0,0,0,0,0,101
 2022,al,Rob Leibowitz,Franmil Reyes,5308,ChC,OF,24,act,previously_reserved,"OF,SW",30,7,3,2,5,0,13,0,0.333,0.0,0.6,100,0,0,0,0,0,14
-2022,al,Rob Leibowitz,Jose Trevino,5991,NYY,C,0,rel,previously_reserved,,34,14,5,1,4,0,6,2,0.25,0.0,0.324,1,112,0,0,0,0,0
 2022,al,Rob Leibowitz,Stephen Vogt,3569,Oak,C,17,rel,previously_reserved,,13,4,3,1,1,0,2,1,0.333,0.0,0.462,26,19,17,0,0,0,0
+2022,al,Rob Leibowitz,Jose Trevino,5991,NYY,C,0,rel,previously_reserved,,34,14,5,1,4,0,6,2,0.25,0.0,0.324,1,112,0,0,0,0,0
 2022,al,Rob Leibowitz,Mitch Haniger,4480,Sea,UT,18,act,previously_reserved,"OF,SW",6,2,1,0,0,0,2,2,0.5,0.0,0.5,12,0,0,0,0,0,47
 2022,al,Rob Leibowitz,Giancarlo Stanton,2378,NYY,SW,23,act,previously_reserved,"OF,SW",13,4,0,0,3,0,4,2,0.267,0.0,0.231,65,0,0,0,0,0,38
-2022,al,Jeff Erickson,Abraham Toro,6790,Sea,MI,0,act,active,"UT,3B,2B,CI,MI,SW",44,18,4,1,5,1,14,1,0.234,0.308,0.318,22,0,1,55,31,0,1
-2022,al,Jeff Erickson,Josh Donaldson,2107,NYY,CI,17,act,active,"3B,CI,SW",478,132,59,15,62,2,148,54,0.308,0.083,0.374,23,0,0,0,104,0,0
+2022,al,Jeff Erickson,Abraham Toro,6790,Sea,MI,0,act,active,"UT,3B,2B,MI,SW,CI",44,18,4,1,5,1,14,1,0.234,0.308,0.318,22,0,1,55,31,0,1
+2022,al,Jeff Erickson,Josh Donaldson,2107,NYY,CI,17,act,active,"3B,SW,CI",478,132,59,15,62,2,148,54,0.308,0.083,0.374,23,0,0,0,104,0,0
 2022,al,Jeff Erickson,Vladimir Guerrero Jr.,5275,Tor,1B,36,act,active,"1B,CI,SW",638,160,90,32,97,8,116,58,0.339,0.556,0.48,32,0,128,0,1,0,0
-2022,al,Jeff Erickson,Adam Frazier,5555,Sea,2B,9,act,active,"2B,MI,SW,OF",541,156,61,3,42,11,73,46,0.301,0.364,0.311,8,0,0,124,0,4,38
-2022,al,Jeff Erickson,Marwin Gonzalez,3884,NYY,SS,17,act,active,"OF,1B,2B,SS,CI,3B,SW,MI",123,59,13,6,14,3,36,10,0.234,0.25,0.317,2,0,14,3,12,20,36
+2022,al,Jeff Erickson,Adam Frazier,5555,Sea,2B,9,act,active,"2B,OF,MI,SW",541,156,61,3,42,11,73,46,0.301,0.364,0.311,8,0,0,124,0,4,38
+2022,al,Jeff Erickson,Marwin Gonzalez,3884,NYY,SS,17,act,active,"OF,1B,MI,CI,3B,SS,2B,SW",123,59,13,6,14,3,36,10,0.234,0.25,0.317,2,0,14,3,12,20,36
 2022,al,Jeff Erickson,Rafael Devers,4903,Bos,3B,34,act,active,"UT,3B,CI,SW",551,140,83,26,86,3,113,49,0.357,0.5,0.514,3,0,0,0,138,0,0
-2022,al,Jeff Erickson,Romy Gonzalez,7828,CWS,OF,45,act,active,"UT,2B,SW,OF,3B,CI",41,15,3,0,1,0,18,0,0.143,0.143,0.195,0,0,0,25,0,3,3
 2022,al,Jeff Erickson,Adolis Garcia,5465,Tex,OF,7,act,active,"OF,SW",605,156,88,27,101,25,183,40,0.3,0.286,0.456,21,0,0,0,0,0,134
 2022,al,Jeff Erickson,Randal Grichuk,2843,Col,OF,2,act,active,"OF,SW",506,141,60,19,73,4,127,24,0.299,0.154,0.425,1,0,0,0,0,0,137
+2022,al,Jeff Erickson,Romy Gonzalez,7828,CWS,OF,45,act,active,"UT,CI,OF,3B,2B,SW",41,15,3,0,1,0,18,0,0.143,0.143,0.195,0,0,0,25,0,3,3
 2022,al,Jeff Erickson,Gilberto Celestino,5687,Min,OF,7,act,active,"OF,SW",140,48,11,0,11,4,35,18,0.314,0.167,0.271,0,0,0,0,0,0,119
-2022,al,Jeff Erickson,Tucker Barnhart,3911,Det,C,4,act,active,"C,SW",281,94,16,1,16,0,74,25,0.287,0.25,0.267,0,92,0,0,1,0,0
 2022,al,Jeff Erickson,Curt Casali,3905,Sea,C,0,act,active,"C,SW",40,16,7,1,3,0,14,9,0.3,0.333,0.225,1,54,3,0,0,0,0
+2022,al,Jeff Erickson,Tucker Barnhart,3911,Det,C,4,act,active,"C,SW",281,94,16,1,16,0,74,25,0.287,0.25,0.267,0,92,0,0,1,0,0
 2022,al,Jeff Erickson,Edward Olivares,6637,KC,UT,0,act,active,"OF,SW",128,44,20,2,10,2,29,9,0.314,0.182,0.328,8,0,0,0,0,0,39
 2022,al,Jeff Erickson,Brandon Marsh,6077,Phi,SW,7,act,active,"OF,SW",424,134,49,11,52,10,158,28,0.295,0.4,0.384,0,0,0,0,0,0,131
 2022,al,Jeff Erickson,Charlie Culberson,3504,Tex,MI,1,rel,previously_active,,4,3,0,0,0,0,2,1,0.6,0.0,0.5,9,0,1,11,25,1,12
 2022,al,Jeff Erickson,Andy Ibanez,5306,Tex,MI,2,rel,previously_active,,116,39,13,1,9,3,21,9,0.272,0.0,0.276,8,0,6,2,25,0,0
+2022,al,Jeff Erickson,*Jorge Polanco,4695,Min,SS,22,dis,previously_active,"2B,SS,SW,MI",371,103,53,15,53,3,94,63,0.343,0.0,0.396,5,0,0,97,0,6,0
 2022,al,Jeff Erickson,Yu-Cheng Chang,6071,Bos,SS,3,rel,previously_active,,73,28,10,3,9,0,16,7,0.317,0.0,0.397,3,0,9,43,7,16,0
-2022,al,Jeff Erickson,*Jorge Polanco,4695,Min,SS,22,dis,previously_active,"2B,SS,MI,SW",371,103,53,15,53,3,94,63,0.343,0.0,0.396,5,0,0,97,0,6,0
 2022,al,Jeff Erickson,Kyle Stowers,7944,Bal,OF,32,res,previously_active,OF,16,7,1,0,0,0,4,2,0.278,0.0,0.187,6,0,0,0,0,0,25
 2022,al,Jeff Erickson,Chas McCormick,7201,Hou,OF,2,rel,previously_active,,155,49,17,6,16,1,42,15,0.291,0.0,0.394,1,0,0,0,0,0,117
 2022,al,Jeff Erickson,*Michael Brantley,2212,Hou,OF,7,rel,previously_active,,243,64,28,5,26,1,30,31,0.37,0.0,0.416,35,0,0,0,0,0,29
-2022,al,Jeff Erickson,Korey Lee,7048,Hou,C,3,rel,previously_active,,10,4,0,0,0,0,5,0,0.0,0.0,0.0,0,12,0,0,0,0,0
 2022,al,Jeff Erickson,Reese McGuire,4631,Bos,C,1,rel,previously_active,,98,35,10,0,8,0,19,5,0.28,0.0,0.286,1,84,0,0,0,0,0
 2022,al,Jeff Erickson,Gabriel Moreno,7541,Tor,C,1,rel,previously_active,,51,16,2,0,4,0,6,1,0.308,0.0,0.314,2,19,0,1,1,0,1
+2022,al,Jeff Erickson,Korey Lee,7048,Hou,C,3,rel,previously_active,,10,4,0,0,0,0,5,0,0.0,0.0,0.0,0,12,0,0,0,0,0
 2022,al,Jeff Erickson,J.J. Matijevic,7984,Hou,UT,3,rel,previously_active,,8,4,1,0,0,0,1,0,0.375,0.0,0.375,12,0,10,0,0,0,1
 2022,al,Jeff Erickson,*Ramon Laureano,5858,Oak,UT,13,dis,previously_active,"OF,SW",342,93,49,13,34,11,102,25,0.29,0.0,0.38,5,0,0,0,0,0,88
-2022,al,Jeff Erickson,Eric Hosmer,2563,Bos,UT,566,dis,previously_active,"1B,CI,SW",30,9,3,0,3,0,8,1,0.281,0.0,0.267,2,0,102,0,0,0,0
+2022,al,Jeff Erickson,Eric Hosmer,2563,Bos,UT,566,dis,previously_active,"1B,SW,CI",30,9,3,0,3,0,8,1,0.281,0.0,0.267,2,0,102,0,0,0,0
 2022,al,Jeff Erickson,*Rob Refsnyder,4986,Bos,SW,17,rel,previously_active,,48,18,8,2,2,0,15,4,0.377,0.0,0.479,7,0,0,0,0,0,47
-2022,al,Jeff Erickson,*Jorge Polanco,4695,Min,SS,22,dis,reserved,"2B,SS,MI,SW",4,1,1,1,3,0,1,1,0.6,0.0,1.25,5,0,0,97,0,6,0
+2022,al,Jeff Erickson,*Jorge Polanco,4695,Min,SS,22,dis,reserved,"2B,SS,SW,MI",4,1,1,1,3,0,1,1,0.6,0.0,1.25,5,0,0,97,0,6,0
 2022,al,Jeff Erickson,Kyle Stowers,7944,Bal,OF,32,res,reserved,OF,47,18,7,2,7,0,14,2,0.32,0.143,0.511,6,0,0,0,0,0,25
-2022,al,Jeff Erickson,Eric Hosmer,2563,Bos,UT,566,dis,reserved,"1B,CI,SW",5,2,0,0,0,0,0,0,0.4,0.4,0.4,2,0,102,0,0,0,0
 2022,al,Jeff Erickson,*Ramon Laureano,5858,Oak,UT,13,dis,reserved,"OF,SW",4,1,0,0,0,0,2,0,0.0,0.0,0.0,5,0,0,0,0,0,88
+2022,al,Jeff Erickson,Eric Hosmer,2563,Bos,UT,566,dis,reserved,"1B,SW,CI",5,2,0,0,0,0,0,0,0.4,0.4,0.4,2,0,102,0,0,0,0
 2022,al,Jeff Erickson,Rafael Devers,4903,Bos,3B,34,act,previously_reserved,"UT,3B,CI,SW",4,1,1,1,2,0,1,0,0.5,0.0,1.5,3,0,0,0,138,0,0
 2022,al,Jeff Erickson,Gilberto Celestino,5687,Min,OF,7,act,previously_reserved,"OF,SW",148,61,13,2,12,0,37,12,0.306,0.0,0.331,0,0,0,0,0,0,119
 2022,al,Jeff Erickson,Reese McGuire,4631,Bos,C,1,rel,previously_reserved,,50,17,2,0,2,0,13,1,0.235,0.0,0.3,1,84,0,0,0,0,0
 2022,al,Jeff Erickson,Gabriel Moreno,7541,Tor,C,1,rel,previously_reserved,,7,2,1,0,0,0,1,1,0.25,0.0,0.143,2,19,0,1,1,0,1
-2022,al,Jeff Erickson,Edward Olivares,6637,KC,UT,0,act,previously_reserved,"OF,SW",33,9,4,2,5,0,7,1,0.412,0.0,0.727,8,0,0,0,0,0,39
 2022,al,Jeff Erickson,J.J. Matijevic,7984,Hou,UT,3,rel,previously_reserved,,1,1,0,0,0,0,1,0,0.0,0.0,0.0,12,0,10,0,0,0,1
+2022,al,Jeff Erickson,Edward Olivares,6637,KC,UT,0,act,previously_reserved,"OF,SW",33,9,4,2,5,0,7,1,0.412,0.0,0.727,8,0,0,0,0,0,39
 2022,al,Rick Wolf/Glenn Colton,Gunnar Henderson,7317,Bal,MI,10,act,active,"SS,3B",116,34,12,4,18,1,34,16,0.348,0.444,0.44,4,0,0,3,24,7,0
-2022,al,Rick Wolf/Glenn Colton,Ty France,6723,Sea,1B,15,act,active,"1B,CI,2B,MI,3B,SW",547,139,65,20,84,0,93,35,0.34,0.357,0.439,8,0,127,1,6,0,0
-2022,al,Rick Wolf/Glenn Colton,Jesus Aguilar,4118,Bal,CI,19,act,active,"1B,SW,CI",41,13,2,1,2,0,10,1,0.286,0.5,0.366,60,0,63,0,4,0,0
+2022,al,Rick Wolf/Glenn Colton,Ty France,6723,Sea,1B,15,act,active,"1B,3B,2B,SW,CI,MI",547,139,65,20,84,0,93,35,0.34,0.357,0.439,8,0,127,1,6,0,0
+2022,al,Rick Wolf/Glenn Colton,Jesus Aguilar,4118,Bal,CI,19,act,active,"1B,CI,SW",41,13,2,1,2,0,10,1,0.286,0.5,0.366,60,0,63,0,4,0,0
 2022,al,Rick Wolf/Glenn Colton,Oswaldo Cabrera,7893,NYY,2B,39,act,active,"UT,OF,2B",135,39,21,6,19,3,35,15,0.331,0.333,0.459,0,0,3,3,3,4,34
 2022,al,Rick Wolf/Glenn Colton,Gleyber Torres,4619,NYY,SS,18,act,active,"2B,SS,SW,MI",526,140,73,24,76,10,129,39,0.31,0.0,0.451,9,0,0,124,0,6,0
-2022,al,Rick Wolf/Glenn Colton,Jeimer Candelario,4071,Det,3B,17,act,active,"3B,SW,CI",429,124,49,13,50,0,109,28,0.272,0.385,0.361,8,0,0,0,117,0,0
-2022,al,Rick Wolf/Glenn Colton,Bubba Thompson,6199,Tex,OF,102,act,active,OF,155,51,18,1,9,16,52,7,0.311,0.167,0.323,1,0,0,0,0,0,52
-2022,al,Rick Wolf/Glenn Colton,Eloy Jimenez,4617,CWS,OF,23,act,active,"OF,SW",292,84,40,16,54,0,72,28,0.358,0.25,0.5,50,0,0,0,0,0,30
-2022,al,Rick Wolf/Glenn Colton,Yordan Alvarez,6185,Hou,OF,33,act,active,"OF,SW",470,135,95,37,97,1,106,78,0.406,0.545,0.613,77,0,0,0,0,0,56
+2022,al,Rick Wolf/Glenn Colton,Jeimer Candelario,4071,Det,3B,17,act,active,"3B,CI,SW",429,124,49,13,50,0,109,28,0.272,0.385,0.361,8,0,0,0,117,0,0
 2022,al,Rick Wolf/Glenn Colton,Myles Straw,6413,Cle,OF,22,act,active,"OF,SW",447,126,67,0,28,17,76,50,0.309,0.364,0.295,0,0,0,0,0,0,152
+2022,al,Rick Wolf/Glenn Colton,Eloy Jimenez,4617,CWS,OF,23,act,active,"OF,SW",292,84,40,16,54,0,72,28,0.358,0.25,0.5,50,0,0,0,0,0,30
+2022,al,Rick Wolf/Glenn Colton,Bubba Thompson,6199,Tex,OF,102,act,active,OF,155,51,18,1,9,16,52,7,0.311,0.167,0.323,1,0,0,0,0,0,52
+2022,al,Rick Wolf/Glenn Colton,Yordan Alvarez,6185,Hou,OF,33,act,active,"OF,SW",470,135,95,37,97,1,106,78,0.406,0.545,0.613,77,0,0,0,0,0,56
 2022,al,Rick Wolf/Glenn Colton,Cal Raleigh,6814,Sea,C,19,act,active,"C,SW",344,109,45,26,62,1,112,33,0.289,0.333,0.512,1,115,0,0,0,0,0
 2022,al,Rick Wolf/Glenn Colton,Christian Bethancourt,3224,TB,C,28,act,active,"C,1B",199,60,19,7,19,1,54,6,0.267,0.4,0.382,10,49,37,0,1,0,0
 2022,al,Rick Wolf/Glenn Colton,Will Brennan,8284,Cle,UT,0,act,active,OF,27,7,6,1,5,0,3,2,0.448,0.4,0.63,1,0,0,0,0,0,10
 2022,al,Rick Wolf/Glenn Colton,Leody Taveras,5412,Tex,SW,42,act,active,"OF,SW",314,99,39,5,34,11,88,21,0.309,0.455,0.366,2,0,0,0,0,0,93
-2022,al,Rick Wolf/Glenn Colton,Jermaine Palacios,6255,Min,MI,2,rel,previously_active,,3,1,0,0,1,0,1,0,0.25,0.0,0.333,0,0,1,12,1,14,0
-2022,al,Rick Wolf/Glenn Colton,*Willi Castro,6289,Det,MI,18,rel,previously_active,,15,8,0,0,1,1,1,2,0.353,0.0,0.333,5,0,0,16,6,16,80
-2022,al,Rick Wolf/Glenn Colton,Phil Gosselin,4644,FA,MI,0,rel,previously_active,,12,7,0,0,0,0,6,0,0.0,0.0,0.0,1,0,3,10,17,0,1
-2022,al,Rick Wolf/Glenn Colton,Ryan O'Hearn,5940,KC,CI,3,rel,previously_active,,2,2,0,0,1,0,1,0,0.5,0.0,0.5,15,0,13,0,0,0,13
-2022,al,Rick Wolf/Glenn Colton,Maikel Garcia,7884,KC,MI,6,rel,previously_active,,4,2,0,0,0,0,0,0,0.25,0.0,0.25,0,0,0,0,0,8,0
-2022,al,Rick Wolf/Glenn Colton,Mauricio Dubon,5380,Hou,MI,59,rel,previously_active,,27,11,2,0,1,0,0,2,0.233,0.0,0.259,1,0,0,17,3,21,67
-2022,al,Rick Wolf/Glenn Colton,Jeter Downs,6514,Bos,MI,9,rel,previously_active,,19,6,2,1,2,0,8,1,0.25,0.0,0.421,1,0,0,8,6,3,0
-2022,al,Rick Wolf/Glenn Colton,Richie Palacios,7876,Cle,MI,19,rel,previously_active,,12,3,0,0,0,0,0,0,0.167,0.0,0.167,11,0,0,2,0,0,25
-2022,al,Rick Wolf/Glenn Colton,*Royce Lewis,6094,Min,MI,2,dis,previously_active,"UT,SS",33,10,5,2,5,0,4,1,0.324,0.0,0.576,0,0,0,0,0,11,1
 2022,al,Rick Wolf/Glenn Colton,Richie Martin,5355,Bal,MI,64,rel,previously_active,,11,6,1,0,0,0,5,3,0.214,0.0,0.0,1,0,0,10,0,2,0
-2022,al,Rick Wolf/Glenn Colton,*Danny Mendick,6774,CWS,2B,2,dis,previously_active,"UT,SS,2B,MI,SW",53,14,13,2,9,1,13,4,0.328,0.0,0.434,0,0,0,6,2,22,1
+2022,al,Rick Wolf/Glenn Colton,Phil Gosselin,4644,FA,MI,0,rel,previously_active,,12,7,0,0,0,0,6,0,0.0,0.0,0.0,1,0,3,10,17,0,1
+2022,al,Rick Wolf/Glenn Colton,Richie Palacios,7876,Cle,MI,19,rel,previously_active,,12,3,0,0,0,0,0,0,0.167,0.0,0.167,11,0,0,2,0,0,25
+2022,al,Rick Wolf/Glenn Colton,*Willi Castro,6289,Det,MI,18,rel,previously_active,,15,8,0,0,1,1,1,2,0.353,0.0,0.333,5,0,0,16,6,16,80
+2022,al,Rick Wolf/Glenn Colton,Mauricio Dubon,5380,Hou,MI,59,rel,previously_active,,27,11,2,0,1,0,0,2,0.233,0.0,0.259,1,0,0,17,3,21,67
+2022,al,Rick Wolf/Glenn Colton,Maikel Garcia,7884,KC,MI,6,rel,previously_active,,4,2,0,0,0,0,0,0,0.25,0.0,0.25,0,0,0,0,0,8,0
+2022,al,Rick Wolf/Glenn Colton,Jeter Downs,6514,Bos,MI,9,rel,previously_active,,19,6,2,1,2,0,8,1,0.25,0.0,0.421,1,0,0,8,6,3,0
+2022,al,Rick Wolf/Glenn Colton,Jermaine Palacios,6255,Min,MI,2,rel,previously_active,,3,1,0,0,1,0,1,0,0.25,0.0,0.333,0,0,1,12,1,14,0
+2022,al,Rick Wolf/Glenn Colton,*Royce Lewis,6094,Min,MI,2,dis,previously_active,SS,33,10,5,2,5,0,4,1,0.324,0.0,0.576,0,0,0,0,0,11,1
+2022,al,Rick Wolf/Glenn Colton,Ryan O'Hearn,5940,KC,CI,3,rel,previously_active,,2,2,0,0,1,0,1,0,0.5,0.0,0.5,15,0,13,0,0,0,13
+2022,al,Rick Wolf/Glenn Colton,*Danny Mendick,6774,CWS,2B,2,dis,previously_active,"UT,2B,SS,MI,SW",53,14,13,2,9,1,13,4,0.328,0.0,0.434,0,0,0,6,2,22,1
 2022,al,Rick Wolf/Glenn Colton,Lenyn Sosa,8227,CWS,2B,0,rel,previously_active,,6,3,0,0,0,0,2,0,0.0,0.0,0.0,0,0,0,6,0,5,0
 2022,al,Rick Wolf/Glenn Colton,*Tim Anderson,4591,CWS,SS,25,rel,previously_active,,332,79,50,6,25,13,55,14,0.339,0.0,0.395,0,0,0,0,0,79,0
 2022,al,Rick Wolf/Glenn Colton,Bobby Dalbec,5764,Bos,3B,15,rel,previously_active,,304,111,38,11,36,3,113,29,0.282,0.0,0.362,1,0,89,2,24,1,0
-2022,al,Rick Wolf/Glenn Colton,*Max Kepler,3195,Min,OF,10,dis,previously_active,"OF,SW",384,114,54,9,43,3,65,49,0.321,0.0,0.352,2,0,0,0,0,0,110
-2022,al,Rick Wolf/Glenn Colton,Chad Pinder,5441,Oak,OF,28,rel,previously_active,,55,16,5,2,9,0,19,1,0.179,0.0,0.291,12,0,3,1,9,0,91
 2022,al,Rick Wolf/Glenn Colton,Jo Adell,6143,LAA,OF,139,rel,previously_active,,148,51,15,4,11,2,59,9,0.273,0.0,0.358,1,0,0,0,0,0,84
+2022,al,Rick Wolf/Glenn Colton,Chad Pinder,5441,Oak,OF,28,rel,previously_active,,55,16,5,2,9,0,19,1,0.179,0.0,0.291,12,0,3,1,9,0,91
+2022,al,Rick Wolf/Glenn Colton,*Max Kepler,3195,Min,OF,10,dis,previously_active,"OF,SW",384,114,54,9,43,3,65,49,0.321,0.0,0.352,2,0,0,0,0,0,110
 2022,al,Rick Wolf/Glenn Colton,Kurt Suzuki,1063,LAA,C,1,rel,previously_active,,57,20,5,1,6,0,14,9,0.313,0.0,0.281,2,44,1,0,0,0,0
 2022,al,Rick Wolf/Glenn Colton,*Tom Murphy,4629,Sea,C,1,rel,previously_active,,33,14,9,1,1,0,13,8,0.439,0.0,0.455,1,12,0,0,0,0,0
 2022,al,Rick Wolf/Glenn Colton,Tyler Nevin,5715,Bal,UT,6,rel,previously_active,,34,10,5,0,4,0,9,2,0.342,0.0,0.324,3,0,8,0,44,0,3
 2022,al,Rick Wolf/Glenn Colton,*Alex Kirilloff,5827,Min,SW,14,rel,previously_active,,138,42,13,3,21,0,32,5,0.291,0.0,0.37,3,0,18,0,0,0,30
-2022,al,Rick Wolf/Glenn Colton,Aaron Whitefield,6566,LAA,SW,1,rel,previously_active,,11,5,0,0,0,0,5,0,0.0,0.0,0.0,0,0,0,0,0,0,5
-2022,al,Rick Wolf/Glenn Colton,Steele Walker,7002,SF,SW,29,rel,previously_active,,10,4,1,1,1,0,2,2,0.25,0.0,0.4,0,0,0,0,0,0,5
 2022,al,Rick Wolf/Glenn Colton,Cristian Pache,6097,Oak,SW,1,rel,previously_active,,185,62,15,2,13,1,51,11,0.209,0.0,0.227,0,0,0,0,0,0,90
 2022,al,Rick Wolf/Glenn Colton,*Mickey Moniak,5792,LAA,SW,39,dis,previously_active,"OF,SW",18,6,2,0,0,0,8,1,0.211,0.0,0.167,1,0,0,0,0,0,36
 2022,al,Rick Wolf/Glenn Colton,*Andrew Velazquez,4584,LAA,SW,18,rel,previously_active,,10,5,2,0,1,1,2,0,0.2,0.0,0.3,0,0,0,0,0,124,0
-2022,al,Rick Wolf/Glenn Colton,*Royce Lewis,6094,Min,MI,2,dis,reserved,"UT,SS",7,2,0,0,0,0,1,0,0.286,0.0,0.429,0,0,0,0,0,11,1
-2022,al,Rick Wolf/Glenn Colton,*Danny Mendick,6774,CWS,2B,2,dis,reserved,"UT,SS,2B,MI,SW",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,6,2,22,1
+2022,al,Rick Wolf/Glenn Colton,Aaron Whitefield,6566,LAA,SW,1,rel,previously_active,,11,5,0,0,0,0,5,0,0.0,0.0,0.0,0,0,0,0,0,0,5
+2022,al,Rick Wolf/Glenn Colton,Steele Walker,7002,SF,SW,29,rel,previously_active,,10,4,1,1,1,0,2,2,0.25,0.0,0.4,0,0,0,0,0,0,5
+2022,al,Rick Wolf/Glenn Colton,*Royce Lewis,6094,Min,MI,2,dis,reserved,SS,7,2,0,0,0,0,1,0,0.286,0.0,0.429,0,0,0,0,0,11,1
+2022,al,Rick Wolf/Glenn Colton,*Danny Mendick,6774,CWS,2B,2,dis,reserved,"UT,2B,SS,MI,SW",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,6,2,22,1
 2022,al,Rick Wolf/Glenn Colton,*Max Kepler,3195,Min,OF,10,dis,reserved,"OF,SW",4,1,0,0,0,0,1,0,0.0,0.0,0.0,2,0,0,0,0,0,110
 2022,al,Rick Wolf/Glenn Colton,*Mickey Moniak,5792,LAA,SW,39,dis,reserved,"OF,SW",3,1,0,0,0,0,3,0,0.0,0.0,0.0,1,0,0,0,0,0,36
-2022,al,Rick Wolf/Glenn Colton,Ty France,6723,Sea,1B,15,act,previously_reserved,"1B,CI,2B,MI,3B,SW",4,1,0,0,0,0,1,0,0.25,0.0,0.25,8,0,127,1,6,0,0
+2022,al,Rick Wolf/Glenn Colton,Ty France,6723,Sea,1B,15,act,previously_reserved,"1B,3B,2B,SW,CI,MI",4,1,0,0,0,0,1,0,0.25,0.0,0.25,8,0,127,1,6,0,0
+2022,al,Rick Wolf/Glenn Colton,Mauricio Dubon,5380,Hou,MI,59,rel,previously_reserved,,8,5,2,1,3,1,1,1,0.444,0.0,0.75,1,0,0,17,3,21,67
 2022,al,Rick Wolf/Glenn Colton,Jeter Downs,6514,Bos,MI,9,rel,previously_reserved,,14,5,0,0,0,0,9,0,0.071,0.0,0.071,1,0,0,8,6,3,0
 2022,al,Rick Wolf/Glenn Colton,Richie Martin,5355,Bal,MI,64,rel,previously_reserved,,10,5,0,0,1,3,3,0,0.1,0.0,0.1,1,0,0,10,0,2,0
-2022,al,Rick Wolf/Glenn Colton,Mauricio Dubon,5380,Hou,MI,59,rel,previously_reserved,,8,5,2,1,3,1,1,1,0.444,0.0,0.75,1,0,0,17,3,21,67
 2022,al,Rick Wolf/Glenn Colton,Myles Straw,6413,Cle,OF,22,act,previously_reserved,"OF,SW",88,26,5,0,4,4,11,4,0.196,0.0,0.159,0,0,0,0,0,0,152
 2022,al,Rick Wolf/Glenn Colton,Jo Adell,6143,LAA,OF,139,rel,previously_reserved,,21,8,0,0,2,1,10,0,0.286,0.0,0.333,1,0,0,0,0,0,84
 2022,al,Rick Wolf/Glenn Colton,Kurt Suzuki,1063,LAA,C,1,rel,previously_reserved,,4,1,1,0,0,0,0,0,0.25,0.0,0.25,2,44,1,0,0,0,0
 2022,al,Rick Wolf/Glenn Colton,Tyler Nevin,5715,Bal,UT,6,rel,previously_reserved,,20,6,2,1,1,0,6,3,0.261,0.0,0.3,3,0,8,0,44,0,3
 2022,al,Rick Wolf/Glenn Colton,*Alex Kirilloff,5827,Min,SW,14,rel,previously_reserved,,6,3,1,0,0,0,4,0,0.286,0.0,0.167,3,0,18,0,0,0,30
 2022,al,Rick Wolf/Glenn Colton,Cristian Pache,6097,Oak,SW,1,rel,previously_reserved,,16,6,0,0,0,0,5,0,0.125,0.0,0.187,0,0,0,0,0,0,90
-2022,al,Patrick Davitt,Mauricio Dubon,5380,Hou,MI,4,act,active,"OF,2B,SS,SW,MI",72,30,8,1,4,0,15,1,0.2,0.286,0.236,1,0,0,17,3,21,67
+2022,al,Patrick Davitt,Mauricio Dubon,5380,Hou,MI,4,act,active,"OF,2B,SS,MI,SW",72,30,8,1,4,0,15,1,0.2,0.286,0.236,1,0,0,17,3,21,67
+2022,al,Patrick Davitt,Anthony Rizzo,3156,NYY,1B,22,act,active,"1B,CI,SW",45,12,4,1,3,0,8,3,0.302,0.25,0.289,9,0,120,0,0,0,0
 2022,al,Patrick Davitt,Vinnie Pasquantino,7939,KC,CI,39,act,active,1B,258,72,25,10,26,1,34,35,0.383,0.417,0.45,35,0,37,0,0,0,0
-2022,al,Patrick Davitt,Anthony Rizzo,3156,NYY,1B,22,act,active,"1B,SW,CI",45,12,4,1,3,0,8,3,0.302,0.25,0.289,9,0,120,0,0,0,0
-2022,al,Patrick Davitt,Jorge Mateo,5119,Bal,2B,7,act,active,"SS,MI,SW,OF,2B",494,150,63,13,50,35,147,27,0.267,0.3,0.379,0,0,0,0,0,149,0
-2022,al,Patrick Davitt,Xander Bogaerts,3822,Bos,SS,27,act,active,"SS,MI,SW",557,150,84,15,73,8,118,57,0.377,0.5,0.456,4,0,0,0,0,146,0
+2022,al,Patrick Davitt,Jorge Mateo,5119,Bal,2B,7,act,active,"SS,MI,2B,OF,SW",494,150,63,13,50,35,147,27,0.267,0.3,0.379,0,0,0,0,0,149,0
+2022,al,Patrick Davitt,Xander Bogaerts,3822,Bos,SS,27,act,active,"SS,SW,MI",557,150,84,15,73,8,118,57,0.377,0.5,0.456,4,0,0,0,0,146,0
 2022,al,Patrick Davitt,Nate Eaton,8002,KC,3B,19,act,active,"OF,3B",27,13,3,0,2,2,6,3,0.267,0.286,0.296,0,0,0,0,15,0,30
-2022,al,Patrick Davitt,Julio Rodriguez,6579,Sea,OF,6,act,active,OF,507,131,84,28,73,25,145,39,0.342,0.455,0.509,1,0,0,0,0,0,130
-2022,al,Patrick Davitt,Manuel Margot,4858,TB,OF,79,act,active,"OF,SW",146,36,15,1,20,2,31,7,0.284,0.111,0.329,16,0,0,0,0,0,70
 2022,al,Patrick Davitt,Josh Naylor,5389,Cle,OF,2,act,active,"1B,OF,CI,SW",432,117,43,16,69,6,76,35,0.308,0.6,0.421,27,0,88,0,0,0,5
+2022,al,Patrick Davitt,Manuel Margot,4858,TB,OF,79,act,active,"OF,SW",146,36,15,1,20,2,31,7,0.284,0.111,0.329,16,0,0,0,0,0,70
+2022,al,Patrick Davitt,Julio Rodriguez,6579,Sea,OF,6,act,active,OF,507,131,84,28,73,25,145,39,0.342,0.455,0.509,1,0,0,0,0,0,130
 2022,al,Patrick Davitt,A.J. Pollock,2837,CWS,OF,701,act,active,"OF,SW",489,138,61,14,56,3,98,32,0.292,0.286,0.389,0,0,0,0,0,0,137
 2022,al,Patrick Davitt,Bo Naylor,6848,Cle,C,4,act,active,C,2,3,0,0,0,0,0,0,0.0,0.0,0.0,1,4,0,0,0,0,0
 2022,al,Patrick Davitt,Salvador Perez,3457,KC,C,23,act,active,"C,SW",425,109,45,21,69,0,103,18,0.297,0.0,0.466,40,77,0,0,0,0,0
 2022,al,Patrick Davitt,Ji-Man Choi,4487,TB,UT,5,act,active,"1B,SW,CI",327,104,33,11,52,0,111,55,0.346,0.714,0.394,12,0,98,0,0,0,0
-2022,al,Patrick Davitt,Yuli Gurriel,2160,Hou,SW,13,act,active,"1B,SW,CI",525,140,50,8,51,8,69,27,0.285,0.3,0.362,3,0,142,0,0,0,0
-2022,al,Patrick Davitt,Kevin Smith,6623,Oak,MI,13,rel,previously_active,,131,44,9,2,12,3,41,7,0.2,0.0,0.275,0,0,0,0,39,10,0
+2022,al,Patrick Davitt,Yuli Gurriel,2160,Hou,SW,13,act,active,"1B,CI,SW",525,140,50,8,51,8,69,27,0.285,0.3,0.362,3,0,142,0,0,0,0
 2022,al,Patrick Davitt,Tyler Wade,5629,NYY,MI,5,rel,previously_active,,118,56,17,0,6,6,27,7,0.286,0.0,0.271,0,0,0,31,12,19,14
-2022,al,Patrick Davitt,*Brandon Lowe,6565,TB,MI,26,dis,previously_active,"2B,MI,SW,OF",214,59,27,8,25,1,56,24,0.302,0.0,0.383,11,0,0,53,0,0,1
-2022,al,Patrick Davitt,*Brad Miller,4310,Tex,3B,6,dis,previously_active,"1B,OF,SW,3B,CI",218,80,20,7,32,4,69,18,0.274,0.0,0.326,22,0,0,0,27,0,29
+2022,al,Patrick Davitt,*Brandon Lowe,6565,TB,MI,26,dis,previously_active,"2B,OF,MI,SW",214,59,27,8,25,1,56,24,0.302,0.0,0.383,11,0,0,53,0,0,1
+2022,al,Patrick Davitt,Kevin Smith,6623,Oak,MI,13,rel,previously_active,,131,44,9,2,12,3,41,7,0.2,0.0,0.275,0,0,0,0,39,10,0
+2022,al,Patrick Davitt,*Brad Miller,4310,Tex,3B,6,dis,previously_active,"1B,OF,CI,SW,3B",218,80,20,7,32,4,69,18,0.274,0.0,0.326,22,0,0,0,27,0,29
 2022,al,Patrick Davitt,Tyler Freeman,6840,Cle,3B,1,res,previously_active,"UT,3B,SS",28,9,4,0,2,0,5,1,0.3,0.0,0.286,1,0,0,4,11,7,0
-2022,al,Patrick Davitt,Chad Pinder,5441,Oak,OF,0,rel,previously_active,,97,28,8,2,7,2,30,6,0.262,0.0,0.33,12,0,3,1,9,0,91
-2022,al,Patrick Davitt,Kole Calhoun,3983,Tex,OF,2,rel,previously_active,,371,119,36,12,48,3,129,26,0.264,0.0,0.342,20,0,0,0,0,0,101
 2022,al,Patrick Davitt,Cedric Mullins,6128,Bal,OF,26,trd,previously_active,,504,129,72,13,51,29,103,42,0.326,0.0,0.409,4,0,0,0,0,0,150
+2022,al,Patrick Davitt,Kole Calhoun,3983,Tex,OF,2,rel,previously_active,,371,119,36,12,48,3,129,26,0.264,0.0,0.342,20,0,0,0,0,0,101
+2022,al,Patrick Davitt,Chad Pinder,5441,Oak,OF,0,rel,previously_active,,97,28,8,2,7,2,30,6,0.262,0.0,0.33,12,0,3,1,9,0,91
 2022,al,Patrick Davitt,Luke Raley,6663,TB,OF,49,rel,previously_active,,16,5,0,0,0,0,8,2,0.222,0.0,0.125,4,0,3,0,0,0,14
-2022,al,Patrick Davitt,Sam Huff,6998,Tex,C,1,rel,previously_active,,15,5,1,0,0,0,3,0,0.333,0.0,0.4,4,29,6,0,0,0,0
 2022,al,Patrick Davitt,Kurt Suzuki,1063,LAA,C,0,rel,previously_active,,43,16,2,1,4,0,8,2,0.191,0.0,0.256,2,44,1,0,0,0,0
-2022,al,Patrick Davitt,Kevin Plawecki,4517,Tex,C,4,rel,previously_active,,19,7,0,0,0,0,3,0,0.158,0.0,0.158,0,61,0,0,0,0,0
+2022,al,Patrick Davitt,Sam Huff,6998,Tex,C,1,rel,previously_active,,15,5,1,0,0,0,3,0,0.333,0.0,0.4,4,29,6,0,0,0,0
 2022,al,Patrick Davitt,Francisco Mejia,4850,TB,C,14,rel,previously_active,,251,82,28,6,29,0,62,4,0.244,0.0,0.367,3,83,2,0,0,0,0
+2022,al,Patrick Davitt,Kevin Plawecki,4517,Tex,C,4,rel,previously_active,,19,7,0,0,0,0,3,0,0.158,0.0,0.158,0,61,0,0,0,0,0
 2022,al,Patrick Davitt,Charlie Culberson,3504,Tex,UT,0,rel,previously_active,,7,5,2,0,1,0,2,0,0.286,0.0,0.571,9,0,1,11,25,1,12
-2022,al,Patrick Davitt,*Brandon Lowe,6565,TB,MI,26,dis,reserved,"2B,MI,SW,OF",21,6,4,0,0,0,5,3,0.375,0.0,0.381,11,0,0,53,0,0,1
-2022,al,Patrick Davitt,*Brad Miller,4310,Tex,3B,6,dis,reserved,"1B,OF,SW,3B,CI",4,1,0,0,0,0,1,0,0.0,0.0,0.0,22,0,0,0,27,0,29
+2022,al,Patrick Davitt,*Brandon Lowe,6565,TB,MI,26,dis,reserved,"2B,OF,MI,SW",21,6,4,0,0,0,5,3,0.375,0.0,0.381,11,0,0,53,0,0,1
+2022,al,Patrick Davitt,*Brad Miller,4310,Tex,3B,6,dis,reserved,"1B,OF,CI,SW,3B",4,1,0,0,0,0,1,0,0.0,0.0,0.0,22,0,0,0,27,0,29
 2022,al,Patrick Davitt,Tyler Freeman,6840,Cle,3B,1,res,reserved,"UT,3B,SS",0,0,0,0,0,0,0,0,0.0,0.0,0.0,1,0,0,4,11,7,0
-2022,al,Patrick Davitt,Mauricio Dubon,5380,Hou,MI,4,act,previously_reserved,"OF,2B,SS,SW,MI",68,27,9,1,5,1,9,6,0.293,0.0,0.338,1,0,0,17,3,21,67
 2022,al,Patrick Davitt,Kevin Smith,6623,Oak,MI,13,rel,previously_reserved,,8,3,0,0,1,1,1,0,0.5,0.0,0.75,0,0,0,0,39,10,0
 2022,al,Patrick Davitt,Tyler Wade,5629,NYY,MI,5,rel,previously_reserved,,29,11,5,1,2,2,6,3,0.219,0.0,0.276,0,0,0,31,12,19,14
-2022,al,Patrick Davitt,Anthony Rizzo,3156,NYY,1B,22,act,previously_reserved,"1B,SW,CI",6,1,2,1,1,0,0,0,0.5,0.0,1.0,9,0,120,0,0,0,0
+2022,al,Patrick Davitt,Anthony Rizzo,3156,NYY,1B,22,act,previously_reserved,"1B,CI,SW",6,1,2,1,1,0,0,0,0.5,0.0,1.0,9,0,120,0,0,0,0
+2022,al,Patrick Davitt,Mauricio Dubon,5380,Hou,MI,4,act,previously_reserved,"OF,2B,SS,MI,SW",68,27,9,1,5,1,9,6,0.293,0.0,0.338,1,0,0,17,3,21,67
 2022,al,Patrick Davitt,Nate Eaton,8002,KC,3B,19,act,previously_reserved,"OF,3B",43,17,8,0,7,8,11,4,0.408,0.0,0.442,0,0,0,0,15,0,30
-2022,al,Patrick Davitt,Kole Calhoun,3983,Tex,OF,2,rel,previously_reserved,,10,3,0,0,0,0,4,1,0.182,0.0,0.1,20,0,0,0,0,0,101
 2022,al,Patrick Davitt,Chad Pinder,5441,Oak,OF,0,rel,previously_reserved,,51,14,6,3,8,0,23,1,0.302,0.0,0.529,12,0,3,1,9,0,91
-2022,al,Patrick Davitt,Julio Rodriguez,6579,Sea,OF,6,act,previously_reserved,OF,4,1,0,0,2,0,0,1,0.6,0.0,0.5,1,0,0,0,0,0,130
+2022,al,Patrick Davitt,Kole Calhoun,3983,Tex,OF,2,rel,previously_reserved,,10,3,0,0,0,0,4,1,0.182,0.0,0.1,20,0,0,0,0,0,101
 2022,al,Patrick Davitt,Manuel Margot,4858,TB,OF,79,act,previously_reserved,"OF,SW",8,2,0,0,0,0,2,0,0.125,0.0,0.125,16,0,0,0,0,0,70
+2022,al,Patrick Davitt,Julio Rodriguez,6579,Sea,OF,6,act,previously_reserved,OF,4,1,0,0,2,0,0,1,0.6,0.0,0.5,1,0,0,0,0,0,130
 2022,al,Patrick Davitt,Josh Naylor,5389,Cle,OF,2,act,previously_reserved,"1B,OF,CI,SW",17,5,4,4,10,0,4,3,0.571,0.0,1.24,27,0,88,0,0,0,5
-2022,al,Patrick Davitt,Bo Naylor,6848,Cle,C,4,act,previously_reserved,C,6,2,0,0,0,0,5,0,0.0,0.0,0.0,1,4,0,0,0,0,0
-2022,al,Patrick Davitt,Kurt Suzuki,1063,LAA,C,0,rel,previously_reserved,,18,8,1,1,1,0,4,4,0.273,0.0,0.278,2,44,1,0,0,0,0
 2022,al,Patrick Davitt,Francisco Mejia,4850,TB,C,14,rel,previously_reserved,,27,8,4,0,1,0,2,3,0.4,0.0,0.481,3,83,2,0,0,0,0
 2022,al,Patrick Davitt,Salvador Perez,3457,KC,C,23,act,previously_reserved,"C,SW",20,5,3,2,7,0,6,0,0.182,0.0,0.45,40,77,0,0,0,0,0
+2022,al,Patrick Davitt,Bo Naylor,6848,Cle,C,4,act,previously_reserved,C,6,2,0,0,0,0,5,0,0.0,0.0,0.0,1,4,0,0,0,0,0
+2022,al,Patrick Davitt,Kurt Suzuki,1063,LAA,C,0,rel,previously_reserved,,18,8,1,1,1,0,4,4,0.273,0.0,0.278,2,44,1,0,0,0,0
 2022,al,Patrick Davitt,Charlie Culberson,3504,Tex,UT,0,rel,previously_reserved,,8,5,1,0,1,0,2,1,0.444,0.0,0.5,9,0,1,11,25,1,12
 2022,al,Patrick Davitt,Ji-Man Choi,4487,TB,UT,5,act,previously_reserved,"1B,SW,CI",29,9,3,0,0,0,12,3,0.281,0.0,0.31,12,0,98,0,0,0,0
-2022,al,Patrick Davitt,Yuli Gurriel,2160,Hou,SW,13,act,previously_reserved,"1B,SW,CI",20,6,3,0,2,0,4,3,0.348,0.0,0.3,3,0,142,0,0,0,0
 2022,al,Patrick Davitt,*Jason Castro,2343,Hou,SW,0,rel,previously_reserved,,11,5,0,0,0,0,4,3,0.333,0.0,0.091,0,30,0,0,0,0,0
-2022,al,Ryan Bloomfield,Josh Harrison,3747,CWS,CI,10,act,active,"3B,2B,SW,MI,OF,CI",346,107,43,6,22,1,62,16,0.301,0.286,0.361,4,0,0,90,23,2,2
-2022,al,Ryan Bloomfield,Nicky Lopez,6356,KC,MI,13,act,active,"3B,SS,MI,2B,SW",436,142,51,0,20,13,63,29,0.281,0.333,0.273,0,0,0,68,30,52,0
-2022,al,Ryan Bloomfield,Owen Miller,7014,Cle,1B,21,act,active,"2B,1B,SW,CI,MI",384,119,43,4,48,2,83,28,0.29,0.125,0.32,22,0,80,25,4,0,0
-2022,al,Ryan Bloomfield,Harold Castro,6431,Det,2B,7,act,active,"2B,1B,SS,3B,SW,MI,CI",372,104,28,3,40,0,68,15,0.293,0.222,0.347,9,0,50,14,25,19,4
+2022,al,Patrick Davitt,Yuli Gurriel,2160,Hou,SW,13,act,previously_reserved,"1B,CI,SW",20,6,3,0,2,0,4,3,0.348,0.0,0.3,3,0,142,0,0,0,0
+2022,al,Ryan Bloomfield,Nicky Lopez,6356,KC,MI,13,act,active,"3B,SS,MI,SW,2B",436,142,51,0,20,13,63,29,0.281,0.333,0.273,0,0,0,68,30,52,0
+2022,al,Ryan Bloomfield,Josh Harrison,3747,CWS,CI,10,act,active,"3B,2B,MI,SW,OF,CI",346,107,43,6,22,1,62,16,0.301,0.286,0.361,4,0,0,90,23,2,2
+2022,al,Ryan Bloomfield,Owen Miller,7014,Cle,1B,21,act,active,"2B,1B,CI,SW,MI",384,119,43,4,48,2,83,28,0.29,0.125,0.32,22,0,80,25,4,0,0
+2022,al,Ryan Bloomfield,Harold Castro,6431,Det,2B,7,act,active,"2B,1B,SS,MI,SW,3B,CI",372,104,28,3,40,0,68,15,0.293,0.222,0.347,9,0,50,14,25,19,4
 2022,al,Ryan Bloomfield,Corey Seager,4154,Tex,SS,22,act,active,"SS,MI,SW",593,151,91,33,83,3,103,58,0.317,0.25,0.455,7,0,0,0,0,144,0
-2022,al,Ryan Bloomfield,Matt Duffy,4893,LAA,3B,0,act,active,"3B,2B,CI,1B,SW,MI",148,49,9,1,8,0,34,13,0.321,0.25,0.311,0,0,21,17,42,0,0
-2022,al,Ryan Bloomfield,Chad Pinder,5441,Oak,OF,42,act,active,"OF,SW,3B",129,45,14,4,13,0,38,6,0.252,0.333,0.341,12,0,3,1,9,0,91
-2022,al,Ryan Bloomfield,Teoscar Hernandez,4844,Tor,OF,30,act,active,"OF,SW",492,129,71,25,75,6,148,34,0.318,0.333,0.496,10,0,0,0,0,0,119
+2022,al,Ryan Bloomfield,Matt Duffy,4893,LAA,3B,0,act,active,"3B,2B,SW,1B,CI,MI",148,49,9,1,8,0,34,13,0.321,0.25,0.311,0,0,21,17,42,0,0
 2022,al,Ryan Bloomfield,Mike Trout,2844,LAA,OF,38,act,active,"OF,SW",438,119,85,40,80,1,139,54,0.369,0.429,0.63,7,0,0,0,0,0,111
+2022,al,Ryan Bloomfield,Chad Pinder,5441,Oak,OF,42,act,active,"OF,3B,SW",129,45,14,4,13,0,38,6,0.252,0.333,0.341,12,0,3,1,9,0,91
 2022,al,Ryan Bloomfield,Robbie Grossman,2699,Atl,OF,18,act,active,"OF,SW",405,127,40,7,45,6,127,56,0.31,0.417,0.311,3,0,0,0,0,0,124
-2022,al,Ryan Bloomfield,Gary Sanchez,3259,Min,C,11,act,active,"C,SW",419,128,42,16,61,2,136,40,0.282,0.222,0.377,32,91,1,0,0,0,0
+2022,al,Ryan Bloomfield,Teoscar Hernandez,4844,Tor,OF,30,act,active,"OF,SW",492,129,71,25,75,6,148,34,0.318,0.333,0.496,10,0,0,0,0,0,119
 2022,al,Ryan Bloomfield,Shea Langeliers,6913,Oak,C,134,act,active,C,123,35,10,5,18,0,44,9,0.256,0.455,0.382,24,17,0,0,0,0,0
+2022,al,Ryan Bloomfield,Gary Sanchez,3259,Min,C,11,act,active,"C,SW",419,128,42,16,61,2,136,40,0.282,0.222,0.377,32,91,1,0,0,0,0
 2022,al,Ryan Bloomfield,J.D. Martinez,3567,Bos,UT,24,act,active,"OF,SW",533,139,76,16,62,0,145,52,0.341,0.4,0.448,139,0,0,0,0,0,0
 2022,al,Ryan Bloomfield,Aaron Hicks,2591,NYY,SW,3,act,active,"OF,SW",324,108,42,6,32,9,88,57,0.33,0.2,0.29,1,0,0,0,0,0,126
+2022,al,Ryan Bloomfield,*Santiago Espinal,6833,Tor,CI,1,dis,previously_active,"3B,SW,2B,SS,CI",441,132,51,7,49,6,66,36,0.324,0.0,0.367,0,0,0,120,11,11,0
 2022,al,Ryan Bloomfield,Bobby Bradley,5249,FA,1B,3,rel,previously_active,,16,7,1,0,0,0,8,0,0.125,0.0,0.125,0,0,7,0,0,0,0
-2022,al,Ryan Bloomfield,*Santiago Espinal,6833,Tor,CI,1,dis,previously_active,"3B,SW,2B,CI,SS",441,132,51,7,49,6,66,36,0.324,0.0,0.367,0,0,0,120,11,11,0
 2022,al,Ryan Bloomfield,Chris Owings,3271,NYY,2B,32,rel,previously_active,,13,7,1,0,0,0,6,1,0.2,0.0,0.154,0,0,0,11,2,8,1
 2022,al,Ryan Bloomfield,Kevin Padlo,5288,Pit,3B,23,rel,previously_active,,1,1,0,0,0,0,1,0,0.0,0.0,0.0,0,0,7,0,5,0,0
-2022,al,Ryan Bloomfield,Cal Raleigh,6814,Sea,C,1,rel,previously_active,,24,9,1,1,1,0,9,4,0.214,0.0,0.208,1,115,0,0,0,0,0
 2022,al,Ryan Bloomfield,Austin Hedges,4064,Cle,C,33,rel,previously_active,,163,59,15,4,19,0,40,17,0.274,0.0,0.27,0,105,0,0,0,0,0
+2022,al,Ryan Bloomfield,Cal Raleigh,6814,Sea,C,1,rel,previously_active,,24,9,1,1,1,0,9,4,0.214,0.0,0.208,1,115,0,0,0,0,0
 2022,al,Ryan Bloomfield,Travis Shaw,4819,FA,UT,0,rel,previously_active,,7,3,0,0,0,0,2,0,0.0,0.0,0.0,3,0,3,0,0,0,0
+2022,al,Ryan Bloomfield,Miguel Andujar,5142,Pit,SW,104,rel,previously_active,,20,6,3,0,2,2,7,1,0.227,0.0,0.25,13,0,1,0,0,0,23
+2022,al,Ryan Bloomfield,Bradley Zimmer,4122,Tor,SW,4,res,previously_active,"OF,SW",1,9,0,0,0,0,0,0,0.0,0.0,0.0,1,0,0,0,0,0,99
+2022,al,Ryan Bloomfield,*Kerry Carpenter,8216,Det,SW,54,dis,previously_active,OF,76,23,11,4,6,0,22,2,0.309,0.0,0.487,12,0,0,0,0,0,19
 2022,al,Ryan Bloomfield,*Kevin Kiermaier,4671,TB,SW,1,dis,previously_active,"OF,SW",194,60,27,7,22,6,57,12,0.275,0.0,0.376,2,0,0,0,0,0,60
 2022,al,Ryan Bloomfield,*Jorge Soler,3918,Mia,SW,14,dis,previously_active,"OF,SW",16,5,1,0,0,0,8,1,0.118,0.0,0.062,14,0,0,0,0,0,57
-2022,al,Ryan Bloomfield,Miguel Andujar,5142,Pit,SW,104,rel,previously_active,,20,6,3,0,2,2,7,1,0.227,0.0,0.25,13,0,1,0,0,0,23
-2022,al,Ryan Bloomfield,*Kerry Carpenter,8216,Det,SW,54,dis,previously_active,OF,76,23,11,4,6,0,22,2,0.309,0.0,0.487,12,0,0,0,0,0,19
-2022,al,Ryan Bloomfield,Bradley Zimmer,4122,Tor,SW,4,res,previously_active,"OF,SW",1,9,0,0,0,0,0,0,0.0,0.0,0.0,1,0,0,0,0,0,99
-2022,al,Ryan Bloomfield,*Santiago Espinal,6833,Tor,CI,1,dis,reserved,"3B,SW,2B,CI,SS",8,3,0,0,2,0,2,0,0.25,0.0,0.5,0,0,0,120,11,11,0
-2022,al,Ryan Bloomfield,*Jorge Soler,3918,Mia,SW,14,dis,reserved,"OF,SW",0,0,0,0,0,0,0,0,0.0,0.0,0.0,14,0,0,0,0,0,57
-2022,al,Ryan Bloomfield,*Kevin Kiermaier,4671,TB,SW,1,dis,reserved,"OF,SW",12,3,1,0,0,0,4,2,0.357,0.0,0.25,2,0,0,0,0,0,60
-2022,al,Ryan Bloomfield,*Kerry Carpenter,8216,Det,SW,54,dis,reserved,OF,0,0,0,0,0,0,0,0,0.0,0.0,0.0,12,0,0,0,0,0,19
+2022,al,Ryan Bloomfield,*Santiago Espinal,6833,Tor,CI,1,dis,reserved,"3B,SW,2B,SS,CI",8,3,0,0,2,0,2,0,0.25,0.0,0.5,0,0,0,120,11,11,0
 2022,al,Ryan Bloomfield,Bradley Zimmer,4122,Tor,SW,4,res,reserved,"OF,SW",29,32,7,0,2,1,12,0,0.2,0.125,0.207,1,0,0,0,0,0,99
+2022,al,Ryan Bloomfield,*Kerry Carpenter,8216,Det,SW,54,dis,reserved,OF,0,0,0,0,0,0,0,0,0.0,0.0,0.0,12,0,0,0,0,0,19
+2022,al,Ryan Bloomfield,*Kevin Kiermaier,4671,TB,SW,1,dis,reserved,"OF,SW",12,3,1,0,0,0,4,2,0.357,0.0,0.25,2,0,0,0,0,0,60
+2022,al,Ryan Bloomfield,*Jorge Soler,3918,Mia,SW,14,dis,reserved,"OF,SW",0,0,0,0,0,0,0,0,0.0,0.0,0.0,14,0,0,0,0,0,57
 2022,al,Ryan Bloomfield,Bobby Bradley,5249,FA,1B,3,rel,previously_reserved,,1,1,0,0,0,0,1,0,0.0,0.0,0.0,0,0,7,0,0,0,0
-2022,al,Ryan Bloomfield,Owen Miller,7014,Cle,1B,21,act,previously_reserved,"2B,1B,SW,CI,MI",40,11,10,2,3,0,10,4,0.4,0.0,0.65,22,0,80,25,4,0,0
-2022,al,Ryan Bloomfield,Josh Harrison,3747,CWS,CI,10,act,previously_reserved,"3B,2B,SW,MI,OF,CI",40,12,7,1,5,1,9,5,0.447,0.0,0.45,4,0,0,90,23,2,2
-2022,al,Ryan Bloomfield,Harold Castro,6431,Det,2B,7,act,previously_reserved,"2B,1B,SS,3B,SW,MI,CI",22,7,5,4,4,0,3,0,0.364,0.0,0.955,9,0,50,14,25,19,4
+2022,al,Ryan Bloomfield,Josh Harrison,3747,CWS,CI,10,act,previously_reserved,"3B,2B,MI,SW,OF,CI",40,12,7,1,5,1,9,5,0.447,0.0,0.45,4,0,0,90,23,2,2
+2022,al,Ryan Bloomfield,Owen Miller,7014,Cle,1B,21,act,previously_reserved,"2B,1B,CI,SW,MI",40,11,10,2,3,0,10,4,0.4,0.0,0.65,22,0,80,25,4,0,0
 2022,al,Ryan Bloomfield,Chris Owings,3271,NYY,2B,32,rel,previously_reserved,,6,3,0,0,0,0,1,1,0.143,0.0,0.0,0,0,0,11,2,8,1
-2022,al,Ryan Bloomfield,Matt Duffy,4893,LAA,3B,0,act,previously_reserved,"3B,2B,CI,1B,SW,MI",80,28,5,1,8,0,16,4,0.282,0.0,0.312,0,0,21,17,42,0,0
+2022,al,Ryan Bloomfield,Harold Castro,6431,Det,2B,7,act,previously_reserved,"2B,1B,SS,MI,SW,3B,CI",22,7,5,4,4,0,3,0,0.364,0.0,0.955,9,0,50,14,25,19,4
+2022,al,Ryan Bloomfield,Matt Duffy,4893,LAA,3B,0,act,previously_reserved,"3B,2B,SW,1B,CI,MI",80,28,5,1,8,0,16,4,0.282,0.0,0.312,0,0,21,17,42,0,0
 2022,al,Ryan Bloomfield,Robbie Grossman,2699,Atl,OF,18,act,previously_reserved,"OF,SW",6,2,0,0,0,0,2,0,0.333,0.0,0.333,3,0,0,0,0,0,124
 2022,al,Ryan Bloomfield,Teoscar Hernandez,4844,Tor,OF,30,act,previously_reserved,"OF,SW",7,2,0,0,2,0,4,0,0.143,0.0,0.143,10,0,0,0,0,0,119
 2022,al,Ryan Bloomfield,Travis Shaw,4819,FA,UT,0,rel,previously_reserved,,12,4,0,0,0,0,5,0,0.0,0.0,0.0,3,0,3,0,0,0,0
 2022,al,Ryan Bloomfield,Miguel Andujar,5142,Pit,SW,104,rel,previously_reserved,,19,5,3,0,1,1,5,1,0.25,0.0,0.211,13,0,1,0,0,0,23
 2022,al,Ryan Bloomfield,Aaron Hicks,2591,NYY,SW,3,act,previously_reserved,"OF,SW",60,22,12,2,8,1,21,6,0.328,0.0,0.433,1,0,0,0,0,0,126
-2022,al,Howard Bender,*Andrew Velazquez,4584,LAA,MI,32,act,active,"SS,SW,MI",261,103,29,9,25,13,99,9,0.241,0.0,0.337,0,0,0,0,0,124,0
 2022,al,Howard Bender,Matt Chapman,5037,Tor,CI,20,act,active,"3B,CI,SW",538,155,83,27,76,2,170,68,0.324,0.429,0.433,1,0,0,0,153,0,0
+2022,al,Howard Bender,*Andrew Velazquez,4584,LAA,MI,32,act,active,"SS,MI,SW",261,103,29,9,25,13,99,9,0.241,0.0,0.337,0,0,0,0,0,124,0
 2022,al,Howard Bender,Triston Casas,6099,Bos,1B,0,act,active,1B,55,20,9,4,10,1,15,16,0.408,0.167,0.473,0,0,27,0,0,0,0
 2022,al,Howard Bender,Andres Gimenez,5824,Cle,2B,11,act,active,"2B,SS,MI,SW",491,146,66,17,69,20,112,34,0.371,0.286,0.466,0,0,0,125,0,18,0
 2022,al,Howard Bender,Bo Bichette,6070,Tor,SS,39,act,active,"SS,MI,SW",652,159,91,24,93,13,155,41,0.333,0.333,0.469,1,0,0,0,0,157,0
 2022,al,Howard Bender,Yoan Moncada,5023,CWS,3B,19,act,active,"3B,SW,CI",376,99,40,12,48,2,106,32,0.276,0.154,0.359,0,0,0,0,101,0,0
-2022,al,Howard Bender,Kody Clemens,7016,Det,OF,23,act,active,"1B,2B,OF,3B",27,18,5,2,7,0,9,2,0.207,0.111,0.37,6,0,13,9,17,0,8
+2022,al,Howard Bender,Kody Clemens,7016,Det,OF,23,act,active,"1B,2B,3B,OF",27,18,5,2,7,0,9,2,0.207,0.111,0.37,6,0,13,9,17,0,8
+2022,al,Howard Bender,Nick Gordon,4960,Min,OF,0,act,active,"OF,2B,SW,SS,MI",290,99,35,7,42,3,78,17,0.33,0.308,0.448,1,0,0,36,1,17,95
 2022,al,Howard Bender,Austin Hays,6076,Bal,OF,11,act,active,"OF,SW",535,145,66,16,60,2,114,34,0.306,0.2,0.413,3,0,0,0,0,0,141
 2022,al,Howard Bender,Alex Verdugo,4948,Bos,OF,14,act,active,"OF,SW",593,152,75,11,74,1,86,42,0.328,0.182,0.405,2,0,0,0,0,0,150
-2022,al,Howard Bender,Nick Gordon,4960,Min,OF,0,act,active,"OF,2B,SW,SS,MI",290,99,35,7,42,3,78,17,0.33,0.308,0.448,1,0,0,36,1,17,95
-2022,al,Howard Bender,Christian Vazquez,4248,Hou,C,10,act,active,"C,1B,SW",398,119,41,9,52,1,69,22,0.315,0.5,0.399,1,108,9,1,0,0,0
 2022,al,Howard Bender,Jose Trevino,5991,NYY,C,1,act,active,"C,SW",250,80,25,7,28,1,49,9,0.267,0.375,0.36,1,112,0,0,0,0,0
+2022,al,Howard Bender,Christian Vazquez,4248,Hou,C,10,act,active,"C,1B,SW",398,119,41,9,52,1,69,22,0.315,0.5,0.399,1,108,9,1,0,0,0
 2022,al,Howard Bender,Magneuris Sierra,5233,LAA,UT,12,act,active,"OF,SW",77,38,6,0,5,4,22,3,0.2,0.0,0.26,0,0,0,0,0,0,43
 2022,al,Howard Bender,Spencer Torkelson,7073,Det,SW,12,act,active,1B,333,102,35,7,26,0,94,34,0.272,0.462,0.297,0,0,109,0,0,0,0
+2022,al,Howard Bender,Tyler Nevin,5715,Bal,1B,132,res,previously_active,"1B,SW,3B,OF",9,4,0,0,1,0,4,2,0.364,0.0,0.333,3,0,8,0,44,0,3
+2022,al,Howard Bender,Hunter Dozier,4612,KC,1B,3,res,previously_active,"3B,OF,1B,SW,CI",417,116,44,10,36,4,111,31,0.292,0.0,0.379,25,0,42,0,27,0,40
 2022,al,Howard Bender,*Nick Solak,6442,Tex,MI,6,rel,previously_active,,42,19,8,2,3,1,12,4,0.327,0.0,0.357,11,0,0,1,0,0,22
-2022,al,Howard Bender,Tyler Nevin,5715,Bal,1B,132,res,previously_active,"1B,OF,SW,3B",9,4,0,0,1,0,4,2,0.364,0.0,0.333,3,0,8,0,44,0,3
-2022,al,Howard Bender,Hunter Dozier,4612,KC,1B,3,res,previously_active,"3B,1B,OF,SW,CI",417,116,44,10,36,4,111,31,0.292,0.0,0.379,25,0,42,0,27,0,40
 2022,al,Howard Bender,*Franchy Cordero,4877,Bos,1B,88,rel,previously_active,,208,70,31,4,23,4,78,23,0.3,0.0,0.365,3,0,53,0,0,0,39
+2022,al,Howard Bender,Brett Phillips,5048,Bal,OF,132,rel,previously_active,,58,29,7,1,5,1,29,5,0.2,0.0,0.19,2,0,0,0,0,0,78
 2022,al,Howard Bender,Derek Hill,5097,Sea,OF,138,rel,previously_active,,63,26,5,1,2,3,22,4,0.265,0.0,0.286,0,0,0,0,0,0,30
 2022,al,Howard Bender,*Austin Meadows,4438,Det,OF,17,dis,previously_active,"OF,SW",111,31,9,0,11,0,14,14,0.367,0.0,0.351,4,0,0,0,0,0,32
-2022,al,Howard Bender,Brett Phillips,5048,Bal,OF,132,rel,previously_active,,58,29,7,1,5,1,29,5,0.2,0.0,0.19,2,0,0,0,0,0,78
-2022,al,Howard Bender,Kyle Higashioka,3107,NYY,C,2,rel,previously_active,,56,21,6,0,5,0,15,3,0.21,0.0,0.214,1,82,0,0,0,0,0
 2022,al,Howard Bender,Anthony Bemboom,6019,Bal,C,0,rel,previously_active,,7,3,0,0,0,0,1,0,0.0,0.0,0.0,0,21,0,0,0,0,0
-2022,al,Howard Bender,*Trevor Larnach,6611,Min,UT,79,dis,previously_active,"OF,SW",128,41,16,5,16,0,45,15,0.292,0.0,0.398,7,0,0,0,0,0,43
+2022,al,Howard Bender,Kyle Higashioka,3107,NYY,C,2,rel,previously_active,,56,21,6,0,5,0,15,3,0.21,0.0,0.214,1,82,0,0,0,0,0
 2022,al,Howard Bender,Ernie Clement,6888,Oak,UT,4,rel,previously_active,,9,3,1,0,0,0,3,0,0.111,0.0,0.111,6,0,5,15,30,1,12
-2022,al,Howard Bender,Yu-Cheng Chang,6071,Bos,UT,38,rel,previously_active,,7,3,0,0,0,0,5,0,0.0,0.0,0.0,3,0,9,43,7,16,0
 2022,al,Howard Bender,Oscar Mercado,5747,Cle,UT,2,rel,previously_active,,61,21,6,3,11,0,14,1,0.21,0.0,0.443,0,0,0,0,0,0,51
+2022,al,Howard Bender,Yu-Cheng Chang,6071,Bos,UT,38,rel,previously_active,,7,3,0,0,0,0,5,0,0.0,0.0,0.0,3,0,9,43,7,16,0
+2022,al,Howard Bender,*Trevor Larnach,6611,Min,UT,79,dis,previously_active,"OF,SW",128,41,16,5,16,0,45,15,0.292,0.0,0.398,7,0,0,0,0,0,43
 2022,al,Howard Bender,Cal Stevenson,6923,Oak,SW,17,rel,previously_active,,31,12,2,0,0,0,10,3,0.206,0.0,0.161,0,0,0,0,0,0,22
-2022,al,Howard Bender,Tyler Nevin,5715,Bal,1B,132,res,reserved,"1B,OF,SW,3B",33,17,0,0,2,0,10,2,0.286,0.333,0.273,3,0,8,0,44,0,3
-2022,al,Howard Bender,Hunter Dozier,4612,KC,1B,3,res,reserved,"3B,1B,OF,SW,CI",45,13,7,2,5,0,14,3,0.292,0.0,0.467,25,0,42,0,27,0,40
+2022,al,Howard Bender,Hunter Dozier,4612,KC,1B,3,res,reserved,"3B,OF,1B,SW,CI",45,13,7,2,5,0,14,3,0.292,0.0,0.467,25,0,42,0,27,0,40
+2022,al,Howard Bender,Tyler Nevin,5715,Bal,1B,132,res,reserved,"1B,SW,3B,OF",33,17,0,0,2,0,10,2,0.286,0.333,0.273,3,0,8,0,44,0,3
 2022,al,Howard Bender,*Austin Meadows,4438,Det,OF,17,dis,reserved,"OF,SW",17,5,0,0,0,0,3,2,0.211,0.0,0.176,4,0,0,0,0,0,32
 2022,al,Howard Bender,*Trevor Larnach,6611,Min,UT,79,dis,reserved,"OF,SW",20,6,5,0,0,0,9,2,0.364,0.0,0.4,7,0,0,0,0,0,43
 2022,al,Howard Bender,Harrison Bader,5366,NYY,SW,102,dis,reserved,"OF,SW",46,14,3,0,9,2,15,2,0.245,0.125,0.283,0,0,0,0,0,0,85
@@ -368,133 +408,133 @@ year,league,team,player_name,player_id,mlb_team,position,salary,status,roster_se
 2022,al,Howard Bender,*Nick Solak,6442,Tex,MI,6,rel,previously_reserved,,25,7,3,0,0,2,5,1,0.231,0.0,0.24,11,0,0,1,0,0,22
 2022,al,Howard Bender,Yoan Moncada,5023,CWS,3B,19,act,previously_reserved,"3B,SW,CI",21,5,1,0,3,0,8,0,0.227,0.0,0.238,0,0,0,0,101,0,0
 2022,al,Howard Bender,Nick Gordon,4960,Min,OF,0,act,previously_reserved,"OF,2B,SW,SS,MI",115,39,10,2,8,3,27,2,0.277,0.0,0.374,1,0,0,36,1,17,95
-2022,al,Howard Bender,Oscar Mercado,5747,Cle,UT,2,rel,previously_reserved,,60,34,11,1,5,2,15,4,0.273,0.0,0.3,0,0,0,0,0,0,51
 2022,al,Howard Bender,Yu-Cheng Chang,6071,Bos,UT,38,rel,previously_reserved,,3,1,0,0,0,0,2,0,0.0,0.0,0.0,3,0,9,43,7,16,0
+2022,al,Howard Bender,Oscar Mercado,5747,Cle,UT,2,rel,previously_reserved,,60,34,11,1,5,2,15,4,0.273,0.0,0.3,0,0,0,0,0,0,51
 2022,al,Howard Bender,Spencer Torkelson,7073,Det,SW,12,act,previously_reserved,1B,27,8,3,1,2,0,5,3,0.437,0.0,0.593,0,0,109,0,0,0,0
-2022,al,Joe Sheehan,Wander Franco,6256,TB,MI,25,act,active,"SS,SW,MI",309,82,46,6,33,8,32,26,0.33,0.667,0.421,10,0,0,0,0,73,0
 2022,al,Joe Sheehan,Ezequiel Duran,7343,Tex,CI,79,act,active,"UT,2B,3B",187,52,21,4,23,4,49,11,0.273,0.0,0.353,1,0,0,9,51,0,0
 2022,al,Joe Sheehan,Andrew Vaughn,6905,CWS,1B,10,act,active,"1B,OF,CI,SW",510,134,60,17,76,0,96,31,0.321,0.0,0.429,29,0,23,2,0,0,84
-2022,al,Joe Sheehan,Sheldon Neuse,6105,Oak,2B,8,act,active,"3B,2B,MI,1B,SW",195,64,19,2,19,5,59,16,0.277,0.0,0.277,9,0,13,23,44,2,0
+2022,al,Joe Sheehan,Wander Franco,6256,TB,MI,25,act,active,"SS,MI,SW",309,82,46,6,33,8,32,26,0.33,0.667,0.421,10,0,0,0,0,73,0
+2022,al,Joe Sheehan,Sheldon Neuse,6105,Oak,2B,8,act,active,"3B,2B,1B,SW,MI",195,64,19,2,19,5,59,16,0.277,0.0,0.277,9,0,13,23,44,2,0
 2022,al,Joe Sheehan,Carlos Correa,4010,Min,SS,25,act,active,"SS,SW,MI",522,136,70,22,64,0,121,61,0.366,0.5,0.467,4,0,0,0,0,132,0
-2022,al,Joe Sheehan,Luis Arraez,6138,Min,3B,9,act,active,"1B,2B,3B,CI,OF,MI,SW",547,144,88,8,49,4,43,50,0.375,0.571,0.42,38,0,65,41,7,0,0
-2022,al,Joe Sheehan,Riley Greene,6953,Det,OF,9,act,active,OF,371,91,44,5,42,1,119,32,0.313,0.286,0.361,0,0,0,0,0,0,93
+2022,al,Joe Sheehan,Luis Arraez,6138,Min,3B,9,act,active,"1B,3B,2B,SW,OF,CI,MI",547,144,88,8,49,4,43,50,0.375,0.571,0.42,38,0,65,41,7,0,0
 2022,al,Joe Sheehan,Kyle Tucker,5384,Hou,OF,39,act,active,"OF,SW",544,150,71,30,107,25,95,59,0.33,0.143,0.478,3,0,0,0,0,0,147
-2022,al,Joe Sheehan,*Rob Refsnyder,4986,Bos,OF,5,act,active,"OF,SW",45,17,7,2,6,0,19,1,0.3,0.0,0.422,7,0,0,0,0,0,47
 2022,al,Joe Sheehan,Anthony Santander,5903,Bal,OF,7,act,active,"OF,SW",574,152,78,33,89,0,122,55,0.318,0.182,0.455,34,0,0,0,0,0,119
-2022,al,Joe Sheehan,Eric Haase,5709,Det,C,2,act,active,"C,OF,SW",323,110,41,14,44,0,97,24,0.305,0.125,0.443,12,84,0,0,0,0,11
+2022,al,Joe Sheehan,Riley Greene,6953,Det,OF,9,act,active,OF,371,91,44,5,42,1,119,32,0.313,0.286,0.361,0,0,0,0,0,0,93
+2022,al,Joe Sheehan,*Rob Refsnyder,4986,Bos,OF,5,act,active,"OF,SW",45,17,7,2,6,0,19,1,0.3,0.0,0.422,7,0,0,0,0,0,47
 2022,al,Joe Sheehan,Max Stassi,3002,LAA,C,3,act,active,"C,SW",333,102,32,9,30,0,112,38,0.267,0.2,0.303,1,97,0,0,0,0,0
+2022,al,Joe Sheehan,Eric Haase,5709,Det,C,2,act,active,"C,OF,SW",323,110,41,14,44,0,97,24,0.305,0.125,0.443,12,84,0,0,0,0,11
 2022,al,Joe Sheehan,Chas McCormick,7201,Hou,UT,39,act,active,"OF,SW",156,54,23,6,25,1,49,23,0.358,0.857,0.423,1,0,0,0,0,0,117
 2022,al,Joe Sheehan,Victor Reyes,4936,Det,SW,5,act,active,"OF,SW",285,84,21,3,32,2,68,11,0.277,0.308,0.344,4,0,0,0,0,0,83
 2022,al,Joe Sheehan,Abraham Toro,6790,Sea,MI,2,rel,previously_active,,242,79,28,8,25,1,44,19,0.245,0.0,0.331,22,0,1,55,31,0,1
 2022,al,Joe Sheehan,Vidal Brujan,6571,TB,2B,3,rel,previously_active,,128,43,10,2,14,3,35,11,0.234,0.0,0.25,1,0,0,31,1,5,21
 2022,al,Joe Sheehan,Niko Goodrum,5931,FA,OF,0,rel,previously_active,,32,12,2,0,0,1,18,1,0.091,0.0,0.094,1,0,4,10,0,0,0
-2022,al,Joe Sheehan,*Luis Robert,5725,CWS,UT,35,dis,previously_active,"OF,SW",374,96,54,12,56,11,75,17,0.324,0.0,0.433,4,0,0,0,0,0,91
 2022,al,Joe Sheehan,Zach Reks,6588,Tex,UT,12,rel,previously_active,,6,5,0,0,0,0,2,0,0.167,0.0,0.167,0,0,0,0,0,0,15
+2022,al,Joe Sheehan,*Luis Robert,5725,CWS,UT,35,dis,previously_active,"OF,SW",374,96,54,12,56,11,75,17,0.324,0.0,0.433,4,0,0,0,0,0,91
 2022,al,Joe Sheehan,Daz Cameron,4914,Det,UT,4,rel,previously_active,,45,14,4,1,7,1,14,3,0.286,0.0,0.4,0,0,0,0,0,0,20
-2022,al,Joe Sheehan,Jo Adell,6143,LAA,SW,10,rel,previously_active,,65,19,4,3,8,1,24,1,0.227,0.0,0.4,1,0,0,0,0,0,84
 2022,al,Joe Sheehan,Tim Locastro,6280,NYY,SW,0,res,previously_active,"OF,SW",0,3,1,0,0,1,0,0,0.0,0.0,0.0,4,0,0,0,0,0,26
+2022,al,Joe Sheehan,Jo Adell,6143,LAA,SW,10,rel,previously_active,,65,19,4,3,8,1,24,1,0.227,0.0,0.4,1,0,0,0,0,0,84
 2022,al,Joe Sheehan,*Luis Robert,5725,CWS,UT,35,dis,reserved,"OF,SW",6,2,0,0,0,0,2,0,0.0,0.0,0.0,4,0,0,0,0,0,91
 2022,al,Joe Sheehan,Tim Locastro,6280,NYY,SW,0,res,reserved,"OF,SW",43,35,12,2,4,7,7,2,0.239,0.0,0.349,4,0,0,0,0,0,26
-2022,al,Joe Sheehan,Wander Franco,6256,TB,MI,25,act,previously_reserved,"SS,SW,MI",5,1,0,0,0,0,1,0,0.2,0.0,0.2,10,0,0,0,0,73,0
 2022,al,Joe Sheehan,Ezequiel Duran,7343,Tex,CI,79,act,previously_reserved,"UT,2B,3B",14,4,3,0,1,0,4,1,0.333,0.0,0.357,1,0,0,9,51,0,0
+2022,al,Joe Sheehan,Wander Franco,6256,TB,MI,25,act,previously_reserved,"SS,MI,SW",5,1,0,0,0,0,1,0,0.2,0.0,0.2,10,0,0,0,0,73,0
 2022,al,Joe Sheehan,Abraham Toro,6790,Sea,MI,2,rel,previously_reserved,,19,5,2,0,1,0,3,1,0.15,0.0,0.211,22,0,1,55,31,0,1
 2022,al,Joe Sheehan,Vidal Brujan,6571,TB,2B,3,rel,previously_reserved,,10,3,1,0,1,1,1,1,0.182,0.0,0.2,1,0,0,31,1,5,21
-2022,al,Joe Sheehan,Niko Goodrum,5931,FA,OF,0,rel,previously_reserved,,11,3,0,0,1,0,5,1,0.333,0.0,0.364,1,0,4,10,0,0,0
 2022,al,Joe Sheehan,Riley Greene,6953,Det,OF,9,act,previously_reserved,OF,5,2,2,0,0,0,1,4,0.667,0.0,0.4,0,0,0,0,0,0,93
 2022,al,Joe Sheehan,*Rob Refsnyder,4986,Bos,OF,5,act,previously_reserved,"OF,SW",9,3,0,0,1,1,2,2,0.545,0.0,0.444,7,0,0,0,0,0,47
+2022,al,Joe Sheehan,Niko Goodrum,5931,FA,OF,0,rel,previously_reserved,,11,3,0,0,1,0,5,1,0.333,0.0,0.364,1,0,4,10,0,0,0
 2022,al,Joe Sheehan,Chas McCormick,7201,Hou,UT,39,act,previously_reserved,"OF,SW",35,11,4,0,0,2,11,5,0.325,0.0,0.229,1,0,0,0,0,0,117
 2022,al,Joe Sheehan,Zach Reks,6588,Tex,UT,12,rel,previously_reserved,,14,5,1,0,0,0,2,0,0.286,0.0,0.286,0,0,0,0,0,0,15
 2022,al,Joe Sheehan,Victor Reyes,4936,Det,SW,5,act,previously_reserved,"OF,SW",30,8,6,0,2,0,9,2,0.394,0.0,0.533,4,0,0,0,0,0,83
-2022,al,Jason Collette,Trey Mancini,5439,Hou,1B,16,act,active,"1B,OF,SW,CI",519,143,56,18,63,0,135,53,0.319,0.0,0.391,71,0,39,0,0,0,31
-2022,al,Jason Collette,D.J. LeMahieu,3275,NYY,MI,16,act,active,"2B,3B,1B,CI,MI,SW",180,46,26,4,12,0,30,24,0.345,0.364,0.35,7,0,35,41,47,0,0
+2022,al,Jason Collette,D.J. LeMahieu,3275,NYY,MI,16,act,active,"2B,1B,3B,CI,SW,MI",180,46,26,4,12,0,30,24,0.345,0.364,0.35,7,0,35,41,47,0,0
 2022,al,Jason Collette,Isaac Paredes,6242,TB,CI,3,act,active,"3B,2B,SW,1B,MI",288,98,39,15,35,0,62,40,0.285,0.111,0.378,0,0,29,43,50,1,0
-2022,al,Jason Collette,Tony Kemp,5292,Oak,2B,8,act,active,"2B,OF,MI,SW",433,128,49,6,40,7,60,41,0.304,0.4,0.33,2,0,0,89,0,0,65
+2022,al,Jason Collette,Trey Mancini,5439,Hou,1B,16,act,active,"1B,CI,SW,OF",519,143,56,18,63,0,135,53,0.319,0.0,0.391,71,0,39,0,0,0,31
+2022,al,Jason Collette,Tony Kemp,5292,Oak,2B,8,act,active,"2B,OF,SW,MI",433,128,49,6,40,7,60,41,0.304,0.4,0.33,2,0,0,89,0,0,65
 2022,al,Jason Collette,Amed Rosario,4884,Cle,SS,18,act,active,"UT,SS,OF,MI,SW",637,153,85,11,71,18,111,25,0.312,0.444,0.403,6,0,0,0,0,140,6
-2022,al,Jason Collette,Yandy Diaz,5735,TB,3B,10,act,active,"1B,3B,CI,SW",473,137,71,9,57,3,60,78,0.401,0.0,0.423,14,0,17,0,102,0,0
+2022,al,Jason Collette,Yandy Diaz,5735,TB,3B,10,act,active,"1B,3B,SW,CI",473,137,71,9,57,3,60,78,0.401,0.0,0.423,14,0,17,0,102,0,0
 2022,al,Jason Collette,Joey Gallo,4121,LAD,OF,24,act,active,"UT,OF,SW",286,103,41,17,42,3,133,47,0.288,0.222,0.374,5,0,1,0,0,0,118
 2022,al,Jason Collette,Jose Siri,6249,TB,OF,555,act,active,"OF,SW",148,50,33,4,14,7,48,10,0.308,0.167,0.392,2,0,0,0,0,0,100
-2022,al,Jason Collette,Kike Hernandez,4992,Bos,OF,16,act,active,"UT,OF,2B,SW,MI,SS",346,89,48,6,43,0,65,33,0.299,0.364,0.35,0,0,0,11,0,10,80
 2022,al,Jason Collette,Tommy Pham,5041,Bos,OF,17,act,active,"OF,SW",554,144,89,17,63,8,167,56,0.312,0.143,0.374,10,0,0,0,0,0,134
+2022,al,Jason Collette,Kike Hernandez,4992,Bos,OF,16,act,active,"UT,OF,2B,MI,SS,SW",346,89,48,6,43,0,65,33,0.299,0.364,0.35,0,0,0,11,0,10,80
 2022,al,Jason Collette,*Seby Zavala,6393,CWS,C,2,act,active,"C,SW",177,60,22,2,20,0,64,19,0.35,0.0,0.384,2,58,2,0,0,0,0
 2022,al,Jason Collette,Danny Jansen,5332,Tor,C,7,act,active,"C,SW",215,72,34,15,44,1,44,25,0.339,0.143,0.516,3,63,0,0,0,0,0
 2022,al,Jason Collette,Adam Engel,4816,CWS,UT,3,act,active,"OF,SW",36,25,4,0,2,0,13,0,0.216,0.429,0.222,2,0,0,0,0,0,113
 2022,al,Jason Collette,Rougned Odor,4026,Bal,SW,4,act,active,"2B,MI,CI,SW,3B",273,88,32,7,36,2,66,21,0.264,0.143,0.319,1,0,0,129,2,0,0
-2022,al,Jason Collette,*Matt Carpenter,3510,NYY,MI,66,dis,previously_active,"1B,OF,2B,SW,MI",119,43,25,14,36,0,32,17,0.418,0.0,0.748,16,0,5,0,2,0,15
-2022,al,Jason Collette,Yolmer Sanchez,4299,NYM,MI,17,rel,previously_active,,19,6,1,0,1,0,6,0,0.053,0.0,0.053,0,0,0,14,2,1,0
 2022,al,Jason Collette,David MacKinnon,8225,Oak,CI,32,rel,previously_active,,17,6,0,0,0,0,8,2,0.211,0.0,0.118,0,0,12,0,5,0,0
-2022,al,Jason Collette,Jonathan Aranda,7905,TB,2B,54,rel,previously_active,,12,4,1,0,1,0,3,0,0.333,0.0,0.417,1,0,11,13,6,0,1
+2022,al,Jason Collette,Yolmer Sanchez,4299,NYM,MI,17,rel,previously_active,,19,6,1,0,1,0,6,0,0.053,0.0,0.053,0,0,0,14,2,1,0
+2022,al,Jason Collette,*Matt Carpenter,3510,NYY,MI,66,dis,previously_active,"1B,SW,2B,MI,OF",119,43,25,14,36,0,32,17,0.418,0.0,0.748,16,0,5,0,2,0,15
 2022,al,Jason Collette,Richie Palacios,7876,Cle,2B,3,rel,previously_active,,26,17,3,0,3,0,6,4,0.281,0.0,0.192,11,0,0,2,0,0,25
-2022,al,Jason Collette,Adam Haseley,6200,CWS,OF,6,rel,previously_active,,4,2,1,0,1,0,1,0,0.25,0.0,0.25,2,0,0,0,0,0,10
-2022,al,Jason Collette,Bradley Zimmer,4122,Tor,OF,6,rel,previously_active,,22,10,1,0,0,0,9,1,0.125,0.0,0.045,1,0,0,0,0,0,99
-2022,al,Jason Collette,*Kyle Garlick,6877,Min,OF,24,dis,previously_active,"OF,SW",67,26,6,2,5,0,22,0,0.265,0.0,0.358,8,0,0,0,0,0,49
+2022,al,Jason Collette,Jonathan Aranda,7905,TB,2B,54,rel,previously_active,,12,4,1,0,1,0,3,0,0.333,0.0,0.417,1,0,11,13,6,0,1
 2022,al,Jason Collette,*Franchy Cordero,4877,Bos,OF,12,dis,previously_active,"OF,1B,SW",14,6,0,0,0,0,8,2,0.187,0.0,0.071,3,0,53,0,0,0,39
 2022,al,Jason Collette,Brett Phillips,5048,Bal,OF,0,rel,previously_active,,94,35,11,3,5,5,49,6,0.225,0.0,0.309,2,0,0,0,0,0,78
+2022,al,Jason Collette,Bradley Zimmer,4122,Tor,OF,6,rel,previously_active,,22,10,1,0,0,0,9,1,0.125,0.0,0.045,1,0,0,0,0,0,99
+2022,al,Jason Collette,*Kyle Garlick,6877,Min,OF,24,dis,previously_active,"OF,SW",67,26,6,2,5,0,22,0,0.265,0.0,0.358,8,0,0,0,0,0,49
+2022,al,Jason Collette,Adam Haseley,6200,CWS,OF,6,rel,previously_active,,4,2,1,0,1,0,1,0,0.25,0.0,0.25,2,0,0,0,0,0,10
 2022,al,Jason Collette,*Byron Buxton,4014,Min,OF,26,dis,previously_active,"OF,SW",306,83,54,24,42,6,106,31,0.291,0.0,0.497,34,0,0,0,0,0,57
-2022,al,Jason Collette,Martin Maldonado,2347,Hou,C,0,rel,previously_active,,61,19,6,2,6,0,21,1,0.187,0.0,0.279,0,113,0,0,0,0,0
-2022,al,Jason Collette,Luke Maile,4804,Cle,C,1,rel,previously_active,,8,4,1,0,0,0,2,3,0.273,0.0,0.0,0,76,0,0,0,0,0
 2022,al,Jason Collette,Rene Pinto,7320,TB,C,3,rel,previously_active,,12,4,1,1,2,0,5,0,0.25,0.0,0.5,0,25,0,0,0,0,0
 2022,al,Jason Collette,Cam Gallagher,5180,Bal,C,26,rel,previously_active,,17,6,0,0,0,0,5,1,0.167,0.0,0.176,0,18,0,0,0,0,0
-2022,al,Jason Collette,Luis Torrens,5151,Sea,C,4,rel,previously_active,,49,15,4,0,4,0,18,2,0.192,0.0,0.184,9,42,0,2,0,0,0
 2022,al,Jason Collette,Sam Huff,6998,Tex,C,34,rel,previously_active,,22,9,0,0,1,0,8,1,0.13,0.0,0.091,4,29,6,0,0,0,0
+2022,al,Jason Collette,Luis Torrens,5151,Sea,C,4,rel,previously_active,,49,15,4,0,4,0,18,2,0.192,0.0,0.184,9,42,0,2,0,0,0
+2022,al,Jason Collette,Luke Maile,4804,Cle,C,1,rel,previously_active,,8,4,1,0,0,0,2,3,0.273,0.0,0.0,0,76,0,0,0,0,0
+2022,al,Jason Collette,Martin Maldonado,2347,Hou,C,0,rel,previously_active,,61,19,6,2,6,0,21,1,0.187,0.0,0.279,0,113,0,0,0,0,0
 2022,al,Jason Collette,Vidal Brujan,6571,TB,UT,3,rel,previously_active,,0,1,1,0,0,1,0,0,1.0,0.0,0.0,1,0,0,31,1,5,21
 2022,al,Jason Collette,*Andrew Benintendi,5386,NYY,UT,19,dis,previously_active,"OF,SW",461,126,54,5,51,8,77,52,0.373,0.0,0.399,1,0,0,0,0,0,124
 2022,al,Jason Collette,Miles Mastrobuoni,7280,TB,SW,0,res,previously_active,"UT,2B",7,4,0,0,0,1,3,1,0.125,0.0,0.0,0,0,0,6,0,0,3
-2022,al,Jason Collette,*Matt Carpenter,3510,NYY,MI,66,dis,reserved,"1B,OF,2B,SW,MI",0,0,0,0,0,0,0,0,0.0,0.0,0.0,16,0,5,0,2,0,15
+2022,al,Jason Collette,*Matt Carpenter,3510,NYY,MI,66,dis,reserved,"1B,SW,2B,MI,OF",0,0,0,0,0,0,0,0,0.0,0.0,0.0,16,0,5,0,2,0,15
 2022,al,Jason Collette,*Kyle Garlick,6877,Min,OF,24,dis,reserved,"OF,SW",62,27,11,4,7,0,20,3,0.265,0.0,0.435,8,0,0,0,0,0,49
 2022,al,Jason Collette,*Byron Buxton,4014,Min,OF,26,dis,reserved,"OF,SW",34,9,7,4,9,0,10,3,0.447,0.0,0.794,34,0,0,0,0,0,57
 2022,al,Jason Collette,*Franchy Cordero,4877,Bos,OF,12,dis,reserved,"OF,1B,SW",0,0,0,0,0,0,0,0,0.0,0.0,0.0,3,0,53,0,0,0,39
 2022,al,Jason Collette,*Andrew Benintendi,5386,NYY,UT,19,dis,reserved,"OF,SW",0,0,0,0,0,0,0,0,0.0,0.0,0.0,1,0,0,0,0,0,124
 2022,al,Jason Collette,Miles Mastrobuoni,7280,TB,SW,0,res,reserved,"UT,2B",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,6,0,0,3
+2022,al,Jason Collette,D.J. LeMahieu,3275,NYY,MI,16,act,previously_reserved,"2B,1B,3B,CI,SW,MI",6,2,0,0,0,0,0,1,0.286,0.0,0.167,7,0,35,41,47,0,0
 2022,al,Jason Collette,Yolmer Sanchez,4299,NYM,MI,17,rel,previously_reserved,,11,4,0,0,0,0,4,1,0.25,0.0,0.182,0,0,0,14,2,1,0
-2022,al,Jason Collette,D.J. LeMahieu,3275,NYY,MI,16,act,previously_reserved,"2B,3B,1B,CI,MI,SW",6,2,0,0,0,0,0,1,0.286,0.0,0.167,7,0,35,41,47,0,0
 2022,al,Jason Collette,Isaac Paredes,6242,TB,CI,3,act,previously_reserved,"3B,2B,SW,1B,MI",43,13,9,5,10,0,5,4,0.437,0.0,0.814,0,0,29,43,50,1,0
-2022,al,Jason Collette,Tony Kemp,5292,Oak,2B,8,act,previously_reserved,"2B,OF,MI,SW",64,19,12,1,6,4,9,4,0.333,0.0,0.359,2,0,0,89,0,0,65
-2022,al,Jason Collette,Kike Hernandez,4992,Bos,OF,16,act,previously_reserved,"UT,OF,2B,SW,MI,SS",15,4,0,0,2,0,6,1,0.118,0.0,0.067,0,0,0,11,0,10,80
+2022,al,Jason Collette,Tony Kemp,5292,Oak,2B,8,act,previously_reserved,"2B,OF,SW,MI",64,19,12,1,6,4,9,4,0.333,0.0,0.359,2,0,0,89,0,0,65
 2022,al,Jason Collette,Joey Gallo,4121,LAD,OF,24,act,previously_reserved,"UT,OF,SW",64,23,7,2,5,0,30,9,0.247,0.0,0.281,5,0,1,0,0,0,118
-2022,al,Jason Collette,Bradley Zimmer,4122,Tor,OF,6,rel,previously_reserved,,8,5,1,1,1,0,4,0,0.125,0.0,0.5,1,0,0,0,0,0,99
 2022,al,Jason Collette,Brett Phillips,5048,Bal,OF,0,rel,previously_reserved,,39,14,3,1,5,1,12,4,0.256,0.0,0.256,2,0,0,0,0,0,78
+2022,al,Jason Collette,Kike Hernandez,4992,Bos,OF,16,act,previously_reserved,"UT,OF,2B,MI,SS,SW",15,4,0,0,2,0,6,1,0.118,0.0,0.067,0,0,0,11,0,10,80
+2022,al,Jason Collette,Bradley Zimmer,4122,Tor,OF,6,rel,previously_reserved,,8,5,1,1,1,0,4,0,0.125,0.0,0.5,1,0,0,0,0,0,99
 2022,al,Jason Collette,Luis Torrens,5151,Sea,C,4,rel,previously_reserved,,4,2,0,0,0,0,2,0,0.25,0.0,0.25,9,42,0,2,0,0,0
 2022,al,Jason Collette,Sam Huff,6998,Tex,C,34,rel,previously_reserved,,6,3,1,0,0,0,6,1,0.143,0.0,0.0,4,29,6,0,0,0,0
 2022,al,Jason Collette,Adam Engel,4816,CWS,UT,3,act,previously_reserved,"OF,SW",13,10,1,0,1,1,4,0,0.154,0.0,0.154,2,0,0,0,0,0,113
 2022,al,Jason Collette,Rougned Odor,4026,Bal,SW,4,act,previously_reserved,"2B,MI,CI,SW,3B",153,47,17,6,17,4,43,11,0.297,0.0,0.425,1,0,0,129,2,0,0
-2022,al,Chris Blessing,Josh Smith,7845,Tex,CI,91,act,active,"SS,OF,3B",116,36,12,2,15,1,26,14,0.269,0.357,0.259,5,0,0,2,36,6,24
-2022,al,Chris Blessing,Ryan Mountcastle,5676,Bal,1B,18,act,active,"1B,CI,OF,SW",547,143,60,21,84,4,152,42,0.305,0.429,0.42,21,0,124,0,0,0,0
 2022,al,Chris Blessing,Elvis Andrus,1543,CWS,MI,0,act,active,"UT,SS,SW,MI",493,137,59,15,48,16,79,32,0.295,0.231,0.4,4,0,0,0,0,143,0
-2022,al,Chris Blessing,Javier Baez,3804,Det,2B,26,act,active,"SS,MI,2B,SW",555,144,64,17,67,9,147,26,0.278,0.154,0.393,10,0,0,0,0,133,0
-2022,al,Chris Blessing,*Trevor Story,4020,Bos,SS,32,act,active,"SS,2B,SW,MI",337,89,51,16,66,11,116,31,0.296,0.0,0.433,0,0,0,94,0,0,0
-2022,al,Chris Blessing,Taylor Walls,7321,TB,3B,1,act,active,"SS,3B,SW,2B,MI",407,142,53,8,33,10,120,52,0.268,0.5,0.285,1,0,0,35,25,92,0
-2022,al,Chris Blessing,Aledmys Diaz,4500,Hou,OF,1,act,active,"SS,OF,3B,CI,2B,1B,SW",221,67,24,7,27,0,38,12,0.274,0.091,0.362,7,0,6,22,10,18,29
-2022,al,Chris Blessing,Akil Baddoo,6487,Det,OF,17,act,active,"OF,SW",156,58,26,2,8,6,49,21,0.282,0.35,0.269,2,0,0,0,0,0,65
+2022,al,Chris Blessing,Ryan Mountcastle,5676,Bal,1B,18,act,active,"1B,SW,OF,CI",547,143,60,21,84,4,152,42,0.305,0.429,0.42,21,0,124,0,0,0,0
+2022,al,Chris Blessing,Josh Smith,7845,Tex,CI,91,act,active,"SS,OF,3B",116,36,12,2,15,1,26,14,0.269,0.357,0.259,5,0,0,2,36,6,24
+2022,al,Chris Blessing,Javier Baez,3804,Det,2B,26,act,active,"SS,2B,MI,SW",555,144,64,17,67,9,147,26,0.278,0.154,0.393,10,0,0,0,0,133,0
+2022,al,Chris Blessing,*Trevor Story,4020,Bos,SS,32,act,active,"SS,SW,2B,MI",337,89,51,16,66,11,116,31,0.296,0.0,0.433,0,0,0,94,0,0,0
+2022,al,Chris Blessing,Taylor Walls,7321,TB,3B,1,act,active,"SS,SW,2B,3B,MI",407,142,53,8,33,10,120,52,0.268,0.5,0.285,1,0,0,35,25,92,0
+2022,al,Chris Blessing,Aledmys Diaz,4500,Hou,OF,1,act,active,"SS,3B,OF,SW,2B,1B,CI",221,67,24,7,27,0,38,12,0.274,0.091,0.362,7,0,6,22,10,18,29
+2022,al,Chris Blessing,*Willi Castro,6289,Det,OF,17,act,active,"OF,SS,2B,SW,3B,MI",300,89,35,6,28,7,70,11,0.281,0.0,0.363,5,0,0,16,6,16,80
 2022,al,Chris Blessing,Oscar Gonzalez,7841,Cle,OF,93,act,active,OF,330,83,38,10,41,1,69,15,0.323,0.357,0.452,7,0,0,0,0,0,84
-2022,al,Chris Blessing,*Willi Castro,6289,Det,OF,17,act,active,"OF,2B,SS,3B,SW,MI",300,89,35,6,28,7,70,11,0.281,0.0,0.363,5,0,0,16,6,16,80
+2022,al,Chris Blessing,Akil Baddoo,6487,Det,OF,17,act,active,"OF,SW",156,58,26,2,8,6,49,21,0.282,0.35,0.269,2,0,0,0,0,0,65
 2022,al,Chris Blessing,Meibrys Viloria,6074,Tex,C,7,act,active,C,26,10,2,0,1,0,14,4,0.129,0.0,0.0,3,20,0,0,0,0,0
 2022,al,Chris Blessing,Sean Murphy,5926,Oak,C,10,act,active,"C,SW",537,148,67,18,66,1,124,56,0.332,0.357,0.426,30,116,0,0,0,0,0
-2022,al,Chris Blessing,Gavin Sheets,6582,CWS,UT,133,act,active,"OF,SW,1B",227,76,23,10,41,0,50,15,0.301,0.273,0.445,15,0,13,0,0,0,88
-2022,al,Chris Blessing,Kelvin Gutierrez,6133,FA,CI,1,rel,previously_active,,4,2,0,0,0,0,3,0,0.0,0.0,0.0,1,0,0,0,10,0,0
+2022,al,Chris Blessing,Gavin Sheets,6582,CWS,UT,133,act,active,"OF,1B,SW",227,76,23,10,41,0,50,15,0.301,0.273,0.445,15,0,13,0,0,0,88
 2022,al,Chris Blessing,Rylan Bannon,6635,Atl,CI,33,rel,previously_active,,2,1,0,0,0,0,1,0,0.333,0.0,0.0,1,0,0,1,3,0,0
-2022,al,Chris Blessing,*Jared Walsh,6822,LAA,CI,23,dis,previously_active,"1B,CI,OF,SW",423,118,41,15,44,2,138,27,0.269,0.0,0.374,0,0,118,0,0,0,2
+2022,al,Chris Blessing,*Jared Walsh,6822,LAA,CI,23,dis,previously_active,"1B,CI,SW,OF",423,118,41,15,44,2,138,27,0.269,0.0,0.374,0,0,118,0,0,0,2
 2022,al,Chris Blessing,Christian Bethancourt,3224,TB,CI,59,rel,previously_active,,10,4,1,0,1,0,4,0,0.1,0.0,0.1,10,49,37,0,1,0,0
+2022,al,Chris Blessing,Kelvin Gutierrez,6133,FA,CI,1,rel,previously_active,,4,2,0,0,0,0,3,0,0.0,0.0,0.0,1,0,0,0,10,0,0
 2022,al,Chris Blessing,Jake Burger,6156,CWS,3B,27,rel,previously_active,,145,43,17,6,20,0,51,7,0.295,0.0,0.441,9,0,0,3,37,0,0
-2022,al,Chris Blessing,*Roman Quinn,4018,TB,OF,7,dis,previously_active,"OF,SW",37,18,7,0,2,0,18,4,0.333,0.0,0.351,0,0,0,0,0,0,44
-2022,al,Chris Blessing,*Lourdes Gurriel,5350,Tor,OF,18,dis,previously_active,"OF,SW,1B",453,121,52,5,52,3,83,31,0.343,0.0,0.4,13,0,8,0,0,0,105
 2022,al,Chris Blessing,Marwin Gonzalez,3884,NYY,OF,1,rel,previously_active,,29,9,2,0,0,0,8,2,0.281,0.0,0.207,2,0,14,3,12,20,36
-2022,al,Chris Blessing,Adam Engel,4816,CWS,OF,1,rel,previously_active,,105,42,13,1,7,7,38,6,0.301,0.0,0.352,2,0,0,0,0,0,113
 2022,al,Chris Blessing,Willie Calhoun,5692,SF,OF,2,rel,previously_active,,44,18,7,1,2,0,6,8,0.283,0.0,0.273,16,0,0,0,0,0,5
-2022,al,Chris Blessing,Martin Maldonado,2347,Hou,C,1,rel,previously_active,,115,38,12,7,21,0,39,6,0.266,0.0,0.452,0,113,0,0,0,0,0
+2022,al,Chris Blessing,*Lourdes Gurriel,5350,Tor,OF,18,dis,previously_active,"OF,1B,SW",453,121,52,5,52,3,83,31,0.343,0.0,0.4,13,0,8,0,0,0,105
+2022,al,Chris Blessing,*Roman Quinn,4018,TB,OF,7,dis,previously_active,"OF,SW",37,18,7,0,2,0,18,4,0.333,0.0,0.351,0,0,0,0,0,0,44
+2022,al,Chris Blessing,Adam Engel,4816,CWS,OF,1,rel,previously_active,,105,42,13,1,7,7,38,6,0.301,0.0,0.352,2,0,0,0,0,0,113
 2022,al,Chris Blessing,*Mike Zunino,4012,TB,C,4,rel,previously_active,,115,36,7,5,16,0,46,6,0.195,0.0,0.304,0,35,0,0,0,0,0
+2022,al,Chris Blessing,Martin Maldonado,2347,Hou,C,1,rel,previously_active,,115,38,12,7,21,0,39,6,0.266,0.0,0.452,0,113,0,0,0,0,0
 2022,al,Chris Blessing,Jonathan Arauz,5653,Bal,UT,1,rel,previously_active,,6,3,0,0,2,0,1,1,0.286,0.0,0.167,0,0,0,4,6,4,0
-2022,al,Chris Blessing,*Jared Walsh,6822,LAA,CI,23,dis,reserved,"1B,CI,OF,SW",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,118,0,0,0,2
+2022,al,Chris Blessing,*Jared Walsh,6822,LAA,CI,23,dis,reserved,"1B,CI,SW,OF",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,118,0,0,0,2
 2022,al,Chris Blessing,*Roman Quinn,4018,TB,OF,7,dis,reserved,"OF,SW",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,0,0,0,44
-2022,al,Chris Blessing,*Lourdes Gurriel,5350,Tor,OF,18,dis,reserved,"OF,SW,1B",0,0,0,0,0,0,0,0,0.0,0.0,0.0,13,0,8,0,0,0,105
-2022,al,Chris Blessing,Josh Smith,7845,Tex,CI,91,act,previously_reserved,"SS,OF,3B",73,27,8,0,1,1,20,8,0.298,0.0,0.205,5,0,0,2,36,6,24
-2022,al,Chris Blessing,Ryan Mountcastle,5676,Bal,1B,18,act,previously_reserved,"1B,CI,OF,SW",8,2,2,1,1,0,2,1,0.333,0.0,0.625,21,0,124,0,0,0,0
-2022,al,Chris Blessing,Christian Bethancourt,3224,TB,CI,59,rel,previously_reserved,,14,5,4,0,0,1,2,1,0.4,0.0,0.357,10,49,37,0,1,0,0
+2022,al,Chris Blessing,*Lourdes Gurriel,5350,Tor,OF,18,dis,reserved,"OF,1B,SW",0,0,0,0,0,0,0,0,0.0,0.0,0.0,13,0,8,0,0,0,105
+2022,al,Chris Blessing,Ryan Mountcastle,5676,Bal,1B,18,act,previously_reserved,"1B,SW,OF,CI",8,2,2,1,1,0,2,1,0.333,0.0,0.625,21,0,124,0,0,0,0
 2022,al,Chris Blessing,Elvis Andrus,1543,CWS,MI,0,act,previously_reserved,"UT,SS,SW,MI",42,12,7,2,10,2,13,7,0.388,0.0,0.452,4,0,0,0,0,143,0
-2022,al,Chris Blessing,*Trevor Story,4020,Bos,SS,32,act,previously_reserved,"SS,2B,SW,MI",20,5,2,0,0,2,6,1,0.429,0.0,0.45,0,0,0,94,0,0,0
+2022,al,Chris Blessing,Christian Bethancourt,3224,TB,CI,59,rel,previously_reserved,,14,5,4,0,0,1,2,1,0.4,0.0,0.357,10,49,37,0,1,0,0
+2022,al,Chris Blessing,Josh Smith,7845,Tex,CI,91,act,previously_reserved,"SS,OF,3B",73,27,8,0,1,1,20,8,0.298,0.0,0.205,5,0,0,2,36,6,24
+2022,al,Chris Blessing,*Trevor Story,4020,Bos,SS,32,act,previously_reserved,"SS,SW,2B,MI",20,5,2,0,0,2,6,1,0.429,0.0,0.45,0,0,0,94,0,0,0
 2022,al,Chris Blessing,Jake Burger,6156,CWS,3B,27,rel,previously_reserved,,0,1,0,0,0,0,0,0,0.0,0.0,0.0,9,0,0,3,37,0,0
-2022,al,Chris Blessing,Akil Baddoo,6487,Det,OF,17,act,previously_reserved,"OF,SW",45,15,4,0,1,3,15,3,0.312,0.0,0.267,2,0,0,0,0,0,65
-2022,al,Chris Blessing,Aledmys Diaz,4500,Hou,OF,1,act,previously_reserved,"SS,OF,3B,CI,2B,1B,SW",84,25,11,5,11,1,15,6,0.322,0.0,0.512,7,0,6,22,10,18,29
-2022,al,Chris Blessing,Oscar Gonzalez,7841,Cle,OF,93,act,previously_reserved,OF,20,5,1,1,2,0,4,0,0.35,0.0,0.55,7,0,0,0,0,0,84
 2022,al,Chris Blessing,Adam Engel,4816,CWS,OF,1,rel,previously_reserved,,83,38,14,1,7,3,18,5,0.284,0.0,0.349,2,0,0,0,0,0,113
-2022,al,Chris Blessing,*Willi Castro,6289,Det,OF,17,act,previously_reserved,"OF,2B,SS,3B,SW,MI",40,11,10,2,2,1,7,2,0.295,0.0,0.425,5,0,0,16,6,16,80
+2022,al,Chris Blessing,Oscar Gonzalez,7841,Cle,OF,93,act,previously_reserved,OF,20,5,1,1,2,0,4,0,0.35,0.0,0.55,7,0,0,0,0,0,84
+2022,al,Chris Blessing,Akil Baddoo,6487,Det,OF,17,act,previously_reserved,"OF,SW",45,15,4,0,1,3,15,3,0.312,0.0,0.267,2,0,0,0,0,0,65
+2022,al,Chris Blessing,*Willi Castro,6289,Det,OF,17,act,previously_reserved,"OF,SS,2B,SW,3B,MI",40,11,10,2,2,1,7,2,0.295,0.0,0.425,5,0,0,16,6,16,80
+2022,al,Chris Blessing,Aledmys Diaz,4500,Hou,OF,1,act,previously_reserved,"SS,3B,OF,SW,2B,1B,CI",84,25,11,5,11,1,15,6,0.322,0.0,0.512,7,0,6,22,10,18,29
 2022,al,Chris Blessing,Jonathan Arauz,5653,Bal,UT,1,rel,previously_reserved,,4,1,0,0,0,0,1,0,0.25,0.0,0.25,0,0,0,4,6,4,0

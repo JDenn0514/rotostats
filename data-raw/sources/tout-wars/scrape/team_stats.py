@@ -558,6 +558,33 @@ def is_empty_team_page(html: str) -> bool:
     return not result.batter_rows and not result.pitcher_rows and not result.totals
 
 
+def parse_team_indexes(html: str) -> list[int]:
+    """Return the list of team_idx values from a display_team_stats.pl page.
+
+    Every team_stats page carries a ``<select name="changeTeam">`` dropdown
+    enumerating every team in the league.  Each ``<option value="...">``
+    holds the integer team_idx used in the URL parameter.  Onroto orders
+    the options by current/final standings (champion first at value=0),
+    but the iteration code does not rely on that ordering — only on the
+    full set of valid indexes being present.
+
+    Returns the indexes in dropdown order; returns [] when the select
+    element is absent.
+    """
+    soup = BeautifulSoup(html, "lxml")
+    sel = soup.find("select", {"name": "changeTeam"})
+    if sel is None:
+        return []
+    out: list[int] = []
+    for opt in sel.find_all("option"):
+        raw = opt.get("value")
+        try:
+            out.append(int(raw))
+        except (TypeError, ValueError):
+            continue
+    return out
+
+
 def _team_class(team_p: Tag) -> str:
     for c in team_p.get("class", []):
         if c.startswith("team_"):
@@ -764,17 +791,55 @@ def scrape_league_year(
     all_batters: list[dict] = []
     all_pitchers: list[dict] = []
 
-    for team_idx in range(1, MAX_TEAM_IDX + 1):
-        if sleep_seconds:
-            time.sleep(sleep_seconds)
-        html = fetch_team_stats_fn(session, sid, league_code, team_idx, year)
-        if is_empty_team_page(html):
-            break
+    # Onroto's display_team_stats.pl uses 0-indexed team_idx in the URL.
+    # Fetch idx=0 first (always a real team) and read the changeTeam
+    # dropdown to discover every team_idx in the league.  This is more
+    # robust than probing 1..N and breaking on an empty page: a future
+    # DOM change that confuses parse_team_page won't silently drop
+    # teams, because the dropdown enumerates exactly which indexes
+    # should be fetched.
+    if sleep_seconds:
+        time.sleep(sleep_seconds)
+    first_html = fetch_team_stats_fn(session, sid, league_code, 0, year)
+    team_indexes = parse_team_indexes(first_html)
+    if not team_indexes:
+        raise RuntimeError(
+            f"could not parse team dropdown from {league_code} {year} idx=0"
+        )
+    if len(team_indexes) > MAX_TEAM_IDX:
+        raise RuntimeError(
+            f"team dropdown has {len(team_indexes)} entries (>{MAX_TEAM_IDX}) "
+            f"for {league_code} {year} — likely a wrong-page response"
+        )
+
+    def _process(html: str, team_idx: int) -> None:
         result = parse_team_page(html, year=year, league_short=league_short)
+        if not result.batter_rows and not result.pitcher_rows:
+            raise RuntimeError(
+                f"empty team page at {league_code} {year} idx={team_idx} "
+                f"despite dropdown listing it"
+            )
         for w in check_section_totals(result):
             log.warning(w)
         all_batters.extend(result.batter_rows)
         all_pitchers.extend(result.pitcher_rows)
+
+    _process(first_html, 0)
+    for team_idx in team_indexes:
+        if team_idx == 0:
+            continue
+        if sleep_seconds:
+            time.sleep(sleep_seconds)
+        html = fetch_team_stats_fn(session, sid, league_code, team_idx, year)
+        _process(html, team_idx)
+
+    seen_teams = {r["team"] for r in all_batters} | {r["team"] for r in all_pitchers}
+    if len(seen_teams) != len(team_indexes):
+        log.warning(
+            f"team count mismatch for {league_code} {year}: parsed "
+            f"{len(seen_teams)} distinct team names, dropdown listed "
+            f"{len(team_indexes)}"
+        )
 
     # Audit duplicates / cross-section per type
     all_batters, info_b, warn_b = audit_player_sections(all_batters)
@@ -813,6 +878,9 @@ def main() -> None:
                 )
             except requests.HTTPError as e:
                 print(f"  WARN: HTTP error for {league_short} {year}: {e}")
+                continue
+            except RuntimeError as e:
+                print(f"  WARN: scrape failed for {league_short} {year}: {e}")
                 continue
 
             if bat_df.empty and pit_df.empty:
