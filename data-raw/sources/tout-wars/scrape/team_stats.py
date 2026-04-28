@@ -668,3 +668,41 @@ def lookup_eligibility(
             return v
     v = elig_map.get((team, f"name:{player_name}"))
     return v if v is not None else ""
+
+
+def audit_player_sections(
+    rows: list[dict],
+) -> tuple[list[dict], list[str], list[str]]:
+    """Return (deduped_rows, info_messages, warn_messages).
+
+    - Same-section duplicate within one team: drop subsequent rows; emit warning.
+    - Cross-section appearance within one team: keep all rows; emit info line.
+    """
+    info: list[str] = []
+    warns: list[str] = []
+    seen_in_section: set[tuple[str, str, str]] = set()  # (team, key, section)
+    sections_per_player: dict[tuple[str, str, str], set[str]] = {}
+    out: list[dict] = []
+    for r in rows:
+        key = r["player_id"] or r["player_name"]
+        section_key = (r["team"], key, r["roster_section"])
+        sections_per_player.setdefault(
+            (r["team"], key, r["player_name"]), set()
+        ).add(r["roster_section"])
+
+        if section_key in seen_in_section:
+            warns.append(
+                f"duplicate row dropped: team={r['team']} "
+                f"player={r['player_name']!r} section={r['roster_section']}"
+            )
+            continue
+        seen_in_section.add(section_key)
+        out.append(r)
+
+    for (team, _key, name), sections in sections_per_player.items():
+        if len(sections) > 1:
+            info.append(
+                f"player in multiple sections: team={team} player={name!r} "
+                f"sections={sorted(sections)}"
+            )
+    return out, info, warns

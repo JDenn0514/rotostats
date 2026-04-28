@@ -218,3 +218,55 @@ def test_lookup_eligibility_falls_back_to_name():
 def test_lookup_eligibility_returns_blank_when_missing():
     elig_map = {}
     assert team_stats.lookup_eligibility(elig_map, "Team A", "999", "Nobody") == ""
+
+
+def _bat_row(team, name, pid, section, ab=0):
+    base = {k: 0 for k in (
+        "g","r","hr","rbi","sb","so","bb","avg","obp","slg",
+        "gp_dh","gp_c","gp_1b","gp_2b","gp_3b","gp_ss","gp_of",
+    )}
+    base.update({
+        "year": 2025, "league": "al", "team": team,
+        "player_name": name, "player_id": pid, "mlb_team": "FA",
+        "position": "OF", "salary": 1, "status": "act",
+        "roster_section": section, "ab": ab,
+    })
+    return base
+
+
+def test_audit_player_sections_dedupes_same_section():
+    rows = [
+        _bat_row("Team A", "Pat", "100", "active", ab=10),
+        _bat_row("Team A", "Pat", "100", "active", ab=99),  # duplicate
+        _bat_row("Team A", "Sam", "200", "active", ab=5),
+    ]
+    deduped, info, warns = team_stats.audit_player_sections(rows)
+    assert len(deduped) == 2
+    assert deduped[0]["player_name"] == "Pat"
+    assert deduped[0]["ab"] == 10  # first occurrence kept
+    assert deduped[1]["player_name"] == "Sam"
+    assert any("Pat" in w for w in warns)
+    assert info == []
+
+
+def test_audit_player_sections_logs_cross_section():
+    rows = [
+        _bat_row("Team A", "Pat", "100", "active", ab=10),
+        _bat_row("Team A", "Pat", "100", "previously_reserved", ab=0),
+    ]
+    deduped, info, warns = team_stats.audit_player_sections(rows)
+    assert len(deduped) == 2  # both rows kept
+    assert any("Pat" in m for m in info)
+    assert warns == []
+
+
+def test_audit_player_sections_clean_input():
+    rows = [
+        _bat_row("Team A", "Pat", "100", "active"),
+        _bat_row("Team A", "Sam", "200", "previously_active"),
+        _bat_row("Team B", "Pat", "100", "reserved"),  # different team — fine
+    ]
+    deduped, info, warns = team_stats.audit_player_sections(rows)
+    assert len(deduped) == 3
+    assert info == []
+    assert warns == []
