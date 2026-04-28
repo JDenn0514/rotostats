@@ -126,3 +126,51 @@ test_that(".aggregate_team_pitching sums IP and reconstructs ER/H/BB", {
   # sum = 190 + 155 + 64 = 409
   expect_equal(out$h_pit_eq, 409L)
 })
+
+test_that(".compute_team_residuals computes joined rates and tolerance flag", {
+  joined <- tibble::tibble(
+    year = 2024L, league = "al", team_id = "OWNER1",
+    ab = 5500L, h_bat_eq = 1500L, bb_bat = 600L,
+    ip = 1450, er_eq = 600L, h_pit_eq = 1300L, bb_pit = 450L,
+    AVG = 1500 / 5500,        # exact match
+    OBP = (1500 + 600) / (5500 + 600),
+    ERA = 600 * 9 / 1450,
+    WHIP = (1300 + 450) / 1450
+  )
+  out <- rotostats:::.compute_team_residuals(joined)
+  expect_true(abs(out$avg_resid) < 1e-9)
+  expect_true(abs(out$obp_resid) < 1e-9)
+  expect_true(abs(out$era_resid) < 1e-9)
+  expect_true(abs(out$whip_resid) < 1e-9)
+  expect_false(out$flagged)
+})
+
+test_that(".compute_team_residuals flags rows exceeding tolerance", {
+  joined <- tibble::tibble(
+    year = 2024L, league = "al", team_id = "OWNER1",
+    ab = 5500L, h_bat_eq = 1700L, bb_bat = 600L,  # AVG inflated
+    ip = 1450, er_eq = 600L, h_pit_eq = 1300L, bb_pit = 450L,
+    AVG = 0.270,
+    OBP = 0.340,
+    ERA = 600 * 9 / 1450,
+    WHIP = (1300 + 450) / 1450
+  )
+  out <- rotostats:::.compute_team_residuals(joined)
+  expect_true(out$flagged)
+  expect_gt(abs(out$avg_resid), 0.005)
+})
+
+test_that(".compute_team_residuals handles NA standings values gracefully", {
+  joined <- tibble::tibble(
+    year = 2024L, league = "al", team_id = "OWNER1",
+    ab = 5500L, h_bat_eq = 1500L, bb_bat = 600L,
+    ip = 1450, er_eq = 600L, h_pit_eq = 1300L, bb_pit = 450L,
+    AVG = NA_real_,             # league didn't score AVG that year
+    OBP = (1500 + 600) / (5500 + 600),
+    ERA = 600 * 9 / 1450,
+    WHIP = (1300 + 450) / 1450
+  )
+  out <- rotostats:::.compute_team_residuals(joined)
+  expect_true(is.na(out$avg_resid))
+  expect_false(out$flagged)
+})

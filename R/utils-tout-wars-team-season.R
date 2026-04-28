@@ -194,3 +194,55 @@
   )
   out
 }
+
+# Reconciliation tolerances. AVG/OBP in batting average units, ERA in
+# earned-runs-per-9, WHIP in walks-and-hits-per-IP units. See spec for
+# justification.
+.tw_ts_tolerances <- list(
+  avg  = 0.005,
+  obp  = 0.005,
+  era  = 0.15,
+  whip = 0.020
+)
+
+#' Compute residuals between roster-reconstructed and standings rate stats.
+#'
+#' Operates on a joined frame that already carries both the standings rate
+#' columns (`AVG`, `OBP`, `ERA`, `WHIP`; uppercase to match the standings
+#' schema) and the per-team aggregated counters (`ab`, `h_bat_eq`, `bb_bat`,
+#' `ip`, `er_eq`, `h_pit_eq`, `bb_pit`).
+#'
+#' OBP reconciliation runs in degraded mode (no HBP / SF available from the
+#' scraper output): `(H + BB) / (AB + BB)`. Tolerance accounts for the
+#' degraded denominator.
+#'
+#' Returns a tibble with one row per input row, augmented with residual
+#' columns and a `flagged` logical (TRUE if any residual exceeds tolerance).
+#' NA in a standings rate (e.g., AVG when only OBP was scored that
+#' league-year) propagates to NA in that residual and is excluded from the
+#' tolerance check.
+#'
+#' @param joined Tibble. See description.
+#' @return Tibble with added columns: avg_resid, obp_resid, era_resid,
+#'   whip_resid, flagged.
+#' @keywords internal
+#' @noRd
+.compute_team_residuals <- function(joined) {
+  joined_avg  <- joined$h_bat_eq / joined$ab
+  joined_obp  <- (joined$h_bat_eq + joined$bb_bat) / (joined$ab + joined$bb_bat)
+  joined_era  <- joined$er_eq * 9 / joined$ip
+  joined_whip <- (joined$bb_pit + joined$h_pit_eq) / joined$ip
+
+  joined$avg_resid  <- abs(joined_avg  - joined$AVG)
+  joined$obp_resid  <- abs(joined_obp  - joined$OBP)
+  joined$era_resid  <- abs(joined_era  - joined$ERA)
+  joined$whip_resid <- abs(joined_whip - joined$WHIP)
+
+  flag_avg  <- !is.na(joined$avg_resid)  & joined$avg_resid  > .tw_ts_tolerances$avg
+  flag_obp  <- !is.na(joined$obp_resid)  & joined$obp_resid  > .tw_ts_tolerances$obp
+  flag_era  <- !is.na(joined$era_resid)  & joined$era_resid  > .tw_ts_tolerances$era
+  flag_whip <- !is.na(joined$whip_resid) & joined$whip_resid > .tw_ts_tolerances$whip
+
+  joined$flagged <- flag_avg | flag_obp | flag_era | flag_whip
+  joined
+}
