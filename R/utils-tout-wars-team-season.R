@@ -246,3 +246,73 @@
   joined$flagged <- flag_avg | flag_obp | flag_era | flag_whip
   joined
 }
+
+.tw_ts_standings_cat_cols <- c(
+  "R", "HR", "RBI", "SB", "OBP", "AVG",
+  "W", "SV", "ERA", "WHIP", "SO"
+)
+
+.tw_ts_standings_pts_cols <- c(
+  "R_pts", "HR_pts", "RBI_pts", "SB_pts", "OBP_pts", "AVG_pts",
+  "W_pts", "SV_pts", "ERA_pts", "WHIP_pts", "SO_pts", "total_pts"
+)
+
+#' Read a Tout Wars standings CSV.
+#'
+#' Source schema: `year, league, team, R, R_pts, HR, HR_pts, ..., SO, SO_pts, total_pts`.
+#' Categories are kept in their source case (uppercase) so they match the
+#' team_season output schema.
+#'
+#' @param path Path to `{year}-{league}.csv` under standings/.
+#' @return Tibble with one row per team-season.
+#' @keywords internal
+#' @noRd
+.read_tw_standings <- function(path) {
+  # Counting cats are integers; rate cats and all _pts are doubles.
+  col_specs <- list(
+    year       = readr::col_integer(),
+    league     = readr::col_character(),
+    team       = readr::col_character(),
+    R          = readr::col_integer(),
+    R_pts      = readr::col_double(),
+    HR         = readr::col_integer(),
+    HR_pts     = readr::col_double(),
+    RBI        = readr::col_integer(),
+    RBI_pts    = readr::col_double(),
+    SB         = readr::col_integer(),
+    SB_pts     = readr::col_double(),
+    OBP        = readr::col_double(),
+    OBP_pts    = readr::col_double(),
+    AVG        = readr::col_double(),
+    AVG_pts    = readr::col_double(),
+    W          = readr::col_integer(),
+    W_pts      = readr::col_double(),
+    SV         = readr::col_integer(),
+    SV_pts     = readr::col_double(),
+    ERA        = readr::col_double(),
+    ERA_pts    = readr::col_double(),
+    WHIP       = readr::col_double(),
+    WHIP_pts   = readr::col_double(),
+    SO         = readr::col_integer(),
+    SO_pts     = readr::col_double(),
+    total_pts  = readr::col_double()
+  )
+  df <- readr::read_csv(
+    path,
+    col_types = do.call(readr::cols, col_specs),
+    progress  = FALSE
+  )
+  required <- c("year", "league", "team",
+                .tw_ts_standings_cat_cols, .tw_ts_standings_pts_cols)
+  missing <- setdiff(required, names(df))
+  if (length(missing) > 0L) {
+    cli::cli_abort(
+      c(
+        "Required column(s) missing from {.file {basename(path)}}.",
+        "i" = "Missing: {.val {missing}}"
+      ),
+      class = "rotostats_error_team_season_missing_column"
+    )
+  }
+  df
+}

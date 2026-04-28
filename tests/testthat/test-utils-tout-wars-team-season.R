@@ -174,3 +174,22 @@ test_that(".compute_team_residuals handles NA standings values gracefully", {
   expect_true(is.na(out$avg_resid))
   expect_false(out$flagged)
 })
+
+test_that(".read_tw_standings reads a standings CSV with normalized columns", {
+  path <- "../../data-raw/sources/tout-wars/standings/2024-al.csv"
+  skip_if_not(file.exists(path), "raw standings CSV not present")
+
+  out <- rotostats:::.read_tw_standings(path)
+
+  expect_true(all(c("year", "league", "team",
+                    "R", "HR", "RBI", "SB", "OBP", "AVG",
+                    "W", "SV", "ERA", "WHIP", "SO",
+                    "R_pts", "HR_pts", "total_pts") %in% names(out)))
+  expect_type(out$year, "integer")
+  expect_type(out$R, "integer")
+  expect_type(out$AVG, "double")
+  expect_type(out$OBP, "double")
+  expect_type(out$ERA, "double")
+  expect_true(all(out$year == 2024L))
+  expect_true(all(out$league == "al"))
+})
