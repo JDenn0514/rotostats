@@ -1,0 +1,434 @@
+year,league,team,player_name,player_id,mlb_team,position,salary,status,roster_section,eligibility,ab,g,r,hr,rbi,sb,so,bb,avg,obp,slg,gp_dh,gp_c,gp_1b,gp_2b,gp_3b,gp_ss,gp_of
+2017,al,Seth Trachtman,Starlin Castro,2724,NYY,MI,16,act,active,"2B,MI,SW",443,112,66,16,63,2,93,23,0.338,0.429,0.454,2,0,0,109,0,0,0
+2017,al,Seth Trachtman,Matt Chapman,5037,Oak,CI,234,act,active,3B,276,80,37,14,37,0,85,30,0.313,0.357,0.482,0,0,0,0,84,0,0
+2017,al,Seth Trachtman,Logan Morrison,2111,TB,1B,2,act,active,"1B,CI,SW",512,149,75,38,85,2,149,81,0.353,0.381,0.516,17,0,126,0,0,0,0
+2017,al,Seth Trachtman,Rougned Odor,4026,Tex,2B,26,act,active,"2B,MI,SW",607,162,79,30,75,15,162,32,0.252,0.3,0.397,2,0,0,158,0,0,0
+2017,al,Seth Trachtman,Marcus Semien,4300,Oak,SS,18,act,active,"SS,SW,MI",342,85,53,10,40,12,85,38,0.325,0.219,0.398,0,0,0,0,0,85,0
+2017,al,Seth Trachtman,Luis Valbuena,2200,LAA,3B,1,act,active,"3B,SW,1B,CI",347,117,42,22,65,0,106,48,0.294,0.435,0.432,3,0,48,0,59,0,0
+2017,al,Seth Trachtman,Derek Fisher,4917,Hou,OF,367,act,active,OF,100,36,12,3,9,2,44,11,0.281,0.35,0.29,2,0,0,0,0,0,48
+2017,al,Seth Trachtman,Andrew Benintendi,5386,Bos,OF,19,act,active,"OF,SW",573,151,84,20,90,20,112,70,0.352,0.15,0.424,0,0,0,0,0,0,149
+2017,al,Seth Trachtman,Ben Gamel,5506,Sea,OF,101,act,active,"OF,SW",470,123,65,10,56,4,115,33,0.329,0.25,0.423,0,0,1,0,0,0,131
+2017,al,Seth Trachtman,Justin Upton,39,LAA,OF,23,act,active,"OF,SW",557,152,100,35,109,14,180,74,0.361,0.24,0.54,0,0,0,0,0,0,151
+2017,al,Seth Trachtman,Salvador Perez,3457,KC,C,15,act,active,"C,SW",471,129,57,27,80,1,95,17,0.297,0.286,0.495,13,115,0,0,0,0,0
+2017,al,Seth Trachtman,Brian McCann,73,Hou,C,16,act,active,"C,SW",347,96,47,18,62,1,58,36,0.322,0.375,0.438,2,95,0,0,0,0,0
+2017,al,Seth Trachtman,Yoan Moncada,5023,CWS,UT,10,act,active,"3B,CI,2B,SW",166,45,30,7,17,3,65,25,0.361,0.28,0.44,0,0,0,54,0,0,0
+2017,al,Seth Trachtman,Jeimer Candelario,4071,Det,SW,35,act,active,"3B,SW,CI",85,24,14,2,13,0,17,12,0.412,0.222,0.482,0,0,1,0,36,0,0
+2017,al,Seth Trachtman,Ryan Rua,4932,Tex,CI,0,rel,previously_active,,99,45,14,3,11,2,41,10,0.275,0.0,0.343,1,0,23,0,0,0,38
+2017,al,Seth Trachtman,Tyler Wade,5629,NYY,MI,15,rel,previously_active,,8,2,1,0,0,0,3,0,0.0,0.0,0.0,1,0,0,15,0,7,7
+2017,al,Seth Trachtman,*Marco Hernandez,4076,Bos,SS,0,dis,previously_active,"2B,SW,MI,SS,3B",23,8,2,0,0,0,7,0,0.261,0.0,0.348,0,0,0,6,9,5,0
+2017,al,Seth Trachtman,Daniel Robertson,4577,TB,SS,21,rel,previously_active,,6,4,0,0,0,0,2,1,0.143,0.0,0.0,2,0,0,41,17,24,1
+2017,al,Seth Trachtman,Dixon Machado,4214,Det,SS,1,rel,previously_active,,11,5,0,0,0,0,1,2,0.308,0.0,0.182,5,0,0,27,5,32,0
+2017,al,Seth Trachtman,Cliff Pennington,2037,LAA,SS,21,rel,previously_active,,68,29,10,1,3,0,18,6,0.284,0.0,0.309,1,0,0,47,18,18,0
+2017,al,Seth Trachtman,Ryan Flaherty,2704,Bal,3B,10,rel,previously_active,,4,4,0,0,0,0,2,0,0.2,0.0,0.0,0,0,0,12,5,5,2
+2017,al,Seth Trachtman,Ryan Goins,3946,Tor,3B,6,rel,previously_active,,34,11,3,1,4,0,6,3,0.243,0.0,0.324,1,0,0,56,8,87,0
+2017,al,Seth Trachtman,Boog Powell,5135,Oak,OF,20,res,previously_active,OF,74,27,16,3,10,0,18,8,0.393,0.0,0.527,9,0,0,0,0,0,36
+2017,al,Seth Trachtman,Colby Rasmus,1436,TB,OF,3,rel,previously_active,,121,37,17,9,23,1,45,7,0.318,0.0,0.579,5,0,0,0,0,0,30
+2017,al,Seth Trachtman,Mikie Mahtook,3666,Det,OF,1,rel,previously_active,,8,4,2,1,2,0,3,0,0.25,0.0,0.75,2,0,0,0,0,0,105
+2017,al,Seth Trachtman,*Danny Santana,4232,Atl,OF,3,rel,previously_active,,5,2,0,0,0,0,3,0,0.0,0.0,0.0,2,0,0,8,5,0,48
+2017,al,Seth Trachtman,Mark Canha,4430,Oak,OF,42,rel,previously_active,,79,25,5,3,6,1,32,4,0.214,0.0,0.38,2,0,3,0,0,0,53
+2017,al,Seth Trachtman,Hyun-soo Kim,5533,Phi,OF,1,rel,previously_active,,86,38,9,1,8,0,20,9,0.296,0.0,0.267,2,0,0,0,0,0,65
+2017,al,Seth Trachtman,Drew Butera,915,KC,C,10,rel,previously_active,,36,10,5,1,4,0,7,2,0.368,0.0,0.417,0,74,4,0,0,0,0
+2017,al,Seth Trachtman,Chris Gimenez,2245,Min,C,0,rel,previously_active,,6,2,1,0,0,0,4,2,0.25,0.0,0.0,1,59,7,0,1,0,5
+2017,al,Seth Trachtman,Seth Smith,465,Bal,UT,11,res,previously_active,"OF,SW",83,31,12,3,9,0,18,11,0.381,0.0,0.458,7,0,0,0,0,0,91
+2017,al,Seth Trachtman,Tyler Collins,4115,Det,UT,15,rel,previously_active,,130,40,17,4,12,0,46,16,0.288,0.0,0.338,0,0,0,0,0,0,44
+2017,al,Seth Trachtman,Mallex Smith,4975,TB,UT,5,res,previously_active,"OF,SW",204,62,26,1,8,12,51,19,0.323,0.0,0.343,1,0,0,0,0,0,78
+2017,al,Seth Trachtman,*Marco Hernandez,4076,Bos,SS,0,dis,reserved,"2B,SW,MI,SS,3B",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,6,9,5,0
+2017,al,Seth Trachtman,Boog Powell,5135,Oak,OF,20,res,reserved,OF,0,0,0,0,0,0,0,0,0.0,0.0,0.0,9,0,0,0,0,0,36
+2017,al,Seth Trachtman,Seth Smith,465,Bal,UT,11,res,reserved,"OF,SW",27,14,4,1,3,0,6,5,0.312,0.333,0.333,7,0,0,0,0,0,91
+2017,al,Seth Trachtman,Mallex Smith,4975,TB,UT,5,res,reserved,"OF,SW",52,19,7,1,4,4,11,4,0.351,0.357,0.404,1,0,0,0,0,0,78
+2017,al,Seth Trachtman,Tyler Wade,5629,NYY,MI,15,rel,previously_reserved,,13,6,0,0,0,0,4,0,0.154,0.0,0.231,1,0,0,15,0,7,7
+2017,al,Seth Trachtman,Derek Fisher,4917,Hou,OF,367,act,previously_reserved,OF,32,13,7,1,6,0,7,3,0.343,0.0,0.5,2,0,0,0,0,0,48
+2017,al,Seth Trachtman,Ben Gamel,5506,Sea,OF,101,act,previously_reserved,"OF,SW",20,6,0,0,0,0,2,1,0.143,0.0,0.1,0,0,1,0,0,0,131
+2017,al,Seth Trachtman,Hyun-soo Kim,5533,Phi,OF,1,rel,previously_reserved,,62,28,4,0,2,0,13,8,0.296,0.0,0.258,2,0,0,0,0,0,65
+2017,al,Seth Trachtman,Drew Butera,915,KC,C,10,rel,previously_reserved,,8,4,0,0,0,0,4,0,0.0,0.0,0.0,0,74,4,0,0,0,0
+2017,al,Seth Trachtman,Brian McCann,73,Hou,C,16,act,previously_reserved,"C,SW",2,1,0,0,0,0,0,2,0.5,0.0,0.0,2,95,0,0,0,0,0
+2017,al,Seth Trachtman,Yoan Moncada,5023,CWS,UT,10,act,previously_reserved,"3B,CI,2B,SW",33,9,1,1,5,0,9,4,0.216,0.0,0.273,0,0,0,54,0,0,0
+2017,al,Jason Collette,Brock Holt,4192,Bos,CI,0,act,active,"3B,OF,SW,CI,2B",96,43,15,0,5,1,18,11,0.306,0.417,0.26,3,0,2,31,9,0,11
+2017,al,Jason Collette,Hanley Ramirez,566,Bos,1B,24,act,active,"1B,SW,CI",496,133,58,23,62,1,116,51,0.32,0.304,0.429,108,0,18,0,0,0,0
+2017,al,Jason Collette,Tim Beckham,2143,Bal,MI,2,act,active,"UT,SS,2B,MI,SW",529,136,67,22,62,6,165,36,0.328,0.0,0.456,1,0,0,17,1,119,0
+2017,al,Jason Collette,Jose Altuve,3776,Hou,2B,45,act,active,"2B,MI,SW",590,153,112,24,81,32,84,58,0.41,0.348,0.547,3,0,0,149,0,0,0
+2017,al,Jason Collette,Elvis Andrus,1543,Tex,SS,23,act,active,"UT,SS,SW,MI",643,158,100,20,88,25,101,38,0.337,0.333,0.471,1,0,0,0,0,157,0
+2017,al,Jason Collette,Yulieski Gurriel,2160,Hou,3B,8,act,active,"1B,3B,CI,SW",529,139,69,18,75,3,62,22,0.332,0.435,0.486,3,0,131,1,7,0,0
+2017,al,Jason Collette,Josh Reddick,2163,Hou,OF,13,act,active,"OF,SW",477,134,77,13,82,7,72,43,0.363,0.0,0.484,2,0,1,0,0,0,129
+2017,al,Jason Collette,Nelson Cruz,1529,Sea,OF,30,act,active,"UT,OF,SW",556,155,91,39,119,1,140,70,0.375,0.346,0.549,147,0,0,0,0,0,5
+2017,al,Jason Collette,Corey Dickerson,3661,TB,OF,13,act,active,"OF,SW",588,150,84,27,62,4,152,35,0.325,0.412,0.49,55,0,0,0,0,0,93
+2017,al,Jason Collette,Carlos Beltran,956,Hou,OF,10,act,active,"OF,SW",467,129,60,14,51,0,102,33,0.283,0.25,0.383,107,0,0,0,0,0,14
+2017,al,Jason Collette,Robinson Chirinos,3011,Tex,C,1,act,active,"C,SW",263,88,46,17,38,1,79,34,0.36,0.2,0.506,2,85,0,0,0,0,0
+2017,al,Jason Collette,Wilson Ramos,2170,TB,C,5,act,active,"C,SW",184,56,17,9,33,0,31,8,0.287,0.231,0.44,1,62,0,0,0,0,0
+2017,al,Jason Collette,Danny Espinosa,2765,TB,UT,12,act,active,"2B,SS,MI,SW",17,6,1,0,0,0,8,0,0.333,0.0,0.294,1,0,2,78,4,4,0
+2017,al,Jason Collette,Deven Marrero,4013,Bos,CI,33,rel,previously_active,,31,12,4,0,3,0,8,2,0.235,0.0,0.194,0,0,1,11,53,6,0
+2017,al,Jason Collette,Erik Gonzalez,4680,Cle,MI,43,rel,previously_active,,6,2,0,0,0,0,1,0,0.167,0.0,0.167,1,0,0,36,8,11,1
+2017,al,Jason Collette,Rickie Weeks,857,FA,CI,6,rel,previously_active,,11,5,2,0,0,0,6,2,0.4,0.0,0.182,17,0,12,0,0,0,0
+2017,al,Jason Collette,Ji-Man Choi,4487,NYY,CI,24,rel,previously_active,,4,2,0,0,1,0,2,0,0.4,0.0,0.75,0,0,6,0,0,0,0
+2017,al,Jason Collette,Tyler White,5443,Hou,CI,32,res,previously_active,"1B,CI,SW",9,3,1,0,0,0,1,0,0.333,0.0,0.556,0,0,19,4,0,0,2
+2017,al,Jason Collette,Danny Valencia,2398,Sea,CI,11,trd,previously_active,,112,30,10,3,14,0,30,9,0.287,0.0,0.375,0,0,118,0,1,0,10
+2017,al,Jason Collette,Adam Engel,4816,CWS,OF,11,rel,previously_active,,42,13,10,1,2,0,11,7,0.32,0.0,0.286,0,0,0,0,0,0,96
+2017,al,Jason Collette,Cameron Maybin,573,Hou,OF,7,trd,previously_active,,245,65,49,6,20,24,53,36,0.353,0.0,0.4,1,0,0,0,0,0,109
+2017,al,Jason Collette,Seth Smith,465,Bal,OF,11,trd,previously_active,,200,61,33,9,18,2,50,20,0.339,0.0,0.455,7,0,0,0,0,0,91
+2017,al,Jason Collette,Josh Phegley,3029,Oak,C,2,rel,previously_active,,55,22,5,2,2,0,12,1,0.241,0.0,0.364,0,56,0,0,0,0,0
+2017,al,Jason Collette,Chris Gimenez,2245,Min,C,2,rel,previously_active,,24,12,2,0,1,0,8,7,0.375,0.0,0.25,1,59,7,0,1,0,5
+2017,al,Jason Collette,Bruce Maxwell,4655,Oak,C,13,rel,previously_active,,7,4,1,0,0,0,2,1,0.375,0.0,0.286,0,74,0,0,0,0,0
+2017,al,Jason Collette,Omar Narvaez,5605,CWS,C,1,rel,previously_active,,5,2,0,0,0,0,0,1,0.167,0.0,0.0,1,83,1,0,0,0,0
+2017,al,Jason Collette,Drew Robinson,4859,Tex,UT,24,rel,previously_active,,5,4,0,0,0,0,2,2,0.286,0.0,0.0,3,0,0,7,20,6,20
+2017,al,Jason Collette,Juan Centeno,4317,Hou,UT,5,rel,previously_active,,23,7,1,0,0,0,6,1,0.208,0.0,0.174,0,22,0,0,0,0,0
+2017,al,Jason Collette,Daniel Robertson,4577,TB,SW,16,rel,previously_active,,101,31,11,2,10,0,31,8,0.297,0.0,0.366,2,0,0,41,17,24,1
+2017,al,Jason Collette,Tyler White,5443,Hou,CI,32,res,reserved,"1B,CI,SW",23,10,1,0,1,0,6,2,0.308,0.214,0.348,0,0,19,4,0,0,2
+2017,al,Jason Collette,Rickie Weeks,857,FA,CI,6,rel,previously_reserved,,10,4,3,0,1,0,6,3,0.308,0.0,0.2,17,0,12,0,0,0,0
+2017,al,Jason Collette,Danny Valencia,2398,Sea,CI,11,trd,previously_reserved,,10,4,3,1,1,1,1,2,0.5,0.0,0.8,0,0,118,0,1,0,10
+2017,al,Jason Collette,Brock Holt,4192,Bos,CI,0,act,previously_reserved,"3B,OF,SW,CI,2B",29,15,3,0,1,1,9,4,0.265,0.0,0.207,3,0,2,31,9,0,11
+2017,al,Jason Collette,JaCoby Jones,4996,Det,CI,0,trd,previously_reserved,,12,5,2,1,4,1,2,3,0.4,0.0,0.583,0,0,0,0,0,0,51
+2017,al,Jason Collette,Tim Beckham,2143,Bal,MI,2,act,previously_reserved,"UT,SS,2B,MI,SW",4,1,0,0,0,0,2,0,0.25,0.0,0.25,1,0,0,17,1,119,0
+2017,al,Jason Collette,Adam Engel,4816,CWS,OF,11,rel,previously_reserved,,9,3,1,0,0,1,4,1,0.2,0.0,0.111,0,0,0,0,0,0,96
+2017,al,Jason Collette,Seth Smith,465,Bal,OF,11,trd,previously_reserved,,20,5,1,0,2,0,5,0,0.2,0.0,0.25,7,0,0,0,0,0,91
+2017,al,Jason Collette,Chris Gimenez,2245,Min,C,2,rel,previously_reserved,,7,2,0,0,0,0,3,0,0.143,0.0,0.143,1,59,7,0,1,0,5
+2017,al,Jason Collette,Wilson Ramos,2170,TB,C,5,act,previously_reserved,"C,SW",24,8,2,2,2,0,5,2,0.308,0.0,0.5,1,62,0,0,0,0,0
+2017,al,Jason Collette,Daniel Robertson,4577,TB,SW,16,rel,previously_reserved,,24,8,1,0,2,0,11,2,0.214,0.0,0.167,2,0,0,41,17,24,1
+2017,al,Steve Moyer,Mitch Moreland,3033,Bos,1B,4,act,active,"1B,SW,CI",508,149,73,22,79,0,120,57,0.326,0.412,0.443,9,0,138,0,0,0,0
+2017,al,Steve Moyer,Trey Mancini,5439,Bal,CI,0,act,active,"1B,SW,OF",543,147,65,24,78,1,139,33,0.338,0.368,0.488,18,0,45,0,0,0,90
+2017,al,Steve Moyer,Manny Machado,3216,Bal,MI,35,act,active,"3B,SW,MI,CI,SS",630,156,81,33,95,9,115,50,0.31,0.1,0.471,0,0,0,0,156,0,0
+2017,al,Steve Moyer,Jean Segura,3177,Sea,2B,26,act,active,"SS,2B,SW,MI",524,125,80,11,45,22,83,34,0.349,1.0,0.427,0,0,0,0,0,124,0
+2017,al,Steve Moyer,Xander Bogaerts,3822,Bos,SS,28,act,active,"SS,MI,SW",571,148,94,10,62,15,116,56,0.343,0.462,0.403,0,0,0,0,0,146,0
+2017,al,Steve Moyer,Evan Longoria,1489,TB,3B,20,act,active,"3B,CI,SW",613,156,71,20,86,6,109,46,0.313,0.19,0.424,14,0,0,0,142,0,0
+2017,al,Steve Moyer,Eric Young Jr.,2059,LAA,OF,217,act,active,"OF,SW",86,38,16,3,14,9,28,3,0.309,0.333,0.384,3,0,0,0,0,0,34
+2017,al,Steve Moyer,J.D. Martinez,3567,Ari,OF,21,act,active,"OF,SW",423,116,83,43,101,4,126,52,0.374,0.389,0.681,5,0,0,0,0,0,113
+2017,al,Steve Moyer,Adam Jones,133,Bal,OF,21,act,active,"OF,SW",597,147,82,26,73,2,113,27,0.322,0.0,0.466,0,0,0,0,0,0,147
+2017,al,Steve Moyer,Alex Presley,3365,Det,OF,9,act,active,"OF,SW",24,6,5,1,3,0,6,1,0.32,0.32,0.5,5,0,0,0,0,0,65
+2017,al,Steve Moyer,Omar Narvaez,5605,CWS,C,14,act,active,"C,SW",27,8,3,0,2,0,4,4,0.419,0.429,0.37,1,83,1,0,0,0,0
+2017,al,Steve Moyer,Gary Sanchez,3259,NYY,C,25,act,active,"C,SW",462,119,77,33,89,2,119,37,0.34,0.318,0.535,18,104,2,0,0,0,0
+2017,al,Steve Moyer,Nick Delmonico,4077,CWS,UT,7,act,active,OF,105,33,20,7,16,2,19,18,0.376,0.35,0.486,11,0,4,0,0,0,27
+2017,al,Steve Moyer,Chris B. Young,40,Bos,SW,1,act,active,"OF,SW",178,66,24,5,22,2,39,25,0.337,0.333,0.393,25,0,0,0,0,0,46
+2017,al,Steve Moyer,*Josh Rutledge,4084,Bos,CI,44,rel,previously_active,,69,23,6,0,5,1,23,5,0.253,0.0,0.246,0,0,5,16,20,0,0
+2017,al,Steve Moyer,Kyle Seager,3774,Sea,CI,24,trd,previously_active,,152,42,14,4,22,0,30,20,0.33,0.0,0.368,0,0,0,0,154,0,0
+2017,al,Steve Moyer,Taylor Featherston,4945,TB,2B,0,rel,previously_active,,10,4,2,1,2,0,1,0,0.273,0.0,0.6,0,0,2,11,2,3,0
+2017,al,Steve Moyer,Jorge Bonifacio,4469,KC,OF,21,rel,previously_active,,52,18,6,1,5,0,17,6,0.305,0.0,0.308,8,0,0,0,0,0,102
+2017,al,Steve Moyer,Terrance Gore,5027,KC,OF,51,rel,previously_active,,0,1,0,0,0,0,0,0,0.0,0.0,0.0,3,0,0,0,0,0,2
+2017,al,Steve Moyer,Jake Marisnick,3197,Hou,OF,1,rel,previously_active,,196,86,44,15,34,6,74,16,0.32,0.0,0.526,1,0,0,0,0,0,102
+2017,al,Steve Moyer,Nick Franklin,2845,LAA,OF,1,rel,previously_active,,63,34,4,0,5,1,11,6,0.243,0.0,0.222,0,0,0,9,0,1,20
+2017,al,Steve Moyer,Martin Maldonado,2347,LAA,C,1,rel,previously_active,,274,86,26,9,28,0,74,12,0.302,0.0,0.391,0,137,1,0,0,0,0
+2017,al,Steve Moyer,Miguel Montero,25,Tor,C,217,rel,previously_active,,63,23,9,1,7,0,16,10,0.253,0.0,0.206,3,56,1,0,0,0,0
+2017,al,Steve Moyer,Jarrod Saltalamacchia,1516,Tor,C,0,rel,previously_active,,13,7,0,0,0,0,11,0,0.0,0.0,0.0,1,7,0,0,0,0,0
+2017,al,Steve Moyer,Zack Granite,5881,Min,UT,61,rel,previously_active,,71,26,8,0,8,2,8,7,0.308,0.0,0.268,2,0,0,0,0,0,32
+2017,al,Steve Moyer,Guillermo Heredia,5329,Sea,SW,1,rel,previously_active,,380,120,43,6,24,1,64,26,0.318,0.0,0.342,1,0,0,0,0,0,117
+2017,al,Steve Moyer,Eric Young Jr.,2059,LAA,OF,217,act,previously_reserved,"OF,SW",1,2,2,0,0,1,0,0,0.0,0.0,0.0,3,0,0,0,0,0,34
+2017,al,Steve Moyer,J.D. Martinez,3567,Ari,OF,21,act,previously_reserved,"OF,SW",9,3,2,2,3,0,2,1,0.5,0.0,1.11,5,0,0,0,0,0,113
+2017,al,Steve Moyer,Jake Marisnick,3197,Hou,OF,1,rel,previously_reserved,,21,10,2,0,0,3,11,1,0.227,0.0,0.19,1,0,0,0,0,0,102
+2017,al,Steve Moyer,Nick Franklin,2845,LAA,OF,1,rel,previously_reserved,,43,32,5,2,7,1,11,4,0.306,0.0,0.372,0,0,0,9,0,1,20
+2017,al,Steve Moyer,Martin Maldonado,2347,LAA,C,1,rel,previously_reserved,,143,48,15,5,9,0,43,3,0.222,0.0,0.322,0,137,1,0,0,0,0
+2017,al,Steve Moyer,Miguel Montero,25,Tor,C,217,rel,previously_reserved,,13,4,2,1,1,0,4,0,0.308,0.0,0.615,3,56,1,0,0,0,0
+2017,al,Steve Moyer,Omar Narvaez,5605,CWS,C,14,act,previously_reserved,"C,SW",201,73,19,2,11,0,37,29,0.372,0.0,0.353,1,83,1,0,0,0,0
+2017,al,Steve Moyer,Gary Sanchez,3259,NYY,C,25,act,previously_reserved,"C,SW",9,3,2,0,1,0,1,3,0.538,0.0,0.333,18,104,2,0,0,0,0
+2017,al,Steve Moyer,Nick Delmonico,4077,CWS,UT,7,act,previously_reserved,OF,13,4,1,1,2,0,4,3,0.312,0.0,0.385,11,0,4,0,0,0,27
+2017,al,Steve Moyer,Zack Granite,5881,Min,UT,61,rel,previously_reserved,,3,2,1,0,0,0,0,1,0.5,0.0,0.333,2,0,0,0,0,0,32
+2017,al,Steve Moyer,Guillermo Heredia,5329,Sea,SW,1,rel,previously_reserved,,6,3,0,0,0,0,0,1,0.143,0.0,0.0,1,0,0,0,0,0,117
+2017,al,Steve Moyer,Chris B. Young,40,Bos,SW,1,act,previously_reserved,"OF,SW",65,24,6,2,3,1,16,5,0.282,0.0,0.369,25,0,0,0,0,0,46
+2017,al,Rob Leibowitz,C.J. Cron,3696,LAA,CI,12,act,active,"1B,CI,SW",260,76,32,11,37,2,73,17,0.311,0.259,0.419,0,0,98,0,0,0,0
+2017,al,Rob Leibowitz,Jason Kipnis,2727,Cle,MI,16,act,active,"2B,OF,SW,MI",331,88,42,12,35,6,68,27,0.293,0.364,0.42,2,0,0,75,0,0,11
+2017,al,Rob Leibowitz,Kendrys Morales,741,Tor,1B,20,act,active,"1B,SW",557,150,67,28,85,0,132,43,0.308,0.312,0.445,129,0,12,0,0,0,0
+2017,al,Rob Leibowitz,Brandon Phillips,344,LAA,2B,379,act,active,"2B,3B,MI,SW",87,21,10,2,8,1,15,1,0.273,0.2,0.414,1,0,0,112,25,0,0
+2017,al,Rob Leibowitz,Didi Gregorius,3599,NYY,SS,6,act,active,"SS,MI,SW",525,134,71,25,85,3,70,25,0.316,0.286,0.474,1,0,0,0,0,135,0
+2017,al,Rob Leibowitz,Alex Bregman,4907,Hou,3B,20,act,active,"3B,CI,SS,SW",556,155,88,19,71,17,97,55,0.352,0.387,0.475,2,0,0,4,132,30,0
+2017,al,Rob Leibowitz,Carlos Gomez,902,Tex,OF,19,act,active,"OF,SW",360,103,50,17,51,13,124,31,0.343,0.167,0.469,1,0,0,0,0,0,102
+2017,al,Rob Leibowitz,Steven Souza,4623,TB,OF,9,act,active,"OF,SW",523,148,78,30,78,16,179,84,0.351,0.588,0.459,6,0,0,0,0,0,139
+2017,al,Rob Leibowitz,Jose Bautista,1184,Tor,OF,26,act,active,"OF,SW,3B",587,157,92,23,65,6,170,84,0.308,0.217,0.366,11,0,1,0,8,0,143
+2017,al,Rob Leibowitz,Lorenzo Cain,2002,KC,OF,20,act,active,"OF,SW",584,155,86,15,49,26,100,54,0.363,0.429,0.44,3,0,0,0,0,0,151
+2017,al,Rob Leibowitz,Evan Gattis,3959,Hou,C,16,act,active,"C,SW",293,82,41,12,55,0,50,18,0.314,0.217,0.464,29,49,1,0,0,0,0
+2017,al,Rob Leibowitz,Roberto Perez,4342,Cle,C,2,act,active,"C,SW",209,69,21,7,37,0,67,25,0.289,0.25,0.364,2,71,0,0,0,0,0
+2017,al,Rob Leibowitz,Matt Davidson,2700,CWS,UT,0,act,active,"3B,1B,SW",406,116,42,25,65,0,162,19,0.257,0.133,0.446,60,0,19,0,34,0,0
+2017,al,Rob Leibowitz,J.D. Davis,5453,Hou,SW,24,act,active,3B,40,18,6,4,5,1,12,0,0.268,0.125,0.625,0,0,2,0,22,0,0
+2017,al,Rob Leibowitz,Sam Travis,5120,Bos,CI,143,res,previously_active,1B,33,15,8,0,0,1,9,6,0.4,0.0,0.394,4,0,21,0,0,0,0
+2017,al,Rob Leibowitz,Ryan Goins,3946,Tor,MI,4,rel,previously_active,,127,38,9,2,19,1,26,8,0.309,0.0,0.378,1,0,0,56,8,87,0
+2017,al,Rob Leibowitz,Dixon Machado,4214,Det,MI,35,rel,previously_active,,1,2,0,0,0,0,0,0,0.0,0.0,0.0,5,0,0,27,5,32,0
+2017,al,Rob Leibowitz,Pablo Sandoval,2182,SF,CI,7,rel,previously_active,,189,57,19,5,16,0,40,14,0.263,0.0,0.312,2,0,9,1,67,0,0
+2017,al,Rob Leibowitz,Kennys Vargas,4610,Min,CI,3,rel,previously_active,,80,21,6,4,18,0,19,1,0.256,0.0,0.463,30,0,40,0,0,0,0
+2017,al,Rob Leibowitz,Franklin Barreto,4834,Oak,MI,0,res,previously_active,"2B,SS",41,16,5,1,3,2,20,4,0.244,0.0,0.341,2,0,0,10,0,11,0
+2017,al,Rob Leibowitz,Jed Lowrie,201,Oak,2B,2,trd,previously_active,,352,93,54,10,34,0,72,36,0.343,0.0,0.449,14,0,0,136,1,0,0
+2017,al,Rob Leibowitz,Ronald Torreyes,4056,NYY,SS,0,rel,previously_active,,64,19,5,1,12,0,5,0,0.328,0.0,0.453,1,0,0,54,26,36,1
+2017,al,Rob Leibowitz,Daniel Robertson,4577,TB,SS,4,rel,previously_active,,26,10,3,1,1,0,11,3,0.276,0.0,0.308,2,0,0,41,17,24,1
+2017,al,Rob Leibowitz,Anthony Alford,4658,Tor,OF,0,rel,previously_active,,2,1,0,0,0,0,1,0,0.5,0.0,1.0,0,0,0,0,0,0,4
+2017,al,Rob Leibowitz,Anthony Santander,5903,Bal,OF,16,rel,previously_active,,1,1,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,0,0,0,12
+2017,al,Rob Leibowitz,Juan Graterol,4731,LAA,C,0,rel,previously_active,,13,4,0,0,0,0,2,0,0.0,0.0,0.0,0,47,0,0,0,0,0
+2017,al,Rob Leibowitz,Francisco Mejia,4850,Cle,C,21,res,previously_active,UT,8,6,0,0,1,0,2,1,0.333,0.0,0.25,5,3,0,0,0,0,0
+2017,al,Rob Leibowitz,*Danny Santana,4232,Atl,UT,0,rel,previously_active,,14,6,1,1,1,0,4,1,0.267,0.0,0.5,2,0,0,8,5,0,48
+2017,al,Rob Leibowitz,*Garrett Cooper,6182,NYY,SW,145,dis,previously_active,1B,25,8,2,0,2,0,7,1,0.308,0.0,0.48,0,0,13,0,0,0,0
+2017,al,Rob Leibowitz,Franklin Barreto,4834,Oak,MI,0,res,reserved,"2B,SS",30,9,5,1,3,0,13,1,0.258,0.333,0.367,2,0,0,10,0,11,0
+2017,al,Rob Leibowitz,*Matt Duffy,4893,TB,MI,38,dis,reserved,"3B,MI,SW,CI,SS",0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,0,0,0,0
+2017,al,Rob Leibowitz,Sam Travis,5120,Bos,CI,143,res,reserved,1B,38,16,4,0,1,0,13,0,0.237,0.1,0.289,4,0,21,0,0,0,0
+2017,al,Rob Leibowitz,Francisco Mejia,4850,Cle,C,21,res,reserved,UT,3,3,0,0,0,0,1,0,0.0,0.0,0.0,5,3,0,0,0,0,0
+2017,al,Rob Leibowitz,*Garrett Cooper,6182,NYY,SW,145,dis,reserved,1B,8,2,1,0,4,0,0,0,0.667,0.0,0.875,0,0,13,0,0,0,0
+2017,al,Rob Leibowitz,Jason Kipnis,2727,Cle,MI,16,act,previously_reserved,"2B,OF,SW,MI",5,2,1,0,0,0,3,1,0.167,0.0,0.0,2,0,0,75,0,0,11
+2017,al,Rob Leibowitz,Kennys Vargas,4610,Min,CI,3,rel,previously_reserved,,9,3,3,1,1,0,3,2,0.455,0.0,0.667,30,0,40,0,0,0,0
+2017,al,Rob Leibowitz,C.J. Cron,3696,LAA,CI,12,act,previously_reserved,"1B,CI,SW",79,24,7,5,19,1,23,5,0.282,0.0,0.494,0,0,98,0,0,0,0
+2017,al,Rob Leibowitz,Pablo Sandoval,2182,SF,CI,7,rel,previously_reserved,,34,12,5,2,7,0,7,1,0.162,0.0,0.353,2,0,9,1,67,0,0
+2017,al,Rob Leibowitz,Ryan Goins,3946,Tor,MI,4,rel,previously_reserved,,41,13,3,1,3,1,10,4,0.289,0.0,0.293,1,0,0,56,8,87,0
+2017,al,Rob Leibowitz,Didi Gregorius,3599,NYY,SS,6,act,previously_reserved,"SS,MI,SW",9,2,2,0,2,0,0,0,0.444,0.0,0.667,1,0,0,0,0,135,0
+2017,al,Rob Leibowitz,Ronald Torreyes,4056,NYY,SS,0,rel,previously_reserved,,2,1,0,0,1,0,1,0,0.0,0.0,0.0,1,0,0,54,26,36,1
+2017,al,Rob Leibowitz,Anthony Santander,5903,Bal,OF,16,rel,previously_reserved,,3,3,0,0,0,0,2,0,0.0,0.0,0.0,0,0,0,0,0,0,12
+2017,al,Rob Leibowitz,Carlos Gomez,902,Tex,OF,19,act,previously_reserved,"OF,SW",8,2,1,0,0,0,3,0,0.222,0.0,0.125,1,0,0,0,0,0,102
+2017,al,Rob Leibowitz,Roberto Perez,4342,Cle,C,2,act,previously_reserved,"C,SW",8,4,1,1,1,0,4,1,0.333,0.0,0.625,2,71,0,0,0,0,0
+2017,al,Rob Leibowitz,Evan Gattis,3959,Hou,C,16,act,previously_reserved,"C,SW",7,2,0,0,0,0,0,0,0.143,0.0,0.143,29,49,1,0,0,0,0
+2017,al,Rob Leibowitz,Matt Davidson,2700,CWS,UT,0,act,previously_reserved,"3B,1B,SW",8,2,1,1,3,0,3,0,0.375,0.0,0.75,60,0,19,0,34,0,0
+2017,al,Jeff Erickson,Giovanny Urshela,5061,Cle,MI,85,act,active,"3B,SS,2B",37,17,3,1,3,0,5,0,0.216,0.25,0.324,0,0,2,5,60,5,0
+2017,al,Jeff Erickson,Josh Donaldson,2107,Tor,CI,38,act,active,"3B,CI,SW",407,111,65,33,78,2,108,76,0.389,0.455,0.565,7,0,0,0,105,4,0
+2017,al,Jeff Erickson,Eric Hosmer,2563,KC,1B,22,act,active,"1B,SW,CI",603,162,98,25,94,6,104,66,0.385,0.304,0.498,5,0,157,0,0,0,0
+2017,al,Jeff Erickson,Jonathan Schoop,4005,Bal,2B,15,act,active,"2B,SS,SW,MI",622,160,92,32,105,1,142,35,0.338,0.19,0.503,0,0,0,159,0,5,0
+2017,al,Jeff Erickson,Andrelton Simmons,3717,LAA,SS,8,act,active,"SS,SW,MI",589,158,77,14,69,19,67,47,0.331,0.364,0.421,0,0,0,0,0,158,0
+2017,al,Jeff Erickson,Ryon Healy,5786,Oak,3B,10,act,active,"3B,CI,1B,SW",576,149,66,25,78,0,142,23,0.302,0.333,0.451,78,0,39,0,34,0,0
+2017,al,Jeff Erickson,Teoscar Hernandez,4844,Tor,OF,84,act,active,"OF,SW",64,19,12,6,13,0,28,5,0.304,0.333,0.594,0,0,0,0,0,0,26
+2017,al,Jeff Erickson,Kole Calhoun,3983,LAA,OF,19,act,active,"OF,SW",569,155,77,19,71,5,134,71,0.333,0.36,0.392,0,0,0,0,0,0,154
+2017,al,Jeff Erickson,Jacoby Ellsbury,186,NYY,OF,16,act,active,"OF,SW",347,110,62,7,39,22,63,41,0.351,0.211,0.406,8,0,0,0,0,0,97
+2017,al,Jeff Erickson,George Springer,3575,Hou,OF,29,act,active,"OF,SW",548,140,112,34,85,5,111,64,0.367,0.393,0.522,7,0,0,0,0,0,131
+2017,al,Jeff Erickson,Russell Martin,787,Tor,C,17,act,active,"C,3B,SW",297,88,48,13,34,1,82,49,0.346,0.167,0.387,0,83,0,0,10,0,0
+2017,al,Jeff Erickson,Alex Avila,2369,ChC,C,2,act,active,"C,1B,SW",311,112,41,14,49,0,120,62,0.387,0.455,0.447,8,78,19,0,0,0,0
+2017,al,Jeff Erickson,Clint Frazier,4439,NYY,UT,1,act,active,OF,115,32,12,3,16,1,37,5,0.264,0.125,0.443,2,0,0,0,0,0,37
+2017,al,Jeff Erickson,Norichika Aoki,2041,NYM,SW,1,act,active,"OF,SW",300,95,40,5,33,8,38,22,0.33,0.385,0.403,1,0,0,0,0,0,104
+2017,al,Jeff Erickson,Darwin Barney,2055,Tor,MI,1,res,previously_active,"2B,SS,3B,CI,SW,MI",250,95,21,4,12,6,47,12,0.248,0.0,0.3,2,0,0,73,44,10,4
+2017,al,Jeff Erickson,Mike Freeman,4724,ChC,MI,2,rel,previously_active,,14,5,0,0,0,0,4,1,0.067,0.0,0.0,1,0,3,6,3,10,0
+2017,al,Jeff Erickson,Deven Marrero,4013,Bos,MI,11,rel,previously_active,,3,2,0,0,0,1,2,1,0.25,0.0,0.0,0,0,1,11,53,6,0
+2017,al,Jeff Erickson,Christian Colon,3221,Mia,MI,1,rel,previously_active,,4,2,0,0,0,0,1,1,0.2,0.0,0.0,0,0,0,10,10,0,0
+2017,al,Jeff Erickson,Craig Gentry,2904,Bal,OF,5,rel,previously_active,,15,9,2,1,4,0,2,2,0.412,0.0,0.6,1,0,0,0,0,0,68
+2017,al,Jeff Erickson,Ben Revere,2085,LAA,OF,6,rel,previously_active,,143,50,17,1,7,5,16,3,0.231,0.0,0.308,3,0,0,0,0,0,82
+2017,al,Jeff Erickson,Max Stassi,3002,Hou,C,13,rel,previously_active,,10,6,2,1,2,0,3,4,0.4,0.0,0.5,2,11,1,0,0,0,0
+2017,al,Jeff Erickson,Shane Peterson,2870,TB,UT,10,rel,previously_active,,9,4,0,0,0,0,2,1,0.4,0.0,0.556,3,0,0,0,0,0,20
+2017,al,Jeff Erickson,Tyler Austin,4116,NYY,UT,57,rel,previously_active,,8,6,1,0,3,0,4,3,0.417,0.0,0.25,6,0,8,0,0,0,7
+2017,al,Jeff Erickson,Paulo Orlando,2752,KC,UT,0,rel,previously_active,,29,9,3,0,2,1,10,1,0.226,0.0,0.172,0,0,0,0,0,0,38
+2017,al,Jeff Erickson,Joey Rickard,5527,Bal,UT,5,res,previously_active,"OF,SW",205,82,25,4,18,6,48,6,0.287,0.0,0.38,0,0,0,0,0,0,107
+2017,al,Jeff Erickson,John Hicks,4309,Det,UT,66,rel,previously_active,,16,5,4,0,1,0,3,1,0.412,0.0,0.5,12,18,26,0,0,0,0
+2017,al,Jeff Erickson,Chris Carter,2028,Oak,SW,5,rel,previously_active,,172,59,18,8,23,0,70,20,0.286,0.0,0.372,1,0,56,0,0,0,2
+2017,al,Jeff Erickson,Darwin Barney,2055,Tor,MI,1,res,reserved,"2B,SS,3B,CI,SW,MI",56,23,7,2,9,1,12,6,0.328,0.353,0.357,2,0,0,73,44,10,4
+2017,al,Jeff Erickson,Joey Rickard,5527,Bal,UT,5,res,reserved,"OF,SW",38,22,1,0,1,1,11,2,0.225,0.25,0.211,0,0,0,0,0,0,107
+2017,al,Jeff Erickson,Josh Donaldson,2107,Tor,CI,38,act,previously_reserved,"3B,CI,SW",8,2,0,0,0,0,3,0,0.125,0.0,0.25,7,0,0,0,105,4,0
+2017,al,Jeff Erickson,Jacoby Ellsbury,186,NYY,OF,16,act,previously_reserved,"OF,SW",9,2,3,0,0,0,0,0,0.222,0.0,0.222,8,0,0,0,0,0,97
+2017,al,Jeff Erickson,Russell Martin,787,Tor,C,17,act,previously_reserved,"C,3B,SW",10,3,1,0,1,0,1,1,0.273,0.0,0.4,0,83,0,0,10,0,0
+2017,al,Jeff Erickson,Clint Frazier,4439,NYY,UT,1,act,previously_reserved,OF,19,7,4,1,1,0,6,2,0.286,0.0,0.474,2,0,0,0,0,0,37
+2017,al,Jeff Erickson,Shane Peterson,2870,TB,UT,10,rel,previously_reserved,,24,9,3,0,1,2,7,1,0.308,0.0,0.292,3,0,0,0,0,0,20
+2017,al,Jeff Erickson,Paulo Orlando,2752,KC,UT,0,rel,previously_reserved,,18,5,1,0,0,0,5,0,0.111,0.0,0.111,0,0,0,0,0,0,38
+2017,al,Jeff Erickson,Tyler Austin,4116,NYY,UT,57,rel,previously_reserved,,5,3,0,0,0,0,1,0,0.2,0.0,0.4,6,0,8,0,0,0,7
+2017,al,Jeff Erickson,Norichika Aoki,2041,NYM,SW,1,act,previously_reserved,"OF,SW",36,15,8,0,2,2,6,7,0.372,0.0,0.306,1,0,0,0,0,0,104
+2017,al,Jeff Erickson,Chris Carter,2028,Oak,SW,5,rel,previously_reserved,,12,3,2,0,3,0,6,0,0.25,0.0,0.333,1,0,56,0,0,0,2
+2017,al,Patrick Davitt,Justin Smoak,2117,Tor,1B,2,act,active,"1B,CI,SW",560,158,85,38,90,0,128,73,0.355,0.19,0.529,2,0,151,0,0,0,0
+2017,al,Patrick Davitt,Edwin Encarnacion,339,Cle,CI,31,act,active,"1B,CI,SW",554,157,96,38,107,2,133,104,0.377,0.455,0.504,132,0,23,0,0,0,0
+2017,al,Patrick Davitt,Marwin Gonzalez,3884,Hou,MI,0,act,active,"OF,3B,1B,2B,SW,SS,CI",455,134,67,23,90,8,99,49,0.377,0.583,0.53,0,0,31,22,19,38,48
+2017,al,Patrick Davitt,Ryan Goins,3946,Tor,2B,132,act,active,"3B,SS,2B,MI,SW",18,6,4,1,3,0,6,0,0.389,0.389,0.667,1,0,0,56,8,87,0
+2017,al,Patrick Davitt,Ian Kinsler,1520,Det,2B,24,act,active,"2B,MI,SW",547,138,90,22,52,14,86,54,0.312,0.333,0.411,3,0,0,135,0,0,0
+2017,al,Patrick Davitt,Tim Anderson,4591,CWS,SS,21,act,active,"UT,SS,MI,SW",587,146,72,17,56,15,162,13,0.276,0.083,0.402,0,0,0,0,0,145,0
+2017,al,Patrick Davitt,Jose Ramirez,4602,Cle,3B,23,act,active,"3B,2B,OF,CI,SW",585,152,107,29,83,17,69,52,0.374,0.462,0.583,0,0,0,71,88,0,0
+2017,al,Patrick Davitt,Ezequiel Carrera,2982,Tor,OF,0,act,active,"OF,SW",205,95,29,7,16,6,53,24,0.371,0.444,0.429,1,0,0,0,0,0,121
+2017,al,Patrick Davitt,Lonnie Chisenhall,2627,Cle,OF,1,act,active,"OF,SW,1B",227,78,31,12,52,2,53,24,0.355,0.167,0.52,0,0,7,0,0,0,75
+2017,al,Patrick Davitt,Alex Gordon,681,KC,OF,15,act,active,"OF,SW",406,128,43,7,37,6,109,43,0.292,0.333,0.298,0,0,0,0,0,0,147
+2017,al,Patrick Davitt,Eduardo Nunez,1033,Bos,OF,558,act,active,"2B,3B,SS,SW,MI,CI,OF",153,35,21,6,24,5,23,5,0.34,0.5,0.51,4,0,0,26,53,16,20
+2017,al,Patrick Davitt,Welington Castillo,2434,Bal,C,13,act,active,"C,SW",341,96,44,20,53,0,97,22,0.323,0.0,0.49,6,88,0,0,0,0,0
+2017,al,Patrick Davitt,Mitch Garver,5025,Min,C,49,act,active,C,41,21,4,0,3,0,13,5,0.283,0.167,0.366,5,13,3,0,0,0,2
+2017,al,Patrick Davitt,Joe Mauer,889,Min,UT,12,act,active,"1B,SW,CI",146,38,21,1,20,0,21,14,0.401,0.375,0.473,13,0,125,0,0,0,0
+2017,al,Patrick Davitt,Danny Espinosa,2765,TB,MI,10,rel,previously_active,,220,73,27,6,29,3,86,19,0.245,0.0,0.286,1,0,2,78,4,4,0
+2017,al,Patrick Davitt,J.J. Hardy,853,Bal,MI,2,rel,previously_active,,128,37,10,1,11,0,27,2,0.237,0.0,0.312,0,0,0,0,0,71,0
+2017,al,Patrick Davitt,Ben Revere,2085,LAA,OF,50,res,previously_active,"OF,SW",125,47,16,0,11,13,9,12,0.37,0.0,0.368,3,0,0,0,0,0,82
+2017,al,Patrick Davitt,Rajai Davis,1311,Bos,OF,17,res,previously_active,"OF,SW",27,13,3,0,0,2,10,1,0.207,0.0,0.148,2,0,0,0,0,0,112
+2017,al,Patrick Davitt,*Jefry Marte,2624,LAA,OF,1,rel,previously_active,,112,40,8,3,13,1,32,11,0.266,0.0,0.286,2,0,28,0,10,0,3
+2017,al,Patrick Davitt,Austin Romine,2402,NYY,C,1,rel,previously_active,,25,8,0,0,2,0,11,0,0.154,0.0,0.24,1,67,12,0,0,0,0
+2017,al,Patrick Davitt,Stephen Vogt,3569,Mil,C,12,rel,previously_active,,185,66,17,8,29,0,39,19,0.291,0.0,0.405,7,81,0,0,0,0,1
+2017,al,Patrick Davitt,Mike Napoli,733,Tex,UT,12,res,previously_active,"1B,CI,SW",416,121,58,27,62,1,160,48,0.283,0.0,0.416,26,0,95,0,0,0,0
+2017,al,Patrick Davitt,Rajai Davis,1311,Bos,OF,17,res,reserved,"OF,SW",13,6,4,0,2,1,4,0,0.385,0.417,0.538,2,0,0,0,0,0,112
+2017,al,Patrick Davitt,Ben Revere,2085,LAA,OF,50,res,reserved,"OF,SW",12,8,2,0,1,1,0,0,0.5,0.333,0.5,3,0,0,0,0,0,82
+2017,al,Patrick Davitt,Mike Napoli,733,Tex,UT,12,res,reserved,"1B,CI,SW",9,3,2,2,4,0,3,1,0.4,0.0,1.0,26,0,95,0,0,0,0
+2017,al,Patrick Davitt,J.J. Hardy,853,Bal,MI,2,rel,previously_reserved,,99,27,9,2,10,0,16,8,0.262,0.0,0.303,0,0,0,0,0,71,0
+2017,al,Patrick Davitt,Danny Espinosa,2765,TB,MI,10,rel,previously_reserved,,8,4,0,0,0,0,5,0,0.0,0.0,0.0,1,0,2,78,4,4,0
+2017,al,Patrick Davitt,Ian Kinsler,1520,Det,2B,24,act,previously_reserved,"2B,MI,SW",4,1,0,0,0,0,0,1,0.4,0.0,0.5,3,0,0,135,0,0,0
+2017,al,Patrick Davitt,Ezequiel Carrera,2982,Tor,OF,0,act,previously_reserved,"OF,SW",82,36,9,1,4,4,22,6,0.318,0.0,0.354,1,0,0,0,0,0,121
+2017,al,Patrick Davitt,Alex Gordon,681,KC,OF,15,act,previously_reserved,"OF,SW",70,20,9,2,8,1,17,2,0.301,0.0,0.414,0,0,0,0,0,0,147
+2017,al,Patrick Davitt,Lonnie Chisenhall,2627,Cle,OF,1,act,previously_reserved,"OF,SW,1B",9,4,3,0,1,0,2,1,0.455,0.0,0.556,0,0,7,0,0,0,75
+2017,al,Patrick Davitt,*Jefry Marte,2624,LAA,OF,1,rel,previously_reserved,,8,3,2,1,1,0,2,2,0.3,0.0,0.5,2,0,28,0,10,0,3
+2017,al,Larry Schechter,Tyler Saladino,4001,CWS,MI,135,act,active,"SS,2B,MI,SW,3B",124,43,13,0,5,3,26,10,0.231,0.214,0.202,14,0,3,26,22,13,0
+2017,al,Larry Schechter,Efren Navarro,3085,Det,CI,1,act,active,1B,18,6,1,0,0,0,5,1,0.263,0.263,0.222,1,0,20,0,0,0,0
+2017,al,Larry Schechter,Albert Pujols,1411,LAA,1B,21,act,active,"1B,SW,CI",593,149,53,23,101,3,93,37,0.286,0.222,0.386,143,0,6,0,0,0,0
+2017,al,Larry Schechter,Whit Merrifield,4419,KC,2B,1,act,active,"2B,OF,MI,SW",568,139,79,18,76,33,85,27,0.324,0.276,0.458,0,0,1,132,1,0,16
+2017,al,Larry Schechter,Adeiny Hechavarria,3146,TB,SS,276,act,active,"SS,MI,SW",246,72,29,7,21,4,56,11,0.278,0.375,0.407,0,0,0,0,0,96,0
+2017,al,Larry Schechter,Todd Frazier,1979,NYY,3B,27,act,active,"UT,3B,SW,CI",474,147,74,27,76,4,125,83,0.344,0.278,0.428,12,0,4,0,133,0,0
+2017,al,Larry Schechter,Mark Trumbo,2262,Bal,OF,20,act,active,"OF,SW",559,146,79,23,65,1,149,42,0.289,0.2,0.397,111,0,2,0,2,0,31
+2017,al,Larry Schechter,Brett Gardner,1038,NYY,OF,16,act,active,"OF,SW",594,151,96,21,63,23,122,72,0.35,0.45,0.428,7,0,0,0,0,0,138
+2017,al,Larry Schechter,Mark Canha,4430,Oak,OF,6,act,active,"OF,CI,SW,1B",52,17,7,1,3,0,16,2,0.241,0.115,0.308,2,0,3,0,0,0,53
+2017,al,Larry Schechter,Melky Cabrera,1014,KC,OF,15,act,active,"OF,SW",620,156,78,17,85,1,74,36,0.324,0.174,0.423,9,0,0,0,0,0,146
+2017,al,Larry Schechter,James McCann,3906,Det,C,5,act,active,"C,SW",352,106,39,13,49,1,89,26,0.318,0.25,0.415,3,103,0,0,0,0,0
+2017,al,Larry Schechter,Jason Castro,2343,Min,C,5,act,active,"C,SW",356,110,49,10,47,0,108,45,0.333,0.5,0.388,0,108,0,0,0,0,0
+2017,al,Larry Schechter,Jackie Bradley,3595,Bos,UT,20,act,active,"OF,SW",464,128,57,16,61,7,121,47,0.324,0.136,0.401,0,0,0,0,0,0,132
+2017,al,Larry Schechter,Tyler Collins,4115,Det,SW,8,act,active,"OF,SW",5,3,0,0,0,0,2,1,0.167,0.0,0.0,0,0,0,0,0,0,44
+2017,al,Larry Schechter,*Yunel Escobar,76,LAA,CI,6,dis,previously_active,"3B,CI,SW",334,85,43,7,31,0,47,29,0.329,0.0,0.392,1,0,0,0,87,0,0
+2017,al,Larry Schechter,Chad Pinder,5441,Oak,MI,23,rel,previously_active,,264,81,30,14,39,2,88,17,0.277,0.0,0.436,7,0,0,16,0,22,41
+2017,al,Larry Schechter,Ruben Tejada,2638,Bal,MI,17,rel,previously_active,,55,19,8,0,3,0,8,4,0.267,0.0,0.218,0,0,0,4,6,36,0
+2017,al,Larry Schechter,Cliff Pennington,2037,LAA,2B,0,rel,previously_active,,7,5,1,0,1,0,3,3,0.5,0.0,0.286,1,0,0,47,18,18,0
+2017,al,Larry Schechter,Adam Rosales,2178,Ari,SS,1,rel,previously_active,,189,65,14,4,25,1,63,9,0.266,0.0,0.344,1,0,6,11,15,65,1
+2017,al,Larry Schechter,Ronald Torreyes,4056,NYY,SS,0,rel,previously_active,,6,2,2,0,0,0,0,1,0.429,0.0,0.333,1,0,0,54,26,36,1
+2017,al,Larry Schechter,*Troy Tulowitzki,461,Tor,SS,16,trd,previously_active,,57,16,5,1,10,0,6,3,0.295,0.0,0.386,0,0,0,0,0,64,0
+2017,al,Larry Schechter,Jarrod Dyson,2961,Sea,OF,17,rel,previously_active,,346,111,56,5,30,28,55,28,0.324,0.0,0.35,1,0,0,0,0,0,108
+2017,al,Larry Schechter,Drew Butera,915,KC,C,0,rel,previously_active,,7,3,0,0,0,0,2,0,0.143,0.0,0.143,0,74,4,0,0,0,0
+2017,al,Larry Schechter,*Victor Martinez,394,Det,UT,14,rel,previously_active,,372,102,36,10,47,0,61,35,0.333,0.0,0.387,104,0,0,0,0,0,0
+2017,al,Larry Schechter,Jaycob Brugman,5802,Oak,SW,112,trd,previously_active,,40,13,3,1,3,1,14,8,0.312,0.0,0.25,0,0,0,0,0,0,43
+2017,al,Larry Schechter,John Hicks,4309,Det,SW,8,rel,previously_active,,13,4,3,1,3,1,4,0,0.154,0.0,0.462,12,18,26,0,0,0,0
+2017,al,Larry Schechter,Brandon Guyer,2683,Cle,SW,4,res,previously_active,"OF,SW",60,22,10,1,6,0,11,5,0.319,0.0,0.333,0,0,0,0,0,0,65
+2017,al,Larry Schechter,*Yunel Escobar,76,LAA,CI,6,dis,reserved,"3B,CI,SW",16,4,0,0,0,1,4,0,0.437,0.0,0.5,1,0,0,0,87,0,0
+2017,al,Larry Schechter,Brandon Guyer,2683,Cle,SW,4,res,reserved,"OF,SW",67,30,5,0,8,0,20,4,0.284,0.0,0.299,0,0,0,0,0,0,65
+2017,al,Larry Schechter,Chad Pinder,5441,Oak,MI,23,rel,previously_reserved,,18,6,6,1,3,0,4,1,0.526,0.0,0.778,7,0,0,16,0,22,41
+2017,al,Larry Schechter,Tyler Saladino,4001,CWS,MI,135,act,previously_reserved,"SS,2B,MI,SW,3B",13,4,0,0,0,0,4,0,0.077,0.0,0.077,14,0,3,26,22,13,0
+2017,al,Larry Schechter,Ruben Tejada,2638,Bal,MI,17,rel,previously_reserved,,25,7,6,0,1,0,1,2,0.407,0.0,0.48,0,0,0,4,6,36,0
+2017,al,Larry Schechter,Cliff Pennington,2037,LAA,2B,0,rel,previously_reserved,,10,6,0,0,1,2,3,0,0.091,0.0,0.1,1,0,0,47,18,18,0
+2017,al,Larry Schechter,Whit Merrifield,4419,KC,2B,1,act,previously_reserved,"2B,OF,MI,SW",19,6,1,1,2,1,3,2,0.333,0.0,0.526,0,0,1,132,1,0,16
+2017,al,Larry Schechter,Mark Canha,4430,Oak,OF,6,act,previously_reserved,"OF,CI,SW,1B",11,4,1,0,1,0,3,0,0.417,0.0,0.455,2,0,3,0,0,0,53
+2017,al,Larry Schechter,Jackie Bradley,3595,Bos,UT,20,act,previously_reserved,"OF,SW",18,5,1,1,2,1,3,1,0.316,0.0,0.444,0,0,0,0,0,0,132
+2017,al,Larry Schechter,*Victor Martinez,394,Det,UT,14,rel,previously_reserved,,20,5,2,0,0,0,2,1,0.143,0.0,0.1,104,0,0,0,0,0,0
+2017,al,Larry Schechter,Jaycob Brugman,5802,Oak,SW,112,trd,previously_reserved,,51,18,5,2,6,0,11,4,0.4,0.0,0.49,0,0,0,0,0,0,43
+2017,al,Larry Schechter,John Hicks,4309,Det,SW,8,rel,previously_reserved,,18,8,1,0,0,0,6,1,0.316,0.0,0.389,12,18,26,0,0,0,0
+2017,al,Rick Wolf/Glenn Colton,Jay Bruce,371,Cle,CI,449,act,active,"1B,OF,SW",137,39,19,7,23,1,33,17,0.321,0.375,0.467,3,0,12,0,0,0,133
+2017,al,Rick Wolf/Glenn Colton,Dustin Pedroia,182,Bos,MI,22,act,active,"2B,MI,SW",394,102,45,7,62,4,45,48,0.375,0.333,0.401,7,0,0,98,0,0,0
+2017,al,Rick Wolf/Glenn Colton,Jose Abreu,4038,CWS,1B,25,act,active,"1B,CI,SW",621,156,95,33,102,3,119,35,0.354,0.304,0.552,18,0,139,0,0,0,0
+2017,al,Rick Wolf/Glenn Colton,Robinson Cano,1008,Sea,2B,31,act,active,"2B,MI,SW",592,150,79,23,97,1,85,49,0.338,0.24,0.453,0,0,0,150,0,0,0
+2017,al,Rick Wolf/Glenn Colton,Jorge Polanco,4695,Min,SS,10,act,active,"SS,SW,MI",487,132,60,13,74,13,77,41,0.313,0.238,0.411,2,0,0,0,0,130,0
+2017,al,Rick Wolf/Glenn Colton,Mike Moustakas,2004,KC,3B,16,act,active,"3B,SW,CI",555,148,75,38,85,0,94,34,0.314,0.368,0.521,17,0,0,0,127,0,0
+2017,al,Rick Wolf/Glenn Colton,Kevin Pillar,4578,Tor,OF,12,act,active,"OF,SW",587,154,72,16,42,15,95,33,0.3,0.231,0.404,0,0,0,0,0,0,153
+2017,al,Rick Wolf/Glenn Colton,Eddie Rosario,3889,Min,OF,6,act,active,"OF,SW",542,151,79,27,78,9,106,35,0.328,0.35,0.507,1,0,0,0,0,0,150
+2017,al,Rick Wolf/Glenn Colton,Austin Hays,6076,Bal,OF,0,act,active,OF,18,5,0,0,0,0,5,1,0.158,0.158,0.111,0,0,0,0,0,0,20
+2017,al,Rick Wolf/Glenn Colton,Mookie Betts,4670,Bos,OF,40,act,active,"UT,OF,SW",628,153,101,24,102,26,79,77,0.344,0.467,0.459,0,0,0,0,0,0,153
+2017,al,Rick Wolf/Glenn Colton,Chris Gimenez,2245,Min,C,0,act,active,"C,OF,SW,1B",124,52,22,6,13,1,38,18,0.345,0.6,0.427,1,59,7,0,1,0,5
+2017,al,Rick Wolf/Glenn Colton,Jonathan Lucroy,2346,Col,C,25,act,active,"C,SW",423,123,45,6,40,1,51,46,0.345,0.714,0.371,10,110,1,0,0,0,0
+2017,al,Rick Wolf/Glenn Colton,Richard Urena,5141,Tor,UT,6,act,active,SS,14,7,2,0,0,0,6,1,0.2,0.2,0.214,0,0,0,1,0,20,0
+2017,al,Rick Wolf/Glenn Colton,Pedro Alvarez,2050,Bal,SW,0,act,active,"UT,SW",11,3,1,0,2,0,2,0,0.364,0.364,0.364,7,0,2,0,0,0,0
+2017,al,Rick Wolf/Glenn Colton,Deven Marrero,4013,Bos,CI,4,rel,previously_active,,6,4,0,0,0,0,2,0,0.0,0.0,0.0,0,0,1,11,53,6,0
+2017,al,Rick Wolf/Glenn Colton,Ronald Torreyes,4056,NYY,MI,1,res,previously_active,"3B,SS,CI,2B,SW,MI",165,51,17,1,20,2,24,7,0.324,0.0,0.37,1,0,0,54,26,36,1
+2017,al,Rick Wolf/Glenn Colton,Ryan Goins,3946,Tor,CI,0,rel,previously_active,,47,14,3,1,5,1,10,3,0.24,0.0,0.255,1,0,0,56,8,87,0
+2017,al,Rick Wolf/Glenn Colton,Jeimer Candelario,4071,Det,CI,3,rel,previously_active,,2,1,1,0,0,0,0,0,0.5,0.0,0.5,0,0,1,0,36,0,0
+2017,al,Rick Wolf/Glenn Colton,JaCoby Jones,4996,Det,CI,0,rel,previously_active,,39,17,2,0,0,0,24,1,0.167,0.0,0.154,0,0,0,0,0,0,51
+2017,al,Rick Wolf/Glenn Colton,Ramon Torres,5495,KC,MI,8,rel,previously_active,,53,20,7,0,2,1,11,4,0.293,0.0,0.264,0,0,0,20,12,3,0
+2017,al,Rick Wolf/Glenn Colton,Daniel Vogelbach,4058,Sea,CI,1,rel,previously_active,,10,5,0,0,0,0,3,2,0.25,0.0,0.1,2,0,7,0,0,0,0
+2017,al,Rick Wolf/Glenn Colton,Dixon Machado,4214,Det,SS,21,rel,previously_active,,4,2,1,0,0,0,1,0,0.5,0.0,0.5,5,0,0,27,5,32,0
+2017,al,Rick Wolf/Glenn Colton,Leonys Martin,3737,ChC,OF,14,rel,previously_active,,54,15,5,0,0,4,14,3,0.172,0.0,0.13,0,0,0,0,0,0,42
+2017,al,Rick Wolf/Glenn Colton,Jorge Bonifacio,4469,KC,OF,183,res,previously_active,OF,279,78,42,12,26,1,85,24,0.315,0.0,0.43,8,0,0,0,0,0,102
+2017,al,Rick Wolf/Glenn Colton,Rymer Liriano,3273,CWS,OF,6,rel,previously_active,,2,3,0,0,1,0,0,1,0.667,0.0,0.5,2,0,0,0,0,0,19
+2017,al,Rick Wolf/Glenn Colton,Carlos Ruiz,1123,Sea,C,26,rel,previously_active,,27,11,5,0,5,0,7,2,0.323,0.0,0.407,1,47,1,0,0,0,0
+2017,al,Rick Wolf/Glenn Colton,Billy Burns,4652,KC,UT,23,rel,previously_active,,0,1,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,0,0,0,5
+2017,al,Rick Wolf/Glenn Colton,Cody Asche,4188,CWS,UT,1,rel,previously_active,,25,8,3,0,1,0,9,2,0.179,0.0,0.08,14,0,2,0,1,0,1
+2017,al,Rick Wolf/Glenn Colton,Josh Phegley,3029,Oak,UT,0,rel,previously_active,,34,12,4,1,3,0,4,0,0.206,0.0,0.412,0,56,0,0,0,0,0
+2017,al,Rick Wolf/Glenn Colton,Jim Adduci,2940,Det,UT,1,rel,previously_active,,71,22,12,1,8,1,23,8,0.316,0.0,0.408,2,0,0,0,0,0,26
+2017,al,Rick Wolf/Glenn Colton,Jared Hoying,4425,Tex,UT,30,rel,previously_active,,27,10,4,0,3,2,8,3,0.226,0.0,0.148,0,0,0,0,0,0,36
+2017,al,Rick Wolf/Glenn Colton,Dwight Smith Jr.,3730,Tor,UT,4,rel,previously_active,,15,5,1,0,0,0,7,0,0.312,0.0,0.333,0,0,0,0,0,0,10
+2017,al,Rick Wolf/Glenn Colton,Abraham Almonte,4385,Cle,UT,1,rel,previously_active,,101,39,22,3,8,0,29,12,0.296,0.0,0.396,4,0,0,0,0,0,58
+2017,al,Rick Wolf/Glenn Colton,Adam Engel,4816,CWS,SW,0,res,previously_active,OF,143,45,12,3,11,2,56,6,0.214,0.0,0.294,0,0,0,0,0,0,96
+2017,al,Rick Wolf/Glenn Colton,Jaycob Brugman,5802,Oak,SW,112,rel,previously_active,,19,8,2,0,0,0,5,3,0.318,0.0,0.263,0,0,0,0,0,0,43
+2017,al,Rick Wolf/Glenn Colton,Tyler Wade,5629,NYY,SW,16,rel,previously_active,,12,4,0,0,0,0,4,1,0.154,0.0,0.167,1,0,0,15,0,7,7
+2017,al,Rick Wolf/Glenn Colton,Drew Robinson,4859,Tex,SW,0,rel,previously_active,,3,2,0,0,0,0,2,1,0.25,0.0,0.0,3,0,0,7,20,6,20
+2017,al,Rick Wolf/Glenn Colton,Willy Garcia,4540,CWS,SW,13,rel,previously_active,,34,15,4,0,2,0,11,2,0.278,0.0,0.353,2,0,0,0,0,0,40
+2017,al,Rick Wolf/Glenn Colton,Ronald Torreyes,4056,NYY,MI,1,res,reserved,"3B,SS,CI,2B,SW,MI",20,10,3,0,0,0,2,1,0.286,0.5,0.4,1,0,0,54,26,36,1
+2017,al,Rick Wolf/Glenn Colton,Jorge Bonifacio,4469,KC,OF,183,res,reserved,OF,27,10,3,1,4,0,11,3,0.333,0.545,0.444,8,0,0,0,0,0,102
+2017,al,Rick Wolf/Glenn Colton,Adam Engel,4816,CWS,SW,0,res,reserved,OF,18,7,1,0,1,1,11,2,0.1,0.1,0.0,0,0,0,0,0,0,96
+2017,al,Rick Wolf/Glenn Colton,Ramon Torres,5495,KC,MI,8,rel,previously_reserved,,1,1,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,20,12,3,0
+2017,al,Rick Wolf/Glenn Colton,Daniel Vogelbach,4058,Sea,CI,1,rel,previously_reserved,,7,2,0,0,1,0,2,1,0.375,0.0,0.286,2,0,7,0,0,0,0
+2017,al,Rick Wolf/Glenn Colton,Dustin Pedroia,182,Bos,MI,22,act,previously_reserved,"2B,MI,SW",12,3,1,0,0,0,3,1,0.154,0.0,0.083,7,0,0,98,0,0,0
+2017,al,Rick Wolf/Glenn Colton,Jorge Polanco,4695,Min,SS,10,act,previously_reserved,"SS,SW,MI",1,1,0,0,0,0,1,0,0.0,0.0,0.0,2,0,0,0,0,130,0
+2017,al,Rick Wolf/Glenn Colton,Abraham Almonte,4385,Cle,UT,1,rel,previously_reserved,,30,10,0,0,3,0,6,1,0.355,0.0,0.4,4,0,0,0,0,0,58
+2017,al,Rick Wolf/Glenn Colton,Jim Adduci,2940,Det,UT,1,rel,previously_reserved,,8,6,0,0,0,0,3,1,0.111,0.0,0.0,2,0,0,0,0,0,26
+2017,al,Rick Wolf/Glenn Colton,Josh Phegley,3029,Oak,UT,0,rel,previously_reserved,,2,1,0,0,0,0,1,0,0.0,0.0,0.0,0,56,0,0,0,0,0
+2017,al,Rick Wolf/Glenn Colton,Cody Asche,4188,CWS,UT,1,rel,previously_reserved,,10,3,0,0,0,0,5,0,0.0,0.0,0.0,14,0,2,0,1,0,1
+2017,al,Rick Wolf/Glenn Colton,Willy Garcia,4540,CWS,SW,13,rel,previously_reserved,,10,5,2,0,2,0,1,2,0.5,0.0,0.8,2,0,0,0,0,0,40
+2017,al,Chris Liss,Chris Davis,1544,Bal,1B,28,act,active,"1B,SW,CI",445,125,65,26,60,1,190,60,0.312,0.214,0.429,2,0,125,0,2,0,0
+2017,al,Chris Liss,Jed Lowrie,201,Oak,MI,2,act,active,"UT,2B,SW,MI",215,60,32,4,35,0,28,37,0.386,0.333,0.447,14,0,0,136,1,0,0
+2017,al,Chris Liss,Miguel Cabrera,509,Det,CI,34,act,active,"1B,CI,SW",469,130,50,16,60,0,110,54,0.329,0.0,0.399,14,0,115,0,0,0,0
+2017,al,Chris Liss,Brian Dozier,3489,Min,2B,30,act,active,"2B,MI,SW",617,152,106,34,93,16,141,78,0.357,0.706,0.496,0,0,0,152,0,0,0
+2017,al,Chris Liss,Carlos Correa,4010,Hou,SS,32,act,active,"SS,MI,SW",422,109,82,24,84,2,92,53,0.391,0.571,0.55,1,0,0,0,0,108,0
+2017,al,Chris Liss,Kyle Seager,3774,Sea,3B,24,act,active,"3B,CI,SW",426,112,58,23,66,2,80,38,0.321,0.3,0.479,0,0,0,0,154,0,0
+2017,al,Chris Liss,Austin Jackson,1039,Cle,OF,25,act,active,"OF,SW",195,59,34,4,21,2,44,26,0.395,0.444,0.462,0,0,0,0,0,0,81
+2017,al,Chris Liss,Nomar Mazara,3791,Tex,OF,17,act,active,"OF,SW",554,148,64,20,101,2,127,55,0.323,0.241,0.422,13,0,0,0,0,0,131
+2017,al,Chris Liss,Brandon Moss,187,KC,OF,10,act,active,"1B,OF,SW,CI",355,116,39,21,48,2,125,36,0.275,0.187,0.417,89,0,14,0,0,0,7
+2017,al,Chris Liss,Robbie Grossman,2699,Min,OF,2,act,active,"OF,SW",367,113,57,7,41,3,76,63,0.353,0.176,0.346,62,0,0,0,0,0,53
+2017,al,Chris Liss,John Hicks,4309,Det,C,108,act,active,"C,1B,CI,SW",98,34,13,2,7,1,32,10,0.312,0.3,0.337,12,18,26,0,0,0,0
+2017,al,Chris Liss,Christian Vazquez,4248,Bos,C,1,act,active,"C,SW",324,99,43,5,32,7,64,17,0.33,0.211,0.404,2,95,0,0,2,0,0
+2017,al,Chris Liss,Kennys Vargas,4610,Min,UT,33,act,active,"1B,CI,SW",124,43,19,4,17,0,49,14,0.343,0.1,0.419,30,0,40,0,0,0,0
+2017,al,Chris Liss,Rafael Devers,4903,Bos,SW,29,act,active,"UT,3B",222,58,34,10,30,3,57,18,0.338,0.179,0.482,1,0,0,0,56,0,0
+2017,al,Chris Liss,*Josh Rutledge,4084,Bos,CI,44,trd,previously_active,,38,14,4,0,4,0,8,4,0.372,0.0,0.289,0,0,5,16,20,0,0
+2017,al,Chris Liss,Raul A. Mondesi,4431,KC,MI,3,res,previously_active,"SS,2B,MI,SW",42,15,4,1,2,5,18,3,0.156,0.0,0.167,0,0,0,14,0,9,0
+2017,al,Chris Liss,Ryan Goins,3946,Tor,SS,4,trd,previously_active,,94,34,6,0,12,0,26,6,0.225,0.0,0.266,1,0,0,56,8,87,0
+2017,al,Chris Liss,Bradley Zimmer,4122,Cle,OF,21,res,previously_active,OF,299,101,41,8,39,18,99,26,0.307,0.0,0.385,0,0,0,0,0,0,97
+2017,al,Chris Liss,Michael Brantley,2212,Cle,OF,8,dis,previously_active,"OF,SW",327,86,47,9,50,11,48,31,0.357,0.0,0.446,2,0,0,0,0,0,87
+2017,al,Chris Liss,Austin Romine,2402,NYY,C,88,rel,previously_active,,115,38,7,2,14,0,28,2,0.246,0.0,0.322,1,67,12,0,0,0,0
+2017,al,Chris Liss,Bruce Maxwell,4655,Oak,UT,133,res,previously_active,"C,SW",80,29,5,1,12,0,23,17,0.316,0.0,0.275,0,74,0,0,0,0,0
+2017,al,Chris Liss,Yandy Diaz,5735,Cle,UT,0,rel,previously_active,,55,15,9,0,2,0,14,5,0.295,0.0,0.255,6,0,0,0,40,0,3
+2017,al,Chris Liss,Cheslor Cuthbert,3614,KC,UT,1,rel,previously_active,,61,20,1,1,4,0,15,2,0.19,0.0,0.246,5,0,6,3,44,0,0
+2017,al,Chris Liss,Raul A. Mondesi,4431,KC,MI,3,res,reserved,"SS,2B,MI,SW",11,10,0,0,1,0,4,0,0.455,0.333,0.545,0,0,0,14,0,9,0
+2017,al,Chris Liss,Bradley Zimmer,4122,Cle,OF,21,res,reserved,OF,0,0,0,0,0,0,0,0,0.0,0.0,0.0,0,0,0,0,0,0,97
+2017,al,Chris Liss,Michael Brantley,2212,Cle,OF,8,dis,reserved,"OF,SW",11,4,0,0,2,0,2,0,0.364,0.333,0.364,2,0,0,0,0,0,87
+2017,al,Chris Liss,Bruce Maxwell,4655,Oak,UT,133,res,reserved,"C,SW",106,34,10,2,9,0,32,10,0.316,0.2,0.368,0,74,0,0,0,0,0
+2017,al,Chris Liss,Chris Davis,1544,Bal,1B,28,act,previously_reserved,"1B,SW,CI",11,3,0,0,1,0,5,1,0.167,0.0,0.182,2,0,125,0,2,0,0
+2017,al,Chris Liss,Austin Jackson,1039,Cle,OF,25,act,previously_reserved,"OF,SW",85,26,12,3,14,1,20,7,0.368,0.0,0.529,0,0,0,0,0,0,81
+2017,al,Chris Liss,Brandon Moss,187,KC,OF,10,act,previously_reserved,"1B,OF,SW,CI",7,2,2,1,2,0,3,1,0.5,0.0,1.0,89,0,14,0,0,0,7
+2017,al,Chris Liss,Jake Marisnick,3197,Hou,OF,0,rel,previously_reserved,,9,6,1,1,1,0,4,1,0.3,0.0,0.556,1,0,0,0,0,0,102
+2017,al,Chris Liss,Robbie Grossman,2699,Min,OF,2,act,previously_reserved,"OF,SW",15,6,5,2,4,0,3,4,0.55,0.0,1.2,62,0,0,0,0,0,53
+2017,al,Chris Liss,Austin Romine,2402,NYY,C,88,rel,previously_reserved,,33,11,5,0,3,0,9,9,0.395,0.0,0.273,1,67,12,0,0,0,0
+2017,al,Chris Liss,Kennys Vargas,4610,Min,UT,33,act,previously_reserved,"1B,CI,SW",1,1,0,0,0,0,0,0,0.0,0.0,0.0,30,0,40,0,0,0,0
+2017,al,Nando DiFino,Joey Gallo,4121,Tex,1B,0,act,active,"1B,3B,SW,CI,OF",449,145,85,41,80,7,196,75,0.333,0.4,0.537,1,0,59,0,72,0,18
+2017,al,Nando DiFino,Jose Iglesias,2913,Det,MI,3,act,active,"SS,SW,MI",445,125,53,5,50,7,61,20,0.293,0.071,0.371,0,0,0,0,0,130,0
+2017,al,Nando DiFino,Adrian Beltre,1355,Tex,CI,25,act,active,"3B,CI,SW",325,89,47,17,68,1,50,39,0.391,0.375,0.545,28,0,0,0,65,0,0
+2017,al,Nando DiFino,Alen Hanson,4120,CWS,2B,3,act,active,"2B,MI,SW,OF",134,57,24,4,10,6,34,9,0.295,0.0,0.403,5,0,0,28,2,2,38
+2017,al,Nando DiFino,Brad Miller,4310,TB,SS,19,act,active,"1B,CI,2B,SS,SW,MI",190,66,21,6,23,2,62,31,0.31,0.364,0.337,10,0,0,98,0,0,0
+2017,al,Nando DiFino,JaCoby Jones,4996,Det,3B,11,act,active,"OF,CI,3B,SW",63,22,8,2,6,4,28,1,0.212,0.353,0.302,0,0,0,0,0,0,51
+2017,al,Nando DiFino,Byron Buxton,4014,Min,OF,21,act,active,"OF,SW",462,140,69,16,51,29,150,38,0.314,0.25,0.413,0,0,0,0,0,0,137
+2017,al,Nando DiFino,Avisail Garcia,3485,CWS,OF,3,act,active,"OF,SW",513,135,73,18,79,4,111,33,0.379,0.4,0.505,4,0,0,0,0,0,132
+2017,al,Nando DiFino,Mitch Haniger,4480,Sea,OF,11,act,active,"OF,SW",359,93,57,15,43,5,91,28,0.351,0.37,0.49,0,0,0,0,0,0,96
+2017,al,Nando DiFino,Jorge Soler,3918,KC,OF,11,act,active,"OF,SW",66,24,4,1,2,0,26,9,0.227,0.0,0.212,11,0,0,0,0,0,22
+2017,al,Nando DiFino,Yan Gomes,3945,Cle,C,7,act,active,"C,SW",341,105,43,14,56,0,99,31,0.309,0.5,0.399,0,103,0,0,0,0,0
+2017,al,Nando DiFino,Jesus Sucre,3125,TB,C,12,act,active,"C,SW",82,32,9,4,10,1,17,3,0.311,0.0,0.451,0,61,0,0,0,0,0
+2017,al,Nando DiFino,Delino DeShields,3357,Tex,UT,5,act,active,"OF,SW",349,113,69,6,20,25,105,38,0.335,0.308,0.358,8,0,0,0,0,0,106
+2017,al,Nando DiFino,Miguel Sano,3148,Min,CI,22,dis,previously_active,"3B,CI,OF,SW,1B",416,111,75,28,77,0,170,54,0.356,0.0,0.514,25,0,9,0,82,0,0
+2017,al,Nando DiFino,Kaleb Cowart,3315,LAA,CI,171,res,previously_active,"3B,2B,CI,SW,MI",73,35,10,3,8,3,19,7,0.256,0.0,0.315,0,0,0,30,24,0,0
+2017,al,Nando DiFino,Jurickson Profar,3198,Tex,1B,11,rel,previously_active,,44,17,5,0,3,0,11,8,0.302,0.0,0.159,0,0,2,1,3,4,12
+2017,al,Nando DiFino,Rickie Weeks,857,FA,1B,77,rel,previously_active,,19,10,0,0,2,0,7,3,0.364,0.0,0.316,17,0,12,0,0,0,0
+2017,al,Nando DiFino,Steve Pearce,1196,Tor,2B,11,res,previously_active,"1B,OF,CI,2B,MI,SW",311,91,37,12,36,0,68,26,0.316,0.0,0.428,2,0,10,0,0,0,85
+2017,al,Nando DiFino,Chris Coghlan,599,Tor,2B,56,rel,previously_active,,70,34,7,1,4,0,21,9,0.309,0.0,0.271,1,0,0,3,18,0,8
+2017,al,Nando DiFino,Cody Asche,4188,CWS,OF,2,rel,previously_active,,13,5,1,1,3,0,4,1,0.267,0.0,0.462,14,0,2,0,1,0,1
+2017,al,Nando DiFino,Leonys Martin,3737,ChC,OF,1,rel,previously_active,,57,18,6,2,7,2,13,2,0.25,0.0,0.368,0,0,0,0,0,0,42
+2017,al,Nando DiFino,Rob Refsnyder,4986,Tor,OF,14,rel,previously_active,,30,17,0,0,0,0,7,2,0.219,0.0,0.167,6,0,6,20,0,0,14
+2017,al,Nando DiFino,Derek Norris,2623,TB,C,6,rel,previously_active,,179,53,21,9,24,1,48,12,0.258,0.0,0.38,0,53,0,0,0,0,0
+2017,al,Nando DiFino,Carlos Ruiz,1123,Sea,UT,12,rel,previously_active,,10,3,1,0,0,1,6,0,0.1,0.0,0.1,1,47,1,0,0,0,0
+2017,al,Nando DiFino,Nick Castellanos,3217,Det,UT,19,trd,previously_active,,210,54,28,5,27,2,60,22,0.304,0.0,0.376,7,0,0,0,129,0,21
+2017,al,Nando DiFino,*Leury Garcia,4245,CWS,SW,0,dis,previously_active,"OF,SW",296,86,40,8,32,8,68,13,0.317,0.0,0.416,0,0,0,3,0,2,79
+2017,al,Nando DiFino,Kaleb Cowart,3315,LAA,CI,171,res,reserved,"3B,2B,CI,SW,MI",8,8,2,0,0,1,5,2,0.3,0.333,0.125,0,0,0,30,24,0,0
+2017,al,Nando DiFino,Miguel Sano,3148,Min,CI,22,dis,reserved,"3B,CI,OF,SW,1B",8,3,0,0,0,0,3,0,0.125,0.125,0.125,25,0,9,0,82,0,0
+2017,al,Nando DiFino,Steve Pearce,1196,Tor,2B,11,res,reserved,"1B,OF,CI,2B,MI,SW",2,1,1,1,1,0,0,1,0.667,0.0,2.0,2,0,10,0,0,0,85
+2017,al,Nando DiFino,*Leury Garcia,4245,CWS,SW,0,dis,reserved,"OF,SW",4,1,1,1,1,0,1,0,0.25,0.0,1.0,0,0,0,3,0,2,79
+2017,al,Nando DiFino,Jurickson Profar,3198,Tex,1B,11,rel,previously_reserved,,14,5,3,0,2,1,3,1,0.267,0.0,0.357,0,0,2,1,3,4,12
+2017,al,Nando DiFino,Jose Iglesias,2913,Det,MI,3,act,previously_reserved,"SS,SW,MI",18,5,3,1,4,0,4,1,0.158,0.0,0.333,0,0,0,0,0,130,0
+2017,al,Nando DiFino,Adrian Beltre,1355,Tex,CI,25,act,previously_reserved,"3B,CI,SW",15,5,0,0,3,0,2,0,0.187,0.0,0.267,28,0,0,0,65,0,0
+2017,al,Nando DiFino,Alen Hanson,4120,CWS,2B,3,act,previously_reserved,"2B,MI,SW,OF",26,11,3,0,0,3,9,1,0.179,0.0,0.231,5,0,0,28,2,2,38
+2017,al,Nando DiFino,Brad Miller,4310,TB,SS,19,act,previously_reserved,"1B,CI,2B,SS,SW,MI",9,3,1,1,3,0,1,2,0.545,0.0,0.889,10,0,0,98,0,0,0
+2017,al,Nando DiFino,Avisail Garcia,3485,CWS,OF,3,act,previously_reserved,"OF,SW",5,1,2,0,1,1,0,0,0.4,0.0,0.6,4,0,0,0,0,0,132
+2017,al,Nando DiFino,Cody Asche,4188,CWS,OF,2,rel,previously_reserved,,1,1,0,0,0,0,1,0,0.0,0.0,0.0,14,0,2,0,1,0,1
+2017,al,Nando DiFino,Mitch Haniger,4480,Sea,OF,11,act,previously_reserved,"OF,SW",10,3,1,1,4,0,2,3,0.385,0.0,0.5,0,0,0,0,0,0,96
+2017,al,Nando DiFino,Jorge Soler,3918,KC,OF,11,act,previously_reserved,"OF,SW",31,11,3,1,4,0,10,3,0.286,0.0,0.355,11,0,0,0,0,0,22
+2017,al,Nando DiFino,Rob Refsnyder,4986,Tor,OF,14,rel,previously_reserved,,10,4,1,0,0,1,2,0,0.3,0.0,0.5,6,0,6,20,0,0,14
+2017,al,Nando DiFino,Leonys Martin,3737,ChC,OF,1,rel,previously_reserved,,4,1,1,1,1,0,2,0,0.5,0.0,1.25,0,0,0,0,0,0,42
+2017,al,Nando DiFino,Carlos Ruiz,1123,Sea,UT,12,rel,previously_reserved,,14,6,0,0,0,0,4,1,0.2,0.0,0.214,1,47,1,0,0,0,0
+2017,al,Nando DiFino,Delino DeShields,3357,Tex,UT,5,act,previously_reserved,"OF,SW",27,7,6,0,2,4,4,6,0.485,0.0,0.481,8,0,0,0,0,0,106
+2017,al,Lawr Michaels,Alcides Escobar,850,KC,MI,11,act,active,"SS,MI,SW",521,143,63,5,45,3,83,14,0.283,0.227,0.374,0,0,0,0,0,162,0
+2017,al,Lawr Michaels,Yonder Alonso,2142,Sea,CI,4,act,active,"1B,SW,CI",451,142,72,28,67,2,118,68,0.365,0.533,0.501,1,0,135,0,0,0,0
+2017,al,Lawr Michaels,Carlos Santana,2181,Cle,1B,26,act,active,"1B,OF,CI,SW",571,154,90,23,79,5,94,88,0.363,0.28,0.455,7,0,140,0,0,0,7
+2017,al,Lawr Michaels,Eduardo Escobar,3138,Min,2B,1,act,active,"3B,SS,CI,MI,SW,2B",457,129,62,21,73,5,98,33,0.309,0.286,0.449,20,1,0,9,79,16,2
+2017,al,Lawr Michaels,Ehire Adrianza,2645,Min,SS,4,act,active,"3B,SS,MI,SW,OF,2B",77,33,19,1,11,1,11,6,0.291,0.308,0.377,1,0,4,9,9,29,17
+2017,al,Lawr Michaels,Nick Castellanos,3217,Det,3B,19,act,active,"OF,3B,CI,SW",404,103,45,21,74,2,82,19,0.329,0.375,0.55,7,0,0,0,129,0,21
+2017,al,Lawr Michaels,Max Kepler,3195,Min,OF,17,act,active,"OF,SW",511,147,67,19,69,6,114,47,0.312,0.238,0.425,1,0,0,0,0,0,143
+2017,al,Lawr Michaels,Khris Davis,4217,Oak,OF,23,act,active,"OF,SW",566,153,91,43,110,4,195,73,0.336,0.429,0.528,37,0,0,0,0,0,116
+2017,al,Lawr Michaels,Danny Valencia,2398,Sea,OF,11,act,active,"3B,OF,1B,CI,SW",328,96,41,11,51,1,91,29,0.317,0.429,0.412,0,0,118,0,1,0,10
+2017,al,Lawr Michaels,Cameron Maybin,573,Hou,OF,7,act,active,"OF,SW",150,49,14,4,15,9,41,15,0.259,0.429,0.307,1,0,0,0,0,0,109
+2017,al,Lawr Michaels,Sandy Leon,3901,Bos,C,3,act,active,"C,SW",271,85,32,7,39,0,74,25,0.29,0.222,0.354,0,84,0,0,0,0,0
+2017,al,Lawr Michaels,Caleb Joseph,3041,Bal,C,1,act,active,"C,3B,SW",254,89,31,8,28,0,72,10,0.287,0.0,0.413,0,79,0,0,8,0,0
+2017,al,Lawr Michaels,Yandy Diaz,5735,Cle,UT,125,act,active,"UT,3B",77,26,11,0,8,2,15,11,0.382,0.167,0.338,6,0,0,0,40,0,3
+2017,al,Lawr Michaels,Kevin Kiermaier,4671,TB,SW,19,act,active,"OF,SW",368,95,53,14,38,16,95,31,0.334,0.333,0.44,0,0,0,0,0,0,97
+2017,al,Lawr Michaels,Brad Miller,4310,TB,MI,19,trd,previously_active,,132,39,21,2,14,3,45,30,0.35,0.0,0.318,10,0,0,98,0,0,0
+2017,al,Lawr Michaels,*Troy Tulowitzki,461,Tor,SS,16,rel,previously_active,,184,50,11,6,16,0,34,14,0.302,0.0,0.375,0,0,0,0,0,64,0
+2017,al,Lawr Michaels,Taylor Motter,5200,Sea,UT,125,res,previously_active,"2B,OF,SS,3B,SW,1B",185,59,17,5,18,9,46,16,0.257,0.0,0.314,1,0,15,18,6,39,19
+2017,al,Lawr Michaels,Trevor Plouffe,2276,TB,UT,10,rel,previously_active,,255,89,27,8,16,1,83,24,0.274,0.0,0.325,15,0,11,3,64,0,0
+2017,al,Lawr Michaels,Jaff Decker,2598,Oak,SW,75,rel,previously_active,,28,9,1,0,0,0,10,4,0.25,0.0,0.143,0,0,0,0,0,0,15
+2017,al,Lawr Michaels,Tyler Naquin,4363,Cle,SW,10,rel,previously_active,,25,9,3,0,0,0,8,1,0.231,0.0,0.24,0,0,0,0,0,0,17
+2017,al,Lawr Michaels,*Devon Travis,4603,Tor,SW,15,rel,previously_active,,185,50,22,5,24,4,38,7,0.291,0.0,0.438,0,0,0,50,0,0,0
+2017,al,Lawr Michaels,Brock Holt,4192,Bos,SW,0,trd,previously_active,,15,6,2,0,1,0,7,4,0.316,0.0,0.133,3,0,2,31,9,0,11
+2017,al,Lawr Michaels,Peter Bourjos,2154,TB,SW,4,res,previously_active,"OF,SW",50,23,6,0,1,2,17,0,0.216,0.0,0.28,2,0,0,0,0,0,86
+2017,al,Lawr Michaels,Taylor Motter,5200,Sea,UT,125,res,reserved,"2B,OF,SS,3B,SW,1B",49,24,6,0,3,3,8,2,0.196,0.125,0.184,1,0,15,18,6,39,19
+2017,al,Lawr Michaels,Peter Bourjos,2154,TB,SW,4,res,reserved,"OF,SW",52,30,7,1,5,0,13,5,0.276,0.154,0.365,2,0,0,0,0,0,86
+2017,al,Lawr Michaels,Brad Miller,4310,TB,MI,19,trd,previously_reserved,,7,2,0,0,0,0,2,0,0.0,0.0,0.0,10,0,0,98,0,0,0
+2017,al,Lawr Michaels,Alcides Escobar,850,KC,MI,11,act,previously_reserved,"SS,MI,SW",78,19,8,1,9,1,19,1,0.198,0.0,0.244,0,0,0,0,0,162,0
+2017,al,Lawr Michaels,Rob Refsnyder,4986,Tor,UT,2,rel,previously_reserved,,3,3,1,0,0,0,1,1,0.25,0.0,0.0,6,0,6,20,0,0,14
+2017,al,Lawr Michaels,Kevin Kiermaier,4671,TB,SW,19,act,previously_reserved,"OF,SW",12,3,3,1,1,0,4,0,0.462,0.0,0.75,0,0,0,0,0,0,97
