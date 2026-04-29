@@ -37,7 +37,7 @@ A tibble with one row per player. For non-custom sources, the
 always-present columns are \code{player_id}, \code{player_name}, \code{team}, \code{league},
 \code{pos_eligibility}, and \code{player_type}. Position strings use \code{|} as the
 multi-position separator (e.g. \code{"SS|OF"}). Pitcher rows additionally
-include derived \code{svhd} and \code{k}. Other stat columns are passed through
+include derived \code{svhd} and \code{so}. Other stat columns are passed through
 from FanGraphs with column names lowercased. The output plugs into
 \code{\link[=replacement_level]{replacement_level()}} and \code{\link[=sgp]{sgp()}} without further reshaping.
 }
@@ -47,8 +47,9 @@ projection systems (Steamer, ZiPS, ATC, FanGraphs Depth Charts, THE BAT,
 THE BAT X) or accepts a user-supplied data frame of custom projections.
 The returned tibble is in long format: one row per player, with a
 \code{player_type} column (\code{"batter"} / \code{"pitcher"}) distinguishing the two
-groups. \code{svhd} is derived as \code{sv + hld} and \code{k} as \code{k_per_9 * ip / 9}
-for pitchers.
+groups. \code{svhd} is derived as \code{sv + hld}. Pitcher rows include an \code{so}
+column: when FanGraphs supplies \code{SO}, it is passed through (lowercased);
+otherwise it is derived as \code{k_per_9 * ip / 9}.
 }
 \examples{
 \dontrun{

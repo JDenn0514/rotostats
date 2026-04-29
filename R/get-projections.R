@@ -8,8 +8,9 @@
 #' THE BAT X) or accepts a user-supplied data frame of custom projections.
 #' The returned tibble is in long format: one row per player, with a
 #' `player_type` column (`"batter"` / `"pitcher"`) distinguishing the two
-#' groups. `svhd` is derived as `sv + hld` and `k` as `k_per_9 * ip / 9`
-#' for pitchers.
+#' groups. `svhd` is derived as `sv + hld`. Pitcher rows include an `so`
+#' column: when FanGraphs supplies `SO`, it is passed through (lowercased);
+#' otherwise it is derived as `k_per_9 * ip / 9`.
 #'
 #' @param source One of `"steamer"` (default), `"zips"`, `"atc"`,
 #'   `"fangraphsdc"`, `"thebat"`, `"thebatx"`, or `"custom"`.
@@ -30,7 +31,7 @@
 #'   always-present columns are `player_id`, `player_name`, `team`, `league`,
 #'   `pos_eligibility`, and `player_type`. Position strings use `|` as the
 #'   multi-position separator (e.g. `"SS|OF"`). Pitcher rows additionally
-#'   include derived `svhd` and `k`. Other stat columns are passed through
+#'   include derived `svhd` and `so`. Other stat columns are passed through
 #'   from FanGraphs with column names lowercased. The output plugs into
 #'   [`replacement_level()`] and [`sgp()`] without further reshaping.
 #'
