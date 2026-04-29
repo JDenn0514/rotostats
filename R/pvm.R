@@ -589,7 +589,7 @@ pvm <- function(
   # repl_stats has columns: position, [cats...], IP, AB (optionally)
   # Weight each position by its roster slots
 
-  hitter_pos_names  <- intersect(names(config$roster_slots), PRIMARY_HITTER_SLOTS)
+  hitter_pos_names  <- intersect(names(config$roster_slots), PRIMARY_BATTER_SLOTS)
   pitcher_pos_names <- if (!is.null(names(config$pitcher_slots))) {
     names(config$pitcher_slots)
   } else {

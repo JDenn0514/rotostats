@@ -15,7 +15,7 @@ CANONICAL_CATEGORIES <- c(
 )
 
 #' @noRd
-PRIMARY_HITTER_SLOTS <- c("C", "1B", "2B", "3B", "SS", "OF", "DH")
+PRIMARY_BATTER_SLOTS <- c("C", "1B", "2B", "3B", "SS", "OF", "DH")
 
 #' @noRd
 VALID_PITCHER_SLOT_NAMES <- c("SP", "RP")
@@ -496,7 +496,7 @@ resolve_keeper <- function(keeper) {
 
 #' @noRd
 pool_sizes <- function(config) {
-  primary <- intersect(names(config$roster_slots), PRIMARY_HITTER_SLOTS)
+  primary <- intersect(names(config$roster_slots), PRIMARY_BATTER_SLOTS)
   list(
     pitchers = as.integer(config$n_teams * sum(config$pitcher_slots)),
     batters = as.integer(config$n_teams * sum(config$roster_slots[primary]))

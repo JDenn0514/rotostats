@@ -6,7 +6,7 @@
 
 # Suppress R CMD check notes for package-internal symbols that are
 # not imported via NAMESPACE (they live in the same package namespace).
-utils::globalVariables(c("PRIMARY_HITTER_SLOTS", "pool_sizes", "sgp"))
+utils::globalVariables(c("PRIMARY_BATTER_SLOTS", "pool_sizes", "sgp"))
 
 # ---------------------------------------------------------------------------
 # replacement_level()
@@ -463,7 +463,7 @@ replacement_level <- function(
 
   # Determine positions with slots > 0
   active_hitter_pos <- names(config$roster_slots[config$roster_slots > 0])
-  active_hitter_pos <- intersect(active_hitter_pos, PRIMARY_HITTER_SLOTS)
+  active_hitter_pos <- intersect(active_hitter_pos, PRIMARY_BATTER_SLOTS)
 
   # SP/RP positions
   pitcher_slots <- config$pitcher_slots
@@ -887,7 +887,7 @@ replacement_level <- function(
     if (!is.null(scarcity_premium)) {
       active_primary_hitter_pos <- intersect(
         active_hitter_pos,
-        PRIMARY_HITTER_SLOTS
+        PRIMARY_BATTER_SLOTS
       )
       assert_zero_sum(
         scarcity_premium = scarcity_premium,

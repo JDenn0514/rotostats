@@ -118,7 +118,7 @@ compute_positional_adjustments <- function(
   hitter_pos <- setdiff(positions, pitcher_pos)
 
   # Primary hitter slots (from league-config.R constant)
-  primary_hitter_pos <- intersect(hitter_pos, PRIMARY_HITTER_SLOTS)
+  primary_hitter_pos <- intersect(hitter_pos, PRIMARY_BATTER_SLOTS)
 
   # -----------------------------------------------------------------------
   # Step 1: Global replacement level per group (hitters / pitchers)
