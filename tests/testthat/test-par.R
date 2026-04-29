@@ -177,7 +177,7 @@ test_that("Row count equals nrow(projections)", {
 
 test_that("Invariant 3: total_par equals rowSums of par_[cat] columns", {
   # Note: par() uses na.rm = TRUE for total_par (simulator bug fix #3):
-  # hitters have NA for pitcher categories and vice versa.  The observable
+  # batters have NA for pitcher categories and vice versa.  The observable
   # invariant is therefore na.rm = TRUE, which matches the implementation.
   # A player contributes 0 (not NA) to categories where they have no stats.
   fx     <- make_par_counting_fixture()
@@ -407,7 +407,7 @@ test_that("R-1: Manual calculation verification with 3-player toy fixture", {
     pitcher_slots      = c(SP = 0L, RP = 0L),
     batting_categories = c("HR"),
     # pitcher_categories supplied as a placeholder; this fixture only exercises
-    # hitter HR. The placeholder ensures league_config() accepts the call.
+    # batter HR. The placeholder ensures league_config() accepts the call.
     pitcher_categories = c("K"),
     league_type        = "AL"
   )
@@ -473,7 +473,7 @@ test_that("R-1b: Delegation identity holds for 10-player toy fixture", {
     pitcher_slots      = c(SP = 0L, RP = 0L),
     batting_categories = "HR",
     # pitcher_categories supplied as a placeholder; this fixture only exercises
-    # hitter HR. The placeholder ensures league_config() accepts the call.
+    # batter HR. The placeholder ensures league_config() accepts the call.
     pitcher_categories = "K",
     league_type        = "AL"
   )
@@ -524,12 +524,12 @@ test_that("par() output respects per-side category scoping", {
   pitcher_rows <- subset(out, player_type == "pitcher")
   batter_rows  <- subset(out, player_type == "batter")
 
-  # Hitter cats in pitcher rows: NA, not 0, not non-zero.
+  # Batter cats in pitcher rows: NA, not 0, not non-zero.
   expect_true(all(is.na(pitcher_rows$par_HR)))
   expect_true(all(is.na(pitcher_rows$par_R)))
   expect_true(all(is.na(pitcher_rows$par_SB)))
 
-  # Pitcher cats in hitter rows: NA.
+  # Pitcher cats in batter rows: NA.
   expect_true(all(is.na(batter_rows$par_K)))
   expect_true(all(is.na(batter_rows$par_SV)))
 

@@ -9,7 +9,7 @@ zaa(
   config = NULL,
   replacement = NULL,
   pitcher_pool = "combined",
-  hitter_pool = "positional",
+  batter_pool = "positional",
   category_weight = NULL,
   weight_method = "none",
   ...
@@ -35,9 +35,9 @@ provides \code{stats} and \code{config} via attributes. When \code{NULL}, all ro
 \code{"split"}: SP and RP form separate pools (FVARz/BIGz approach).
 \code{"none"}: all pitchers in one pool, no SP/RP distinction.}
 
-\item{hitter_pool}{Character. One of \code{"positional"} (default) or
-\code{"combined"}. Controls whether hitter z-scores are computed within each
-position (\code{"positional"}) or across all hitters together (\code{"combined"}).}
+\item{batter_pool}{Character. One of \code{"positional"} (default) or
+\code{"combined"}. Controls whether batter z-scores are computed within each
+position (\code{"positional"}) or across all batters together (\code{"combined"}).}
 
 \item{category_weight}{Named numeric vector mapping position pool labels
 (e.g., \code{c(SP = 0.8, RP = 0.8)}) to manual multipliers applied to
@@ -72,8 +72,8 @@ stats add \code{sd_vol} (the population SD of volume-weighted
 z-scores; Step 2b denominator) used by \code{zar()} to score
 replacement lines without re-running \code{zaa()}. Inner schema:
 nested (pool-keyed -> category-keyed) when
-\code{hitter_pool = "positional"}; flat (category-keyed) when
-\code{hitter_pool = "combined"}. Pitchers: nested when
+\code{batter_pool = "positional"}; flat (category-keyed) when
+\code{batter_pool = "combined"}. Pitchers: nested when
 \code{pitcher_pool = "split"}, flat otherwise.}
 }
 }

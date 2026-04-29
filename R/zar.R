@@ -44,10 +44,10 @@
 #'   \code{"split"}, or \code{"none"}. Forwarded unchanged to the internal
 #'   [zaa()] call. Controls whether SP and RP share a z-score normalization
 #'   pool. Does NOT affect which replacement stat line is used for each role.
-#' @param hitter_pool Character scalar. One of \code{"positional"} (default)
+#' @param batter_pool Character scalar. One of \code{"positional"} (default)
 #'   or \code{"combined"}. Forwarded unchanged to the internal [zaa()] call.
-#'   Controls whether hitter z-scores are computed within each position or
-#'   across all hitters together.
+#'   Controls whether batter z-scores are computed within each position or
+#'   across all batters together.
 #' @param category_weight Named numeric vector or \code{NULL} (default).
 #'   Forwarded unchanged to the internal [zaa()] call. Manual multipliers
 #'   applied to \code{total_zaa} (and therefore \code{total_zar}) per position
@@ -73,8 +73,8 @@
 #'       \code{NA} when the corresponding \code{zaa_<cat>} is \code{NA} or the
 #'       player has no position assignment.}
 #'     \item{\code{total_zar}}{\code{rowSums()} across all \code{zar_<cat>}
-#'       columns with \code{na.rm = TRUE}. Mixed hitter/pitcher pools carry
-#'       \code{NA} for opposite-side categories (a hitter has \code{NA} for
+#'       columns with \code{na.rm = TRUE}. Mixed batter/pitcher pools carry
+#'       \code{NA} for opposite-side categories (a batter has \code{NA} for
 #'       ERA/WHIP; a pitcher has \code{NA} for AVG), and those \code{NA}s are
 #'       treated as zero contribution so \code{total_zar} sums the categories
 #'       each player actually participates in.}
@@ -131,7 +131,7 @@ zar <- function(
   replacement,
   include_raw = FALSE,
   pitcher_pool = "combined",
-  hitter_pool = "positional",
+  batter_pool = "positional",
   category_weight = NULL,
   weight_method = "none",
   ...
@@ -202,14 +202,14 @@ zar <- function(
   # ---------------------------------------------------------------------------
   # Step 1 — Compute within-position z-scores via zaa()
   #
-  # Validation of pitcher_pool, hitter_pool, weight_method, category_weight,
+  # Validation of pitcher_pool, batter_pool, weight_method, category_weight,
   # stat_units, column presence, and column types are all delegated to zaa().
   # ---------------------------------------------------------------------------
 
   zaa_result <- zaa(
     replacement = replacement,
     pitcher_pool = pitcher_pool,
-    hitter_pool = hitter_pool,
+    batter_pool = batter_pool,
     category_weight = category_weight,
     weight_method = weight_method,
     ...
@@ -229,7 +229,7 @@ zar <- function(
   repl_positions <- unique(replacement_stats$position)
 
   # Build zar_repl: named list keyed by position, each entry a named numeric
-  # vector keyed by category. Cross-side categories (e.g. K for a hitter
+  # vector keyed by category. Cross-side categories (e.g. K for a batter
   # position) stay NA — they are never overwritten — so the per-row
   # subtraction propagates NA into the cross-side cells of zar_matrix.
   zar_repl <- vector("list", length(repl_positions))
@@ -247,11 +247,11 @@ zar <- function(
     if (is_pitcher_pos) {
       use_nested <- identical(pitcher_pool, "split")
     } else {
-      use_nested <- identical(hitter_pool, "positional")
+      use_nested <- identical(batter_pool, "positional")
     }
 
     # Per-side categories: only iterate the side's own scored categories so
-    # cross-side cells (e.g. zar_K for a hitter row) stay NA.
+    # cross-side cells (e.g. zar_K for a batter row) stay NA.
     side_categories <- if (is_pitcher_pos) {
       pitcher_categories
     } else {
@@ -285,7 +285,7 @@ zar <- function(
       repl_stat_col <- names(repl_row)[toupper(names(repl_row)) == cat_upper]
       if (length(repl_stat_col) == 0L) {
         # Category column absent from replacement_stats for this position
-        # (e.g., hitter-only stat for a pitcher position) — skip; leave NA
+        # (e.g., batter-only stat for a pitcher position) — skip; leave NA
         repl_z_vec[cat] <- NA_real_
         next
       }
@@ -432,7 +432,7 @@ zar <- function(
   # ---------------------------------------------------------------------------
   # Step 5 — Compute total_zar
   #
-  # na.rm = TRUE so cross-side NAs (hitter categories for pitchers and vice
+  # na.rm = TRUE so cross-side NAs (batter categories for pitchers and vice
   # versa) contribute 0 rather than propagating to total_zar. Matches par()'s
   # convention (see R/par.R total_par).
   # ---------------------------------------------------------------------------

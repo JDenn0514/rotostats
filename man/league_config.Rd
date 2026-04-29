@@ -20,7 +20,7 @@ league_config(
 \arguments{
 \item{n_teams}{Positive integer. Number of teams in the league. Default 12.}
 
-\item{roster_slots}{Named integer vector of hitter roster slots by position.
+\item{roster_slots}{Named integer vector of batter roster slots by position.
 Combo slots (UTIL, MI, CI) should be included — they count toward league
 depth for pool sizing even though they have no independent replacement
 pool. Positions with zero slots may be omitted.}
@@ -59,7 +59,7 @@ if present. \code{"mixed"} keeps both leagues.}
 Default \code{260L}.}
 
 \item{budget_split}{Numeric in \verb{(0, 1)}. Fraction of the total league
-budget devoted to hitters. Default \code{0.60}. Calibrate from spending
+budget devoted to batters. Default \code{0.60}. Calibrate from spending
 history with \code{calibrate_budget_split()}.}
 
 \item{keeper}{Controls keeper handling. \code{FALSE} (default) = redraft;

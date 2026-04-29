@@ -125,7 +125,7 @@ test_that("TS-05: counting stat replacement = arithmetic mean of band", {
     pitcher_slots      = c(SP = 6L, RP = 3L),
     batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
     # pitcher_categories supplied as a placeholder; this fixture only exercises
-    # hitter cats. The placeholder ensures league_config() accepts the call.
+    # batter cats. The placeholder ensures league_config() accepts the call.
     pitcher_categories = c("K"),
     league_type        = "AL"
   )
@@ -380,10 +380,10 @@ test_that("TS-15: zero-sum holds for catcher_adjustment_method = partial_offset"
 test_that("TS-16: scarcity premium direction - C and SS positive, OF at or below zero", {
   # Redesigned with realistic positional scarcity:
   # C and SS players have lower HR/AVG than 1B and OF, creating genuine scarcity premiums.
-  # C:  mean HR=8,  AVG=0.250  (thin pool, weak hitters)
+  # C:  mean HR=8,  AVG=0.250  (thin pool, weak batters)
   # SS: mean HR=10, AVG=0.255  (thin pool, below-average power)
-  # 1B: mean HR=25, AVG=0.280  (strong hitters, large pool)
-  # OF: mean HR=22, AVG=0.275  (strong hitters, very deep pool)
+  # 1B: mean HR=25, AVG=0.280  (strong batters, large pool)
+  # OF: mean HR=22, AVG=0.275  (strong batters, very deep pool)
   # Single set.seed(3L) controls all random draws in this fixture.
   # Seed 3 gives C=+2.12, SS=+2.43, OF=-0.80 (verified in isolation).
   set.seed(3L)
@@ -594,7 +594,7 @@ test_that("TS-28: pool too small → error", {
     pitcher_slots      = c(SP = 6L, RP = 3L),
     batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
     # pitcher_categories supplied as a placeholder; this fixture only exercises
-    # hitter cats. The placeholder ensures league_config() accepts the call.
+    # batter cats. The placeholder ensures league_config() accepts the call.
     pitcher_categories = c("K"),
     league_type        = "AL"
   )
@@ -935,7 +935,7 @@ test_that("TS-64: assignment hash distinguishes different assignment vectors", {
 # Shared pool-construction helper for R6 fixture tests.
 #
 # Produces a pool with enough players at every position to satisfy
-# cfg_mixed_12 (12-team, boundary = 12 per hitter slot, 72 SP, 36 RP).
+# cfg_mixed_12 (12-team, boundary = 12 per batter slot, 72 SP, 36 RP).
 # Pool dimensions per test-spec §2:
 #   n_solo_per_pos  : primary-only players at C, 1B, 2B, 3B, SS (≥ 15 each)
 #   n_of            : OF players (≥ 39)
@@ -1204,7 +1204,7 @@ test_that("TS-R6-2: 3-cycle detection — hash ring buffer catches higher-order 
 # ---------------------------------------------------------------------------
 test_that("TS-R6-3: pathological pool — max_iter fires, converged = FALSE, warning emitted", {
   # Seed matches test-spec §2: set.seed(20260418L + 2L)
-  proj <- make_projections_data(seed = 20260418L + 2L, n_hitters = 200L)
+  proj <- make_projections_data(seed = 20260418L + 2L, n_batters = 200L)
 
   max_iter_val <- 1L
 
@@ -1251,8 +1251,8 @@ test_that("PITCHER_ELIG_REGEX matches SP, RP, and bare P tokens", {
   expect_equal(got, expected)
 })
 
-test_that("PITCHER_ELIG_REGEX does NOT match substrings inside hitter tokens", {
-  # Sanity: no hitter position string contains S, R, P as a standalone token
+test_that("PITCHER_ELIG_REGEX does NOT match substrings inside batter tokens", {
+  # Sanity: no batter position string contains S, R, P as a standalone token
   # boundary-safe regex must reject things like "1SP" (synthetic — not a real
   # position, just a regression guard).
   expect_false(grepl(rotostats:::PITCHER_ELIG_REGEX, "1SP"))
@@ -1307,11 +1307,11 @@ test_that(".compute_two_way_players() accepts bare P as pitcher eligibility", {
 
 # ---------------------------------------------------------------------------
 # Bug-C regression — DH-only players in a league without a DH slot must be
-# seeded to an active hitter slot (not "DH"), so their position_assignments
+# seeded to an active batter slot (not "DH"), so their position_assignments
 # label is a valid key in replacement_stats.
 # ---------------------------------------------------------------------------
-test_that("DH-only hitters are not seeded as 'DH' when the league has no DH slot", {
-  # Toy fixture: 5 DH-only, 5 1B, 10 OF hitters + 6 SP + 4 RP.
+test_that("DH-only batters are not seeded as 'DH' when the league has no DH slot", {
+  # Toy fixture: 5 DH-only, 5 1B, 10 OF batters + 6 SP + 4 RP.
   proj <- data.frame(
     player_id = c(paste0("H", 1:10), paste0("O", 1:10),
                   paste0("S", 1:6), paste0("R", 1:4)),
@@ -1351,15 +1351,15 @@ test_that("DH-only hitters are not seeded as 'DH' when the league has no DH slot
 
   dh_ids <- paste0("H", 1:5)
   expect_true(all(pa[dh_ids] == "OF"),
-              info = "DH-only hitters fall back to the most-slots hitter position (OF)")
+              info = "DH-only batters fall back to the most-slots batter position (OF)")
 
-  # Every hitter label (non-pitcher) in pa is a key in replacement_stats.
-  hitter_labels <- unique(pa[!pa %in% c("SP", "RP", "P")])
-  expect_true(all(hitter_labels %in% repl_keys),
-              info = "every hitter pa label is a key in replacement_stats")
+  # Every batter label (non-pitcher) in pa is a key in replacement_stats.
+  batter_labels <- unique(pa[!pa %in% c("SP", "RP", "P")])
+  expect_true(all(batter_labels %in% repl_keys),
+              info = "every batter pa label is a key in replacement_stats")
 })
 
-test_that("DH|OF multi-eligible hitters in a no-DH league pick OF, not DH", {
+test_that("DH|OF multi-eligible batters in a no-DH league pick OF, not DH", {
   proj <- data.frame(
     player_id = c(paste0("H", 1:4), paste0("O", 1:10),
                   paste0("S", 1:6), paste0("R", 1:4)),

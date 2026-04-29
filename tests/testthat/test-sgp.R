@@ -280,7 +280,7 @@ test_that("AVG SGP is positive when player AVG is above baseline (sign flip)", {
   )
   lc <- make_league_config()
 
-  # avg_AVG ≈ 0.259. A hitter with AVG = 0.320 and many ABs raises blended AVG
+  # avg_AVG ≈ 0.259. A batter with AVG = 0.320 and many ABs raises blended AVG
   # above avg_AVG, so sgp_AVG > 0.
   proj <- data.frame(
     AVG = c(0.320),
@@ -291,7 +291,7 @@ test_that("AVG SGP is positive when player AVG is above baseline (sign flip)", {
   expect_gt(
     result$sgp_AVG[1L],
     0,
-    label = "elite hitter AVG SGP should be positive"
+    label = "elite batter AVG SGP should be positive"
   )
 })
 
@@ -307,7 +307,7 @@ test_that("AVG SGP is negative when player AVG is below baseline", {
   )
   lc <- make_league_config()
 
-  # avg_AVG ≈ 0.271. Hitter with AVG = 0.200 and many ABs drags down blended
+  # avg_AVG ≈ 0.271. Batter with AVG = 0.200 and many ABs drags down blended
   # AVG below avg_AVG, so sgp_AVG < 0.
   proj <- data.frame(
     AVG = c(0.200),
@@ -318,7 +318,7 @@ test_that("AVG SGP is negative when player AVG is below baseline", {
   expect_lt(
     result$sgp_AVG[1L],
     0,
-    label = "poor hitter AVG SGP should be negative"
+    label = "poor batter AVG SGP should be negative"
   )
 })
 
@@ -684,9 +684,9 @@ test_that("AVG SGP formula matches manual blended-pool calculation", {
     )
   )
 
-  lc <- make_league_config() # pool_size_h = 12 * (1+1+1+1+1+5+1) = 12 * 11 = 132
+  lc <- make_league_config() # pool_size_b = 12 * (1+1+1+1+1+5+1) = 12 * 11 = 132
 
-  # All hitters with AVG = 0.260; when blended with pool of same, result = 0.260
+  # All batters with AVG = 0.260; when blended with pool of same, result = 0.260
   n_total <- 300L
   ab_proj <- c(rep(550, 132), rep(100, 168)) # top 132 by AB form the pool
   avg_proj <- rep(0.260, n_total)
@@ -1115,14 +1115,14 @@ test_that("user override: custom rate stat with PA denominator computes sgp colu
       scale = 1,
       numerator_fn = function(rate, denom) rate * denom,
       direction = "standard",
-      pool_type = "hitter"
+      pool_type = "batter"
     ),
     MYSTAT = list(
       denominator_col = "PA",
       scale = 1,
       numerator_fn = function(rate, denom) rate * denom,
       direction = "standard",
-      pool_type = "hitter"
+      pool_type = "batter"
     )
   )
 
@@ -1179,7 +1179,7 @@ test_that("user override is full replacement — dropping ERA from override abor
       scale = 1,
       numerator_fn = function(rate, denom) rate * denom,
       direction = "standard",
-      pool_type = "hitter"
+      pool_type = "batter"
     )
   )
 

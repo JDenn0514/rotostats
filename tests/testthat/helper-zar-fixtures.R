@@ -11,7 +11,7 @@
 # make_zar_fixture()
 # ---------------------------------------------------------------------------
 # Builds a real replacement_level() round-trip for success-path tests.
-#   - projections: standard make_projections_data() output (n_hitters=120,
+#   - projections: standard make_projections_data() output (n_batters=120,
 #     n_sp=80, n_rp=40, seed=99) — enough players for well-defined SDs.
 #   - categories: HR, R, SB, K, SV (pure counting — avoids rate-stat complexity)
 #   - n_teams = 2L so replacement boundary is low (easy to identify)
@@ -46,7 +46,7 @@ make_zar_fixture <- function(n_teams = 2L, seed = 99L) {
 #       sp_bad_id:  ERA = 6.50 (above position mean ~4.1 => should get zar_era < 0)
 # Returns: list(projections, config, replacement, sp_good_id, sp_bad_id)
 make_zar_rate_fixture <- function(seed = 42L) {
-  projections <- make_projections_data(n_hitters = 60L, n_sp = 20L, n_rp = 10L,
+  projections <- make_projections_data(n_batters = 60L, n_sp = 20L, n_rp = 10L,
                                        seed = seed)
 
   sp_idx <- which(projections$pos_eligibility == "SP")
@@ -83,10 +83,10 @@ make_zar_rate_fixture <- function(seed = 42L) {
 # Builds a fixture specifically for TS-ZAR-6 (SP/RP separate SV baselines).
 # SP players have SV = 0 explicitly (starters don't save); RP players have
 # realistic SV drawn from make_projections_data (mean ~9.6, sd ~7.6).
-# Uses n_hitters=120, n_sp=80, n_rp=40 for a non-degenerate combined pool.
+# Uses n_batters=120, n_sp=80, n_rp=40 for a non-degenerate combined pool.
 # Returns: list(projections, config, replacement)
 make_zar_sv_fixture <- function(seed = 42L) {
-  projections <- make_projections_data(n_hitters = 120L, n_sp = 80L, n_rp = 40L,
+  projections <- make_projections_data(n_batters = 120L, n_sp = 80L, n_rp = 40L,
                                        seed = seed)
 
   # Set SP SV to 0 (not NA) so combined pool distribution is non-degenerate

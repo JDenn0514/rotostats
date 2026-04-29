@@ -35,7 +35,7 @@
 #'    \code{match(player_positions, repl_sgp_mat$position)}.
 #' 9. Subtract replacement SGP from player SGP (fully vectorized).
 #' 10. Compute \code{total_par = rowSums(par_[CAT], na.rm = TRUE)} so mixed
-#'     hitter/pitcher pools (where hitters have NA for pitcher-only categories
+#'     batter/pitcher pools (where batters have NA for pitcher-only categories
 #'     and vice versa) sum correctly rather than producing NA.
 #' 11. Band calibration check: median \code{total_par} of the +/-K band around
 #'     the roster boundary must be within \code{boundary_threshold} of 0.
@@ -108,8 +108,8 @@
 #'       assigned position.  \code{NA} when any input SGP is \code{NA} or the
 #'       player has no position assignment.}
 #'     \item{\code{total_par}}{\code{rowSums()} across all \code{par_[CAT]}
-#'       columns with \code{na.rm = TRUE}.  Mixed hitter/pitcher pools carry
-#'       \code{NA} for opposite-side categories (a hitter has \code{NA} for
+#'       columns with \code{na.rm = TRUE}.  Mixed batter/pitcher pools carry
+#'       \code{NA} for opposite-side categories (a batter has \code{NA} for
 #'       K/SV; a pitcher has \code{NA} for HR/R/SB), so \code{na.rm = TRUE}
 #'       is required for the sum to reflect each player's contribution.}
 #'     \item{\code{sgp_[CAT]}}{(only when \code{include_raw = TRUE}) Raw SGP
@@ -336,7 +336,7 @@ par <- function(
   pos_idx <- match(player_positions, repl_sgp_mat$position)
 
   # Per-row side classification (used to gate cross-side category cells to NA
-  # so a hitter never receives a non-NA par_K and a pitcher never receives a
+  # so a batter never receives a non-NA par_K and a pitcher never receives a
   # non-NA par_HR even if upstream sgp() would return finite values for the
   # opposite side). Derives side from the assigned valuation position when
   # available, falling back to POS_ELIGIBILITY parsing.
@@ -365,7 +365,7 @@ par <- function(
     cat_upper <- toupper(cat)
     # Defense-in-depth: explicitly NA cross-side cells. In practice these
     # are already NA because per-side stats are NA in projections (e.g. K
-    # is NA for hitters, HR is NA for pitchers), but explicit gating keeps
+    # is NA for batters, HR is NA for pitchers), but explicit gating keeps
     # par() correct if upstream sgp() ever propagates a non-NA value into
     # the opposite side.
     if (cat_upper %in% batting_categories) {

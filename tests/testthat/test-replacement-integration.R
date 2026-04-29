@@ -73,7 +73,7 @@ make_test_sgp_denominators <- function(seed = 42L) {
 # ---------------------------------------------------------------------------
 
 test_that("TS-50: sort_by=sgp iteration converges with valid denominators", {
-  proj       <- make_projections_data(n_hitters = 80L, seed = 42L)
+  proj       <- make_projections_data(n_batters = 80L, seed = 42L)
   sgp_bundle <- suppressWarnings(make_test_sgp_denominators(seed = 42L))
   # sgp_bundle$denominators has rate_conversion = "blended_pool"; must supply
   # sgp_bundle$history (with IP and AB) as league_history so sgp() can compute
@@ -96,7 +96,7 @@ test_that("TS-50: sort_by=sgp iteration converges with valid denominators", {
 # ---------------------------------------------------------------------------
 
 test_that("TS-51: sort_by=sgp produces different replacement stats than zscore", {
-  proj       <- make_projections_data(n_hitters = 80L, seed = 42L)
+  proj       <- make_projections_data(n_batters = 80L, seed = 42L)
   sgp_bundle <- suppressWarnings(make_test_sgp_denominators(seed = 42L))
 
   result_z   <- replacement_level(proj, config = cfg_mixed_12,
@@ -123,7 +123,7 @@ test_that("TS-51: sort_by=sgp produces different replacement stats than zscore",
 # ---------------------------------------------------------------------------
 
 test_that("TS-52: position_assignments on second call updates pool membership", {
-  proj    <- make_projections_data(n_hitters = 80L, 
+  proj    <- make_projections_data(n_batters = 80L, 
                                    seed = 42L)
   result1 <- replacement_level(proj, config = cfg_mixed_12,
                                 multi_pos = "highest_par")
@@ -141,7 +141,7 @@ test_that("TS-52: position_assignments on second call updates pool membership", 
 # ---------------------------------------------------------------------------
 
 test_that("TS-53: multi_pos=primary ignores position_assignments", {
-  proj    <- make_projections_data(n_hitters = 80L, 
+  proj    <- make_projections_data(n_batters = 80L, 
                                    seed = 42L)
   result1 <- replacement_level(proj, config = cfg_mixed_12,
                                 multi_pos = "highest_par")
@@ -164,14 +164,14 @@ test_that("TS-53: multi_pos=primary ignores position_assignments", {
 # (no position field -> pos_eligibility = "P") were silently dropped from
 # every SP/RP pool. The fixture here mirrors the shape of
 # get_projections("steamer") after normalization: lowercase column names,
-# pitcher rows with pos_eligibility = "P", batter rows with standard hitter
+# pitcher rows with pos_eligibility = "P", batter rows with standard batter
 # eligibility tokens.
 # ---------------------------------------------------------------------------
 
 test_that("replacement_level() classifies pitchers when pos_eligibility = 'P'", {
   set.seed(42L)
   # OF needs n_teams * 5 = 50 eligible; weight the position mix so OF is the
-  # majority (mirrors real projection sets where OF dominates hitter rows).
+  # majority (mirrors real projection sets where OF dominates batter rows).
   hit_positions <- c(
     rep("C",  20L),
     rep("1B", 15L),
@@ -188,9 +188,9 @@ test_that("replacement_level() classifies pitchers when pos_eligibility = 'P'", 
   n_rp <- 50L
   n_pit <- n_sp + n_rp
 
-  hitters <- data.frame(
+  batters <- data.frame(
     player_id       = paste0("h", seq_len(n_hit)),
-    player_name     = paste0("Hitter ", seq_len(n_hit)),
+    player_name     = paste0("Batter ", seq_len(n_hit)),
     team            = "NYY",
     league          = "AL",
     pos_eligibility = hit_positions,
@@ -236,7 +236,7 @@ test_that("replacement_level() classifies pitchers when pos_eligibility = 'P'", 
     stringsAsFactors = FALSE
   )
 
-  proj <- rbind(hitters, pitchers)
+  proj <- rbind(batters, pitchers)
 
   config <- league_config(
     n_teams            = 10L,
@@ -285,7 +285,7 @@ test_that("replacement_level() + zar() pipeline produces finite pitcher zar", {
   n_sp <- 80L
   n_rp <- 50L
   n_pit <- n_sp + n_rp
-  hitters <- data.frame(
+  batters <- data.frame(
     player_id       = paste0("h", seq_len(n_hit)),
     player_name     = paste0("H", seq_len(n_hit)),
     team            = "NYY",
@@ -320,7 +320,7 @@ test_that("replacement_level() + zar() pipeline produces finite pitcher zar", {
     K               = ip_vals * rnorm(n_pit, 1.0, 0.1),
     stringsAsFactors = FALSE
   )
-  proj <- rbind(hitters, pitchers)
+  proj <- rbind(batters, pitchers)
   config <- league_config(
     n_teams            = 10L,
     roster_slots       = c(C = 2L, `1B` = 1L, `2B` = 1L, SS = 1L, `3B` = 1L,

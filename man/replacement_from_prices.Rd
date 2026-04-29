@@ -26,11 +26,11 @@ name matching.}
 
 \item{roster_slots}{Named integer vector.  Roster slots per position.}
 
-\item{batting_categories}{Character vector of scored hitter categories.
+\item{batting_categories}{Character vector of scored batter categories.
 May be empty (\code{character(0L)}) for pitcher-only leagues.}
 
 \item{pitcher_categories}{Character vector of scored pitcher categories.
-May be empty (\code{character(0L)}) for hitter-only leagues.}
+May be empty (\code{character(0L)}) for batter-only leagues.}
 
 \item{trim_method}{Character scalar.  \code{"iqr"} (default) — remove above
 Q3 + 1.5×IQR; \code{"mad"} — remove above median + 3×MAD; \code{"kde"} — detect

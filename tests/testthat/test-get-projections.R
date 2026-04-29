@@ -881,7 +881,7 @@ test_that("get_projections() surfaces invalid mlb_only error class", {
 
 test_that("custom source without player_type is auto-classified via pos_eligibility", {
   custom_df <- data.frame(
-    name            = c("Hitter Bob", "Pitcher Sue"),
+    name            = c("Batter Bob", "Pitcher Sue"),
     pos_eligibility = c("OF", "SP"),
     HR  = c(25L, NA_integer_),
     R   = c(80L, NA_integer_),
@@ -891,7 +891,7 @@ test_that("custom source without player_type is auto-classified via pos_eligibil
   )
   out <- get_projections(source = "custom", data = custom_df)
   expect_setequal(out$player_type, c("batter", "pitcher"))
-  expect_equal(out$player_type[out$name == "Hitter Bob"], "batter")
+  expect_equal(out$player_type[out$name == "Batter Bob"], "batter")
   expect_equal(out$player_type[out$name == "Pitcher Sue"], "pitcher")
 })
 
@@ -909,12 +909,12 @@ test_that("custom source with player_type column is honored", {
 
 test_that("custom source without player_type falls back to IP heuristic", {
   custom_df <- data.frame(
-    name = c("Hitter", "Pitcher"),
+    name = c("Batter", "Pitcher"),
     HR   = c(20L, NA_integer_),
     IP   = c(NA_real_, 180),
     stringsAsFactors = FALSE
   )
   out <- get_projections(source = "custom", data = custom_df)
   expect_equal(out$player_type[out$name == "Pitcher"], "pitcher")
-  expect_equal(out$player_type[out$name == "Hitter"], "batter")
+  expect_equal(out$player_type[out$name == "Batter"], "batter")
 })

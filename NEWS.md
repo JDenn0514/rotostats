@@ -17,7 +17,7 @@
 
 * `zaa()`, `zar()`, `par()`, `pvm()`: cross-side category cells in the
   output frame are now `NA` instead of `0` or a contaminated value. For
-  example, a pitcher row's `zar_hr`, `zar_r`, `zar_sb` are `NA`; a hitter
+  example, a pitcher row's `zar_hr`, `zar_r`, `zar_sb` are `NA`; a batter
   row's `zar_k`, `zar_era` are `NA`. The `total_zar` / `total_par` /
   `total_pvm` columns continue to use `na.rm = TRUE` so each side's
   intra-side total is unchanged.
@@ -33,12 +33,27 @@
   previously fired once per offending player, now emits at most one
   summary per (side, category) and lists a sample of affected IDs.
 
+* Unified batter / pitcher terminology across the package. The side
+  opposite pitchers is now consistently called "batter" — matching the
+  existing `player_type == "batter"` data convention and the
+  `CANONICAL_BATTING_CATEGORIES` constant. Four user-visible surfaces
+  changed:
+
+  * `zaa()` and `zar()`: argument `hitter_pool` is replaced by
+    `batter_pool`.
+  * `zaa()` output: the `pool_label` value `"ALL_HITTERS"` is now
+    `"ALL_BATTERS"`.
+  * Rate-stat registry (`rate_stat_formulas()` / custom formulas passed
+    to `sgp()`): `pool_type = "hitter"` is now `pool_type = "batter"`.
+  * `pool_sizes(config)`: the named-list element `$hitters` is now
+    `$batters`.
+
 ## Bug fixes
 
 * `zar()` / `zaa()`: fix cross-side z-score contamination caused by the
   FanGraphs pitcher endpoint returning columns named `hr` / `r` / `avg`
-  (HR allowed, R allowed, opponent BAA) that collided with hitter columns
-  of the same name. Hitter z-scores are now computed against the hitter
+  (HR allowed, R allowed, opponent BAA) that collided with batter columns
+  of the same name. Batter z-scores are now computed against the batter
   pool only; pitcher z-scores against the pitcher pool only.
 
 ## New features
@@ -73,7 +88,7 @@
   Each registry entry specifies its playing-time denominator column, recomposition
   scale, numerator function, `direction` (`"inverse"` for lower-is-better
   stats like ERA/WHIP/FIP, `"standard"` for higher-is-better stats like
-  AVG/K/9), and `pool_type` (`"pitcher"` or `"hitter"`). This generalizes
+  AVG/K/9), and `pool_type` (`"pitcher"` or `"batter"`). This generalizes
   rate-stat support beyond the hardcoded ERA / WHIP / AVG trio: FIP, xFIP,
   SIERA, xERA, K/9, BB/9, and HR/9 are now supported out of the box, and
   users can add custom linear rate stats (e.g. `OBP` backed by `PA`) by
@@ -145,7 +160,7 @@
 * `zar()` — z-scores above replacement. Computes per-player, per-category
   z-scores above the replacement level by calling `zaa()` internally and
   subtracting the per-position replacement-band z-score from each player's
-  `zaa_<cat>` score. Supports `include_raw`, `pitcher_pool`, `hitter_pool`,
+  `zaa_<cat>` score. Supports `include_raw`, `pitcher_pool`, `batter_pool`,
   `category_weight`, and `weight_method`; all forwarded to the internal
   `zaa()` call. SP and RP always use separate replacement baselines regardless
   of `pitcher_pool`. Returns a data frame with `zar_<CAT>` columns and
@@ -193,7 +208,7 @@
 * `rate_stat_formulas()` — Returns the built-in named list of blended-pool
   rate-stat formula descriptors consumed by `sgp()`. Each entry documents
   the denominator column, recomposition scale, numerator function,
-  direction (inverse vs standard), and pool type (pitcher vs hitter) for a
+  direction (inverse vs standard), and pool type (pitcher vs batter) for a
   single linear rate stat. Built-ins cover `ERA`, `WHIP`, `AVG`, `FIP`,
   `XFIP`, `SIERA`, `XERA`, `K/9`, `BB/9`, and `HR/9`. Pass a list of the
   same shape to `sgp()` via the `rate_stat_formulas` argument to fully

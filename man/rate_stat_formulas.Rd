@@ -38,7 +38,7 @@ better — ERA, WHIP, FIP, xFIP, SIERA, xERA, BB/9, HR/9) or
 order in the blended-pool SGP formula.}
 \item{\code{pool_type}}{Character scalar. Either \code{"pitcher"} (pool sized from
 \code{pool_sizes(config)$pitchers} and selected by descending IP) or
-\code{"hitter"} (pool sized from \code{pool_sizes(config)$hitters} and selected
+\code{"batter"} (pool sized from \code{pool_sizes(config)$batters} and selected
 by descending AB or the entry's \code{denominator_col}).}
 }
 

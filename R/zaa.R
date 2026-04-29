@@ -61,9 +61,9 @@
 #'   `"combined"`: all pitchers in one pool (LPP/FanGraphs approach).
 #'   `"split"`: SP and RP form separate pools (FVARz/BIGz approach).
 #'   `"none"`: all pitchers in one pool, no SP/RP distinction.
-#' @param hitter_pool Character. One of `"positional"` (default) or
-#'   `"combined"`. Controls whether hitter z-scores are computed within each
-#'   position (`"positional"`) or across all hitters together (`"combined"`).
+#' @param batter_pool Character. One of `"positional"` (default) or
+#'   `"combined"`. Controls whether batter z-scores are computed within each
+#'   position (`"positional"`) or across all batters together (`"combined"`).
 #' @param category_weight Named numeric vector mapping position pool labels
 #'   (e.g., `c(SP = 0.8, RP = 0.8)`) to manual multipliers applied to
 #'   `total_zaa`. Overrides `weight_method` when supplied.
@@ -95,8 +95,8 @@
 #'       z-scores; Step 2b denominator) used by `zar()` to score
 #'       replacement lines without re-running `zaa()`. Inner schema:
 #'       nested (pool-keyed -> category-keyed) when
-#'       `hitter_pool = "positional"`; flat (category-keyed) when
-#'       `hitter_pool = "combined"`. Pitchers: nested when
+#'       `batter_pool = "positional"`; flat (category-keyed) when
+#'       `batter_pool = "combined"`. Pitchers: nested when
 #'       `pitcher_pool = "split"`, flat otherwise.}
 #'   }
 #'
@@ -144,7 +144,7 @@ zaa <- function(
   config = NULL,
   replacement = NULL,
   pitcher_pool = "combined",
-  hitter_pool = "positional",
+  batter_pool = "positional",
   category_weight = NULL,
   weight_method = "none",
   ...
@@ -169,14 +169,14 @@ zaa <- function(
     )
   }
 
-  if (!missing(hitter_pool)) {
+  if (!missing(batter_pool)) {
     tryCatch(
-      checkmate::assert_choice(hitter_pool, c("positional", "combined")),
+      checkmate::assert_choice(batter_pool, c("positional", "combined")),
       error = function(e) {
         cli::cli_abort(
           c(
-            "{.arg hitter_pool} must be one of {.val positional} or {.val combined}.",
-            "i" = "You supplied: {.val {hitter_pool}}"
+            "{.arg batter_pool} must be one of {.val positional} or {.val combined}.",
+            "i" = "You supplied: {.val {batter_pool}}"
           ),
           class = "rotostats_error_invalid_parameter",
           call = rlang::caller_env()
@@ -290,7 +290,7 @@ zaa <- function(
   # Side-scoped category vectors (Phase 2). The union (`categories`) is kept
   # for whole-frame validations (column presence, type checks) and for output
   # column emission; per-side z-score computation in Step 2 below uses
-  # `batting_categories` against hitter pools and `pitcher_categories`
+  # `batting_categories` against batter pools and `pitcher_categories`
   # against pitcher pools so cross-side cells stay NA.
   batting_categories <- working_config$batting_categories
   pitcher_categories <- working_config$pitcher_categories
@@ -393,7 +393,7 @@ zaa <- function(
     # or data frame with player_id and pool_label columns.
     #
     # Note: two-way players (e.g. Shohei Ohtani) appear twice — once as a
-    # hitter row and once as a pitcher row — with the same player_id but
+    # batter row and once as a pitcher row — with the same player_id but
     # distinct pool labels. Named-vector lookup (pa_pools[player_id]) only
     # returns the first match per name and would collapse both rows to the
     # same pool. To preserve duplicates we instead keep positional alignment
@@ -489,20 +489,20 @@ zaa <- function(
     return(result)
   }
 
-  # Classify each player row as hitter or pitcher
-  # SP / RP are pitcher slots; all others are hitters
+  # Classify each player row as batter or pitcher
+  # SP / RP are pitcher slots; all others are batters
   is_pitcher <- row_pools %in% c("SP", "RP", "P", "ALL_PITCHERS")
-  is_hitter <- !is_pitcher
+  is_batter <- !is_pitcher
 
-  # Finalize pool labels given pitcher_pool and hitter_pool settings
+  # Finalize pool labels given pitcher_pool and batter_pool settings
   pool_labels <- character(n_players)
 
-  # Hitters
-  if (hitter_pool == "combined") {
-    pool_labels[is_hitter] <- "ALL_HITTERS"
+  # Batters
+  if (batter_pool == "combined") {
+    pool_labels[is_batter] <- "ALL_BATTERS"
   } else {
-    # positional — use row_pools directly for hitters
-    pool_labels[is_hitter] <- row_pools[is_hitter]
+    # positional — use row_pools directly for batters
+    pool_labels[is_batter] <- row_pools[is_batter]
   }
 
   # Pitchers
@@ -577,7 +577,7 @@ zaa <- function(
   # ---------------------------------------------------------------------------
 
   # Initialize z-score matrix (players x categories). Cells stay NA when
-  # a row's side does not score that category (e.g. hitter rows are NA for
+  # a row's side does not score that category (e.g. batter rows are NA for
   # zaa_K / zaa_SV / zaa_ERA; pitcher rows are NA for zaa_HR / zaa_R / zaa_SB).
   zaa_col_names <- .zaa_col_name(categories)
   zaa_matrix <- matrix(
@@ -732,7 +732,7 @@ zaa <- function(
       use_nested <- if (is_pitcher_pool) {
         pitcher_pool == "split"
       } else {
-        hitter_pool == "positional"
+        batter_pool == "positional"
       }
 
       if (use_nested) {
@@ -751,7 +751,7 @@ zaa <- function(
   # ---------------------------------------------------------------------------
 
   # na.rm = TRUE: cross-side NAs (e.g. zaa_HR for a pitcher row, zaa_K for a
-  # hitter row) contribute 0 instead of propagating to total_zaa, so each
+  # batter row) contribute 0 instead of propagating to total_zaa, so each
   # side's intra-side total stays well-defined. NAs from same-side reasons
   # (e.g. zero playing time on a rate stat) still fall under na.rm = TRUE
   # here; consumers that want strict propagation can recompute from the
@@ -762,26 +762,26 @@ zaa <- function(
   # Step 4 — Apply weight_method or category_weight to total_zaa
   # ---------------------------------------------------------------------------
 
-  # n_hitter_cats: count of categories scored by hitters (non-NA, non-zero)
-  hitter_rows <- which(is_hitter)
+  # n_batter_cats: count of categories scored by batters (non-NA, non-zero)
+  batter_rows <- which(is_batter)
 
-  if (length(hitter_rows) > 0L) {
-    n_hitter_cats <- sum(
+  if (length(batter_rows) > 0L) {
+    n_batter_cats <- sum(
       vapply(
         categories,
         function(cat) {
           col <- upper_col_map[toupper(cat)]
           any(
-            !is.na(working_stats[[col]][hitter_rows]) &
-              working_stats[[col]][hitter_rows] != 0
+            !is.na(working_stats[[col]][batter_rows]) &
+              working_stats[[col]][batter_rows] != 0
           )
         },
         logical(1)
       )
     )
   } else {
-    # No hitters in pool: use total category count as baseline
-    n_hitter_cats <- length(categories)
+    # No batters in pool: use total category count as baseline
+    n_batter_cats <- length(categories)
   }
 
   if (!is.null(category_weight)) {
@@ -821,9 +821,9 @@ zaa <- function(
         multiplier <- switch(
           weight_method,
           "none" = 1,
-          "linear" = if (n_hitter_cats > 0) n_pos_cats / n_hitter_cats else 1,
-          "sqrt" = if (n_hitter_cats > 0) {
-            sqrt(n_pos_cats / n_hitter_cats)
+          "linear" = if (n_batter_cats > 0) n_pos_cats / n_batter_cats else 1,
+          "sqrt" = if (n_batter_cats > 0) {
+            sqrt(n_pos_cats / n_batter_cats)
           } else {
             1
           }
@@ -858,8 +858,8 @@ zaa <- function(
       multiplier <- switch(
         weight_method,
         "none" = 1,
-        "linear" = if (n_hitter_cats > 0) n_pos_cats / n_hitter_cats else 1,
-        "sqrt" = if (n_hitter_cats > 0) sqrt(n_pos_cats / n_hitter_cats) else 1
+        "linear" = if (n_batter_cats > 0) n_pos_cats / n_batter_cats else 1,
+        "sqrt" = if (n_batter_cats > 0) sqrt(n_pos_cats / n_batter_cats) else 1
       )
       total_zaa[pos_rows] <- rowSums(
         zaa_matrix[pos_rows, , drop = FALSE],
@@ -904,7 +904,7 @@ zaa <- function(
   attr(result, "units") <- "zscore"
   attr(result, "anchor") <- "average"
   attr(result, "distribution") <- distribution
-  # pool_labels: per-row zaa pool label (e.g. "ALL_HITTERS", "ALL_PITCHERS",
+  # pool_labels: per-row zaa pool label (e.g. "ALL_BATTERS", "ALL_PITCHERS",
   # or positional labels under positional/split pools) used for the
   # within-pool z-score computation.
   attr(result, "pool_labels") <- pool_labels

@@ -6,7 +6,7 @@
 
 # Suppress R CMD check notes for package-internal symbols that are
 # not imported via NAMESPACE (they live in the same package namespace).
-utils::globalVariables(c("PRIMARY_HITTER_SLOTS", "pool_sizes", "sgp"))
+utils::globalVariables(c("PRIMARY_BATTER_SLOTS", "pool_sizes", "sgp"))
 
 # ---------------------------------------------------------------------------
 # replacement_level()
@@ -32,7 +32,7 @@ utils::globalVariables(c("PRIMARY_HITTER_SLOTS", "pool_sizes", "sgp"))
 #' @param projections A data frame with one row per projected player.
 #'   Required columns: `player_id`, `player_name`, `pos_eligibility`,
 #'   `team`, `league`, plus one column per scored category in `config$categories`.
-#'   Pitcher rows require `IP`; hitter rows require `AB` when `AVG`, `OBP`, or
+#'   Pitcher rows require `IP`; batter rows require `AB` when `AVG`, `OBP`, or
 #'   `SLG` is a scored category.  Column names are normalized to uppercase at
 #'   entry (no message emitted).  `pos_eligibility` is pipe-delimited
 #'   (`"C"`, `"1B|3B"`, `"SP|RP"`); the first entry is the primary position.
@@ -71,7 +71,7 @@ utils::globalVariables(c("PRIMARY_HITTER_SLOTS", "pool_sizes", "sgp"))
 #' @param sp_ip_threshold Numeric.  IP cutoff for SP vs. RP inference when
 #'   no `role` column is present (default `100`).
 #' @param normalize_to_season Logical.  If `TRUE`, normalize counting stats
-#'   to full-season baselines (hitters 600 PA / 550 AB, SP 200 IP, RP 70 IP).
+#'   to full-season baselines (batters 600 PA / 550 AB, SP 200 IP, RP 70 IP).
 #'   Default `FALSE`.
 #' @param band_width Integer or `NULL`.  Band half-width K.  Overrides
 #'   `replacement_params$band_width_K` when non-NULL.
@@ -107,7 +107,7 @@ utils::globalVariables(c("PRIMARY_HITTER_SLOTS", "pool_sizes", "sgp"))
 #'   \describe{
 #'     \item{`replacement_stats`}{data.frame — one row per position (positions
 #'       with `roster_slots > 0`, plus SP and RP).  Columns: `position`,
-#'       one column per scored category, `IP` for pitcher rows, `AB` for hitter
+#'       one column per scored category, `IP` for pitcher rows, `AB` for batter
 #'       rows when AVG/OBP/SLG scored, `n_band_players`, `cliff_detected`.}
 #'     \item{`positional_adjustments`}{Named numeric vector of scarcity
 #'       premiums by position, or `NULL` on pass 1 when
@@ -116,7 +116,7 @@ utils::globalVariables(c("PRIMARY_HITTER_SLOTS", "pool_sizes", "sgp"))
 #'       `position`, `cliff_detected`, `cliff_location`, `cliff_magnitude`,
 #'       `swingman`, `n_band_players`.}
 #'     \item{`two_way_players`}{Character vector of `player_id`s with PAR > 0
-#'       in both hitter and pitcher roles.}
+#'       in both batter and pitcher roles.}
 #'     \item{`pool_diagnostics`}{List with `position_sd_ratio`: named numeric
 #'       vector of within-position SD / global SD per scored category.}
 #'     \item{`method`}{`"boundary_band"`.}
@@ -458,12 +458,12 @@ replacement_level <- function(
   # Pool size computation
   # -------------------------------------------------------------------------
   ps <- get_pool_sizes(config)
-  pool_size_h <- ps$hitters
+  pool_size_b <- ps$batters
   pool_size_p <- ps$pitchers
 
   # Determine positions with slots > 0
-  active_hitter_pos <- names(config$roster_slots[config$roster_slots > 0])
-  active_hitter_pos <- intersect(active_hitter_pos, PRIMARY_HITTER_SLOTS)
+  active_batter_pos <- names(config$roster_slots[config$roster_slots > 0])
+  active_batter_pos <- intersect(active_batter_pos, PRIMARY_BATTER_SLOTS)
 
   # SP/RP positions
   pitcher_slots <- config$pitcher_slots
@@ -478,10 +478,10 @@ replacement_level <- function(
 
   active_pitcher_pos <- names(pitcher_slots_named[pitcher_slots_named > 0])
 
-  all_positions <- c(active_hitter_pos, active_pitcher_pos)
+  all_positions <- c(active_batter_pos, active_pitcher_pos)
 
   # Pool too small check
-  for (pos in active_hitter_pos) {
+  for (pos in active_batter_pos) {
     n_rostered <- config$n_teams * config$roster_slots[pos]
     pool_players <- sum(
       grepl(paste0("(^|\\|)", pos, "(\\||$)"), projections$POS_ELIGIBILITY)
@@ -506,7 +506,7 @@ replacement_level <- function(
   if (is.null(position_assignments)) {
     # Seed: assign each player to a primary position that matches a key in
     # replacement_stats. resolve_seed_pos() handles the DH-only-in-no-DH-
-    # league fallback so hitter labels always match replacement_stats keys.
+    # league fallback so batter labels always match replacement_stats keys.
     # For pitcher rows, the role inferred by infer_pitcher_roles() ("SP"/
     # "RP") then overrides the seed so that bare-"P" eligibility (the
     # get_projections() fallback for FanGraphs pitchers) is propagated as
@@ -515,7 +515,7 @@ replacement_level <- function(
       projections$POS_ELIGIBILITY,
       resolve_seed_pos,
       character(1L),
-      active_hitter_pos = active_hitter_pos,
+      active_batter_pos = active_batter_pos,
       roster_slots = config$roster_slots,
       USE.NAMES = FALSE
     )
@@ -547,23 +547,23 @@ replacement_level <- function(
     # A. Sort players into position pools using current assignments
     # -----------------------------------------------------------------------
 
-    # Hitter z-scores for sorting (pass 1 always uses z-scores)
-    hitter_rows <- which(
+    # Batter z-scores for sorting (pass 1 always uses z-scores)
+    batter_rows <- which(
       projections$LEAGUE %in%
         c("AL", "NL") &
         !grepl(PITCHER_ELIG_REGEX, projections$POS_ELIGIBILITY)
     )
     pitcher_rows_idx <- which(grepl(PITCHER_ELIG_REGEX, projections$POS_ELIGIBILITY))
 
-    # Compute composite z-scores for hitters and pitchers
+    # Compute composite z-scores for batters and pitchers
     # Only recompute on pass 1 or when sort_by = "zscore"
     if (pass == 1L || sort_by == "zscore") {
       order_col_h <- if ("AB" %in% names(projections)) "AB" else cats_upper[1]
       order_col_p <- "IP"
 
-      z_hitters <- compute_pool_zscores(
-        projections[hitter_rows, , drop = FALSE],
-        pool_size_h,
+      z_batters <- compute_pool_zscores(
+        projections[batter_rows, , drop = FALSE],
+        pool_size_b,
         batting_cats_upper,
         K,
         order_col_h,
@@ -580,7 +580,7 @@ replacement_level <- function(
 
       # Assign composite scores back (length = all players)
       composite_score <- rep(NA_real_, nrow(projections))
-      composite_score[hitter_rows] <- z_hitters
+      composite_score[batter_rows] <- z_batters
       composite_score[pitcher_rows_idx] <- z_pitchers
     }
 
@@ -593,7 +593,7 @@ replacement_level <- function(
         league_config = config
       )
       composite_score <- rep(NA_real_, nrow(projections))
-      composite_score[hitter_rows] <- sgp_result$total_sgp[hitter_rows]
+      composite_score[batter_rows] <- sgp_result$total_sgp[batter_rows]
       composite_score[pitcher_rows_idx] <- sgp_result$total_sgp[
         pitcher_rows_idx
       ]
@@ -885,15 +885,15 @@ replacement_level <- function(
     # E. Zero-sum assertion (if adjustments computed)
     # -----------------------------------------------------------------------
     if (!is.null(scarcity_premium)) {
-      active_primary_hitter_pos <- intersect(
-        active_hitter_pos,
-        PRIMARY_HITTER_SLOTS
+      active_primary_batter_pos <- intersect(
+        active_batter_pos,
+        PRIMARY_BATTER_SLOTS
       )
       assert_zero_sum(
         scarcity_premium = scarcity_premium,
         config = config,
         catcher_adjustment_method = catcher_adjustment_method,
-        primary_hitter_slots = active_primary_hitter_pos
+        primary_batter_slots = active_primary_batter_pos
       )
     }
 
@@ -911,16 +911,16 @@ replacement_level <- function(
       for (pid in multi_player_ids) {
         player_row <- projections[projections$PLAYER_ID == pid, , drop = FALSE]
         elig_pos <- strsplit(player_row$POS_ELIGIBILITY, "\\|")[[1]]
-        elig_hitter <- setdiff(elig_pos, c("SP", "RP", "P"))
-        elig_hitter <- intersect(elig_hitter, active_hitter_pos)
+        elig_batter <- setdiff(elig_pos, c("SP", "RP", "P"))
+        elig_batter <- intersect(elig_batter, active_batter_pos)
 
-        if (length(elig_hitter) <= 1L) {
+        if (length(elig_batter) <= 1L) {
           next
         }
 
         # Compute PAR at each eligible position
         par_vals <- vapply(
-          elig_hitter,
+          elig_batter,
           function(p) {
             repl_row <- repl_stats_df[
               repl_stats_df$position == p,
@@ -935,17 +935,17 @@ replacement_level <- function(
           numeric(1L)
         )
 
-        best_pos <- elig_hitter[which.max(par_vals)]
+        best_pos <- elig_batter[which.max(par_vals)]
         new_assignments[pid] <- best_pos
       }
     } else if (multi_pos == "primary") {
-      # Always use primary position (via resolve_seed_pos so DH-only hitters
-      # in no-DH leagues fall back to an active hitter slot).
+      # Always use primary position (via resolve_seed_pos so DH-only batters
+      # in no-DH leagues fall back to an active batter slot).
       primary_pos <- vapply(
         projections$POS_ELIGIBILITY,
         resolve_seed_pos,
         character(1L),
-        active_hitter_pos = active_hitter_pos,
+        active_batter_pos = active_batter_pos,
         roster_slots = config$roster_slots,
         USE.NAMES = FALSE
       )
@@ -1075,7 +1075,7 @@ replacement_level <- function(
     projections = projections,
     repl_stats_df = repl_stats_df,
     cats_upper = cats_upper,
-    active_hitter_pos = active_hitter_pos,
+    active_batter_pos = active_batter_pos,
     active_pitcher_pos = active_pitcher_pos,
     current_assignments = new_assignments
   )
@@ -1149,10 +1149,10 @@ replacement_level <- function(
 #'   name matching.
 #' @param n_teams Positive integer.  Number of teams in the league.
 #' @param roster_slots Named integer vector.  Roster slots per position.
-#' @param batting_categories Character vector of scored hitter categories.
+#' @param batting_categories Character vector of scored batter categories.
 #'   May be empty (`character(0L)`) for pitcher-only leagues.
 #' @param pitcher_categories Character vector of scored pitcher categories.
-#'   May be empty (`character(0L)`) for hitter-only leagues.
+#'   May be empty (`character(0L)`) for batter-only leagues.
 #' @param trim_method Character scalar.  `"iqr"` (default) — remove above
 #'   Q3 + 1.5×IQR; `"mad"` — remove above median + 3×MAD; `"kde"` — detect
 #'   trough via kernel density estimation (errors if no trough found).
@@ -1577,7 +1577,7 @@ replacement_from_prices <- function(
   active_pitcher_pos
 ) {
   # Normalize counting stats to full-season baselines
-  # Hitters: 600 PA (550 AB when PA unavailable); SP: 200 IP; RP: 70 IP
+  # Batters: 600 PA (550 AB when PA unavailable); SP: 200 IP; RP: 70 IP
   for (i in seq_len(nrow(repl_stats_df))) {
     pos <- repl_stats_df$position[i]
     is_sp <- pos %in% intersect(active_pitcher_pos, "SP")
@@ -1609,7 +1609,7 @@ replacement_from_prices <- function(
         }
       }
     } else if (!is_sp && !is_rp) {
-      # Hitter: scale to 550 AB if AB available, else use PA-based scaling
+      # Batter: scale to 550 AB if AB available, else use PA-based scaling
       if (
         "AB" %in%
           names(repl_stats_df) &&
@@ -1637,11 +1637,11 @@ replacement_from_prices <- function(
   pitcher_cats_upper,
   role
 ) {
-  # Two-way players: those with PAR > 0 in both hitter and pitcher roles
-  has_hitter_elig <- !is.na(current_assignments)
+  # Two-way players: those with PAR > 0 in both batter and pitcher roles
+  has_batter_elig <- !is.na(current_assignments)
   has_pitcher_elig <- !is.na(role) & role %in% c("SP", "RP")
 
-  # A two-way player must have both hitter and pitcher eligibility
+  # A two-way player must have both batter and pitcher eligibility
   two_way_ids <- character(0L)
 
   for (i in seq_len(nrow(projections))) {
@@ -1656,7 +1656,7 @@ replacement_from_prices <- function(
       next
     }
 
-    # Compute PAR as hitter
+    # Compute PAR as batter
     assigned_pos <- current_assignments[pid]
     if (is.null(assigned_pos) || is.na(assigned_pos)) {
       next
@@ -1711,12 +1711,12 @@ replacement_from_prices <- function(
   projections,
   repl_stats_df,
   cats_upper,
-  active_hitter_pos,
+  active_batter_pos,
   active_pitcher_pos,
   current_assignments
 ) {
   # position_sd_ratio: per-category ratio of within-position SD to global SD
-  positions <- c(active_hitter_pos, active_pitcher_pos)
+  positions <- c(active_batter_pos, active_pitcher_pos)
 
   sd_ratios <- vector("list", length(positions))
   names(sd_ratios) <- positions

@@ -60,7 +60,7 @@ fake_league_history <- function(
 }
 
 # Build a minimal league_config for n_teams.
-# C=1, 1B=1, 2B=1, 3B=1, SS=1, OF=3, DH=1 = 9 primary hitter slots per team
+# C=1, 1B=1, 2B=1, 3B=1, SS=1, OF=3, DH=1 = 9 primary batter slots per team
 # SP=5, RP=4 = 9 pitcher slots per team
 fake_league_config <- function(n_teams = 12L) {
   league_config(
@@ -309,7 +309,7 @@ test_that("TS-6: WHIP SGP sign correct — negative above pool mean, positive be
 # TS-7: Blended-pool AVG SGP — sign correctness (sign flip vs ERA/WHIP)
 # ---------------------------------------------------------------------------
 test_that("TS-7: AVG SGP sign correct — positive above pool mean (sign flip vs ERA/WHIP)", {
-  # Pool: 5 hitters with AB in [470, 550]
+  # Pool: 5 batters with AB in [470, 550]
   # Evaluated players: AB = 50 / 40, strictly below pool minimum (470)
   # → evaluated players are never selected into the pool
   pool_ab  <- c(550, 530, 510, 490, 470)
@@ -351,7 +351,7 @@ test_that("TS-7: AVG SGP sign correct — positive above pool mean (sign flip vs
     pitcher_slots      = 1L,
     batting_categories = c("HR", "AVG"),
     # pitcher_categories supplied as a placeholder; this fixture only exercises
-    # hitter cats. The placeholder ensures league_config() accepts the call.
+    # batter cats. The placeholder ensures league_config() accepts the call.
     pitcher_categories = c("K")
   )
 
@@ -438,8 +438,8 @@ test_that("TS-8: ERA SGP equals exact hand-computed formula", {
 # TS-9: Blended-pool AVG SGP — exact formula check
 # ---------------------------------------------------------------------------
 test_that("TS-9: AVG SGP equals exact hand-computed formula (sign flip verified)", {
-  # pool_size_h = 2 * 2 = 4 (n_teams=2, C=1, 1B=1 → 2 primary slots per team)
-  # Pool: 4 hitters with AB in [540, 600]
+  # pool_size_b = 2 * 2 = 4 (n_teams=2, C=1, 1B=1 → 2 primary slots per team)
+  # Pool: 4 batters with AB in [540, 600]
   # Player Y: AB = 500, strictly below pool minimum (540) → not in pool
   pool_ab  <- c(600, 580, 560, 540)
   pool_avg <- c(0.280, 0.265, 0.255, 0.250)
@@ -490,7 +490,7 @@ test_that("TS-9: AVG SGP equals exact hand-computed formula (sign flip verified)
     pitcher_slots      = 1L,
     batting_categories = c("HR", "AVG"),
     # pitcher_categories supplied as a placeholder; this fixture only exercises
-    # hitter cats. The placeholder ensures league_config() accepts the call.
+    # batter cats. The placeholder ensures league_config() accepts the call.
     pitcher_categories = c("K")
   )
 
@@ -627,7 +627,7 @@ test_that("TS-12: zero AB player gets NA for AVG SGP, others computed normally",
     pitcher_slots      = 1L,
     batting_categories = c("HR", "AVG"),
     # pitcher_categories supplied as a placeholder; this fixture only exercises
-    # hitter cats. The placeholder ensures league_config() accepts the call.
+    # batter cats. The placeholder ensures league_config() accepts the call.
     pitcher_categories = c("K")
   )
 

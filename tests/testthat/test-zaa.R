@@ -9,40 +9,40 @@
 #
 # KNOWN IMPLEMENTATION BUG (audit.md §BLOCK):
 #   zaa() throws "missing value where TRUE/FALSE needed" (blank_labels guard)
-#   when replacement is provided AND hitter_pool = "positional" (the default),
+#   when replacement is provided AND batter_pool = "positional" (the default),
 #   or when any pitcher rows exist in the stats pool alongside replacement.
-#   Only hitter-only pools with hitter_pool = "combined" work with replacement.
+#   Only batter-only pools with batter_pool = "combined" work with replacement.
 #   Affected scenarios: TS-ZAA-2 (pool restriction with pitchers).
 
 library(testthat)
 
 # ===========================================================================
-# Helper: build a unified stats data frame from separate pitcher/hitter frames
+# Helper: build a unified stats data frame from separate pitcher/batter frames
 # Adds cross-position NA columns so rbind works cleanly.
 # ===========================================================================
-.build_mixed_stats <- function(pitcher_df, hitter_df,
-                               pitcher_cats, hitter_cats) {
-  # pitcher rows: NA for hitter cats
-  for (col in hitter_cats) {
+.build_mixed_stats <- function(pitcher_df, batter_df,
+                               pitcher_cats, batter_cats) {
+  # pitcher rows: NA for batter cats
+  for (col in batter_cats) {
     if (!col %in% names(pitcher_df)) pitcher_df[[col]] <- NA_real_
   }
-  # hitter rows: NA for pitcher cats
+  # batter rows: NA for pitcher cats
   for (col in pitcher_cats) {
-    if (!col %in% names(hitter_df)) hitter_df[[col]] <- NA_real_
+    if (!col %in% names(batter_df)) batter_df[[col]] <- NA_real_
   }
-  all_cols <- union(names(pitcher_df), names(hitter_df))
+  all_cols <- union(names(pitcher_df), names(batter_df))
   for (col in all_cols) {
     if (!col %in% names(pitcher_df)) pitcher_df[[col]] <- NA_real_
-    if (!col %in% names(hitter_df))  hitter_df[[col]]  <- NA_real_
+    if (!col %in% names(batter_df))  batter_df[[col]]  <- NA_real_
   }
-  rbind(pitcher_df[, all_cols], hitter_df[, all_cols])
+  rbind(pitcher_df[, all_cols], batter_df[, all_cols])
 }
 
 # ===========================================================================
 # Shared fixture for TS-ZAA-5 and TS-ZAA-6:
 # 4 pitchers (2 SP, 2 RP) with W, K, SV, QS all non-NA;
-# 5 hitters with HR, R, RBI, SB, BB all non-NA.
-# Categories: 5 hitter (HR,R,RBI,SB,BB) + 4 pitcher (W,K,SV,QS).
+# 5 batters with HR, R, RBI, SB, BB all non-NA.
+# Categories: 5 batter (HR,R,RBI,SB,BB) + 4 pitcher (W,K,SV,QS).
 # Linear pitcher weight = 4/5 = 0.8; sqrt = sqrt(4/5) ~ 0.894.
 # ===========================================================================
 .make_ts5_fixture <- function() {
@@ -55,7 +55,7 @@ library(testthat)
     SV = c(2, 1, 20, 10), QS = c(18, 15, 4, 2),
     stringsAsFactors = FALSE
   )
-  hitters <- data.frame(
+  batters <- data.frame(
     player_id       = paste0("H", 1:5),
     player_name     = paste0("H", 1:5),
     pos_eligibility = c("1B", "1B", "OF", "OF", "OF"),
@@ -67,7 +67,7 @@ library(testthat)
   )
   p_cats <- c("W", "K", "SV", "QS")
   h_cats <- c("HR", "R", "RBI", "SB", "BB")
-  stats_df <- .build_mixed_stats(pitchers, hitters, p_cats, h_cats)
+  stats_df <- .build_mixed_stats(pitchers, batters, p_cats, h_cats)
 
   cfg <- suppressWarnings(
     league_config(
@@ -82,9 +82,9 @@ library(testthat)
     stats_df      = stats_df,
     cfg           = cfg,
     pitcher_cols  = paste0("zaa_", p_cats),
-    hitter_cols   = paste0("zaa_", h_cats),
+    batter_cols   = paste0("zaa_", h_cats),
     pitcher_rows  = 1:4,
-    hitter_rows   = 5:9
+    batter_rows   = 5:9
   )
 }
 
@@ -198,7 +198,7 @@ test_that("TS-ZAA-12: NA IP -> zaa_ERA = NA and warning fires", {
 })
 
 test_that("TS-ZAA-12: zero AB -> zaa_AVG = NA and warning fires", {
-  hitters <- data.frame(
+  batters <- data.frame(
     player_id       = c("H1", "H2", "H3", "H4"),
     player_name     = c("A", "B", "C", "D"),
     pos_eligibility = rep("1B", 4),
@@ -208,13 +208,13 @@ test_that("TS-ZAA-12: zero AB -> zaa_AVG = NA and warning fires", {
     HR              = c(25, 10, 20, 30),
     stringsAsFactors = FALSE
   )
-  hitters <- pad_cross_side_columns(hitters)
+  batters <- pad_cross_side_columns(batters)
   cfg <- make_zaa_cfg(categories = c("AVG", "HR"),
                       roster_slots  = c("1B" = 4L),
                       pitcher_slots = c(SP = 0L, RP = 0L))
 
   expect_warning(
-    {result <- zaa(stats = hitters, config = cfg)},
+    {result <- zaa(stats = batters, config = cfg)},
     class = "rotostats_warning_zero_playing_time"
   )
   expect_true(is.na(result$zaa_AVG[result$player_id == "H2"]),
@@ -272,7 +272,7 @@ test_that("TS-ZAA-1: below-mean ERA -> positive zaa_ERA; above-mean ERA -> negat
 # ---------------------------------------------------------------------------
 
 test_that("TS-ZAA-8A positional: distribution nested by position; sd_vol for rate stats only", {
-  hitters <- data.frame(
+  batters <- data.frame(
     player_id       = c("C1", "C2", "B1", "B2"),
     player_name     = c("C1", "C2", "B1", "B2"),
     pos_eligibility = c("C", "C", "1B", "1B"),
@@ -282,13 +282,13 @@ test_that("TS-ZAA-8A positional: distribution nested by position; sd_vol for rat
     AB              = c(380, 420, 480, 520),
     stringsAsFactors = FALSE
   )
-  hitters <- pad_cross_side_columns(hitters)
+  batters <- pad_cross_side_columns(batters)
   cfg <- make_zaa_cfg(categories = c("HR", "AVG"),
                       roster_slots  = c(C = 2L, "1B" = 2L),
                       pitcher_slots = c(SP = 0L, RP = 0L))
 
   result_A <- withCallingHandlers(
-    zaa(stats = hitters, config = cfg, hitter_pool = "positional"),
+    zaa(stats = batters, config = cfg, batter_pool = "positional"),
     message = function(m) invokeRestart("muffleMessage")
   )
 
@@ -320,7 +320,7 @@ test_that("TS-ZAA-8A positional: distribution nested by position; sd_vol for rat
 })
 
 test_that("TS-ZAA-8B combined: distribution flat by category; no position keys", {
-  hitters <- data.frame(
+  batters <- data.frame(
     player_id       = c("C1", "C2", "B1", "B2"),
     player_name     = c("C1", "C2", "B1", "B2"),
     pos_eligibility = c("C", "C", "1B", "1B"),
@@ -330,13 +330,13 @@ test_that("TS-ZAA-8B combined: distribution flat by category; no position keys",
     AB              = c(380, 420, 480, 520),
     stringsAsFactors = FALSE
   )
-  hitters <- pad_cross_side_columns(hitters)
+  batters <- pad_cross_side_columns(batters)
   cfg <- make_zaa_cfg(categories = c("HR", "AVG"),
                       roster_slots  = c(C = 2L, "1B" = 2L),
                       pitcher_slots = c(SP = 0L, RP = 0L))
 
   result_B <- withCallingHandlers(
-    zaa(stats = hitters, config = cfg, hitter_pool = "combined"),
+    zaa(stats = batters, config = cfg, batter_pool = "combined"),
     message = function(m) invokeRestart("muffleMessage")
   )
 
@@ -369,7 +369,7 @@ test_that("TS-ZAA-8B combined: distribution flat by category; no position keys",
 # ---------------------------------------------------------------------------
 
 test_that("TS-ZAA-10: attr(replacement,'projections') supersedes explicit stats argument", {
-  # Uses hitter_pool = "combined" to avoid blank_labels bug with positional pool.
+  # Uses batter_pool = "combined" to avoid blank_labels bug with positional pool.
   stats_in_repl <- data.frame(
     player_id       = paste0("R", 1:5),
     player_name     = paste0("Repl", 1:5),
@@ -386,7 +386,7 @@ test_that("TS-ZAA-10: attr(replacement,'projections') supersedes explicit stats 
     pitcher_slots      = c(SP = 0L, RP = 0L),
     batting_categories = "HR",
     # pitcher_categories supplied as a placeholder; this fixture only exercises
-    # hitter HR. The placeholder ensures league_config() accepts the call.
+    # batter HR. The placeholder ensures league_config() accepts the call.
     pitcher_categories = c("K")
   )
   repl <- suppressWarnings(replacement_level(stats_in_repl, config = cfg_small))
@@ -402,9 +402,9 @@ test_that("TS-ZAA-10: attr(replacement,'projections') supersedes explicit stats 
   stats_explicit <- pad_cross_side_columns(stats_explicit)
 
   result_main    <- zaa(stats = stats_explicit, replacement = repl,
-                        config = cfg_small, hitter_pool = "combined")
+                        config = cfg_small, batter_pool = "combined")
   result_control <- zaa(stats = stats_in_repl,  replacement = repl,
-                        config = cfg_small, hitter_pool = "combined")
+                        config = cfg_small, batter_pool = "combined")
 
   expect_equal(nrow(result_main), 5L,
                label = "TS-ZAA-10: row count from repl projections (5)")
@@ -600,13 +600,13 @@ test_that("TS-ZAA-16: replacement non-NULL emits NO message", {
                        pitcher_slots = c(SP = 0L, RP = 0L),
                        batting_categories = "HR",
                        # pitcher_categories supplied as a placeholder; this
-                       # fixture only exercises hitter HR. The placeholder
+                       # fixture only exercises batter HR. The placeholder
                        # ensures league_config() accepts the call.
                        pitcher_categories = "K")
   repl <- suppressWarnings(replacement_level(players, config = cfg))
 
   expect_no_message(
-    zaa(stats = players, replacement = repl, config = cfg, hitter_pool = "combined")
+    zaa(stats = players, replacement = repl, config = cfg, batter_pool = "combined")
   )
 })
 
@@ -616,8 +616,8 @@ test_that("TS-ZAA-16: replacement non-NULL emits NO message", {
 
 test_that("TS-ZAA-5 linear: pitcher total_zaa / rowSums(pitcher_cats) ~ 4/5 = 0.8", {
   # Fixture: 4 pitcher cats (W,K,SV,QS) all non-NA for all pitchers;
-  #          5 hitter cats (HR,R,RBI,SB,BB) all non-NA for all hitters.
-  # Expected linear multiplier: 4/5 = 0.8 for pitchers, 1.0 for hitters.
+  #          5 batter cats (HR,R,RBI,SB,BB) all non-NA for all batters.
+  # Expected linear multiplier: 4/5 = 0.8 for pitchers, 1.0 for batters.
   fx <- .make_ts5_fixture()
 
   result_A <- suppressWarnings(
@@ -637,12 +637,12 @@ test_that("TS-ZAA-5 linear: pitcher total_zaa / rowSums(pitcher_cats) ~ 4/5 = 0.
                                   " ratio ~ 0.8"))
     }
   }
-  for (i in fx$hitter_rows) {
-    rsum <- sum(as.numeric(result_A[i, fx$hitter_cols]), na.rm = FALSE)
+  for (i in fx$batter_rows) {
+    rsum <- sum(as.numeric(result_A[i, fx$batter_cols]), na.rm = FALSE)
     if (!is.na(rsum) && abs(rsum) > 1e-10) {
       ratio <- result_A$total_zaa[i] / rsum
       expect_equal(ratio, 1.0, tolerance = 1e-6,
-                   label = paste0("TS-ZAA-5 linear: hitter row ", i,
+                   label = paste0("TS-ZAA-5 linear: batter row ", i,
                                   " ratio ~ 1.0"))
     }
   }
@@ -722,12 +722,12 @@ test_that("TS-ZAA-6: category_weight overrides weight_method (not 0.8, but 0.5)"
                                   " ratio ~ 0.5 (not 0.8)"))
     }
   }
-  for (i in fx$hitter_rows) {
-    rsum <- sum(as.numeric(result[i, fx$hitter_cols]), na.rm = FALSE)
+  for (i in fx$batter_rows) {
+    rsum <- sum(as.numeric(result[i, fx$batter_cols]), na.rm = FALSE)
     if (!is.na(rsum) && abs(rsum) > 1e-10) {
       ratio <- result$total_zaa[i] / rsum
       expect_equal(ratio, 1.0, tolerance = 1e-6,
-                   label = paste0("TS-ZAA-6: hitter row ", i,
+                   label = paste0("TS-ZAA-6: batter row ", i,
                                   " ratio ~ 1.0"))
     }
   }
@@ -738,11 +738,11 @@ test_that("TS-ZAA-6: category_weight overrides weight_method (not 0.8, but 0.5)"
 # NOTE: Cannot test the restriction with a pitched-only pool because of the
 # blank_labels implementation bug (see BLOCK in audit.md). We test:
 # (a) Call A (replacement=NULL) emits inform; (b) row-count / inform assertions
-# for a hitter-only pool where replacement DOES work.
+# for a batter-only pool where replacement DOES work.
 # ---------------------------------------------------------------------------
 
 test_that("TS-ZAA-2: replacement=NULL emits inform; replacement non-NULL does not", {
-  hitters <- pad_cross_side_columns(data.frame(
+  batters <- pad_cross_side_columns(data.frame(
     player_id       = paste0("H", 1:8),
     player_name     = paste0("H", 1:8),
     pos_eligibility = rep("1B", 8),
@@ -755,22 +755,22 @@ test_that("TS-ZAA-2: replacement=NULL emits inform; replacement non-NULL does no
                        pitcher_slots = c(SP = 0L, RP = 0L),
                        batting_categories = "HR",
                        # pitcher_categories supplied as a placeholder; this
-                       # fixture only exercises hitter HR. The placeholder
+                       # fixture only exercises batter HR. The placeholder
                        # ensures league_config() accepts the call.
                        pitcher_categories = "K")
-  repl <- suppressWarnings(replacement_level(hitters, config = cfg))
+  repl <- suppressWarnings(replacement_level(batters, config = cfg))
 
-  expect_message(zaa(stats = hitters, config = cfg))
+  expect_message(zaa(stats = batters, config = cfg))
 
   expect_no_message(
-    zaa(stats = hitters, replacement = repl, config = cfg, hitter_pool = "combined")
+    zaa(stats = batters, replacement = repl, config = cfg, batter_pool = "combined")
   )
 })
 
-test_that("TS-ZAA-2: hitter-only replacement restricts output rows to rostered set", {
-  # 8 hitters total, 4 rostered (good HR), 4 fringe (low HR).
-  # replacement built from good_hitters only.
-  good_hitters <- pad_cross_side_columns(data.frame(
+test_that("TS-ZAA-2: batter-only replacement restricts output rows to rostered set", {
+  # 8 batters total, 4 rostered (good HR), 4 fringe (low HR).
+  # replacement built from good_batters only.
+  good_batters <- pad_cross_side_columns(data.frame(
     player_id       = paste0("G", 1:4),
     player_name     = paste0("Good", 1:4),
     pos_eligibility = rep("1B", 4),
@@ -782,12 +782,12 @@ test_that("TS-ZAA-2: hitter-only replacement restricts output rows to rostered s
                        pitcher_slots = c(SP = 0L, RP = 0L),
                        batting_categories = "HR",
                        # pitcher_categories supplied as a placeholder; this
-                       # fixture only exercises hitter HR. The placeholder
+                       # fixture only exercises batter HR. The placeholder
                        # ensures league_config() accepts the call.
                        pitcher_categories = "K")
-  repl <- suppressWarnings(replacement_level(good_hitters, config = cfg))
-  result_B <- zaa(stats = good_hitters, replacement = repl, config = cfg,
-                  hitter_pool = "combined")
+  repl <- suppressWarnings(replacement_level(good_batters, config = cfg))
+  result_B <- zaa(stats = good_batters, replacement = repl, config = cfg,
+                  batter_pool = "combined")
 
   expect_equal(nrow(result_B), 4L,
                label = "TS-ZAA-2: restricted pool returns rostered rows only")
@@ -832,7 +832,7 @@ test_that("TS-ZAA-3: higher IP with same ERA gets larger absolute z-score", {
 test_that("TS-ZAA-3: higher AB with same AVG (above pool mean) gets larger absolute z-score", {
   # H1 and H2 must have AVG > pool mean to avoid zaa_AVG = 0.
   # Pool mean AVG = (0.310+0.310+0.270+0.280)/4 = 0.2925; H1/H2 are above mean.
-  hitters <- data.frame(
+  batters <- data.frame(
     player_id       = c("H1", "H2", "H3", "H4"),
     player_name     = c("A", "B", "C", "D"),
     pos_eligibility = rep("1B", 4),
@@ -842,13 +842,13 @@ test_that("TS-ZAA-3: higher AB with same AVG (above pool mean) gets larger absol
     HR              = c(25, 10, 20, 30),
     stringsAsFactors = FALSE
   )
-  hitters <- pad_cross_side_columns(hitters)
+  batters <- pad_cross_side_columns(batters)
   cfg <- make_zaa_cfg(categories = c("AVG", "HR"),
                       roster_slots  = c("1B" = 4L),
                       pitcher_slots = c(SP = 0L, RP = 0L))
 
   result <- withCallingHandlers(
-    zaa(stats = hitters, config = cfg, hitter_pool = "combined"),
+    zaa(stats = batters, config = cfg, batter_pool = "combined"),
     message = function(m) invokeRestart("muffleMessage")
   )
 
@@ -954,11 +954,11 @@ test_that("TS-ZAA-7: split pool gives RP1 a lower zaa_SV than combined pool", {
 })
 
 # ---------------------------------------------------------------------------
-# TS-ZAA-9 — hitter_pool effect on z-score magnitude
+# TS-ZAA-9 — batter_pool effect on z-score magnitude
 # ---------------------------------------------------------------------------
 
 test_that("TS-ZAA-9: catcher HR z-score larger under positional than combined pool", {
-  hitters <- data.frame(
+  batters <- data.frame(
     player_id       = c("C1", "C2", "B1", "B2", "B3", "B4"),
     player_name     = c("C1", "C2", "B1", "B2", "B3", "B4"),
     pos_eligibility = c("C", "C", "1B", "1B", "1B", "1B"),
@@ -966,17 +966,17 @@ test_that("TS-ZAA-9: catcher HR z-score larger under positional than combined po
     HR              = c(15, 25, 20, 28, 35, 42),
     stringsAsFactors = FALSE
   )
-  hitters <- pad_cross_side_columns(hitters)
+  batters <- pad_cross_side_columns(batters)
   cfg <- make_zaa_cfg(categories = "HR",
                       roster_slots  = c(C = 2L, "1B" = 4L),
                       pitcher_slots = c(SP = 0L, RP = 0L))
 
   result_pos <- withCallingHandlers(
-    zaa(stats = hitters, config = cfg, hitter_pool = "positional"),
+    zaa(stats = batters, config = cfg, batter_pool = "positional"),
     message = function(m) invokeRestart("muffleMessage")
   )
   result_comb <- withCallingHandlers(
-    zaa(stats = hitters, config = cfg, hitter_pool = "combined"),
+    zaa(stats = batters, config = cfg, batter_pool = "combined"),
     message = function(m) invokeRestart("muffleMessage")
   )
 
@@ -1019,7 +1019,7 @@ test_that("TS-ZAA-17A: pitcher_pool='both' -> rotostats_error_invalid_parameter"
   )
 })
 
-test_that("TS-ZAA-17B: hitter_pool='all' -> rotostats_error_invalid_parameter", {
+test_that("TS-ZAA-17B: batter_pool='all' -> rotostats_error_invalid_parameter", {
   players <- data.frame(
     player_id = "P1", player_name = "A", pos_eligibility = "1B",
     team = "NYY", league = "AL", HR = 25, stringsAsFactors = FALSE
@@ -1030,7 +1030,7 @@ test_that("TS-ZAA-17B: hitter_pool='all' -> rotostats_error_invalid_parameter", 
 
   expect_error(
     withCallingHandlers(
-      zaa(stats = players, config = cfg, hitter_pool = "all"),
+      zaa(stats = players, config = cfg, batter_pool = "all"),
       message = function(m) invokeRestart("muffleMessage")
     ),
     class = "rotostats_error_invalid_parameter"
@@ -1084,13 +1084,13 @@ test_that("TS-ZAA-18: config=NULL and replacement=NULL -> rotostats_error_invali
 })
 
 # ---------------------------------------------------------------------------
-# TS-ZAA-Z1a — replacement + hitter_pool="positional" (default) + mixed pool
+# TS-ZAA-Z1a — replacement + batter_pool="positional" (default) + mixed pool
 # Closes Note 1 from review.md (zaa-2026-04-21): the blank_labels fix
 # (setNames + is.na guard) was exercised by code inspection but had no
-# end-to-end test with replacement + hitter_pool="positional" + mixed pool.
+# end-to-end test with replacement + batter_pool="positional" + mixed pool.
 # ---------------------------------------------------------------------------
 
-test_that("TS-ZAA-Z1a: replacement + hitter_pool='positional' + mixed pool returns data frame", {
+test_that("TS-ZAA-Z1a: replacement + batter_pool='positional' + mixed pool returns data frame", {
   # Mixed stats: 2 catchers, 2 first basemen, 2 SPs.
   # n_teams=1 so all 6 players are in the rostered set.
   h_cats <- c("HR", "R", "RBI", "SB")
@@ -1124,7 +1124,7 @@ test_that("TS-ZAA-Z1a: replacement + hitter_pool='positional' + mixed pool retur
   result <- withCallingHandlers(
     suppressWarnings(
       zaa(stats = stats_df, config = cfg, replacement = repl,
-          hitter_pool = "positional")
+          batter_pool = "positional")
     ),
     message = function(m) invokeRestart("muffleMessage")
   )
@@ -1132,7 +1132,7 @@ test_that("TS-ZAA-Z1a: replacement + hitter_pool='positional' + mixed pool retur
     withCallingHandlers(
       suppressWarnings(
         zaa(stats = stats_df, config = cfg, replacement = repl,
-            hitter_pool = "positional")
+            batter_pool = "positional")
       ),
       message = function(m) invokeRestart("muffleMessage")
     )
@@ -1154,9 +1154,9 @@ test_that("TS-ZAA-Z1a: replacement + hitter_pool='positional' + mixed pool retur
   )
 
   # Assertion 3: distribution is keyed by side first (Task 4.2 schema), then
-  # nested on the hitter side under hitter_pool="positional".
+  # nested on the batter side under batter_pool="positional".
   # Outer level: $batter / $pitcher.
-  # Under $batter: hitter position keys ("C", "1B"); under each, category
+  # Under $batter: batter position keys ("C", "1B"); under each, category
   # keys (e.g., "HR").
   dist <- attr(result, "distribution")
   expect_true(is.list(dist), label = "TS-ZAA-Z1a: distribution is list")
@@ -1164,9 +1164,9 @@ test_that("TS-ZAA-Z1a: replacement + hitter_pool='positional' + mixed pool retur
               label = "TS-ZAA-Z1a: top-level 'batter' key present")
   bat_dist <- dist[["batter"]]
   expect_true("C"  %in% names(bat_dist),
-              label = "TS-ZAA-Z1a: hitter position key 'C' under $batter")
+              label = "TS-ZAA-Z1a: batter position key 'C' under $batter")
   expect_true("1B" %in% names(bat_dist),
-              label = "TS-ZAA-Z1a: hitter position key '1B' under $batter")
+              label = "TS-ZAA-Z1a: batter position key '1B' under $batter")
   expect_true("HR" %in% names(bat_dist[["C"]]),
               label = "TS-ZAA-Z1a: category key 'HR' under $batter$C")
   expect_true("HR" %in% names(bat_dist[["1B"]]),
@@ -1188,7 +1188,7 @@ test_that("TS-ZAA-Z1a: replacement + hitter_pool='positional' + mixed pool retur
 })
 
 # ---------------------------------------------------------------------------
-# TS-ZAA-19 — AVG in mixed hitter/pitcher pool with weight_method="linear"
+# TS-ZAA-19 — AVG in mixed batter/pitcher pool with weight_method="linear"
 # Closes Note 2 from review.md (zaa-2026-04-21): the interaction
 # weight_method != "none" + mixed pool + AVG (causing pitcher total_zaa=NA
 # via NA AB -> NA zaa_AVG -> NA rowSum) was not covered.
@@ -1199,16 +1199,16 @@ test_that("TS-ZAA-19: AVG + mixed pool + weight_method='linear': pitcher zaa_AVG
   # zaa_AVG via volume-weighting in Step 2b) and §Step 3/§Step 4 (na.rm=FALSE
   # rowSums; weight_method applied to row-summed total).
   #
-  # Scored cats: 5 hitter (HR, R, RBI, SB, AVG) + 4 pitcher counting
+  # Scored cats: 5 batter (HR, R, RBI, SB, AVG) + 4 pitcher counting
   # (W, K, SV, QS).  AVG requires AB; pitchers have NA AB -> NA zaa_AVG
-  # -> NA total_zaa (na.rm=FALSE).  Hitters have NA for W/K/SV/QS but those
-  # are counting stats that produce z=0 for hitters, so hitter total_zaa
-  # is finite.  Linear multiplier for hitters = 5/5 = 1.0 (n_hitter/n_hitter).
+  # -> NA total_zaa (na.rm=FALSE).  Batters have NA for W/K/SV/QS but those
+  # are counting stats that produce z=0 for batters, so batter total_zaa
+  # is finite.  Linear multiplier for batters = 5/5 = 1.0 (n_batter/n_batter).
 
   h_cats <- c("HR", "R", "RBI", "SB", "AVG")
   p_cats <- c("W", "K", "SV", "QS")
 
-  hitters <- data.frame(
+  batters <- data.frame(
     player_id       = c("H1", "H2", "H3"),
     player_name     = c("H1", "H2", "H3"),
     pos_eligibility = c("C", "C", "C"),
@@ -1237,9 +1237,9 @@ test_that("TS-ZAA-19: AVG + mixed pool + weight_method='linear': pitcher zaa_AVG
   )
 
   # Use .build_mixed_stats to add cross-position NA columns so rbind works.
-  stats_df <- .build_mixed_stats(pitchers, hitters,
+  stats_df <- .build_mixed_stats(pitchers, batters,
                                  pitcher_cats = p_cats,
-                                 hitter_cats  = h_cats)
+                                 batter_cats  = h_cats)
 
   cfg <- make_zaa_cfg(
     categories    = c(h_cats, p_cats),
@@ -1264,7 +1264,7 @@ test_that("TS-ZAA-19: AVG + mixed pool + weight_method='linear': pitcher zaa_AVG
   hit_rows <- result$player_id %in% c("H1", "H2", "H3")
 
   # Assertion 1: every pitcher row has NA zaa_AVG.
-  # AVG is a hitter-side category (cross-side under Task 4.2 per-side
+  # AVG is a batter-side category (cross-side under Task 4.2 per-side
   # scoping), so pitcher rows always carry NA zaa_AVG regardless of the
   # legacy NA-AB / Step-2b path.
   expect_true(
@@ -1283,28 +1283,28 @@ test_that("TS-ZAA-19: AVG + mixed pool + weight_method='linear': pitcher zaa_AVG
     label = "TS-ZAA-19: every pitcher row has finite total_zaa (na.rm=TRUE)"
   )
 
-  # Assertion 3: every hitter row has finite total_zaa.
-  # Hitters have full AB coverage -> finite zaa_AVG.
-  # Hitter z-scores for W/K/SV/QS are 0 (not NA) per counting-stat behavior.
+  # Assertion 3: every batter row has finite total_zaa.
+  # Batters have full AB coverage -> finite zaa_AVG.
+  # Batter z-scores for W/K/SV/QS are 0 (not NA) per counting-stat behavior.
   expect_true(
     all(is.finite(result$total_zaa[hit_rows])),
-    label = "TS-ZAA-19: every hitter row has finite total_zaa"
+    label = "TS-ZAA-19: every batter row has finite total_zaa"
   )
 
-  # Assertion 4: hitter multiplier preservation.
-  # Linear weight_method: multiplier = n_hitter_cats / n_hitter_cats = 5/5 = 1.0.
-  # total_zaa[i] / sum(hitter_zaa_cats[i]) must equal 1.0 within tolerance=1e-6.
-  # This mirrors TS-ZAA-5's hitter-side ratio check.
-  hitter_zaa_cols <- paste0("zaa_", h_cats)  # zaa_HR, zaa_R, zaa_RBI, zaa_SB, zaa_AVG
+  # Assertion 4: batter multiplier preservation.
+  # Linear weight_method: multiplier = n_batter_cats / n_batter_cats = 5/5 = 1.0.
+  # total_zaa[i] / sum(batter_zaa_cats[i]) must equal 1.0 within tolerance=1e-6.
+  # This mirrors TS-ZAA-5's batter-side ratio check.
+  batter_zaa_cols <- paste0("zaa_", h_cats)  # zaa_HR, zaa_R, zaa_RBI, zaa_SB, zaa_AVG
   for (pid in c("H1", "H2", "H3")) {
     row  <- result[result$player_id == pid, , drop = FALSE]
-    rsum <- sum(as.numeric(row[, hitter_zaa_cols, drop = FALSE]), na.rm = FALSE)
+    rsum <- sum(as.numeric(row[, batter_zaa_cols, drop = FALSE]), na.rm = FALSE)
     if (!is.na(rsum) && abs(rsum) > 1e-10) {
       ratio <- row$total_zaa / rsum
       expect_equal(
         ratio, 1.0, tolerance = 1e-6,
-        label = paste0("TS-ZAA-19: hitter ", pid,
-                       " ratio total_zaa / sum(hitter_zaa_cats) == 1.0")
+        label = paste0("TS-ZAA-19: batter ", pid,
+                       " ratio total_zaa / sum(batter_zaa_cats) == 1.0")
       )
     }
   }

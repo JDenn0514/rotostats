@@ -36,7 +36,7 @@ test_that("each registry entry has required five fields with correct types", {
                 info = cat)
     expect_true(is.function(entry$numerator_fn), info = cat)
     expect_true(entry$direction %in% c("inverse", "standard"), info = cat)
-    expect_true(entry$pool_type %in% c("pitcher", "hitter"), info = cat)
+    expect_true(entry$pool_type %in% c("pitcher", "batter"), info = cat)
   }
 })
 
@@ -54,7 +54,7 @@ test_that("registry encodes expected direction and pool_type per stat", {
   expect_identical(rsf[["AVG"]]$direction, "standard")
   expect_identical(rsf[["K/9"]]$direction, "standard")
 
-  expect_identical(rsf[["AVG"]]$pool_type, "hitter")
+  expect_identical(rsf[["AVG"]]$pool_type, "batter")
   expect_identical(rsf[["ERA"]]$pool_type, "pitcher")
   expect_identical(rsf[["K/9"]]$pool_type, "pitcher")
   expect_identical(rsf[["FIP"]]$pool_type, "pitcher")

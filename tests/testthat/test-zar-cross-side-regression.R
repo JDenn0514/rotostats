@@ -1,10 +1,10 @@
 # tests/testthat/test-zar-cross-side-regression.R
-# Regression: pitcher rows must receive NA for hitter z-scores (HR, R, SB, ...)
+# Regression: pitcher rows must receive NA for batter z-scores (HR, R, SB, ...)
 # and vice versa. Before this fix, FanGraphs pitcher `hr` (HR allowed) and `r`
-# (R allowed) collided with hitter `hr` / `r` after the union combine, so
-# pitchers received a non-NA hitter z-score.
+# (R allowed) collided with batter `hr` / `r` after the union combine, so
+# pitchers received a non-NA batter z-score.
 
-test_that("pitcher rows get NA for hitter categories in zar() output", {
+test_that("pitcher rows get NA for batter categories in zar() output", {
   skip_if_not_installed("withr")
 
   proj <- make_projections_data(seed = 7L)
@@ -22,20 +22,20 @@ test_that("pitcher rows get NA for hitter categories in zar() output", {
   out  <- zar(repl)
 
   pitchers <- subset(out, player_type == "pitcher")
-  hitters  <- subset(out, player_type == "batter")
+  batters  <- subset(out, player_type == "batter")
 
-  # Hitter cats in pitcher rows: NA, not 0, not non-zero.
+  # Batter cats in pitcher rows: NA, not 0, not non-zero.
   expect_true(all(is.na(pitchers$zar_hr)))
   expect_true(all(is.na(pitchers$zar_r)))
   expect_true(all(is.na(pitchers$zar_sb)))
 
-  # Pitcher cats in hitter rows: NA, not 0.
-  expect_true(all(is.na(hitters$zar_k)))
-  expect_true(all(is.na(hitters$zar_sv)))
-  expect_true(all(is.na(hitters$zar_era)))
+  # Pitcher cats in batter rows: NA, not 0.
+  expect_true(all(is.na(batters$zar_k)))
+  expect_true(all(is.na(batters$zar_sv)))
+  expect_true(all(is.na(batters$zar_era)))
 
   # total_zar is the rowSum(na.rm = TRUE) — neither side gets credit for the
   # other side's cells but each side's intra-side total is well-defined.
   expect_true(all(is.finite(pitchers$total_zar)))
-  expect_true(all(is.finite(hitters$total_zar)))
+  expect_true(all(is.finite(batters$total_zar)))
 })

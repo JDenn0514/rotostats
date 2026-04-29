@@ -11,7 +11,7 @@
 # Matches a POS_ELIGIBILITY string whose pipe-separated tokens include any of
 # `SP`, `RP`, or a bare `P` (the get_projections() fallback for FanGraphs
 # pitchers, which return no position field). Anchored with `(^|\|)` / `(\||$)`
-# so hitter tokens containing the letter "P" (e.g. a hypothetical "1P") do not
+# so batter tokens containing the letter "P" (e.g. a hypothetical "1P") do not
 # match, and so substrings like "SPA" / "XP" are not false positives.
 #
 # Use this instead of open-coding `grepl("(SP|RP)", ...)` anywhere pitcher
@@ -113,15 +113,15 @@ compute_positional_adjustments <- function(
   )
   roster_slots <- config$roster_slots
 
-  # Identify hitter vs pitcher positions
+  # Identify batter vs pitcher positions
   pitcher_pos <- intersect(positions, c("SP", "RP"))
-  hitter_pos <- setdiff(positions, pitcher_pos)
+  batter_pos <- setdiff(positions, pitcher_pos)
 
-  # Primary hitter slots (from league-config.R constant)
-  primary_hitter_pos <- intersect(hitter_pos, PRIMARY_HITTER_SLOTS)
+  # Primary batter slots (from league-config.R constant)
+  primary_batter_pos <- intersect(batter_pos, PRIMARY_BATTER_SLOTS)
 
   # -----------------------------------------------------------------------
-  # Step 1: Global replacement level per group (hitters / pitchers)
+  # Step 1: Global replacement level per group (batters / pitchers)
   # -----------------------------------------------------------------------
 
   compute_global_repl <- function(pos_set) {
@@ -160,7 +160,7 @@ compute_positional_adjustments <- function(
     colSums(repl_mat * weights / wt_sum, na.rm = TRUE)
   }
 
-  global_hitter <- compute_global_repl(primary_hitter_pos)
+  global_batter <- compute_global_repl(primary_batter_pos)
   global_pitcher <- compute_global_repl(pitcher_pos)
 
   # -----------------------------------------------------------------------
@@ -183,7 +183,7 @@ compute_positional_adjustments <- function(
         names(pos_stats) <- scored_cats
 
         # Restrict to categories that are non-NA for this position group.
-        # Hitter positions have NA for pitcher-only stats (ERA, WHIP) and vice
+        # Batter positions have NA for pitcher-only stats (ERA, WHIP) and vice
         # versa.  colSums(na.rm=TRUE) in compute_global_repl() maps those to 0,
         # so (NA - 0) = NA and mean(c(NA,...), na.rm=TRUE) returns NaN when
         # all values in the vector are NA.  Filtering to valid cats prevents NaN.
@@ -217,7 +217,7 @@ compute_positional_adjustments <- function(
       }
     }
 
-    compute_fvarz_premium(primary_hitter_pos, global_hitter)
+    compute_fvarz_premium(primary_batter_pos, global_batter)
     compute_fvarz_premium(pitcher_pos, global_pitcher)
 
     # Re-center so zero-sum holds for the zero_sum_positions.
@@ -229,9 +229,9 @@ compute_positional_adjustments <- function(
     zero_sum_pos <- if (
       catcher_adjustment_method %in% c("split_pool", "none")
     ) {
-      setdiff(primary_hitter_pos, "C")
+      setdiff(primary_batter_pos, "C")
     } else {
-      primary_hitter_pos
+      primary_batter_pos
     }
     zero_sum_pos <- intersect(
       zero_sum_pos,
@@ -264,7 +264,7 @@ compute_positional_adjustments <- function(
         ])
         names(pos_stats) <- scored_cats
         # Restrict to categories non-NA for this position group (same reasoning
-        # as fvarz: hitter positions have NA for pitcher-only stats).
+        # as fvarz: batter positions have NA for pitcher-only stats).
         valid_cats <- scored_cats[!is.na(pos_stats[scored_cats])]
         if (length(valid_cats) == 0L) {
           scarcity_premium[[pos]] <<- 0.0
@@ -289,15 +289,15 @@ compute_positional_adjustments <- function(
       }
     }
 
-    compute_sgp_premium(primary_hitter_pos, global_hitter)
+    compute_sgp_premium(primary_batter_pos, global_batter)
     compute_sgp_premium(pitcher_pos, global_pitcher)
 
     zero_sum_pos <- if (
       catcher_adjustment_method %in% c("split_pool", "none")
     ) {
-      setdiff(primary_hitter_pos, "C")
+      setdiff(primary_batter_pos, "C")
     } else {
-      primary_hitter_pos
+      primary_batter_pos
     }
     zero_sum_pos <- intersect(
       zero_sum_pos,
@@ -314,18 +314,18 @@ compute_positional_adjustments <- function(
   } else if (positional_adjustment_method == "dollar") {
     budget <- config$budget
     budget_split <- config$budget_split
-    hitter_budget <- budget * budget_split
+    batter_budget <- budget * budget_split
     pitcher_budget <- budget * (1 - budget_split)
 
-    n_hitter_slots <- sum(
-      as.numeric(roster_slots[primary_hitter_pos]),
+    n_batter_slots <- sum(
+      as.numeric(roster_slots[primary_batter_pos]),
       na.rm = TRUE
     ) *
       config$n_teams
     n_pitcher_slots <- sum(as.numeric(config$pitcher_slots)) * config$n_teams
 
-    per_hitter_dollar <- if (n_hitter_slots > 0) {
-      hitter_budget / n_hitter_slots
+    per_batter_dollar <- if (n_batter_slots > 0) {
+      batter_budget / n_batter_slots
     } else {
       0
     }
@@ -335,16 +335,16 @@ compute_positional_adjustments <- function(
       0
     }
 
-    for (pos in primary_hitter_pos) {
+    for (pos in primary_batter_pos) {
       idx <- match(pos, replacement_stats$position)
       pos_stats <- as.numeric(replacement_stats[idx, scored_cats, drop = TRUE])
       names(pos_stats) <- scored_cats
       # Restrict to categories non-NA for this position group.
       valid_cats <- scored_cats[!is.na(pos_stats[scored_cats])]
-      global_stats <- as.numeric(global_hitter[valid_cats])
+      global_stats <- as.numeric(global_batter[valid_cats])
       diffs <- global_stats - pos_stats[valid_cats]
       scarcity_premium[[pos]] <- if (length(diffs) > 0L) {
-        mean(diffs, na.rm = TRUE) * per_hitter_dollar
+        mean(diffs, na.rm = TRUE) * per_batter_dollar
       } else {
         0.0
       }
@@ -371,9 +371,9 @@ compute_positional_adjustments <- function(
     zero_sum_pos <- if (
       catcher_adjustment_method %in% c("split_pool", "none")
     ) {
-      setdiff(primary_hitter_pos, "C")
+      setdiff(primary_batter_pos, "C")
     } else {
-      primary_hitter_pos
+      primary_batter_pos
     }
     zero_sum_pos <- intersect(
       zero_sum_pos,
@@ -425,15 +425,15 @@ compute_positional_adjustments <- function(
       }
     }
 
-    compute_posblend_premium(primary_hitter_pos, global_hitter)
+    compute_posblend_premium(primary_batter_pos, global_batter)
     compute_posblend_premium(pitcher_pos, global_pitcher)
 
     zero_sum_pos <- if (
       catcher_adjustment_method %in% c("split_pool", "none")
     ) {
-      setdiff(primary_hitter_pos, "C")
+      setdiff(primary_batter_pos, "C")
     } else {
-      primary_hitter_pos
+      primary_batter_pos
     }
     zero_sum_pos <- intersect(
       zero_sum_pos,
@@ -654,41 +654,41 @@ infer_pitcher_roles <- function(projections, sp_ip_threshold) {
 #   1. Split POS_ELIGIBILITY on "|" and take the first element as the
 #      legacy primary.
 #   2. If the primary is NOT "DH", return it unchanged — this covers every
-#      hitter whose first eligibility is a real positional slot (even if it
+#      batter whose first eligibility is a real positional slot (even if it
 #      is inactive in this league, e.g. "3B|1B" in a C/1B/OF league) and
 #      every pitcher row ("SP", "RP", "P").
-#   3. If "DH" is itself an active hitter slot, return "DH" — the league
+#   3. If "DH" is itself an active batter slot, return "DH" — the league
 #      actually has a DH bucket and the label matches replacement_stats.
 #   4. Otherwise the player is DH-only (or "DH|…") in a league without a
 #      DH slot. Prefer another listed eligibility that IS active, and fall
-#      back to the least-scarce active hitter position (most roster slots)
+#      back to the least-scarce active batter position (most roster slots)
 #      so the seed always lands on a key in replacement_stats.
 #
 # Args:
 #   pos_elig           character scalar ("DH", "DH|OF", "1B|3B", "P", ...)
-#   active_hitter_pos  character vector of active hitter slot names
+#   active_batter_pos  character vector of active batter slot names
 #   roster_slots       named integer vector from league_config
 #
 # Returns: character scalar — the resolved seed position.
 
 #' @noRd
-resolve_seed_pos <- function(pos_elig, active_hitter_pos, roster_slots) {
+resolve_seed_pos <- function(pos_elig, active_batter_pos, roster_slots) {
   parts <- strsplit(pos_elig, "|", fixed = TRUE)[[1]]
   first <- parts[1L]
 
   # Legacy path: preserve first-position-wins unless the primary is DH in
   # a league without a DH slot.
-  if (!identical(first, "DH") || "DH" %in% active_hitter_pos) {
+  if (!identical(first, "DH") || "DH" %in% active_batter_pos) {
     return(first)
   }
 
   # DH-only-in-no-DH-league corner case — prefer another active eligibility.
-  other_active <- intersect(parts[-1L], active_hitter_pos)
+  other_active <- intersect(parts[-1L], active_batter_pos)
   if (length(other_active) > 0L) {
     return(other_active[1L])
   }
 
-  hit_slots <- roster_slots[names(roster_slots) %in% active_hitter_pos]
+  hit_slots <- roster_slots[names(roster_slots) %in% active_batter_pos]
   if (length(hit_slots) == 0L) {
     return(first)
   }
@@ -876,7 +876,7 @@ detect_cliff <- function(
 #   scored_cats  character vector — category names
 #   rate_cats    character vector — names of rate stats
 #   include_ip   logical — always include IP for pitchers
-#   include_ab   logical — include AB for hitters when AVG/OBP in cats
+#   include_ab   logical — include AB for batters when AVG/OBP in cats
 #
 # Returns: named numeric vector of replacement stats
 
@@ -928,7 +928,7 @@ compute_replacement_stat_line <- function(
 # ---------------------------------------------------------------------------
 
 # compute_pool_zscores()
-# Compute z-scores within the unified hitter or pitcher pool.
+# Compute z-scores within the unified batter or pitcher pool.
 #
 # Pool is sized to pool_size + K players.  Z-scores are computed within the
 # unified pool — not per position — to avoid SD compression at thin positions.
@@ -1023,7 +1023,7 @@ normalize_player_name <- function(x) {
 
 # get_pool_sizes()
 # Delegate to pool_sizes() from R/league-config.R.
-# Returns list(pitchers, hitters).
+# Returns list(pitchers, batters).
 
 #' @noRd
 get_pool_sizes <- function(config) {
@@ -1040,19 +1040,19 @@ get_pool_sizes <- function(config) {
 #   scarcity_premium          named numeric vector
 #   config                    league_config object
 #   catcher_adjustment_method character scalar
-#   primary_hitter_slots      character vector
+#   primary_batter_slots      character vector
 
 #' @noRd
 assert_zero_sum <- function(
   scarcity_premium,
   config,
   catcher_adjustment_method,
-  primary_hitter_slots
+  primary_batter_slots
 ) {
   zero_sum_positions <- if (catcher_adjustment_method == "split_pool") {
-    setdiff(primary_hitter_slots, "C")
+    setdiff(primary_batter_slots, "C")
   } else {
-    primary_hitter_slots
+    primary_batter_slots
   }
 
   roster_slots <- config$roster_slots

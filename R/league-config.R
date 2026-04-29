@@ -15,7 +15,7 @@ CANONICAL_CATEGORIES <- c(
 )
 
 #' @noRd
-PRIMARY_HITTER_SLOTS <- c("C", "1B", "2B", "3B", "SS", "OF", "DH")
+PRIMARY_BATTER_SLOTS <- c("C", "1B", "2B", "3B", "SS", "OF", "DH")
 
 #' @noRd
 VALID_PITCHER_SLOT_NAMES <- c("SP", "RP")
@@ -43,7 +43,7 @@ VALID_KEEPER_METHODS <- c("pool_shrink", "salary_adjust", "none")
 #' weights) remain as arguments on the functions that consume them.
 #'
 #' @param n_teams Positive integer. Number of teams in the league. Default 12.
-#' @param roster_slots Named integer vector of hitter roster slots by position.
+#' @param roster_slots Named integer vector of batter roster slots by position.
 #'   Combo slots (UTIL, MI, CI) should be included — they count toward league
 #'   depth for pool sizing even though they have no independent replacement
 #'   pool. Positions with zero slots may be omitted.
@@ -75,7 +75,7 @@ VALID_KEEPER_METHODS <- c("pool_shrink", "salary_adjust", "none")
 #' @param budget Positive integer. Per-team auction budget in dollars.
 #'   Default `260L`.
 #' @param budget_split Numeric in `(0, 1)`. Fraction of the total league
-#'   budget devoted to hitters. Default `0.60`. Calibrate from spending
+#'   budget devoted to batters. Default `0.60`. Calibrate from spending
 #'   history with `calibrate_budget_split()`.
 #' @param keeper Controls keeper handling. `FALSE` (default) = redraft;
 #'   `TRUE` = keeper league with default settings
@@ -496,10 +496,10 @@ resolve_keeper <- function(keeper) {
 
 #' @noRd
 pool_sizes <- function(config) {
-  primary <- intersect(names(config$roster_slots), PRIMARY_HITTER_SLOTS)
+  primary <- intersect(names(config$roster_slots), PRIMARY_BATTER_SLOTS)
   list(
     pitchers = as.integer(config$n_teams * sum(config$pitcher_slots)),
-    hitters = as.integer(config$n_teams * sum(config$roster_slots[primary]))
+    batters = as.integer(config$n_teams * sum(config$roster_slots[primary]))
   )
 }
 
@@ -524,11 +524,11 @@ print.league_config <- function(x, ...) {
     x$budget,
     x$league_type
   ))
-  hitter_txt <- paste(
+  batter_txt <- paste(
     sprintf("%s=%d", names(x$roster_slots), x$roster_slots),
     collapse = ", "
   )
-  cat(sprintf("  Hitters:    %s (%d slots)\n", hitter_txt, sum(x$roster_slots)))
+  cat(sprintf("  Batters:    %s (%d slots)\n", batter_txt, sum(x$roster_slots)))
   p_total <- sum(x$pitcher_slots)
   pitcher_txt <- if (!is.null(names(x$pitcher_slots))) {
     paste(
