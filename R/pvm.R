@@ -75,7 +75,7 @@
 #'   \item \strong{Category-weighted total.}
 #'     \eqn{total\_pvm[i] = \sum_c pvm[i,c] \times CAT\%[c]}, where
 #'     \eqn{CAT\%[c]} comes from the \code{cat_pct} argument. Sub-role NA
-#'     values (pitchers have NA for hitter categories and vice-versa) are
+#'     values (pitchers have NA for batter categories and vice-versa) are
 #'     treated as 0 in this weighted sum.
 #' }
 #'
@@ -107,10 +107,10 @@
 #'   compute \code{total_pvm}.
 #'   \itemize{
 #'     \item \code{"auto"}: weights derived from \code{config$budget_split}
-#'       (default 0.60). Hitter categories each receive
-#'       \eqn{budget\_split / n\_hitter\_cats}; pitcher categories each
+#'       (default 0.60). Batter categories each receive
+#'       \eqn{budget\_split / n\_batter\_cats}; pitcher categories each
 #'       receive \eqn{(1 - budget\_split) / n\_pitcher\_cats}. For a standard
-#'       5x5 league with \code{budget_split = 0.60}: each hitter category
+#'       5x5 league with \code{budget_split = 0.60}: each batter category
 #'       gets 0.12, each pitcher category gets 0.08.
 #'     \item \code{"equal"}: all scored categories receive equal weight
 #'       \eqn{1 / n\_scored\_cats}.
@@ -172,14 +172,14 @@
 #'       above-replacement contribution for each scored category, after
 #'       sign-flipping inverse categories and applying \code{sub_replacement}
 #'       mode but before volume-weighting or normalization. One column per
-#'       scored category, named \code{contrib_<CAT>} (uppercase). Hitters have
+#'       scored category, named \code{contrib_<CAT>} (uppercase). Batters have
 #'       \code{NA} for pitcher-only categories; pitchers have \code{NA} for
-#'       hitter-only categories.}
+#'       batter-only categories.}
 #'     \item{\code{pvm_[CAT]}}{Proportional pool share for each scored
 #'       category, named \code{pvm_<CAT>} (uppercase). Under
 #'       \code{sub_replacement = "clip"}: values in \eqn{[0, 1]}, summing to
 #'       1.0 per category. Under \code{"negative"}: positive values sum to
-#'       1.0; sub-replacement players have negative values. Hitters have
+#'       1.0; sub-replacement players have negative values. Batters have
 #'       \code{NA} for pitcher categories and vice-versa.}
 #'     \item{\code{total_pvm}}{CAT%-weighted sum of \code{pvm_[CAT]} columns.
 #'       Cross-role \code{NA} cells are treated as 0 in the weighted sum, so
@@ -603,7 +603,7 @@ pvm <- function(
       next
     }
 
-    # Determine if this is a hitter or pitcher category to pick slot weights
+    # Determine if this is a batter or pitcher category to pick slot weights
     is_pitcher_cat <- cat %in% pitcher_categories
     if (is_pitcher_cat) {
       relevant_pos <- intersect(repl_stats$position, pitcher_pos_names)

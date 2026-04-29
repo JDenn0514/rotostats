@@ -33,7 +33,7 @@
 #' the `rate_stat_formulas` argument (see below).
 #'
 #' Pool constants are derived once from the top-`pool_size_p` pitchers (for
-#' entries with `pool_type = "pitcher"`) or top-`pool_size_h` hitters (for
+#' entries with `pool_type = "pitcher"`) or top-`pool_size_b` batters (for
 #' entries with `pool_type = "batter"`) by the registry's `denominator_col`.
 #' Pool sizes come from `pool_sizes(league_config)` and therefore reflect
 #' the league's roster structure.
@@ -137,7 +137,7 @@
 #'   Required when `rate_conversion = "blended_pool"` and
 #'   `pool_baseline = "projection_pool"`.  Passed to `pool_sizes()` (an
 #'   internal helper in `R/league-config.R`) to derive `pool_size_p` and
-#'   `pool_size_h` from the league's roster structure rather than hard-coding
+#'   `pool_size_b` from the league's roster structure rather than hard-coding
 #'   roster depth.
 #' @param baseline_era Numeric scalar or `NULL`.  Explicit ERA baseline used
 #'   only when `rate_conversion = "fixed_baseline"`.  Passed through to

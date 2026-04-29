@@ -55,7 +55,7 @@ not yet implemented.}
 Required when \code{rate_conversion = "blended_pool"} and
 \code{pool_baseline = "projection_pool"}.  Passed to \code{pool_sizes()} (an
 internal helper in \code{R/league-config.R}) to derive \code{pool_size_p} and
-\code{pool_size_h} from the league's roster structure rather than hard-coding
+\code{pool_size_b} from the league's roster structure rather than hard-coding
 roster depth.}
 
 \item{baseline_era}{Numeric scalar or \code{NULL}.  Explicit ERA baseline used
@@ -119,7 +119,7 @@ BB/9, and HR/9 are built in, and users can supply a custom registry via
 the \code{rate_stat_formulas} argument (see below).
 
 Pool constants are derived once from the top-\code{pool_size_p} pitchers (for
-entries with \code{pool_type = "pitcher"}) or top-\code{pool_size_h} hitters (for
+entries with \code{pool_type = "pitcher"}) or top-\code{pool_size_b} batters (for
 entries with \code{pool_type = "batter"}) by the registry's \code{denominator_col}.
 Pool sizes come from \code{pool_sizes(league_config)} and therefore reflect
 the league's roster structure.

@@ -1,6 +1,6 @@
 # R/categories.R — Canonical category lists, partitioned by side.
 #
-# Single source of truth for which scored category belongs to hitters vs
+# Single source of truth for which scored category belongs to batters vs
 # pitchers. Used by league_config validators, zaa()/zar()/par()/pvm() to
 # scope per-side z-score computations, and by .classify_custom_player_type()
 # in get-projections-internal.R when the user supplies a custom data frame

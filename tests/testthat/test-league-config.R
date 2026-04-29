@@ -215,8 +215,8 @@ test_that("league_config() requires batting_categories and pitcher_categories", 
   )
 })
 
-test_that("league_config() allows empty vector for one side (hitter-only or pitcher-only leagues)", {
-  # hitter-only
+test_that("league_config() allows empty vector for one side (batter-only or pitcher-only leagues)", {
+  # batter-only
   cfg_hit <- league_config(
     n_teams            = 12L,
     roster_slots       = c(C = 1L),
@@ -380,7 +380,7 @@ test_that("print.league_config returns x invisibly and renders a summary", {
 # Internal helper: pool_sizes()
 # ---------------------------------------------------------------------------
 
-test_that("pool_sizes() returns a list of pitcher and hitter pool counts", {
+test_that("pool_sizes() returns a list of pitcher and batter pool counts", {
   cfg <- make_cfg()
   ps  <- pool_sizes(cfg)
   expect_type(ps, "list")

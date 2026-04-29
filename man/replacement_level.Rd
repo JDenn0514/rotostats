@@ -36,7 +36,7 @@ replacement_level(
 \item{projections}{A data frame with one row per projected player.
 Required columns: \code{player_id}, \code{player_name}, \code{pos_eligibility},
 \code{team}, \code{league}, plus one column per scored category in \code{config$categories}.
-Pitcher rows require \code{IP}; hitter rows require \code{AB} when \code{AVG}, \code{OBP}, or
+Pitcher rows require \code{IP}; batter rows require \code{AB} when \code{AVG}, \code{OBP}, or
 \code{SLG} is a scored category.  Column names are normalized to uppercase at
 entry (no message emitted).  \code{pos_eligibility} is pipe-delimited
 (\code{"C"}, \code{"1B|3B"}, \code{"SP|RP"}); the first entry is the primary position.
@@ -88,7 +88,7 @@ Controls catcher-specific scarcity-premium override.}
 no \code{role} column is present (default \code{100}).}
 
 \item{normalize_to_season}{Logical.  If \code{TRUE}, normalize counting stats
-to full-season baselines (hitters 600 PA / 550 AB, SP 200 IP, RP 70 IP).
+to full-season baselines (batters 600 PA / 550 AB, SP 200 IP, RP 70 IP).
 Default \code{FALSE}.}
 
 \item{band_width}{Integer or \code{NULL}.  Band half-width K.  Overrides
@@ -136,7 +136,7 @@ A named list with elements:
 \describe{
 \item{\code{replacement_stats}}{data.frame — one row per position (positions
 with \code{roster_slots > 0}, plus SP and RP).  Columns: \code{position},
-one column per scored category, \code{IP} for pitcher rows, \code{AB} for hitter
+one column per scored category, \code{IP} for pitcher rows, \code{AB} for batter
 rows when AVG/OBP/SLG scored, \code{n_band_players}, \code{cliff_detected}.}
 \item{\code{positional_adjustments}}{Named numeric vector of scarcity
 premiums by position, or \code{NULL} on pass 1 when
@@ -145,7 +145,7 @@ premiums by position, or \code{NULL} on pass 1 when
 \code{position}, \code{cliff_detected}, \code{cliff_location}, \code{cliff_magnitude},
 \code{swingman}, \code{n_band_players}.}
 \item{\code{two_way_players}}{Character vector of \code{player_id}s with PAR > 0
-in both hitter and pitcher roles.}
+in both batter and pitcher roles.}
 \item{\code{pool_diagnostics}}{List with \code{position_sd_ratio}: named numeric
 vector of within-position SD / global SD per scored category.}
 \item{\code{method}}{\code{"boundary_band"}.}

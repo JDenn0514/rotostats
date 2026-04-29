@@ -43,7 +43,7 @@ VALID_KEEPER_METHODS <- c("pool_shrink", "salary_adjust", "none")
 #' weights) remain as arguments on the functions that consume them.
 #'
 #' @param n_teams Positive integer. Number of teams in the league. Default 12.
-#' @param roster_slots Named integer vector of hitter roster slots by position.
+#' @param roster_slots Named integer vector of batter roster slots by position.
 #'   Combo slots (UTIL, MI, CI) should be included — they count toward league
 #'   depth for pool sizing even though they have no independent replacement
 #'   pool. Positions with zero slots may be omitted.
@@ -75,7 +75,7 @@ VALID_KEEPER_METHODS <- c("pool_shrink", "salary_adjust", "none")
 #' @param budget Positive integer. Per-team auction budget in dollars.
 #'   Default `260L`.
 #' @param budget_split Numeric in `(0, 1)`. Fraction of the total league
-#'   budget devoted to hitters. Default `0.60`. Calibrate from spending
+#'   budget devoted to batters. Default `0.60`. Calibrate from spending
 #'   history with `calibrate_budget_split()`.
 #' @param keeper Controls keeper handling. `FALSE` (default) = redraft;
 #'   `TRUE` = keeper league with default settings
@@ -528,7 +528,7 @@ print.league_config <- function(x, ...) {
     sprintf("%s=%d", names(x$roster_slots), x$roster_slots),
     collapse = ", "
   )
-  cat(sprintf("  Hitters:    %s (%d slots)\n", batter_txt, sum(x$roster_slots)))
+  cat(sprintf("  Batters:    %s (%d slots)\n", batter_txt, sum(x$roster_slots)))
   p_total <- sum(x$pitcher_slots)
   pitcher_txt <- if (!is.null(names(x$pitcher_slots))) {
     paste(

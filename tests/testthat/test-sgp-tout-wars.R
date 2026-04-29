@@ -34,7 +34,7 @@ test_that("sgp() blended_pool runs on tout_wars_team_season + Steamer fixture", 
   expect_true(all(expected_cols %in% names(out)))
   expect_equal(nrow(out), nrow(projections))
 
-  # At least some hitter rows should have finite hitter-cat SGP, and at
+  # At least some batter rows should have finite batter-cat SGP, and at
   # least some pitcher rows should have finite pitcher-cat SGP. The fixture
   # has 25 batters + 25 pitchers; allow a generous margin (>= 10 each side).
   batter_cols  <- c("sgp_R", "sgp_HR", "sgp_RBI", "sgp_SB", "sgp_OBP")

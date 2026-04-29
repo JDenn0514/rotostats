@@ -11,13 +11,13 @@
 #   zaa() throws "missing value where TRUE/FALSE needed" (blank_labels guard)
 #   when replacement is provided AND batter_pool = "positional" (the default),
 #   or when any pitcher rows exist in the stats pool alongside replacement.
-#   Only hitter-only pools with batter_pool = "combined" work with replacement.
+#   Only batter-only pools with batter_pool = "combined" work with replacement.
 #   Affected scenarios: TS-ZAA-2 (pool restriction with pitchers).
 
 library(testthat)
 
 # ===========================================================================
-# Helper: build a unified stats data frame from separate pitcher/hitter frames
+# Helper: build a unified stats data frame from separate pitcher/batter frames
 # Adds cross-position NA columns so rbind works cleanly.
 # ===========================================================================
 .build_mixed_stats <- function(pitcher_df, batter_df,
@@ -41,8 +41,8 @@ library(testthat)
 # ===========================================================================
 # Shared fixture for TS-ZAA-5 and TS-ZAA-6:
 # 4 pitchers (2 SP, 2 RP) with W, K, SV, QS all non-NA;
-# 5 hitters with HR, R, RBI, SB, BB all non-NA.
-# Categories: 5 hitter (HR,R,RBI,SB,BB) + 4 pitcher (W,K,SV,QS).
+# 5 batters with HR, R, RBI, SB, BB all non-NA.
+# Categories: 5 batter (HR,R,RBI,SB,BB) + 4 pitcher (W,K,SV,QS).
 # Linear pitcher weight = 4/5 = 0.8; sqrt = sqrt(4/5) ~ 0.894.
 # ===========================================================================
 .make_ts5_fixture <- function() {
@@ -386,7 +386,7 @@ test_that("TS-ZAA-10: attr(replacement,'projections') supersedes explicit stats 
     pitcher_slots      = c(SP = 0L, RP = 0L),
     batting_categories = "HR",
     # pitcher_categories supplied as a placeholder; this fixture only exercises
-    # hitter HR. The placeholder ensures league_config() accepts the call.
+    # batter HR. The placeholder ensures league_config() accepts the call.
     pitcher_categories = c("K")
   )
   repl <- suppressWarnings(replacement_level(stats_in_repl, config = cfg_small))
@@ -600,7 +600,7 @@ test_that("TS-ZAA-16: replacement non-NULL emits NO message", {
                        pitcher_slots = c(SP = 0L, RP = 0L),
                        batting_categories = "HR",
                        # pitcher_categories supplied as a placeholder; this
-                       # fixture only exercises hitter HR. The placeholder
+                       # fixture only exercises batter HR. The placeholder
                        # ensures league_config() accepts the call.
                        pitcher_categories = "K")
   repl <- suppressWarnings(replacement_level(players, config = cfg))
@@ -616,8 +616,8 @@ test_that("TS-ZAA-16: replacement non-NULL emits NO message", {
 
 test_that("TS-ZAA-5 linear: pitcher total_zaa / rowSums(pitcher_cats) ~ 4/5 = 0.8", {
   # Fixture: 4 pitcher cats (W,K,SV,QS) all non-NA for all pitchers;
-  #          5 hitter cats (HR,R,RBI,SB,BB) all non-NA for all hitters.
-  # Expected linear multiplier: 4/5 = 0.8 for pitchers, 1.0 for hitters.
+  #          5 batter cats (HR,R,RBI,SB,BB) all non-NA for all batters.
+  # Expected linear multiplier: 4/5 = 0.8 for pitchers, 1.0 for batters.
   fx <- .make_ts5_fixture()
 
   result_A <- suppressWarnings(
@@ -642,7 +642,7 @@ test_that("TS-ZAA-5 linear: pitcher total_zaa / rowSums(pitcher_cats) ~ 4/5 = 0.
     if (!is.na(rsum) && abs(rsum) > 1e-10) {
       ratio <- result_A$total_zaa[i] / rsum
       expect_equal(ratio, 1.0, tolerance = 1e-6,
-                   label = paste0("TS-ZAA-5 linear: hitter row ", i,
+                   label = paste0("TS-ZAA-5 linear: batter row ", i,
                                   " ratio ~ 1.0"))
     }
   }
@@ -727,7 +727,7 @@ test_that("TS-ZAA-6: category_weight overrides weight_method (not 0.8, but 0.5)"
     if (!is.na(rsum) && abs(rsum) > 1e-10) {
       ratio <- result$total_zaa[i] / rsum
       expect_equal(ratio, 1.0, tolerance = 1e-6,
-                   label = paste0("TS-ZAA-6: hitter row ", i,
+                   label = paste0("TS-ZAA-6: batter row ", i,
                                   " ratio ~ 1.0"))
     }
   }
@@ -738,7 +738,7 @@ test_that("TS-ZAA-6: category_weight overrides weight_method (not 0.8, but 0.5)"
 # NOTE: Cannot test the restriction with a pitched-only pool because of the
 # blank_labels implementation bug (see BLOCK in audit.md). We test:
 # (a) Call A (replacement=NULL) emits inform; (b) row-count / inform assertions
-# for a hitter-only pool where replacement DOES work.
+# for a batter-only pool where replacement DOES work.
 # ---------------------------------------------------------------------------
 
 test_that("TS-ZAA-2: replacement=NULL emits inform; replacement non-NULL does not", {
@@ -755,7 +755,7 @@ test_that("TS-ZAA-2: replacement=NULL emits inform; replacement non-NULL does no
                        pitcher_slots = c(SP = 0L, RP = 0L),
                        batting_categories = "HR",
                        # pitcher_categories supplied as a placeholder; this
-                       # fixture only exercises hitter HR. The placeholder
+                       # fixture only exercises batter HR. The placeholder
                        # ensures league_config() accepts the call.
                        pitcher_categories = "K")
   repl <- suppressWarnings(replacement_level(batters, config = cfg))
@@ -767,8 +767,8 @@ test_that("TS-ZAA-2: replacement=NULL emits inform; replacement non-NULL does no
   )
 })
 
-test_that("TS-ZAA-2: hitter-only replacement restricts output rows to rostered set", {
-  # 8 hitters total, 4 rostered (good HR), 4 fringe (low HR).
+test_that("TS-ZAA-2: batter-only replacement restricts output rows to rostered set", {
+  # 8 batters total, 4 rostered (good HR), 4 fringe (low HR).
   # replacement built from good_batters only.
   good_batters <- pad_cross_side_columns(data.frame(
     player_id       = paste0("G", 1:4),
@@ -782,7 +782,7 @@ test_that("TS-ZAA-2: hitter-only replacement restricts output rows to rostered s
                        pitcher_slots = c(SP = 0L, RP = 0L),
                        batting_categories = "HR",
                        # pitcher_categories supplied as a placeholder; this
-                       # fixture only exercises hitter HR. The placeholder
+                       # fixture only exercises batter HR. The placeholder
                        # ensures league_config() accepts the call.
                        pitcher_categories = "K")
   repl <- suppressWarnings(replacement_level(good_batters, config = cfg))
@@ -1154,9 +1154,9 @@ test_that("TS-ZAA-Z1a: replacement + batter_pool='positional' + mixed pool retur
   )
 
   # Assertion 3: distribution is keyed by side first (Task 4.2 schema), then
-  # nested on the hitter side under batter_pool="positional".
+  # nested on the batter side under batter_pool="positional".
   # Outer level: $batter / $pitcher.
-  # Under $batter: hitter position keys ("C", "1B"); under each, category
+  # Under $batter: batter position keys ("C", "1B"); under each, category
   # keys (e.g., "HR").
   dist <- attr(result, "distribution")
   expect_true(is.list(dist), label = "TS-ZAA-Z1a: distribution is list")
@@ -1164,9 +1164,9 @@ test_that("TS-ZAA-Z1a: replacement + batter_pool='positional' + mixed pool retur
               label = "TS-ZAA-Z1a: top-level 'batter' key present")
   bat_dist <- dist[["batter"]]
   expect_true("C"  %in% names(bat_dist),
-              label = "TS-ZAA-Z1a: hitter position key 'C' under $batter")
+              label = "TS-ZAA-Z1a: batter position key 'C' under $batter")
   expect_true("1B" %in% names(bat_dist),
-              label = "TS-ZAA-Z1a: hitter position key '1B' under $batter")
+              label = "TS-ZAA-Z1a: batter position key '1B' under $batter")
   expect_true("HR" %in% names(bat_dist[["C"]]),
               label = "TS-ZAA-Z1a: category key 'HR' under $batter$C")
   expect_true("HR" %in% names(bat_dist[["1B"]]),
@@ -1188,7 +1188,7 @@ test_that("TS-ZAA-Z1a: replacement + batter_pool='positional' + mixed pool retur
 })
 
 # ---------------------------------------------------------------------------
-# TS-ZAA-19 — AVG in mixed hitter/pitcher pool with weight_method="linear"
+# TS-ZAA-19 — AVG in mixed batter/pitcher pool with weight_method="linear"
 # Closes Note 2 from review.md (zaa-2026-04-21): the interaction
 # weight_method != "none" + mixed pool + AVG (causing pitcher total_zaa=NA
 # via NA AB -> NA zaa_AVG -> NA rowSum) was not covered.
@@ -1199,11 +1199,11 @@ test_that("TS-ZAA-19: AVG + mixed pool + weight_method='linear': pitcher zaa_AVG
   # zaa_AVG via volume-weighting in Step 2b) and §Step 3/§Step 4 (na.rm=FALSE
   # rowSums; weight_method applied to row-summed total).
   #
-  # Scored cats: 5 hitter (HR, R, RBI, SB, AVG) + 4 pitcher counting
+  # Scored cats: 5 batter (HR, R, RBI, SB, AVG) + 4 pitcher counting
   # (W, K, SV, QS).  AVG requires AB; pitchers have NA AB -> NA zaa_AVG
-  # -> NA total_zaa (na.rm=FALSE).  Hitters have NA for W/K/SV/QS but those
-  # are counting stats that produce z=0 for hitters, so hitter total_zaa
-  # is finite.  Linear multiplier for hitters = 5/5 = 1.0 (n_hitter/n_hitter).
+  # -> NA total_zaa (na.rm=FALSE).  Batters have NA for W/K/SV/QS but those
+  # are counting stats that produce z=0 for batters, so batter total_zaa
+  # is finite.  Linear multiplier for batters = 5/5 = 1.0 (n_batter/n_batter).
 
   h_cats <- c("HR", "R", "RBI", "SB", "AVG")
   p_cats <- c("W", "K", "SV", "QS")
@@ -1264,7 +1264,7 @@ test_that("TS-ZAA-19: AVG + mixed pool + weight_method='linear': pitcher zaa_AVG
   hit_rows <- result$player_id %in% c("H1", "H2", "H3")
 
   # Assertion 1: every pitcher row has NA zaa_AVG.
-  # AVG is a hitter-side category (cross-side under Task 4.2 per-side
+  # AVG is a batter-side category (cross-side under Task 4.2 per-side
   # scoping), so pitcher rows always carry NA zaa_AVG regardless of the
   # legacy NA-AB / Step-2b path.
   expect_true(
@@ -1283,18 +1283,18 @@ test_that("TS-ZAA-19: AVG + mixed pool + weight_method='linear': pitcher zaa_AVG
     label = "TS-ZAA-19: every pitcher row has finite total_zaa (na.rm=TRUE)"
   )
 
-  # Assertion 3: every hitter row has finite total_zaa.
-  # Hitters have full AB coverage -> finite zaa_AVG.
-  # Hitter z-scores for W/K/SV/QS are 0 (not NA) per counting-stat behavior.
+  # Assertion 3: every batter row has finite total_zaa.
+  # Batters have full AB coverage -> finite zaa_AVG.
+  # Batter z-scores for W/K/SV/QS are 0 (not NA) per counting-stat behavior.
   expect_true(
     all(is.finite(result$total_zaa[hit_rows])),
-    label = "TS-ZAA-19: every hitter row has finite total_zaa"
+    label = "TS-ZAA-19: every batter row has finite total_zaa"
   )
 
-  # Assertion 4: hitter multiplier preservation.
-  # Linear weight_method: multiplier = n_hitter_cats / n_hitter_cats = 5/5 = 1.0.
-  # total_zaa[i] / sum(hitter_zaa_cats[i]) must equal 1.0 within tolerance=1e-6.
-  # This mirrors TS-ZAA-5's hitter-side ratio check.
+  # Assertion 4: batter multiplier preservation.
+  # Linear weight_method: multiplier = n_batter_cats / n_batter_cats = 5/5 = 1.0.
+  # total_zaa[i] / sum(batter_zaa_cats[i]) must equal 1.0 within tolerance=1e-6.
+  # This mirrors TS-ZAA-5's batter-side ratio check.
   batter_zaa_cols <- paste0("zaa_", h_cats)  # zaa_HR, zaa_R, zaa_RBI, zaa_SB, zaa_AVG
   for (pid in c("H1", "H2", "H3")) {
     row  <- result[result$player_id == pid, , drop = FALSE]
@@ -1303,8 +1303,8 @@ test_that("TS-ZAA-19: AVG + mixed pool + weight_method='linear': pitcher zaa_AVG
       ratio <- row$total_zaa / rsum
       expect_equal(
         ratio, 1.0, tolerance = 1e-6,
-        label = paste0("TS-ZAA-19: hitter ", pid,
-                       " ratio total_zaa / sum(hitter_zaa_cats) == 1.0")
+        label = paste0("TS-ZAA-19: batter ", pid,
+                       " ratio total_zaa / sum(batter_zaa_cats) == 1.0")
       )
     }
   }

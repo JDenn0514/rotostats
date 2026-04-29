@@ -19,7 +19,7 @@ test_that("CANONICAL_BATTING_CATEGORIES and CANONICAL_PITCHER_CATEGORIES partiti
   )
 })
 
-test_that(".classify_category_side() returns 'batter' for hitter cats", {
+test_that(".classify_category_side() returns 'batter' for batter cats", {
   expect_equal(.classify_category_side("HR"), "batter")
   expect_equal(.classify_category_side("AVG"), "batter")
   expect_equal(.classify_category_side("OPS"), "batter")

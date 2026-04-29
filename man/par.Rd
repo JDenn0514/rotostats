@@ -68,8 +68,8 @@ is the player's SGP minus the replacement-level SGP for their
 assigned position.  \code{NA} when any input SGP is \code{NA} or the
 player has no position assignment.}
 \item{\code{total_par}}{\code{rowSums()} across all \code{par_[CAT]}
-columns with \code{na.rm = TRUE}.  Mixed hitter/pitcher pools carry
-\code{NA} for opposite-side categories (a hitter has \code{NA} for
+columns with \code{na.rm = TRUE}.  Mixed batter/pitcher pools carry
+\code{NA} for opposite-side categories (a batter has \code{NA} for
 K/SV; a pitcher has \code{NA} for HR/R/SB), so \code{na.rm = TRUE}
 is required for the sum to reflect each player's contribution.}
 \item{\code{sgp_[CAT]}}{(only when \code{include_raw = TRUE}) Raw SGP
@@ -119,7 +119,7 @@ Compute Points Above Replacement (PAR) in SGP units
 \code{match(player_positions, repl_sgp_mat$position)}.
 \item Subtract replacement SGP from player SGP (fully vectorized).
 \item Compute \code{total_par = rowSums(par_[CAT], na.rm = TRUE)} so mixed
-hitter/pitcher pools (where hitters have NA for pitcher-only categories
+batter/pitcher pools (where batters have NA for pitcher-only categories
 and vice versa) sum correctly rather than producing NA.
 \item Band calibration check: median \code{total_par} of the +/-K band around
 the roster boundary must be within \code{boundary_threshold} of 0.

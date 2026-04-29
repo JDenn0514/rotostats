@@ -5,7 +5,7 @@
 # All assertions derive from observable behavior described in test-spec.md.
 #
 # Note on NA handling: pvm results contain NA for non-applicable player-category
-# combinations (pitchers get NA for hitter stats and vice versa). Sums and
+# combinations (pitchers get NA for batter stats and vice versa). Sums and
 # comparisons use na.rm = TRUE as appropriate, which is consistent with the
 # colSums(na.rm=TRUE) approach in pvm() itself.
 #
@@ -63,7 +63,7 @@ test_that("TS-PVM-2: stat_units = 'sgp' triggers rotostats_error_stat_units_mism
 # TS-PVM-3 — Sum-to-1 invariant under sub_replacement = "clip" (default)
 #
 # Note: pvm() returns NA for player-category pairs where the player does not
-# participate in that category (pitchers get NA for hitter stats and vice versa).
+# participate in that category (pitchers get NA for batter stats and vice versa).
 # The sum-to-1 invariant uses na.rm = TRUE (as does pvm()'s internal check),
 # so sum(..., na.rm=TRUE) == 1.0 is the correct assertion here.
 # ---------------------------------------------------------------------------
@@ -562,8 +562,8 @@ test_that("PROP-6: contrib_ columns present iff include_raw = TRUE", {
 # Cross-Reference Benchmark — sum invariant for 2-player/1-category case
 # ---------------------------------------------------------------------------
 
-test_that("BENCH-1: sum-to-1 holds for a 2-player hitter-only fixture", {
-  # This is a smoke test that pvm() produces sum=1 for a simple 2-hitter
+test_that("BENCH-1: sum-to-1 holds for a 2-player batter-only fixture", {
+  # This is a smoke test that pvm() produces sum=1 for a simple 2-batter
   # scenario. The exact pvm values depend on replacement_level's RS computation.
   proj <- data.frame(
     player_id       = c("A", "B"),
@@ -587,7 +587,7 @@ test_that("BENCH-1: sum-to-1 holds for a 2-player hitter-only fixture", {
     stringsAsFactors = FALSE
   )
 
-  # 1 team, 2 1B slots (both rostered); hitter cats only
+  # 1 team, 2 1B slots (both rostered); batter cats only
   cfg <- tryCatch(
     league_config(
       n_teams            = 1L,
@@ -595,7 +595,7 @@ test_that("BENCH-1: sum-to-1 holds for a 2-player hitter-only fixture", {
       pitcher_slots      = 0L,
       batting_categories = c("HR", "R", "RBI", "SB", "AVG"),
       # pitcher_categories supplied as a placeholder; this fixture only exercises
-      # hitter cats. The placeholder ensures league_config() accepts the call.
+      # batter cats. The placeholder ensures league_config() accepts the call.
       pitcher_categories = c("K"),
       budget             = 260L,
       budget_split       = 0.67

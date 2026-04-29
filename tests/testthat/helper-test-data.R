@@ -26,7 +26,7 @@ test_invariants <- function(obj) {
 # Synthetic projections data for replacement_level() tests.
 #
 # Defaults produce enough players for a standard 12-team 5x5 league:
-#   - n_batters = 120:  at least 15 per hitter position (C, 1B, 2B, 3B, SS)
+#   - n_batters = 120:  at least 15 per batter position (C, 1B, 2B, 3B, SS)
 #                       plus 45 OF = 90 base; excess becomes OF.
 #   - n_sp      = 80:   satisfies 12-team × 6 SP slots = 72 needed
 #   - n_rp      = 40:   satisfies 12-team × 3 RP slots = 36 needed
@@ -39,7 +39,7 @@ make_projections_data <- function(n_batters = 120L, n_sp = 80L, n_rp = 40L,
                                    seed = 42L) {
   set.seed(seed)
 
-  # Guarantee at least 15 players per primary hitter position
+  # Guarantee at least 15 players per primary batter position
   pos_min <- 15L
   batter_positions_base <- c(
     rep("C",  pos_min),
@@ -78,7 +78,7 @@ make_projections_data <- function(n_batters = 120L, n_sp = 80L, n_rp = 40L,
 
   pos_elig <- c(batter_positions, rep("SP", n_sp), rep("RP", n_rp))
 
-  # Hitter stats
+  # Batter stats
   HR  <- c(round(pmax(0, rnorm(n_batters_actual, 18, 10))),
            rep(NA_real_, n_sp + n_rp))
   R   <- c(round(pmax(0, rnorm(n_batters_actual, 70, 20))),
@@ -157,7 +157,7 @@ load_projections_fixture <- function() {
 # ---------------------------------------------------------------------------
 # pad_cross_side_columns()
 #
-# Decorates a one-sided test fixture (hitter-only or pitcher-only rows) with
+# Decorates a one-sided test fixture (batter-only or pitcher-only rows) with
 # NA columns for the absent-side categories. This matches the realistic
 # shape produced by `get_projections()` after `bind_rows()` of batter +
 # pitcher fetches: every union column is present on every row; cells that

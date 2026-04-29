@@ -164,14 +164,14 @@ test_that("TS-53: multi_pos=primary ignores position_assignments", {
 # (no position field -> pos_eligibility = "P") were silently dropped from
 # every SP/RP pool. The fixture here mirrors the shape of
 # get_projections("steamer") after normalization: lowercase column names,
-# pitcher rows with pos_eligibility = "P", batter rows with standard hitter
+# pitcher rows with pos_eligibility = "P", batter rows with standard batter
 # eligibility tokens.
 # ---------------------------------------------------------------------------
 
 test_that("replacement_level() classifies pitchers when pos_eligibility = 'P'", {
   set.seed(42L)
   # OF needs n_teams * 5 = 50 eligible; weight the position mix so OF is the
-  # majority (mirrors real projection sets where OF dominates hitter rows).
+  # majority (mirrors real projection sets where OF dominates batter rows).
   hit_positions <- c(
     rep("C",  20L),
     rep("1B", 15L),
@@ -190,7 +190,7 @@ test_that("replacement_level() classifies pitchers when pos_eligibility = 'P'", 
 
   batters <- data.frame(
     player_id       = paste0("h", seq_len(n_hit)),
-    player_name     = paste0("Hitter ", seq_len(n_hit)),
+    player_name     = paste0("Batter ", seq_len(n_hit)),
     team            = "NYY",
     league          = "AL",
     pos_eligibility = hit_positions,

@@ -57,7 +57,7 @@ make_zaa_cfg <- function(categories,
   batting <- intersect(categories, .zaa_batting_cats)
   pitcher <- intersect(categories, .zaa_pitcher_cats)
 
-  # Placeholder fill-ins for hitter-only or pitcher-only fixtures. The
+  # Placeholder fill-ins for batter-only or pitcher-only fixtures. The
   # placeholder ensures league_config() accepts the call; the fixture only
   # exercises the populated side.
   if (length(batting) == 0L) batting <- "HR"
@@ -78,7 +78,7 @@ make_zaa_cfg <- function(categories,
 # For TS-ZAA-5 fixture hygiene: no cross-position NA contamination.
 # ---------------------------------------------------------------------------
 
-# n pitchers with W, K, ERA, WHIP, IP; no hitter stat columns.
+# n pitchers with W, K, ERA, WHIP, IP; no batter stat columns.
 make_pure_pitcher_df <- function(n_sp = 3L, n_rp = 3L, seed = 7L) {
   set.seed(seed)
   n <- n_sp + n_rp
@@ -101,13 +101,13 @@ make_pure_pitcher_df <- function(n_sp = 3L, n_rp = 3L, seed = 7L) {
   )
 }
 
-# n hitters with HR, R, RBI, SB, AVG, AB; no pitcher stat columns.
+# n batters with HR, R, RBI, SB, AVG, AB; no pitcher stat columns.
 make_pure_batter_df <- function(n = 5L, positions = NULL, seed = 11L) {
   set.seed(seed)
   if (is.null(positions)) positions <- rep("OF", n)
   data.frame(
     player_id       = paste0("H", seq_len(n)),
-    player_name     = paste0("Hitter", seq_len(n)),
+    player_name     = paste0("Batter", seq_len(n)),
     pos_eligibility = positions,
     team            = rep("BOS", n),
     league          = rep("AL",  n),

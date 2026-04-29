@@ -131,7 +131,7 @@ test_that("TS-ZAR-3: total_zar == rowSums(zar_*, na.rm = TRUE) within 1e-10", {
 })
 
 test_that("TS-ZAR-3b: cross-side NA categories do not propagate to total_zar", {
-  # Hitters in a rate-stat league have NA IP, yielding NA zar_ERA. Under
+  # Batters in a rate-stat league have NA IP, yielding NA zar_ERA. Under
   # na.rm = TRUE semantics those NAs must contribute 0, not propagate.
   fixture <- .fixture_rate
   result  <- suppressWarnings(zar(fixture$replacement))
@@ -142,11 +142,11 @@ test_that("TS-ZAR-3b: cross-side NA categories do not propagate to total_zar", {
   batter_rows <- result[result$player_id %in% batter_ids, , drop = FALSE]
 
   expect_gt(nrow(batter_rows), 0L,
-            label = "fixture yields at least one hitter row for the check")
+            label = "fixture yields at least one batter row for the check")
   expect_true(any(is.na(batter_rows$zar_ERA)),
-              label = "hitters still carry NA on zar_ERA (precondition)")
+              label = "batters still carry NA on zar_ERA (precondition)")
   expect_false(any(is.na(batter_rows$total_zar)),
-               label = "total_zar is never NA for hitters with NA zar_ERA")
+               label = "total_zar is never NA for batters with NA zar_ERA")
 })
 
 # ===========================================================================
@@ -155,7 +155,7 @@ test_that("TS-ZAR-3b: cross-side NA categories do not propagate to total_zar", {
 test_that("TS-ZAR-4: good ERA pitcher (ERA=2.50 < repl) has zar_era > 0; bad (ERA=6.50 > repl) < 0", {
   fixture <- .fixture_rate
 
-  # suppressWarnings: hitters have NA IP, which triggers a rate-stat warning
+  # suppressWarnings: batters have NA IP, which triggers a rate-stat warning
   result <- suppressWarnings(zar(fixture$replacement))
 
   expect_true("zar_ERA" %in% names(result), label = "zar_ERA column present")
@@ -552,7 +552,7 @@ test_that("SV-5: S4 (SV regime-break) raises top_minus_boundary_zar mean relativ
 # TS-ZAR-13 — Two-way player duplicate player_id handling (Bug D regression)
 # ===========================================================================
 #
-# When a projection source emits two rows for the same player_id — a hitter
+# When a projection source emits two rows for the same player_id — a batter
 # row and a pitcher row (e.g. Shohei Ohtani in thebatx) — each row must keep
 # its own side-specific pool label in zar(). Name-based lookup against a
 # named vector returns only the first match per name and would collapse both
@@ -561,12 +561,12 @@ test_that("SV-5: S4 (SV regime-break) raises top_minus_boundary_zar mean relativ
 # and zar() consumes them positionally.
 test_that("TS-ZAR-13: two-way player (duplicate player_id) keeps side-specific pools", {
   # Start from the standard rate fixture (has ERA/WHIP so both sides are
-  # scored) and duplicate one hitter's player_id onto a pitcher row.
+  # scored) and duplicate one batter's player_id onto a pitcher row.
   fixture <- .fixture_rate
   proj <- fixture$projections
 
-  # Pick the first OF hitter row and the first SP pitcher row, then re-id
-  # the SP row to share the hitter's player_id. After replacement_level()
+  # Pick the first OF batter row and the first SP pitcher row, then re-id
+  # the SP row to share the batter's player_id. After replacement_level()
   # the position_assignments named vector will have two entries with the
   # same name but different pool labels ("OF" and "SP").
   of_row   <- which(proj$pos_eligibility == "OF")[1]
@@ -584,7 +584,7 @@ test_that("TS-ZAR-13: two-way player (duplicate player_id) keeps side-specific p
   dup_rows <- which(result$player_id == two_way_id)
   expect_length(dup_rows, 2L)
 
-  # Collect the zar category columns; identify hitter- vs pitcher-only cats
+  # Collect the zar category columns; identify batter- vs pitcher-only cats
   # by which side of the (duplicated) rows has non-NA zaa values.
   zaa_cols <- grep("^zaa_", names(result), value = TRUE)
 
@@ -604,8 +604,8 @@ test_that("TS-ZAR-13: two-way player (duplicate player_id) keeps side-specific p
   expect_true(all(row_has_nonNA),
               label = "each duplicated-id row must have at least one non-NA zar_<cat>")
 
-  # The two rows must differ in which categories are non-NA: the hitter row
-  # contributes to hitter categories; the pitcher row contributes to pitcher
+  # The two rows must differ in which categories are non-NA: the batter row
+  # contributes to batter categories; the pitcher row contributes to pitcher
   # categories. If both rows shared a pool, their NA patterns would match.
   na_pattern_1 <- is.na(unlist(result[dup_rows[1], zar_cols]))
   na_pattern_2 <- is.na(unlist(result[dup_rows[2], zar_cols]))

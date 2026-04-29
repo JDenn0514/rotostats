@@ -124,7 +124,7 @@ make_par_rate_fixture <- function(seed = 42L) {
 # replacement, causing the band-check median to exceed boundary_threshold = 1.0.
 #
 # Implementation: directly scale down the counting-stat columns in
-# replacement_stats for hitter positions.  This is the "direct manipulation"
+# replacement_stats for batter positions.  This is the "direct manipulation"
 # approach from test-spec.md §2b.
 # ---------------------------------------------------------------------------
 make_miscalibrated_replacement <- function(fixture, shift_n) {

@@ -290,7 +290,7 @@ zaa <- function(
   # Side-scoped category vectors (Phase 2). The union (`categories`) is kept
   # for whole-frame validations (column presence, type checks) and for output
   # column emission; per-side z-score computation in Step 2 below uses
-  # `batting_categories` against hitter pools and `pitcher_categories`
+  # `batting_categories` against batter pools and `pitcher_categories`
   # against pitcher pools so cross-side cells stay NA.
   batting_categories <- working_config$batting_categories
   pitcher_categories <- working_config$pitcher_categories
@@ -393,7 +393,7 @@ zaa <- function(
     # or data frame with player_id and pool_label columns.
     #
     # Note: two-way players (e.g. Shohei Ohtani) appear twice — once as a
-    # hitter row and once as a pitcher row — with the same player_id but
+    # batter row and once as a pitcher row — with the same player_id but
     # distinct pool labels. Named-vector lookup (pa_pools[player_id]) only
     # returns the first match per name and would collapse both rows to the
     # same pool. To preserve duplicates we instead keep positional alignment
@@ -489,8 +489,8 @@ zaa <- function(
     return(result)
   }
 
-  # Classify each player row as hitter or pitcher
-  # SP / RP are pitcher slots; all others are hitters
+  # Classify each player row as batter or pitcher
+  # SP / RP are pitcher slots; all others are batters
   is_pitcher <- row_pools %in% c("SP", "RP", "P", "ALL_PITCHERS")
   is_batter <- !is_pitcher
 
@@ -577,7 +577,7 @@ zaa <- function(
   # ---------------------------------------------------------------------------
 
   # Initialize z-score matrix (players x categories). Cells stay NA when
-  # a row's side does not score that category (e.g. hitter rows are NA for
+  # a row's side does not score that category (e.g. batter rows are NA for
   # zaa_K / zaa_SV / zaa_ERA; pitcher rows are NA for zaa_HR / zaa_R / zaa_SB).
   zaa_col_names <- .zaa_col_name(categories)
   zaa_matrix <- matrix(
@@ -751,7 +751,7 @@ zaa <- function(
   # ---------------------------------------------------------------------------
 
   # na.rm = TRUE: cross-side NAs (e.g. zaa_HR for a pitcher row, zaa_K for a
-  # hitter row) contribute 0 instead of propagating to total_zaa, so each
+  # batter row) contribute 0 instead of propagating to total_zaa, so each
   # side's intra-side total stays well-defined. NAs from same-side reasons
   # (e.g. zero playing time on a rate stat) still fall under na.rm = TRUE
   # here; consumers that want strict propagation can recompute from the

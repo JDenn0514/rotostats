@@ -11,7 +11,7 @@
 # Matches a POS_ELIGIBILITY string whose pipe-separated tokens include any of
 # `SP`, `RP`, or a bare `P` (the get_projections() fallback for FanGraphs
 # pitchers, which return no position field). Anchored with `(^|\|)` / `(\||$)`
-# so hitter tokens containing the letter "P" (e.g. a hypothetical "1P") do not
+# so batter tokens containing the letter "P" (e.g. a hypothetical "1P") do not
 # match, and so substrings like "SPA" / "XP" are not false positives.
 #
 # Use this instead of open-coding `grepl("(SP|RP)", ...)` anywhere pitcher
@@ -113,15 +113,15 @@ compute_positional_adjustments <- function(
   )
   roster_slots <- config$roster_slots
 
-  # Identify hitter vs pitcher positions
+  # Identify batter vs pitcher positions
   pitcher_pos <- intersect(positions, c("SP", "RP"))
   batter_pos <- setdiff(positions, pitcher_pos)
 
-  # Primary hitter slots (from league-config.R constant)
+  # Primary batter slots (from league-config.R constant)
   primary_batter_pos <- intersect(batter_pos, PRIMARY_BATTER_SLOTS)
 
   # -----------------------------------------------------------------------
-  # Step 1: Global replacement level per group (hitters / pitchers)
+  # Step 1: Global replacement level per group (batters / pitchers)
   # -----------------------------------------------------------------------
 
   compute_global_repl <- function(pos_set) {
@@ -183,7 +183,7 @@ compute_positional_adjustments <- function(
         names(pos_stats) <- scored_cats
 
         # Restrict to categories that are non-NA for this position group.
-        # Hitter positions have NA for pitcher-only stats (ERA, WHIP) and vice
+        # Batter positions have NA for pitcher-only stats (ERA, WHIP) and vice
         # versa.  colSums(na.rm=TRUE) in compute_global_repl() maps those to 0,
         # so (NA - 0) = NA and mean(c(NA,...), na.rm=TRUE) returns NaN when
         # all values in the vector are NA.  Filtering to valid cats prevents NaN.
@@ -264,7 +264,7 @@ compute_positional_adjustments <- function(
         ])
         names(pos_stats) <- scored_cats
         # Restrict to categories non-NA for this position group (same reasoning
-        # as fvarz: hitter positions have NA for pitcher-only stats).
+        # as fvarz: batter positions have NA for pitcher-only stats).
         valid_cats <- scored_cats[!is.na(pos_stats[scored_cats])]
         if (length(valid_cats) == 0L) {
           scarcity_premium[[pos]] <<- 0.0
@@ -654,19 +654,19 @@ infer_pitcher_roles <- function(projections, sp_ip_threshold) {
 #   1. Split POS_ELIGIBILITY on "|" and take the first element as the
 #      legacy primary.
 #   2. If the primary is NOT "DH", return it unchanged — this covers every
-#      hitter whose first eligibility is a real positional slot (even if it
+#      batter whose first eligibility is a real positional slot (even if it
 #      is inactive in this league, e.g. "3B|1B" in a C/1B/OF league) and
 #      every pitcher row ("SP", "RP", "P").
-#   3. If "DH" is itself an active hitter slot, return "DH" — the league
+#   3. If "DH" is itself an active batter slot, return "DH" — the league
 #      actually has a DH bucket and the label matches replacement_stats.
 #   4. Otherwise the player is DH-only (or "DH|…") in a league without a
 #      DH slot. Prefer another listed eligibility that IS active, and fall
-#      back to the least-scarce active hitter position (most roster slots)
+#      back to the least-scarce active batter position (most roster slots)
 #      so the seed always lands on a key in replacement_stats.
 #
 # Args:
 #   pos_elig           character scalar ("DH", "DH|OF", "1B|3B", "P", ...)
-#   active_batter_pos  character vector of active hitter slot names
+#   active_batter_pos  character vector of active batter slot names
 #   roster_slots       named integer vector from league_config
 #
 # Returns: character scalar — the resolved seed position.
@@ -876,7 +876,7 @@ detect_cliff <- function(
 #   scored_cats  character vector — category names
 #   rate_cats    character vector — names of rate stats
 #   include_ip   logical — always include IP for pitchers
-#   include_ab   logical — include AB for hitters when AVG/OBP in cats
+#   include_ab   logical — include AB for batters when AVG/OBP in cats
 #
 # Returns: named numeric vector of replacement stats
 
@@ -928,7 +928,7 @@ compute_replacement_stat_line <- function(
 # ---------------------------------------------------------------------------
 
 # compute_pool_zscores()
-# Compute z-scores within the unified hitter or pitcher pool.
+# Compute z-scores within the unified batter or pitcher pool.
 #
 # Pool is sized to pool_size + K players.  Z-scores are computed within the
 # unified pool — not per position — to avoid SD compression at thin positions.
@@ -1023,7 +1023,7 @@ normalize_player_name <- function(x) {
 
 # get_pool_sizes()
 # Delegate to pool_sizes() from R/league-config.R.
-# Returns list(pitchers, hitters).
+# Returns list(pitchers, batters).
 
 #' @noRd
 get_pool_sizes <- function(config) {

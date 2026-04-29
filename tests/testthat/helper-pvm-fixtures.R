@@ -25,7 +25,7 @@
 
 # ---------------------------------------------------------------------------
 # make_pvm_config()
-# Standard 5x5 league config: 10 teams, hitter + pitcher slots per spec.
+# Standard 5x5 league config: 10 teams, batter + pitcher slots per spec.
 #
 # Accepts a flat `categories` vector for backwards-compatible call sites and
 # partitions it into the new batting_categories / pitcher_categories split
@@ -40,7 +40,7 @@ make_pvm_config <- function(
   batting <- intersect(categories, .pvm_batting_cats)
   pitcher <- intersect(categories, .pvm_pitcher_cats)
 
-  # Placeholder fill-ins for hitter-only or pitcher-only fixtures. The
+  # Placeholder fill-ins for batter-only or pitcher-only fixtures. The
   # placeholder ensures league_config() accepts the call; the fixture only
   # exercises the populated side.
   if (length(batting) == 0L) batting <- "HR"
@@ -60,9 +60,9 @@ make_pvm_config <- function(
 
 # ---------------------------------------------------------------------------
 # make_pvm_projections()
-# Synthetic projections: n_hitters and n_pitchers; seed for reproducibility.
+# Synthetic projections: n_batters and n_pitchers; seed for reproducibility.
 # Generates enough players for a 10-team 5x5 league:
-#   9 hitter slots * 10 teams = 90 hitters needed
+#   9 batter slots * 10 teams = 90 batters needed
 #   8 pitcher slots * 10 teams = 80 pitchers needed
 # ---------------------------------------------------------------------------
 make_pvm_projections <- function(n_batters = 180L, n_pitchers = 130L, seed = 42L) {
@@ -95,7 +95,7 @@ make_pvm_replacement <- function(
 # We use n_teams = 2 with 1 slot per position so the boundary player is rank 2.
 # ---------------------------------------------------------------------------
 make_boundary_replacement <- function() {
-  # Use a simple 3-hitter, 2-pitcher config so n_teams=2, 1 slot each
+  # Use a simple 3-batter, 2-pitcher config so n_teams=2, 1 slot each
   cfg <- league_config(
     n_teams            = 2L,
     roster_slots       = c(C = 1L, `1B` = 1L, `2B` = 1L),
