@@ -22,7 +22,7 @@ test_that("pitcher rows get NA for batter categories in zar() output", {
   out  <- zar(repl)
 
   pitchers <- subset(out, player_type == "pitcher")
-  hitters  <- subset(out, player_type == "batter")
+  batters  <- subset(out, player_type == "batter")
 
   # Batter cats in pitcher rows: NA, not 0, not non-zero.
   expect_true(all(is.na(pitchers$zar_hr)))
@@ -30,12 +30,12 @@ test_that("pitcher rows get NA for batter categories in zar() output", {
   expect_true(all(is.na(pitchers$zar_sb)))
 
   # Pitcher cats in batter rows: NA, not 0.
-  expect_true(all(is.na(hitters$zar_k)))
-  expect_true(all(is.na(hitters$zar_sv)))
-  expect_true(all(is.na(hitters$zar_era)))
+  expect_true(all(is.na(batters$zar_k)))
+  expect_true(all(is.na(batters$zar_sv)))
+  expect_true(all(is.na(batters$zar_era)))
 
   # total_zar is the rowSum(na.rm = TRUE) — neither side gets credit for the
   # other side's cells but each side's intra-side total is well-defined.
   expect_true(all(is.finite(pitchers$total_zar)))
-  expect_true(all(is.finite(hitters$total_zar)))
+  expect_true(all(is.finite(batters$total_zar)))
 })
