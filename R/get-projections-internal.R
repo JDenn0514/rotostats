@@ -274,10 +274,10 @@ PROJECTION_COLUMN_RENAME <- c(
 }
 
 #' @noRd
-.derive_k <- function(df) {
+.derive_so <- function(df) {
   if (!all(c("k_per_9", "ip") %in% names(df))) return(df)
-  if ("k" %in% names(df)) return(df)
-  df$k <- df$k_per_9 * df$ip / 9
+  if ("so" %in% names(df)) return(df)
+  df$so <- df$k_per_9 * df$ip / 9
   df
 }
 
@@ -363,7 +363,7 @@ PROJECTION_COLUMN_RENAME <- c(
   df  <- .normalize_projection_cols(df)
   if (player_type == "pitchers") {
     df <- .derive_svhd(df)
-    df <- .derive_k(df)
+    df <- .derive_so(df)
     if (!("pos" %in% names(df))) df$pos <- "P"
   }
   df <- .normalize_pos_eligibility(df)
