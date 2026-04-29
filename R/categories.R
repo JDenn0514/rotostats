@@ -8,14 +8,16 @@
 
 #' @noRd
 CANONICAL_BATTING_CATEGORIES <- c(
-  "HR", "R", "RBI", "SB", "AVG", "OPS"
+  "HR", "R", "RBI", "SB", "AVG", "OBP", "SLG", "OPS",
+  "K%_BATTER", "BB%_BATTER", "SO%_BATTER"
 )
 
 #' @noRd
 CANONICAL_PITCHER_CATEGORIES <- c(
-  "W", "K", "SV", "HLD", "QS", "SVHD",
+  "W", "K", "SO", "SV", "HLD", "QS", "SVHD",
   "ERA", "WHIP", "FIP", "XFIP", "SIERA", "XERA",
-  "K/9", "BB/9", "HR/9"
+  "K/9", "BB/9", "HR/9", "SO/9", "SO/BB",
+  "K%_PITCHER", "BB%_PITCHER", "SO%_PITCHER"
 )
 
 #' @noRd
