@@ -417,9 +417,9 @@ test_that("get_projections(..., player_type = 'pitchers') returns a pitcher fram
   expect_true("svhd" %in% names(out))
   expect_true(all(out$player_type == "pitcher"))
   expect_true("qs" %in% names(out))
-  expect_true("k" %in% names(out))
+  expect_true("so" %in% names(out))
   expect_equal(
-    out$k[out$player_type == "pitcher"],
+    out$so[out$player_type == "pitcher"],
     out$k_per_9[out$player_type == "pitcher"] *
       out$ip[out$player_type == "pitcher"] / 9
   )
@@ -564,10 +564,10 @@ test_that("get_projections('steamer', 'pitchers') derives SVHD from the recorded
   # tibble return
   expect_s3_class(out, "tbl_df")
 
-  # k derivation for pitchers
+  # so derivation for pitchers
   pitcher_rows <- out[out$player_type == "pitcher", , drop = FALSE]
-  expect_true("k" %in% names(pitcher_rows))
-  expect_true(all(is.finite(pitcher_rows$k) | is.na(pitcher_rows$k)))
+  expect_true("so" %in% names(pitcher_rows))
+  expect_true(all(is.finite(pitcher_rows$so) | is.na(pitcher_rows$so)))
 })
 
 test_that("ZiPS pitcher fixture parses even without QS", {
@@ -603,10 +603,10 @@ test_that("ZiPS pitcher fixture parses even without QS", {
   # tibble return
   expect_s3_class(out, "tbl_df")
 
-  # k derivation for pitchers
+  # so derivation for pitchers
   pitcher_rows <- out[out$player_type == "pitcher", , drop = FALSE]
-  expect_true("k" %in% names(pitcher_rows))
-  expect_true(all(is.finite(pitcher_rows$k) | is.na(pitcher_rows$k)))
+  expect_true("so" %in% names(pitcher_rows))
+  expect_true(all(is.finite(pitcher_rows$so) | is.na(pitcher_rows$so)))
 })
 
 # ---------------------------------------------------------------------------
@@ -646,43 +646,50 @@ test_that(".normalize_pos_eligibility() preserves NA in pos", {
 })
 
 # ---------------------------------------------------------------------------
-# .derive_k()
+# .derive_so()
 # ---------------------------------------------------------------------------
 
-test_that(".derive_k() computes k = k_per_9 * ip / 9", {
+test_that(".derive_so() produces an 'so' column from k_per_9 and ip", {
+  df <- data.frame(k_per_9 = 9, ip = 100)
+  out <- rotostats:::.derive_so(df)
+  expect_true("so" %in% names(out))
+  expect_equal(out$so, 100)
+})
+
+test_that(".derive_so() computes so = k_per_9 * ip / 9", {
   df <- data.frame(ip = c(180, 90), k_per_9 = c(9.0, 10.0), stringsAsFactors = FALSE)
-  out <- rotostats:::.derive_k(df)
-  expect_equal(out$k, c(180, 100))
+  out <- rotostats:::.derive_so(df)
+  expect_equal(out$so, c(180, 100))
 })
 
-test_that(".derive_k() is a no-op if k_per_9 is absent", {
+test_that(".derive_so() is a no-op if k_per_9 is absent", {
   df <- data.frame(ip = 180, stringsAsFactors = FALSE)
-  out <- rotostats:::.derive_k(df)
+  out <- rotostats:::.derive_so(df)
   expect_identical(out, df)
-  expect_false("k" %in% names(out))
+  expect_false("so" %in% names(out))
 })
 
-test_that(".derive_k() is a no-op if ip is absent", {
+test_that(".derive_so() is a no-op if ip is absent", {
   df <- data.frame(k_per_9 = 9.0, stringsAsFactors = FALSE)
-  out <- rotostats:::.derive_k(df)
+  out <- rotostats:::.derive_so(df)
   expect_identical(out, df)
-  expect_false("k" %in% names(out))
+  expect_false("so" %in% names(out))
 })
 
-test_that(".derive_k() does not overwrite an existing k column", {
-  df <- data.frame(ip = 180, k_per_9 = 9.0, k = 42, stringsAsFactors = FALSE)
-  out <- rotostats:::.derive_k(df)
-  expect_equal(out$k, 42)
+test_that(".derive_so() does not overwrite an existing so column", {
+  df <- data.frame(ip = 180, k_per_9 = 9.0, so = 42, stringsAsFactors = FALSE)
+  out <- rotostats:::.derive_so(df)
+  expect_equal(out$so, 42)
 })
 
-test_that(".derive_k() propagates NA in ip or k_per_9", {
+test_that(".derive_so() propagates NA in ip or k_per_9", {
   df <- data.frame(
     ip      = c(180, NA_real_, 90),
     k_per_9 = c(9.0, 10.0,     NA_real_),
     stringsAsFactors = FALSE
   )
-  out <- rotostats:::.derive_k(df)
-  expect_equal(out$k, c(180, NA_real_, NA_real_))
+  out <- rotostats:::.derive_so(df)
+  expect_equal(out$so, c(180, NA_real_, NA_real_))
 })
 
 # ---------------------------------------------------------------------------

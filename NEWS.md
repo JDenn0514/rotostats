@@ -57,9 +57,10 @@
   drops rows whose `league` is not `"AL"` or `"NL"`. Set to `FALSE` to
   retain minor-league and free-agent rows.
 
-* `get_projections()` pitcher rows gain a derived `k` column
-  (`k = k_per_9 * ip / 9`) so that strikeouts can be scored as a counting
-  category without downstream arithmetic.
+* `get_projections()` pitcher rows gain a derived `so` column. When
+  FanGraphs supplies `SO`, it is passed through (lowercased); otherwise
+  the column is derived as `so = k_per_9 * ip / 9` so that strikeouts can
+  be scored as a counting category without downstream arithmetic.
 
 * `get_projections()` output now plugs directly into `replacement_level()`
   and `sgp()` without an adapter step.
