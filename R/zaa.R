@@ -499,7 +499,7 @@ zaa <- function(
 
   # Hitters
   if (batter_pool == "combined") {
-    pool_labels[is_hitter] <- "ALL_HITTERS"
+    pool_labels[is_hitter] <- "ALL_BATTERS"
   } else {
     # positional — use row_pools directly for hitters
     pool_labels[is_hitter] <- row_pools[is_hitter]
@@ -904,7 +904,7 @@ zaa <- function(
   attr(result, "units") <- "zscore"
   attr(result, "anchor") <- "average"
   attr(result, "distribution") <- distribution
-  # pool_labels: per-row zaa pool label (e.g. "ALL_HITTERS", "ALL_PITCHERS",
+  # pool_labels: per-row zaa pool label (e.g. "ALL_BATTERS", "ALL_PITCHERS",
   # or positional labels under positional/split pools) used for the
   # within-pool z-score computation.
   attr(result, "pool_labels") <- pool_labels
