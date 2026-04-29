@@ -33,7 +33,7 @@ RATE_STAT_FORMULAS <- list(
     scale = 1,
     numerator_fn = function(rate, denom) rate * denom,
     direction = "standard",
-    pool_type = "hitter"
+    pool_type = "batter"
   ),
   FIP = list(
     denominator_col = "IP",
@@ -119,7 +119,7 @@ RATE_STAT_FORMULAS <- list(
 #'     order in the blended-pool SGP formula.}
 #'   \item{`pool_type`}{Character scalar. Either `"pitcher"` (pool sized from
 #'     `pool_sizes(config)$pitchers` and selected by descending IP) or
-#'     `"hitter"` (pool sized from `pool_sizes(config)$hitters` and selected
+#'     `"batter"` (pool sized from `pool_sizes(config)$hitters` and selected
 #'     by descending AB or the entry's `denominator_col`).}
 #' }
 #'
@@ -220,10 +220,10 @@ rate_stat_formulas <- function() {
     }
     if (
       !identical(entry$pool_type, "pitcher") &&
-        !identical(entry$pool_type, "hitter")
+        !identical(entry$pool_type, "batter")
     ) {
       cli::cli_abort(
-        "Entry {.val {cat}}: {.field pool_type} must be {.val pitcher} or {.val hitter}, not {.val {entry$pool_type}}.",
+        "Entry {.val {cat}}: {.field pool_type} must be {.val pitcher} or {.val batter}, not {.val {entry$pool_type}}.",
         class = "rotostats_error_invalid_rate_stat_formula"
       )
     }

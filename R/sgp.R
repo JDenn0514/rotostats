@@ -34,7 +34,7 @@
 #'
 #' Pool constants are derived once from the top-`pool_size_p` pitchers (for
 #' entries with `pool_type = "pitcher"`) or top-`pool_size_h` hitters (for
-#' entries with `pool_type = "hitter"`) by the registry's `denominator_col`.
+#' entries with `pool_type = "batter"`) by the registry's `denominator_col`.
 #' Pool sizes come from `pool_sizes(league_config)` and therefore reflect
 #' the league's roster structure.
 #'
@@ -407,18 +407,16 @@ sgp <- function(
     .validate_rate_stat_formulas(rate_stat_formulas)
   }
 
-  # Per-category side: "pitcher" or "hitter".
+  # Per-category side: "pitcher" or "batter".
   # Rate stats: read pool_type from the registry entry.
   # Counting stats: fall back to .classify_category_side() (which returns
-  # "batter"/"pitcher"); normalize "batter" -> "hitter" for parity with the
-  # registry vocabulary used here.
+  # "batter"/"pitcher").
   .cat_side <- function(cat) {
     entry <- effective_registry[[cat]]
     if (!is.null(entry) && !is.null(entry$pool_type)) {
       return(entry$pool_type)
     }
-    s <- .classify_category_side(cat)
-    if (identical(s, "batter")) "hitter" else s
+    .classify_category_side(cat)
   }
 
   # Detect rate stats as those scored categories that have a registry entry.
@@ -576,7 +574,7 @@ sgp <- function(
   # 11b. Build one pool per unique (pool_type, denominator_col) across the
   # scored rate stats, then compute the pool denominator sum and per-cat
   # pool numerator. Pools are keyed by denominator_col because in practice
-  # pool_type is determined by denominator_col (IP=pitcher, AB/PA=hitter).
+  # pool_type is determined by denominator_col (IP=pitcher, AB/PA=batter).
   pool_meta <- list() # keyed by denominator_col; stores players df + denom total
   pool_num <- list() # keyed by rate-stat name; stores numerator total
 
@@ -622,23 +620,20 @@ sgp <- function(
 
   n_players <- nrow(projections)
 
-  # Side classification per row: "hitter", "pitcher", "two_way", or NA.
+  # Side classification per row: "batter", "pitcher", "two_way", or NA.
   # Used to NA-fill cross-side sgp cells. Rows with NA classification (e.g.,
   # synthesized replacement rows that lack player_type / pos_eligibility) are
   # skipped by the cross-side mask so their SGP values are preserved.
   row_side <- if ("player_type" %in% names(projections)) {
-    pt <- as.character(projections$player_type)
-    # Normalize "batter" -> "hitter" for parity with registry pool_type
-    pt[pt == "batter"] <- "hitter"
-    pt
+    as.character(projections$player_type)
   } else if ("POS_ELIGIBILITY" %in% names(projections)) {
     elig <- projections$POS_ELIGIBILITY
-    rs <- ifelse(grepl(PITCHER_ELIG_REGEX, elig), "pitcher", "hitter")
+    rs <- ifelse(grepl(PITCHER_ELIG_REGEX, elig), "pitcher", "batter")
     rs[is.na(elig)] <- NA_character_
     rs
   } else if ("pos_eligibility" %in% names(projections)) {
     elig <- projections$pos_eligibility
-    rs <- ifelse(grepl(PITCHER_ELIG_REGEX, elig), "pitcher", "hitter")
+    rs <- ifelse(grepl(PITCHER_ELIG_REGEX, elig), "pitcher", "batter")
     rs[is.na(elig)] <- NA_character_
     rs
   } else {

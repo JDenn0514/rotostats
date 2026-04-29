@@ -1115,14 +1115,14 @@ test_that("user override: custom rate stat with PA denominator computes sgp colu
       scale = 1,
       numerator_fn = function(rate, denom) rate * denom,
       direction = "standard",
-      pool_type = "hitter"
+      pool_type = "batter"
     ),
     MYSTAT = list(
       denominator_col = "PA",
       scale = 1,
       numerator_fn = function(rate, denom) rate * denom,
       direction = "standard",
-      pool_type = "hitter"
+      pool_type = "batter"
     )
   )
 
@@ -1179,7 +1179,7 @@ test_that("user override is full replacement — dropping ERA from override abor
       scale = 1,
       numerator_fn = function(rate, denom) rate * denom,
       direction = "standard",
-      pool_type = "hitter"
+      pool_type = "batter"
     )
   )
 
