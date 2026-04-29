@@ -65,10 +65,10 @@ make_pvm_config <- function(
 #   9 hitter slots * 10 teams = 90 hitters needed
 #   8 pitcher slots * 10 teams = 80 pitchers needed
 # ---------------------------------------------------------------------------
-make_pvm_projections <- function(n_hitters = 180L, n_pitchers = 130L, seed = 42L) {
+make_pvm_projections <- function(n_batters = 180L, n_pitchers = 130L, seed = 42L) {
   n_sp <- round(n_pitchers * 0.625)   # ~5/8 SP
   n_rp <- n_pitchers - n_sp
-  make_projections_data(n_hitters = n_hitters, n_sp = n_sp, n_rp = n_rp, seed = seed)
+  make_projections_data(n_batters = n_batters, n_sp = n_sp, n_rp = n_rp, seed = seed)
 }
 
 # ---------------------------------------------------------------------------

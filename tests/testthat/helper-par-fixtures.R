@@ -133,10 +133,10 @@ make_miscalibrated_replacement <- function(fixture, shift_n) {
   # scale < 1 inflates band-player PAR; larger shift_n shrinks further.
   scale <- pmax(0.1, 1 - shift_n * 0.1)
 
-  hitter_cats <- c("HR", "R", "SB")
+  batter_cats <- c("HR", "R", "SB")
   rs <- repl$replacement_stats
 
-  for (cat in hitter_cats) {
+  for (cat in batter_cats) {
     if (cat %in% names(rs)) {
       rs[[cat]] <- rs[[cat]] * scale
     }

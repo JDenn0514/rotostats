@@ -293,10 +293,10 @@ test_that("TS-PVM-13: cat_pct = 'auto' produces budget_split-weighted total_pvm"
   cfg         <- attr(.pvm_base, "config")
   bsplit      <- cfg$budget_split
 
-  hitter_cats  <- c("HR", "R", "RBI", "SB", "AVG")
+  batter_cats  <- c("HR", "R", "RBI", "SB", "AVG")
   pitcher_cats <- c("W",  "K", "SV",  "ERA", "WHIP")
 
-  pvm_h_cols <- paste0("pvm_", hitter_cats)
+  pvm_h_cols <- paste0("pvm_", batter_cats)
   pvm_p_cols <- paste0("pvm_", pitcher_cats)
 
   # Replace NA with 0 for the weighted sum
@@ -521,11 +521,11 @@ test_that("PROP-3: total_pvm is CAT%-weighted sum of pvm columns (auto weights, 
   cfg      <- attr(.pvm_base, "config")
   bsplit   <- cfg$budget_split
 
-  hitter_cats  <- c("HR", "R", "RBI", "SB", "AVG")
+  batter_cats  <- c("HR", "R", "RBI", "SB", "AVG")
   pitcher_cats <- c("W",  "K", "SV",  "ERA", "WHIP")
-  pvm_cols <- paste0("pvm_", c(hitter_cats, pitcher_cats))
+  pvm_cols <- paste0("pvm_", c(batter_cats, pitcher_cats))
   weights  <- c(
-    setNames(rep(bsplit / 5, 5),         paste0("pvm_", hitter_cats)),
+    setNames(rep(bsplit / 5, 5),         paste0("pvm_", batter_cats)),
     setNames(rep((1 - bsplit) / 5, 5),   paste0("pvm_", pitcher_cats))
   )
 

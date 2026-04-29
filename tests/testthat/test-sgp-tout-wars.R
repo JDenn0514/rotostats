@@ -37,9 +37,9 @@ test_that("sgp() blended_pool runs on tout_wars_team_season + Steamer fixture", 
   # At least some hitter rows should have finite hitter-cat SGP, and at
   # least some pitcher rows should have finite pitcher-cat SGP. The fixture
   # has 25 batters + 25 pitchers; allow a generous margin (>= 10 each side).
-  hitter_cols  <- c("sgp_R", "sgp_HR", "sgp_RBI", "sgp_SB", "sgp_OBP")
+  batter_cols  <- c("sgp_R", "sgp_HR", "sgp_RBI", "sgp_SB", "sgp_OBP")
   pitcher_cols <- c("sgp_W", "sgp_SV", "sgp_SO", "sgp_ERA", "sgp_WHIP")
-  hr_finite <- rowSums(is.finite(as.matrix(out[, hitter_cols, drop = FALSE]))) > 0
+  hr_finite <- rowSums(is.finite(as.matrix(out[, batter_cols, drop = FALSE]))) > 0
   pi_finite <- rowSums(is.finite(as.matrix(out[, pitcher_cols, drop = FALSE]))) > 0
   expect_gte(sum(hr_finite), 10)
   expect_gte(sum(pi_finite), 10)

@@ -74,7 +74,7 @@ make_zaa_cfg <- function(categories,
 }
 
 # ---------------------------------------------------------------------------
-# make_pure_pitcher_df() / make_pure_hitter_df()
+# make_pure_pitcher_df() / make_pure_batter_df()
 # For TS-ZAA-5 fixture hygiene: no cross-position NA contamination.
 # ---------------------------------------------------------------------------
 
@@ -102,7 +102,7 @@ make_pure_pitcher_df <- function(n_sp = 3L, n_rp = 3L, seed = 7L) {
 }
 
 # n hitters with HR, R, RBI, SB, AVG, AB; no pitcher stat columns.
-make_pure_hitter_df <- function(n = 5L, positions = NULL, seed = 11L) {
+make_pure_batter_df <- function(n = 5L, positions = NULL, seed = 11L) {
   set.seed(seed)
   if (is.null(positions)) positions <- rep("OF", n)
   data.frame(

@@ -73,7 +73,7 @@ make_test_sgp_denominators <- function(seed = 42L) {
 # ---------------------------------------------------------------------------
 
 test_that("TS-50: sort_by=sgp iteration converges with valid denominators", {
-  proj       <- make_projections_data(n_hitters = 80L, seed = 42L)
+  proj       <- make_projections_data(n_batters = 80L, seed = 42L)
   sgp_bundle <- suppressWarnings(make_test_sgp_denominators(seed = 42L))
   # sgp_bundle$denominators has rate_conversion = "blended_pool"; must supply
   # sgp_bundle$history (with IP and AB) as league_history so sgp() can compute
@@ -96,7 +96,7 @@ test_that("TS-50: sort_by=sgp iteration converges with valid denominators", {
 # ---------------------------------------------------------------------------
 
 test_that("TS-51: sort_by=sgp produces different replacement stats than zscore", {
-  proj       <- make_projections_data(n_hitters = 80L, seed = 42L)
+  proj       <- make_projections_data(n_batters = 80L, seed = 42L)
   sgp_bundle <- suppressWarnings(make_test_sgp_denominators(seed = 42L))
 
   result_z   <- replacement_level(proj, config = cfg_mixed_12,
@@ -123,7 +123,7 @@ test_that("TS-51: sort_by=sgp produces different replacement stats than zscore",
 # ---------------------------------------------------------------------------
 
 test_that("TS-52: position_assignments on second call updates pool membership", {
-  proj    <- make_projections_data(n_hitters = 80L, 
+  proj    <- make_projections_data(n_batters = 80L, 
                                    seed = 42L)
   result1 <- replacement_level(proj, config = cfg_mixed_12,
                                 multi_pos = "highest_par")
@@ -141,7 +141,7 @@ test_that("TS-52: position_assignments on second call updates pool membership", 
 # ---------------------------------------------------------------------------
 
 test_that("TS-53: multi_pos=primary ignores position_assignments", {
-  proj    <- make_projections_data(n_hitters = 80L, 
+  proj    <- make_projections_data(n_batters = 80L, 
                                    seed = 42L)
   result1 <- replacement_level(proj, config = cfg_mixed_12,
                                 multi_pos = "highest_par")

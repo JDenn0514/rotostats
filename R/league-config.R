@@ -524,11 +524,11 @@ print.league_config <- function(x, ...) {
     x$budget,
     x$league_type
   ))
-  hitter_txt <- paste(
+  batter_txt <- paste(
     sprintf("%s=%d", names(x$roster_slots), x$roster_slots),
     collapse = ", "
   )
-  cat(sprintf("  Hitters:    %s (%d slots)\n", hitter_txt, sum(x$roster_slots)))
+  cat(sprintf("  Hitters:    %s (%d slots)\n", batter_txt, sum(x$roster_slots)))
   p_total <- sum(x$pitcher_slots)
   pitcher_txt <- if (!is.null(names(x$pitcher_slots))) {
     paste(

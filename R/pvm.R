@@ -462,17 +462,17 @@ pvm <- function(
   # ---------------------------------------------------------------------------
   if (is.character(cat_pct) && length(cat_pct) == 1L && !is.na(cat_pct)) {
     if (cat_pct == "auto") {
-      hitter_cats  <- batting_categories
+      batter_cats  <- batting_categories
       pitcher_cats <- pitcher_categories
       bsplit       <- config$budget_split
       if (is.null(bsplit) || !is.numeric(bsplit) || length(bsplit) != 1L) {
         bsplit <- 0.60
       }
       cat_weights <- c(
-        if (length(hitter_cats) > 0L) {
+        if (length(batter_cats) > 0L) {
           stats::setNames(
-            rep(bsplit / length(hitter_cats), length(hitter_cats)),
-            hitter_cats
+            rep(bsplit / length(batter_cats), length(batter_cats)),
+            batter_cats
           )
         } else {
           numeric(0L)
@@ -589,7 +589,7 @@ pvm <- function(
   # repl_stats has columns: position, [cats...], IP, AB (optionally)
   # Weight each position by its roster slots
 
-  hitter_pos_names  <- intersect(names(config$roster_slots), PRIMARY_BATTER_SLOTS)
+  batter_pos_names  <- intersect(names(config$roster_slots), PRIMARY_BATTER_SLOTS)
   pitcher_pos_names <- if (!is.null(names(config$pitcher_slots))) {
     names(config$pitcher_slots)
   } else {
@@ -617,7 +617,7 @@ pvm <- function(
         }
       }, numeric(1L))
     } else {
-      relevant_pos <- intersect(repl_stats$position, hitter_pos_names)
+      relevant_pos <- intersect(repl_stats$position, batter_pos_names)
       slot_weights <- vapply(relevant_pos, function(p) {
         as.numeric(config$roster_slots[[p]])
       }, numeric(1L))

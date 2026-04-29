@@ -492,17 +492,17 @@ zaa <- function(
   # Classify each player row as hitter or pitcher
   # SP / RP are pitcher slots; all others are hitters
   is_pitcher <- row_pools %in% c("SP", "RP", "P", "ALL_PITCHERS")
-  is_hitter <- !is_pitcher
+  is_batter <- !is_pitcher
 
   # Finalize pool labels given pitcher_pool and batter_pool settings
   pool_labels <- character(n_players)
 
-  # Hitters
+  # Batters
   if (batter_pool == "combined") {
-    pool_labels[is_hitter] <- "ALL_BATTERS"
+    pool_labels[is_batter] <- "ALL_BATTERS"
   } else {
-    # positional — use row_pools directly for hitters
-    pool_labels[is_hitter] <- row_pools[is_hitter]
+    # positional — use row_pools directly for batters
+    pool_labels[is_batter] <- row_pools[is_batter]
   }
 
   # Pitchers
@@ -762,26 +762,26 @@ zaa <- function(
   # Step 4 — Apply weight_method or category_weight to total_zaa
   # ---------------------------------------------------------------------------
 
-  # n_hitter_cats: count of categories scored by hitters (non-NA, non-zero)
-  hitter_rows <- which(is_hitter)
+  # n_batter_cats: count of categories scored by batters (non-NA, non-zero)
+  batter_rows <- which(is_batter)
 
-  if (length(hitter_rows) > 0L) {
-    n_hitter_cats <- sum(
+  if (length(batter_rows) > 0L) {
+    n_batter_cats <- sum(
       vapply(
         categories,
         function(cat) {
           col <- upper_col_map[toupper(cat)]
           any(
-            !is.na(working_stats[[col]][hitter_rows]) &
-              working_stats[[col]][hitter_rows] != 0
+            !is.na(working_stats[[col]][batter_rows]) &
+              working_stats[[col]][batter_rows] != 0
           )
         },
         logical(1)
       )
     )
   } else {
-    # No hitters in pool: use total category count as baseline
-    n_hitter_cats <- length(categories)
+    # No batters in pool: use total category count as baseline
+    n_batter_cats <- length(categories)
   }
 
   if (!is.null(category_weight)) {
@@ -821,9 +821,9 @@ zaa <- function(
         multiplier <- switch(
           weight_method,
           "none" = 1,
-          "linear" = if (n_hitter_cats > 0) n_pos_cats / n_hitter_cats else 1,
-          "sqrt" = if (n_hitter_cats > 0) {
-            sqrt(n_pos_cats / n_hitter_cats)
+          "linear" = if (n_batter_cats > 0) n_pos_cats / n_batter_cats else 1,
+          "sqrt" = if (n_batter_cats > 0) {
+            sqrt(n_pos_cats / n_batter_cats)
           } else {
             1
           }
@@ -858,8 +858,8 @@ zaa <- function(
       multiplier <- switch(
         weight_method,
         "none" = 1,
-        "linear" = if (n_hitter_cats > 0) n_pos_cats / n_hitter_cats else 1,
-        "sqrt" = if (n_hitter_cats > 0) sqrt(n_pos_cats / n_hitter_cats) else 1
+        "linear" = if (n_batter_cats > 0) n_pos_cats / n_batter_cats else 1,
+        "sqrt" = if (n_batter_cats > 0) sqrt(n_pos_cats / n_batter_cats) else 1
       )
       total_zaa[pos_rows] <- rowSums(
         zaa_matrix[pos_rows, , drop = FALSE],

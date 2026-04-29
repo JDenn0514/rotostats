@@ -136,16 +136,16 @@ test_that("TS-ZAR-3b: cross-side NA categories do not propagate to total_zar", {
   fixture <- .fixture_rate
   result  <- suppressWarnings(zar(fixture$replacement))
 
-  hitter_ids <- fixture$projections$player_id[
+  batter_ids <- fixture$projections$player_id[
     !grepl("(SP|RP)", fixture$projections$pos_eligibility)
   ]
-  hitter_rows <- result[result$player_id %in% hitter_ids, , drop = FALSE]
+  batter_rows <- result[result$player_id %in% batter_ids, , drop = FALSE]
 
-  expect_gt(nrow(hitter_rows), 0L,
+  expect_gt(nrow(batter_rows), 0L,
             label = "fixture yields at least one hitter row for the check")
-  expect_true(any(is.na(hitter_rows$zar_ERA)),
+  expect_true(any(is.na(batter_rows$zar_ERA)),
               label = "hitters still carry NA on zar_ERA (precondition)")
-  expect_false(any(is.na(hitter_rows$total_zar)),
+  expect_false(any(is.na(batter_rows$total_zar)),
                label = "total_zar is never NA for hitters with NA zar_ERA")
 })
 

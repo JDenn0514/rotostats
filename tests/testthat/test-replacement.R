@@ -1204,7 +1204,7 @@ test_that("TS-R6-2: 3-cycle detection — hash ring buffer catches higher-order 
 # ---------------------------------------------------------------------------
 test_that("TS-R6-3: pathological pool — max_iter fires, converged = FALSE, warning emitted", {
   # Seed matches test-spec §2: set.seed(20260418L + 2L)
-  proj <- make_projections_data(seed = 20260418L + 2L, n_hitters = 200L)
+  proj <- make_projections_data(seed = 20260418L + 2L, n_batters = 200L)
 
   max_iter_val <- 1L
 
@@ -1354,8 +1354,8 @@ test_that("DH-only hitters are not seeded as 'DH' when the league has no DH slot
               info = "DH-only hitters fall back to the most-slots hitter position (OF)")
 
   # Every hitter label (non-pitcher) in pa is a key in replacement_stats.
-  hitter_labels <- unique(pa[!pa %in% c("SP", "RP", "P")])
-  expect_true(all(hitter_labels %in% repl_keys),
+  batter_labels <- unique(pa[!pa %in% c("SP", "RP", "P")])
+  expect_true(all(batter_labels %in% repl_keys),
               info = "every hitter pa label is a key in replacement_stats")
 })
 
