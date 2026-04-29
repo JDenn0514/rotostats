@@ -44,10 +44,10 @@
 #'   \code{"split"}, or \code{"none"}. Forwarded unchanged to the internal
 #'   [zaa()] call. Controls whether SP and RP share a z-score normalization
 #'   pool. Does NOT affect which replacement stat line is used for each role.
-#' @param hitter_pool Character scalar. One of \code{"positional"} (default)
+#' @param batter_pool Character scalar. One of \code{"positional"} (default)
 #'   or \code{"combined"}. Forwarded unchanged to the internal [zaa()] call.
-#'   Controls whether hitter z-scores are computed within each position or
-#'   across all hitters together.
+#'   Controls whether batter z-scores are computed within each position or
+#'   across all batters together.
 #' @param category_weight Named numeric vector or \code{NULL} (default).
 #'   Forwarded unchanged to the internal [zaa()] call. Manual multipliers
 #'   applied to \code{total_zaa} (and therefore \code{total_zar}) per position
@@ -131,7 +131,7 @@ zar <- function(
   replacement,
   include_raw = FALSE,
   pitcher_pool = "combined",
-  hitter_pool = "positional",
+  batter_pool = "positional",
   category_weight = NULL,
   weight_method = "none",
   ...
@@ -202,14 +202,14 @@ zar <- function(
   # ---------------------------------------------------------------------------
   # Step 1 — Compute within-position z-scores via zaa()
   #
-  # Validation of pitcher_pool, hitter_pool, weight_method, category_weight,
+  # Validation of pitcher_pool, batter_pool, weight_method, category_weight,
   # stat_units, column presence, and column types are all delegated to zaa().
   # ---------------------------------------------------------------------------
 
   zaa_result <- zaa(
     replacement = replacement,
     pitcher_pool = pitcher_pool,
-    hitter_pool = hitter_pool,
+    batter_pool = batter_pool,
     category_weight = category_weight,
     weight_method = weight_method,
     ...
@@ -247,7 +247,7 @@ zar <- function(
     if (is_pitcher_pos) {
       use_nested <- identical(pitcher_pool, "split")
     } else {
-      use_nested <- identical(hitter_pool, "positional")
+      use_nested <- identical(batter_pool, "positional")
     }
 
     # Per-side categories: only iterate the side's own scored categories so

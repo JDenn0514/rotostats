@@ -9,9 +9,9 @@
 #
 # KNOWN IMPLEMENTATION BUG (audit.md §BLOCK):
 #   zaa() throws "missing value where TRUE/FALSE needed" (blank_labels guard)
-#   when replacement is provided AND hitter_pool = "positional" (the default),
+#   when replacement is provided AND batter_pool = "positional" (the default),
 #   or when any pitcher rows exist in the stats pool alongside replacement.
-#   Only hitter-only pools with hitter_pool = "combined" work with replacement.
+#   Only hitter-only pools with batter_pool = "combined" work with replacement.
 #   Affected scenarios: TS-ZAA-2 (pool restriction with pitchers).
 
 library(testthat)
@@ -288,7 +288,7 @@ test_that("TS-ZAA-8A positional: distribution nested by position; sd_vol for rat
                       pitcher_slots = c(SP = 0L, RP = 0L))
 
   result_A <- withCallingHandlers(
-    zaa(stats = hitters, config = cfg, hitter_pool = "positional"),
+    zaa(stats = hitters, config = cfg, batter_pool = "positional"),
     message = function(m) invokeRestart("muffleMessage")
   )
 
@@ -336,7 +336,7 @@ test_that("TS-ZAA-8B combined: distribution flat by category; no position keys",
                       pitcher_slots = c(SP = 0L, RP = 0L))
 
   result_B <- withCallingHandlers(
-    zaa(stats = hitters, config = cfg, hitter_pool = "combined"),
+    zaa(stats = hitters, config = cfg, batter_pool = "combined"),
     message = function(m) invokeRestart("muffleMessage")
   )
 
@@ -369,7 +369,7 @@ test_that("TS-ZAA-8B combined: distribution flat by category; no position keys",
 # ---------------------------------------------------------------------------
 
 test_that("TS-ZAA-10: attr(replacement,'projections') supersedes explicit stats argument", {
-  # Uses hitter_pool = "combined" to avoid blank_labels bug with positional pool.
+  # Uses batter_pool = "combined" to avoid blank_labels bug with positional pool.
   stats_in_repl <- data.frame(
     player_id       = paste0("R", 1:5),
     player_name     = paste0("Repl", 1:5),
@@ -402,9 +402,9 @@ test_that("TS-ZAA-10: attr(replacement,'projections') supersedes explicit stats 
   stats_explicit <- pad_cross_side_columns(stats_explicit)
 
   result_main    <- zaa(stats = stats_explicit, replacement = repl,
-                        config = cfg_small, hitter_pool = "combined")
+                        config = cfg_small, batter_pool = "combined")
   result_control <- zaa(stats = stats_in_repl,  replacement = repl,
-                        config = cfg_small, hitter_pool = "combined")
+                        config = cfg_small, batter_pool = "combined")
 
   expect_equal(nrow(result_main), 5L,
                label = "TS-ZAA-10: row count from repl projections (5)")
@@ -606,7 +606,7 @@ test_that("TS-ZAA-16: replacement non-NULL emits NO message", {
   repl <- suppressWarnings(replacement_level(players, config = cfg))
 
   expect_no_message(
-    zaa(stats = players, replacement = repl, config = cfg, hitter_pool = "combined")
+    zaa(stats = players, replacement = repl, config = cfg, batter_pool = "combined")
   )
 })
 
@@ -763,7 +763,7 @@ test_that("TS-ZAA-2: replacement=NULL emits inform; replacement non-NULL does no
   expect_message(zaa(stats = hitters, config = cfg))
 
   expect_no_message(
-    zaa(stats = hitters, replacement = repl, config = cfg, hitter_pool = "combined")
+    zaa(stats = hitters, replacement = repl, config = cfg, batter_pool = "combined")
   )
 })
 
@@ -787,7 +787,7 @@ test_that("TS-ZAA-2: hitter-only replacement restricts output rows to rostered s
                        pitcher_categories = "K")
   repl <- suppressWarnings(replacement_level(good_hitters, config = cfg))
   result_B <- zaa(stats = good_hitters, replacement = repl, config = cfg,
-                  hitter_pool = "combined")
+                  batter_pool = "combined")
 
   expect_equal(nrow(result_B), 4L,
                label = "TS-ZAA-2: restricted pool returns rostered rows only")
@@ -848,7 +848,7 @@ test_that("TS-ZAA-3: higher AB with same AVG (above pool mean) gets larger absol
                       pitcher_slots = c(SP = 0L, RP = 0L))
 
   result <- withCallingHandlers(
-    zaa(stats = hitters, config = cfg, hitter_pool = "combined"),
+    zaa(stats = hitters, config = cfg, batter_pool = "combined"),
     message = function(m) invokeRestart("muffleMessage")
   )
 
@@ -954,7 +954,7 @@ test_that("TS-ZAA-7: split pool gives RP1 a lower zaa_SV than combined pool", {
 })
 
 # ---------------------------------------------------------------------------
-# TS-ZAA-9 — hitter_pool effect on z-score magnitude
+# TS-ZAA-9 — batter_pool effect on z-score magnitude
 # ---------------------------------------------------------------------------
 
 test_that("TS-ZAA-9: catcher HR z-score larger under positional than combined pool", {
@@ -972,11 +972,11 @@ test_that("TS-ZAA-9: catcher HR z-score larger under positional than combined po
                       pitcher_slots = c(SP = 0L, RP = 0L))
 
   result_pos <- withCallingHandlers(
-    zaa(stats = hitters, config = cfg, hitter_pool = "positional"),
+    zaa(stats = hitters, config = cfg, batter_pool = "positional"),
     message = function(m) invokeRestart("muffleMessage")
   )
   result_comb <- withCallingHandlers(
-    zaa(stats = hitters, config = cfg, hitter_pool = "combined"),
+    zaa(stats = hitters, config = cfg, batter_pool = "combined"),
     message = function(m) invokeRestart("muffleMessage")
   )
 
@@ -1019,7 +1019,7 @@ test_that("TS-ZAA-17A: pitcher_pool='both' -> rotostats_error_invalid_parameter"
   )
 })
 
-test_that("TS-ZAA-17B: hitter_pool='all' -> rotostats_error_invalid_parameter", {
+test_that("TS-ZAA-17B: batter_pool='all' -> rotostats_error_invalid_parameter", {
   players <- data.frame(
     player_id = "P1", player_name = "A", pos_eligibility = "1B",
     team = "NYY", league = "AL", HR = 25, stringsAsFactors = FALSE
@@ -1030,7 +1030,7 @@ test_that("TS-ZAA-17B: hitter_pool='all' -> rotostats_error_invalid_parameter", 
 
   expect_error(
     withCallingHandlers(
-      zaa(stats = players, config = cfg, hitter_pool = "all"),
+      zaa(stats = players, config = cfg, batter_pool = "all"),
       message = function(m) invokeRestart("muffleMessage")
     ),
     class = "rotostats_error_invalid_parameter"
@@ -1084,13 +1084,13 @@ test_that("TS-ZAA-18: config=NULL and replacement=NULL -> rotostats_error_invali
 })
 
 # ---------------------------------------------------------------------------
-# TS-ZAA-Z1a — replacement + hitter_pool="positional" (default) + mixed pool
+# TS-ZAA-Z1a — replacement + batter_pool="positional" (default) + mixed pool
 # Closes Note 1 from review.md (zaa-2026-04-21): the blank_labels fix
 # (setNames + is.na guard) was exercised by code inspection but had no
-# end-to-end test with replacement + hitter_pool="positional" + mixed pool.
+# end-to-end test with replacement + batter_pool="positional" + mixed pool.
 # ---------------------------------------------------------------------------
 
-test_that("TS-ZAA-Z1a: replacement + hitter_pool='positional' + mixed pool returns data frame", {
+test_that("TS-ZAA-Z1a: replacement + batter_pool='positional' + mixed pool returns data frame", {
   # Mixed stats: 2 catchers, 2 first basemen, 2 SPs.
   # n_teams=1 so all 6 players are in the rostered set.
   h_cats <- c("HR", "R", "RBI", "SB")
@@ -1124,7 +1124,7 @@ test_that("TS-ZAA-Z1a: replacement + hitter_pool='positional' + mixed pool retur
   result <- withCallingHandlers(
     suppressWarnings(
       zaa(stats = stats_df, config = cfg, replacement = repl,
-          hitter_pool = "positional")
+          batter_pool = "positional")
     ),
     message = function(m) invokeRestart("muffleMessage")
   )
@@ -1132,7 +1132,7 @@ test_that("TS-ZAA-Z1a: replacement + hitter_pool='positional' + mixed pool retur
     withCallingHandlers(
       suppressWarnings(
         zaa(stats = stats_df, config = cfg, replacement = repl,
-            hitter_pool = "positional")
+            batter_pool = "positional")
       ),
       message = function(m) invokeRestart("muffleMessage")
     )
@@ -1154,7 +1154,7 @@ test_that("TS-ZAA-Z1a: replacement + hitter_pool='positional' + mixed pool retur
   )
 
   # Assertion 3: distribution is keyed by side first (Task 4.2 schema), then
-  # nested on the hitter side under hitter_pool="positional".
+  # nested on the hitter side under batter_pool="positional".
   # Outer level: $batter / $pitcher.
   # Under $batter: hitter position keys ("C", "1B"); under each, category
   # keys (e.g., "HR").

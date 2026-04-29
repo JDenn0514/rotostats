@@ -8,7 +8,7 @@ zar(
   replacement,
   include_raw = FALSE,
   pitcher_pool = "combined",
-  hitter_pool = "positional",
+  batter_pool = "positional",
   category_weight = NULL,
   weight_method = "none",
   ...
@@ -30,10 +30,10 @@ average, before replacement subtraction) in the output. Column order is
 \code{\link[=zaa]{zaa()}} call. Controls whether SP and RP share a z-score normalization
 pool. Does NOT affect which replacement stat line is used for each role.}
 
-\item{hitter_pool}{Character scalar. One of \code{"positional"} (default)
+\item{batter_pool}{Character scalar. One of \code{"positional"} (default)
 or \code{"combined"}. Forwarded unchanged to the internal \code{\link[=zaa]{zaa()}} call.
-Controls whether hitter z-scores are computed within each position or
-across all hitters together.}
+Controls whether batter z-scores are computed within each position or
+across all batters together.}
 
 \item{category_weight}{Named numeric vector or \code{NULL} (default).
 Forwarded unchanged to the internal \code{\link[=zaa]{zaa()}} call. Manual multipliers

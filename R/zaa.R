@@ -61,9 +61,9 @@
 #'   `"combined"`: all pitchers in one pool (LPP/FanGraphs approach).
 #'   `"split"`: SP and RP form separate pools (FVARz/BIGz approach).
 #'   `"none"`: all pitchers in one pool, no SP/RP distinction.
-#' @param hitter_pool Character. One of `"positional"` (default) or
-#'   `"combined"`. Controls whether hitter z-scores are computed within each
-#'   position (`"positional"`) or across all hitters together (`"combined"`).
+#' @param batter_pool Character. One of `"positional"` (default) or
+#'   `"combined"`. Controls whether batter z-scores are computed within each
+#'   position (`"positional"`) or across all batters together (`"combined"`).
 #' @param category_weight Named numeric vector mapping position pool labels
 #'   (e.g., `c(SP = 0.8, RP = 0.8)`) to manual multipliers applied to
 #'   `total_zaa`. Overrides `weight_method` when supplied.
@@ -95,8 +95,8 @@
 #'       z-scores; Step 2b denominator) used by `zar()` to score
 #'       replacement lines without re-running `zaa()`. Inner schema:
 #'       nested (pool-keyed -> category-keyed) when
-#'       `hitter_pool = "positional"`; flat (category-keyed) when
-#'       `hitter_pool = "combined"`. Pitchers: nested when
+#'       `batter_pool = "positional"`; flat (category-keyed) when
+#'       `batter_pool = "combined"`. Pitchers: nested when
 #'       `pitcher_pool = "split"`, flat otherwise.}
 #'   }
 #'
@@ -144,7 +144,7 @@ zaa <- function(
   config = NULL,
   replacement = NULL,
   pitcher_pool = "combined",
-  hitter_pool = "positional",
+  batter_pool = "positional",
   category_weight = NULL,
   weight_method = "none",
   ...
@@ -169,14 +169,14 @@ zaa <- function(
     )
   }
 
-  if (!missing(hitter_pool)) {
+  if (!missing(batter_pool)) {
     tryCatch(
-      checkmate::assert_choice(hitter_pool, c("positional", "combined")),
+      checkmate::assert_choice(batter_pool, c("positional", "combined")),
       error = function(e) {
         cli::cli_abort(
           c(
-            "{.arg hitter_pool} must be one of {.val positional} or {.val combined}.",
-            "i" = "You supplied: {.val {hitter_pool}}"
+            "{.arg batter_pool} must be one of {.val positional} or {.val combined}.",
+            "i" = "You supplied: {.val {batter_pool}}"
           ),
           class = "rotostats_error_invalid_parameter",
           call = rlang::caller_env()
@@ -494,11 +494,11 @@ zaa <- function(
   is_pitcher <- row_pools %in% c("SP", "RP", "P", "ALL_PITCHERS")
   is_hitter <- !is_pitcher
 
-  # Finalize pool labels given pitcher_pool and hitter_pool settings
+  # Finalize pool labels given pitcher_pool and batter_pool settings
   pool_labels <- character(n_players)
 
   # Hitters
-  if (hitter_pool == "combined") {
+  if (batter_pool == "combined") {
     pool_labels[is_hitter] <- "ALL_HITTERS"
   } else {
     # positional — use row_pools directly for hitters
@@ -732,7 +732,7 @@ zaa <- function(
       use_nested <- if (is_pitcher_pool) {
         pitcher_pool == "split"
       } else {
-        hitter_pool == "positional"
+        batter_pool == "positional"
       }
 
       if (use_nested) {
