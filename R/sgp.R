@@ -556,7 +556,7 @@ sgp <- function(
   # 11a. Get pool sizes
   ps <- pool_sizes(league_config)
   pool_size_p <- ps$pitchers
-  pool_size_h <- ps$batters
+  pool_size_b <- ps$batters
 
   # Validate that each scored rate stat's denominator column is present in
   # projections. Skipped for rate stats whose rate column is entirely absent
@@ -586,7 +586,7 @@ sgp <- function(
       pool_size <- if (identical(f$pool_type, "pitcher")) {
         pool_size_p
       } else {
-        pool_size_h
+        pool_size_b
       }
       sort_rows <- order(projections[[key]], decreasing = TRUE)
       pool_df <- projections[head(sort_rows, pool_size), , drop = FALSE]

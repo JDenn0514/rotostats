@@ -1295,10 +1295,10 @@ test_that("TS-ZAA-19: AVG + mixed pool + weight_method='linear': pitcher zaa_AVG
   # Linear weight_method: multiplier = n_hitter_cats / n_hitter_cats = 5/5 = 1.0.
   # total_zaa[i] / sum(hitter_zaa_cats[i]) must equal 1.0 within tolerance=1e-6.
   # This mirrors TS-ZAA-5's hitter-side ratio check.
-  hitter_zaa_cols <- paste0("zaa_", h_cats)  # zaa_HR, zaa_R, zaa_RBI, zaa_SB, zaa_AVG
+  batter_zaa_cols <- paste0("zaa_", h_cats)  # zaa_HR, zaa_R, zaa_RBI, zaa_SB, zaa_AVG
   for (pid in c("H1", "H2", "H3")) {
     row  <- result[result$player_id == pid, , drop = FALSE]
-    rsum <- sum(as.numeric(row[, hitter_zaa_cols, drop = FALSE]), na.rm = FALSE)
+    rsum <- sum(as.numeric(row[, batter_zaa_cols, drop = FALSE]), na.rm = FALSE)
     if (!is.na(rsum) && abs(rsum) > 1e-10) {
       ratio <- row$total_zaa / rsum
       expect_equal(

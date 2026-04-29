@@ -188,7 +188,7 @@ test_that("replacement_level() classifies pitchers when pos_eligibility = 'P'", 
   n_rp <- 50L
   n_pit <- n_sp + n_rp
 
-  hitters <- data.frame(
+  batters <- data.frame(
     player_id       = paste0("h", seq_len(n_hit)),
     player_name     = paste0("Hitter ", seq_len(n_hit)),
     team            = "NYY",
@@ -236,7 +236,7 @@ test_that("replacement_level() classifies pitchers when pos_eligibility = 'P'", 
     stringsAsFactors = FALSE
   )
 
-  proj <- rbind(hitters, pitchers)
+  proj <- rbind(batters, pitchers)
 
   config <- league_config(
     n_teams            = 10L,
@@ -285,7 +285,7 @@ test_that("replacement_level() + zar() pipeline produces finite pitcher zar", {
   n_sp <- 80L
   n_rp <- 50L
   n_pit <- n_sp + n_rp
-  hitters <- data.frame(
+  batters <- data.frame(
     player_id       = paste0("h", seq_len(n_hit)),
     player_name     = paste0("H", seq_len(n_hit)),
     team            = "NYY",
@@ -320,7 +320,7 @@ test_that("replacement_level() + zar() pipeline produces finite pitcher zar", {
     K               = ip_vals * rnorm(n_pit, 1.0, 0.1),
     stringsAsFactors = FALSE
   )
-  proj <- rbind(hitters, pitchers)
+  proj <- rbind(batters, pitchers)
   config <- league_config(
     n_teams            = 10L,
     roster_slots       = c(C = 2L, `1B` = 1L, `2B` = 1L, SS = 1L, `3B` = 1L,
