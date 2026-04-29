@@ -120,7 +120,7 @@ the \code{rate_stat_formulas} argument (see below).
 
 Pool constants are derived once from the top-\code{pool_size_p} pitchers (for
 entries with \code{pool_type = "pitcher"}) or top-\code{pool_size_h} hitters (for
-entries with \code{pool_type = "hitter"}) by the registry's \code{denominator_col}.
+entries with \code{pool_type = "batter"}) by the registry's \code{denominator_col}.
 Pool sizes come from \code{pool_sizes(league_config)} and therefore reflect
 the league's roster structure.
 

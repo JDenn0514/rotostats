@@ -458,7 +458,7 @@ replacement_level <- function(
   # Pool size computation
   # -------------------------------------------------------------------------
   ps <- get_pool_sizes(config)
-  pool_size_h <- ps$hitters
+  pool_size_h <- ps$batters
   pool_size_p <- ps$pitchers
 
   # Determine positions with slots > 0

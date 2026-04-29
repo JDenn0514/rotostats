@@ -384,10 +384,10 @@ test_that("pool_sizes() returns a list of pitcher and hitter pool counts", {
   cfg <- make_cfg()
   ps  <- pool_sizes(cfg)
   expect_type(ps, "list")
-  expect_named(ps, c("pitchers", "hitters"), ignore.order = TRUE)
+  expect_named(ps, c("pitchers", "batters"), ignore.order = TRUE)
   expect_equal(ps$pitchers, 12L * 9L)
   # UTIL excluded; no DH
-  expect_equal(ps$hitters, 12L * (1 + 1 + 1 + 1 + 1 + 5))
+  expect_equal(ps$batters, 12L * (1 + 1 + 1 + 1 + 1 + 5))
 })
 
 test_that("pool_sizes() excludes UTIL, MI, CI combo slots", {
@@ -395,14 +395,14 @@ test_that("pool_sizes() excludes UTIL, MI, CI combo slots", {
                                    SS = 1L, OF = 5L,
                                    UTIL = 1L, MI = 1L, CI = 1L))
   ps <- pool_sizes(cfg)
-  expect_equal(ps$hitters, 12L * (1 + 1 + 1 + 1 + 1 + 5))
+  expect_equal(ps$batters, 12L * (1 + 1 + 1 + 1 + 1 + 5))
 })
 
 test_that("pool_sizes() includes DH for AL leagues", {
   roster_with_dh <- c(basic_roster, DH = 1L)
   cfg <- make_cfg(league_type = "AL", roster_slots = roster_with_dh)
   ps  <- pool_sizes(cfg)
-  expect_equal(ps$hitters, 12L * (1 + 1 + 1 + 1 + 1 + 5 + 1))
+  expect_equal(ps$batters, 12L * (1 + 1 + 1 + 1 + 1 + 5 + 1))
 })
 
 test_that("pool_sizes() excludes DH for NL (dropped at construction)", {
@@ -411,7 +411,7 @@ test_that("pool_sizes() excludes DH for NL (dropped at construction)", {
     make_cfg(league_type = "NL", roster_slots = roster_with_dh)
   )
   ps <- pool_sizes(cfg)
-  expect_equal(ps$hitters, 12L * (1 + 1 + 1 + 1 + 1 + 5))
+  expect_equal(ps$batters, 12L * (1 + 1 + 1 + 1 + 1 + 5))
 })
 
 test_that("pool_sizes() handles single-integer pitcher_slots", {

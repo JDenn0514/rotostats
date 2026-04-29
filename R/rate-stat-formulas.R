@@ -119,7 +119,7 @@ RATE_STAT_FORMULAS <- list(
 #'     order in the blended-pool SGP formula.}
 #'   \item{`pool_type`}{Character scalar. Either `"pitcher"` (pool sized from
 #'     `pool_sizes(config)$pitchers` and selected by descending IP) or
-#'     `"batter"` (pool sized from `pool_sizes(config)$hitters` and selected
+#'     `"batter"` (pool sized from `pool_sizes(config)$batters` and selected
 #'     by descending AB or the entry's `denominator_col`).}
 #' }
 #'

@@ -499,7 +499,7 @@ pool_sizes <- function(config) {
   primary <- intersect(names(config$roster_slots), PRIMARY_HITTER_SLOTS)
   list(
     pitchers = as.integer(config$n_teams * sum(config$pitcher_slots)),
-    hitters = as.integer(config$n_teams * sum(config$roster_slots[primary]))
+    batters = as.integer(config$n_teams * sum(config$roster_slots[primary]))
   )
 }
 
