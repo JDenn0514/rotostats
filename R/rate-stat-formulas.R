@@ -83,6 +83,86 @@ RATE_STAT_FORMULAS <- list(
     numerator_fn = function(rate, denom) rate * denom / 9,
     direction = "inverse",
     pool_type = "pitcher"
+  ),
+  OBP = list(
+    source_col = "OBP",
+    denominator_col = "PA",
+    scale = 1,
+    numerator_fn = function(rate, denom) rate * denom,
+    direction = "standard",
+    pool_type = "batter"
+  ),
+  SLG = list(
+    source_col = "SLG",
+    denominator_col = "AB",
+    scale = 1,
+    numerator_fn = function(rate, denom) rate * denom,
+    direction = "standard",
+    pool_type = "batter"
+  ),
+  "SO/9" = list(
+    source_col = "SO/9",
+    denominator_col = "IP",
+    scale = 9,
+    numerator_fn = function(rate, denom) rate * denom / 9,
+    direction = "standard",
+    pool_type = "pitcher"
+  ),
+  "SO/BB" = list(
+    source_col = "SO/BB",
+    denominator_col = "BB",
+    scale = 1,
+    numerator_fn = function(rate, denom) rate * denom,
+    direction = "standard",
+    pool_type = "pitcher"
+  ),
+  "K%_BATTER" = list(
+    source_col = "K%",
+    denominator_col = "PA",
+    scale = 1,
+    numerator_fn = function(rate, denom) rate * denom,
+    direction = "inverse",
+    pool_type = "batter"
+  ),
+  "K%_PITCHER" = list(
+    source_col = "K%",
+    denominator_col = "TBF",
+    scale = 1,
+    numerator_fn = function(rate, denom) rate * denom,
+    direction = "standard",
+    pool_type = "pitcher"
+  ),
+  "BB%_BATTER" = list(
+    source_col = "BB%",
+    denominator_col = "PA",
+    scale = 1,
+    numerator_fn = function(rate, denom) rate * denom,
+    direction = "standard",
+    pool_type = "batter"
+  ),
+  "BB%_PITCHER" = list(
+    source_col = "BB%",
+    denominator_col = "TBF",
+    scale = 1,
+    numerator_fn = function(rate, denom) rate * denom,
+    direction = "inverse",
+    pool_type = "pitcher"
+  ),
+  "SO%_BATTER" = list(
+    source_col = "SO%",
+    denominator_col = "PA",
+    scale = 1,
+    numerator_fn = function(rate, denom) rate * denom,
+    direction = "inverse",
+    pool_type = "batter"
+  ),
+  "SO%_PITCHER" = list(
+    source_col = "SO%",
+    denominator_col = "TBF",
+    scale = 1,
+    numerator_fn = function(rate, denom) rate * denom,
+    direction = "standard",
+    pool_type = "pitcher"
   )
 )
 

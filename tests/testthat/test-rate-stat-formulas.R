@@ -292,3 +292,44 @@ test_that("validator rejects mixed shape (both components and denominator_col)",
     class = "rotostats_error_invalid_rate_stat_formula"
   )
 })
+
+# ---------------------------------------------------------------------------
+# 6. New single-component entries (Task 2.3)
+# ---------------------------------------------------------------------------
+
+test_that("registry includes new single-component entries with correct fields", {
+  rsf <- rate_stat_formulas()
+  new_entries <- c("OBP", "SLG", "SO/9", "SO/BB",
+                   "K%_BATTER", "K%_PITCHER",
+                   "BB%_BATTER", "BB%_PITCHER",
+                   "SO%_BATTER", "SO%_PITCHER")
+  expect_true(all(new_entries %in% names(rsf)))
+
+  expect_identical(rsf[["OBP"]]$denominator_col, "PA")
+  expect_identical(rsf[["OBP"]]$direction, "standard")
+  expect_identical(rsf[["OBP"]]$pool_type, "batter")
+
+  expect_identical(rsf[["SLG"]]$denominator_col, "AB")
+  expect_identical(rsf[["SLG"]]$direction, "standard")
+
+  expect_identical(rsf[["SO/9"]]$denominator_col, "IP")
+  expect_identical(rsf[["SO/9"]]$scale, 9)
+
+  expect_identical(rsf[["SO/BB"]]$denominator_col, "BB")
+
+  expect_identical(rsf[["K%_BATTER"]]$source_col, "K%")
+  expect_identical(rsf[["K%_BATTER"]]$denominator_col, "PA")
+  expect_identical(rsf[["K%_BATTER"]]$direction, "inverse")
+  expect_identical(rsf[["K%_BATTER"]]$pool_type, "batter")
+
+  expect_identical(rsf[["K%_PITCHER"]]$source_col, "K%")
+  expect_identical(rsf[["K%_PITCHER"]]$denominator_col, "TBF")
+  expect_identical(rsf[["K%_PITCHER"]]$direction, "standard")
+  expect_identical(rsf[["K%_PITCHER"]]$pool_type, "pitcher")
+
+  expect_identical(rsf[["BB%_BATTER"]]$direction, "standard")   # batter walks: higher better
+  expect_identical(rsf[["BB%_PITCHER"]]$direction, "inverse")  # pitcher walks: lower better
+
+  expect_identical(rsf[["SO%_BATTER"]]$direction, "inverse")
+  expect_identical(rsf[["SO%_PITCHER"]]$direction, "standard")
+})
