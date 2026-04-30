@@ -100,6 +100,23 @@ RATE_STAT_FORMULAS <- list(
     direction = "standard",
     pool_type = "batter"
   ),
+  OPS = list(
+    components = list(
+      OBP = list(
+        denominator_col = "PA",
+        scale = 1,
+        numerator_fn = function(rate, denom) rate * denom
+      ),
+      SLG = list(
+        denominator_col = "AB",
+        scale = 1,
+        numerator_fn = function(rate, denom) rate * denom
+      )
+    ),
+    combine = "sum",
+    direction = "standard",
+    pool_type = "batter"
+  ),
   "SO/9" = list(
     source_col = "SO/9",
     denominator_col = "IP",

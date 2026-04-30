@@ -28,6 +28,8 @@ test_that("each registry entry has required five fields with correct types", {
   for (cat in names(rsf)) {
     entry <- rsf[[cat]]
     expect_type(entry, "list")
+    # Multi-component entries use a different shape; validate them separately.
+    if (!is.null(entry$components)) next
     expect_true(all(required %in% names(entry)), info = cat)
     expect_type(entry$denominator_col, "character")
     expect_length(entry$denominator_col, 1L)
@@ -296,6 +298,19 @@ test_that("validator rejects mixed shape (both components and denominator_col)",
 # ---------------------------------------------------------------------------
 # 6. New single-component entries (Task 2.3)
 # ---------------------------------------------------------------------------
+
+test_that("OPS is a multi-component entry summing OBP and SLG", {
+  rsf <- rate_stat_formulas()
+  expect_true("OPS" %in% names(rsf))
+  ops <- rsf[["OPS"]]
+  expect_true(!is.null(ops$components))
+  expect_identical(ops$combine, "sum")
+  expect_identical(ops$direction, "standard")
+  expect_identical(ops$pool_type, "batter")
+  expect_setequal(names(ops$components), c("OBP", "SLG"))
+  expect_identical(ops$components$OBP$denominator_col, "PA")
+  expect_identical(ops$components$SLG$denominator_col, "AB")
+})
 
 test_that("registry includes new single-component entries with correct fields", {
   rsf <- rate_stat_formulas()
