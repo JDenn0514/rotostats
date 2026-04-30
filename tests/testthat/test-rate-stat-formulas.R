@@ -240,3 +240,55 @@ test_that(".resolve_source_col() returns source_col when present, else entry nam
   expect_identical(rotostats:::.resolve_source_col(rsf, "K%_BATTER"), "K%")
   expect_identical(rotostats:::.resolve_source_col(rsf, "AVG"), "AVG")
 })
+
+# ---------------------------------------------------------------------------
+# 5. Multi-component entry validation
+# ---------------------------------------------------------------------------
+
+test_that("validator accepts a valid multi-component entry", {
+  rsf <- list(
+    OPS = list(
+      components = list(
+        OBP = list(denominator_col = "PA", scale = 1, numerator_fn = function(r, d) r * d),
+        SLG = list(denominator_col = "AB", scale = 1, numerator_fn = function(r, d) r * d)
+      ),
+      combine = "sum",
+      direction = "standard",
+      pool_type = "batter"
+    )
+  )
+  expect_silent(rotostats:::.validate_rate_stat_formulas(rsf))
+})
+
+test_that("validator rejects multi-component with missing combine", {
+  rsf <- list(
+    OPS = list(
+      components = list(
+        OBP = list(denominator_col = "PA", scale = 1, numerator_fn = function(r, d) r * d)
+      ),
+      direction = "standard",
+      pool_type = "batter"
+    )
+  )
+  expect_error(
+    rotostats:::.validate_rate_stat_formulas(rsf),
+    class = "rotostats_error_invalid_rate_stat_formula"
+  )
+})
+
+test_that("validator rejects mixed shape (both components and denominator_col)", {
+  rsf <- list(
+    BAD = list(
+      components = list(),
+      denominator_col = "PA",
+      scale = 1,
+      numerator_fn = function(r, d) r * d,
+      direction = "standard",
+      pool_type = "batter"
+    )
+  )
+  expect_error(
+    rotostats:::.validate_rate_stat_formulas(rsf),
+    class = "rotostats_error_invalid_rate_stat_formula"
+  )
+})

@@ -160,14 +160,6 @@ rate_stat_formulas <- function() {
     )
   }
 
-  required_fields <- c(
-    "denominator_col",
-    "scale",
-    "numerator_fn",
-    "direction",
-    "pool_type"
-  )
-
   for (cat in names(rsf)) {
     entry <- rsf[[cat]]
     if (!is.list(entry)) {
@@ -176,73 +168,136 @@ rate_stat_formulas <- function() {
         class = "rotostats_error_invalid_rate_stat_formula"
       )
     }
-    missing_fields <- setdiff(required_fields, names(entry))
-    if (length(missing_fields) > 0L) {
+
+    has_components <- !is.null(entry$components)
+    has_denom      <- !is.null(entry$denominator_col)
+
+    if (has_components && has_denom) {
       cli::cli_abort(
-        "Entry {.val {cat}} in {.arg rate_stat_formulas} is missing required field(s): {.val {missing_fields}}.",
+        "Entry {.val {cat}}: must not have both {.field components} and {.field denominator_col}.",
         class = "rotostats_error_invalid_rate_stat_formula"
       )
     }
-    if (
-      !is.character(entry$denominator_col) ||
-        length(entry$denominator_col) != 1L ||
-        !nzchar(entry$denominator_col)
-    ) {
-      cli::cli_abort(
-        "Entry {.val {cat}}: {.field denominator_col} must be a non-empty character scalar.",
-        class = "rotostats_error_invalid_rate_stat_formula"
-      )
-    }
-    if (
-      !is.numeric(entry$scale) ||
-        length(entry$scale) != 1L ||
-        !is.finite(entry$scale)
-    ) {
-      cli::cli_abort(
-        "Entry {.val {cat}}: {.field scale} must be a finite numeric scalar.",
-        class = "rotostats_error_invalid_rate_stat_formula"
-      )
-    }
-    if (!is.function(entry$numerator_fn)) {
-      cli::cli_abort(
-        "Entry {.val {cat}}: {.field numerator_fn} must be a function.",
-        class = "rotostats_error_invalid_rate_stat_formula"
-      )
-    }
-    if (
-      !identical(entry$direction, "inverse") &&
-        !identical(entry$direction, "standard")
-    ) {
-      cli::cli_abort(
-        "Entry {.val {cat}}: {.field direction} must be {.val inverse} or {.val standard}, not {.val {entry$direction}}.",
-        class = "rotostats_error_invalid_rate_stat_formula"
-      )
-    }
-    if (
-      !identical(entry$pool_type, "pitcher") &&
-        !identical(entry$pool_type, "batter")
-    ) {
-      cli::cli_abort(
-        "Entry {.val {cat}}: {.field pool_type} must be {.val pitcher} or {.val batter}, not {.val {entry$pool_type}}.",
-        class = "rotostats_error_invalid_rate_stat_formula"
-      )
-    }
-    if (!is.null(entry$source_col)) {
-      if (
-        !is.character(entry$source_col) ||
-          length(entry$source_col) != 1L ||
-          !nzchar(entry$source_col)
-      ) {
-        cli::cli_abort(
-          "Entry {.val {cat}}: {.field source_col} must be a non-empty character scalar when supplied.",
-          class = "rotostats_error_invalid_rate_stat_formula"
-        )
-      }
+
+    if (has_components) {
+      .validate_multicomponent_entry(cat, entry)
+    } else {
+      .validate_single_component_entry(cat, entry)
     }
   }
 
   names(rsf) <- toupper(names(rsf))
   rsf
+}
+
+#' @noRd
+.validate_single_component_entry <- function(cat, entry) {
+  required <- c("denominator_col", "scale", "numerator_fn", "direction", "pool_type")
+  missing_fields <- setdiff(required, names(entry))
+  if (length(missing_fields) > 0L) {
+    cli::cli_abort(
+      "Entry {.val {cat}} is missing required field(s): {.val {missing_fields}}.",
+      class = "rotostats_error_invalid_rate_stat_formula"
+    )
+  }
+  if (!is.character(entry$denominator_col) ||
+      length(entry$denominator_col) != 1L ||
+      !nzchar(entry$denominator_col)) {
+    cli::cli_abort(
+      "Entry {.val {cat}}: {.field denominator_col} must be a non-empty character scalar.",
+      class = "rotostats_error_invalid_rate_stat_formula"
+    )
+  }
+  if (!is.numeric(entry$scale) || length(entry$scale) != 1L || !is.finite(entry$scale)) {
+    cli::cli_abort(
+      "Entry {.val {cat}}: {.field scale} must be a finite numeric scalar.",
+      class = "rotostats_error_invalid_rate_stat_formula"
+    )
+  }
+  if (!is.function(entry$numerator_fn)) {
+    cli::cli_abort(
+      "Entry {.val {cat}}: {.field numerator_fn} must be a function.",
+      class = "rotostats_error_invalid_rate_stat_formula"
+    )
+  }
+  if (!identical(entry$direction, "inverse") && !identical(entry$direction, "standard")) {
+    cli::cli_abort(
+      "Entry {.val {cat}}: {.field direction} must be {.val inverse} or {.val standard}, not {.val {entry$direction}}.",
+      class = "rotostats_error_invalid_rate_stat_formula"
+    )
+  }
+  if (!identical(entry$pool_type, "pitcher") && !identical(entry$pool_type, "batter")) {
+    cli::cli_abort(
+      "Entry {.val {cat}}: {.field pool_type} must be {.val pitcher} or {.val batter}, not {.val {entry$pool_type}}.",
+      class = "rotostats_error_invalid_rate_stat_formula"
+    )
+  }
+  if (!is.null(entry$source_col)) {
+    if (!is.character(entry$source_col) ||
+        length(entry$source_col) != 1L ||
+        !nzchar(entry$source_col)) {
+      cli::cli_abort(
+        "Entry {.val {cat}}: {.field source_col} must be a non-empty character scalar when supplied.",
+        class = "rotostats_error_invalid_rate_stat_formula"
+      )
+    }
+  }
+  invisible(NULL)
+}
+
+#' @noRd
+.validate_multicomponent_entry <- function(cat, entry) {
+  required_top <- c("components", "combine", "direction", "pool_type")
+  missing_fields <- setdiff(required_top, names(entry))
+  if (length(missing_fields) > 0L) {
+    cli::cli_abort(
+      "Multi-component entry {.val {cat}} is missing required field(s): {.val {missing_fields}}.",
+      class = "rotostats_error_invalid_rate_stat_formula"
+    )
+  }
+  if (!identical(entry$combine, "sum")) {
+    cli::cli_abort(
+      "Multi-component entry {.val {cat}}: {.field combine} must be {.val sum}, not {.val {entry$combine}}.",
+      class = "rotostats_error_invalid_rate_stat_formula"
+    )
+  }
+  if (!identical(entry$direction, "inverse") && !identical(entry$direction, "standard")) {
+    cli::cli_abort(
+      "Multi-component entry {.val {cat}}: {.field direction} must be {.val inverse} or {.val standard}.",
+      class = "rotostats_error_invalid_rate_stat_formula"
+    )
+  }
+  if (!identical(entry$pool_type, "pitcher") && !identical(entry$pool_type, "batter")) {
+    cli::cli_abort(
+      "Multi-component entry {.val {cat}}: {.field pool_type} must be {.val pitcher} or {.val batter}.",
+      class = "rotostats_error_invalid_rate_stat_formula"
+    )
+  }
+  if (!is.list(entry$components) || is.null(names(entry$components)) ||
+      any(!nzchar(names(entry$components)))) {
+    cli::cli_abort(
+      "Multi-component entry {.val {cat}}: {.field components} must be a named list.",
+      class = "rotostats_error_invalid_rate_stat_formula"
+    )
+  }
+  required_child <- c("denominator_col", "scale", "numerator_fn")
+  for (child_name in names(entry$components)) {
+    child <- entry$components[[child_name]]
+    if (!is.list(child)) {
+      cli::cli_abort(
+        "Multi-component entry {.val {cat}}: child {.val {child_name}} must be a list.",
+        class = "rotostats_error_invalid_rate_stat_formula"
+      )
+    }
+    miss_child <- setdiff(required_child, names(child))
+    if (length(miss_child) > 0L) {
+      cli::cli_abort(
+        "Multi-component entry {.val {cat}}: child {.val {child_name}} is missing field(s): {.val {miss_child}}.",
+        class = "rotostats_error_invalid_rate_stat_formula"
+      )
+    }
+  }
+  invisible(NULL)
 }
 
 #' @noRd
