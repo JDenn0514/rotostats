@@ -462,11 +462,13 @@ sgp <- function(
   # -------------------------------------------------------------------------
   missing_cats <- character(0L)
   for (cat in scored_cats) {
-    if (!cat %in% names(projections)) {
+    src_col_for_check <- .resolve_source_col(effective_registry, cat)
+    if (!src_col_for_check %in% names(projections)) {
       col_name <- .sgp_col_name(cat)
       cli::cli_warn(
         paste0(
-          "Scored category {.val {cat}} is absent from {.arg projections}. ",
+          "Scored category {.val {cat}} requires column {.val {src_col_for_check}} ",
+          "in {.arg projections}; not found. ",
           "{.code ",
           col_name,
           "} will be {.code NA} for all players."
@@ -519,7 +521,8 @@ sgp <- function(
   # Rate stats in missing_cats are skipped — their SGP columns are NA-filled.
   for (cat in setdiff(rate_cats, missing_cats)) {
     f <- effective_registry[[cat]]
-    needed_in_ts <- c(cat, f$denominator_col)
+    src_col <- .resolve_source_col(effective_registry, cat)
+    needed_in_ts <- c(src_col, f$denominator_col)
     ts_missing <- setdiff(needed_in_ts, names(ts))
     if (length(ts_missing) > 0L) {
       cli::cli_abort(
@@ -543,8 +546,9 @@ sgp <- function(
   baselines <- list()
   for (cat in setdiff(rate_cats, missing_cats)) {
     f <- effective_registry[[cat]]
+    src_col <- .resolve_source_col(effective_registry, cat)
     baselines[[cat]] <- stats::weighted.mean(
-      ts_base[[cat]],
+      ts_base[[src_col]],
       ts_base[[f$denominator_col]]
     )
   }
@@ -595,12 +599,13 @@ sgp <- function(
     }
 
     players_df <- pool_meta[[key]]$players
+    src_col <- .resolve_source_col(effective_registry, cat)
     # If the rate column is not in the pool df (shouldn't happen — caught
     # earlier by missing_cats and denominator validation — but be defensive),
     # treat numerator total as 0 so blended reduces to pool-only.
-    if (cat %in% names(players_df)) {
+    if (src_col %in% names(players_df)) {
       pool_num[[cat]] <- sum(
-        f$numerator_fn(players_df[[cat]], players_df[[key]]),
+        f$numerator_fn(players_df[[src_col]], players_df[[key]]),
         na.rm = TRUE
       )
     } else {
@@ -704,7 +709,8 @@ sgp <- function(
       warned_denom_cols <- c(warned_denom_cols, denom_col)
     }
 
-    player_rate <- projections[[cat]]
+    src_col <- .resolve_source_col(effective_registry, cat)
+    player_rate <- projections[[src_col]]
     player_num <- f$numerator_fn(player_rate, player_denom)
     denom_total <- pool_meta[[denom_col]]$denom_total
     num_total <- pool_num[[cat]]
