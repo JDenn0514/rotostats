@@ -462,6 +462,10 @@ sgp <- function(
   # -------------------------------------------------------------------------
   missing_cats <- character(0L)
   for (cat in scored_cats) {
+    f_check <- effective_registry[[cat]]
+    # Multi-component entries (e.g., OPS) have no single source column.
+    # Their component columns are checked later in .compute_multicomponent_sgp().
+    if (!is.null(f_check) && !is.null(f_check$components)) next
     src_col_for_check <- .resolve_source_col(effective_registry, cat)
     if (!src_col_for_check %in% names(projections)) {
       col_name <- .sgp_col_name(cat)
@@ -519,8 +523,11 @@ sgp <- function(
 
   # Validate ts has each scored rate stat's rate column and denominator column.
   # Rate stats in missing_cats are skipped — their SGP columns are NA-filled.
+  # Multi-component entries (e.g., OPS) derive their baselines from the
+  # projection pool rather than league_history, so they are skipped here.
   for (cat in setdiff(rate_cats, missing_cats)) {
     f <- effective_registry[[cat]]
+    if (!is.null(f$components)) next
     src_col <- .resolve_source_col(effective_registry, cat)
     needed_in_ts <- c(src_col, f$denominator_col)
     ts_missing <- setdiff(needed_in_ts, names(ts))
@@ -542,10 +549,13 @@ sgp <- function(
   # 10b. Filter ts to baseline_year
   ts_base <- ts[ts$YEAR == baseline_year, , drop = FALSE]
 
-  # 10c. Compute weighted means for each scored rate stat
+  # 10c. Compute weighted means for each scored rate stat.
+  # Multi-component entries (e.g., OPS) are skipped here; their component
+  # baselines are derived from the projection pool in Step 11.
   baselines <- list()
   for (cat in setdiff(rate_cats, missing_cats)) {
     f <- effective_registry[[cat]]
+    if (!is.null(f$components)) next
     src_col <- .resolve_source_col(effective_registry, cat)
     baselines[[cat]] <- stats::weighted.mean(
       ts_base[[src_col]],
@@ -565,8 +575,11 @@ sgp <- function(
   # Validate that each scored rate stat's denominator column is present in
   # projections. Skipped for rate stats whose rate column is entirely absent
   # (already handled via Step 8's missing_cats NA-fill).
+  # Multi-component entries (e.g., OPS) have no single denominator_col;
+  # their component columns are validated in .compute_multicomponent_sgp().
   for (cat in setdiff(rate_cats, missing_cats)) {
     f <- effective_registry[[cat]]
+    if (!is.null(f$components)) next
     if (!f$denominator_col %in% names(projections)) {
       cli::cli_abort(
         "{.arg projections} must contain a {.val {f$denominator_col}} column when {.val {cat}} is a scored rate stat.",
@@ -584,6 +597,8 @@ sgp <- function(
 
   for (cat in setdiff(rate_cats, missing_cats)) {
     f <- effective_registry[[cat]]
+    # Multi-component entries (e.g., OPS) are built separately below.
+    if (!is.null(f$components)) next
     key <- f$denominator_col
 
     if (is.null(pool_meta[[key]])) {
@@ -610,6 +625,35 @@ sgp <- function(
       )
     } else {
       pool_num[[cat]] <- 0
+    }
+  }
+
+  # Build pool_meta and baselines for multi-component entry children.
+  # Each child's baseline is pool_num / pool_denom (projection-pool average).
+  # This runs after the single-component pool is built so that shared
+  # denominator_cols (e.g., AB) are not double-initialised.
+  for (cat in setdiff(rate_cats, missing_cats)) {
+    f <- effective_registry[[cat]]
+    if (is.null(f$components)) next
+    pool_size <- if (identical(f$pool_type, "pitcher")) pool_size_p else pool_size_b
+    for (child_name in names(f$components)) {
+      child     <- f$components[[child_name]]
+      denom_col <- child$denominator_col
+      if (!(child_name %in% names(projections)) ||
+          !(denom_col %in% names(projections))) next
+      if (is.null(pool_meta[[denom_col]])) {
+        sort_rows   <- order(projections[[denom_col]], decreasing = TRUE)
+        pool_df     <- projections[head(sort_rows, pool_size), , drop = FALSE]
+        denom_total <- sum(pool_df[[denom_col]], na.rm = TRUE)
+        pool_meta[[denom_col]] <- list(players = pool_df, denom_total = denom_total)
+      }
+      if (is.null(baselines[[child_name]])) {
+        player_rate  <- projections[[child_name]]
+        player_denom <- projections[[denom_col]]
+        num_total    <- sum(child$numerator_fn(player_rate, player_denom), na.rm = TRUE)
+        denom_total  <- pool_meta[[denom_col]]$denom_total
+        baselines[[child_name]] <- num_total * child$scale / denom_total
+      }
     }
   }
 
@@ -684,6 +728,22 @@ sgp <- function(
     }
 
     f <- effective_registry[[cat]]
+
+    # Multi-component entries (e.g., OPS) are handled by a dedicated helper.
+    if (!is.null(f$components)) {
+      sgp_cols[[col_sgp]] <- unname(.compute_multicomponent_sgp(
+        cat          = cat,
+        entry        = f,
+        projections  = projections,
+        pool_meta    = pool_meta,
+        baselines    = baselines,
+        denominators = denominators,
+        n_players    = n_players,
+        row_side     = row_side
+      ))
+      next
+    }
+
     denom_col <- f$denominator_col
     player_denom <- projections[[denom_col]]
     zero_denom <- player_denom == 0 | is.na(player_denom)
@@ -752,4 +812,83 @@ sgp <- function(
   )
 
   result
+}
+
+# ---------------------------------------------------------------------------
+# .compute_multicomponent_sgp() — internal helper for OPS-style rate stats
+# ---------------------------------------------------------------------------
+
+#' Compute SGP for a multi-component rate stat (e.g., OPS = OBP + SLG)
+#'
+#' Each component's blended-pool marginal is computed independently, then
+#' summed and divided by the top-level denominator (from `denominators`).
+#' Component baselines and pool totals must already be populated in
+#' `baselines` and `pool_meta` before this function is called.
+#'
+#' @noRd
+.compute_multicomponent_sgp <- function(cat, entry, projections, pool_meta,
+                                        baselines, denominators, n_players,
+                                        row_side) {
+  marginal_total <- rep(0, n_players)
+
+  for (child_name in names(entry$components)) {
+    child     <- entry$components[[child_name]]
+    denom_col <- child$denominator_col
+
+    if (!(child_name %in% names(projections))) {
+      cli::cli_warn(
+        "Multi-component category {.val {cat}} requires column {.val {child_name}} in {.arg projections}; not found. SGP for {.val {cat}} set to NA.",
+        class = "rotostats_warning_missing_category_column"
+      )
+      return(rep(NA_real_, n_players))
+    }
+    if (!(denom_col %in% names(projections))) {
+      cli::cli_warn(
+        "Multi-component category {.val {cat}} requires denominator column {.val {denom_col}} in {.arg projections}; not found. SGP for {.val {cat}} set to NA.",
+        class = "rotostats_warning_missing_category_column"
+      )
+      return(rep(NA_real_, n_players))
+    }
+
+    player_rate  <- projections[[child_name]]
+    player_denom <- projections[[denom_col]]
+    player_num   <- child$numerator_fn(player_rate, player_denom)
+
+    denom_total <- pool_meta[[denom_col]]$denom_total
+    num_total   <- sum(child$numerator_fn(
+      projections[[child_name]],
+      projections[[denom_col]]
+    ), na.rm = TRUE)
+
+    blended  <- (num_total + player_num) * child$scale /
+                  (denom_total + player_denom)
+    baseline <- baselines[[child_name]]
+    if (is.null(baseline)) {
+      baseline <- num_total * child$scale / denom_total
+    }
+
+    marginal_total <- marginal_total + (blended - baseline)
+  }
+
+  if (identical(entry$direction, "inverse")) {
+    sgp_vec <- -marginal_total / denominators[cat]
+  } else {
+    sgp_vec <- marginal_total / denominators[cat]
+  }
+
+  # NA rows where any component denominator is zero or NA
+  for (child_name in names(entry$components)) {
+    denom_col <- entry$components[[child_name]]$denominator_col
+    pd <- projections[[denom_col]]
+    sgp_vec[is.na(pd) | pd == 0] <- NA_real_
+  }
+
+  # NA-fill rows whose side disagrees with the entry's pool_type
+  side_for_pool <- entry$pool_type  # "batter" or "pitcher"
+  if (!all(is.na(row_side))) {
+    cross <- !is.na(row_side) & row_side != "two_way" & row_side != side_for_pool
+    sgp_vec[cross] <- NA_real_
+  }
+
+  sgp_vec
 }
