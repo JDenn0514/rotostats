@@ -203,3 +203,30 @@ test_that(".validate_rate_stat_formulas() rejects malformed input", {
     class = "rotostats_error_invalid_rate_stat_formula"
   )
 })
+
+test_that("validator rejects non-character source_col", {
+  rsf <- list(BAD = list(source_col = 42, denominator_col = "AB", scale = 1,
+                          numerator_fn = function(r, d) r * d,
+                          direction = "standard", pool_type = "hitter"))
+  expect_error(
+    rotostats:::.validate_rate_stat_formulas(rsf),
+    class = "rotostats_error_invalid_rate_stat_formula"
+  )
+})
+
+# ---------------------------------------------------------------------------
+# 4. .resolve_source_col() helper
+# ---------------------------------------------------------------------------
+
+test_that(".resolve_source_col() returns source_col when present, else entry name", {
+  rsf <- list(
+    "K%_BATTER" = list(source_col = "K%", denominator_col = "PA", scale = 1,
+                       numerator_fn = function(r, d) r * d,
+                       direction = "inverse", pool_type = "hitter"),
+    "AVG"       = list(denominator_col = "AB", scale = 1,
+                       numerator_fn = function(r, d) r * d,
+                       direction = "standard", pool_type = "hitter")
+  )
+  expect_identical(rotostats:::.resolve_source_col(rsf, "K%_BATTER"), "K%")
+  expect_identical(rotostats:::.resolve_source_col(rsf, "AVG"), "AVG")
+})

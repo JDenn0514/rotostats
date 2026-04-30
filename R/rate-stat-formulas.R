@@ -227,10 +227,31 @@ rate_stat_formulas <- function() {
         class = "rotostats_error_invalid_rate_stat_formula"
       )
     }
+    if (!is.null(entry$source_col)) {
+      if (
+        !is.character(entry$source_col) ||
+          length(entry$source_col) != 1L ||
+          !nzchar(entry$source_col)
+      ) {
+        cli::cli_abort(
+          "Entry {.val {cat}}: {.field source_col} must be a non-empty character scalar when supplied.",
+          class = "rotostats_error_invalid_rate_stat_formula"
+        )
+      }
+    }
   }
 
   names(rsf) <- toupper(names(rsf))
   rsf
+}
+
+#' @noRd
+.resolve_source_col <- function(rsf, cat) {
+  entry <- rsf[[cat]]
+  if (!is.null(entry$source_col) && nzchar(entry$source_col)) {
+    return(entry$source_col)
+  }
+  cat
 }
 
 # Turn a category name into its SGP column name. Slash-containing names
