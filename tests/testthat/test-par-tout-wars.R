@@ -13,12 +13,12 @@ test_that("par() runs on tout_wars_team_season + Steamer fixture", {
     roster_slots       = c(C = 1, "1B" = 1, "2B" = 1, "3B" = 1, SS = 1,
                            OF = 3, UTIL = 1),
     pitcher_slots      = c(SP = 5L, RP = 3L),
-    batting_categories = c("R", "HR", "RBI", "SB", "OBP"),
+    batting_categories = c("R", "HR", "RBI", "SB", "AVG"),
     pitcher_categories = c("W", "SV", "SO", "ERA", "WHIP")
   )
   denoms <- sgp_denominators(
     history,
-    scoring_categories = c("R", "HR", "RBI", "SB", "OBP",
+    scoring_categories = c("R", "HR", "RBI", "SB", "AVG",
                            "W", "SV", "SO", "ERA", "WHIP"),
     exclude_years      = 2020L
   )

@@ -28,6 +28,8 @@ test_that("each registry entry has required five fields with correct types", {
   for (cat in names(rsf)) {
     entry <- rsf[[cat]]
     expect_type(entry, "list")
+    # Multi-component entries use a different shape; validate them separately.
+    if (!is.null(entry$components)) next
     expect_true(all(required %in% names(entry)), info = cat)
     expect_type(entry$denominator_col, "character")
     expect_length(entry$denominator_col, 1L)
@@ -202,4 +204,147 @@ test_that(".validate_rate_stat_formulas() rejects malformed input", {
     )),
     class = "rotostats_error_invalid_rate_stat_formula"
   )
+})
+
+test_that("validator rejects non-character source_col", {
+  rsf <- list(BAD = list(source_col = 42, denominator_col = "AB", scale = 1,
+                          numerator_fn = function(r, d) r * d,
+                          direction = "standard", pool_type = "batter"))
+  expect_error(
+    rotostats:::.validate_rate_stat_formulas(rsf),
+    class = "rotostats_error_invalid_rate_stat_formula"
+  )
+})
+
+test_that("validator rejects empty-string source_col", {
+  rsf <- list(BAD = list(source_col = "", denominator_col = "AB", scale = 1,
+                          numerator_fn = function(r, d) r * d,
+                          direction = "standard", pool_type = "batter"))
+  expect_error(
+    rotostats:::.validate_rate_stat_formulas(rsf),
+    class = "rotostats_error_invalid_rate_stat_formula"
+  )
+})
+
+# ---------------------------------------------------------------------------
+# 4. .resolve_source_col() helper
+# ---------------------------------------------------------------------------
+
+test_that(".resolve_source_col() returns source_col when present, else entry name", {
+  rsf <- list(
+    "K%_BATTER" = list(source_col = "K%", denominator_col = "PA", scale = 1,
+                       numerator_fn = function(r, d) r * d,
+                       direction = "inverse", pool_type = "batter"),
+    "AVG"       = list(denominator_col = "AB", scale = 1,
+                       numerator_fn = function(r, d) r * d,
+                       direction = "standard", pool_type = "batter")
+  )
+  expect_identical(rotostats:::.resolve_source_col(rsf, "K%_BATTER"), "K%")
+  expect_identical(rotostats:::.resolve_source_col(rsf, "AVG"), "AVG")
+})
+
+# ---------------------------------------------------------------------------
+# 5. Multi-component entry validation
+# ---------------------------------------------------------------------------
+
+test_that("validator accepts a valid multi-component entry", {
+  rsf <- list(
+    OPS = list(
+      components = list(
+        OBP = list(denominator_col = "PA", scale = 1, numerator_fn = function(r, d) r * d),
+        SLG = list(denominator_col = "AB", scale = 1, numerator_fn = function(r, d) r * d)
+      ),
+      combine = "sum",
+      direction = "standard",
+      pool_type = "batter"
+    )
+  )
+  expect_silent(rotostats:::.validate_rate_stat_formulas(rsf))
+})
+
+test_that("validator rejects multi-component with missing combine", {
+  rsf <- list(
+    OPS = list(
+      components = list(
+        OBP = list(denominator_col = "PA", scale = 1, numerator_fn = function(r, d) r * d)
+      ),
+      direction = "standard",
+      pool_type = "batter"
+    )
+  )
+  expect_error(
+    rotostats:::.validate_rate_stat_formulas(rsf),
+    class = "rotostats_error_invalid_rate_stat_formula"
+  )
+})
+
+test_that("validator rejects mixed shape (both components and denominator_col)", {
+  rsf <- list(
+    BAD = list(
+      components = list(),
+      denominator_col = "PA",
+      scale = 1,
+      numerator_fn = function(r, d) r * d,
+      direction = "standard",
+      pool_type = "batter"
+    )
+  )
+  expect_error(
+    rotostats:::.validate_rate_stat_formulas(rsf),
+    class = "rotostats_error_invalid_rate_stat_formula"
+  )
+})
+
+# ---------------------------------------------------------------------------
+# 6. New single-component entries (Task 2.3)
+# ---------------------------------------------------------------------------
+
+test_that("OPS is a multi-component entry summing OBP and SLG", {
+  rsf <- rate_stat_formulas()
+  expect_true("OPS" %in% names(rsf))
+  ops <- rsf[["OPS"]]
+  expect_true(!is.null(ops$components))
+  expect_identical(ops$combine, "sum")
+  expect_identical(ops$direction, "standard")
+  expect_identical(ops$pool_type, "batter")
+  expect_setequal(names(ops$components), c("OBP", "SLG"))
+  expect_identical(ops$components$OBP$denominator_col, "PA")
+  expect_identical(ops$components$SLG$denominator_col, "AB")
+})
+
+test_that("registry includes new single-component entries with correct fields", {
+  rsf <- rate_stat_formulas()
+  new_entries <- c("OBP", "SLG", "SO/9", "SO/BB",
+                   "K%_BATTER", "K%_PITCHER",
+                   "BB%_BATTER", "BB%_PITCHER",
+                   "SO%_BATTER", "SO%_PITCHER")
+  expect_true(all(new_entries %in% names(rsf)))
+
+  expect_identical(rsf[["OBP"]]$denominator_col, "PA")
+  expect_identical(rsf[["OBP"]]$direction, "standard")
+  expect_identical(rsf[["OBP"]]$pool_type, "batter")
+
+  expect_identical(rsf[["SLG"]]$denominator_col, "AB")
+  expect_identical(rsf[["SLG"]]$direction, "standard")
+
+  expect_identical(rsf[["SO/9"]]$denominator_col, "IP")
+  expect_identical(rsf[["SO/9"]]$scale, 9)
+
+  expect_identical(rsf[["SO/BB"]]$denominator_col, "BB")
+
+  expect_identical(rsf[["K%_BATTER"]]$source_col, "K%")
+  expect_identical(rsf[["K%_BATTER"]]$denominator_col, "PA")
+  expect_identical(rsf[["K%_BATTER"]]$direction, "inverse")
+  expect_identical(rsf[["K%_BATTER"]]$pool_type, "batter")
+
+  expect_identical(rsf[["K%_PITCHER"]]$source_col, "K%")
+  expect_identical(rsf[["K%_PITCHER"]]$denominator_col, "TBF")
+  expect_identical(rsf[["K%_PITCHER"]]$direction, "standard")
+  expect_identical(rsf[["K%_PITCHER"]]$pool_type, "pitcher")
+
+  expect_identical(rsf[["BB%_BATTER"]]$direction, "standard")   # batter walks: higher better
+  expect_identical(rsf[["BB%_PITCHER"]]$direction, "inverse")  # pitcher walks: lower better
+
+  expect_identical(rsf[["SO%_BATTER"]]$direction, "inverse")
+  expect_identical(rsf[["SO%_PITCHER"]]$direction, "standard")
 })
